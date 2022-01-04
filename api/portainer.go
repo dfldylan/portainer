@@ -196,6 +196,7 @@ type (
 		URL                     string              `json:"URL"`
 		GroupID                 EndpointGroupID     `json:"GroupId"`
 		PublicURL               string              `json:"PublicURL"`
+		Gpus                    []Pair              `json:"Gpus"`
 		TLSConfig               TLSConfiguration    `json:"TLSConfig"`
 		Extensions              []EndpointExtension `json:"Extensions"`
 		AzureCredentials        AzureCredentials    `json:"AzureCredentials,omitempty"`

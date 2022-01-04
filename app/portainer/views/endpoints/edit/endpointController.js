@@ -22,6 +22,13 @@ angular
     SettingsService
   ) {
     $scope.state = {
+      selectAll: false,
+      // displayTextFilter: false,
+      get selectedItemCount() {
+        return $scope.state.selectedItems.length || 0;
+      },
+      selectedItems: [],
+
       uploadInProgress: false,
       actionInProgress: false,
       deploymentTab: 0,
@@ -51,6 +58,48 @@ angular
       ],
     };
 
+    $scope.selectAll = function () {
+      $scope.state.firstClickedItem = null;
+      for (var i = 0; i < $scope.state.filteredDataSet.length; i++) {
+        var item = $scope.state.filteredDataSet[i];
+        if (item.Checked !== $scope.state.selectAll) {
+          // if ($scope.allowSelection(item) && item.Checked !== $scope.state.selectAll) {
+          item.Checked = $scope.state.selectAll;
+          $scope.selectItem(item);
+        }
+      }
+    };
+
+    function isBetween(value, a, b) {
+      return (value >= a && value <= b) || (value >= b && value <= a);
+    }
+
+    $scope.selectItem = function (item, event) {
+      // Handle range select using shift
+      if (event && event.originalEvent.shiftKey && $scope.state.firstClickedItem) {
+        const firstItemIndex = $scope.state.filteredDataSet.indexOf($scope.state.firstClickedItem);
+        const lastItemIndex = $scope.state.filteredDataSet.indexOf(item);
+        const itemsInRange = _.filter($scope.state.filteredDataSet, (item, index) => {
+          return isBetween(index, firstItemIndex, lastItemIndex);
+        });
+        const value = $scope.state.firstClickedItem.Checked;
+
+        _.forEach(itemsInRange, (i) => {
+          i.Checked = value;
+        });
+        $scope.state.firstClickedItem = item;
+      } else if (event) {
+        item.Checked = !item.Checked;
+        $scope.state.firstClickedItem = item;
+      }
+      $scope.state.selectedItems = _.uniq(_.concat($scope.state.selectedItems, $scope.state.filteredDataSet)).filter((i) => i.Checked);
+      if (event && $scope.state.selectAll && $scope.state.selectedItems.length !== $scope.state.filteredDataSet.length) {
+        $scope.state.selectAll = false;
+      }
+    };
+
+
+
     $scope.formValues = {
       SecurityFormData: new EndpointSecurityFormData(),
     };
@@ -59,34 +108,34 @@ angular
       if ($scope.state.deploymentTab === 2 && $scope.state.platformType === 'linux') {
         clipboard.copyText(
           'docker run -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes -v /:/host -v portainer_agent_data:/data --restart always -e EDGE=1 -e EDGE_ID=' +
-            $scope.randomEdgeID +
-            ' -e EDGE_KEY=' +
-            $scope.endpoint.EdgeKey +
-            ' -e CAP_HOST_MANAGEMENT=1 --name portainer_edge_agent portainer/agent'
+          $scope.randomEdgeID +
+          ' -e EDGE_KEY=' +
+          $scope.endpoint.EdgeKey +
+          ' -e CAP_HOST_MANAGEMENT=1 --name portainer_edge_agent portainer/agent'
         );
       } else if ($scope.state.deploymentTab === 2 && $scope.state.platformType === 'windows') {
         clipboard.copyText(
           'docker run -d --mount type=npipe,src=\\\\.\\pipe\\docker_engine,dst=\\\\.\\pipe\\docker_engine --mount type=bind,src=C:\\ProgramData\\docker\\volumes,dst=C:\\ProgramData\\docker\\volumes --mount type=volume,src=portainer_agent_data,dst=C:\\data -e EDGE=1 -e EDGE_ID=' +
-            $scope.randomEdgeID +
-            ' -e EDGE_KEY=' +
-            $scope.endpoint.EdgeKey +
-            ' -e CAP_HOST_MANAGEMENT=1 --name portainer_edge_agent portainer/agent'
+          $scope.randomEdgeID +
+          ' -e EDGE_KEY=' +
+          $scope.endpoint.EdgeKey +
+          ' -e CAP_HOST_MANAGEMENT=1 --name portainer_edge_agent portainer/agent'
         );
       } else if ($scope.state.deploymentTab === 1 && $scope.state.platformType === 'linux') {
         clipboard.copyText(
           'docker network create --driver overlay portainer_agent_network; docker service create --name portainer_edge_agent --network portainer_agent_network -e AGENT_CLUSTER_ADDR=tasks.portainer_edge_agent -e EDGE=1 -e EDGE_ID=' +
-            $scope.randomEdgeID +
-            ' -e EDGE_KEY=' +
-            $scope.endpoint.EdgeKey +
-            " -e CAP_HOST_MANAGEMENT=1 --mode global --constraint 'node.platform.os == linux' --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock --mount type=bind,src=//var/lib/docker/volumes,dst=/var/lib/docker/volumes --mount type=bind,src=//,dst=/host --mount type=volume,src=portainer_agent_data,dst=/data portainer/agent"
+          $scope.randomEdgeID +
+          ' -e EDGE_KEY=' +
+          $scope.endpoint.EdgeKey +
+          " -e CAP_HOST_MANAGEMENT=1 --mode global --constraint 'node.platform.os == linux' --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock --mount type=bind,src=//var/lib/docker/volumes,dst=/var/lib/docker/volumes --mount type=bind,src=//,dst=/host --mount type=volume,src=portainer_agent_data,dst=/data portainer/agent"
         );
       } else if ($scope.state.deploymentTab === 1 && $scope.state.platformType === 'windows') {
         clipboard.copyText(
           'docker network create --driver overlay portainer_edge_agent_network && docker service create --name portainer_edge_agent --network portainer_edge_agent_network -e AGENT_CLUSTER_ADDR=tasks.portainer_edge_agent -e EDGE=1 -e EDGE_ID=' +
-            $scope.randomEdgeID +
-            ' -e EDGE_KEY=' +
-            $scope.endpoint.EdgeKey +
-            ' -e CAP_HOST_MANAGEMENT=1 --mode global --constraint node.platform.os==windows --mount type=npipe,src=\\\\.\\pipe\\docker_engine,dst=\\\\.\\pipe\\docker_engine --mount type=bind,src=C:\\ProgramData\\docker\\volumes,dst=C:\\ProgramData\\docker\\volumes --mount type=volume,src=portainer_agent_data,dst=C:\\data portainer/agent'
+          $scope.randomEdgeID +
+          ' -e EDGE_KEY=' +
+          $scope.endpoint.EdgeKey +
+          ' -e CAP_HOST_MANAGEMENT=1 --mode global --constraint node.platform.os==windows --mount type=npipe,src=\\\\.\\pipe\\docker_engine,dst=\\\\.\\pipe\\docker_engine --mount type=bind,src=C:\\ProgramData\\docker\\volumes,dst=C:\\ProgramData\\docker\\volumes --mount type=volume,src=portainer_agent_data,dst=C:\\data portainer/agent'
         );
       } else {
         clipboard.copyText('curl https://downloads.portainer.io/portainer-edge-agent-setup.sh | bash -s -- ' + $scope.randomEdgeID + ' ' + $scope.endpoint.EdgeKey);
@@ -113,6 +162,42 @@ angular
       }
     }
 
+    $scope.removeAction = removeAction;
+    $scope.addAction = addAction;
+
+    Array.prototype.indexOf = function (val) {
+      for (var i = 0; i < this.length; i++) {
+        if (this[i] == val) return i;
+      }
+      return -1;
+    };
+    Array.prototype.remove = function (val) {
+      var index = this.indexOf(val);
+      if (index > -1) {
+        this.splice(index, 1);
+      }
+    };
+
+    function removeAction(selectedItems) {
+      for (let item of selectedItems) {
+        $scope.endpoint.Gpus.remove(item);
+      }
+    }
+
+    function addAction() {
+      $scope.endpoint.Gpus.push({ 'name': null, 'value': null });
+    }
+
+    function verifyGpus() {
+      var i = $scope.endpoint.Gpus.length;
+      while (i--) {
+        if ($scope.endpoint.Gpus[i].name === '' || $scope.endpoint.Gpus[i].name === null ) {
+          $scope.endpoint.Gpus.splice(i, 1);
+        }
+      }
+    }
+
+
     $scope.updateEndpoint = function () {
       var endpoint = $scope.endpoint;
       var securityData = $scope.formValues.SecurityFormData;
@@ -121,9 +206,11 @@ angular
       var TLSSkipVerify = TLS && (TLSMode === 'tls_client_noca' || TLSMode === 'tls_only');
       var TLSSkipClientVerify = TLS && (TLSMode === 'tls_ca' || TLSMode === 'tls_only');
 
+      verifyGpus();
       var payload = {
         Name: endpoint.Name,
         PublicURL: endpoint.PublicURL,
+        Gpus: endpoint.Gpus,
         GroupID: endpoint.GroupId,
         TagIds: endpoint.TagIds,
         EdgeCheckinInterval: endpoint.EdgeCheckinInterval,

@@ -8,7 +8,7 @@ import (
 	httperror "github.com/portainer/libhttp/error"
 	"github.com/portainer/libhttp/request"
 	"github.com/portainer/libhttp/response"
-	"github.com/portainer/portainer/api"
+	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/bolt/errors"
 	"github.com/portainer/portainer/api/http/client"
 	"github.com/portainer/portainer/api/internal/edge"
@@ -19,6 +19,7 @@ type endpointUpdatePayload struct {
 	Name                   *string
 	URL                    *string
 	PublicURL              *string
+	Gpus                   []portainer.Pair
 	GroupID                *int
 	TLS                    *bool
 	TLSSkipVerify          *bool
@@ -68,6 +69,10 @@ func (handler *Handler) endpointUpdate(w http.ResponseWriter, r *http.Request) *
 
 	if payload.PublicURL != nil {
 		endpoint.PublicURL = *payload.PublicURL
+	}
+
+	if payload.Gpus != nil {
+		endpoint.Gpus = payload.Gpus
 	}
 
 	if payload.EdgeCheckinInterval != nil {
