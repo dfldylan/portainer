@@ -727,6 +727,25 @@ angular.module('portainer.docker').controller('CreateContainerController', [
       });
     }
 
+    $scope.getAvailbleGpus = function() {
+      if($scope.useAllGpus === true){
+        return [];
+      }
+      else{
+        var availGpus = new Array();
+        var selectedGPUs = _.map($scope.formValues.GPU.selectedGPUs, 'key');
+        for(let gpu of endpoint.Gpus){
+          if($scope.gpuUseSet.has(gpu.name) || selectedGPUs.includes(gpu.name)){
+            continue;
+          }
+          else{
+            availGpus.push({'name':gpu.name,'value':gpu.value});
+          }          
+        }
+        return availGpus;
+      }
+    }
+
     async function initView() {
       var nodeName = $transition$.params().nodeName;
       $scope.formValues.NodeName = nodeName;
@@ -769,6 +788,25 @@ angular.module('portainer.docker').controller('CreateContainerController', [
         function (d) {
           var containers = d;
           $scope.runningContainers = containers;
+          $scope.useAllGpus = false;
+          $scope.gpuUseSet = new Set();
+          for (let item of $scope.runningContainers) {
+            ContainerService.container(item.Id).then(function success(data) {
+              if ($scope.useAllGpus === false) {
+                const gpuOptions = _.find(data.HostConfig.DeviceRequests, { Driver: 'nvidia' });
+                if (gpuOptions) {
+                  if (gpuOptions.Count === -1) {
+                    $scope.useAllGpus = true;
+                  }
+                  else {
+                    for (let id of gpuOptions.DeviceIDs){
+                      $scope.gpuUseSet.add(id);
+                    }
+                  }
+                }
+              }
+            });
+          }
           if ($transition$.params().from) {
             loadFromContainerSpec();
           } else {
