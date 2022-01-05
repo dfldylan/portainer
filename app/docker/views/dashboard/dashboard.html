@@ -56,6 +56,10 @@
               <td>{{ endpoint.URL | stripprotocol }}</td>
             </tr>
             <tr>
+              <td>{{ endpoint.Gpus.length <= 1 ? 'GPU' : 'GPUs' }}</td>
+              <td>{{ gpusInfo }}</td>
+            </tr>
+            <tr>
               <td>Tags</td>
               <td>{{ endpointTags }}</td>
             </tr>
@@ -159,6 +163,23 @@
           </div>
           <div class="title">{{ networkCount }}</div>
           <div class="comment">{{ networkCount === 1 ? 'Network' : 'Networks' }}</div>
+        </rd-widget-body>
+      </rd-widget>
+    </a>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <a ui-sref="docker.containers">
+      <rd-widget>
+        <rd-widget-body>
+          <div class="widget-icon blue pull-left">
+            <i class="fa fa-digital-tachograph"></i>
+          </div>
+          <div class="pull-right" style="padding-left: 5px;">
+            <div><i class="fa fa-check space-right green-icon"></i>{{ endpoint.Gpus.length-gpuOccupied }} available</div>
+            <div><i class="fa fa-lock space-right red-icon"></i>{{ gpuOccupied }} occupied</div>
+          </div>
+          <div class="title">{{ endpoint.Gpus.length }}</div>
+          <div class="comment">{{ endpoint.Gpus.length <= 1 ? 'GPU' : 'GPUs' }}</div>
         </rd-widget-body>
       </rd-widget>
     </a>

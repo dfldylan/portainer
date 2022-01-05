@@ -63,6 +63,28 @@ angular.module('portainer.docker').controller('DashboardController', [
       })
         .then(function success(data) {
           $scope.containers = data.containers;
+          $scope.useAllGpus = false;
+          $scope.gpuUseSet = new Set();
+          $scope.gpuOccupied = 0;
+          for (let item of $scope.containers) {
+            if (item.State != "running") continue;
+            ContainerService.container(item.Id).then(function success(data) {
+              if ($scope.useAllGpus === false) {
+                const gpuOptions = _.find(data.HostConfig.DeviceRequests, { Driver: 'nvidia' });
+                if (gpuOptions) {
+                  if (gpuOptions.Count === -1) {
+                    $scope.useAllGpus = true;
+                  }
+                  else {
+                    for (let id of gpuOptions.DeviceIDs) {
+                      $scope.gpuUseSet.add(id);
+                    }
+                  }
+                  $scope.gpuOccupied = $scope.useAllGpus ? $scope.endpoint.Gpus.length : $scope.gpuUseSet.size;
+                }
+              };
+            });
+          }
           $scope.images = data.images;
           $scope.volumeCount = data.volumes.length;
           $scope.networkCount = data.networks.length;
@@ -70,17 +92,42 @@ angular.module('portainer.docker').controller('DashboardController', [
           $scope.stackCount = data.stacks.length;
           $scope.info = data.info;
           $scope.endpoint = data.endpoint;
+          var gpusInfo = new Array();
+          for (let i = 0; i < $scope.endpoint.Gpus.length; i++) {
+            var exist = false;
+            for (let gpuInfo in gpusInfo) {
+              if ($scope.endpoint.Gpus[i].value === gpuInfo) {
+                gpusInfo[gpuInfo] += 1;
+                exist = true;
+              }
+            }
+            if (exist === false) {
+              gpusInfo[$scope.endpoint.Gpus[i].value] = 1;
+            }
+          }
+          $scope.gpusInfo = Object.keys(gpusInfo).length
+            ? _.join(
+              _.map(Object.keys(gpusInfo), (gpuInfo) => {
+                var _str = gpusInfo[gpuInfo];
+                _str += ' x ';
+                _str += gpuInfo;
+                return _str;
+              })
+              , ' + '
+            )
+            : 'none';
+
           $scope.endpointTags = $scope.endpoint.TagIds.length
             ? _.join(
-                _.filter(
-                  _.map($scope.endpoint.TagIds, (id) => {
-                    const tag = data.tags.find((tag) => tag.Id === id);
-                    return tag ? tag.Name : '';
-                  }),
-                  Boolean
-                ),
-                ', '
-              )
+              _.filter(
+                _.map($scope.endpoint.TagIds, (id) => {
+                  const tag = data.tags.find((tag) => tag.Id === id);
+                  return tag ? tag.Name : '';
+                }),
+                Boolean
+              ),
+              ', '
+            )
             : '-';
           $scope.offlineMode = EndpointProvider.offlineMode();
         })
