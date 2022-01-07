@@ -11,10 +11,8 @@ const meta: Meta = {
 
 export default meta;
 
-export { Example };
-
-function Example() {
-  const [selectedUsers, setSelectedUsers] = useState([1]);
+export function Example() {
+  const [selectedUsers, setSelectedUsers] = useState([10]);
 
   const users = [createMockUser(1, 'user1'), createMockUser(2, 'user2')];
 

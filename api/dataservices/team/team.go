@@ -63,7 +63,7 @@ func (service *Service) TeamByName(name string) (*portainer.Team, error) {
 				logrus.WithField("obj", obj).Errorf("Failed to convert to Team object")
 				return nil, fmt.Errorf("Failed to convert to Team object: %s", obj)
 			}
-			if strings.EqualFold(team.Name, name) {
+			if strings.EqualFold(t.Name, name) {
 				t = team
 				return nil, stop
 			}

@@ -8,7 +8,7 @@ import porAccessManagementModule from './accessManagement';
 import formComponentsModule from './form-components';
 import widgetModule from './widget';
 import boxSelectorModule from './BoxSelector';
-import headerModule from './PageHeader';
+import headerModule from './Header';
 
 import { ReactExampleAngular } from './ReactExample';
 import { TooltipAngular } from './Tip/Tooltip';

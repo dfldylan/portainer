@@ -1,7 +1,6 @@
 import moment from 'moment';
 import _ from 'lodash-es';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
-import { confirmContainerDeletion } from '@/portainer/services/modal.service/prompt';
 
 angular.module('portainer.docker').controller('ContainerController', [
   '$q',
@@ -247,8 +246,7 @@ angular.module('portainer.docker').controller('ContainerController', [
       if ($scope.container.State.Running) {
         title = 'You are about to remove a running container.';
       }
-
-      confirmContainerDeletion(title, function (result) {
+      ModalService.confirmContainerDeletion(title, function (result) {
         if (!result) {
           return;
         }

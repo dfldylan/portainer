@@ -79,7 +79,6 @@ overrides:
       react/forbid-prop-types: off
       react/require-default-props: off
       react/no-array-index-key: off
-      no-underscore-dangle: off
       react/jsx-filename-extension: [0]
       import/no-extraneous-dependencies: ['error', { devDependencies: true }]
       '@typescript-eslint/explicit-module-boundary-types': off
@@ -88,8 +87,6 @@ overrides:
       'jsx-a11y/label-has-associated-control': ['error', { 'assert': 'either' }]
       'react/function-component-definition': ['error', { 'namedComponents': 'function-declaration' }]
       'react/jsx-no-bind': off
-      'no-await-in-loop': 'off'
-      'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }]
   - files:
       - app/**/*.test.*
     extends:
@@ -97,5 +94,3 @@ overrides:
       - 'plugin:jest/style'
     env:
       'jest/globals': true
-    rules:
-      'react/jsx-no-constructed-context-values': off

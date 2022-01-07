@@ -213,11 +213,6 @@ export default class CreateEdgeStackViewController {
   }
 
   formIsInvalid() {
-    return (
-      this.form.$invalid ||
-      !this.formValues.Groups.length ||
-      (['template', 'editor'].includes(this.state.Method) && !this.formValues.StackFileContent) ||
-      ('upload' === this.state.Method && !this.formValues.StackFile)
-    );
+    return this.form.$invalid || !this.formValues.Groups.length || (['template', 'editor'].includes(this.state.Method) && !this.formValues.StackFileContent);
   }
 }

@@ -47,9 +47,7 @@ class DockerComposeFormController {
   }
 
   onChangeFile(value) {
-    return this.$async(async () => {
-      this.formValues.StackFile = value;
-    });
+    this.formValues.StackFile = value;
   }
 
   async $onInit() {
