@@ -77,7 +77,7 @@ angular.module('portainer.docker').controller('ContainersDatatableController', [
     };
 
     this.getGpus = function (DeviceRequests) {
-      const gpuOptions = _.find(DeviceRequests, { Driver: 'nvidia' });
+      const gpuOptions = _.find(DeviceRequests, function(o) { return (o.Driver === 'nvidia' || o.Capabilities[0][0] === 'gpu') });
       if (!gpuOptions) {
         return 'none';
       }

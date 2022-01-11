@@ -70,7 +70,7 @@ angular.module('portainer.docker').controller('DashboardController', [
             if (item.State != "running") continue;
             ContainerService.container(item.Id).then(function success(data) {
               if ($scope.useAllGpus === false) {
-                const gpuOptions = _.find(data.HostConfig.DeviceRequests, { Driver: 'nvidia' });
+                const gpuOptions = _.find(data.HostConfig.DeviceRequests, function(o) { return (o.Driver === 'nvidia' || o.Capabilities[0][0] === 'gpu') });
                 if (gpuOptions) {
                   if (gpuOptions.Count === -1) {
                     $scope.useAllGpus = true;

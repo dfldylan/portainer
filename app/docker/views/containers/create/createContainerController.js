@@ -423,7 +423,7 @@ angular.module('portainer.docker').controller('CreateContainerController', [
         return;
       }
       const driver = 'nvidia';
-      const existingDeviceRequest = _.find($scope.config.HostConfig.DeviceRequests, { Driver: driver });
+      const existingDeviceRequest = _.find($scope.config.HostConfig.DeviceRequests, function(o) { return (o.Driver === driver || o.Capabilities[0][0] === 'gpu') });
       if (existingDeviceRequest) {
         _.pullAllBy(config.HostConfig.DeviceRequests, [existingDeviceRequest], 'Driver');
       }
@@ -609,7 +609,7 @@ angular.module('portainer.docker').controller('CreateContainerController', [
     }
 
     function loadFromContainerDeviceRequests() {
-      const deviceRequest = _.find($scope.config.HostConfig.DeviceRequests, { Driver: 'nvidia' });
+      const deviceRequest = _.find($scope.config.HostConfig.DeviceRequests, function(o) { return (o.Driver === 'nvidia' || o.Capabilities[0][0] === 'gpu') });
       if (deviceRequest) {
         $scope.formValues.GPU.enabled = true;
         $scope.formValues.GPU.useSpecific = deviceRequest.Count !== -1;
@@ -793,7 +793,7 @@ angular.module('portainer.docker').controller('CreateContainerController', [
           for (let item of $scope.runningContainers) {
             ContainerService.container(item.Id).then(function success(data) {
               if ($scope.useAllGpus === false) {
-                const gpuOptions = _.find(data.HostConfig.DeviceRequests, { Driver: 'nvidia' });
+                const gpuOptions = _.find(data.HostConfig.DeviceRequests, function(o) { return (o.Driver === 'nvidia' || o.Capabilities[0][0] === 'gpu') });
                 if (gpuOptions) {
                   if (gpuOptions.Count === -1) {
                     $scope.useAllGpus = true;
