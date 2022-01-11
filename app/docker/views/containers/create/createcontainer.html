@@ -733,11 +733,11 @@
                       <div class="input-group col-sm-8 input-group-sm"> 
                         <span class="input-group-addon">index or UUID</span>
                         <input type="text" class="form-control" typeahead-no-results="noResults" typeahead-min-length=0 typeahead-editable=false typeahead-select-on-exact=true uib-typeahead="item.name as item.name+' : '+item.value for item in getAvailbleGpus() | filter:$viewValue | limitTo:all" ng-model="gpu.key" placeholder="e.g. 0 or GPU-fef8089b" typeahead-wait-ms=100 />
-                        <div ng-if="noResults">No Available GPU</div>
                       </div>
                       <button class="btn btn-sm btn-danger" type="button" ng-click="removeGPU($index)">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </button>
+                      <div ng-if="noResults">No Available GPU</div>
                     </div>
                   </div>
                 </div>
