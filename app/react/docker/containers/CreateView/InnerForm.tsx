@@ -176,6 +176,11 @@ export function InnerForm({
                               environment.SecuritySettings
                                 .allowSysctlSettingForRegularUsers
                             }
+                            isSecurityOptFieldVisible={
+                              isEnvironmentAdminQuery.authorized ||
+                              environment.SecuritySettings
+                                .allowSecurityOptForRegularUsers
+                            }
                             renderLimits={
                               isDuplicate
                                 ? (values) => (

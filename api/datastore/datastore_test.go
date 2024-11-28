@@ -117,6 +117,7 @@ func setEndpointAuthorizations(endpoint *portainer.Endpoint) {
 		EnableHostManagementFeatures:      false,
 
 		AllowSysctlSettingForRegularUsers:         true,
+		AllowSecurityOptForRegularUsers:           true,
 		AllowBindMountsForRegularUsers:            true,
 		AllowPrivilegedModeForRegularUsers:        true,
 		AllowHostNamespaceForRegularUsers:         true,

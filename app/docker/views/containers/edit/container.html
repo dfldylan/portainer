@@ -318,6 +318,16 @@
                 </table>
               </td>
             </tr>
+            <tr ng-if="!(container.HostConfig.SecurityOpt | emptyobject)">
+              <td>SecurityOpt</td>
+              <td>
+                <table class="table-bordered table-condensed table">
+                  <tr ng-repeat="opt in container.HostConfig.SecurityOpt">
+                    <td>{{ opt }}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>                        
             <tr ng-if="container.HostConfig.DeviceRequests.length">
               <td>GPUS</td>
               <td>{{ computeDockerGPUCommand() }}</td>

@@ -25,6 +25,7 @@ export default class DockerFeaturesConfigurationController {
       disableDeviceMappingForRegularUsers: false,
       disableContainerCapabilitiesForRegularUsers: false,
       disableSysctlSettingForRegularUsers: false,
+      disableSecurityOptForRegularUsers: false,
     };
 
     this.isAgent = false;
@@ -49,6 +50,7 @@ export default class DockerFeaturesConfigurationController {
     this.onChangeDisableDeviceMappingForRegularUsers = this.onChangeField('disableDeviceMappingForRegularUsers');
     this.onChangeDisableContainerCapabilitiesForRegularUsers = this.onChangeField('disableContainerCapabilitiesForRegularUsers');
     this.onChangeDisableSysctlSettingForRegularUsers = this.onChangeField('disableSysctlSettingForRegularUsers');
+    this.onChangeDisableSecurityOptForRegularUsers = this.onChangeField('disableSecurityOptForRegularUsers');
   }
 
   onToggleAutoUpdate(value) {
@@ -94,6 +96,7 @@ export default class DockerFeaturesConfigurationController {
       disableDeviceMappingForRegularUsers,
       disableContainerCapabilitiesForRegularUsers,
       disableSysctlSettingForRegularUsers,
+      disableSecurityOptForRegularUsers,
     } = this.formValues;
     return (
       disableBindMountsForRegularUsers ||
@@ -101,7 +104,8 @@ export default class DockerFeaturesConfigurationController {
       disablePrivilegedModeForRegularUsers ||
       disableDeviceMappingForRegularUsers ||
       disableContainerCapabilitiesForRegularUsers ||
-      disableSysctlSettingForRegularUsers
+      disableSysctlSettingForRegularUsers ||
+      disableSecurityOptForRegularUsers
     );
   }
 
@@ -123,6 +127,7 @@ export default class DockerFeaturesConfigurationController {
           allowStackManagementForRegularUsers: !this.formValues.disableStackManagementForRegularUsers,
           allowContainerCapabilitiesForRegularUsers: !this.formValues.disableContainerCapabilitiesForRegularUsers,
           allowSysctlSettingForRegularUsers: !this.formValues.disableSysctlSettingForRegularUsers,
+          allowSecurityOptForRegularUsers: !this.formValues.disableSecurityOptForRegularUsers,
           enableGPUManagement: this.state.enableGPUManagement,
           gpus,
         };
@@ -177,6 +182,7 @@ export default class DockerFeaturesConfigurationController {
       disableStackManagementForRegularUsers: !securitySettings.allowStackManagementForRegularUsers,
       disableContainerCapabilitiesForRegularUsers: !securitySettings.allowContainerCapabilitiesForRegularUsers,
       disableSysctlSettingForRegularUsers: !securitySettings.allowSysctlSettingForRegularUsers,
+      disableSecurityOptForRegularUsers: !securitySettings.allowSecurityOptForRegularUsers,
     };
 
     // this.endpoint.Gpus could be null as it is Gpus: []Pair in the API

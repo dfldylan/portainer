@@ -77,6 +77,7 @@ func (config *ComposeStackDeploymentConfig) Deploy() error {
 		!securitySettings.AllowHostNamespaceForRegularUsers ||
 		!securitySettings.AllowDeviceMappingForRegularUsers ||
 		!securitySettings.AllowSysctlSettingForRegularUsers ||
+		!securitySettings.AllowSecurityOptForRegularUsers ||
 		!securitySettings.AllowContainerCapabilitiesForRegularUsers) &&
 		!isAdminOrEndpointAdmin {
 
