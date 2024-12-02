@@ -32,8 +32,14 @@ cp -r "./mustache-templates" "./dist"
 
 
 cd api || exit 1
-# the go get adds 8 seconds
-go get -t -d -v ./...
+
+# Conditionally run go get based on the SKIP_GO_GET environment variable
+# This process adds a bit of time to the build
+# This is useful in the CI/CD pipeline to ensure that all dependencies are available
+if [ "${SKIP_GO_GET:-false}" = false ]; then
+  echo "Running go get -t -v ./..."
+  go get -t -v ./...
+fi
 
 
 ldflags="-s -X 'github.com/portainer/liblicense.LicenseServerBaseURL=https://api.portainer.io' \
@@ -51,7 +57,6 @@ ldflags="-s -X 'github.com/portainer/liblicense.LicenseServerBaseURL=https://api
 
 echo "$ldflags"
 
-# the build takes 2 seconds
 GOOS=${1:-$(go env GOOS)} GOARCH=${2:-$(go env GOARCH)} CGO_ENABLED=0 go build \
 	-trimpath \
 	--installsuffix cgo \
