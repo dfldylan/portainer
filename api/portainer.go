@@ -185,6 +185,16 @@ type (
 	// CustomTemplatePlatform represents a custom template platform
 	CustomTemplatePlatform int
 
+	// DiagnosticsData represents the diagnostics data for an environment
+	// this contains the logs, telnet, traceroute, dns and proxy information
+	// which will be part of the DockerSnapshot and KubernetesSnapshot structs
+	DiagnosticsData struct {
+		Log    string            `json:"Log,omitempty"`
+		Telnet map[string]string `json:"Telnet,omitempty"`
+		DNS    map[string]string `json:"DNS,omitempty"`
+		Proxy  map[string]string `json:"Proxy,omitempty"`
+	}
+
 	// DockerHub represents all the required information to connect and use the
 	// Docker Hub
 	DockerHub struct {
@@ -217,6 +227,7 @@ type (
 		GpuUseAll               bool              `json:"GpuUseAll"`
 		GpuUseList              []string          `json:"GpuUseList"`
 		IsPodman                bool              `json:"IsPodman"`
+		DiagnosticsData         *DiagnosticsData  `json:"DiagnosticsData"`
 	}
 
 	// DockerContainerSnapshot is an extent of Docker's Container struct
@@ -638,11 +649,12 @@ type (
 
 	// KubernetesSnapshot represents a snapshot of a specific Kubernetes environment(endpoint) at a specific time
 	KubernetesSnapshot struct {
-		Time              int64  `json:"Time"`
-		KubernetesVersion string `json:"KubernetesVersion"`
-		NodeCount         int    `json:"NodeCount"`
-		TotalCPU          int64  `json:"TotalCPU"`
-		TotalMemory       int64  `json:"TotalMemory"`
+		Time              int64            `json:"Time"`
+		KubernetesVersion string           `json:"KubernetesVersion"`
+		NodeCount         int              `json:"NodeCount"`
+		TotalCPU          int64            `json:"TotalCPU"`
+		TotalMemory       int64            `json:"TotalMemory"`
+		DiagnosticsData   *DiagnosticsData `json:"DiagnosticsData"`
 	}
 
 	// KubernetesConfiguration represents the configuration of a Kubernetes environment(endpoint)
