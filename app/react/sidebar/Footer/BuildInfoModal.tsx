@@ -41,7 +41,7 @@ export function BuildInfoModalButton() {
         onClick={() => setIsBuildInfoVisible(true)}
         title="About Portainer"
       >
-        {`${Version} (${VersionSupport})`}
+        {`${Version} ${VersionSupport}`}
       </button>
       {isBuildInfoVisible && (
         <BuildInfoModal closeModal={() => setIsBuildInfoVisible(false)} />
@@ -80,7 +80,7 @@ function BuildInfoModal({ closeModal }: { closeModal: () => void }) {
                 <td>
                   <span className="inline-flex items-center flex-wrap">
                     <Server size="13" className="space-right" />
-                    Server Version: {ServerVersion} ({VersionSupport})
+                    Server Version: {ServerVersion} {VersionSupport}
                   </span>
                 </td>
                 <td>
