@@ -329,9 +329,6 @@ type (
 		DeploymentType EdgeStackDeploymentType `json:"DeploymentType"`
 		// Uses the manifest's namespaces instead of the default one
 		UseManifestNamespaces bool
-
-		// Deprecated
-		Prune bool `json:"Prune,omitempty"`
 	}
 
 	EdgeStackDeploymentType int
