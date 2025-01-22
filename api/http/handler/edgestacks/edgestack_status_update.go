@@ -116,7 +116,7 @@ func (handler *Handler) updateEdgeStackStatus(tx dataservices.DataStoreTx, r *ht
 
 	endpoint, err := tx.Endpoint().Endpoint(payload.EndpointID)
 	if err != nil {
-		return nil, handler.handlerDBErr(fmt.Errorf("unable to find the environment from the database: %w. Environment ID: %d", err, payload.EndpointID), "unable to find the environment")
+		return nil, handlerDBErr(fmt.Errorf("unable to find the environment from the database: %w. Environment ID: %d", err, payload.EndpointID), "unable to find the environment")
 	}
 
 	if err := handler.requestBouncer.AuthorizedEdgeEndpointOperation(r, endpoint); err != nil {
@@ -139,7 +139,7 @@ func (handler *Handler) updateEdgeStackStatus(tx dataservices.DataStoreTx, r *ht
 	updateEnvStatus(payload.EndpointID, stack, deploymentStatus)
 
 	if err := tx.EdgeStack().UpdateEdgeStack(stackID, stack); err != nil {
-		return nil, handler.handlerDBErr(fmt.Errorf("unable to update Edge stack to the database: %w. Environment name: %s", err, endpoint.Name), "unable to update Edge stack")
+		return nil, handlerDBErr(fmt.Errorf("unable to update Edge stack to the database: %w. Environment name: %s", err, endpoint.Name), "unable to update Edge stack")
 	}
 
 	return stack, nil

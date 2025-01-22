@@ -58,10 +58,10 @@ func NewHandler(bouncer security.BouncerService, dataStore dataservices.DataStor
 	return h
 }
 
-func (handler *Handler) handlerDBErr(err error, msg string) *httperror.HandlerError {
+func handlerDBErr(err error, msg string) *httperror.HandlerError {
 	httpErr := httperror.InternalServerError(msg, err)
 
-	if handler.DataStore.IsErrObjectNotFound(err) {
+	if dataservices.IsErrObjectNotFound(err) {
 		httpErr.StatusCode = http.StatusNotFound
 	}
 
