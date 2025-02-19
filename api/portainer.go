@@ -1493,7 +1493,8 @@ type (
 		StoreSSLCertPair(cert, key []byte) (string, string, error)
 		CopySSLCertPair(certPath, keyPath string) (string, string, error)
 		CopySSLCACert(caCertPath string) (string, error)
-		StoreMTLSCertificates(cert, caCert, key []byte) (string, string, string, error)
+		StoreMTLSCertificates(caCert, cert, key []byte) (string, string, string, error)
+		GetMTLSCertificates() (string, string, string, error)
 		GetDefaultChiselPrivateKeyPath() string
 		StoreChiselPrivateKey(privateKey []byte) error
 	}
