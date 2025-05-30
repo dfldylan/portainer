@@ -679,14 +679,11 @@
           "Images": null,
           "Info": {
             "Architecture": "",
-            "BridgeNfIp6tables": false,
-            "BridgeNfIptables": false,
             "CDISpecDirs": null,
             "CPUSet": false,
             "CPUShares": false,
             "CgroupDriver": "",
             "ContainerdCommit": {
-              "Expected": "",
               "ID": ""
             },
             "Containers": 0,
@@ -710,7 +707,6 @@
             "IndexServerAddress": "",
             "InitBinary": "",
             "InitCommit": {
-              "Expected": "",
               "ID": ""
             },
             "Isolation": "",
@@ -739,7 +735,6 @@
             },
             "RegistryConfig": null,
             "RuncCommit": {
-              "Expected": "",
               "ID": ""
             },
             "Runtimes": null,
