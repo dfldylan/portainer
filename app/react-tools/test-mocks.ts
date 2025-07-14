@@ -10,7 +10,7 @@ import {
 
 export function createMockUsers(
   count: number,
-  roles: Role | Role[] | ((id: UserId) => Role) = () => _.random(1, 3)
+  roles: Role | Role[] | ((id: UserId) => Role)
 ): User[] {
   return _.range(1, count + 1).map((value) => ({
     Id: value,
@@ -40,7 +40,14 @@ function getRoles(
     return roles;
   }
 
-  return roles[id];
+  // Roles is an array
+  if (roles.length === 0) {
+    throw new Error('No roles provided');
+  }
+
+  // The number of roles is not necessarily the same length as the number of users
+  // so we need to distribute the roles evenly and consistently
+  return roles[(id - 1) % roles.length];
 }
 
 export function createMockTeams(count: number): Team[] {
