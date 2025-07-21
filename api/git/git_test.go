@@ -38,7 +38,7 @@ func Test_ClonePublicRepository_Shallow(t *testing.T) {
 
 	dir := t.TempDir()
 	t.Logf("Cloning into %s", dir)
-	err := service.CloneRepository(dir, repositoryURL, referenceName, "", "", false)
+	err := service.CloneRepository(dir, repositoryURL, referenceName, "", "", gittypes.GitCredentialAuthType_Basic, false)
 	assert.NoError(t, err)
 	assert.Equal(t, 1, getCommitHistoryLength(t, err, dir), "cloned repo has incorrect depth")
 }
@@ -50,7 +50,7 @@ func Test_ClonePublicRepository_NoGitDirectory(t *testing.T) {
 
 	dir := t.TempDir()
 	t.Logf("Cloning into %s", dir)
-	err := service.CloneRepository(dir, repositoryURL, referenceName, "", "", false)
+	err := service.CloneRepository(dir, repositoryURL, referenceName, "", "", gittypes.GitCredentialAuthType_Basic, false)
 	assert.NoError(t, err)
 	assert.NoDirExists(t, filepath.Join(dir, ".git"))
 }
@@ -84,7 +84,7 @@ func Test_latestCommitID(t *testing.T) {
 	repositoryURL := setup(t)
 	referenceName := "refs/heads/main"
 
-	id, err := service.LatestCommitID(repositoryURL, referenceName, "", "", false)
+	id, err := service.LatestCommitID(repositoryURL, referenceName, "", "", gittypes.GitCredentialAuthType_Basic, false)
 
 	assert.NoError(t, err)
 	assert.Equal(t, "68dcaa7bd452494043c64252ab90db0f98ecf8d2", id)
@@ -95,7 +95,7 @@ func Test_ListRefs(t *testing.T) {
 
 	repositoryURL := setup(t)
 
-	fs, err := service.ListRefs(repositoryURL, "", "", false, false)
+	fs, err := service.ListRefs(repositoryURL, "", "", gittypes.GitCredentialAuthType_Basic, false, false)
 
 	assert.NoError(t, err)
 	assert.Equal(t, []string{"refs/heads/main"}, fs)
@@ -107,7 +107,17 @@ func Test_ListFiles(t *testing.T) {
 	repositoryURL := setup(t)
 	referenceName := "refs/heads/main"
 
-	fs, err := service.ListFiles(repositoryURL, referenceName, "", "", false, false, []string{".yml"}, false)
+	fs, err := service.ListFiles(
+		repositoryURL,
+		referenceName,
+		"",
+		"",
+		gittypes.GitCredentialAuthType_Basic,
+		false,
+		false,
+		[]string{".yml"},
+		false,
+	)
 
 	assert.NoError(t, err)
 	assert.Equal(t, []string{"docker-compose.yml"}, fs)
@@ -255,7 +265,7 @@ func Test_listFilesPrivateRepository(t *testing.T) {
 			name: "list tree with real repository and head ref but no credential",
 			args: fetchOption{
 				baseOption: baseOption{
-					repositoryUrl: privateGitRepoURL + "fake",
+					repositoryUrl: privateGitRepoURL,
 					username:      "",
 					password:      "",
 				},

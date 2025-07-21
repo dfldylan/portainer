@@ -15,6 +15,7 @@ import (
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
+	gittypes "github.com/portainer/portainer/api/git/types"
 	"github.com/portainer/portainer/api/http/proxy/factory/utils"
 	"github.com/portainer/portainer/api/http/security"
 	"github.com/portainer/portainer/api/internal/authorization"
@@ -418,7 +419,14 @@ func (transport *Transport) updateDefaultGitBranch(request *http.Request) error 
 	}
 
 	repositoryURL := remote[:len(remote)-4]
-	latestCommitID, err := transport.gitService.LatestCommitID(repositoryURL, "", "", "", false)
+	latestCommitID, err := transport.gitService.LatestCommitID(
+		repositoryURL,
+		"",
+		"",
+		"",
+		gittypes.GitCredentialAuthType_Basic,
+		false,
+	)
 	if err != nil {
 		return err
 	}

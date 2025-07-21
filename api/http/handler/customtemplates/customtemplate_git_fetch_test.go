@@ -33,13 +33,28 @@ type TestGitService struct {
 	targetFilePath string
 }
 
-func (g *TestGitService) CloneRepository(destination string, repositoryURL, referenceName string, username, password string, tlsSkipVerify bool) error {
+func (g *TestGitService) CloneRepository(
+	destination string,
+	repositoryURL,
+	referenceName string,
+	username,
+	password string,
+	authType gittypes.GitCredentialAuthType,
+	tlsSkipVerify bool,
+) error {
 	time.Sleep(100 * time.Millisecond)
 
 	return createTestFile(g.targetFilePath)
 }
 
-func (g *TestGitService) LatestCommitID(repositoryURL, referenceName, username, password string, tlsSkipVerify bool) (string, error) {
+func (g *TestGitService) LatestCommitID(
+	repositoryURL,
+	referenceName,
+	username,
+	password string,
+	authType gittypes.GitCredentialAuthType,
+	tlsSkipVerify bool,
+) (string, error) {
 	return "", nil
 }
 
@@ -56,11 +71,26 @@ type InvalidTestGitService struct {
 	targetFilePath string
 }
 
-func (g *InvalidTestGitService) CloneRepository(dest, repoUrl, refName, username, password string, tlsSkipVerify bool) error {
+func (g *InvalidTestGitService) CloneRepository(
+	dest,
+	repoUrl,
+	refName,
+	username,
+	password string,
+	authType gittypes.GitCredentialAuthType,
+	tlsSkipVerify bool,
+) error {
 	return errors.New("simulate network error")
 }
 
-func (g *InvalidTestGitService) LatestCommitID(repositoryURL, referenceName, username, password string, tlsSkipVerify bool) (string, error) {
+func (g *InvalidTestGitService) LatestCommitID(
+	repositoryURL,
+	referenceName,
+	username,
+	password string,
+	authType gittypes.GitCredentialAuthType,
+	tlsSkipVerify bool,
+) (string, error) {
 	return "", nil
 }
 

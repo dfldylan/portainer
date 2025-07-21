@@ -1540,10 +1540,42 @@ type (
 
 	// GitService represents a service for managing Git
 	GitService interface {
-		CloneRepository(destination string, repositoryURL, referenceName, username, password string, tlsSkipVerify bool) error
-		LatestCommitID(repositoryURL, referenceName, username, password string, tlsSkipVerify bool) (string, error)
-		ListRefs(repositoryURL, username, password string, hardRefresh bool, tlsSkipVerify bool) ([]string, error)
-		ListFiles(repositoryURL, referenceName, username, password string, dirOnly, hardRefresh bool, includeExts []string, tlsSkipVerify bool) ([]string, error)
+		CloneRepository(
+			destination string,
+			repositoryURL,
+			referenceName,
+			username,
+			password string,
+			authType gittypes.GitCredentialAuthType,
+			tlsSkipVerify bool,
+		) error
+		LatestCommitID(
+			repositoryURL,
+			referenceName,
+			username,
+			password string,
+			authType gittypes.GitCredentialAuthType,
+			tlsSkipVerify bool,
+		) (string, error)
+		ListRefs(
+			repositoryURL,
+			username,
+			password string,
+			authType gittypes.GitCredentialAuthType,
+			hardRefresh bool,
+			tlsSkipVerify bool,
+		) ([]string, error)
+		ListFiles(
+			repositoryURL,
+			referenceName,
+			username,
+			password string,
+			authType gittypes.GitCredentialAuthType,
+			dirOnly,
+			hardRefresh bool,
+			includeExts []string,
+			tlsSkipVerify bool,
+		) ([]string, error)
 	}
 
 	// OpenAMTService represents a service for managing OpenAMT

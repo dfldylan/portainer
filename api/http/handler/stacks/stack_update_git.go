@@ -19,14 +19,15 @@ import (
 )
 
 type stackGitUpdatePayload struct {
-	AutoUpdate               *portainer.AutoUpdateSettings
-	Env                      []portainer.Pair
-	Prune                    bool
-	RepositoryReferenceName  string
-	RepositoryAuthentication bool
-	RepositoryUsername       string
-	RepositoryPassword       string
-	TLSSkipVerify            bool
+	AutoUpdate                  *portainer.AutoUpdateSettings
+	Env                         []portainer.Pair
+	Prune                       bool
+	RepositoryReferenceName     string
+	RepositoryAuthentication    bool
+	RepositoryUsername          string
+	RepositoryPassword          string
+	RepositoryAuthorizationType gittypes.GitCredentialAuthType
+	TLSSkipVerify               bool
 }
 
 func (payload *stackGitUpdatePayload) Validate(r *http.Request) error {
@@ -151,11 +152,19 @@ func (handler *Handler) stackUpdateGit(w http.ResponseWriter, r *http.Request) *
 		}
 
 		stack.GitConfig.Authentication = &gittypes.GitAuthentication{
-			Username: payload.RepositoryUsername,
-			Password: password,
+			Username:          payload.RepositoryUsername,
+			Password:          password,
+			AuthorizationType: payload.RepositoryAuthorizationType,
 		}
 
-		if _, err := handler.GitService.LatestCommitID(stack.GitConfig.URL, stack.GitConfig.ReferenceName, stack.GitConfig.Authentication.Username, stack.GitConfig.Authentication.Password, stack.GitConfig.TLSSkipVerify); err != nil {
+		if _, err := handler.GitService.LatestCommitID(
+			stack.GitConfig.URL,
+			stack.GitConfig.ReferenceName,
+			stack.GitConfig.Authentication.Username,
+			stack.GitConfig.Authentication.Password,
+			stack.GitConfig.Authentication.AuthorizationType,
+			stack.GitConfig.TLSSkipVerify,
+		); err != nil {
 			return httperror.InternalServerError("Unable to fetch git repository", err)
 		}
 	} else {
