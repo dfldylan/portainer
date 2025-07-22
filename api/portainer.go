@@ -7,17 +7,18 @@ import (
 	"net/http"
 	"time"
 
+	gittypes "github.com/portainer/portainer/api/git/types"
+	models "github.com/portainer/portainer/api/http/models/kubernetes"
+	"github.com/portainer/portainer/api/roar"
+	"github.com/portainer/portainer/pkg/featureflags"
+	httperror "github.com/portainer/portainer/pkg/libhttp/error"
+
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/api/types/system"
 	"github.com/docker/docker/api/types/volume"
-	gittypes "github.com/portainer/portainer/api/git/types"
-	models "github.com/portainer/portainer/api/http/models/kubernetes"
-	"github.com/portainer/portainer/pkg/featureflags"
-	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/segmentio/encoding/json"
-
 	"golang.org/x/oauth2"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/version"
@@ -265,12 +266,15 @@ type (
 	// EdgeGroup represents an Edge group
 	EdgeGroup struct {
 		// EdgeGroup Identifier
-		ID           EdgeGroupID  `json:"Id" example:"1"`
-		Name         string       `json:"Name"`
-		Dynamic      bool         `json:"Dynamic"`
-		TagIDs       []TagID      `json:"TagIds"`
-		Endpoints    []EndpointID `json:"Endpoints"`
-		PartialMatch bool         `json:"PartialMatch"`
+		ID           EdgeGroupID           `json:"Id" example:"1"`
+		Name         string                `json:"Name"`
+		Dynamic      bool                  `json:"Dynamic"`
+		TagIDs       []TagID               `json:"TagIds"`
+		EndpointIDs  roar.Roar[EndpointID] `json:"EndpointIds"`
+		PartialMatch bool                  `json:"PartialMatch"`
+
+		// Deprecated: only used for API responses
+		Endpoints []EndpointID `json:"Endpoints"`
 	}
 
 	// EdgeGroupID represents an Edge group identifier

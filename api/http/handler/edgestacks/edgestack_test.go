@@ -15,6 +15,7 @@ import (
 	"github.com/portainer/portainer/api/internal/edge/edgestacks"
 	"github.com/portainer/portainer/api/internal/testhelpers"
 	"github.com/portainer/portainer/api/jwt"
+	"github.com/portainer/portainer/api/roar"
 
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
@@ -103,7 +104,7 @@ func createEdgeStack(t *testing.T, store dataservices.DataStore, endpointID port
 		Name:         "EdgeGroup 1",
 		Dynamic:      false,
 		TagIDs:       nil,
-		Endpoints:    []portainer.EndpointID{endpointID},
+		EndpointIDs:  roar.FromSlice([]portainer.EndpointID{endpointID}),
 		PartialMatch: false,
 	}
 

@@ -6,6 +6,7 @@ import (
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/database/models"
 	"github.com/portainer/portainer/api/dataservices/dockerhub"
+	"github.com/portainer/portainer/api/dataservices/edgegroup"
 	"github.com/portainer/portainer/api/dataservices/edgejob"
 	"github.com/portainer/portainer/api/dataservices/edgestack"
 	"github.com/portainer/portainer/api/dataservices/edgestackstatus"
@@ -60,6 +61,7 @@ type (
 		edgeStackService        *edgestack.Service
 		edgeStackStatusService  *edgestackstatus.Service
 		edgeJobService          *edgejob.Service
+		edgeGroupService        *edgegroup.Service
 		TunnelServerService     *tunnelserver.Service
 		pendingActionsService   *pendingactions.Service
 	}
@@ -89,6 +91,7 @@ type (
 		EdgeStackService        *edgestack.Service
 		EdgeStackStatusService  *edgestackstatus.Service
 		EdgeJobService          *edgejob.Service
+		EdgeGroupService        *edgegroup.Service
 		TunnelServerService     *tunnelserver.Service
 		PendingActionsService   *pendingactions.Service
 	}
@@ -120,11 +123,13 @@ func NewMigrator(parameters *MigratorParameters) *Migrator {
 		edgeStackService:        parameters.EdgeStackService,
 		edgeStackStatusService:  parameters.EdgeStackStatusService,
 		edgeJobService:          parameters.EdgeJobService,
+		edgeGroupService:        parameters.EdgeGroupService,
 		TunnelServerService:     parameters.TunnelServerService,
 		pendingActionsService:   parameters.PendingActionsService,
 	}
 
 	migrator.initMigrations()
+
 	return migrator
 }
 
@@ -250,6 +255,8 @@ func (m *Migrator) initMigrations() {
 	m.addMigrations("2.31.0", m.migrateEdgeStacksStatuses_2_31_0)
 
 	m.addMigrations("2.32.0", m.addEndpointRelationForEdgeAgents_2_32_0)
+
+	m.addMigrations("2.33.0", m.migrateEdgeGroupEndpointsToRoars_2_33_0)
 
 	// Add new migrations above...
 	// One function per migration, each versions migration funcs in the same file.

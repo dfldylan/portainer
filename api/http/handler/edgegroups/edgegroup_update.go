@@ -158,7 +158,7 @@ func (handler *Handler) edgeGroupUpdate(w http.ResponseWriter, r *http.Request) 
 		return nil
 	})
 
-	return txResponse(w, edgeGroup, err)
+	return txResponse(w, shadowedEdgeGroup{EdgeGroup: *edgeGroup}, err)
 }
 
 func (handler *Handler) updateEndpointStacks(tx dataservices.DataStoreTx, endpoint *portainer.Endpoint, edgeGroups []portainer.EdgeGroup, edgeStacks []portainer.EdgeStack) error {

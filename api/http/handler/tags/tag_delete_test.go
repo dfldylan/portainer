@@ -1,7 +1,6 @@
 package tags
 
 import (
-	"github.com/portainer/portainer/api/dataservices"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -9,9 +8,11 @@ import (
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/api/dataservices"
 	portainerDsErrors "github.com/portainer/portainer/api/dataservices/errors"
 	"github.com/portainer/portainer/api/datastore"
 	"github.com/portainer/portainer/api/internal/testhelpers"
+	"github.com/portainer/portainer/api/roar"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -127,9 +128,9 @@ func TestHandler_tagDelete(t *testing.T) {
 		require.NoError(t, store.EdgeGroup().Create(dynamicEdgeGroup))
 
 		staticEdgeGroup := &portainer.EdgeGroup{
-			ID:        2,
-			Name:      "edgegroup-2",
-			Endpoints: []portainer.EndpointID{endpoint2.ID},
+			ID:          2,
+			Name:        "edgegroup-2",
+			EndpointIDs: roar.FromSlice([]portainer.EndpointID{endpoint2.ID}),
 		}
 		require.NoError(t, store.EdgeGroup().Create(staticEdgeGroup))
 
@@ -163,14 +164,14 @@ func TestHandler_tagDelete(t *testing.T) {
 		dynamicEdgeGroup, err = store.EdgeGroup().Read(dynamicEdgeGroup.ID)
 		require.NoError(t, err)
 		assert.Len(t, dynamicEdgeGroup.TagIDs, 0, "dynamic edge group should not have any tags")
-		assert.Len(t, dynamicEdgeGroup.Endpoints, 0, "dynamic edge group should not have any endpoints")
+		assert.Equal(t, 0, dynamicEdgeGroup.EndpointIDs.Len(), "dynamic edge group should not have any endpoints")
 
 		// Check that the static edge group is not updated
 		staticEdgeGroup, err = store.EdgeGroup().Read(staticEdgeGroup.ID)
 		require.NoError(t, err)
 		assert.Len(t, staticEdgeGroup.TagIDs, 0, "static edge group should not have any tags")
-		assert.Len(t, staticEdgeGroup.Endpoints, 1, "static edge group should have one endpoint")
-		assert.Equal(t, endpoint2.ID, staticEdgeGroup.Endpoints[0], "static edge group should have the endpoint-2")
+		assert.Equal(t, 1, staticEdgeGroup.EndpointIDs.Len(), "static edge group should have one endpoint")
+		assert.True(t, staticEdgeGroup.EndpointIDs.Contains(endpoint2.ID), "static edge group should have the endpoint-2")
 	})
 
 	// Test the tx.IsErrObjectNotFound logic when endpoint is not found during cleanup
@@ -185,14 +186,10 @@ func TestHandler_tagDelete(t *testing.T) {
 		}
 
 		err := store.Tag().Create(tag)
-		if err != nil {
-			t.Fatal("could not create tag:", err)
-		}
+		require.NoError(t, err)
 
 		err = deleteTag(store, 1)
-		if err != nil {
-			t.Fatal("could not delete tag:", err)
-		}
+		require.NoError(t, err)
 	})
 }
 

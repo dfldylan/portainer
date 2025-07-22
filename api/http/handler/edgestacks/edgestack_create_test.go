@@ -8,9 +8,10 @@ import (
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
-	"github.com/stretchr/testify/require"
+	"github.com/portainer/portainer/api/roar"
 
 	"github.com/segmentio/encoding/json"
+	"github.com/stretchr/testify/require"
 )
 
 // Create
@@ -24,7 +25,7 @@ func TestCreateAndInspect(t *testing.T) {
 		Name:         "EdgeGroup 1",
 		Dynamic:      false,
 		TagIDs:       nil,
-		Endpoints:    []portainer.EndpointID{endpoint.ID},
+		EndpointIDs:  roar.FromSlice([]portainer.EndpointID{endpoint.ID}),
 		PartialMatch: false,
 	}
 

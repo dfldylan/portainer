@@ -9,9 +9,10 @@ import (
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
-	"github.com/stretchr/testify/require"
+	"github.com/portainer/portainer/api/roar"
 
 	"github.com/segmentio/encoding/json"
+	"github.com/stretchr/testify/require"
 )
 
 // Update
@@ -43,7 +44,7 @@ func TestUpdateAndInspect(t *testing.T) {
 		Name:         "EdgeGroup 2",
 		Dynamic:      false,
 		TagIDs:       nil,
-		Endpoints:    []portainer.EndpointID{newEndpoint.ID},
+		EndpointIDs:  roar.FromSlice([]portainer.EndpointID{newEndpoint.ID}),
 		PartialMatch: false,
 	}
 
@@ -112,7 +113,7 @@ func TestUpdateWithInvalidEdgeGroups(t *testing.T) {
 		Name:         "EdgeGroup 2",
 		Dynamic:      false,
 		TagIDs:       nil,
-		Endpoints:    []portainer.EndpointID{8889},
+		EndpointIDs:  roar.FromSlice([]portainer.EndpointID{8889}),
 		PartialMatch: false,
 	}
 
