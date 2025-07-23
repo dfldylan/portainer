@@ -91,7 +91,7 @@ func (r *Roar[T]) Intersection(other Roar[T]) {
 // ToSlice converts the bitmap to a slice of elements
 func (r *Roar[T]) ToSlice() []T {
 	if r.rb == nil {
-		return nil
+		return make([]T, 0)
 	}
 
 	slice := make([]T, 0, r.rb.GetCardinality())

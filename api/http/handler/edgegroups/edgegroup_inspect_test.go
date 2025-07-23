@@ -69,6 +69,45 @@ func TestEdgeGroupInspectHandler(t *testing.T) {
 	assert.ElementsMatch(t, []portainer.EndpointID{1, 2, 3}, responseGroup.Endpoints)
 }
 
+func TestEmptyEdgeGroupInspectHandler(t *testing.T) {
+	_, store := datastore.MustNewTestStore(t, true, true)
+
+	handler := NewHandler(testhelpers.NewTestRequestBouncer())
+	handler.DataStore = store
+
+	err := store.EndpointGroup().Create(&portainer.EndpointGroup{
+		ID:   1,
+		Name: "Test Group",
+	})
+	require.NoError(t, err)
+
+	err = store.EdgeGroup().Create(&portainer.EdgeGroup{
+		ID:          1,
+		Name:        "Test Edge Group",
+		EndpointIDs: roar.Roar[portainer.EndpointID]{},
+	})
+	require.NoError(t, err)
+
+	rr := httptest.NewRecorder()
+
+	req := httptest.NewRequest(
+		http.MethodGet,
+		"/edge_groups/1",
+		nil,
+	)
+
+	handler.ServeHTTP(rr, req)
+	require.Equal(t, http.StatusOK, rr.Result().StatusCode)
+
+	var responseGroup portainer.EdgeGroup
+	err = json.NewDecoder(rr.Body).Decode(&responseGroup)
+	require.NoError(t, err)
+
+	// Make sure the frontend does not get a null value but a [] instead
+	require.NotNil(t, responseGroup.Endpoints)
+	require.Len(t, responseGroup.Endpoints, 0)
+}
+
 func TestDynamicEdgeGroupInspectHandler(t *testing.T) {
 	_, store := datastore.MustNewTestStore(t, true, true)
 
