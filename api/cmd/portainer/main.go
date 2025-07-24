@@ -451,7 +451,7 @@ func buildServer(flags *portainer.CLIFlags) portainer.Server {
 
 	snapshotService.Start()
 
-	proxyManager.NewProxyFactory(dataStore, signatureService, reverseTunnelService, dockerClientFactory, kubernetesClientFactory, kubernetesTokenCacheManager, gitService, snapshotService)
+	proxyManager.NewProxyFactory(dataStore, signatureService, reverseTunnelService, dockerClientFactory, kubernetesClientFactory, kubernetesTokenCacheManager, gitService, snapshotService, jwtService)
 
 	helmPackageManager, err := initHelmPackageManager()
 	if err != nil {

@@ -38,7 +38,7 @@ func (factory *ProxyFactory) newKubernetesLocalProxy(endpoint *portainer.Endpoin
 		return nil, err
 	}
 
-	transport, err := kubernetes.NewLocalTransport(tokenManager, endpoint, factory.kubernetesClientFactory, factory.dataStore)
+	transport, err := kubernetes.NewLocalTransport(tokenManager, endpoint, factory.kubernetesClientFactory, factory.dataStore, factory.jwtService)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func (factory *ProxyFactory) newKubernetesEdgeHTTPProxy(endpoint *portainer.Endp
 
 	endpointURL.Scheme = "http"
 	proxy := NewSingleHostReverseProxyWithHostHeader(endpointURL)
-	proxy.Transport = kubernetes.NewEdgeTransport(factory.dataStore, factory.signatureService, factory.reverseTunnelService, endpoint, tokenManager, factory.kubernetesClientFactory)
+	proxy.Transport = kubernetes.NewEdgeTransport(factory.dataStore, factory.signatureService, factory.reverseTunnelService, endpoint, tokenManager, factory.kubernetesClientFactory, factory.jwtService)
 
 	return proxy, nil
 }
@@ -105,7 +105,7 @@ func (factory *ProxyFactory) newKubernetesAgentHTTPSProxy(endpoint *portainer.En
 	}
 
 	proxy := NewSingleHostReverseProxyWithHostHeader(remoteURL)
-	proxy.Transport = kubernetes.NewAgentTransport(factory.signatureService, tlsConfig, tokenManager, endpoint, factory.kubernetesClientFactory, factory.dataStore)
+	proxy.Transport = kubernetes.NewAgentTransport(factory.signatureService, tlsConfig, tokenManager, endpoint, factory.kubernetesClientFactory, factory.dataStore, factory.jwtService)
 
 	return proxy, nil
 }

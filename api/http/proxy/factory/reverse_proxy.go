@@ -9,17 +9,20 @@ import (
 
 // Note that we discard any non-canonical headers by design
 var allowedHeaders = map[string]struct{}{
-	"Accept":                  {},
-	"Accept-Encoding":         {},
-	"Accept-Language":         {},
-	"Cache-Control":           {},
-	"Content-Length":          {},
-	"Content-Type":            {},
-	"Private-Token":           {},
-	"User-Agent":              {},
-	"X-Portaineragent-Target": {},
-	"X-Portainer-Volumename":  {},
-	"X-Registry-Auth":         {},
+	"Accept":                    {},
+	"Accept-Encoding":           {},
+	"Accept-Language":           {},
+	"Cache-Control":             {},
+	"Connection":                {},
+	"Content-Length":            {},
+	"Content-Type":              {},
+	"Private-Token":             {},
+	"Upgrade":                   {},
+	"User-Agent":                {},
+	"X-Portaineragent-Target":   {},
+	"X-Portainer-Volumename":    {},
+	"X-Registry-Auth":           {},
+	"X-Stream-Protocol-Version": {},
 }
 
 // newSingleHostReverseProxyWithHostHeader is based on NewSingleHostReverseProxy
