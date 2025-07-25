@@ -21,7 +21,11 @@ export function Header({ logo: customLogo }: Props) {
 
   return (
     <div className="flex">
-      <div className={clsx('pr-5 w-full flex', { 'justify-center': !isOpen })}>
+      <div
+        className={clsx('pr-5 w-full flex flex-wrap', {
+          'justify-center': !isOpen,
+        })}
+      >
         <Link
           to="portainer.home"
           data-cy="portainerSidebar-homeImage"
