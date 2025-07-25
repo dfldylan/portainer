@@ -24,6 +24,7 @@ import { AccessView } from '@/react/kubernetes/namespaces/AccessView/AccessView'
 import { JobsView } from '@/react/kubernetes/more-resources/JobsView/JobsView';
 import { ClusterView } from '@/react/kubernetes/cluster/ClusterView';
 import { HelmApplicationView } from '@/react/kubernetes/helm/HelmApplicationView';
+import { KubectlShellView } from '@/react/kubernetes/cluster/KubectlShell/KubectlShellView';
 
 export const viewsModule = angular
   .module('portainer.kubernetes.react.views', [])
@@ -83,6 +84,10 @@ export const viewsModule = angular
   .component(
     'kubernetesHelmApplicationView',
     r2a(withUIRouter(withReactQuery(withCurrentUser(HelmApplicationView))), [])
+  )
+  .component(
+    'kubectlShellView',
+    r2a(withUIRouter(withReactQuery(withCurrentUser(KubectlShellView))), [])
   )
   .component(
     'kubernetesClusterView',

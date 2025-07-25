@@ -1,56 +1,39 @@
 import { Terminal } from 'xterm';
 import { fit } from 'xterm/lib/addons/fit/fit';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
-import { RotateCw, X, Terminal as TerminalIcon } from 'lucide-react';
 
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 import { baseHref } from '@/portainer/helpers/pathHelper';
-import {
-  terminalClose,
-  terminalResize,
-} from '@/portainer/services/terminal-window';
+import { terminalClose } from '@/portainer/services/terminal-window';
 import { EnvironmentId } from '@/react/portainer/environments/types';
 import { error as notifyError } from '@/portainer/services/notifications';
 
-import { Icon } from '@@/Icon';
+import { Alert } from '@@/Alert';
 import { Button } from '@@/buttons';
 
-import styles from './KubectlShell.module.css';
+type Socket = WebSocket | null;
+type ShellState = 'loading' | 'connected' | 'disconnected';
 
-interface ShellState {
-  socket: WebSocket | null;
-  minimized: boolean;
-}
-
-interface Props {
-  environmentId: EnvironmentId;
-  onClose(): void;
-}
-
-export function KubeCtlShell({ environmentId, onClose }: Props) {
+export function KubectlShellView() {
+  const environmentId = useEnvironmentId();
   const [terminal] = useState(new Terminal());
 
-  const [shell, setShell] = useState<ShellState>({
-    socket: null,
-    minimized: false,
-  });
-
-  const { socket } = shell;
+  const [socket, setSocket] = useState<Socket>(null);
+  const [shellState, setShellState] = useState<ShellState>('loading');
 
   const terminalElem = useRef(null);
 
-  const handleClose = useCallback(() => {
+  const closeTerminal = useCallback(() => {
     terminalClose(); // only css trick
     socket?.close();
     terminal.dispose();
-    onClose();
-  }, [onClose, terminal, socket]);
+    setShellState('disconnected');
+  }, [terminal, socket]);
 
   const openTerminal = useCallback(() => {
     if (!terminalElem.current) {
       return;
     }
-
     terminal.open(terminalElem.current);
     terminal.setOption('cursorBlink', true);
     terminal.focus();
@@ -58,6 +41,11 @@ export function KubeCtlShell({ environmentId, onClose }: Props) {
     terminal.writeln('#Run kubectl commands inside here');
     terminal.writeln('#e.g. kubectl get all');
     terminal.writeln('');
+    setShellState('connected');
+  }, [terminal]);
+
+  const resizeTerminal = useCallback(() => {
+    fit(terminal);
   }, [terminal]);
 
   // refresh socket listeners on socket updates
@@ -73,10 +61,10 @@ export function KubeCtlShell({ environmentId, onClose }: Props) {
       terminal.writeUtf8(encoded);
     }
     function onClose() {
-      handleClose();
+      closeTerminal();
     }
     function onError(e: Event) {
-      handleClose();
+      closeTerminal();
       if (socket?.readyState !== WebSocket.CLOSED) {
         notifyError(
           'Failure',
@@ -97,88 +85,62 @@ export function KubeCtlShell({ environmentId, onClose }: Props) {
       socket.removeEventListener('close', onClose);
       socket.removeEventListener('error', onError);
     };
-  }, [handleClose, openTerminal, socket, terminal]);
+  }, [closeTerminal, openTerminal, socket, terminal]);
 
   // on component load/destroy
   useEffect(() => {
     const socket = new WebSocket(buildUrl(environmentId));
-    setShell((shell) => ({ ...shell, socket }));
+    setSocket(socket);
+    setShellState('loading');
 
     terminal.onData((data) => socket.send(data));
     terminal.onKey(({ domEvent }) => {
       if (domEvent.ctrlKey && domEvent.code === 'KeyD') {
         close();
+        setShellState('disconnected');
       }
     });
 
-    window.addEventListener('resize', () => terminalResize());
+    window.addEventListener('resize', resizeTerminal);
 
     function close() {
       socket.close();
       terminal.dispose();
-      window.removeEventListener('resize', terminalResize);
+      window.removeEventListener('resize', resizeTerminal);
     }
 
     return close;
-  }, [environmentId, terminal]);
+  }, [environmentId, terminal, resizeTerminal]);
 
   return (
-    <div className={clsx(styles.root, { [styles.minimized]: shell.minimized })}>
-      <div className={styles.header}>
-        <div className={clsx(styles.title, 'vertical-center')}>
-          <Icon icon={TerminalIcon} />
-          kubectl shell
+    <div className="fixed bottom-0 left-0 right-0 top-0 z-[10000] bg-black text-white">
+      {shellState === 'loading' && (
+        <div className="px-4 pt-2">Loading Terminal...</div>
+      )}
+      {shellState === 'disconnected' && (
+        <div className="p-4">
+          <Alert color="info" title="Console disconnected">
+            <div className="mt-4 flex items-center gap-2">
+              <Button
+                onClick={() => window.location.reload()}
+                data-cy="k8sShell-reloadButton"
+              >
+                Reload
+              </Button>
+              <Button
+                onClick={() => window.close()}
+                color="default"
+                data-cy="k8sShell-closeButton"
+              >
+                Close
+              </Button>
+            </div>
+          </Alert>
         </div>
-        <div className={clsx(styles.actions, 'space-x-8')}>
-          <Button
-            color="link"
-            onClick={clearScreen}
-            data-cy="k8sShell-refreshButton"
-          >
-            <Icon icon={RotateCw} size="md" />
-          </Button>
-          <Button
-            color="link"
-            onClick={toggleMinimize}
-            data-cy={shell.minimized ? 'k8sShell-restore' : 'k8sShell-minimise'}
-          >
-            <Icon
-              icon={shell.minimized ? 'maximize-2' : 'minimize-2'}
-              size="md"
-              data-cy={
-                shell.minimized ? 'k8sShell-restore' : 'k8sShell-minimise'
-              }
-            />
-          </Button>
-          <Button
-            color="link"
-            onClick={handleClose}
-            data-cy="k8sShell-closeButton"
-          >
-            <Icon icon={X} size="md" />
-          </Button>
-        </div>
-      </div>
-
-      <div className={styles.terminalContainer} ref={terminalElem}>
-        <div className={styles.loadingMessage}>Loading Terminal...</div>
-      </div>
+      )}
+      <div className="h-full" ref={terminalElem} />
     </div>
   );
-
-  function clearScreen() {
-    terminal.clear();
-  }
-
-  function toggleMinimize() {
-    if (shell.minimized) {
-      terminalResize();
-      setShell((shell) => ({ ...shell, minimized: false }));
-    } else {
-      terminalClose();
-      setShell((shell) => ({ ...shell, minimized: true }));
-    }
-  }
 
   function buildUrl(environmentId: EnvironmentId) {
     const params = {

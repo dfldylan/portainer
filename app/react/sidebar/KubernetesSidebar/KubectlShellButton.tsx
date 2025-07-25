@@ -1,32 +1,27 @@
-import { useState } from 'react';
-import { createPortal } from 'react-dom';
 import { Terminal } from 'lucide-react';
 import clsx from 'clsx';
+import { v4 as uuidv4 } from 'uuid';
 
 import { EnvironmentId } from '@/react/portainer/environments/types';
 import { useAnalytics } from '@/react/hooks/useAnalytics';
+import { baseHref } from '@/portainer/helpers/pathHelper';
 
 import { Button } from '@@/buttons';
 
-import { useSidebarState } from '../../useSidebarState';
-import { SidebarTooltip } from '../../SidebarItem/SidebarTooltip';
-
-import { KubeCtlShell } from './KubectlShell';
+import { useSidebarState } from '../useSidebarState';
+import { SidebarTooltip } from '../SidebarItem/SidebarTooltip';
 
 interface Props {
   environmentId: EnvironmentId;
 }
 export function KubectlShellButton({ environmentId }: Props) {
   const { isOpen: isSidebarOpen } = useSidebarState();
-
-  const [open, setOpen] = useState(false);
   const { trackEvent } = useAnalytics();
 
   const button = (
     <Button
       color="primary"
       size="small"
-      disabled={open}
       data-cy="k8sSidebar-shellButton"
       onClick={() => handleOpen()}
       className={clsx('sidebar', !isSidebarOpen && '!p-1')}
@@ -48,19 +43,17 @@ export function KubectlShellButton({ environmentId }: Props) {
         </SidebarTooltip>
       )}
       {isSidebarOpen && button}
-      {open &&
-        createPortal(
-          <KubeCtlShell
-            environmentId={environmentId}
-            onClose={() => setOpen(false)}
-          />,
-          document.body
-        )}
     </>
   );
 
   function handleOpen() {
-    setOpen(true);
+    const url = window.location.origin + baseHref();
+    window.open(
+      `${url}#!/${environmentId}/kubernetes/kubectl-shell`,
+      // give the window a unique name so that more than one can be opened
+      `kubectl-shell-${environmentId}-${uuidv4()}`,
+      'width=800,height=600'
+    );
 
     trackEvent('kubernetes-kubectl-shell', { category: 'kubernetes' });
   }
