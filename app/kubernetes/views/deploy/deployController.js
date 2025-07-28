@@ -34,10 +34,10 @@ class KubernetesDeployController {
 
     this.methodOptions = [
       { ...git, value: KubernetesDeployBuildMethods.GIT },
+      { ...helm, value: KubernetesDeployBuildMethods.HELM },
       { ...editor, value: KubernetesDeployBuildMethods.WEB_EDITOR },
       { ...url, value: KubernetesDeployBuildMethods.URL },
       { ...customTemplate, value: KubernetesDeployBuildMethods.CUSTOM_TEMPLATE },
-      { ...helm, value: KubernetesDeployBuildMethods.HELM },
     ];
 
     let buildMethod = Number(this.$state.params.buildMethod) || KubernetesDeployBuildMethods.GIT;
