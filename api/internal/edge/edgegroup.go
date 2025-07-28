@@ -4,13 +4,22 @@ import (
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
 	"github.com/portainer/portainer/api/internal/endpointutils"
+	"github.com/portainer/portainer/api/roar"
 	"github.com/portainer/portainer/api/tag"
 )
 
 // EdgeGroupRelatedEndpoints returns a list of environments(endpoints) related to this Edge group
 func EdgeGroupRelatedEndpoints(edgeGroup *portainer.EdgeGroup, endpoints []portainer.Endpoint, endpointGroups []portainer.EndpointGroup) []portainer.EndpointID {
 	if !edgeGroup.Dynamic {
-		return edgeGroup.EndpointIDs.ToSlice()
+		var r roar.Roar[portainer.EndpointID]
+
+		for _, endpoint := range endpoints {
+			if edgeGroup.EndpointIDs.Contains(endpoint.ID) {
+				r.Add(endpoint.ID)
+			}
+		}
+
+		return r.ToSlice()
 	}
 
 	endpointGroupsMap := map[portainer.EndpointGroupID]*portainer.EndpointGroup{}
