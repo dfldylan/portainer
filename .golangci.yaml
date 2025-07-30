@@ -13,6 +13,7 @@ linters:
     - intrange
     - perfsprint
     - ineffassign
+    - bodyclose
 
 linters-settings:
   depguard:

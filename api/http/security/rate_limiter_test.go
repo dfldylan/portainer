@@ -33,8 +33,13 @@ func TestLimitAccess(t *testing.T) {
 
 		ts := httptest.NewServer(handler)
 		defer ts.Close()
-		http.Get(ts.URL)
+
 		resp, err := http.Get(ts.URL)
+		if err == nil {
+			resp.Body.Close()
+		}
+
+		resp, err = http.Get(ts.URL)
 		if err != nil {
 			t.Fatal(err)
 		}

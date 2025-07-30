@@ -42,6 +42,8 @@ func ValidateHelmRepositoryURL(repoUrl string, client *http.Client) error {
 		return fmt.Errorf("%s is not a valid chart repository or cannot be reached: %w", repoUrl, err)
 	}
 
+	response.Body.Close()
+
 	// Success is indicated with 2xx status codes. 3xx status codes indicate a redirect.
 	statusOK := response.StatusCode >= 200 && response.StatusCode < 300
 	if !statusOK {

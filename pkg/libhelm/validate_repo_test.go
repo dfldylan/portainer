@@ -1,10 +1,13 @@
 package libhelm
 
 import (
+	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/portainer/portainer/pkg/libhelm/test"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_ValidateHelmRepositoryURL(t *testing.T) {
@@ -47,5 +50,43 @@ func Test_ValidateHelmRepositoryURL(t *testing.T) {
 				}
 			})
 		}(test)
+	}
+}
+
+func TestValidateHelmRepositoryURL(t *testing.T) {
+	var fail bool
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if fail {
+			w.WriteHeader(http.StatusNotFound)
+
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer srv.Close()
+
+	// Success
+	err := ValidateHelmRepositoryURL(srv.URL, nil)
+	require.NoError(t, err)
+
+	// Failure
+	fail = true
+
+	var failureURLs = []string{
+		"",
+		"!",
+		"oci://example.com",
+		"ftp://example.com",
+		srv.URL,
+	}
+
+	for _, url := range failureURLs {
+		err = ValidateHelmRepositoryURL(url, nil)
+		require.Error(t, err)
+
+		err = ValidateHelmRepositoryURL(srv.URL, nil)
+		require.Error(t, err)
 	}
 }
