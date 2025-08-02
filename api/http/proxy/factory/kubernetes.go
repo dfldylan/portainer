@@ -7,7 +7,6 @@ import (
 	"github.com/portainer/portainer/api/http/proxy/factory/kubernetes"
 
 	portainer "github.com/portainer/portainer/api"
-	"github.com/portainer/portainer/api/crypto"
 )
 
 func (factory *ProxyFactory) newKubernetesProxy(endpoint *portainer.Endpoint) (http.Handler, error) {
@@ -93,19 +92,19 @@ func (factory *ProxyFactory) newKubernetesAgentHTTPSProxy(endpoint *portainer.En
 		return nil, err
 	}
 
-	tlsConfig, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig.TLSCACertPath, endpoint.TLSConfig.TLSCertPath, endpoint.TLSConfig.TLSKeyPath, endpoint.TLSConfig.TLSSkipVerify)
-	if err != nil {
-		return nil, err
-	}
-
 	tokenCache := factory.kubernetesTokenCacheManager.GetOrCreateTokenCache(endpoint.ID)
 	tokenManager, err := kubernetes.NewTokenManager(kubecli, factory.dataStore, tokenCache, false)
 	if err != nil {
 		return nil, err
 	}
 
+	transport, err := kubernetes.NewAgentTransport(factory.signatureService, tokenManager, endpoint, factory.kubernetesClientFactory, factory.dataStore, factory.jwtService)
+	if err != nil {
+		return nil, err
+	}
+
 	proxy := NewSingleHostReverseProxyWithHostHeader(remoteURL)
-	proxy.Transport = kubernetes.NewAgentTransport(factory.signatureService, tlsConfig, tokenManager, endpoint, factory.kubernetesClientFactory, factory.dataStore, factory.jwtService)
+	proxy.Transport = transport
 
 	return proxy, nil
 }

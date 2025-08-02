@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/api/crypto"
 	"github.com/portainer/portainer/api/datastore"
 	gittypes "github.com/portainer/portainer/api/git/types"
 	"github.com/portainer/portainer/api/internal/testhelpers"
@@ -127,9 +128,8 @@ func agentServer(t *testing.T) string {
 	cert, err := tls.X509KeyPair([]byte(localhostCert), []byte(localhostKey))
 	require.NoError(t, err)
 
-	tlsConfig := &tls.Config{
-		Certificates: []tls.Certificate{cert},
-	}
+	tlsConfig := crypto.CreateTLSConfiguration()
+	tlsConfig.Certificates = []tls.Certificate{cert}
 
 	l, err := tls.Listen("tcp", "127.0.0.1:0", tlsConfig)
 	require.NoError(t, err)

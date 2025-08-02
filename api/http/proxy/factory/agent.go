@@ -43,7 +43,7 @@ func (factory *ProxyFactory) NewAgentProxy(endpoint *portainer.Endpoint) (*Proxy
 	httpTransport := &http.Transport{}
 
 	if endpoint.TLSConfig.TLS || endpoint.TLSConfig.TLSSkipVerify {
-		config, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig.TLSCACertPath, endpoint.TLSConfig.TLSCertPath, endpoint.TLSConfig.TLSKeyPath, endpoint.TLSConfig.TLSSkipVerify)
+		config, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig)
 		if err != nil {
 			return nil, errors.WithMessage(err, "failed generating tls configuration")
 		}

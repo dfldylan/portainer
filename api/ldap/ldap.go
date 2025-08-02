@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"strings"
 
-	ldap "github.com/go-ldap/ldap/v3"
-	"github.com/pkg/errors"
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/crypto"
 	httperrors "github.com/portainer/portainer/api/http/errors"
+
+	ldap "github.com/go-ldap/ldap/v3"
+	"github.com/pkg/errors"
 )
 
 var (
@@ -30,36 +31,44 @@ func createConnection(settings *portainer.LDAPSettings) (*ldap.Conn, error) {
 }
 
 func createConnectionForURL(url string, settings *portainer.LDAPSettings) (*ldap.Conn, error) {
-	if settings.TLSConfig.TLS || settings.StartTLS {
-		config, err := crypto.CreateTLSConfigurationFromDisk(settings.TLSConfig.TLSCACertPath, settings.TLSConfig.TLSCertPath, settings.TLSConfig.TLSKeyPath, settings.TLSConfig.TLSSkipVerify)
-		if err != nil {
-			return nil, err
-		}
-		config.ServerName = strings.Split(url, ":")[0]
-
-		if settings.TLSConfig.TLS {
-			return ldap.DialTLS("tcp", url, config)
-		}
-
-		conn, err := ldap.Dial("tcp", url)
-		if err != nil {
-			return nil, err
-		}
-
-		err = conn.StartTLS(config)
-		if err != nil {
-			return nil, err
-		}
-
-		return conn, nil
+	if !settings.TLSConfig.TLS && !settings.StartTLS {
+		return ldap.Dial("tcp", url)
 	}
 
-	return ldap.Dial("tcp", url)
+	// Store the original value to ensure the TLSConfig is created
+	t := settings.TLSConfig.TLS
+	settings.TLSConfig.TLS = settings.TLSConfig.TLS || settings.StartTLS
+
+	config, err := crypto.CreateTLSConfigurationFromDisk(settings.TLSConfig)
+	if err != nil {
+		return nil, err
+	}
+
+	// Restore the original value
+	settings.TLSConfig.TLS = t
+
+	if settings.TLSConfig.TLS || settings.StartTLS {
+		config.ServerName = strings.Split(url, ":")[0]
+	}
+
+	if settings.TLSConfig.TLS {
+		return ldap.DialTLS("tcp", url, config)
+	}
+
+	conn, err := ldap.Dial("tcp", url)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := conn.StartTLS(config); err != nil {
+		return nil, err
+	}
+
+	return conn, nil
 }
 
 // AuthenticateUser is used to authenticate a user against a LDAP/AD.
 func (*Service) AuthenticateUser(username, password string, settings *portainer.LDAPSettings) error {
-
 	connection, err := createConnection(settings)
 	if err != nil {
 		return err

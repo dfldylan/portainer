@@ -1,7 +1,6 @@
 package endpoints
 
 import (
-	"crypto/tls"
 	"errors"
 	"net/http"
 	"runtime"
@@ -285,8 +284,6 @@ func (handler *Handler) endpointCreate(w http.ResponseWriter, r *http.Request) *
 }
 
 func (handler *Handler) createEndpoint(tx dataservices.DataStoreTx, payload *endpointCreatePayload) (*portainer.Endpoint, *httperror.HandlerError) {
-	var err error
-
 	switch payload.EndpointCreationType {
 	case azureEnvironment:
 		return handler.createAzureEndpoint(tx, payload)
@@ -301,12 +298,9 @@ func (handler *Handler) createEndpoint(tx dataservices.DataStoreTx, payload *end
 	endpointType := portainer.DockerEnvironment
 	var agentVersion string
 	if payload.EndpointCreationType == agentEnvironment {
-		var tlsConfig *tls.Config
-		if payload.TLS {
-			tlsConfig, err = crypto.CreateTLSConfigurationFromBytes(payload.TLSCACertFile, payload.TLSCertFile, payload.TLSKeyFile, payload.TLSSkipVerify, payload.TLSSkipClientVerify)
-			if err != nil {
-				return nil, httperror.InternalServerError("Unable to create TLS configuration", err)
-			}
+		tlsConfig, err := crypto.CreateTLSConfigurationFromBytes(payload.TLS, payload.TLSCACertFile, payload.TLSCertFile, payload.TLSKeyFile, payload.TLSSkipVerify, payload.TLSSkipClientVerify)
+		if err != nil {
+			return nil, httperror.InternalServerError("Unable to create TLS configuration", err)
 		}
 
 		agentPlatform, version, err := agent.GetAgentVersionAndPlatform(payload.URL, tlsConfig)

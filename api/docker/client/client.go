@@ -181,10 +181,11 @@ func httpClient(endpoint *portainer.Endpoint, timeout *time.Duration) (*http.Cli
 	}
 
 	if endpoint.TLSConfig.TLS {
-		tlsConfig, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig.TLSCACertPath, endpoint.TLSConfig.TLSCertPath, endpoint.TLSConfig.TLSKeyPath, endpoint.TLSConfig.TLSSkipVerify)
+		tlsConfig, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig)
 		if err != nil {
 			return nil, err
 		}
+
 		transport.TLSClientConfig = tlsConfig
 	}
 

@@ -1,13 +1,15 @@
 package networking
 
 import (
-	"crypto/tls"
+	"crypto/fips140"
 	"fmt"
 	"net"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/portainer/portainer/api/crypto"
 
 	"github.com/segmentio/encoding/json"
 )
@@ -71,12 +73,13 @@ func ProbeTelnetConnection(url string) string {
 func DetectProxy(url string) string {
 	client := &http.Client{
 		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
+			TLSClientConfig: crypto.CreateTLSConfiguration(),
 		},
 		Timeout: 10 * time.Second,
 	}
+
+	// TODO: use fips.CanTLSSkipVerify() instead
+	client.Transport.(*http.Transport).TLSClientConfig.InsecureSkipVerify = !fips140.Enabled()
 
 	result := map[string]string{
 		"operation":      "proxy detection",

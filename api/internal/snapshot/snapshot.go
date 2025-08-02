@@ -2,7 +2,6 @@ package snapshot
 
 import (
 	"context"
-	"crypto/tls"
 	"errors"
 	"time"
 
@@ -138,14 +137,9 @@ func SupportDirectSnapshot(endpoint *portainer.Endpoint) bool {
 // If the snapshot is a success, it will be associated to the environment(endpoint).
 func (service *Service) SnapshotEndpoint(endpoint *portainer.Endpoint) error {
 	if endpoint.Type == portainer.AgentOnDockerEnvironment || endpoint.Type == portainer.AgentOnKubernetesEnvironment {
-		var err error
-		var tlsConfig *tls.Config
-
-		if endpoint.TLSConfig.TLS {
-			tlsConfig, err = crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig.TLSCACertPath, endpoint.TLSConfig.TLSCertPath, endpoint.TLSConfig.TLSKeyPath, endpoint.TLSConfig.TLSSkipVerify)
-			if err != nil {
-				return err
-			}
+		tlsConfig, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig)
+		if err != nil {
+			return err
 		}
 
 		_, version, err := agent.GetAgentVersionAndPlatform(endpoint.URL, tlsConfig)
