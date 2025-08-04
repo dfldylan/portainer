@@ -70,6 +70,7 @@ export interface Props<D extends DefaultType> extends AutomationTestingProps {
   getRowCanExpand?(row: Row<D>): boolean;
   noWidget?: boolean;
   extendTableOptions?: (options: TableOptions<D>) => TableOptions<D>;
+  onSearchChange?: (search: string) => void;
   includeSearch?: boolean;
   ariaLabel?: string;
   id?: string;
@@ -97,6 +98,7 @@ export function Datatable<D extends DefaultType>({
   getRowCanExpand,
   'data-cy': dataCy,
   onPageChange = () => {},
+  onSearchChange = () => {},
   page,
   totalCount = dataset.length,
   isServerSidePagination = false,
@@ -158,7 +160,12 @@ export function Datatable<D extends DefaultType>({
       getRowCanExpand,
       getColumnCanGlobalFilter,
       ...(isServerSidePagination
-        ? { manualPagination: true, pageCount }
+        ? {
+            pageCount,
+            manualPagination: true,
+            manualFiltering: true,
+            manualSorting: true,
+          }
         : {
             getSortedRowModel: getSortedRowModel(),
           }),
@@ -231,6 +238,7 @@ export function Datatable<D extends DefaultType>({
   function handleSearchBarChange(search: string) {
     tableInstance.setGlobalFilter({ search });
     settings.setSearch(search);
+    onSearchChange(search);
   }
 
   function handlePageChange(page: number) {
