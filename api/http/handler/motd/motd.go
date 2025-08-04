@@ -60,7 +60,7 @@ func (handler *Handler) motd(w http.ResponseWriter, r *http.Request) {
 
 	message := strings.Join(data.Message, "\n")
 
-	hash := libcrypto.HashFromBytes([]byte(message))
+	hash := libcrypto.InsecureHashFromBytes([]byte(message))
 	resp := motdResponse{
 		Title:         data.Title,
 		Message:       message,

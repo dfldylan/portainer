@@ -20,11 +20,16 @@ import (
 	"github.com/portainer/portainer/api/internal/authorization"
 	"github.com/portainer/portainer/api/internal/testhelpers"
 	"github.com/portainer/portainer/api/jwt"
+	"github.com/portainer/portainer/pkg/fips"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 
 	"github.com/segmentio/encoding/json"
 	"github.com/stretchr/testify/assert"
 )
+
+func init() {
+	fips.InitFIPS(false)
+}
 
 var testFileContent = "abcdefg"
 

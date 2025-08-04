@@ -49,6 +49,7 @@ import (
 	"github.com/portainer/portainer/api/stacks/deployments"
 	"github.com/portainer/portainer/pkg/build"
 	"github.com/portainer/portainer/pkg/featureflags"
+	"github.com/portainer/portainer/pkg/fips"
 	"github.com/portainer/portainer/pkg/libhelm"
 	libhelmtypes "github.com/portainer/portainer/pkg/libhelm/types"
 	"github.com/portainer/portainer/pkg/libstack/compose"
@@ -342,6 +343,9 @@ func buildServer(flags *portainer.CLIFlags) portainer.Server {
 			trustedOrigins = append(trustedOrigins, origin)
 		}
 	}
+
+	// -ce can not ever be run in FIPS mode
+	fips.InitFIPS(false)
 
 	fileService := initFileService(*flags.Data)
 	encryptionKey := loadEncryptionSecretKey(*flags.SecretKeyName)
