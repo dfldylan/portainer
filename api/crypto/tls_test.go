@@ -10,8 +10,15 @@ import (
 )
 
 func TestCreateTLSConfiguration(t *testing.T) {
-	config := CreateTLSConfiguration()
-	require.Equal(t, config.MinVersion, uint16(tls.VersionTLS12))
+	// InsecureSkipVerify = false
+	config := CreateTLSConfiguration(false)
+	require.Equal(t, config.MinVersion, uint16(tls.VersionTLS12)) //nolint:forbidigo
+	require.False(t, config.InsecureSkipVerify)                   //nolint:forbidigo
+
+	// InsecureSkipVerify = true
+	config = CreateTLSConfiguration(true)
+	require.Equal(t, config.MinVersion, uint16(tls.VersionTLS12)) //nolint:forbidigo
+	require.True(t, config.InsecureSkipVerify)                    //nolint:forbidigo
 }
 
 func TestCreateTLSConfigurationFIPS(t *testing.T) {
@@ -26,11 +33,12 @@ func TestCreateTLSConfigurationFIPS(t *testing.T) {
 
 	fipsCurvePreferences := []tls.CurveID{tls.CurveP256, tls.CurveP384, tls.CurveP521}
 
-	config := createTLSConfiguration(fips)
-	require.Equal(t, config.MinVersion, uint16(tls.VersionTLS12))
-	require.Equal(t, config.MaxVersion, uint16(tls.VersionTLS13))
-	require.Equal(t, config.CipherSuites, fipsCipherSuites)
-	require.Equal(t, config.CurvePreferences, fipsCurvePreferences)
+	config := createTLSConfiguration(fips, false)
+	require.Equal(t, config.MinVersion, uint16(tls.VersionTLS12))   //nolint:forbidigo
+	require.Equal(t, config.MaxVersion, uint16(tls.VersionTLS13))   //nolint:forbidigo
+	require.Equal(t, config.CipherSuites, fipsCipherSuites)         //nolint:forbidigo
+	require.Equal(t, config.CurvePreferences, fipsCurvePreferences) //nolint:forbidigo
+	require.False(t, config.InsecureSkipVerify)                     //nolint:forbidigo
 }
 
 func TestCreateTLSConfigurationFromBytes(t *testing.T) {
@@ -75,5 +83,5 @@ func TestCreateTLSConfigurationFromDiskFIPS(t *testing.T) {
 	})
 	require.NoError(t, err)
 	require.NotNil(t, config)
-	require.False(t, config.InsecureSkipVerify)
+	require.False(t, config.InsecureSkipVerify) //nolint:forbidigo
 }

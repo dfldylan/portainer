@@ -10,12 +10,12 @@ import (
 )
 
 // CreateTLSConfiguration creates a basic tls.Config with recommended TLS settings
-func CreateTLSConfiguration() *tls.Config { //nolint:forbidigo
+func CreateTLSConfiguration(insecureSkipVerify bool) *tls.Config { //nolint:forbidigo
 	// TODO: use fips.FIPSMode() instead
-	return createTLSConfiguration(fips140.Enabled())
+	return createTLSConfiguration(fips140.Enabled(), insecureSkipVerify)
 }
 
-func createTLSConfiguration(fipsEnabled bool) *tls.Config { //nolint:forbidigo
+func createTLSConfiguration(fipsEnabled bool, insecureSkipVerify bool) *tls.Config { //nolint:forbidigo
 	if fipsEnabled {
 		return &tls.Config{ //nolint:forbidigo
 			MinVersion: tls.VersionTLS12,
@@ -51,6 +51,7 @@ func createTLSConfiguration(fipsEnabled bool) *tls.Config { //nolint:forbidigo
 			tls.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,
 			tls.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,
 		},
+		InsecureSkipVerify: insecureSkipVerify, //nolint:forbidigo
 	}
 }
 
@@ -66,8 +67,7 @@ func createTLSConfigurationFromBytes(fipsEnabled, useTLS bool, caCert, cert, key
 		return nil, nil
 	}
 
-	config := CreateTLSConfiguration()
-	config.InsecureSkipVerify = skipServerVerification && !fipsEnabled
+	config := createTLSConfiguration(fipsEnabled, skipServerVerification)
 
 	if !skipClientVerification || fipsEnabled {
 		certificate, err := tls.X509KeyPair(cert, key)
@@ -99,8 +99,7 @@ func createTLSConfigurationFromDisk(fipsEnabled bool, config portainer.TLSConfig
 		return nil, nil
 	}
 
-	tlsConfig := CreateTLSConfiguration()
-	tlsConfig.InsecureSkipVerify = config.TLSSkipVerify && !fipsEnabled
+	tlsConfig := createTLSConfiguration(fipsEnabled, config.TLSSkipVerify)
 
 	if config.TLSCertPath != "" && config.TLSKeyPath != "" {
 		cert, err := tls.LoadX509KeyPair(config.TLSCertPath, config.TLSKeyPath)
@@ -111,7 +110,7 @@ func createTLSConfigurationFromDisk(fipsEnabled bool, config portainer.TLSConfig
 		tlsConfig.Certificates = []tls.Certificate{cert}
 	}
 
-	if !tlsConfig.InsecureSkipVerify && config.TLSCACertPath != "" {
+	if !tlsConfig.InsecureSkipVerify && config.TLSCACertPath != "" { //nolint:forbidigo
 		caCert, err := os.ReadFile(config.TLSCACertPath)
 		if err != nil {
 			return nil, err

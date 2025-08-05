@@ -9,5 +9,5 @@ import (
 func TestNewLocalTransport(t *testing.T) {
 	transport, err := NewLocalTransport(nil, nil, nil, nil, nil)
 	require.NoError(t, err)
-	require.True(t, transport.baseTransport.httpTransport.TLSClientConfig.InsecureSkipVerify)
+	require.True(t, transport.baseTransport.httpTransport.TLSClientConfig.InsecureSkipVerify) //nolint:forbidigo
 }

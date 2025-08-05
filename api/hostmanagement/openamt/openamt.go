@@ -33,14 +33,11 @@ type Service struct {
 
 // NewService initializes a new service.
 func NewService(insecureSkipVerify bool) *Service {
-	tlsConfig := crypto.CreateTLSConfiguration()
-	tlsConfig.InsecureSkipVerify = insecureSkipVerify
-
 	return &Service{
 		httpsClient: &http.Client{
 			Timeout: httpClientTimeout,
 			Transport: &http.Transport{
-				TLSClientConfig: tlsConfig,
+				TLSClientConfig: crypto.CreateTLSConfiguration(insecureSkipVerify),
 			},
 		},
 	}

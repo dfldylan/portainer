@@ -128,7 +128,7 @@ func agentServer(t *testing.T) string {
 	cert, err := tls.X509KeyPair([]byte(localhostCert), []byte(localhostKey))
 	require.NoError(t, err)
 
-	tlsConfig := crypto.CreateTLSConfiguration()
+	tlsConfig := crypto.CreateTLSConfiguration(false)
 	tlsConfig.Certificates = []tls.Certificate{cert}
 
 	l, err := tls.Listen("tcp", "127.0.0.1:0", tlsConfig)

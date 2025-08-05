@@ -1,7 +1,6 @@
 package networking
 
 import (
-	"crypto/fips140"
 	"fmt"
 	"net"
 	"net/http"
@@ -73,13 +72,10 @@ func ProbeTelnetConnection(url string) string {
 func DetectProxy(url string) string {
 	client := &http.Client{
 		Transport: &http.Transport{
-			TLSClientConfig: crypto.CreateTLSConfiguration(),
+			TLSClientConfig: crypto.CreateTLSConfiguration(true),
 		},
 		Timeout: 10 * time.Second,
 	}
-
-	// TODO: use fips.CanTLSSkipVerify() instead
-	client.Transport.(*http.Transport).TLSClientConfig.InsecureSkipVerify = !fips140.Enabled()
 
 	result := map[string]string{
 		"operation":      "proxy detection",
