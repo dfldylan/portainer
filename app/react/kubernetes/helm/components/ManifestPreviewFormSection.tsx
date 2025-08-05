@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
+import { AlertTriangle } from 'lucide-react';
 
 import { useDebouncedValue } from '@/react/hooks/useDebouncedValue';
 import { EnvironmentId } from '@/react/portainer/environments/types';
 
+import { ExpandableMessageByLines } from '@@/ExpandableMessageByLines';
 import { FormSection } from '@@/form-components/FormSection';
 import { CodeEditor } from '@@/CodeEditor';
 import { DiffViewer } from '@@/CodeEditor/DiffViewer';
 import { InlineLoader } from '@@/InlineLoader';
 import { Alert } from '@@/Alert';
 import { TextTip } from '@@/Tip/TextTip';
+import { Badge } from '@@/Badge';
+import { Icon } from '@@/Icon';
 
 import { useHelmDryRun } from '../helmReleaseQueries/useHelmDryRun';
 import { UpdateHelmReleasePayload } from '../types';
@@ -49,26 +53,39 @@ export function ManifestPreviewFormSection({
     return <InlineLoader>Generating manifest preview...</InlineLoader>;
   }
 
-  if (manifestPreviewQuery.isError) {
-    return (
-      <Alert color="error" title="Error with Helm chart configuration">
-        {manifestPreviewQuery.error?.message ||
-          'Error generating manifest preview'}
-      </Alert>
-    );
-  }
-
   return (
     <FormSection
-      title={title}
+      title={
+        <>
+          {title}
+          {manifestPreviewQuery.isError && (
+            <Badge
+              type="dangerSecondary"
+              className="ml-2"
+              data-cy="helm-manifest-preview-error-badge"
+            >
+              <Icon icon={AlertTriangle} size="md" />
+            </Badge>
+          )}
+        </>
+      }
       isFoldable
       defaultFolded={isFolded}
       setIsDefaultFolded={setIsFolded}
     >
-      <ManifestPreview
-        currentManifest={currentManifest}
-        newManifest={manifestPreviewQuery.data?.manifest ?? ''}
-      />
+      {manifestPreviewQuery.isError ? (
+        <Alert color="error" title="Error with Helm chart configuration">
+          <ExpandableMessageByLines>
+            {manifestPreviewQuery.error?.message ||
+              'Error generating manifest preview'}
+          </ExpandableMessageByLines>
+        </Alert>
+      ) : (
+        <ManifestPreview
+          currentManifest={currentManifest}
+          newManifest={manifestPreviewQuery.data?.manifest ?? ''}
+        />
+      )}
     </FormSection>
   );
 }

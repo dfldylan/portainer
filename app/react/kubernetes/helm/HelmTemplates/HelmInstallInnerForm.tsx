@@ -1,5 +1,5 @@
 import { Form, useFormikContext } from 'formik';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
@@ -23,6 +23,7 @@ type Props = {
   versionOptions: Option<ChartVersion>[];
   isVersionsLoading: boolean;
   isRepoAvailable: boolean;
+  setPreviewIsValid: (isValid: boolean) => void;
 };
 
 export function HelmInstallInnerForm({
@@ -32,9 +33,9 @@ export function HelmInstallInnerForm({
   versionOptions,
   isVersionsLoading,
   isRepoAvailable,
+  setPreviewIsValid,
 }: Props) {
   const environmentId = useEnvironmentId();
-  const [previewIsValid, setPreviewIsValid] = useState(false);
   const { values, setFieldValue, isSubmitting } =
     useFormikContext<HelmInstallFormValues>();
 
@@ -129,7 +130,7 @@ export function HelmInstallInnerForm({
         className="!ml-0 mt-5"
         loadingText="Installing Helm chart"
         isLoading={isSubmitting}
-        disabled={!namespace || !name || !isRepoAvailable || !previewIsValid}
+        disabled={!namespace || !name || !isRepoAvailable}
         data-cy="helm-install"
       >
         Install

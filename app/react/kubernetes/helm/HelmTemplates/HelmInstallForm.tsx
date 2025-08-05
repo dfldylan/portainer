@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Formik, FormikProps } from 'formik';
 import { useRouter } from '@uirouter/react';
 
@@ -7,7 +7,7 @@ import { useAnalytics } from '@/react/hooks/useAnalytics';
 import { useCanExit } from '@/react/hooks/useCanExit';
 import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { confirmGenericDiscard } from '@@/modals/confirm';
+import { confirm, confirmGenericDiscard } from '@@/modals/confirm';
 import { Option } from '@@/form-components/PortainerSelect';
 
 import { Chart } from '../types';
@@ -34,6 +34,7 @@ export function HelmInstallForm({
   isRepoAvailable,
 }: Props) {
   const environmentId = useEnvironmentId();
+  const [previewIsValid, setPreviewIsValid] = useState(false);
   const router = useRouter();
   const analytics = useAnalytics();
   const helmRepoVersionsQuery = useHelmRepoVersions(
@@ -78,6 +79,7 @@ export function HelmInstallForm({
         versionOptions={versionOptions}
         isVersionsLoading={helmRepoVersionsQuery.isInitialLoading}
         isRepoAvailable={isRepoAvailable}
+        setPreviewIsValid={setPreviewIsValid}
       />
     </Formik>
   );
@@ -86,6 +88,17 @@ export function HelmInstallForm({
     if (!name || !namespace) {
       // Theoretically this should never happen and is mainly to keep typescript happy
       return;
+    }
+
+    if (!previewIsValid) {
+      const confirmed = await confirm({
+        title: 'Chart validation failed',
+        message:
+          'The Helm manifest preview validation failed, which may indicate configuration issues. This can be normal when creating new resources. Do you want to proceed with the installation?',
+      });
+      if (!confirmed) {
+        return;
+      }
     }
 
     await installHelmChartMutation.mutateAsync(

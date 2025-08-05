@@ -106,7 +106,7 @@ describe('ManifestPreviewFormSection', () => {
     expect(screen.queryByText('Manifest Preview')).not.toBeInTheDocument();
   });
 
-  it('should show error and no form section when error', () => {
+  it("should show error when there's an error", async () => {
     mockUseHelmDryRun.mockReturnValue({
       isInitialLoading: false,
       isError: true,
@@ -116,11 +116,18 @@ describe('ManifestPreviewFormSection', () => {
 
     renderComponent();
 
+    expect(screen.queryByText('Manifest Preview')).toBeInTheDocument();
+    // there should be an error badge
+    expect(
+      screen.queryByTestId('helm-manifest-preview-error-badge')
+    ).toBeInTheDocument();
+    const expandButton = screen.getByLabelText('Expand');
+    await userEvent.click(expandButton);
+
     expect(
       screen.getByText('Error with Helm chart configuration')
     ).toBeInTheDocument();
     expect(screen.getByText('Invalid chart configuration')).toBeInTheDocument();
-    expect(screen.queryByText('Manifest Preview')).not.toBeInTheDocument();
   });
 
   it('should show single code editor when only the generated manifest is available', async () => {

@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 
+import { AutomationTestingProps } from '@/types';
+
 export type BadgeType =
   | 'success'
   | 'danger'
@@ -73,7 +75,8 @@ export function Badge({
   type = 'info',
   className,
   children,
-}: PropsWithChildren<Props>) {
+  'data-cy': dataCy,
+}: PropsWithChildren<Props> & Partial<AutomationTestingProps>) {
   const baseClasses =
     'inline-flex w-fit items-center !text-xs font-medium rounded-full px-2 py-0.5';
 
@@ -81,6 +84,7 @@ export function Badge({
     <span
       className={clsx(baseClasses, typeClasses[type], className)}
       role="status"
+      data-cy={dataCy}
     >
       {children}
     </span>

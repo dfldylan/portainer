@@ -73,7 +73,7 @@ export function HelmTemplatesList({
           />
         ))}
 
-        {filteredCharts.length === 0 && textFilter && (
+        {filteredCharts.length === 0 && textFilter && !isLoadingCharts && (
           <div className="text-muted small mt-4">No Helm charts found</div>
         )}
 

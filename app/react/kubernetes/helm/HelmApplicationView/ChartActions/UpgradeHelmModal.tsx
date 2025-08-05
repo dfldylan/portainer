@@ -7,6 +7,7 @@ import { ChartVersion } from '@/react/kubernetes/helm/helmChartSourceQueries/use
 import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { Modal, OnSubmit, openModal } from '@@/modals';
+import { confirm } from '@@/modals/confirm';
 import { Button } from '@@/buttons';
 import { Input } from '@@/form-components/Input';
 import { FormControl } from '@@/form-components/FormControl';
@@ -181,8 +182,19 @@ export function UpgradeHelmModal({
             Cancel
           </Button>
           <Button
-            onClick={() => onSubmit(submitPayload)}
-            disabled={!previewIsValid}
+            onClick={async () => {
+              if (!previewIsValid) {
+                const confirmed = await confirm({
+                  title: 'Chart validation failed',
+                  message:
+                    'The Helm manifest preview validation failed, which may indicate configuration issues. This can be normal when creating new resources. Do you want to proceed with the upgrade?',
+                });
+                if (!confirmed) {
+                  return;
+                }
+              }
+              onSubmit(submitPayload);
+            }}
             color="primary"
             key="update-button"
             size="medium"

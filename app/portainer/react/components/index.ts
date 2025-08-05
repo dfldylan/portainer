@@ -98,7 +98,7 @@ export const ngModule = angular
     r2a(Tooltip, ['message', 'position', 'className', 'setHtmlMessage', 'size'])
   )
   .component('terminalTooltip', r2a(TerminalTooltip, []))
-  .component('badge', r2a(Badge, ['type', 'className']))
+  .component('badge', r2a(Badge, ['type', 'className', 'data-cy']))
   .component('fileUploadField', fileUploadField)
   .component('porSwitchField', switchField)
   .component(
