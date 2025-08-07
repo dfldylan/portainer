@@ -77,41 +77,41 @@ vJUUCFYm8+9p6gTVOcoMit+eGSwa81PCPEs1TnU1PV/PaDFeUhn/mg==
 type noopDeployer struct{}
 
 // without unpacker
-func (s *noopDeployer) DeploySwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry, prune, pullImage bool) error {
+func (s noopDeployer) DeploySwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry, prune, pullImage bool) error {
 	return nil
 }
 
-func (s *noopDeployer) DeployComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry, forcePullImage, forceRecreate bool) error {
+func (s noopDeployer) DeployComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry, forcePullImage, forceRecreate bool) error {
 	return nil
 }
 
-func (s *noopDeployer) DeployKubernetesStack(stack *portainer.Stack, endpoint *portainer.Endpoint, user *portainer.User) error {
+func (s noopDeployer) DeployKubernetesStack(stack *portainer.Stack, endpoint *portainer.Endpoint, user *portainer.User) error {
 	return nil
 }
 
 // with unpacker
-func (s *noopDeployer) DeployRemoteComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry, forcePullImage, forceRecreate bool) error {
+func (s noopDeployer) DeployRemoteComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry, forcePullImage, forceRecreate bool) error {
 	return nil
 }
-func (s *noopDeployer) UndeployRemoteComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint) error {
+func (s noopDeployer) UndeployRemoteComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint) error {
 	return nil
 }
-func (s *noopDeployer) StartRemoteComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry) error {
+func (s noopDeployer) StartRemoteComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry) error {
 	return nil
 }
-func (s *noopDeployer) StopRemoteComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint) error {
+func (s noopDeployer) StopRemoteComposeStack(stack *portainer.Stack, endpoint *portainer.Endpoint) error {
 	return nil
 }
-func (s *noopDeployer) DeployRemoteSwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry, prune, pullImage bool) error {
+func (s noopDeployer) DeployRemoteSwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry, prune, pullImage bool) error {
 	return nil
 }
-func (s *noopDeployer) UndeployRemoteSwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint) error {
+func (s noopDeployer) UndeployRemoteSwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint) error {
 	return nil
 }
-func (s *noopDeployer) StartRemoteSwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry) error {
+func (s noopDeployer) StartRemoteSwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint, registries []portainer.Registry) error {
 	return nil
 }
-func (s *noopDeployer) StopRemoteSwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint) error {
+func (s noopDeployer) StopRemoteSwarmStack(stack *portainer.Stack, endpoint *portainer.Endpoint) error {
 	return nil
 }
 
@@ -266,7 +266,7 @@ func Test_redeployWhenChanged(t *testing.T) {
 		stack.Type = portainer.DockerComposeStack
 		store.Stack().Update(stack.ID, &stack)
 
-		err = RedeployWhenChanged(1, &noopDeployer{}, store, testhelpers.NewGitService(nil, "newHash"))
+		err = RedeployWhenChanged(1, noopDeployer{}, store, testhelpers.NewGitService(nil, "newHash"))
 		assert.NoError(t, err)
 	})
 
@@ -274,7 +274,7 @@ func Test_redeployWhenChanged(t *testing.T) {
 		stack.Type = portainer.DockerSwarmStack
 		store.Stack().Update(stack.ID, &stack)
 
-		err = RedeployWhenChanged(1, &noopDeployer{}, store, testhelpers.NewGitService(nil, "newHash"))
+		err = RedeployWhenChanged(1, noopDeployer{}, store, testhelpers.NewGitService(nil, "newHash"))
 		assert.NoError(t, err)
 	})
 
@@ -282,7 +282,7 @@ func Test_redeployWhenChanged(t *testing.T) {
 		stack.Type = portainer.KubernetesStack
 		store.Stack().Update(stack.ID, &stack)
 
-		err = RedeployWhenChanged(1, &noopDeployer{}, store, testhelpers.NewGitService(nil, "newHash"))
+		err = RedeployWhenChanged(1, noopDeployer{}, store, testhelpers.NewGitService(nil, "newHash"))
 		assert.NoError(t, err)
 	})
 }

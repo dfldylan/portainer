@@ -67,7 +67,7 @@ func CLIFlags() *portainer.CLIFlags {
 }
 
 // ParseFlags parse the CLI flags and return a portainer.Flags struct
-func (*Service) ParseFlags(version string) (*portainer.CLIFlags, error) {
+func (Service) ParseFlags(version string) (*portainer.CLIFlags, error) {
 	kingpin.Version(version)
 
 	flags := CLIFlags()
@@ -87,7 +87,7 @@ func (*Service) ParseFlags(version string) (*portainer.CLIFlags, error) {
 }
 
 // ValidateFlags validates the values of the flags.
-func (*Service) ValidateFlags(flags *portainer.CLIFlags) error {
+func (Service) ValidateFlags(flags *portainer.CLIFlags) error {
 	displayDeprecationWarnings(flags)
 
 	if err := validateEndpointURL(*flags.EndpointURL); err != nil {

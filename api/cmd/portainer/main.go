@@ -60,7 +60,7 @@ import (
 )
 
 func initCLI() *portainer.CLIFlags {
-	cliService := &cli.Service{}
+	cliService := cli.Service{}
 
 	flags, err := cliService.ParseFlags(portainer.APIVersion)
 	if err != nil {
@@ -381,7 +381,7 @@ func buildServer(flags *portainer.CLIFlags) portainer.Server {
 		log.Fatal().Err(err).Msg("failed initializing JWT service")
 	}
 
-	ldapService := &ldap.Service{}
+	ldapService := ldap.Service{}
 
 	oauthService := oauth.NewService()
 
@@ -390,7 +390,7 @@ func buildServer(flags *portainer.CLIFlags) portainer.Server {
 	// Setting insecureSkipVerify to true to preserve the old behaviour.
 	openAMTService := openamt.NewService(true)
 
-	cryptoService := &crypto.Service{}
+	cryptoService := crypto.Service{}
 
 	signatureService := initDigitalSignatureService()
 

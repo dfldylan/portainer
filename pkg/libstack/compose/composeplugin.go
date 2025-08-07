@@ -35,7 +35,7 @@ const portainerEnvVarsPrefix = "PORTAINER_"
 var mu sync.Mutex
 
 func init() {
-	logrus.SetOutput(&LogrusToZerologWriter{})
+	logrus.SetOutput(LogrusToZerologWriter{})
 	logrus.SetFormatter(&logrus.TextFormatter{
 		DisableTimestamp: true,
 	})

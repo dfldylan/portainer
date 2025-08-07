@@ -19,13 +19,13 @@ type RepositoryListClient interface {
 type RepositoryListClientFactory struct{}
 
 // NewRepositoryListClientFactory creates a new factory instance
-func NewRepositoryListClientFactory() *RepositoryListClientFactory {
-	return &RepositoryListClientFactory{}
+func NewRepositoryListClientFactory() RepositoryListClientFactory {
+	return RepositoryListClientFactory{}
 }
 
 // CreateListClientWithRegistry creates a repository listing client based on the registry type
 // and automatically configures it with the provided ORAS registry client for generic registries
-func (f *RepositoryListClientFactory) CreateListClientWithRegistry(registry *portainer.Registry, registryClient *remote.Registry) (RepositoryListClient, error) {
+func (f RepositoryListClientFactory) CreateListClientWithRegistry(registry *portainer.Registry, registryClient *remote.Registry) (RepositoryListClient, error) {
 	switch registry.Type {
 	case portainer.GitlabRegistry:
 		return NewGitlabListRepoClient(registry), nil

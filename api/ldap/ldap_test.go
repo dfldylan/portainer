@@ -70,3 +70,25 @@ func TestCreateConnectionForURL(t *testing.T) {
 	require.Error(t, err)
 	require.Nil(t, conn)
 }
+
+func TestFailures(t *testing.T) {
+	s := Service{}
+
+	err := s.AuthenticateUser("username", "password", &portainer.LDAPSettings{})
+	require.Error(t, err)
+
+	uGroups, err := s.GetUserGroups("username", &portainer.LDAPSettings{})
+	require.Error(t, err)
+	require.Empty(t, uGroups)
+
+	users, err := s.SearchUsers(&portainer.LDAPSettings{})
+	require.Error(t, err)
+	require.Empty(t, users)
+
+	groups, err := s.SearchGroups(&portainer.LDAPSettings{})
+	require.Error(t, err)
+	require.Empty(t, groups)
+
+	err = s.TestConnectivity(&portainer.LDAPSettings{})
+	require.Error(t, err)
+}

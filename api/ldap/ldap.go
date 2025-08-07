@@ -68,7 +68,7 @@ func createConnectionForURL(url string, settings *portainer.LDAPSettings) (*ldap
 }
 
 // AuthenticateUser is used to authenticate a user against a LDAP/AD.
-func (*Service) AuthenticateUser(username, password string, settings *portainer.LDAPSettings) error {
+func (Service) AuthenticateUser(username, password string, settings *portainer.LDAPSettings) error {
 	connection, err := createConnection(settings)
 	if err != nil {
 		return err
@@ -103,7 +103,7 @@ func (*Service) AuthenticateUser(username, password string, settings *portainer.
 }
 
 // GetUserGroups is used to retrieve user groups from LDAP/AD.
-func (*Service) GetUserGroups(username string, settings *portainer.LDAPSettings) ([]string, error) {
+func (Service) GetUserGroups(username string, settings *portainer.LDAPSettings) ([]string, error) {
 	connection, err := createConnection(settings)
 	if err != nil {
 		return nil, err
@@ -128,7 +128,7 @@ func (*Service) GetUserGroups(username string, settings *portainer.LDAPSettings)
 }
 
 // SearchUsers searches for users with the specified settings
-func (*Service) SearchUsers(settings *portainer.LDAPSettings) ([]string, error) {
+func (Service) SearchUsers(settings *portainer.LDAPSettings) ([]string, error) {
 	connection, err := createConnection(settings)
 	if err != nil {
 		return nil, err
@@ -175,7 +175,7 @@ func (*Service) SearchUsers(settings *portainer.LDAPSettings) ([]string, error) 
 }
 
 // SearchGroups searches for groups with the specified settings
-func (*Service) SearchGroups(settings *portainer.LDAPSettings) ([]portainer.LDAPUser, error) {
+func (Service) SearchGroups(settings *portainer.LDAPSettings) ([]portainer.LDAPUser, error) {
 	type groupSet map[string]bool
 
 	connection, err := createConnection(settings)
@@ -304,8 +304,7 @@ func getGroupsByUser(userDN string, conn *ldap.Conn, settings []portainer.LDAPGr
 
 // TestConnectivity is used to test a connection against the LDAP server using the credentials
 // specified in the LDAPSettings.
-func (*Service) TestConnectivity(settings *portainer.LDAPSettings) error {
-
+func (Service) TestConnectivity(settings *portainer.LDAPSettings) error {
 	connection, err := createConnection(settings)
 	if err != nil {
 		return err
