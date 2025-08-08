@@ -45,7 +45,7 @@ type dashboardResponse struct {
 // @success 200 {object} dashboardResponse "Success"
 // @failure 400 "Bad request"
 // @failure 500 "Internal server error"
-// @router /docker/{environmentId}/dashboard [post]
+// @router /docker/{environmentId}/dashboard [get]
 func (h *Handler) dashboard(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	var resp dashboardResponse
 	err := h.dataStore.ViewTx(func(tx dataservices.DataStoreTx) error {
