@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	"github.com/portainer/portainer/pkg/fips"
+
 	"golang.org/x/crypto/argon2"
 	"golang.org/x/crypto/pbkdf2"
 	"golang.org/x/crypto/scrypt"
@@ -56,8 +57,7 @@ func AesEncrypt(input io.Reader, output io.Writer, passphrase []byte) error {
 
 // AesDecrypt reads from input, decrypts with AES-256 and returns the reader to read the decrypted content from
 func AesDecrypt(input io.Reader, passphrase []byte) (io.Reader, error) {
-	fipsMode := fips.FIPSMode()
-	return aesDecrypt(input, passphrase, fipsMode)
+	return aesDecrypt(input, passphrase, fips.FIPSMode())
 }
 
 func aesDecrypt(input io.Reader, passphrase []byte, fipsMode bool) (io.Reader, error) {
@@ -152,15 +152,14 @@ func aesEncryptGCM(input io.Reader, output io.Writer, passphrase []byte) error {
 			break // end of plaintext input
 		}
 
-		if err != nil && !(errors.Is(err, io.EOF) || errors.Is(err, io.ErrUnexpectedEOF)) {
+		if err != nil && !errors.Is(err, io.EOF) && !errors.Is(err, io.ErrUnexpectedEOF) {
 			return err
 		}
 
 		// Seal encrypts the plaintext using the nonce returning the updated slice.
 		ciphertext = aesgcm.Seal(ciphertext[:0], nonce.Value(), buf[:n], nil)
 
-		_, err = output.Write(ciphertext)
-		if err != nil {
+		if _, err := output.Write(ciphertext); err != nil {
 			return err
 		}
 
@@ -221,7 +220,7 @@ func aesDecryptGCM(input io.Reader, passphrase []byte) (io.Reader, error) {
 			break // end of ciphertext
 		}
 
-		if err != nil && !(errors.Is(err, io.EOF) || errors.Is(err, io.ErrUnexpectedEOF)) {
+		if err != nil && !errors.Is(err, io.EOF) && !errors.Is(err, io.ErrUnexpectedEOF) {
 			return nil, err
 		}
 
@@ -282,15 +281,14 @@ func aesEncryptGCMFIPS(input io.Reader, output io.Writer, passphrase []byte) err
 			break // end of plaintext input
 		}
 
-		if err != nil && !(errors.Is(err, io.EOF) || errors.Is(err, io.ErrUnexpectedEOF)) {
+		if err != nil && !errors.Is(err, io.EOF) && !errors.Is(err, io.ErrUnexpectedEOF) {
 			return err
 		}
 
 		// Seal encrypts the plaintext
 		ciphertext := aesgcm.Seal(nil, nil, buf[:n], nil)
 
-		_, err = output.Write(ciphertext)
-		if err != nil {
+		if _, err := output.Write(ciphertext); err != nil {
 			return err
 		}
 	}
@@ -343,7 +341,7 @@ func aesDecryptGCMFIPS(input io.Reader, passphrase []byte) (io.Reader, error) {
 			break // end of ciphertext
 		}
 
-		if err != nil && !(errors.Is(err, io.EOF) || errors.Is(err, io.ErrUnexpectedEOF)) {
+		if err != nil && !errors.Is(err, io.EOF) && !errors.Is(err, io.ErrUnexpectedEOF) {
 			return nil, err
 		}
 
@@ -365,11 +363,9 @@ func aesDecryptGCMFIPS(input io.Reader, passphrase []byte) (io.Reader, error) {
 // passphrase is used to generate an encryption key.
 // note: This function used to decrypt files that were encrypted without a header i.e. old archives
 func aesDecryptOFB(input io.Reader, passphrase []byte) (io.Reader, error) {
-	var emptySalt []byte = make([]byte, 0)
-
 	// making a 32 bytes key that would correspond to AES-256
 	// don't necessarily need a salt, so just kept in empty
-	key, err := scrypt.Key(passphrase, emptySalt, 32768, 8, 1, 32)
+	key, err := scrypt.Key(passphrase, nil, 32768, 8, 1, 32)
 	if err != nil {
 		return nil, err
 	}

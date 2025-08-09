@@ -263,7 +263,7 @@ func (kcl *KubeClient) updateVolumesWithOwningApplications(volumes *[]models.K8s
 		for _, pod := range pods.Items {
 			if pod.Spec.Volumes != nil {
 				for _, podVolume := range pod.Spec.Volumes {
-					if podVolume.VolumeSource.PersistentVolumeClaim != nil && podVolume.VolumeSource.PersistentVolumeClaim.ClaimName == volume.PersistentVolumeClaim.Name && pod.Namespace == volume.PersistentVolumeClaim.Namespace {
+					if podVolume.PersistentVolumeClaim != nil && podVolume.PersistentVolumeClaim.ClaimName == volume.PersistentVolumeClaim.Name && pod.Namespace == volume.PersistentVolumeClaim.Namespace {
 						application, err := kcl.ConvertPodToApplication(pod, PortainerApplicationResources{
 							ReplicaSets:  replicaSetItems,
 							Deployments:  deploymentItems,

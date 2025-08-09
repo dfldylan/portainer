@@ -6,12 +6,12 @@ import (
 
 	"github.com/portainer/portainer/pkg/libhelm/options"
 	"github.com/portainer/portainer/pkg/libhelm/test"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestUpgrade(t *testing.T) {
 	test.EnsureIntegrationTest(t)
-	is := assert.New(t)
+	is := require.New(t)
 
 	// Create a new SDK package manager
 	hspm := NewHelmSDKPackageManager()
@@ -31,14 +31,12 @@ func TestUpgrade(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(upgradeOpts)
-		if release != nil {
-			defer hspm.Uninstall(options.UninstallOptions{
-				Name: upgradeOpts.Name,
-			})
-		}
-
 		is.NoError(err, "should successfully install release via upgrade")
 		is.NotNil(release, "should return non-nil release")
+		defer hspm.Uninstall(options.UninstallOptions{
+			Name: upgradeOpts.Name,
+		})
+
 		is.Equal(upgradeOpts.Name, release.Name, "release name should match")
 		is.Equal(1, release.Version, "release version should be 1 for new install")
 		is.NotEmpty(release.Manifest, "release manifest should not be empty")
@@ -64,11 +62,11 @@ func TestUpgrade(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
+		is.NoError(err, "should successfully install release")
+		is.NotNil(release, "should return non-nil release")
 		defer hspm.Uninstall(options.UninstallOptions{
 			Name: installOpts.Name,
 		})
-		is.NoError(err, "should successfully install release")
-		is.NotNil(release, "should return non-nil release")
 
 		// Upgrade the release with the same options
 		upgradedRelease, err := hspm.Upgrade(installOpts)
@@ -95,11 +93,11 @@ func TestUpgrade(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts) // Cleanup
+		is.NoError(err, "should successfully install release")
+		is.NotNil(release, "should return non-nil release")
 		defer hspm.Uninstall(options.UninstallOptions{
 			Name: installOpts.Name,
 		})
-		is.NoError(err, "should successfully install release")
-		is.NotNil(release, "should return non-nil release")
 
 		// Create values file
 		values, err := test.CreateValuesFile("service:\n  port:  8083")
@@ -139,11 +137,11 @@ func TestUpgrade(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
+		is.NoError(err, "should successfully install release")
+		is.NotNil(release, "should return non-nil release")
 		defer hspm.Uninstall(options.UninstallOptions{
 			Name: installOpts.Name,
 		})
-		is.NoError(err, "should successfully install release")
-		is.NotNil(release, "should return non-nil release")
 
 		// Create invalid values file
 		values, err := test.CreateValuesFile("this is not valid yaml")

@@ -6,12 +6,11 @@ import (
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
+
 	"github.com/rs/zerolog/log"
 )
 
-const (
-	BucketName = "pending_actions"
-)
+const BucketName = "pending_actions"
 
 type Service struct {
 	dataservices.BaseDataService[portainer.PendingAction, portainer.PendingActionID]
@@ -78,15 +77,14 @@ func (s ServiceTx) Update(ID portainer.PendingActionID, config *portainer.Pendin
 
 func (s ServiceTx) DeleteByEndpointID(ID portainer.EndpointID) error {
 	log.Debug().Int("endpointId", int(ID)).Msg("deleting pending actions for endpoint")
-	pendingActions, err := s.BaseDataServiceTx.ReadAll()
+	pendingActions, err := s.ReadAll()
 	if err != nil {
 		return fmt.Errorf("failed to retrieve pending-actions for endpoint (%d): %w", ID, err)
 	}
 
 	for _, pendingAction := range pendingActions {
 		if pendingAction.EndpointID == ID {
-			err := s.BaseDataServiceTx.Delete(pendingAction.ID)
-			if err != nil {
+			if err := s.Delete(pendingAction.ID); err != nil {
 				log.Debug().Int("endpointId", int(ID)).Msgf("failed to delete pending action: %v", err)
 			}
 		}

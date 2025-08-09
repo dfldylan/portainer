@@ -26,7 +26,7 @@ func (kcl *KubeClient) GetNodesLimits() (portainer.K8sNodesLimits, error) {
 		cpu := item.Status.Allocatable.Cpu().MilliValue()
 		memory := item.Status.Allocatable.Memory().Value() // bytes
 
-		nodesLimits[item.ObjectMeta.Name] = &portainer.K8sNodeLimits{
+		nodesLimits[item.Name] = &portainer.K8sNodeLimits{
 			CPU:    cpu,
 			Memory: memory,
 		}

@@ -22,7 +22,6 @@ type filterTest struct {
 }
 
 func Test_Filter_AgentVersion(t *testing.T) {
-
 	version1Endpoint := portainer.Endpoint{ID: 1, GroupID: 1,
 		Type: portainer.AgentOnDockerEnvironment,
 		Agent: struct {
@@ -78,7 +77,6 @@ func Test_Filter_AgentVersion(t *testing.T) {
 }
 
 func Test_Filter_edgeFilter(t *testing.T) {
-
 	trustedEdgeAsync := portainer.Endpoint{ID: 1, UserTrusted: true, Edge: portainer.EnvironmentEdgeSettings{AsyncMode: true}, GroupID: 1, Type: portainer.EdgeAgentOnDockerEnvironment}
 	untrustedEdgeAsync := portainer.Endpoint{ID: 2, UserTrusted: false, Edge: portainer.EnvironmentEdgeSettings{AsyncMode: true}, GroupID: 1, Type: portainer.EdgeAgentOnDockerEnvironment}
 	regularUntrustedEdgeStandard := portainer.Endpoint{ID: 3, UserTrusted: false, Edge: portainer.EnvironmentEdgeSettings{AsyncMode: false}, GroupID: 1, Type: portainer.EdgeAgentOnDockerEnvironment}
@@ -280,7 +278,6 @@ func runTest(t *testing.T, test filterTest, handler *Handler, endpoints []portai
 	}
 
 	is.ElementsMatch(test.expected, respIds)
-
 }
 
 func setupFilterTest(t *testing.T, endpoints []portainer.Endpoint) *Handler {
@@ -425,4 +422,26 @@ func TestFilterEndpointsByExcludeEdgeGroupIDs(t *testing.T) {
 
 	require.Len(t, egs, 1)
 	require.Equal(t, egs[0].ID, portainer.EdgeGroupID(2))
+}
+
+func TestGetShortestAsyncInterval(t *testing.T) {
+	endpoint := &portainer.Endpoint{
+		ID:   1,
+		Name: "Test Endpoint",
+		Edge: portainer.EnvironmentEdgeSettings{
+			PingInterval:     -1,
+			SnapshotInterval: -1,
+			CommandInterval:  -1,
+		},
+	}
+
+	settings := &portainer.Settings{
+		Edge: portainer.Edge{
+			PingInterval:     10,
+			SnapshotInterval: 20,
+			CommandInterval:  30,
+		},
+	}
+
+	require.Equal(t, 10, getShortestAsyncInterval(endpoint, settings))
 }

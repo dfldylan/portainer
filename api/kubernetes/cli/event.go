@@ -73,7 +73,7 @@ func parseEvent(event *corev1.Event) models.K8sEvent {
 		EventTime: event.EventTime.UTC(),
 		Kind:      event.Kind,
 		Count:     event.Count,
-		UID:       string(event.ObjectMeta.GetUID()),
+		UID:       string(event.GetUID()),
 		InvolvedObjectKind: models.K8sEventInvolvedObject{
 			Kind:      event.InvolvedObject.Kind,
 			UID:       string(event.InvolvedObject.UID),

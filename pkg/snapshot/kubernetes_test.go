@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
+
 	"github.com/stretchr/testify/require"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
@@ -162,7 +163,7 @@ func TestKubernetesSnapshotNodesWithAPIError(t *testing.T) {
 	fakeClient := kfake.NewClientset()
 
 	// Add a reactor to simulate API error
-	fakeClient.Fake.PrependReactor("list", "nodes", func(action ktesting.Action) (handled bool, ret runtime.Object, err error) {
+	fakeClient.PrependReactor("list", "nodes", func(action ktesting.Action) (handled bool, ret runtime.Object, err error) {
 		return true, nil, errors.New("simulated API error")
 	})
 

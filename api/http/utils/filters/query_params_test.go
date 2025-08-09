@@ -181,15 +181,15 @@ func TestExtractListModifiersQueryParams(t *testing.T) {
 			result := ExtractListModifiersQueryParams(req)
 
 			// Assertions
-			require.Equal(t, tt.expectedResult.SearchQueryParams.search, result.SearchQueryParams.search,
+			require.Equal(t, tt.expectedResult.search, result.search,
 				"Search parameter should match expected value")
-			require.Equal(t, tt.expectedResult.SortQueryParams.sort, result.SortQueryParams.sort,
+			require.Equal(t, tt.expectedResult.sort, result.sort,
 				"Sort parameter should match expected value")
-			require.Equal(t, tt.expectedResult.SortQueryParams.order, result.SortQueryParams.order,
+			require.Equal(t, tt.expectedResult.order, result.order,
 				"Order parameter should match expected value")
-			require.Equal(t, tt.expectedResult.PaginationQueryParams.start, result.PaginationQueryParams.start,
+			require.Equal(t, tt.expectedResult.start, result.start,
 				"Start parameter should match expected value")
-			require.Equal(t, tt.expectedResult.PaginationQueryParams.limit, result.PaginationQueryParams.limit,
+			require.Equal(t, tt.expectedResult.limit, result.limit,
 				"Limit parameter should match expected value")
 
 			// Verify the complete struct

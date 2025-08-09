@@ -9,9 +9,7 @@ import (
 )
 
 func TestLimitAccess(t *testing.T) {
-	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
+	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})
 
 	t.Run("Request below the limit", func(t *testing.T) {
 		req := httptest.NewRequest("GET", "/", nil)

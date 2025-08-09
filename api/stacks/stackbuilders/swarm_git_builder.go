@@ -32,11 +32,6 @@ func CreateSwarmStackGitBuilder(securityContext *security.RestrictedRequestConte
 	}
 }
 
-func (b *SwarmStackGitBuilder) SetGeneralInfo(payload *StackPayload, endpoint *portainer.Endpoint) GitMethodStackBuildProcess {
-	b.GitMethodStackBuilder.SetGeneralInfo(payload, endpoint)
-	return b
-}
-
 func (b *SwarmStackGitBuilder) SetUniqueInfo(payload *StackPayload) GitMethodStackBuildProcess {
 	if b.hasError() {
 		return b
@@ -47,11 +42,6 @@ func (b *SwarmStackGitBuilder) SetUniqueInfo(payload *StackPayload) GitMethodSta
 	b.stack.EntryPoint = payload.ComposeFile
 	b.stack.FromAppTemplate = payload.FromAppTemplate
 	b.stack.Env = payload.Env
-	return b
-}
-
-func (b *SwarmStackGitBuilder) SetGitRepository(payload *StackPayload) GitMethodStackBuildProcess {
-	b.GitMethodStackBuilder.SetGitRepository(payload)
 	return b
 }
 
@@ -71,9 +61,4 @@ func (b *SwarmStackGitBuilder) Deploy(payload *StackPayload, endpoint *portainer
 	b.stack.CreatedBy = b.deploymentConfiger.GetUsername()
 
 	return b.GitMethodStackBuilder.Deploy(payload, endpoint)
-}
-
-func (b *SwarmStackGitBuilder) SetAutoUpdate(payload *StackPayload) GitMethodStackBuildProcess {
-	b.GitMethodStackBuilder.SetAutoUpdate(payload)
-	return b
 }

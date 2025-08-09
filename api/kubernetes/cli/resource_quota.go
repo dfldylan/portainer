@@ -86,7 +86,7 @@ func (kcl *KubeClient) UpdateNamespacesWithResourceQuotas(namespaces map[string]
 // GetResourceQuotaFromNamespace gets the resource quota in a specific namespace where the resource quota's name is prefixed with "portainer-rq-".
 func (kcl *KubeClient) GetResourceQuotaFromNamespace(namespace portainer.K8sNamespaceInfo, resourceQuotas []corev1.ResourceQuota) *corev1.ResourceQuota {
 	for _, resourceQuota := range resourceQuotas {
-		if resourceQuota.ObjectMeta.Namespace == namespace.Name && resourceQuota.ObjectMeta.Name == "portainer-rq-"+namespace.Name {
+		if resourceQuota.Namespace == namespace.Name && resourceQuota.Name == "portainer-rq-"+namespace.Name {
 			return &resourceQuota
 		}
 	}

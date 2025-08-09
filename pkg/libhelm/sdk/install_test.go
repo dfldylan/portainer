@@ -6,12 +6,13 @@ import (
 
 	"github.com/portainer/portainer/pkg/libhelm/options"
 	"github.com/portainer/portainer/pkg/libhelm/test"
-	"github.com/stretchr/testify/assert"
+
+	"github.com/stretchr/testify/require"
 )
 
 func Test_Install(t *testing.T) {
 	test.EnsureIntegrationTest(t)
-	is := assert.New(t)
+	is := require.New(t)
 
 	// Create a new SDK package manager
 	hspm := NewHelmSDKPackageManager()
@@ -29,14 +30,12 @@ func Test_Install(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
-		if release != nil {
-			defer hspm.Uninstall(options.UninstallOptions{
-				Name: installOpts.Name,
-			})
-		}
-
 		is.NoError(err, "should successfully install release")
 		is.NotNil(release, "should return non-nil release")
+		defer hspm.Uninstall(options.UninstallOptions{
+			Name: installOpts.Name,
+		})
+
 		is.Equal("test-nginx", release.Name, "release name should match")
 		is.Equal(1, release.Version, "release version should be 1")
 		is.NotEmpty(release.Manifest, "release manifest should not be empty")
@@ -60,14 +59,12 @@ func Test_Install(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
-		if release != nil {
-			defer hspm.Uninstall(options.UninstallOptions{
-				Name: installOpts.Name,
-			})
-		}
-
 		is.NoError(err, "should successfully install release")
 		is.NotNil(release, "should return non-nil release")
+		defer hspm.Uninstall(options.UninstallOptions{
+			Name: installOpts.Name,
+		})
+
 		is.Equal("test-nginx-2", release.Name, "release name should match")
 		is.Equal(1, release.Version, "release version should be 1")
 		is.NotEmpty(release.Manifest, "release manifest should not be empty")
@@ -86,14 +83,12 @@ func Test_Install(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
-		if release != nil {
-			defer hspm.Uninstall(options.UninstallOptions{
-				Name: installOpts.Name,
-			})
-		}
-
 		is.NoError(err, "should successfully install release")
 		is.NotNil(release, "should return non-nil release")
+		defer hspm.Uninstall(options.UninstallOptions{
+			Name: installOpts.Name,
+		})
+
 		is.Equal("portainer-test", release.Name, "release name should match")
 		is.Equal(1, release.Version, "release version should be 1")
 		is.NotEmpty(release.Manifest, "release manifest should not be empty")
@@ -118,14 +113,12 @@ func Test_Install(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
-		if release != nil {
-			defer hspm.Uninstall(options.UninstallOptions{
-				Name: installOpts.Name,
-			})
-		}
-
 		is.NoError(err, "should successfully install release")
 		is.NotNil(release, "should return non-nil release")
+		defer hspm.Uninstall(options.UninstallOptions{
+			Name: installOpts.Name,
+		})
+
 		is.Equal("test-nginx-3", release.Name, "release name should match")
 	})
 
@@ -143,14 +136,12 @@ func Test_Install(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
-		if release != nil {
-			defer hspm.Uninstall(options.UninstallOptions{
-				Name: installOpts.Name,
-			})
-		}
-
 		is.NoError(err, "should successfully install release")
 		is.NotNil(release, "should return non-nil release")
+		defer hspm.Uninstall(options.UninstallOptions{
+			Name: installOpts.Name,
+		})
+
 		is.Equal("test-nginx-4", release.Name, "release name should match")
 		is.Equal("default", release.Namespace, "release namespace should match")
 	})

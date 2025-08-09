@@ -29,9 +29,7 @@ func Test_RegistryAccess_RequiresAuthentication(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/registries/1", nil)
 	req = mux.SetURLVars(req, map[string]string{"id": "1"})
 	rr := httptest.NewRecorder()
-	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
+	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})
 	bouncer := handler.RegistryAccess(testHandler)
 	bouncer.ServeHTTP(rr, req)
 	assert.Equal(t, http.StatusUnauthorized, rr.Code)
@@ -53,9 +51,7 @@ func Test_RegistryAccess_InvalidRegistryID(t *testing.T) {
 
 	rr := httptest.NewRecorder()
 
-	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
+	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})
 
 	bouncer := handler.RegistryAccess(testHandler)
 	bouncer.ServeHTTP(rr, req)
@@ -79,9 +75,7 @@ func Test_RegistryAccess_RegistryNotFound(t *testing.T) {
 
 	rr := httptest.NewRecorder()
 
-	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
+	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})
 
 	bouncer := handler.RegistryAccess(testHandler)
 	bouncer.ServeHTTP(rr, req)

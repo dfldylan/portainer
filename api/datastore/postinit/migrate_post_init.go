@@ -149,7 +149,7 @@ func (migrator *PostInitMigrator) MigrateGPUs(e portainer.Endpoint, dockerClient
 	return migrator.dataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
 		environment, err := tx.Endpoint().Endpoint(e.ID)
 		if err != nil {
-			log.Error().Err(err).Msgf("Error getting environment %d", environment.ID)
+			log.Error().Err(err).Msgf("Error getting environment %d", e.ID)
 			return err
 		}
 		// Early exit if we do not need to migrate!
@@ -175,10 +175,11 @@ func (migrator *PostInitMigrator) MigrateGPUs(e portainer.Endpoint, dockerClient
 				continue
 			}
 
-			deviceRequests := containerDetails.HostConfig.Resources.DeviceRequests
+			deviceRequests := containerDetails.HostConfig.DeviceRequests
 			for _, deviceRequest := range deviceRequests {
 				if deviceRequest.Driver == "nvidia" {
 					environment.EnableGPUManagement = true
+
 					break containersLoop
 				}
 			}
@@ -186,8 +187,7 @@ func (migrator *PostInitMigrator) MigrateGPUs(e portainer.Endpoint, dockerClient
 
 		// set the MigrateGPUs flag to false so we don't run this again
 		environment.PostInitMigrations.MigrateGPUs = false
-		err = tx.Endpoint().UpdateEndpoint(environment.ID, environment)
-		if err != nil {
+		if err := tx.Endpoint().UpdateEndpoint(environment.ID, environment); err != nil {
 			log.Error().Err(err).Msgf("Error updating EnableGPUManagement flag for environment %d", environment.ID)
 			return err
 		}

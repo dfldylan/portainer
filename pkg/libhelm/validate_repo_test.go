@@ -62,8 +62,6 @@ func TestValidateHelmRepositoryURL(t *testing.T) {
 
 			return
 		}
-
-		w.WriteHeader(http.StatusOK)
 	}))
 	defer srv.Close()
 

@@ -38,12 +38,6 @@ func CreateKubernetesStackUrlBuilder(dataStore dataservices.DataStore,
 	}
 }
 
-func (b *KubernetesStackUrlBuilder) SetGeneralInfo(payload *StackPayload, endpoint *portainer.Endpoint) UrlMethodStackBuildProcess {
-	b.UrlMethodStackBuilder.SetGeneralInfo(payload, endpoint)
-
-	return b
-}
-
 func (b *KubernetesStackUrlBuilder) SetUniqueInfo(payload *StackPayload) UrlMethodStackBuildProcess {
 	if b.hasError() {
 		return b
@@ -106,9 +100,9 @@ func (b *KubernetesStackUrlBuilder) Deploy(payload *StackPayload, endpoint *port
 
 	b.deploymentConfiger = k8sDeploymentConfig
 
-	return b.UrlMethodStackBuilder.Deploy(payload, endpoint)
+	return b.Deploy(payload, endpoint)
 }
 
 func (b *KubernetesStackUrlBuilder) GetResponse() string {
-	return b.UrlMethodStackBuilder.deploymentConfiger.GetResponse()
+	return b.deploymentConfiger.GetResponse()
 }

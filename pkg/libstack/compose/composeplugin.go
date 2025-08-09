@@ -42,11 +42,11 @@ func init() {
 }
 
 func withCli(
-	ctx context.Context,
+	ctx context.Context, //nolint:staticcheck
 	options libstack.Options,
 	cliFn func(context.Context, *command.DockerCli) error,
 ) error {
-	ctx = context.Background()
+	ctx = context.Background() //nolint:staticcheck
 
 	cli, err := command.NewDockerCli(command.WithCombinedStreams(log.Logger))
 	if err != nil {

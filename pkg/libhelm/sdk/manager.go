@@ -3,7 +3,6 @@ package sdk
 import (
 	"time"
 
-	"github.com/portainer/portainer/pkg/libhelm/types"
 	"helm.sh/helm/v3/pkg/cli"
 )
 
@@ -14,7 +13,7 @@ type HelmSDKPackageManager struct {
 }
 
 // NewHelmSDKPackageManager initializes a new HelmPackageManager service using the Helm SDK
-func NewHelmSDKPackageManager() types.HelmPackageManager {
+func NewHelmSDKPackageManager() *HelmSDKPackageManager {
 	settings := cli.New()
 	return &HelmSDKPackageManager{
 		settings: settings,

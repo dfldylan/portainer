@@ -141,10 +141,7 @@ func pingOperation(client *http.Client, target string) (bool, error) {
 	io.Copy(io.Discard, resp.Body)
 	resp.Body.Close()
 
-	agentOnDockerEnvironment := false
-	if resp.Header.Get(portainer.PortainerAgentHeader) != "" {
-		agentOnDockerEnvironment = true
-	}
+	agentOnDockerEnvironment := resp.Header.Get(portainer.PortainerAgentHeader) != ""
 
 	return agentOnDockerEnvironment, nil
 }

@@ -52,7 +52,7 @@ func (hspm *HelmSDKPackageManager) Show(showOpts options.ShowOptions) ([]byte, e
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse chart reference: %w", err)
 	}
-	chartPath, err := showClient.ChartPathOptions.LocateChart(chartRef, hspm.settings)
+	chartPath, err := showClient.LocateChart(chartRef, hspm.settings)
 	if err != nil {
 		log.Error().
 			Str("context", "HelmClient").

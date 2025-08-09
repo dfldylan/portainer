@@ -59,18 +59,19 @@ func newMockRelease(re *release.ReleaseElement) *release.Release {
 
 // Install a helm chart (not thread safe)
 func (hpm helmMockPackageManager) Install(installOpts options.InstallOptions) (*release.Release, error) {
-
 	releaseElement := newMockReleaseElement(installOpts)
 
 	// Enforce only one chart with the same name per namespace
 	for i, rel := range mockCharts {
 		if rel.Name == installOpts.Name && rel.Namespace == installOpts.Namespace {
 			mockCharts[i] = *releaseElement
+
 			return newMockRelease(releaseElement), nil
 		}
 	}
 
 	mockCharts = append(mockCharts, *releaseElement)
+
 	return newMockRelease(releaseElement), nil
 }
 
@@ -81,7 +82,7 @@ func (hpm helmMockPackageManager) Upgrade(upgradeOpts options.InstallOptions) (*
 
 // Rollback a helm chart (not thread safe)
 func (hpm helmMockPackageManager) Rollback(rollbackOpts options.RollbackOptions) (*release.Release, error) {
-	return hpm.Rollback(rollbackOpts)
+	return nil, nil
 }
 
 // Show values/readme/chart etc
@@ -94,6 +95,7 @@ func (hpm helmMockPackageManager) Show(showOpts options.ShowOptions) ([]byte, er
 	case options.ShowValues:
 		return []byte(MockDataValues), nil
 	}
+
 	return nil, nil
 }
 
@@ -104,6 +106,7 @@ func (hpm helmMockPackageManager) Uninstall(uninstallOpts options.UninstallOptio
 			mockCharts = slices.Delete(mockCharts, i, i+1)
 		}
 	}
+
 	return nil
 }
 
@@ -117,6 +120,7 @@ func (hpm helmMockPackageManager) Get(getOpts options.GetOptions) (*release.Rele
 	index := slices.IndexFunc(mockCharts, func(re release.ReleaseElement) bool {
 		return re.Name == getOpts.Name && re.Namespace == getOpts.Namespace
 	})
+
 	return newMockRelease(&mockCharts[index]), nil
 }
 
@@ -159,8 +163,7 @@ func (hbpm helmMockPackageManager) SearchRepo(searchRepoOpts options.SearchRepoO
 	reader := strings.NewReader(mockPortainerIndex)
 
 	var file release.File
-	err := yaml.NewDecoder(reader).Decode(&file)
-	if err != nil {
+	if err := yaml.NewDecoder(reader).Decode(&file); err != nil {
 		return nil, errors.Wrap(err, "failed to decode index file")
 	}
 

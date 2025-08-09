@@ -1,6 +1,8 @@
 package client
 
 import (
+	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
@@ -28,4 +30,15 @@ func TestExecutePingOperationFailure(t *testing.T) {
 	require.False(t, ok)
 	require.Error(t, err)
 
+}
+
+func TestPingOperation(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add(portainer.PortainerAgentHeader, "1")
+	}))
+	defer srv.Close()
+
+	agentOnDockerEnv, err := pingOperation(http.DefaultClient, srv.URL)
+	require.NoError(t, err)
+	require.True(t, agentOnDockerEnv)
 }

@@ -1,6 +1,8 @@
 package crypto
 
 import (
+	"crypto/aes"
+	"crypto/cipher"
 	"io"
 	"math/rand"
 	"os"
@@ -8,8 +10,10 @@ import (
 	"testing"
 
 	"github.com/portainer/portainer/pkg/fips"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"golang.org/x/crypto/scrypt"
 )
 
 func init() {
@@ -23,6 +27,7 @@ func randBytes(n int) []byte {
 	for i := range b {
 		b[i] = letterBytes[rand.Intn(len(letterBytes))]
 	}
+
 	return b
 }
 
@@ -122,6 +127,10 @@ func Test_encryptAndDecrypt_withTheSamePassword(t *testing.T) {
 		}
 
 		testFunc(t, aesEncryptGCMFIPS, decrypt, true)
+	})
+
+	t.Run("legacy", func(t *testing.T) {
+		testFunc(t, legacyAesEncrypt, aesDecryptOFB, true)
 	})
 }
 
@@ -318,4 +327,26 @@ func Test_decryptWithDifferentPassphrase_shouldProduceWrongResult(t *testing.T) 
 	t.Run("non_fips", func(t *testing.T) {
 		testFunc(t, aesEncryptGCM, aesDecryptGCM)
 	})
+}
+
+func legacyAesEncrypt(input io.Reader, output io.Writer, passphrase []byte) error {
+	key, err := scrypt.Key(passphrase, nil, 32768, 8, 1, 32)
+	if err != nil {
+		return err
+	}
+
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return err
+	}
+
+	var iv [aes.BlockSize]byte
+	stream := cipher.NewOFB(block, iv[:])
+
+	writer := &cipher.StreamWriter{S: stream, W: output}
+	if _, err := io.Copy(writer, input); err != nil {
+		return err
+	}
+
+	return nil
 }

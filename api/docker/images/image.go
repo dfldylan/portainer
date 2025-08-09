@@ -7,9 +7,9 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/docker/docker/api/types"
-
 	"github.com/containers/image/v5/docker/reference"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/image"
 	"github.com/opencontainers/go-digest"
 	"github.com/pkg/errors"
 )
@@ -179,11 +179,11 @@ func IsLocalImage(image types.ImageInspect) bool {
 // IsDanglingImage returns whether the given image is "dangling" which means
 // that there are no repository references to the given image and it has no
 // child images
-func IsDanglingImage(image types.ImageInspect) bool {
+func IsDanglingImage(image image.InspectResponse) bool {
 	return len(image.RepoTags) == 1 && image.RepoTags[0] == "<none>:<none>" && len(image.RepoDigests) == 1 && image.RepoDigests[0] == "<none>@<none>"
 }
 
 // IsNoTagImage returns whether the given image is damaged, has no tags
-func IsNoTagImage(image types.ImageInspect) bool {
+func IsNoTagImage(image image.InspectResponse) bool {
 	return len(image.RepoTags) == 0
 }

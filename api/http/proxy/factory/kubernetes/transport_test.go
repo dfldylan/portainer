@@ -277,7 +277,6 @@ func TestBaseTransport_AddTokenForExec_Integration(t *testing.T) {
 	testServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		capturedRequest = r
 		capturedHeaders = r.Header.Clone()
-		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("success"))
 	}))
 	defer testServer.Close()

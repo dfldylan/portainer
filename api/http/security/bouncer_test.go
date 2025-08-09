@@ -19,9 +19,7 @@ import (
 )
 
 // testHandler200 is a simple handler which returns HTTP status 200 OK
-var testHandler200 = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-})
+var testHandler200 = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})
 
 func tokenLookupSucceed(dataStore dataservices.DataStore, jwtService portainer.JWTService) tokenLookup {
 	return func(r *http.Request) (*portainer.TokenData, error) {

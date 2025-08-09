@@ -24,6 +24,8 @@ const (
 	dockerClientVersion         = "1.37"
 )
 
+type NodeNamesCtxKey struct{}
+
 // ClientFactory is used to create Docker clients
 type ClientFactory struct {
 	signatureService     portainer.DigitalSignatureService
@@ -162,7 +164,7 @@ func (t *NodeNameTransport) RoundTrip(req *http.Request) (*http.Response, error)
 		return resp, nil
 	}
 
-	nodeNames, ok := req.Context().Value("nodeNames").(map[string]string)
+	nodeNames, ok := req.Context().Value(NodeNamesCtxKey{}).(map[string]string)
 	if ok {
 		for idx, r := range rs {
 			// as there is no way to differentiate the same image available in multiple nodes only by their ID

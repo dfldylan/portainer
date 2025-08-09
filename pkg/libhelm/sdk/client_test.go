@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/portainer/portainer/pkg/libhelm/options"
+
 	"github.com/stretchr/testify/assert"
 	"helm.sh/helm/v3/pkg/action"
 	"k8s.io/client-go/tools/clientcmd"
@@ -16,7 +17,7 @@ func Test_InitActionConfig(t *testing.T) {
 
 	t.Run("with nil k8sAccess should use default kubeconfig", func(t *testing.T) {
 		actionConfig := new(action.Configuration)
-		err := hspm.(*HelmSDKPackageManager).initActionConfig(actionConfig, "default", nil)
+		err := hspm.initActionConfig(actionConfig, "default", nil)
 
 		// The function should not fail by design, even when not running in a k8s environment
 		is.NoError(err, "should not return error when not in k8s environment")
@@ -30,7 +31,7 @@ func Test_InitActionConfig(t *testing.T) {
 		}
 
 		// The function should not fail by design
-		err := hspm.(*HelmSDKPackageManager).initActionConfig(actionConfig, "default", k8sAccess)
+		err := hspm.initActionConfig(actionConfig, "default", k8sAccess)
 		is.NoError(err, "should not return error when using in-memory config")
 	})
 
@@ -43,7 +44,7 @@ func Test_InitActionConfig(t *testing.T) {
 		}
 
 		// The function should not fail by design
-		err := hspm.(*HelmSDKPackageManager).initActionConfig(actionConfig, "default", k8sAccess)
+		err := hspm.initActionConfig(actionConfig, "default", k8sAccess)
 		is.NoError(err, "should not return error when using in-memory config with CA")
 	})
 }
@@ -117,7 +118,7 @@ resources:
     cpu: 100m
     memory: 128Mi
 `)
-		values, err := hspm.(*HelmSDKPackageManager).parseValues(yamlData)
+		values, err := hspm.parseValues(yamlData)
 		is.NoError(err, "should parse valid YAML without error")
 		is.NotNil(values, "should return non-nil values")
 
@@ -142,13 +143,13 @@ service:
   port: 80
   invalid yaml
 `)
-		_, err := hspm.(*HelmSDKPackageManager).parseValues(yamlData)
+		_, err := hspm.parseValues(yamlData)
 		is.Error(err, "should return error for invalid YAML")
 	})
 
 	t.Run("should handle empty YAML", func(t *testing.T) {
 		yamlData := []byte(``)
-		values, err := hspm.(*HelmSDKPackageManager).parseValues(yamlData)
+		values, err := hspm.parseValues(yamlData)
 		is.NoError(err, "should not return error for empty YAML")
 		is.NotNil(values, "should return non-nil values for empty YAML")
 		is.Len(values, 0, "should return empty map for empty YAML")

@@ -40,7 +40,7 @@ func Test_ClonePublicRepository_Shallow(t *testing.T) {
 	t.Logf("Cloning into %s", dir)
 	err := service.CloneRepository(dir, repositoryURL, referenceName, "", "", gittypes.GitCredentialAuthType_Basic, false)
 	assert.NoError(t, err)
-	assert.Equal(t, 1, getCommitHistoryLength(t, err, dir), "cloned repo has incorrect depth")
+	assert.Equal(t, 1, getCommitHistoryLength(t, dir), "cloned repo has incorrect depth")
 }
 
 func Test_ClonePublicRepository_NoGitDirectory(t *testing.T) {
@@ -75,7 +75,7 @@ func Test_cloneRepository(t *testing.T) {
 	})
 
 	assert.NoError(t, err)
-	assert.Equal(t, 4, getCommitHistoryLength(t, err, dir), "cloned repo has incorrect depth")
+	assert.Equal(t, 4, getCommitHistoryLength(t, dir), "cloned repo has incorrect depth")
 }
 
 func Test_latestCommitID(t *testing.T) {
@@ -123,7 +123,7 @@ func Test_ListFiles(t *testing.T) {
 	assert.Equal(t, []string{"docker-compose.yml"}, fs)
 }
 
-func getCommitHistoryLength(t *testing.T, err error, dir string) int {
+func getCommitHistoryLength(t *testing.T, dir string) int {
 	repo, err := git.PlainOpen(dir)
 	if err != nil {
 		t.Fatalf("can't open a git repo at %s with error %v", dir, err)
@@ -135,11 +135,10 @@ func getCommitHistoryLength(t *testing.T, err error, dir string) int {
 	}
 
 	count := 0
-	err = iter.ForEach(func(_ *object.Commit) error {
+	if err := iter.ForEach(func(_ *object.Commit) error {
 		count++
 		return nil
-	})
-	if err != nil {
+	}); err != nil {
 		t.Fatalf("can't iterate over the commit history with error %v", err)
 	}
 

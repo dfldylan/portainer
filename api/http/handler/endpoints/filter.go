@@ -723,27 +723,22 @@ func getEdgeStackStatusParam(r *http.Request) (*portainer.EdgeStackStatusType, e
 }
 
 func getShortestAsyncInterval(endpoint *portainer.Endpoint, settings *portainer.Settings) int {
-	var edgeIntervalUseDefault int = -1
+	const edgeIntervalUseDefault = -1
+
 	pingInterval := endpoint.Edge.PingInterval
 	if pingInterval == edgeIntervalUseDefault {
 		pingInterval = settings.Edge.PingInterval
 	}
-	shortestAsyncInterval := pingInterval
 
 	snapshotInterval := endpoint.Edge.SnapshotInterval
 	if snapshotInterval == edgeIntervalUseDefault {
 		snapshotInterval = settings.Edge.SnapshotInterval
-	}
-	if shortestAsyncInterval > snapshotInterval {
-		shortestAsyncInterval = snapshotInterval
 	}
 
 	commandInterval := endpoint.Edge.CommandInterval
 	if commandInterval == edgeIntervalUseDefault {
 		commandInterval = settings.Edge.CommandInterval
 	}
-	if shortestAsyncInterval > commandInterval {
-		shortestAsyncInterval = commandInterval
-	}
-	return shortestAsyncInterval
+
+	return min(pingInterval, snapshotInterval, commandInterval)
 }

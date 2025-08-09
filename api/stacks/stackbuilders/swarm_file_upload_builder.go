@@ -28,12 +28,6 @@ func CreateSwarmStackFileUploadBuilder(securityContext *security.RestrictedReque
 	}
 }
 
-func (b *SwarmStackFileUploadBuilder) SetGeneralInfo(payload *StackPayload, endpoint *portainer.Endpoint) FileUploadMethodStackBuildProcess {
-	b.FileUploadMethodStackBuilder.SetGeneralInfo(payload, endpoint)
-
-	return b
-}
-
 func (b *SwarmStackFileUploadBuilder) SetUniqueInfo(payload *StackPayload) FileUploadMethodStackBuildProcess {
 	if b.hasError() {
 		return b
@@ -44,16 +38,6 @@ func (b *SwarmStackFileUploadBuilder) SetUniqueInfo(payload *StackPayload) FileU
 	b.stack.SwarmID = payload.SwarmID
 	b.stack.EntryPoint = filesystem.ComposeFileDefaultName
 	b.stack.Env = payload.Env
-
-	return b
-}
-
-func (b *SwarmStackFileUploadBuilder) SetUploadedFile(payload *StackPayload) FileUploadMethodStackBuildProcess {
-	if b.hasError() {
-		return b
-	}
-
-	b.FileUploadMethodStackBuilder.SetUploadedFile(payload)
 
 	return b
 }
