@@ -170,14 +170,18 @@ function separateHelmApps(applications: Application[]): ApplicationRowData[] {
 
   const groupedHelmApps: Record<string, Application[]> = groupBy(
     helmApps,
-    (app) => app.Metadata?.labels[PodKubernetesInstanceLabel] ?? ''
+    (app) =>
+      `${app.ResourcePool}/${
+        app.Metadata?.labels[PodKubernetesInstanceLabel] ?? ''
+      }`
   );
 
   // build the helm apps row data from the grouped helm apps
   const helmAppsRowData = Object.entries(groupedHelmApps).reduce<
     ApplicationRowData[]
-  >((helmApps, [appName, apps]) => {
-    const helmApp = buildHelmAppRowData(appName, apps);
+  >((helmApps, [groupKey, apps]) => {
+    const instanceLabel = groupKey.split('/')[1];
+    const helmApp = buildHelmAppRowData(instanceLabel, apps);
     return [...helmApps, helmApp];
   }, []);
 
