@@ -307,8 +307,19 @@ func initKeyPair(fileService portainer.FileService, signatureService portainer.D
 	return generateAndStoreKeyPair(fileService, signatureService)
 }
 
+// dbSecretPath build the path to the file that contains the db encryption
+// secret. Normally in Docker this is built from the static path inside
+// /run/portainer for example: /run/portainer/<keyFilenameFlag> but for ease of
+// use outside Docker it also accepts an absolute path
+func dbSecretPath(keyFilenameFlag string) string {
+	if path.IsAbs(keyFilenameFlag) {
+		return keyFilenameFlag
+	}
+	return path.Join("/run/portainer", keyFilenameFlag)
+}
+
 func loadEncryptionSecretKey(keyfilename string) []byte {
-	content, err := os.ReadFile(path.Join("/run/secrets", keyfilename))
+	content, err := os.ReadFile(keyfilename)
 	if err != nil {
 		if os.IsNotExist(err) {
 			log.Info().Str("filename", keyfilename).Msg("encryption key file not present")
@@ -320,6 +331,7 @@ func loadEncryptionSecretKey(keyfilename string) []byte {
 	}
 
 	// return a 32 byte hash of the secret (required for AES)
+	// fips compliant version of this is not implemented in -ce
 	hash := sha256.Sum256(content)
 
 	return hash[:]
@@ -348,7 +360,7 @@ func buildServer(flags *portainer.CLIFlags) portainer.Server {
 	fips.InitFIPS(false)
 
 	fileService := initFileService(*flags.Data)
-	encryptionKey := loadEncryptionSecretKey(*flags.SecretKeyName)
+	encryptionKey := loadEncryptionSecretKey(dbSecretPath(*flags.SecretKeyName))
 	if encryptionKey == nil {
 		log.Info().Msg("proceeding without encryption key")
 	}
