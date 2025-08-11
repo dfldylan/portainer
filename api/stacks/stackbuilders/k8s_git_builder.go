@@ -40,6 +40,12 @@ func CreateKubernetesStackGitBuilder(dataStore dataservices.DataStore,
 	}
 }
 
+func (b *KubernetesStackGitBuilder) SetGeneralInfo(payload *StackPayload, endpoint *portainer.Endpoint) GitMethodStackBuildProcess {
+	b.GitMethodStackBuilder.SetGeneralInfo(payload, endpoint)
+
+	return b
+}
+
 func (b *KubernetesStackGitBuilder) SetUniqueInfo(payload *StackPayload) GitMethodStackBuildProcess {
 	if b.hasError() {
 		return b
@@ -50,6 +56,12 @@ func (b *KubernetesStackGitBuilder) SetUniqueInfo(payload *StackPayload) GitMeth
 	b.stack.Name = payload.StackName
 	b.stack.EntryPoint = payload.ManifestFile
 	b.stack.CreatedBy = b.user.Username
+
+	return b
+}
+
+func (b *KubernetesStackGitBuilder) SetGitRepository(payload *StackPayload) GitMethodStackBuildProcess {
+	b.GitMethodStackBuilder.SetGitRepository(payload)
 
 	return b
 }
@@ -78,4 +90,14 @@ func (b *KubernetesStackGitBuilder) Deploy(payload *StackPayload, endpoint *port
 	b.deploymentConfiger = k8sDeploymentConfig
 
 	return b.GitMethodStackBuilder.Deploy(payload, endpoint)
+}
+
+func (b *KubernetesStackGitBuilder) SetAutoUpdate(payload *StackPayload) GitMethodStackBuildProcess {
+	b.GitMethodStackBuilder.SetAutoUpdate(payload)
+
+	return b
+}
+
+func (b *KubernetesStackGitBuilder) GetResponse() string {
+	return b.deploymentConfiger.GetResponse()
 }
