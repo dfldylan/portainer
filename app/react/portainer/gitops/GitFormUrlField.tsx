@@ -12,7 +12,6 @@ import { isPortainerError } from '@/portainer/error';
 
 import { FormControl } from '@@/form-components/FormControl';
 import { Input } from '@@/form-components/Input';
-import { TextTip } from '@@/Tip/TextTip';
 import { Button } from '@@/buttons';
 import { useCachedValidation } from '@@/form-components/useCachedTest';
 
@@ -68,9 +67,6 @@ export function GitFormUrlField({
 
   return (
     <div className="form-group">
-      <span className="col-sm-12">
-        <TextTip color="blue">You can use the URL of a git repository.</TextTip>
-      </span>
       <div className="col-sm-12">
         <FormControl
           label="Repository URL"
