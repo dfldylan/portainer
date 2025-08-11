@@ -2,16 +2,11 @@ import { useMemo } from 'react';
 import {
   StreamLanguage,
   LanguageSupport,
-  syntaxHighlighting,
   indentService,
 } from '@codemirror/language';
 import { dockerFile } from '@codemirror/legacy-modes/mode/dockerfile';
 import { shell } from '@codemirror/legacy-modes/mode/shell';
-import {
-  oneDarkHighlightStyle,
-  keymap,
-  Extension,
-} from '@uiw/react-codemirror';
+import { keymap, Extension } from '@uiw/react-codemirror';
 import type { JSONSchema7 } from 'json-schema';
 import { lintKeymap, lintGutter } from '@codemirror/lint';
 import { defaultKeymap } from '@codemirror/commands';
@@ -45,7 +40,6 @@ function yamlLanguage(schema?: JSONSchema7) {
     linter,
     stateExtensions,
     yamlIndentExtension,
-    syntaxHighlighting(oneDarkHighlightStyle),
     // explicitly setting lineNumbers() as an extension ensures that the gutter order is the same between the diff viewer and the code editor
     lineNumbers(),
     !!schema && lintGutter(),

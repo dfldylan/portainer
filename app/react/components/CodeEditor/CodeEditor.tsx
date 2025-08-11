@@ -46,6 +46,10 @@ export const theme = createTheme({
     selectionMatch: 'var(--bg-codemirror-selected-color)',
   },
   styles: [
+    {
+      tag: [highlightTags.propertyName, highlightTags.attributeName],
+      color: 'var(--text-cm-default-color)',
+    },
     { tag: highlightTags.atom, color: 'var(--text-cm-default-color)' },
     { tag: highlightTags.meta, color: 'var(--text-cm-meta-color)' },
     {
