@@ -37,6 +37,8 @@ linters:
               desc: use github.com/portainer/portainer/pkg/libcrypto
             - pkg: github.com/portainer/libhttp
               desc: use github.com/portainer/portainer/pkg/libhttp
+            - pkg: golang.org/x/crypto/pbkdf2
+              desc: use standard crypto/pbkdf2 instead - important for FIPS mode
     forbidigo:
       forbid:
         - pattern: ^tls\.Config$
