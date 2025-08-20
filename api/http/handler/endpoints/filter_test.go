@@ -189,9 +189,7 @@ func BenchmarkFilterEndpointsBySearchCriteria_PartialMatch(b *testing.B) {
 
 	searchString := "edge-group"
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		e := filterEndpointsBySearchCriteria(endpoints, endpointGroups, edgeGroups, tagsMap, searchString)
 		if len(e) != n {
 			b.FailNow()
@@ -237,13 +235,9 @@ func BenchmarkFilterEndpointsBySearchCriteria_FullMatch(b *testing.B) {
 
 	searchString := "edge-group"
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		e := filterEndpointsBySearchCriteria(endpoints, endpointGroups, edgeGroups, tagsMap, searchString)
-		if len(e) != n {
-			b.FailNow()
-		}
+		require.Len(b, e, n)
 	}
 }
 
