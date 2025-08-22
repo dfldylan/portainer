@@ -11,6 +11,7 @@ import (
 	"github.com/portainer/portainer/api/internal/testhelpers"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestHandler_getDockerStacks(t *testing.T) {
@@ -69,7 +70,7 @@ func TestHandler_getDockerStacks(t *testing.T) {
 	stacksList, err := GetDockerStacks(datastore, &security.RestrictedRequestContext{
 		IsAdmin: true,
 	}, environment.ID, containers, services)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Len(t, stacksList, 3)
 
 	expectedStacks := []StackViewModel{

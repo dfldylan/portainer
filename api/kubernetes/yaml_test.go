@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_AddAppLabels(t *testing.T) {
@@ -420,7 +421,7 @@ spec:
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			result, err := AddAppLabels([]byte(tt.input), labels.ToMap())
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			assert.Equal(t, tt.wantOutput, string(result))
 		})
 	}
@@ -584,7 +585,7 @@ spec:
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			result, err := AddAppLabels([]byte(tt.input), labels)
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			assert.Equal(t, tt.wantOutput, string(result))
 		})
 	}
@@ -633,7 +634,7 @@ metadata:
     io.portainer.kubernetes.application.stackid: "123"
 `
 	result, err := AddAppLabels([]byte(input), labels.ToMap())
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, expected, string(result))
 }
 
@@ -664,7 +665,7 @@ kind: Namespace
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			result, err := GetNamespace([]byte(tt.input))
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			assert.Equal(t, tt.want, result)
 		})
 	}
@@ -704,7 +705,8 @@ kind: Namespace
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			results, err := ExtractDocuments([]byte(tt.input), nil)
-			assert.NoError(t, err)
+			require.NoError(t, err)
+
 			for i := range results {
 				assert.Equal(t, tt.want[i], string(results[i]))
 			}

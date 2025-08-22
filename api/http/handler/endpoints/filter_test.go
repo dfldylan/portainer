@@ -261,9 +261,9 @@ func runTest(t *testing.T, test filterTest, handler *Handler, endpoints []portai
 		&security.RestrictedRequestContext{IsAdmin: true},
 	)
 
-	is.NoError(err)
+	require.NoError(t, err)
 
-	is.Equal(len(test.expected), len(filteredEndpoints))
+	is.Len(filteredEndpoints, len(test.expected))
 
 	respIds := []portainer.EndpointID{}
 
@@ -275,16 +275,15 @@ func runTest(t *testing.T, test filterTest, handler *Handler, endpoints []portai
 }
 
 func setupFilterTest(t *testing.T, endpoints []portainer.Endpoint) *Handler {
-	is := assert.New(t)
 	_, store := datastore.MustNewTestStore(t, true, true)
 
 	for _, endpoint := range endpoints {
 		err := store.Endpoint().Create(&endpoint)
-		is.NoError(err, "error creating environment")
+		require.NoError(t, err, "error creating environment")
 	}
 
 	err := store.User().Create(&portainer.User{Username: "admin", Role: portainer.AdministratorRole})
-	is.NoError(err, "error creating a user")
+	require.NoError(t, err, "error creating a user")
 
 	bouncer := testhelpers.NewTestRequestBouncer()
 	handler := NewHandler(bouncer)
@@ -408,11 +407,11 @@ func TestFilterEndpointsByExcludeEdgeGroupIDs(t *testing.T) {
 	require.NoError(t, err)
 
 	require.Len(t, es, 3)
-	require.Equal(t, es, []portainer.Endpoint{
+	require.Equal(t, []portainer.Endpoint{
 		{ID: 2, Name: "Endpoint 2"},
 		{ID: 3, Name: "Endpoint 3"},
 		{ID: 4, Name: "Endpoint 4"},
-	})
+	}, es)
 
 	require.Len(t, egs, 1)
 	require.Equal(t, egs[0].ID, portainer.EdgeGroupID(2))

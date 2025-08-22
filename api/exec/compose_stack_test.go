@@ -8,7 +8,9 @@ import (
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
+
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_createEnvFile(t *testing.T) {
@@ -61,7 +63,7 @@ func Test_createEnvFile(t *testing.T) {
 
 				assert.Equal(t, tt.expected, string(content))
 			} else {
-				assert.Equal(t, "", result)
+				assert.Empty(t, result)
 			}
 		})
 	}
@@ -79,7 +81,7 @@ func Test_createEnvFile_mergesDefultAndInplaceEnvVars(t *testing.T) {
 	}
 	result, err := createEnvFile(stack)
 	assert.Equal(t, filepath.Join(stack.ProjectPath, "stack.env"), result)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.FileExists(t, path.Join(dir, "stack.env"))
 	f, _ := os.Open(path.Join(dir, "stack.env"))
 	content, _ := io.ReadAll(f)

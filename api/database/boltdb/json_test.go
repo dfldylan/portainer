@@ -94,7 +94,7 @@ func Test_MarshalObjectUnencrypted(t *testing.T) {
 	for _, test := range tests {
 		t.Run(fmt.Sprintf("%s -> %s", test.object, test.expected), func(t *testing.T) {
 			data, err := conn.MarshalObject(test.object)
-			is.NoError(err)
+			require.NoError(t, err)
 			is.Equal(test.expected, string(data))
 		})
 	}
@@ -135,7 +135,7 @@ func Test_UnMarshalObjectUnencrypted(t *testing.T) {
 		t.Run(fmt.Sprintf("%s -> %s", test.object, test.expected), func(t *testing.T) {
 			var object string
 			err := conn.UnmarshalObject(test.object, &object)
-			is.NoError(err)
+			require.NoError(t, err)
 			is.Equal(test.expected, object)
 		})
 	}
@@ -172,12 +172,12 @@ func Test_ObjectMarshallingEncrypted(t *testing.T) {
 		t.Run(fmt.Sprintf("%s -> %s", test.object, test.expected), func(t *testing.T) {
 
 			data, err := conn.MarshalObject(test.object)
-			is.NoError(err)
+			require.NoError(t, err)
 
 			var object []byte
 			err = conn.UnmarshalObject(data, &object)
 
-			is.NoError(err)
+			require.NoError(t, err)
 			is.Equal(test.object, object)
 		})
 	}

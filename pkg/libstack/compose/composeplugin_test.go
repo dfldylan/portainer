@@ -564,7 +564,7 @@ func Test_DeployWithIgnoreOrphans(t *testing.T) {
 	require.Equal(t, libstack.StatusCompleted, waitResult.Status)
 
 	logString := logOutput.String()
-	require.False(t, strings.Contains(logString, "Found orphan containers ([compose_ignore_orphans_test-service-1-1])"))
+	require.NotContains(t, logString, "Found orphan containers ([compose_ignore_orphans_test-service-1-1])")
 }
 
 func Test_MaxConcurrency(t *testing.T) {
@@ -597,7 +597,7 @@ func Test_MaxConcurrency(t *testing.T) {
 
 	w.withComposeService(ctx, filepaths, options, func(service api.Service, _ *types.Project) error {
 		if mockS, ok := service.(*mockComposeService); ok {
-			require.Equal(t, mockS.maxConcurrency, expectedMaxConcurrency)
+			require.Equal(t, expectedMaxConcurrency, mockS.maxConcurrency)
 		} else {
 			t.Fatalf("Expected mockComposeService but got %T", service)
 		}

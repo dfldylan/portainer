@@ -136,5 +136,5 @@ func TestEndpointRelations(t *testing.T) {
 	require.NoError(t, service.Create(&portainer.EndpointRelation{EndpointID: 1}))
 	rels, err := service.EndpointRelations()
 	require.NoError(t, err)
-	require.Equal(t, 1, len(rels))
+	require.Len(t, rels, 1)
 }

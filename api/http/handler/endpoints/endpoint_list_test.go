@@ -15,6 +15,7 @@ import (
 
 	"github.com/segmentio/encoding/json"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 type endpointListTest struct {
@@ -86,9 +87,9 @@ func Test_EndpointList_AgentVersion(t *testing.T) {
 			req := buildEndpointListRequest(query)
 
 			resp, err := doEndpointListRequest(req, handler, is)
-			is.NoError(err)
+			require.NoError(t, err)
 
-			is.Equal(len(test.expected), len(resp))
+			is.Len(resp, len(test.expected))
 
 			respIds := []portainer.EndpointID{}
 
@@ -164,9 +165,9 @@ func Test_endpointList_edgeFilter(t *testing.T) {
 
 			req := buildEndpointListRequest(query)
 			resp, err := doEndpointListRequest(req, handler, is)
-			is.NoError(err)
+			require.NoError(t, err)
 
-			is.Equal(len(test.expected), len(resp))
+			is.Len(resp, len(test.expected))
 
 			respIds := []portainer.EndpointID{}
 
@@ -180,16 +181,15 @@ func Test_endpointList_edgeFilter(t *testing.T) {
 }
 
 func setupEndpointListHandler(t *testing.T, endpoints []portainer.Endpoint) *Handler {
-	is := assert.New(t)
 	_, store := datastore.MustNewTestStore(t, true, true)
 
 	for _, endpoint := range endpoints {
 		err := store.Endpoint().Create(&endpoint)
-		is.NoError(err, "error creating environment")
+		require.NoError(t, err, "error creating environment")
 	}
 
 	err := store.User().Create(&portainer.User{Username: "admin", Role: portainer.AdministratorRole})
-	is.NoError(err, "error creating a user")
+	require.NoError(t, err, "error creating a user")
 
 	bouncer := testhelpers.NewTestRequestBouncer()
 

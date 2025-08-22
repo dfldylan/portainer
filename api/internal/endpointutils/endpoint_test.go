@@ -97,7 +97,7 @@ func Test_FilterByExcludeIDs(t *testing.T) {
 				portainer.EndpointID(2),
 			},
 			asserts: func(t *testing.T, output []portainer.Endpoint) {
-				assert.Equal(t, 0, len(output))
+				assert.Empty(t, output)
 			},
 		},
 		{
@@ -108,7 +108,7 @@ func Test_FilterByExcludeIDs(t *testing.T) {
 			},
 			inputExcludeIDs: []portainer.EndpointID{},
 			asserts: func(t *testing.T, output []portainer.Endpoint) {
-				assert.Equal(t, 2, len(output))
+				assert.Len(t, output, 2)
 			},
 		},
 	}

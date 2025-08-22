@@ -11,6 +11,7 @@ import (
 
 	"github.com/gofrs/uuid"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestHandler_webhookInvoke(t *testing.T) {
@@ -51,7 +52,7 @@ func TestHandler_webhookInvoke(t *testing.T) {
 
 func newGuidString(t *testing.T) string {
 	uuid, err := uuid.NewV4()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	return uuid.String()
 }

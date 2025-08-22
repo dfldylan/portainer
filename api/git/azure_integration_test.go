@@ -12,6 +12,7 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const privateAzureRepoURL = "https://portainer.visualstudio.com/gitops-test/_git/gitops-test"
@@ -67,7 +68,7 @@ func TestService_ClonePublicRepository_Azure(t *testing.T) {
 				gittypes.GitCredentialAuthType_Basic,
 				false,
 			)
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			assert.FileExists(t, filepath.Join(dst, "README.md"))
 		})
 	}
@@ -90,7 +91,7 @@ func TestService_ClonePrivateRepository_Azure(t *testing.T) {
 		gittypes.GitCredentialAuthType_Basic,
 		false,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.FileExists(t, filepath.Join(dst, "README.md"))
 }
 
@@ -108,7 +109,7 @@ func TestService_LatestCommitID_Azure(t *testing.T) {
 		gittypes.GitCredentialAuthType_Basic,
 		false,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.NotEmpty(t, id, "cannot guarantee commit id, but it should be not empty")
 }
 
@@ -127,7 +128,7 @@ func TestService_ListRefs_Azure(t *testing.T) {
 		false,
 		false,
 	)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.GreaterOrEqual(t, len(refs), 1)
 }
 
@@ -289,14 +290,14 @@ func TestService_ListFiles_Azure(t *testing.T) {
 				false,
 			)
 			if tt.expect.shouldFail {
-				assert.Error(t, err)
+				require.Error(t, err)
 				if tt.expect.err != nil {
 					assert.Equal(t, tt.expect.err, err)
 				}
 			} else {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				if tt.expect.matchedCount > 0 {
-					assert.Greater(t, len(paths), 0)
+					assert.NotEmpty(t, paths)
 				}
 			}
 		})

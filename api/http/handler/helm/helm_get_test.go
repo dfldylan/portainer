@@ -19,6 +19,7 @@ import (
 
 	"github.com/segmentio/encoding/json"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_helmGet(t *testing.T) {
@@ -27,13 +28,13 @@ func Test_helmGet(t *testing.T) {
 	_, store := datastore.MustNewTestStore(t, true, true)
 
 	err := store.Endpoint().Create(&portainer.Endpoint{ID: 1})
-	is.NoError(err, "Error creating environment")
+	require.NoError(t, err, "Error creating environment")
 
 	err = store.User().Create(&portainer.User{Username: "admin", Role: portainer.AdministratorRole})
-	is.NoError(err, "Error creating a user")
+	require.NoError(t, err, "Error creating a user")
 
 	jwtService, err := jwt.NewService("1h", store)
-	is.NoError(err, "Error initiating jwt service")
+	require.NoError(t, err, "Error initiating jwt service")
 
 	kubernetesDeployer := exectest.NewKubernetesDeployer()
 	helmPackageManager := test.NewMockHelmPackageManager()
@@ -57,7 +58,7 @@ func Test_helmGet(t *testing.T) {
 
 		data := release.Release{}
 		body, err := io.ReadAll(rr.Body)
-		is.NoError(err, "ReadAll should not return error")
+		require.NoError(t, err, "ReadAll should not return error")
 		json.Unmarshal(body, &data)
 		is.Equal(http.StatusOK, rr.Code, "Status should be 200")
 		is.Equal("nginx-1", data.Name)

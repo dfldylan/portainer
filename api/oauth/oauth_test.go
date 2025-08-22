@@ -7,6 +7,7 @@ import (
 	"github.com/portainer/portainer/api/oauth/oauthtest"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"golang.org/x/oauth2"
 )
 
@@ -80,8 +81,8 @@ func Test_getIdToken(t *testing.T) {
 			}
 
 			result, err := GetIdToken(token)
-			assert.Equal(t, err, tc.expectedError)
-			assert.Equal(t, result, tc.expectedResult)
+			require.ErrorIs(t, err, tc.expectedError)
+			assert.Equal(t, tc.expectedResult, result)
 		})
 	}
 }

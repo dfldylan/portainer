@@ -18,6 +18,7 @@ linters:
     - errorlint
     - govet
     - zerologlint
+    - testifylint
   settings:
     staticcheck:
       checks: ["all", "-ST1003", "-ST1005", "-ST1016", "-SA1019", "-QF1003"]

@@ -105,7 +105,7 @@ func TestEmptyEdgeGroupInspectHandler(t *testing.T) {
 
 	// Make sure the frontend does not get a null value but a [] instead
 	require.NotNil(t, responseGroup.Endpoints)
-	require.Len(t, responseGroup.Endpoints, 0)
+	require.Empty(t, responseGroup.Endpoints)
 }
 
 func TestDynamicEdgeGroupInspectHandler(t *testing.T) {

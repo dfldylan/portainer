@@ -31,7 +31,7 @@ func TestUpgrade(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(upgradeOpts)
-		is.NoError(err, "should successfully install release via upgrade")
+		require.NoError(t, err, "should successfully install release via upgrade")
 		is.NotNil(release, "should return non-nil release")
 		defer hspm.Uninstall(options.UninstallOptions{
 			Name: upgradeOpts.Name,
@@ -62,7 +62,7 @@ func TestUpgrade(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
-		is.NoError(err, "should successfully install release")
+		require.NoError(t, err, "should successfully install release")
 		is.NotNil(release, "should return non-nil release")
 		defer hspm.Uninstall(options.UninstallOptions{
 			Name: installOpts.Name,
@@ -71,7 +71,7 @@ func TestUpgrade(t *testing.T) {
 		// Upgrade the release with the same options
 		upgradedRelease, err := hspm.Upgrade(installOpts)
 
-		is.NoError(err, "should successfully upgrade release")
+		require.NoError(t, err, "should successfully upgrade release")
 		is.NotNil(upgradedRelease, "should return non-nil release")
 		is.Equal("test-upgrade-nginx", upgradedRelease.Name, "release name should match")
 		is.Equal(2, upgradedRelease.Version, "release version should be incremented to 2")
@@ -93,7 +93,7 @@ func TestUpgrade(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts) // Cleanup
-		is.NoError(err, "should successfully install release")
+		require.NoError(t, err, "should successfully install release")
 		is.NotNil(release, "should return non-nil release")
 		defer hspm.Uninstall(options.UninstallOptions{
 			Name: installOpts.Name,
@@ -101,7 +101,7 @@ func TestUpgrade(t *testing.T) {
 
 		// Create values file
 		values, err := test.CreateValuesFile("service:\n  port:  8083")
-		is.NoError(err, "should create a values file")
+		require.NoError(t, err, "should create a values file")
 		defer os.Remove(values)
 
 		// Now upgrade with values
@@ -115,7 +115,7 @@ func TestUpgrade(t *testing.T) {
 
 		upgradedRelease, err := hspm.Upgrade(upgradeOpts)
 
-		is.NoError(err, "should successfully upgrade release with values")
+		require.NoError(t, err, "should successfully upgrade release with values")
 		is.NotNil(upgradedRelease, "should return non-nil release")
 		is.Equal("test-values-nginx", upgradedRelease.Name, "release name should match")
 		is.Equal(2, upgradedRelease.Version, "release version should be incremented to 2")
@@ -137,7 +137,7 @@ func TestUpgrade(t *testing.T) {
 		})
 
 		release, err := hspm.Upgrade(installOpts)
-		is.NoError(err, "should successfully install release")
+		require.NoError(t, err, "should successfully install release")
 		is.NotNil(release, "should return non-nil release")
 		defer hspm.Uninstall(options.UninstallOptions{
 			Name: installOpts.Name,
@@ -145,7 +145,7 @@ func TestUpgrade(t *testing.T) {
 
 		// Create invalid values file
 		values, err := test.CreateValuesFile("this is not valid yaml")
-		is.NoError(err, "should create a values file")
+		require.NoError(t, err, "should create a values file")
 		defer os.Remove(values)
 
 		// Now upgrade with invalid values
@@ -159,7 +159,7 @@ func TestUpgrade(t *testing.T) {
 
 		_, err = hspm.Upgrade(upgradeOpts)
 
-		is.Error(err, "should return error with invalid values")
+		require.Error(t, err, "should return error with invalid values")
 	})
 
 	t.Run("should return error when name is not provided", func(t *testing.T) {
@@ -171,7 +171,7 @@ func TestUpgrade(t *testing.T) {
 
 		_, err := hspm.Upgrade(upgradeOpts)
 
-		is.Error(err, "should return an error when name is not provided")
+		require.Error(t, err, "should return an error when name is not provided")
 		is.Equal("name is required for helm release upgrade", err.Error(), "should return correct error message")
 	})
 }

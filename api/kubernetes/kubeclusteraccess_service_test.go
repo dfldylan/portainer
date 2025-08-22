@@ -3,10 +3,10 @@ package kubernetes
 import (
 	"fmt"
 	"os"
-	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // TLS certificate can be generated using:
@@ -66,9 +66,9 @@ func Test_getCertificateAuthorityData(t *testing.T) {
 		filePath := createTempFile("valid-cert.crt", certData, t)
 
 		certificateAuthorityData, err := getCertificateAuthorityData(filePath)
-		is.NoError(err, "getCertificateAuthorityData succeed with valid cert; err=%w", errTLSCertIncorrectType)
+		require.NoError(t, err, "getCertificateAuthorityData succeed with valid cert; err=%w", errTLSCertIncorrectType)
 
-		is.Equal(certificateAuthorityData, certDataString, "returned certificateAuthorityData should be %s", certDataString)
+		is.Equal(certDataString, certificateAuthorityData, "returned certificateAuthorityData should be %s", certDataString)
 	})
 }
 
@@ -94,13 +94,13 @@ func TestKubeClusterAccessService_GetKubeConfigInternal(t *testing.T) {
 	t.Run("GetClusterDetails contains host address", func(t *testing.T) {
 		kcs := NewKubeClusterAccessService("/", "", "")
 		clusterAccessDetails := kcs.GetClusterDetails("mysite.com", 1, true)
-		is.True(strings.Contains(clusterAccessDetails.ClusterServerURL, "https://mysite.com"), "should contain host address")
+		is.Contains(clusterAccessDetails.ClusterServerURL, "https://mysite.com", "should contain host address")
 	})
 
 	t.Run("GetClusterDetails contains environment proxy url", func(t *testing.T) {
 		kcs := NewKubeClusterAccessService("/", "", "")
 		clusterAccessDetails := kcs.GetClusterDetails("mysite.com", 100, true)
-		is.True(strings.Contains(clusterAccessDetails.ClusterServerURL, "api/endpoints/100/kubernetes"), "should contain environment proxy url")
+		is.Contains(clusterAccessDetails.ClusterServerURL, "api/endpoints/100/kubernetes", "should contain environment proxy url")
 	})
 
 	t.Run("GetClusterDetails returns insecure cluster access config", func(t *testing.T) {

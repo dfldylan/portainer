@@ -13,6 +13,7 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func setup(t *testing.T) string {
@@ -39,7 +40,7 @@ func Test_ClonePublicRepository_Shallow(t *testing.T) {
 	dir := t.TempDir()
 	t.Logf("Cloning into %s", dir)
 	err := service.CloneRepository(dir, repositoryURL, referenceName, "", "", gittypes.GitCredentialAuthType_Basic, false)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, 1, getCommitHistoryLength(t, dir), "cloned repo has incorrect depth")
 }
 
@@ -51,7 +52,7 @@ func Test_ClonePublicRepository_NoGitDirectory(t *testing.T) {
 	dir := t.TempDir()
 	t.Logf("Cloning into %s", dir)
 	err := service.CloneRepository(dir, repositoryURL, referenceName, "", "", gittypes.GitCredentialAuthType_Basic, false)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.NoDirExists(t, filepath.Join(dir, ".git"))
 }
 
@@ -74,7 +75,7 @@ func Test_cloneRepository(t *testing.T) {
 		depth: 10,
 	})
 
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, 4, getCommitHistoryLength(t, dir), "cloned repo has incorrect depth")
 }
 
@@ -86,7 +87,7 @@ func Test_latestCommitID(t *testing.T) {
 
 	id, err := service.LatestCommitID(repositoryURL, referenceName, "", "", gittypes.GitCredentialAuthType_Basic, false)
 
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, "68dcaa7bd452494043c64252ab90db0f98ecf8d2", id)
 }
 
@@ -97,7 +98,7 @@ func Test_ListRefs(t *testing.T) {
 
 	fs, err := service.ListRefs(repositoryURL, "", "", gittypes.GitCredentialAuthType_Basic, false, false)
 
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, []string{"refs/heads/main"}, fs)
 }
 
@@ -119,7 +120,7 @@ func Test_ListFiles(t *testing.T) {
 		false,
 	)
 
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, []string{"docker-compose.yml"}, fs)
 }
 
@@ -214,12 +215,12 @@ func Test_listRefsPrivateRepository(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			refs, err := client.listRefs(context.TODO(), tt.args)
 			if tt.expect.err == nil {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				if tt.expect.refsCount > 0 {
-					assert.Greater(t, len(refs), 0)
+					assert.NotEmpty(t, refs)
 				}
 			} else {
-				assert.Error(t, err)
+				require.Error(t, err)
 				assert.Equal(t, tt.expect.err, err)
 			}
 		})
@@ -325,14 +326,14 @@ func Test_listFilesPrivateRepository(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			paths, err := client.listFiles(context.TODO(), tt.args)
 			if tt.expect.shouldFail {
-				assert.Error(t, err)
+				require.Error(t, err)
 				if tt.expect.err != nil {
 					assert.Equal(t, tt.expect.err, err)
 				}
 			} else {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				if tt.expect.matchedCount > 0 {
-					assert.Greater(t, len(paths), 0)
+					assert.NotEmpty(t, paths)
 				}
 			}
 		})

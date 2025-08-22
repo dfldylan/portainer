@@ -7,6 +7,7 @@ import (
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/pkg/fips"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"oras.land/oras-go/v2/registry/remote/retry"
 )
 
@@ -88,12 +89,12 @@ func TestCreateClient(t *testing.T) {
 			client, usePlainHTTP, err := CreateClient(tt.registry)
 
 			if tt.expectError {
-				assert.Error(t, err)
+				require.Error(t, err)
 				assert.Nil(t, client)
 				return
 			}
 
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			assert.NotNil(t, client)
 			assert.Equal(t, tt.expectedUsePlainHTTP, usePlainHTTP)
 
@@ -137,7 +138,7 @@ func TestCreateClient_CloudRegistries(t *testing.T) {
 
 			client, usePlainHTTP, err := CreateClient(registry)
 
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			assert.NotNil(t, client)
 			assert.False(t, usePlainHTTP, "Cloud registries should use HTTPS")
 			assert.Equal(t, retry.DefaultClient, client, "Cloud registries should use default retry client")
@@ -160,7 +161,7 @@ func TestCreateClient_CustomTLSConfiguration(t *testing.T) {
 
 		client, usePlainHTTP, err := CreateClient(registry)
 
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		assert.NotNil(t, client)
 		assert.False(t, usePlainHTTP, "TLS enabled registries should use HTTPS")
 		assert.NotEqual(t, retry.DefaultClient, client, "Custom TLS should create new client")
@@ -180,7 +181,7 @@ func TestCreateClient_CustomTLSConfiguration(t *testing.T) {
 
 		client, usePlainHTTP, err := CreateClient(registry)
 
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		assert.NotNil(t, client)
 		assert.True(t, usePlainHTTP, "TLS disabled should use plain HTTP")
 		assert.Equal(t, retry.DefaultClient, client, "No TLS should use default client")
@@ -195,7 +196,7 @@ func TestCreateClient_CustomTLSConfiguration(t *testing.T) {
 
 		client, usePlainHTTP, err := CreateClient(registry)
 
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		assert.NotNil(t, client)
 		assert.True(t, usePlainHTTP, "No management config should use plain HTTP")
 		assert.Equal(t, retry.DefaultClient, client, "No management config should use default client")

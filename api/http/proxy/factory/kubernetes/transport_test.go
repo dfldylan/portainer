@@ -11,6 +11,7 @@ import (
 	"github.com/portainer/portainer/api/datastore"
 	"github.com/portainer/portainer/api/http/security"
 	"github.com/portainer/portainer/api/jwt"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -23,8 +24,10 @@ type MockJWTService struct {
 func (m *MockJWTService) GenerateToken(data *portainer.TokenData) (string, time.Time, error) {
 	if m.generateTokenFunc != nil {
 		token, err := m.generateTokenFunc(data)
+
 		return token, time.Now().Add(24 * time.Hour), err
 	}
+
 	return "mock-token", time.Now().Add(24 * time.Hour), nil
 }
 
@@ -32,6 +35,7 @@ func (m *MockJWTService) GenerateTokenForKubeconfig(data *portainer.TokenData) (
 	if m.generateTokenFunc != nil {
 		return m.generateTokenFunc(data)
 	}
+
 	return "mock-kubeconfig-token", nil
 }
 
@@ -104,7 +108,7 @@ func TestBaseTransport_AddTokenForExec(t *testing.T) {
 
 				token := authHeader[7:] // Remove "Bearer " prefix
 				parsedTokenData, _, _, err := jwtService.ParseAndVerifyToken(token)
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.Equal(t, tokenData.ID, parsedTokenData.ID)
 				assert.Equal(t, tokenData.Username, parsedTokenData.Username)
 				assert.Equal(t, tokenData.Role, parsedTokenData.Role)
@@ -132,7 +136,7 @@ func TestBaseTransport_AddTokenForExec(t *testing.T) {
 
 				token := authHeader[7:] // Remove "Bearer " prefix
 				parsedTokenData, _, _, err := jwtService.ParseAndVerifyToken(token)
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.Equal(t, tokenData.ID, parsedTokenData.ID)
 				assert.Equal(t, tokenData.Username, parsedTokenData.Username)
 				assert.Equal(t, tokenData.Role, parsedTokenData.Role)
@@ -193,7 +197,6 @@ func TestBaseTransport_AddTokenForExec(t *testing.T) {
 
 				token := authHeader[7:] // Remove "Bearer " prefix
 				assert.NotEmpty(t, token)
-				assert.Greater(t, len(token), 0, "Token should not be empty")
 			},
 		},
 		{
@@ -211,6 +214,7 @@ func TestBaseTransport_AddTokenForExec(t *testing.T) {
 				}))
 				// Set an existing Authorization header
 				req.Header.Set("Authorization", "Bearer old-token")
+
 				return req
 			},
 			expectError: false,
@@ -221,7 +225,7 @@ func TestBaseTransport_AddTokenForExec(t *testing.T) {
 
 				token := authHeader[7:] // Remove "Bearer " prefix
 				parsedTokenData, _, _, err := jwtService.ParseAndVerifyToken(token)
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.Equal(t, tokenData.ID, parsedTokenData.ID)
 			},
 		},
@@ -255,12 +259,12 @@ func TestBaseTransport_AddTokenForExec(t *testing.T) {
 
 			// Check results
 			if tt.expectError {
-				assert.Error(t, err)
+				require.Error(t, err)
 				if tt.errorMsg != "" {
 					assert.Contains(t, err.Error(), tt.errorMsg)
 				}
 			} else {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				if tt.verifyResponse != nil {
 					tt.verifyResponse(t, request, tt.tokenData)
 				}

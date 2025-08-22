@@ -4,7 +4,9 @@ import (
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
+
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"oras.land/oras-go/v2/registry/remote/auth"
 	"oras.land/oras-go/v2/registry/remote/retry"
 )
@@ -127,7 +129,7 @@ func TestCreateClient_AuthenticationScenarios(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			client, err := CreateClient(tt.registry)
 
-			assert.NoError(t, err, "CreateClient should not return an error")
+			require.NoError(t, err, "CreateClient should not return an error")
 			assert.NotNil(t, client, "Client should not be nil")
 
 			// Check if the client has authentication configured
@@ -178,7 +180,7 @@ func TestCreateClient_RegistryTypes(t *testing.T) {
 
 			client, err := CreateClient(registry)
 
-			assert.NoError(t, err, "CreateClient should not return an error")
+			require.NoError(t, err, "CreateClient should not return an error")
 			assert.NotNil(t, client, "Client should not be nil")
 
 			// Verify that getRegistryTypeName returns the expected name
@@ -248,10 +250,10 @@ func TestCreateClient_ErrorHandling(t *testing.T) {
 			client, err := CreateClient(tt.registry)
 
 			if tt.expectError {
-				assert.Error(t, err, "Expected an error but got none")
+				require.Error(t, err, "Expected an error but got none")
 				assert.Nil(t, client, "Client should be nil when error occurs")
 			} else {
-				assert.NoError(t, err, "Expected no error but got: %v", err)
+				require.NoError(t, err, "Expected no error but got: %v", err)
 				assert.NotNil(t, client, "Client should not be nil")
 			}
 		})

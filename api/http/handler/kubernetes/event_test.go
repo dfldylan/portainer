@@ -13,7 +13,9 @@ import (
 	"github.com/portainer/portainer/api/jwt"
 	"github.com/portainer/portainer/api/kubernetes"
 	kubeClient "github.com/portainer/portainer/api/kubernetes/cli"
+
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // Currently this test just tests the HTTP Handler is setup correctly, in the future we should move the ClientFactory to a mock in order
@@ -28,13 +30,13 @@ func TestGetKubernetesEvents(t *testing.T) {
 		Type: portainer.AgentOnKubernetesEnvironment,
 	},
 	)
-	is.NoError(err, "error creating environment")
+	require.NoError(t, err, "error creating environment")
 
 	err = store.User().Create(&portainer.User{Username: "admin", Role: portainer.AdministratorRole})
-	is.NoError(err, "error creating a user")
+	require.NoError(t, err, "error creating a user")
 
 	jwtService, err := jwt.NewService("1h", store)
-	is.NoError(err, "Error initiating jwt service")
+	require.NoError(t, err, "Error initiating jwt service")
 
 	tk, _, _ := jwtService.GenerateToken(&portainer.TokenData{ID: 1, Username: "admin", Role: portainer.AdministratorRole})
 

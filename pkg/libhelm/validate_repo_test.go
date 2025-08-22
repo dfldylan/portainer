@@ -6,13 +6,11 @@ import (
 	"testing"
 
 	"github.com/portainer/portainer/pkg/libhelm/test"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func Test_ValidateHelmRepositoryURL(t *testing.T) {
 	test.EnsureIntegrationTest(t)
-	is := assert.New(t)
 
 	type testCase struct {
 		name    string
@@ -44,9 +42,9 @@ func Test_ValidateHelmRepositoryURL(t *testing.T) {
 				t.Parallel()
 				err := ValidateHelmRepositoryURL(tc.url, nil)
 				if tc.invalid {
-					is.Errorf(err, "error expected: %s", tc.url)
+					require.Error(t, err, "error expected: %s", tc.url)
 				} else {
-					is.NoError(err, "no error expected: %s", tc.url)
+					require.NoError(t, err, "no error expected: %s", tc.url)
 				}
 			})
 		}(test)
