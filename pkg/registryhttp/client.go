@@ -5,6 +5,7 @@ import (
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/crypto"
+
 	"github.com/rs/zerolog/log"
 	"oras.land/oras-go/v2/registry/remote/retry"
 )
@@ -14,7 +15,7 @@ import (
 // Returns the HTTP client, whether to use plainHTTP, and any error.
 func CreateClient(registry *portainer.Registry) (*http.Client, bool, error) {
 	switch registry.Type {
-	case portainer.AzureRegistry, portainer.EcrRegistry, portainer.GithubRegistry, portainer.GitlabRegistry:
+	case portainer.AzureRegistry, portainer.EcrRegistry, portainer.GithubRegistry, portainer.GitlabRegistry, portainer.DockerHubRegistry:
 		// Cloud registries use the default retry client with built-in TLS
 		return retry.DefaultClient, false, nil
 	default:
