@@ -52,6 +52,40 @@ export function bytesValue(mem: string | number) {
 }
 
 /**
+ * Coverts Ki, Gi, Ti, Pi, Ei suffix values to Mi string
+ * Used for kubernetes memory conversions currently
+ */
+export function convertBase2ToMiB(value: string | number) {
+  if (typeof value === 'number') {
+    return value;
+  }
+
+  // Extract the numeric part and suffix
+  const match = value.match(/^(\d+(?:\.\d+)?)([A-Za-z]*)$/);
+  if (!match) {
+    return value;
+  }
+
+  const numericValue = parseFloat(match[1]);
+  const suffix = match[2];
+
+  switch (suffix) {
+    case 'Mi':
+      return `${numericValue}Mi`;
+    case 'Gi':
+      return `${numericValue * 1024}Mi`;
+    case 'Ti':
+      return `${numericValue * 1024 * 1024}Mi`;
+    case 'Pi':
+      return `${numericValue * 1024 * 1024 * 1024}Mi`;
+    case 'Ei':
+      return `${numericValue * 1024 * 1024 * 1024 * 1024}Mi`;
+    default:
+      return value;
+  }
+}
+
+/**
  * The default base is 2, you can use base 10 if you want
  * https://github.com/patrickkettner/filesize-parser#readme
  */

@@ -4,7 +4,11 @@ import { StorageClass } from '@/react/portainer/environments/types';
 import { Registry } from '@/react/portainer/registries/types/registry';
 
 import { NamespaceFormValues, PortainerNamespace } from '../types';
-import { megaBytesValue, parseCPU } from '../resourceQuotaUtils';
+import {
+  megaBytesValue,
+  parseCPU,
+  convertBase2ToMiB,
+} from '../resourceQuotaUtils';
 import { IngressControllerClassMap } from '../../cluster/ingressClass/types';
 
 interface ComputeInitialValuesParams {
@@ -41,7 +45,7 @@ export function computeInitialValues({
     ingressClasses: ingressClasses ?? [],
     resourceQuota: {
       enabled: !!memory || !!cpu,
-      memory: `${megaBytesValue(memory)}`,
+      memory: `${megaBytesValue(convertBase2ToMiB(memory))}`,
       cpu: `${parseCPU(cpu)}`,
     },
     registries: registriesUsed ?? [],

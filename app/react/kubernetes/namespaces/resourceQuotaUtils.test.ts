@@ -1,4 +1,4 @@
-import { parseCPU } from './resourceQuotaUtils';
+import { parseCPU, convertBase2ToMiB } from './resourceQuotaUtils';
 
 // test parseCPU with '', '2', '100m', '100u'
 describe('parseCPU', () => {
@@ -13,5 +13,21 @@ describe('parseCPU', () => {
   });
   it('should return 0.0001 for 100u', () => {
     expect(parseCPU('100u')).toBe(0.0001);
+  });
+});
+
+// test convertBase2ToMiB
+describe('convertBase2ToMiB', () => {
+  it('should return empty string for empty string', () => {
+    expect(convertBase2ToMiB('')).toBe('');
+  });
+  it('should return 2Mi for 2Mi', () => {
+    expect(convertBase2ToMiB('2Mi')).toBe('2Mi');
+  });
+  it('should return 1024Mi for 1Gi', () => {
+    expect(convertBase2ToMiB('1Gi')).toBe('1024Mi');
+  });
+  it('should return 1024Mi for 1Ti', () => {
+    expect(convertBase2ToMiB('1Ti')).toBe('1048576Mi');
   });
 });
