@@ -15,8 +15,9 @@ import (
 
 	"github.com/portainer/portainer/pkg/fips"
 
-	"golang.org/x/crypto/argon2"
-	"golang.org/x/crypto/scrypt"
+	// Not allowed in FIPS mode
+	"golang.org/x/crypto/argon2" //nolint:depguard
+	"golang.org/x/crypto/scrypt" //nolint:depguard
 )
 
 const (
