@@ -8,13 +8,18 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var jobInterval = time.Second
 
+func requireNoShutdownErr(t *testing.T, fn func() error) {
+	require.NoError(t, fn(), "scheduler must be shutdown without error")
+}
+
 func Test_ScheduledJobRuns(t *testing.T) {
 	s := NewScheduler(context.Background())
-	defer s.Shutdown()
+	defer requireNoShutdownErr(t, s.Shutdown)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 2*jobInterval)
 
@@ -23,6 +28,7 @@ func Test_ScheduledJobRuns(t *testing.T) {
 		workDone = true
 
 		cancel()
+
 		return nil
 	})
 
@@ -32,7 +38,7 @@ func Test_ScheduledJobRuns(t *testing.T) {
 
 func Test_JobCanBeStopped(t *testing.T) {
 	s := NewScheduler(context.Background())
-	defer s.Shutdown()
+	defer requireNoShutdownErr(t, s.Shutdown)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 2*jobInterval)
 
@@ -41,9 +47,12 @@ func Test_JobCanBeStopped(t *testing.T) {
 		workDone = true
 
 		cancel()
+
 		return nil
 	})
-	s.StopJob(jobID)
+
+	err := s.StopJob(jobID)
+	require.NoError(t, err)
 
 	<-ctx.Done()
 	assert.False(t, workDone, "job shouldn't had a chance to run")
@@ -51,13 +60,15 @@ func Test_JobCanBeStopped(t *testing.T) {
 
 func Test_JobShouldStop_UponPermError(t *testing.T) {
 	s := NewScheduler(context.Background())
-	defer s.Shutdown()
+	defer requireNoShutdownErr(t, s.Shutdown)
 
 	var acc int
+
 	ch := make(chan struct{})
 	s.StartJobEvery(jobInterval, func() error {
 		acc++
 		close(ch)
+
 		return NewPermanentError(errors.New("failed"))
 	})
 
@@ -68,13 +79,15 @@ func Test_JobShouldStop_UponPermError(t *testing.T) {
 
 func Test_JobShouldNotStop_UponError(t *testing.T) {
 	s := NewScheduler(context.Background())
-	defer s.Shutdown()
+	defer requireNoShutdownErr(t, s.Shutdown)
 
 	var acc atomic.Int64
+
 	ch := make(chan struct{})
 	s.StartJobEvery(jobInterval, func() error {
 		if acc.Add(1) == 2 {
 			close(ch)
+
 			return NewPermanentError(errors.New("failed"))
 		}
 
@@ -94,12 +107,12 @@ func Test_CanTerminateAllJobs_ByShuttingDownScheduler(t *testing.T) {
 	var workDone bool
 	s.StartJobEvery(jobInterval, func() error {
 		workDone = true
-
 		cancel()
+
 		return nil
 	})
 
-	s.Shutdown()
+	requireNoShutdownErr(t, s.Shutdown)
 
 	<-ctx.Done()
 	assert.False(t, workDone, "job shouldn't had a chance to run")
@@ -112,8 +125,8 @@ func Test_CanTerminateAllJobs_ByCancellingParentContext(t *testing.T) {
 	var workDone bool
 	s.StartJobEvery(jobInterval, func() error {
 		workDone = true
-
 		cancel()
+
 		return nil
 	})
 
