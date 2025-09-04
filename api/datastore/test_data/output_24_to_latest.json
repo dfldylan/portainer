@@ -83,7 +83,6 @@
         "MigrateIngresses": true
       },
       "PublicURL": "",
-      "QueryDate": 0,
       "SecuritySettings": {
         "allowBindMountsForRegularUsers": true,
         "allowContainerCapabilitiesForRegularUsers": true,

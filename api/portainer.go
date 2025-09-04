@@ -448,8 +448,6 @@ type (
 		AMTDeviceGUID string `json:"AMTDeviceGUID,omitempty" example:"4c4c4544-004b-3910-8037-b6c04f504633"`
 		// LastCheckInDate mark last check-in date on checkin
 		LastCheckInDate int64
-		// QueryDate of each query with the endpoints list
-		QueryDate int64
 		// Heartbeat indicates the heartbeat status of an edge environment
 		Heartbeat bool `json:"Heartbeat" example:"true"`
 

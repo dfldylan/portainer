@@ -215,9 +215,8 @@ func UpdateEdgeEndpointHeartbeat(endpoint *portainer.Endpoint, settings *portain
 		return
 	}
 
-	endpoint.QueryDate = time.Now().Unix()
 	checkInInterval := getEndpointCheckinInterval(endpoint, settings)
-	endpoint.Heartbeat = endpoint.QueryDate-endpoint.LastCheckInDate <= int64(checkInInterval*2+20)
+	endpoint.Heartbeat = time.Now().Unix()-endpoint.LastCheckInDate <= int64(checkInInterval*2+20)
 }
 
 func getEndpointCheckinInterval(endpoint *portainer.Endpoint, settings *portainer.Settings) int {
