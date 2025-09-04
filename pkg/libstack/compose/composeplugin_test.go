@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/compose-spec/compose-go/v2/consts"
@@ -476,8 +477,20 @@ func Test_DeployWithRemoveOrphans(t *testing.T) {
 	}
 }
 
+type logger struct {
+	sync.Mutex
+	strings.Builder
+}
+
+func (l *logger) Write(p []byte) (n int, err error) {
+	l.Lock()
+	defer l.Unlock()
+
+	return l.Builder.Write(p)
+}
+
 func Test_DeployWithIgnoreOrphans(t *testing.T) {
-	var logOutput strings.Builder
+	var logOutput logger
 	oldLogger := zerolog.Logger
 	zerolog.Logger = zerolog.Output(&logOutput)
 	defer func() {
