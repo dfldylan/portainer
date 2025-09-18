@@ -19,7 +19,7 @@ func TestGetEvents(t *testing.T) {
 		kcl := &KubeClient{
 			cli:         kfake.NewSimpleClientset(),
 			instanceID:  "instance",
-			IsKubeAdmin: true,
+			isKubeAdmin: true,
 		}
 
 		event := corev1.Event{
@@ -47,8 +47,8 @@ func TestGetEvents(t *testing.T) {
 		kcl := &KubeClient{
 			cli:                kfake.NewSimpleClientset(),
 			instanceID:         "instance",
-			IsKubeAdmin:        false,
-			NonAdminNamespaces: []string{"nonAdmin"},
+			isKubeAdmin:        false,
+			nonAdminNamespaces: []string{"nonAdmin"},
 		}
 
 		event := corev1.Event{
@@ -77,8 +77,8 @@ func TestGetEvents(t *testing.T) {
 		kcl := &KubeClient{
 			cli:                kfake.NewSimpleClientset(),
 			instanceID:         "instance",
-			IsKubeAdmin:        false,
-			NonAdminNamespaces: []string{"nonAdmin"},
+			isKubeAdmin:        false,
+			nonAdminNamespaces: []string{"nonAdmin"},
 		}
 
 		event := corev1.Event{

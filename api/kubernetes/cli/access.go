@@ -149,7 +149,7 @@ func (kcl *KubeClient) GetIsKubeAdmin() bool {
 	kcl.mu.Lock()
 	defer kcl.mu.Unlock()
 
-	return kcl.IsKubeAdmin
+	return kcl.isKubeAdmin
 }
 
 // UpdateIsKubeAdmin sets whether the kube client is admin
@@ -157,7 +157,7 @@ func (kcl *KubeClient) SetIsKubeAdmin(isKubeAdmin bool) {
 	kcl.mu.Lock()
 	defer kcl.mu.Unlock()
 
-	kcl.IsKubeAdmin = isKubeAdmin
+	kcl.isKubeAdmin = isKubeAdmin
 }
 
 // GetClientNonAdminNamespaces retrieves non-admin namespaces
@@ -165,7 +165,7 @@ func (kcl *KubeClient) GetClientNonAdminNamespaces() []string {
 	kcl.mu.Lock()
 	defer kcl.mu.Unlock()
 
-	return kcl.NonAdminNamespaces
+	return kcl.nonAdminNamespaces
 }
 
 // UpdateClientNonAdminNamespaces sets the client non admin namespace list
@@ -173,5 +173,5 @@ func (kcl *KubeClient) SetClientNonAdminNamespaces(nonAdminNamespaces []string) 
 	kcl.mu.Lock()
 	defer kcl.mu.Unlock()
 
-	kcl.NonAdminNamespaces = nonAdminNamespaces
+	kcl.nonAdminNamespaces = nonAdminNamespaces
 }

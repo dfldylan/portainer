@@ -18,7 +18,7 @@ func (kcl *KubeClient) TestFetchCronJobs(t *testing.T) {
 	t.Run("admin client can fetch Cron Jobs from all namespaces", func(t *testing.T) {
 		kcl.cli = kfake.NewSimpleClientset()
 		kcl.instanceID = "test"
-		kcl.IsKubeAdmin = true
+		kcl.isKubeAdmin = true
 
 		cronJobs, err := kcl.GetCronJobs("")
 		if err != nil {
@@ -31,7 +31,7 @@ func (kcl *KubeClient) TestFetchCronJobs(t *testing.T) {
 	t.Run("non-admin client can fetch Cron Jobs from the default namespace only", func(t *testing.T) {
 		kcl.cli = kfake.NewSimpleClientset()
 		kcl.instanceID = "test"
-		kcl.IsKubeAdmin = false
+		kcl.isKubeAdmin = false
 		kcl.SetClientNonAdminNamespaces([]string{"default"})
 
 		cronJobs, err := kcl.GetCronJobs("")

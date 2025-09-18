@@ -312,7 +312,7 @@ func TestGetApplications(t *testing.T) {
 		kubeClient := &KubeClient{
 			cli:         fakeClient,
 			instanceID:  "test-instance",
-			IsKubeAdmin: true,
+			isKubeAdmin: true,
 		}
 
 		// Test cases
@@ -387,8 +387,8 @@ func TestGetApplications(t *testing.T) {
 		kubeClient := &KubeClient{
 			cli:                fakeClient,
 			instanceID:         "test-instance",
-			IsKubeAdmin:        false,
-			NonAdminNamespaces: []string{namespace1},
+			isKubeAdmin:        false,
+			nonAdminNamespaces: []string{namespace1},
 		}
 
 		// Test that only resources from allowed namespace are returned
@@ -447,7 +447,7 @@ func TestGetApplications(t *testing.T) {
 		kubeClient := &KubeClient{
 			cli:         fakeClient,
 			instanceID:  "test-instance",
-			IsKubeAdmin: true,
+			isKubeAdmin: true,
 		}
 
 		// Test filtering by node name
