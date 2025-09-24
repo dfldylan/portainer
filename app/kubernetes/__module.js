@@ -470,7 +470,7 @@ angular.module('portainer.kubernetes', ['portainer.app', registriesModule, custo
       },
     };
 
-    const resourcePools = {
+    const namespaces = {
       name: 'kubernetes.resourcePools',
       url: '/namespaces',
       views: {
@@ -496,7 +496,7 @@ angular.module('portainer.kubernetes', ['portainer.app', registriesModule, custo
       },
     };
 
-    const resourcePool = {
+    const namespace = {
       name: 'kubernetes.resourcePools.resourcePool',
       url: '/:id?tab',
       views: {
@@ -678,9 +678,9 @@ angular.module('portainer.kubernetes', ['portainer.app', registriesModule, custo
     $stateRegistryProvider.register(node);
     $stateRegistryProvider.register(nodeStats);
     $stateRegistryProvider.register(kubectlShell);
-    $stateRegistryProvider.register(resourcePools);
+    $stateRegistryProvider.register(namespaces);
     $stateRegistryProvider.register(namespaceCreation);
-    $stateRegistryProvider.register(resourcePool);
+    $stateRegistryProvider.register(namespace);
     $stateRegistryProvider.register(namespaceAccess);
     $stateRegistryProvider.register(volumes);
     $stateRegistryProvider.register(volume);
