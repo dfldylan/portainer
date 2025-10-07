@@ -1,9 +1,3 @@
-# See: https://gist.github.com/asukakenji/f15ba7e588ac42795f421b48b8aede63
-# For a list of valid GOOS and GOARCH values
-# Note: these can be overriden on the command line e.g. `make PLATFORM=<platform> ARCH=<arch>`
-PLATFORM=$(shell go env GOOS)
-ARCH=$(shell go env GOARCH)
-
 # build target, can be one of "production", "testing", "development"
 ENV=development
 WEBPACK_CONFIG=webpack/webpack.$(ENV).js
@@ -36,10 +30,6 @@ build-image: build-all ## Build the Portainer image locally
 
 build-storybook: ## Build and serve the storybook files
 	yarn storybook:build
-
-devops: clean deps build-client ## Build the everything target specifically for CI
-	echo "Building the devops binary..."
-	@./build/build_binary_azuredevops.sh "$(PLATFORM)" "$(ARCH)"
 
 ##@ Build dependencies
 .PHONY: deps server-deps client-deps tidy
