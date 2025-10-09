@@ -34,7 +34,6 @@ describe('SettingsView', () => {
       http.get('/api/settings/public', () =>
         HttpResponse.json({
           Features: {
-            'auto-patch': false,
             'disable-roles-sync': false,
           },
         })
