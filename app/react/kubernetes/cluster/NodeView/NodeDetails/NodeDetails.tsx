@@ -201,7 +201,7 @@ function NodeDetailsForm({
           submitLabel="Update node"
           loadingText="Updating node..."
           isLoading={isSubmitting}
-          isValid={isValid && dirty && !isSubmitting}
+          isValid={isValid && !isSubmitting}
           data-cy="node-saveButton"
         >
           <Button

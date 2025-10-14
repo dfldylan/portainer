@@ -47,6 +47,8 @@ type Release struct {
 	Labels map[string]string `json:"-"`
 	// ChartReference are the labels that are used to identify the chart source.
 	ChartReference ChartReference `json:"chartReference,omitempty"`
+	// StackID is the ID of the Portainer stack associated with this release (if using GitOps)
+	StackID int `json:"stackID,omitempty"`
 	// Values are the values used to deploy the chart.
 	Values Values `json:"values,omitempty"`
 }
@@ -60,6 +62,16 @@ type ChartReference struct {
 	ChartPath  string `json:"chartPath,omitempty"`
 	RepoURL    string `json:"repoURL,omitempty"`
 	RegistryID int64  `json:"registryID,omitempty"`
+}
+
+type GitReference struct {
+	Repo               string `json:"repo,omitempty"`
+	Reference          string `json:"reference,omitempty"`
+	CommitID           string `json:"commitID,omitempty"`
+	StackID            string `json:"stackID,omitempty"`
+	AutoUpdate         bool   `json:"autoUpdate,omitempty"`
+	AutoUpdateInterval string `json:"autoUpdateInterval,omitempty"`
+	TLSSkipVerify      bool   `json:"tlsSkipVerify,omitempty"`
 }
 
 // Chart is a helm package that contains metadata, a default config, zero or more

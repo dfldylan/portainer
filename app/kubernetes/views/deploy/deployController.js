@@ -11,7 +11,7 @@ import { baseStackWebhookUrl, createWebhookId } from '@/portainer/helpers/webhoo
 import { getVariablesFieldDefaultValues } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
 import { KUBE_STACK_NAME_VALIDATION_REGEX } from '@/react/kubernetes/DeployView/StackName/constants';
 import { confirmWebEditorDiscard } from '@@/modals/confirm';
-import { editor, git, customTemplate, url, helm } from '@@/BoxSelector/common-options/build-methods';
+import { editor, git, customTemplate, url } from '@@/BoxSelector/common-options/build-methods';
 import { kubernetes } from '@@/BoxSelector/common-options/deployment-methods';
 
 class KubernetesDeployController {
@@ -34,7 +34,6 @@ class KubernetesDeployController {
 
     this.methodOptions = [
       { ...git, value: KubernetesDeployBuildMethods.GIT },
-      { ...helm, value: KubernetesDeployBuildMethods.HELM },
       { ...editor, value: KubernetesDeployBuildMethods.WEB_EDITOR },
       { ...url, value: KubernetesDeployBuildMethods.URL },
       { ...customTemplate, value: KubernetesDeployBuildMethods.CUSTOM_TEMPLATE },

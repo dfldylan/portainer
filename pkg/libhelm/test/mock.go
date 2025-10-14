@@ -121,6 +121,10 @@ func (hpm helmMockPackageManager) Get(getOpts options.GetOptions) (*release.Rele
 		return re.Name == getOpts.Name && re.Namespace == getOpts.Namespace
 	})
 
+	if index == -1 {
+		return nil, errors.Errorf("release %s not found in namespace %s", getOpts.Name, getOpts.Namespace)
+	}
+
 	return newMockRelease(&mockCharts[index]), nil
 }
 

@@ -59,6 +59,7 @@ const completeHelmRelease = {
   },
   info: {
     status: 'deployed',
+    last_deployed: '2021-01-01T00:00:00Z',
     notes: 'This is a test note',
     resources: [
       {
@@ -228,19 +229,16 @@ describe(
       // Check for the page header
       expect(await findByText('Helm details')).toBeInTheDocument();
 
-      // Check for the badge content
-      expect(await findByText(/Namespace: default/)).toBeInTheDocument();
-      expect(
-        await findByText(/Chart version: test-chart-2.2.2/)
-      ).toBeInTheDocument();
-      expect(await findByText(/Chart: test-chart/)).toBeInTheDocument();
-      expect(await findByText(/Revision: #1/)).toBeInTheDocument();
-      expect(
-        await findByText(/Last deployed: Jan 1, 2021, 12:00 AM/)
-      ).toBeInTheDocument();
+      // Check for the details content - these values should appear somewhere in the card
+      expect(await findByText('default')).toBeInTheDocument(); // namespace
+      expect(await findByText('test-chart-2.2.2')).toBeInTheDocument(); // chart version
+      expect(await findByText('test-chart')).toBeInTheDocument(); // chart name
+      expect(await findByText('#1')).toBeInTheDocument(); // revision
+      expect(await findByText('Jan 1, 2021, 12:00 AM')).toBeInTheDocument(); // last deployed
+
       // Check for the actual values
-      expect(await findAllByText(/test-release/)).toHaveLength(2); // title and badge
-      expect(await findAllByText(/test-chart/)).toHaveLength(2); // title and badge (not checking revision list item)
+      expect(await findAllByText(/test-release/)).toHaveLength(2); // title and breadcrumb
+      expect(await findAllByText(/test-chart/)).toHaveLength(2); // chart name appears twice
 
       // There shouldn't be a notes tab when there are no notes
       expect(screen.queryByText(/Notes/)).not.toBeInTheDocument();
@@ -293,13 +291,6 @@ describe(
 
       expect(await findByText('Helm details')).toBeInTheDocument();
 
-      // Check for the app version badge when it's available
-      await waitFor(() => {
-        expect(
-          screen.getByText(/App version/, { exact: false })
-        ).toBeInTheDocument();
-      });
-
       await waitFor(() => {
         // Look for specific tab text
         expect(screen.getByText('Resources')).toBeInTheDocument();
@@ -309,7 +300,8 @@ describe(
         expect(screen.getByText('Events')).toBeInTheDocument();
       });
 
-      expect(await findByText(/App version: 1.0.0/)).toBeInTheDocument();
+      // Check for the app version in the summary section
+      expect(await screen.findByText('1.0.0')).toBeInTheDocument();
     });
   },
   {

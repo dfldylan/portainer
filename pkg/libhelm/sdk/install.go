@@ -58,13 +58,18 @@ func (hspm *HelmSDKPackageManager) install(installOpts options.InstallOptions) (
 		return nil, errors.Wrap(err, "failed to initialize helm install client for helm release installation")
 	}
 
-	values, err := hspm.getHelmValuesFromFile(installOpts.ValuesFile)
-	if err != nil {
-		log.Error().
-			Str("context", "HelmClient").
-			Err(err).
-			Msg("Failed to get Helm values from file for helm release installation")
-		return nil, errors.Wrap(err, "failed to get Helm values from file for helm release installation")
+	var values map[string]any
+	if installOpts.Values != nil {
+		values = installOpts.Values
+	} else {
+		values, err = GetHelmValuesFromFile(installOpts.ValuesFile)
+		if err != nil {
+			log.Error().
+				Str("context", "HelmClient").
+				Err(err).
+				Msg("Failed to get Helm values from file for helm release installation")
+			return nil, errors.Wrap(err, "failed to get Helm values from file for helm release installation")
+		}
 	}
 
 	chartRef, repoURL, err := parseChartRef(installOpts.Chart, installOpts.Repo, installOpts.Registry)
@@ -95,7 +100,7 @@ func (hspm *HelmSDKPackageManager) install(installOpts options.InstallOptions) (
 	if installOpts.Registry != nil {
 		registryID = int(installOpts.Registry.ID)
 	}
-	chart.Metadata.Annotations = appendChartReferenceAnnotations(installOpts.Chart, installOpts.Repo, registryID, chart.Metadata.Annotations)
+	chart.Metadata.Annotations = appendChartReferenceAnnotations(installOpts.Chart, installOpts.Repo, registryID, installOpts.StackID, installOpts.GitConfig, installOpts.AutoUpdate, chart.Metadata.Annotations)
 
 	// Run the installation
 	log.Info().
@@ -104,6 +109,7 @@ func (hspm *HelmSDKPackageManager) install(installOpts options.InstallOptions) (
 		Str("name", installOpts.Name).
 		Str("namespace", installOpts.Namespace).
 		Msg("Running chart installation for helm release")
+
 	helmRelease, err := installClient.Run(chart, values)
 	if err != nil {
 		log.Error().

@@ -25,7 +25,7 @@
 
                 <!-- namespace -->
                 <div class="col-sm-12 form-section-title !mt-4"> Deploy to </div>
-                <div class="form-group" ng-if="ctrl.formValues.Namespace && ctrl.state.BuildMethod !== ctrl.BuildMethods.HELM">
+                <div class="form-group" ng-if="ctrl.formValues.Namespace">
                   <label for="toggle_logo" class="col-lg-2 col-sm-3 control-label text-left">
                     Use namespace(s) specified from manifest
                     <portainer-tooltip message="'If you have defined namespaces in your deployment file turning this on will enforce the use of those only in the deployment'">
@@ -43,15 +43,13 @@
                   <label for="target_namespace" class="col-lg-2 col-sm-3 control-label text-left">Namespace</label>
                   <div class="col-sm-9 col-lg-10">
                     <namespace-portainer-select
-                      ng-if="!ctrl.formValues.namespace_toggle || ctrl.state.BuildMethod === ctrl.BuildMethods.HELM"
-                      is-disabled="ctrl.formValues.namespace_toggle && ctrl.state.BuildMethod !== ctrl.BuildMethods.HELM || ctrl.state.isNamespaceInputDisabled"
+                      ng-if="!ctrl.formValues.namespace_toggle"
+                      is-disabled="ctrl.formValues.namespace_toggle || ctrl.state.isNamespaceInputDisabled"
                       value="ctrl.formValues.Namespace"
                       on-change="(ctrl.onChangeNamespace)"
                       options="ctrl.namespaceOptions"
                     ></namespace-portainer-select>
-                    <span ng-if="ctrl.formValues.namespace_toggle && ctrl.state.BuildMethod !== ctrl.BuildMethods.HELM" class="small text-muted pt-[7px]"
-                      >Namespaces specified in the manifest will be used</span
-                    >
+                    <span ng-if="ctrl.formValues.namespace_toggle" class="small text-muted pt-[7px]">Namespaces specified in the manifest will be used</span>
                   </div>
                 </div>
 
@@ -63,30 +61,11 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="name" class="col-lg-2 col-sm-3 control-label text-left" ng-class="{ required: ctrl.state.BuildMethod === ctrl.BuildMethods.HELM }">Name</label>
-                  <div class="col-sm-9 col-lg-10 small text-muted pt-[7px]" ng-if="ctrl.state.BuildMethod !== ctrl.BuildMethods.HELM">
-                    Resource names specified in the manifest will be used
-                  </div>
-                  <div class="col-sm-9 col-lg-10" ng-if="ctrl.state.BuildMethod === ctrl.BuildMethods.HELM">
-                    <input
-                      type="text"
-                      data-cy="name-input"
-                      class="form-control"
-                      ng-model="ctrl.formValues.Name"
-                      id="name"
-                      name="name"
-                      placeholder="e.g. my-app"
-                      required="ctrl.state.BuildMethod === ctrl.BuildMethods.HELM"
-                    />
-                    <div class="small text-warning mt-2">
-                      <div ng-messages="ctrl.deploymentForm.name.$error">
-                        <p ng-message="required"> <pr-icon icon="'alert-triangle'" mode="'warning'"></pr-icon> This field is required.</p>
-                      </div>
-                    </div>
-                  </div>
+                  <label for="name" class="col-lg-2 col-sm-3 control-label text-left">Name</label>
+                  <div class="col-sm-9 col-lg-10 text-muted small pt-[7px]"> Resource names specified in the manifest will be used </div>
                 </div>
 
-                <div ng-if="!ctrl.deploymentOptions.hideStacksFunctionality && ctrl.state.BuildMethod !== ctrl.BuildMethods.HELM">
+                <div ng-if="!ctrl.deploymentOptions.hideStacksFunctionality">
                   <div class="mb-4 w-fit">
                     <stack-name-label-insight></stack-name-label-insight>
                   </div>
@@ -186,15 +165,9 @@
                 </div>
                 <!-- !url -->
 
-                <!-- Helm -->
-                <div ng-show="ctrl.state.BuildMethod === ctrl.BuildMethods.HELM">
-                  <helm-templates-view on-select-helm-chart="(ctrl.onSelectHelmChart)" namespace="ctrl.formValues.Namespace" name="ctrl.formValues.Name" />
-                </div>
-                <!-- !Helm -->
-
                 <!-- actions -->
-                <div class="col-sm-12 form-section-title !mt-4" ng-if="ctrl.state.BuildMethod !== ctrl.BuildMethods.HELM"> Actions </div>
-                <div class="form-group" ng-if="ctrl.state.BuildMethod !== ctrl.BuildMethods.HELM">
+                <div class="col-sm-12 form-section-title !mt-4"> Actions </div>
+                <div class="form-group">
                   <div class="col-sm-12">
                     <button
                       type="button"

@@ -15,13 +15,13 @@ import (
 
 const (
 	// ErrInvalidQueryParameter defines the message of an error raised when a mandatory query parameter has an invalid value.
-	ErrInvalidQueryParameter = "Invalid query parameter"
+	ErrInvalidQueryParameter = "invalid query parameter"
 	// ErrInvalidRequestURL defines the message of an error raised when the data sent in the query or the URL is invalid
-	ErrInvalidRequestURL = "Invalid request URL"
+	ErrInvalidRequestURL = "invalid request URL"
 	// ErrMissingQueryParameter defines the message of an error raised when a mandatory query parameter is missing.
-	ErrMissingQueryParameter = "Missing query parameter"
+	ErrMissingQueryParameter = "missing query parameter"
 	// ErrMissingFormDataValue defines the message of an error raised when a mandatory form data value is missing.
-	ErrMissingFormDataValue = "Missing form data value"
+	ErrMissingFormDataValue = "missing form data value"
 )
 
 // RetrieveMultiPartFormFile returns the content of an uploaded file (form data) as bytes as well

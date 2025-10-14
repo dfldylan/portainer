@@ -106,7 +106,6 @@ func Test_ClientConfigGetter(t *testing.T) {
 
 func Test_ParseValues(t *testing.T) {
 	is := assert.New(t)
-	hspm := NewHelmSDKPackageManager()
 
 	t.Run("should parse valid YAML values", func(t *testing.T) {
 		yamlData := []byte(`
@@ -118,7 +117,7 @@ resources:
     cpu: 100m
     memory: 128Mi
 `)
-		values, err := hspm.parseValues(yamlData)
+		values, err := parseValues(yamlData)
 		require.NoError(t, err, "should parse valid YAML without error")
 		is.NotNil(values, "should return non-nil values")
 
@@ -143,13 +142,13 @@ service:
   port: 80
   invalid yaml
 `)
-		_, err := hspm.parseValues(yamlData)
+		_, err := parseValues(yamlData)
 		require.Error(t, err, "should return error for invalid YAML")
 	})
 
 	t.Run("should handle empty YAML", func(t *testing.T) {
 		yamlData := []byte(``)
-		values, err := hspm.parseValues(yamlData)
+		values, err := parseValues(yamlData)
 		require.NoError(t, err, "should not return error for empty YAML")
 		is.NotNil(values, "should return non-nil values for empty YAML")
 		is.Empty(values, "should return empty map for empty YAML")

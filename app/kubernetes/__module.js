@@ -470,6 +470,22 @@ angular.module('portainer.kubernetes', ['portainer.app', registriesModule, custo
       },
     };
 
+    const helmInstall = {
+      name: 'kubernetes.helminstall',
+      url: '/helm?referrer',
+      views: {
+        'content@': {
+          component: 'helmInstallView',
+        },
+      },
+      params: {
+        yaml: '',
+      },
+      data: {
+        docs: '/user/kubernetes/applications/manifest',
+      },
+    };
+
     const namespaces = {
       name: 'kubernetes.resourcePools',
       url: '/namespaces',
@@ -675,6 +691,7 @@ angular.module('portainer.kubernetes', ['portainer.app', registriesModule, custo
     $stateRegistryProvider.register(cluster);
     $stateRegistryProvider.register(dashboard);
     $stateRegistryProvider.register(deploy);
+    $stateRegistryProvider.register(helmInstall);
     $stateRegistryProvider.register(node);
     $stateRegistryProvider.register(nodeStats);
     $stateRegistryProvider.register(kubectlShell);
