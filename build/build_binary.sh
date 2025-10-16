@@ -26,8 +26,8 @@ DOCKER_VERSION=$(jq -r '.docker' < "${BINARY_VERSION_FILE}")
 COMPOSE_VERSION=$(go list -m -f '{{.Version}}' github.com/docker/compose/v2)
 # Kubernetes SDK uses v0.x.y versioning, but official kubectl releases use v1.x.y
 # We need to transform the version (e.g., v0.33.2 -> v1.33.2)
-KUBECTL_VERSION=$(go list -modfile ../server-ce/go.mod -m -f '{{.Version}}' k8s.io/kubectl | sed 's/^v0\./v1./' | sed 's/^0\./1./')
-HELM_VERSION=$(go list -modfile ../server-ce/go.mod -m -f '{{.Version}}' helm.sh/helm/v3)
+KUBECTL_VERSION=$(go list -modfile go.mod -m -f '{{.Version}}' k8s.io/kubectl | sed 's/^v0\./v1./' | sed 's/^0\./1./')
+HELM_VERSION=$(go list -modfile go.mod -m -f '{{.Version}}' helm.sh/helm/v3)
 
 # copy templates
 cp -r "./mustache-templates" "./dist"
