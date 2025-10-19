@@ -482,7 +482,7 @@ angular.module('portainer.kubernetes', ['portainer.app', registriesModule, custo
         yaml: '',
       },
       data: {
-        docs: '/user/kubernetes/applications/manifest',
+        docs: '/user/kubernetes/applications/manifest/helm',
       },
     };
 
