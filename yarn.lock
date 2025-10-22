@@ -6207,6 +6207,13 @@
   resolved "https://registry.yarnpkg.com/@types/filesize-parser/-/filesize-parser-1.5.1.tgz#d1218f48ad160d7b089a555f3984439254196bd7"
   integrity sha512-kU4V/I/EUARPF3hxTRrZ1ad2P0/9sby1JoRbNcpvMIPqhkVlBqcNc+HutiLl6cS7iCId54Xd6X+BEp5vUgSY6Q==
 
+"@types/filesize@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@types/filesize/-/filesize-5.0.2.tgz#6555fecafc6cc0fe244c0b80194d5c2f6eac9023"
+  integrity sha512-U7ZziS3iSkMu+ca04RzbWMZJeiW8am09E3bLZb6RGz2z79u7oV3KGCFCzWsousZUgw3geTRxUx2GHHj1pllkeQ==
+  dependencies:
+    filesize "*"
+
 "@types/find-cache-dir@^3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@types/find-cache-dir/-/find-cache-dir-3.2.1.tgz#7b959a4b9643a1e6a1a5fe49032693cc36773501"
@@ -10858,6 +10865,11 @@ filesize-parser@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/filesize-parser/-/filesize-parser-1.5.0.tgz#97ad66d5b0d7154b2e8b1b4e83f526aed33c62f3"
   integrity sha512-UTDpJB22VvozK7t31slU9WCAPSdcUWuwD7P7S6LBXswdgzUz+YhoziLOohknFcx0Kq5LWCAj4MEKY9q3zGq47Q==
+
+filesize@*:
+  version "11.0.13"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-11.0.13.tgz#8e61c5c4e8d7463c71d573c4f8051fb1ba4ff883"
+  integrity sha512-mYJ/qXKvREuO0uH8LTQJ6v7GsUvVOguqxg2VTwQUkyTPXXRRWPdjuUPVqdBrJQhvci48OHlNGRnux+Slr2Rnvw==
 
 filesize@^10.1.6:
   version "10.1.6"

@@ -48,7 +48,9 @@ type Metadata struct {
 }
 
 type CustomResourceMetadata struct {
+	Name       string `json:"name"`
 	Kind       string `json:"kind"`
+	Scope      string `json:"scope"`
 	APIVersion string `json:"apiVersion"`
 	Plural     string `json:"plural"`
 }
