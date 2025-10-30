@@ -57,7 +57,11 @@ function ImageCell({
   const isTruncated = isWidthTruncated();
 
   const imageElement = (
-    <div className="inline-block max-w-xs truncate" ref={contentRef}>
+    <div
+      className="inline-block max-w-xs truncate"
+      ref={contentRef}
+      title={image}
+    >
       {image}
     </div>
   );

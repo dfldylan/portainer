@@ -14,7 +14,7 @@ export const columns = [
     header: 'Image',
     cell: ({ row: { original: item } }) => (
       <>
-        {truncate(item.Image, 64)}
+        <span title={item.Image}>{truncate(item.Image, 64)}</span>
         {item.Containers?.length > 1 && <>+ {item.Containers.length - 1}</>}
       </>
     ),

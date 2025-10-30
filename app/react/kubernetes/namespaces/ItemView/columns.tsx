@@ -50,7 +50,9 @@ export function useColumns() {
         columnHelper.accessor('Image', {
           header: 'Image',
           cell: ({ getValue }) => (
-            <div className="max-w-md truncate">{getValue()}</div>
+            <div className="max-w-md truncate" title={getValue()}>
+              {getValue()}
+            </div>
           ),
         }),
         columnHelper.accessor(

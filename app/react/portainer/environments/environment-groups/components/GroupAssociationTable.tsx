@@ -16,7 +16,9 @@ const columns = [
   columHelper.accessor('Name', {
     header: 'Name',
     id: 'Name',
-    cell: ({ getValue }) => truncate(getValue(), { length: 64 }),
+    cell: ({ getValue }) => (
+      <span title={getValue()}>{truncate(getValue(), { length: 64 })}</span>
+    ),
   }),
 ];
 

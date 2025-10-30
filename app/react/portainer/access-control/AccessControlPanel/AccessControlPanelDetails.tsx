@@ -138,6 +138,7 @@ function getInheritanceMessage(
           to="docker.services.service"
           params={{ id: resourceId }}
           data-cy="docker-access-inherited-service"
+          title={String(resourceId)}
         >
           {truncate(resourceId)}
         </Link>
@@ -157,6 +158,7 @@ function getInheritanceMessage(
           to="docker.containers.container"
           params={{ id: resourceId }}
           data-cy="docker-access-inherited-container"
+          title={String(resourceId)}
         >
           {truncate(resourceId)}
         </Link>
