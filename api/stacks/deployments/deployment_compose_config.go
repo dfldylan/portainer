@@ -25,12 +25,19 @@ type ComposeStackDeploymentConfig struct {
 }
 
 func CreateComposeStackDeploymentConfig(securityContext *security.RestrictedRequestContext, stack *portainer.Stack, endpoint *portainer.Endpoint, dataStore dataservices.DataStore, fileService portainer.FileService, deployer StackDeployer, forcePullImage, forceCreate bool) (*ComposeStackDeploymentConfig, error) {
-	user, err := dataStore.User().Read(securityContext.UserID)
+	return CreateComposeStackDeploymentConfigTx(dataStore, securityContext, stack, endpoint, fileService, deployer, forcePullImage, forceCreate)
+}
+
+// Alternate function that works within a transaction
+// We didn't update the original function to use a transaction because it would be a breaking change for many other files.
+// Let's do this only where necessary for now. This is also planed to be refactored in the future, but not prioritized right now.
+func CreateComposeStackDeploymentConfigTx(tx dataservices.DataStoreTx, securityContext *security.RestrictedRequestContext, stack *portainer.Stack, endpoint *portainer.Endpoint, fileService portainer.FileService, deployer StackDeployer, forcePullImage, forceCreate bool) (*ComposeStackDeploymentConfig, error) {
+	user, err := tx.User().Read(securityContext.UserID)
 	if err != nil {
 		return nil, fmt.Errorf("unable to load user information from the database: %w", err)
 	}
 
-	registries, err := dataStore.Registry().ReadAll()
+	registries, err := tx.Registry().ReadAll()
 	if err != nil {
 		return nil, fmt.Errorf("unable to retrieve registries from the database: %w", err)
 	}

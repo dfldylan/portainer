@@ -6,6 +6,7 @@ import (
 	"time"
 
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/api/dataservices"
 	httperrors "github.com/portainer/portainer/api/http/errors"
 	"github.com/portainer/portainer/api/http/security"
 	"github.com/portainer/portainer/api/stacks/deployments"
@@ -78,13 +79,6 @@ func (handler *Handler) stackUpdate(w http.ResponseWriter, r *http.Request) *htt
 		return httperror.BadRequest("Invalid stack identifier route variable", err)
 	}
 
-	stack, err := handler.DataStore.Stack().Read(portainer.StackID(stackID))
-	if handler.DataStore.IsErrObjectNotFound(err) {
-		return httperror.NotFound("Unable to find a stack with the specified identifier inside the database", err)
-	} else if err != nil {
-		return httperror.InternalServerError("Unable to find a stack with the specified identifier inside the database", err)
-	}
-
 	// TODO: this is a work-around for stacks created with Portainer version >= 1.17.1
 	// The EndpointID property is not available for these stacks, this API endpoint
 	// can use the optional EndpointID query parameter to associate a valid environment(endpoint) identifier to the stack.
@@ -92,63 +86,84 @@ func (handler *Handler) stackUpdate(w http.ResponseWriter, r *http.Request) *htt
 	if err != nil {
 		return httperror.BadRequest("Invalid query parameter: endpointId", err)
 	}
-	if endpointID != int(stack.EndpointID) {
-		stack.EndpointID = portainer.EndpointID(endpointID)
+
+	var stack *portainer.Stack
+	err = handler.DataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
+		var httpErr *httperror.HandlerError
+		stack, httpErr = handler.updateStackInTx(tx, r, portainer.StackID(stackID), portainer.EndpointID(endpointID))
+		if httpErr != nil {
+			return httpErr
+		}
+		return nil
+	})
+	return response.TxResponse(w, stack, err)
+}
+
+func (handler *Handler) updateStackInTx(tx dataservices.DataStoreTx, r *http.Request, stackID portainer.StackID, endpointID portainer.EndpointID) (*portainer.Stack, *httperror.HandlerError) {
+	stack, err := tx.Stack().Read(stackID)
+	if tx.IsErrObjectNotFound(err) {
+		return nil, httperror.NotFound("Unable to find a stack with the specified identifier inside the database", err)
+	} else if err != nil {
+		return nil, httperror.InternalServerError("Unable to find a stack with the specified identifier inside the database", err)
 	}
 
-	endpoint, err := handler.DataStore.Endpoint().Endpoint(stack.EndpointID)
-	if handler.DataStore.IsErrObjectNotFound(err) {
-		return httperror.NotFound("Unable to find the environment associated to the stack inside the database", err)
+	if endpointID != 0 && endpointID != stack.EndpointID {
+		stack.EndpointID = endpointID
+	}
+
+	endpoint, err := tx.Endpoint().Endpoint(stack.EndpointID)
+	if tx.IsErrObjectNotFound(err) {
+		return nil, httperror.NotFound("Unable to find the environment associated to the stack inside the database", err)
 	} else if err != nil {
-		return httperror.InternalServerError("Unable to find the environment associated to the stack inside the database", err)
+		return nil, httperror.InternalServerError("Unable to find the environment associated to the stack inside the database", err)
 	}
 
 	if err := handler.requestBouncer.AuthorizedEndpointOperation(r, endpoint); err != nil {
-		return httperror.Forbidden("Permission denied to access environment", err)
+		return nil, httperror.Forbidden("Permission denied to access environment", err)
 	}
 
 	securityContext, err := security.RetrieveRestrictedRequestContext(r)
 	if err != nil {
-		return httperror.InternalServerError("Unable to retrieve info from request context", err)
+		return nil, httperror.InternalServerError("Unable to retrieve info from request context", err)
 	}
 
 	//only check resource control when it is a DockerSwarmStack or a DockerComposeStack
 	if stack.Type == portainer.DockerSwarmStack || stack.Type == portainer.DockerComposeStack {
-		resourceControl, err := handler.DataStore.ResourceControl().ResourceControlByResourceIDAndType(stackutils.ResourceControlID(stack.EndpointID, stack.Name), portainer.StackResourceControl)
+		resourceControl, err := tx.ResourceControl().ResourceControlByResourceIDAndType(stackutils.ResourceControlID(stack.EndpointID, stack.Name), portainer.StackResourceControl)
 		if err != nil {
-			return httperror.InternalServerError("Unable to retrieve a resource control associated to the stack", err)
+			return nil, httperror.InternalServerError("Unable to retrieve a resource control associated to the stack", err)
 		}
 
 		if access, err := handler.userCanAccessStack(securityContext, endpoint.ID, resourceControl); err != nil {
-			return httperror.InternalServerError("Unable to verify user authorizations to validate stack access", err)
+			return nil, httperror.InternalServerError("Unable to verify user authorizations to validate stack access", err)
 		} else if !access {
-			return httperror.Forbidden("Access denied to resource", httperrors.ErrResourceAccessDenied)
+			return nil, httperror.Forbidden("Access denied to resource", httperrors.ErrResourceAccessDenied)
 		}
 	}
 
 	if canManage, err := handler.userCanManageStacks(securityContext, endpoint); err != nil {
-		return httperror.InternalServerError("Unable to verify user authorizations to validate stack deletion", err)
+		return nil, httperror.InternalServerError("Unable to verify user authorizations to validate stack deletion", err)
 	} else if !canManage {
 		errMsg := "Stack editing is disabled for non-admin users"
 
-		return httperror.Forbidden(errMsg, errors.New(errMsg))
+		return nil, httperror.Forbidden(errMsg, errors.New(errMsg))
 	}
 
-	if err := handler.updateAndDeployStack(r, stack, endpoint); err != nil {
-		return err
+	if err := handler.updateAndDeployStack(tx, r, stack, endpoint); err != nil {
+		return nil, err
 	}
 
-	user, err := handler.DataStore.User().Read(securityContext.UserID)
+	user, err := tx.User().Read(securityContext.UserID)
 	if err != nil {
-		return httperror.BadRequest("Cannot find context user", errors.Wrap(err, "failed to fetch the user"))
+		return nil, httperror.BadRequest("Cannot find context user", errors.Wrap(err, "failed to fetch the user"))
 	}
 
 	stack.UpdatedBy = user.Username
 	stack.UpdateDate = time.Now().Unix()
 	stack.Status = portainer.StackStatusActive
 
-	if err := handler.DataStore.Stack().Update(stack.ID, stack); err != nil {
-		return httperror.InternalServerError("Unable to persist the stack changes inside the database", err)
+	if err := tx.Stack().Update(stack.ID, stack); err != nil {
+		return nil, httperror.InternalServerError("Unable to persist the stack changes inside the database", err)
 	}
 
 	if stack.GitConfig != nil && stack.GitConfig.Authentication != nil && stack.GitConfig.Authentication.Password != "" {
@@ -156,19 +171,19 @@ func (handler *Handler) stackUpdate(w http.ResponseWriter, r *http.Request) *htt
 		stack.GitConfig.Authentication.Password = ""
 	}
 
-	return response.JSON(w, stack)
+	return stack, nil
 }
 
-func (handler *Handler) updateAndDeployStack(r *http.Request, stack *portainer.Stack, endpoint *portainer.Endpoint) *httperror.HandlerError {
+func (handler *Handler) updateAndDeployStack(tx dataservices.DataStoreTx, r *http.Request, stack *portainer.Stack, endpoint *portainer.Endpoint) *httperror.HandlerError {
 	switch stack.Type {
 	case portainer.DockerSwarmStack:
 		stack.Name = handler.SwarmStackManager.NormalizeStackName(stack.Name)
 
-		return handler.updateSwarmStack(r, stack, endpoint)
+		return handler.updateSwarmStack(tx, r, stack, endpoint)
 	case portainer.DockerComposeStack:
 		stack.Name = handler.ComposeStackManager.NormalizeStackName(stack.Name)
 
-		return handler.updateComposeStack(r, stack, endpoint)
+		return handler.updateComposeStack(tx, r, stack, endpoint)
 	case portainer.KubernetesStack:
 		return handler.updateKubernetesStack(r, stack, endpoint)
 	}
@@ -176,7 +191,7 @@ func (handler *Handler) updateAndDeployStack(r *http.Request, stack *portainer.S
 	return httperror.InternalServerError("Unsupported stack", errors.Errorf("unsupported stack type: %v", stack.Type))
 }
 
-func (handler *Handler) updateComposeStack(r *http.Request, stack *portainer.Stack, endpoint *portainer.Endpoint) *httperror.HandlerError {
+func (handler *Handler) updateComposeStack(tx dataservices.DataStoreTx, r *http.Request, stack *portainer.Stack, endpoint *portainer.Endpoint) *httperror.HandlerError {
 	// Must not be git based stack. stop the auto update job if there is any
 	if stack.AutoUpdate != nil {
 		deployments.StopAutoupdate(stack.ID, stack.AutoUpdate.JobID, handler.Scheduler)
@@ -213,10 +228,9 @@ func (handler *Handler) updateComposeStack(r *http.Request, stack *portainer.Sta
 		return httperror.InternalServerError("Unable to retrieve info from request context", err)
 	}
 
-	composeDeploymentConfig, err := deployments.CreateComposeStackDeploymentConfig(securityContext,
+	composeDeploymentConfig, err := deployments.CreateComposeStackDeploymentConfigTx(tx, securityContext,
 		stack,
 		endpoint,
-		handler.DataStore,
 		handler.FileService,
 		handler.StackDeployer,
 		payload.PullImage,
@@ -243,7 +257,7 @@ func (handler *Handler) updateComposeStack(r *http.Request, stack *portainer.Sta
 	return nil
 }
 
-func (handler *Handler) updateSwarmStack(r *http.Request, stack *portainer.Stack, endpoint *portainer.Endpoint) *httperror.HandlerError {
+func (handler *Handler) updateSwarmStack(tx dataservices.DataStoreTx, r *http.Request, stack *portainer.Stack, endpoint *portainer.Endpoint) *httperror.HandlerError {
 	// Must not be git based stack. stop the auto update job if there is any
 	if stack.AutoUpdate != nil {
 		deployments.StopAutoupdate(stack.ID, stack.AutoUpdate.JobID, handler.Scheduler)
@@ -280,10 +294,9 @@ func (handler *Handler) updateSwarmStack(r *http.Request, stack *portainer.Stack
 		return httperror.InternalServerError("Unable to retrieve info from request context", err)
 	}
 
-	swarmDeploymentConfig, err := deployments.CreateSwarmStackDeploymentConfig(securityContext,
+	swarmDeploymentConfig, err := deployments.CreateSwarmStackDeploymentConfigTx(tx, securityContext,
 		stack,
 		endpoint,
-		handler.DataStore,
 		handler.FileService,
 		handler.StackDeployer,
 		payload.Prune,
