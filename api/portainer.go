@@ -354,6 +354,14 @@ type (
 		Status     []EdgeStackDeploymentStatus
 		// EE only feature
 		DeploymentInfo StackDeploymentInfo
+		// RePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+		RePullImage bool `json:"RePullImage,omitempty"`
+		// ForceRedeploy is a flag to indicate whether the force redeployment is set for the current
+		// deployment of the edge stack. The redeployment could be triggered by GitOps Update or manually by user.
+		ForceRedeploy bool `json:"ForceRedeploy,omitempty"`
+
+		// Deprecated(2.36): use ForceRedeploy and RePullImage instead for cleaner
+		// responsibility, but keep it for backward compatibility. To remove in future versions (2.44+)
 		// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
 		ReadyRePullImage bool `json:"ReadyRePullImage,omitempty"`
 	}
