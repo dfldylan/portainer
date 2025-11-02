@@ -342,7 +342,7 @@ angular.module('portainer.app').controller('StackController', [
             $scope.containerNames = ContainerHelper.getContainerNames(data.containers);
 
             $scope.formValues.Env = $scope.stack.Env;
-
+            $scope.formValues.Prune = !!($scope.stack.Option && $scope.stack.Option.Prune);
             let resourcesPromise = Promise.resolve({});
             if (!stack.Status || stack.Status === 1) {
               resourcesPromise = stack.Type === 1 ? retrieveSwarmStackResources(stack.Name, agentProxy) : retrieveComposeStackResources(stack.Name);

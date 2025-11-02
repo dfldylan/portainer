@@ -309,6 +309,14 @@ func (handler *Handler) updateSwarmStack(tx dataservices.DataStoreTx, r *http.Re
 		return httperror.InternalServerError(err.Error(), err)
 	}
 
+	if stack.Option != nil {
+		stack.Option.Prune = payload.Prune
+	} else {
+		stack.Option = &portainer.StackOption{
+			Prune: payload.Prune,
+		}
+	}
+
 	// Deploy the stack
 	if err := swarmDeploymentConfig.Deploy(); err != nil {
 		if rollbackErr := handler.FileService.RollbackStackFile(stackFolder, stack.EntryPoint); rollbackErr != nil {
