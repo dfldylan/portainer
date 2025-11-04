@@ -1,5 +1,6 @@
 import { getEnvironments } from '@/react/portainer/environments/environment.service';
 import { restoreOptions } from '@/react/portainer/init/InitAdminView/restore-options';
+import { privacyPolicyUrl } from '@/react/portainer/settings/SettingsView/ApplicationSettingsPanel/EnableTelemetryField';
 
 angular.module('portainer.app').controller('InitAdminController', [
   '$scope',
@@ -13,6 +14,8 @@ angular.module('portainer.app').controller('InitAdminController', [
   'StatusService',
   function ($scope, $state, Notifications, Authentication, StateManager, SettingsService, UserService, BackupService, StatusService) {
     $scope.restoreOptions = restoreOptions;
+
+    $scope.privacyPolicyUrl = privacyPolicyUrl;
 
     $scope.uploadBackup = uploadBackup;
 
