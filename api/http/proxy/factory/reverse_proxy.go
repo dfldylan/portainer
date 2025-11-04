@@ -1,7 +1,6 @@
 package factory
 
 import (
-	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"strings"
@@ -34,30 +33,30 @@ var allowedHeaders = map[string]struct{}{
 // from golang.org/src/net/http/httputil/reverseproxy.go and merely sets the Host
 // HTTP header, which NewSingleHostReverseProxy deliberately preserves.
 func NewSingleHostReverseProxyWithHostHeader(target *url.URL) *httputil.ReverseProxy {
-	return &httputil.ReverseProxy{Director: createDirector(target)}
+	return &httputil.ReverseProxy{Rewrite: createRewriteFn(target)}
 }
 
-func createDirector(target *url.URL) func(*http.Request) {
+func createRewriteFn(target *url.URL) func(*httputil.ProxyRequest) {
 	targetQuery := target.RawQuery
-	return func(req *http.Request) {
-		req.URL.Scheme = target.Scheme
-		req.URL.Host = target.Host
-		req.URL.Path = singleJoiningSlash(target.Path, req.URL.Path)
-		req.Host = req.URL.Host
-		if targetQuery == "" || req.URL.RawQuery == "" {
-			req.URL.RawQuery = targetQuery + req.URL.RawQuery
+	return func(proxyReq *httputil.ProxyRequest) {
+		proxyReq.Out.URL.Scheme = target.Scheme
+		proxyReq.Out.URL.Host = target.Host
+		proxyReq.Out.URL.Path = singleJoiningSlash(target.Path, proxyReq.In.URL.Path)
+		proxyReq.Out.Host = proxyReq.Out.URL.Host
+		if targetQuery == "" || proxyReq.Out.URL.RawQuery == "" {
+			proxyReq.Out.URL.RawQuery = targetQuery + proxyReq.Out.URL.RawQuery
 		} else {
-			req.URL.RawQuery = targetQuery + "&" + req.URL.RawQuery
+			proxyReq.Out.URL.RawQuery = targetQuery + "&" + proxyReq.Out.URL.RawQuery
 		}
-		if _, ok := req.Header["User-Agent"]; !ok {
+		if _, ok := proxyReq.Out.Header["User-Agent"]; !ok {
 			// explicitly disable User-Agent so it's not set to default value
-			req.Header.Set("User-Agent", "")
+			proxyReq.Out.Header.Set("User-Agent", "")
 		}
 
-		for k := range req.Header {
+		for k := range proxyReq.Out.Header {
 			if _, ok := allowedHeaders[k]; !ok {
 				// We use delete here instead of req.Header.Del because we want to delete non canonical headers.
-				delete(req.Header, k)
+				delete(proxyReq.Out.Header, k)
 			}
 		}
 	}
