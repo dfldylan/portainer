@@ -119,14 +119,13 @@
                   endpoint="applicationState.endpoint"
                 >
                 </stack-redeploy-git-form>
+
                 <stack-duplication-form
-                  ng-if="regular && endpoints.length > 0"
-                  endpoints="endpoints"
-                  groups="groups"
-                  current-endpoint-id="endpoint.Id"
-                  on-duplicate="duplicateStack(name, endpointId)"
-                  on-migrate="migrateStack(name, endpointId)"
+                  ng-if="stack && regular"
+                  current-environment-id="endpoint.Id"
                   yaml-error="state.yamlError"
+                  stack="stack"
+                  original-file-content="stackFileContent"
                 >
                 </stack-duplication-form>
               </div>

@@ -1,7 +1,6 @@
 import { ResourceControlType } from '@/react/portainer/access-control/types';
 import { AccessControlFormData } from 'Portainer/components/accessControlForm/porAccessControlFormModel';
 import { FeatureId } from '@/react/portainer/feature-flags/enums';
-import { getEnvironments } from '@/react/portainer/environments/environment.service';
 import { StackStatus, StackType } from '@/react/common/stacks/types';
 import { extractContainerNames } from '@/portainer/helpers/stackHelper';
 import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
@@ -26,7 +25,6 @@ angular.module('portainer.app').controller('StackController', [
   'TaskHelper',
   'Notifications',
   'FormHelper',
-  'GroupService',
   'StackHelper',
   'ResourceControlService',
   'Authentication',
@@ -48,7 +46,6 @@ angular.module('portainer.app').controller('StackController', [
     TaskHelper,
     Notifications,
     FormHelper,
-    GroupService,
     StackHelper,
     ResourceControlService,
     Authentication,
@@ -109,41 +106,8 @@ angular.module('portainer.app').controller('StackController', [
       });
     };
 
-    $scope.duplicateStack = function duplicateStack(name, targetEndpointId) {
-      var stack = $scope.stack;
-      var env = FormHelper.removeInvalidEnvVars($scope.formValues.Env);
-
-      return StackService.duplicateStack(name, $scope.stackFileContent, env, targetEndpointId, stack.Type).then(onDuplicationSuccess).catch(notifyOnError);
-
-      function onDuplicationSuccess() {
-        Notifications.success('Success', 'Stack successfully duplicated');
-        $state.go('docker.stacks', {}, { reload: true });
-      }
-
-      function notifyOnError(err) {
-        Notifications.error('Failure', err, 'Unable to duplicate stack');
-      }
-    };
-
     $scope.showEditor = function () {
       $scope.state.showEditorTab = true;
-    };
-
-    $scope.migrateStack = function (name, endpointId) {
-      return $q(async function (resolve) {
-        const confirmed = await confirm({
-          title: 'Are you sure?',
-          modalType: ModalType.Warn,
-          message:
-            'This action will deploy a new instance of this stack on the target environment, please note that this does NOT relocate the content of any persistent volumes that may be attached to this stack.',
-          confirmButton: buildConfirmButton('Migrate', 'danger'),
-        });
-
-        if (!confirmed) {
-          return resolve();
-        }
-        return resolve(migrateStack(name, endpointId));
-      });
     };
 
     $scope.removeStack = function () {
@@ -164,36 +128,6 @@ angular.module('portainer.app').controller('StackController', [
         $scope.deployStack();
       });
     };
-
-    function migrateStack(name, targetEndpointId) {
-      const stack = $scope.stack;
-
-      let migrateRequest = StackService.migrateSwarmStack;
-      if (stack.Type === 2) {
-        migrateRequest = StackService.migrateComposeStack;
-      }
-
-      // TODO: this is a work-around for stacks created with Portainer version >= 1.17.1
-      // The EndpointID property is not available for these stacks, we can pass
-      // the current endpoint identifier as a part of the migrate request. It will be used if
-      // the EndpointID property is not defined on the stack.
-      if (!stack.EndpointId) {
-        stack.EndpointId = endpoint.Id;
-      }
-
-      $scope.state.migrationInProgress = true;
-      return migrateRequest(stack, targetEndpointId, name)
-        .then(function success() {
-          Notifications.success('Stack successfully migrated', stack.Name);
-          $state.go('docker.stacks', {}, { reload: true });
-        })
-        .catch(function error(err) {
-          Notifications.error('Failure', err, 'Unable to migrate stack');
-        })
-        .finally(function final() {
-          $scope.state.migrationInProgress = false;
-        });
-    }
 
     function deleteStack() {
       var endpointId = +$state.params.endpointId;
@@ -322,22 +256,12 @@ angular.module('portainer.app').controller('StackController', [
       return $async(async () => {
         var agentProxy = $scope.applicationState.endpoint.mode.agentProxy;
 
-        getEnvironments()
-          .then(function success(data) {
-            $scope.endpoints = data.value;
-          })
-          .catch(function error(err) {
-            Notifications.error('Failure', err, 'Unable to retrieve environments');
-          });
-
         $q.all({
           stack: StackService.stack(id),
-          groups: GroupService.groups(),
           containers: ContainerService.containers(endpoint.Id, true),
         })
           .then(function success(data) {
             var stack = data.stack;
-            $scope.groups = data.groups;
             $scope.stack = stack;
             $scope.containerNames = ContainerHelper.getContainerNames(data.containers);
 
