@@ -1,13 +1,16 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { SchemaOf, object, string } from 'yup';
+import { useState } from 'react';
 
 import { useAnalytics } from '@/react/hooks/useAnalytics';
 
-import { LoadingButton } from '@@/buttons';
 import { FormControl } from '@@/form-components/FormControl';
 import { Input } from '@@/form-components/Input';
 import { FormSection } from '@@/form-components/FormSection';
 import { TextTip } from '@@/Tip/TextTip';
+import { FormActions } from '@@/form-components/FormActions';
+
+import { RegistryTestConnection } from '../TestConnection/RegistryTestConnection';
 
 export interface RegistryFormDockerhubValues {
   Name: string;
@@ -31,6 +34,7 @@ export function RegistryFormDockerhub({
   nameIsUsed,
 }: Props) {
   const { trackEvent } = useAnalytics();
+  const [isConnectionTested, setIsConnectionTested] = useState(false);
 
   return (
     <Formik
@@ -40,7 +44,7 @@ export function RegistryFormDockerhub({
       enableReinitialize
       validateOnMount
     >
-      {({ errors, isValid, dirty }) => (
+      {({ errors, isValid, values, setFieldValue }) => (
         <Form className="form-horizontal">
           <FormSection title="Important notice">
             <TextTip color="blue">
@@ -66,12 +70,16 @@ export function RegistryFormDockerhub({
               errors={errors.Name}
               required
             >
-              <Field
-                as={Input}
+              <Input
                 id="registry_name"
                 name="Name"
                 placeholder="dockerhub-prod-us"
                 data-cy="component-registryName"
+                value={values.Name}
+                onChange={(event) => {
+                  setIsConnectionTested(false);
+                  setFieldValue('Name', event.target.value);
+                }}
               />
             </FormControl>
 
@@ -81,11 +89,15 @@ export function RegistryFormDockerhub({
               errors={errors.Username}
               required
             >
-              <Field
-                as={Input}
+              <Input
                 id="registry_username"
                 name="Username"
                 data-cy="component-registryUsername"
+                value={values.Username}
+                onChange={(event) => {
+                  setIsConnectionTested(false);
+                  setFieldValue('Username', event.target.value);
+                }}
               />
             </FormControl>
 
@@ -95,47 +107,46 @@ export function RegistryFormDockerhub({
               errors={errors.Password}
               required
             >
-              <Field
-                as={Input}
+              <Input
                 id="registry_password"
                 name="Password"
                 type="password"
+                data-cy="component-registryPassword"
+                value={values.Password}
+                onChange={(event) => {
+                  setIsConnectionTested(false);
+                  setFieldValue('Password', event.target.value);
+                }}
               />
             </FormControl>
           </FormSection>
 
-          <FormSection title="Actions">
-            <div className="form-group">
-              <div className="col-sm-12">
-                <LoadingButton
-                  type="submit"
-                  color="primary"
-                  size="small"
-                  disabled={!isValid || !dirty}
-                  isLoading={isLoading}
-                  loadingText="In progress..."
-                  onClick={() => handleAnalytics()}
-                  data-cy="registry-form-submit"
-                >
-                  {submitLabel}
-                </LoadingButton>
-              </div>
-            </div>
-          </FormSection>
+          <RegistryTestConnection
+            values={values}
+            onTestSuccess={() => setIsConnectionTested(true)}
+            disabled={!isValid}
+            isConnectionTested={isConnectionTested}
+          />
+
+          <FormActions
+            isLoading={isLoading}
+            isValid={isValid && isConnectionTested}
+            submitLabel={submitLabel}
+            errors={errors}
+            loadingText="In progress..."
+            data-cy="registry-form-submit"
+          />
         </Form>
       )}
     </Formik>
   );
 
   function handleSubmit(values: RegistryFormDockerhubValues) {
-    return onSubmit(values);
-  }
-
-  function handleAnalytics() {
     trackEvent('portainer-registry-creation', {
       category: 'portainer',
       metadata: { type: 'dockerhub' },
     });
+    return onSubmit(values);
   }
 }
 

@@ -93,4 +93,10 @@ export const handlers = [
   http.get('/api/registries/:id', () => HttpResponse.json({})),
 
   http.get('/api/system/info', () => HttpResponse.json({})),
+  http.post('/api/registries/ping', () =>
+    HttpResponse.json({
+      success: true,
+      message: 'Registry connection successful',
+    })
+  ),
 ];

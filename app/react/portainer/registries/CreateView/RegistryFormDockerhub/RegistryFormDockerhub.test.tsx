@@ -1,5 +1,7 @@
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 
@@ -7,6 +9,26 @@ import {
   RegistryFormDockerhub,
   RegistryFormDockerhubValues,
 } from './RegistryFormDockerhub';
+
+// Mock RegistryTestConnection component to auto-trigger success
+vi.mock('../TestConnection/RegistryTestConnection', () => ({
+  RegistryTestConnection: ({
+    onTestSuccess,
+    disabled,
+  }: {
+    onTestSuccess: () => void;
+    disabled?: boolean;
+  }) => {
+    // Auto-trigger success for tests, but only when the form is valid (not disabled)
+    React.useEffect(() => {
+      if (!disabled) {
+        onTestSuccess();
+      }
+    }, [onTestSuccess, disabled]);
+
+    return <div data-testid="registry-test-connection">Test Connection</div>;
+  },
+}));
 
 test('should render form with all required fields', () => {
   renderComponent();
@@ -27,7 +49,8 @@ test('should show validation errors for empty required fields', async () => {
 
   const submitButton = screen.getByRole('button', { name: 'Add registry' });
 
-  // Button should be disabled initially when form is empty
+  await userEvent.click(submitButton);
+
   expect(submitButton).toBeDisabled();
 
   await waitFor(() => {
@@ -90,8 +113,8 @@ test('should submit form with valid data', async () => {
 test('should show loading state when isLoading is true', () => {
   renderComponent({ isLoading: true });
 
-  const submitButton = screen.getByRole('button');
-  expect(submitButton).toHaveTextContent('In progress...');
+  const submitButton = screen.getByRole('button', { name: 'In progress...' });
+
   expect(submitButton).toBeDisabled();
 });
 

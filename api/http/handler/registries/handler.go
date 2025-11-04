@@ -71,6 +71,7 @@ func (handler *Handler) initRouter(bouncer accessGuard) {
 	// Keep the gitlab proxy on the regular authenticated router as it doesn't require specific registry access
 	authenticatedRouter := handler.NewRoute().Subrouter()
 	authenticatedRouter.Use(bouncer.AuthenticatedAccess)
+	authenticatedRouter.Handle("/registries/ping", httperror.LoggerHandler(handler.pingRegistry)).Methods(http.MethodPost)
 	authenticatedRouter.PathPrefix("/registries/proxies/gitlab").Handler(httperror.LoggerHandler(handler.proxyRequestsToGitlabAPIWithoutRegistry))
 }
 
