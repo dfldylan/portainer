@@ -291,12 +291,12 @@ const mockRow = mockTable.getRow('1');
 
 describe('defaultGlobalFilterFn', () => {
   it('should return true when filterValue is null', () => {
-    const result = defaultGlobalFilterFn(mockRow, 'Name', null);
+    const result = defaultGlobalFilterFn(mockRow, 'name', null);
     expect(result).toBe(true);
   });
 
   it('should return true when filterValue.search is empty', () => {
-    const result = defaultGlobalFilterFn(mockRow, 'Name', {
+    const result = defaultGlobalFilterFn(mockRow, 'name', {
       search: '',
     });
     expect(result).toBe(true);

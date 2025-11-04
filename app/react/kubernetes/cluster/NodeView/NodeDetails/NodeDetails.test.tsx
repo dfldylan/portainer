@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 import { withTestRouter } from '@/react/test-utils/withRouter';
@@ -16,12 +16,15 @@ import { confirmUpdateNode } from '../ConfirmUpdateNode';
 import { NodeDetails } from './NodeDetails';
 
 // Mocks
+
 vi.mock('../ConfirmUpdateNode', () => ({
   confirmUpdateNode: vi.fn(),
 }));
+
 vi.mock('@/portainer/services/notifications', () => ({
   notifySuccess: vi.fn(),
 }));
+
 vi.mock(
   '@/react/hooks/useUser',
   async (importOriginal: () => Promise<object>) => {
@@ -32,10 +35,18 @@ vi.mock(
     };
   }
 );
+
 vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
   ...(await importOriginal()),
+
   useCurrentStateAndParams: vi.fn(() => ({
     params: { endpointId: 1, name: 'test-node' },
+  })),
+
+  useRouter: vi.fn(() => ({
+    stateService: {
+      reload: vi.fn(),
+    },
   })),
 }));
 
@@ -169,10 +180,6 @@ describe('NodeDetails', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     setupMocks();
-  });
-
-  afterEach(() => {
-    server.resetHandlers();
   });
 
   it('shows drain warning when selecting Drain availability', async () => {

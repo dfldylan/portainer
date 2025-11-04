@@ -145,6 +145,7 @@ function useEnvironmentTagNames(tagIds?: TagId[]) {
           .map((tag) => tag?.Name)
       );
     },
+    enabled: !!tagIds && tagIds.length > 0,
   });
 
   const { data: tags, isLoading } = tagsQuery;

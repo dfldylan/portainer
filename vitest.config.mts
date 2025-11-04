@@ -8,11 +8,11 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: [
+      './app/setup-tests/setup-rtl.ts',
       './app/setup-tests/setup-msw.ts',
       './app/setup-tests/stub-modules.ts',
       './app/setup-tests/setup.ts',
       './app/setup-tests/setup-codemirror.ts',
-      './app/setup-tests/setup-rtl.ts',
     ],
     coverage: {
       provider: 'v8',
@@ -24,8 +24,13 @@ export default defineConfig({
     env: {
       PORTAINER_EDITION: 'CE',
     },
-    deps: {
-      inline: [/@radix-ui/, /codemirror-json-schema/], // https://github.com/radix-ui/primitives/issues/2974#issuecomment-2186808459
+    server: {
+      deps: {
+        inline: [/@radix-ui/, /codemirror-json-schema/], // https://github.com/radix-ui/primitives/issues/2974#issuecomment-2186808459
+      },
+    },
+    onConsoleLog(log) {
+      return !/Can't perform a React state update on an unmounted component/.test(log);
     },
   },
   plugins: [svgr({ include: /\?c$/ }), tsconfigPaths()],

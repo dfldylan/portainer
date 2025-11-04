@@ -9,13 +9,16 @@ import { EnvironmentGroup } from '@/react/portainer/environments/environment-gro
 import { Tag } from '@/portainer/tags/types';
 import { StatusResponse } from '@/react/portainer/system/useSystemStatus';
 import { createMockTeams } from '@/react-tools/test-mocks';
-import { PublicSettingsResponse } from '@/react/portainer/settings/types';
 import { UserId } from '@/portainer/users/types';
 import { VersionResponse } from '@/react/portainer/system/useSystemVersion';
 
 import { azureHandlers } from './setup-handlers/azure';
 import { dockerHandlers } from './setup-handlers/docker';
 import { userHandlers } from './setup-handlers/users';
+import { kubernetesHandlers } from './setup-handlers/kubernetes';
+import { endpointsHandlers } from './setup-handlers/endpoints';
+import { settingsHandlers } from './setup-handlers/settings';
+import { templatesHandlers } from './setup-handlers/templates';
 
 const tags: Tag[] = [
   { ID: 1, Name: 'tag1', Endpoints: {} },
@@ -44,9 +47,13 @@ export const handlers = [
   http.post<never, { userId: UserId }>('/api/team_memberships', () =>
     HttpResponse.json(null, { status: 204 })
   ),
+  ...endpointsHandlers,
+  ...settingsHandlers,
+  ...templatesHandlers,
   ...azureHandlers,
   ...dockerHandlers,
   ...userHandlers,
+  ...kubernetesHandlers,
   http.get('/api/licenses/info', () => HttpResponse.json(licenseInfo)),
   http.get('/api/status/nodes', () => HttpResponse.json({ nodes: 3 })),
   http.get('/api/backup/s3/status', () => HttpResponse.json({ Failed: false })),
@@ -70,19 +77,7 @@ export const handlers = [
     tags.push(tag);
     return HttpResponse.json(tag);
   }),
-  http.get<never, never, Partial<PublicSettingsResponse>>(
-    '/api/settings/public',
-    () =>
-      HttpResponse.json({
-        Edge: {
-          AsyncMode: false,
-          CheckinInterval: 60,
-          CommandInterval: 60,
-          PingInterval: 60,
-          SnapshotInterval: 60,
-        },
-      })
-  ),
+
   http.get<never, never, Partial<StatusResponse>>('/api/status', () =>
     HttpResponse.json({})
   ),
@@ -90,5 +85,12 @@ export const handlers = [
     HttpResponse.json({ ServerVersion: 'v2.10.0' })
   ),
   http.get('/api/teams/:id/memberships', () => HttpResponse.json([])),
-  http.get('/api/endpoints/agent_versions', () => HttpResponse.json([])),
+  http.get('/api/observability/alerting/settings', () => HttpResponse.json([])),
+  http.get('/observability/alerting/rules', () => HttpResponse.json([])),
+
+  http.get('/api/omni/:id/machines', () => HttpResponse.json([])),
+  http.get('/api/registries', () => HttpResponse.json([])),
+  http.get('/api/registries/:id', () => HttpResponse.json({})),
+
+  http.get('/api/system/info', () => HttpResponse.json({})),
 ];
