@@ -15,14 +15,15 @@ export function RegistryViewModel(data) {
   this.Gitlab = data.Gitlab;
   this.Quay = data.Quay;
   this.Ecr = data.Ecr;
+  this.ManagementConfiguration = data.ManagementConfiguration;
 }
 
 export function RegistryManagementConfigurationDefaultModel(registry) {
   this.Authentication = registry.Authentication;
   this.Username = registry.Username;
   this.Password = '';
-  this.TLS = false;
-  this.TLSSkipVerify = false;
+  this.TLS = (registry.ManagementConfiguration && registry.ManagementConfiguration.TLSConfig && registry.ManagementConfiguration.TLSConfig.TLS) || false;
+  this.TLSSkipVerify = (registry.ManagementConfiguration && registry.ManagementConfiguration.TLSConfig && registry.ManagementConfiguration.TLSConfig.TLSSkipVerify) || false;
   this.TLSCACertFile = null;
   this.TLSCertFile = null;
   this.TLSKeyFile = null;
