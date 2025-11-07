@@ -15,6 +15,8 @@ import (
 	"github.com/compose-spec/compose-go/v2/consts"
 	"github.com/compose-spec/compose-go/v2/types"
 	"github.com/docker/cli/cli/command"
+	"github.com/docker/cli/cli/config"
+	configtypes "github.com/docker/cli/cli/config/types"
 	cmdcompose "github.com/docker/compose/v2/cmd/compose"
 	"github.com/docker/compose/v2/pkg/api"
 	"github.com/docker/compose/v2/pkg/compose"
@@ -28,13 +30,13 @@ import (
 func Test_UpAndDown(t *testing.T) {
 	const projectName = "composetest"
 
-	const composeFileContent = `version: "3.9"
+	const composeFileContent = `
 services:
   busybox:
     image: "alpine:3.7"
     container_name: "composetest_container_one"`
 
-	const overrideComposeFileContent = `version: "3.9"
+	const overrideComposeFileContent = `
 services:
   busybox:
     image: "alpine:latest"
@@ -1312,7 +1314,80 @@ func Test_createProject(t *testing.T) {
 	}
 }
 
-func createMockComposeService(dockerCli command.Cli, opts ...compose.Option) api.Compose {
+func Test_CredentialsStore_Behavior(t *testing.T) {
+	ctx := context.Background()
+	// Create a temporary Docker config with a credsStore set (simulating Docker Desktop)
+	tmpDir := t.TempDir()
+
+	// Write a fake config.json with credsStore configured
+	configJSON := `{
+	"credsStore": "test-store",
+	"auths": {}
+}`
+	configPath := filepath.Join(tmpDir, "config.json")
+	err := os.WriteFile(configPath, []byte(configJSON), 0644)
+	require.NoError(t, err)
+
+	t.Run("withCli preserves credsStore when no registries provided", func(t *testing.T) {
+		// Set the Docker config directory to the temp dir
+		config.SetDir(tmpDir)
+
+		var capturedCredsStore string
+		var capturedAuthConfigs map[string]configtypes.AuthConfig
+
+		err = withCli(ctx, libstack.Options{}, func(ctx context.Context, cli *command.DockerCli) error {
+			// Capture the state after withCli sets up credentials
+			capturedCredsStore = cli.ConfigFile().CredentialsStore
+			capturedAuthConfigs = cli.ConfigFile().AuthConfigs
+			return nil
+		})
+		require.NoError(t, err)
+
+		// Verify the fix: credsStore should be preserved when no registries are provided
+		require.Equal(t, "test-store", capturedCredsStore,
+			"credsStore should be preserved when no registries are provided")
+
+		// Verify registry credentials were not set
+		require.Empty(t, capturedAuthConfigs,
+			"no registry credentials should be configured in AuthConfigs")
+	})
+
+	t.Run("withCli clears credsStore when registries provided", func(t *testing.T) {
+		// Set the Docker config directory to the temp dir
+		config.SetDir(tmpDir)
+
+		// Test with registries provided
+		registries := []configtypes.AuthConfig{
+			{
+				Username:      "testuser",
+				Password:      "testpass",
+				ServerAddress: "registry.example.com",
+			},
+		}
+		var capturedCredsStore string
+		var capturedAuthConfigs map[string]configtypes.AuthConfig
+
+		err = withCli(ctx, libstack.Options{Registries: registries}, func(ctx context.Context, cli *command.DockerCli) error {
+			// Capture the state after withCli sets up credentials
+			capturedCredsStore = cli.ConfigFile().CredentialsStore
+			capturedAuthConfigs = cli.ConfigFile().AuthConfigs
+			return nil
+		})
+		require.NoError(t, err)
+
+		// Verify the fix: credsStore should be empty when registries are provided
+		require.Empty(t, capturedCredsStore,
+			"credsStore should be cleared when registries are provided to force Docker to use inline credentials")
+
+		// Verify registry credentials were set
+		require.Contains(t, capturedAuthConfigs, "registry.example.com",
+			"custom registry credentials should be configured in AuthConfigs")
+		require.Equal(t, "testuser", capturedAuthConfigs["registry.example.com"].Username,
+			"custom registry username should match")
+	})
+}
+
+func createMockComposeService(command.Cli, ...compose.Option) api.Compose {
 	return &mockComposeService{}
 }
 

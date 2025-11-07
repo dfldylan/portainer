@@ -75,6 +75,29 @@ func withCli(
 		cli.ConfigFile().AuthConfigs[r.ServerAddress] = r
 	}
 
+	// Docker resolves credentials in the following priority:
+	// 1. credHelpers – per-registry credential helpers
+	// 2. credsStore  – global credential store used for all registries
+	// 3. auths       – inline credentials defined in config.json
+	//
+	// Many Docker Desktop users (Windows/macOS) have a global credsStore configured
+	// by default (e.g. "desktop.exe" on Windows or "osxkeychain" on macOS). These
+	// global stores often do not include credentials for the custom registries
+	// defined in Portainer stacks, leading to authentication failures.
+	//
+	// To avoid this, when inline credentials are provided for one or more registries,
+	// we intentionally clear the global credsStore. This ensures Docker uses the
+	// credentials configured in Portainer instead of falling back to an empty global
+	// store.
+	//
+	// If no inline credentials are configured in Portainer, we keep the credsStore
+	// so Docker can still use it as a fallback.
+	// credHelpers are not affected as they are external services managed by the user.
+	// @ref: https://linear.app/portainer/issue/BE-12237
+	if len(options.Registries) > 0 {
+		cli.ConfigFile().CredentialsStore = ""
+	}
+
 	return cliFn(ctx, cli)
 }
 
