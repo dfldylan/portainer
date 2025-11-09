@@ -1,4 +1,5 @@
 import { ResourceControlResponse } from '@/react/portainer/access-control/types';
+import { AuthTypeOption } from '@/react/portainer/account/git-credentials/types';
 import {
   AutoUpdateResponse,
   RepoConfigResponse,
@@ -64,3 +65,21 @@ export interface Stack {
 export type StackFile = {
   StackFileContent: string;
 };
+
+export interface GitStackPayload {
+  env: Array<{ name: string; value: string }>;
+  prune?: boolean;
+  RepositoryReferenceName?: string;
+  RepositoryAuthentication?: boolean;
+  RepositoryGitCredentialID?: number;
+  RepositoryUsername?: string;
+  RepositoryPassword?: string;
+  RepositoryAuthorizationType?: AuthTypeOption;
+  PullImage?: boolean;
+  AutoUpdate?: AutoUpdateResponse | null;
+  TLSSkipVerify?: boolean;
+  Registries?: number[];
+  HelmChartPath?: string;
+  HelmValuesFiles?: string[];
+  Atomic?: boolean;
+}
