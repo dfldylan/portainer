@@ -34,6 +34,18 @@ it('should initialize form with empty name and no selected environment', async (
   });
 });
 
+it('should display rename help text', async () => {
+  const { getByText } = renderComponent();
+
+  await waitFor(() => {
+    expect(
+      getByText(
+        'To rename the stack, choose the same environment when migrating.'
+      )
+    ).toBeVisible();
+  });
+});
+
 function createMockStack(overrides?: Partial<Stack>): Stack {
   return {
     Id: 1,

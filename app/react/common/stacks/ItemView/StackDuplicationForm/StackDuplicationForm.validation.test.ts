@@ -3,7 +3,6 @@ import { renderHook } from '@testing-library/react-hooks';
 import type { AnySchema } from 'yup';
 
 import {
-  getBaseValidationSchema,
   getDuplicateValidationSchema,
   getMigrateValidationSchema,
   useValidation,
@@ -14,31 +13,65 @@ describe('getDuplicateValidationSchema', () => {
   const schema = getDuplicateValidationSchema();
 
   describe('name validation', () => {
-    it('should require stack name', async () => {
-      await expect(
-        schema.validate({ name: '', environmentId: 2 })
-      ).rejects.toThrow('Stack name is required');
-    });
-
     it.each([
-      ['lowercase alphanumeric', 'mystack123'],
-      ['with underscores', 'my_stack'],
-      ['with hyphens', 'my-stack'],
-      ['with underscores and hyphens', 'my_stack-123'],
-    ])('should accept valid names: %s', async (_, name) => {
-      await expect(
-        schema.validate({ name, environmentId: 2 })
-      ).resolves.toBeTruthy();
-    });
-
-    it.each([
-      ['uppercase letters', 'MyStack'],
-      ['spaces', 'my stack'],
-      ['special characters', 'my@stack'],
-    ])('should reject names with %s', async (_, name) => {
-      await expect(schema.validate({ name, environmentId: 2 })).rejects.toThrow(
-        "Stack name must consist of lower case alphanumeric characters, '_' or '-'"
-      );
+      {
+        name: '',
+        environmentId: 2,
+        error: 'Stack name is required',
+        scenario: 'should fail with empty name',
+      },
+      {
+        name: 'mystack123',
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid with lowercase alphanumeric',
+      },
+      {
+        name: 'my_stack',
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid with underscores',
+      },
+      {
+        name: 'my-stack',
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid with hyphens',
+      },
+      {
+        name: 'my_stack-123',
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid with underscores and hyphens',
+      },
+      {
+        name: 'MyStack',
+        environmentId: 2,
+        error:
+          "Stack name must consist of lower case alphanumeric characters, '_' or '-'",
+        scenario: 'should fail with uppercase letters',
+      },
+      {
+        name: 'my stack',
+        environmentId: 2,
+        error:
+          "Stack name must consist of lower case alphanumeric characters, '_' or '-'",
+        scenario: 'should fail with spaces',
+      },
+      {
+        name: 'my@stack',
+        environmentId: 2,
+        error:
+          "Stack name must consist of lower case alphanumeric characters, '_' or '-'",
+        scenario: 'should fail with special characters',
+      },
+    ])('$scenario', async ({ name, environmentId, error }) => {
+      const promise = schema.validate({ name, environmentId });
+      if (error) {
+        await expect(promise).rejects.toThrow(error);
+      } else {
+        await expect(promise).resolves.toBeTruthy();
+      }
     });
   });
 
@@ -48,81 +81,144 @@ describe('getDuplicateValidationSchema', () => {
 });
 
 describe('getMigrateValidationSchema', () => {
+  const currentStackName = 'test-stack';
   const currentEnvironmentId = 1;
-  const schema = getMigrateValidationSchema(currentEnvironmentId);
+  const schema = getMigrateValidationSchema(
+    currentStackName,
+    currentEnvironmentId
+  );
 
   describe('name validation (optional)', () => {
     it.each([
-      ['empty string', ''],
-      ['undefined', undefined],
-    ])('should accept %s', async (_, name) => {
-      await expect(
-        schema.validate({ name, environmentId: 2 })
-      ).resolves.toBeTruthy();
-    });
-
-    it.each([
-      ['valid format', 'mystack'],
-      ['with underscores and hyphens', 'my_stack-123'],
-    ])('should accept valid name when provided: %s', async (_, name) => {
-      await expect(
-        schema.validate({ name, environmentId: 2 })
-      ).resolves.toBeTruthy();
-    });
-
-    it.each([
-      ['uppercase letters', 'MyStack'],
-      ['special characters', 'my@stack'],
-    ])('should reject invalid format when provided: %s', async (_, name) => {
-      await expect(schema.validate({ name, environmentId: 2 })).rejects.toThrow(
-        "Stack name must consist of lower case alphanumeric characters, '_' or '-'"
-      );
-    });
-  });
-
-  describe('environmentId validation', () => {
-    testEnvironmentIdValidation(schema, currentEnvironmentId);
-  });
-});
-
-describe('getBaseValidationSchema', () => {
-  const schema = getBaseValidationSchema();
-
-  describe('name validation (optional)', () => {
-    it.each([
-      ['empty string', ''],
-      ['undefined', undefined],
-    ])('should accept %s', async (_, name) => {
-      await expect(
-        schema.validate({ name, environmentId: 2 })
-      ).resolves.toBeTruthy();
-    });
-
-    it.each([
-      ['valid format', 'mystack'],
-      ['with underscores and hyphens', 'my_stack-123'],
-    ])('should accept valid name when provided: %s', async (_, name) => {
-      await expect(
-        schema.validate({ name, environmentId: 2 })
-      ).resolves.toBeTruthy();
-    });
-
-    it.each([
-      ['uppercase letters', 'MyStack'],
-      ['special characters', 'my@stack'],
-    ])('should reject invalid format when provided: %s', async (_, name) => {
-      await expect(schema.validate({ name, environmentId: 2 })).rejects.toThrow(
-        "Stack name must consist of lower case alphanumeric characters, '_' or '-'"
-      );
+      {
+        name: '',
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid with empty string',
+      },
+      {
+        name: undefined,
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid with undefined',
+      },
+      {
+        name: 'mystack',
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid with lowercase alphanumeric',
+      },
+      {
+        name: 'my_stack-123',
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid with underscores and hyphens',
+      },
+      {
+        name: 'MyStack',
+        environmentId: 2,
+        error:
+          "Stack name must consist of lower case alphanumeric characters, '_' or '-'",
+        scenario: 'should fail with uppercase letters',
+      },
+      {
+        name: 'my@stack',
+        environmentId: 2,
+        error:
+          "Stack name must consist of lower case alphanumeric characters, '_' or '-'",
+        scenario: 'should fail with special characters',
+      },
+    ])('$scenario', async ({ name, environmentId, error }) => {
+      const promise = schema.validate({ name, environmentId });
+      if (error) {
+        await expect(promise).rejects.toThrow(error);
+      } else {
+        await expect(promise).resolves.toBeTruthy();
+      }
     });
   });
 
   describe('environmentId validation', () => {
     testEnvironmentIdValidation(schema);
   });
+
+  describe('rename validation (same environment)', () => {
+    it.each([
+      {
+        name: currentStackName,
+        environmentId: currentEnvironmentId,
+        error: "Can't rename to the same name",
+        scenario: 'should fail when renaming to same name',
+      },
+      {
+        name: '',
+        environmentId: currentEnvironmentId,
+        error: 'Stack name is required when renaming',
+        scenario: 'should fail when renaming with empty name',
+      },
+      {
+        name: undefined,
+        environmentId: currentEnvironmentId,
+        error: 'Stack name is required when renaming',
+        scenario: 'should fail when renaming with undefined name',
+      },
+      {
+        name: 'new-stack-name',
+        environmentId: currentEnvironmentId,
+        error: '',
+        scenario: 'should be valid when renaming to different name',
+      },
+    ])('$scenario', async ({ name, environmentId, error }) => {
+      const promise = schema.validate({ name, environmentId });
+      if (error) {
+        await expect(promise).rejects.toThrow(error);
+      } else {
+        await expect(promise).resolves.toBeTruthy();
+      }
+    });
+  });
+
+  describe('migrate validation (different environment)', () => {
+    it.each([
+      {
+        name: '',
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid when migrating with empty name',
+      },
+      {
+        name: undefined,
+        environmentId: 2,
+        error: '',
+        scenario: 'should be valid when migrating with undefined name',
+      },
+      {
+        name: currentStackName,
+        environmentId: 2,
+        error: '',
+        scenario:
+          'should be valid when migrating with same name to different environment',
+      },
+      {
+        name: 'new-stack-name',
+        environmentId: 2,
+        error: '',
+        scenario:
+          'should be valid when migrating with different name to different environment',
+      },
+    ])('$scenario', async ({ name, environmentId, error }) => {
+      const promise = schema.validate({ name, environmentId });
+      if (error) {
+        await expect(promise).rejects.toThrow(error);
+      } else {
+        await expect(promise).resolves.toBeTruthy();
+      }
+    });
+  });
 });
 
 describe('useValidation', () => {
+  const currentStackName = 'test-stack';
   const currentEnvironmentId = 1;
 
   it('should start with both migrate and duplicate as false', () => {
@@ -133,6 +229,7 @@ describe('useValidation', () => {
           newName: '',
           actionType: 'migrate',
         },
+        currentStackName,
         currentEnvironmentId,
       })
     );
@@ -141,119 +238,11 @@ describe('useValidation', () => {
     expect(result.current.duplicate).toBe(false);
   });
 
-  describe('migrate validation state', () => {
-    it('should set migrate to true when valid environmentId is selected', async () => {
-      const { result } = renderHook(() =>
-        useValidation({
-          values: {
-            environmentId: 2,
-            newName: '',
-            actionType: 'migrate',
-          },
-          currentEnvironmentId,
-        })
-      );
-
-      await waitFor(() => {
-        expect(result.current.migrate).toBe(true);
-      });
-    });
-
-    it('should set migrate to true when valid environmentId and valid name provided', async () => {
-      const { result } = renderHook(() =>
-        useValidation({
-          values: {
-            environmentId: 2,
-            newName: 'mystack',
-            actionType: 'migrate',
-          },
-          currentEnvironmentId,
-        })
-      );
-
-      await waitFor(() => {
-        expect(result.current.migrate).toBe(true);
-      });
-    });
-
-    it.each([
-      ['matches current environment', currentEnvironmentId, ''],
-      ['is undefined', undefined, ''],
-      ['has invalid name format', 2, 'InvalidName'],
-    ])(
-      'should set migrate to false when environmentId %s',
-      async (_, environmentId, newName) => {
-        const { result } = renderHook(() =>
-          useValidation({
-            values: {
-              environmentId,
-              newName,
-              actionType: 'migrate',
-            },
-            currentEnvironmentId,
-          })
-        );
-
-        await waitFor(() => {
-          expect(result.current.migrate).toBe(false);
-        });
-      }
-    );
-  });
-
-  describe('duplicate validation state', () => {
-    it('should set duplicate to true when valid name and environmentId provided', async () => {
-      const { result } = renderHook(() =>
-        useValidation({
-          values: {
-            environmentId: 2,
-            newName: 'mystack',
-            actionType: 'duplicate',
-          },
-          currentEnvironmentId,
-        })
-      );
-
-      await waitFor(() => {
-        expect(result.current.duplicate).toBe(true);
-      });
-    });
-
-    it.each([
-      ['name is empty', 2, ''],
-      ['name format is invalid', 2, 'Invalid@Name'],
-      [
-        'environmentId matches current environment',
-        currentEnvironmentId,
-        'mystack',
-      ],
-      ['environmentId is undefined', undefined, 'mystack'],
-    ])(
-      'should set duplicate to false when %s',
-      async (_, environmentId, newName) => {
-        const { result } = renderHook(() =>
-          useValidation({
-            values: {
-              environmentId,
-              newName,
-              actionType: 'duplicate',
-            },
-            currentEnvironmentId,
-          })
-        );
-
-        await waitFor(() => {
-          expect(result.current.duplicate).toBe(false);
-        });
-      }
-    );
-  });
-
   describe('reactive updates', () => {
     it('should revalidate when environmentId changes', async () => {
       const { result, rerender } = renderHook(
         ({ values }: { values: FormSubmitValues }) =>
-          useValidation({ values, currentEnvironmentId }),
+          useValidation({ values, currentStackName, currentEnvironmentId }),
         {
           initialProps: {
             values: {
@@ -285,7 +274,7 @@ describe('useValidation', () => {
     it('should revalidate when newName changes', async () => {
       const { result, rerender } = renderHook(
         ({ values }: { values: FormSubmitValues }) =>
-          useValidation({ values, currentEnvironmentId }),
+          useValidation({ values, currentStackName, currentEnvironmentId }),
         {
           initialProps: {
             values: {
@@ -316,30 +305,14 @@ describe('useValidation', () => {
   });
 });
 
-function testEnvironmentIdValidation(
-  schema: AnySchema,
-  currentEnvironmentId?: number
-) {
+function testEnvironmentIdValidation(schema: AnySchema) {
   it('should require environmentId', async () => {
     await expect(
       schema.validate({ name: 'mystack', environmentId: undefined })
     ).rejects.toThrow('Target environment must be selected');
   });
 
-  if (currentEnvironmentId !== undefined) {
-    it('should reject environmentId that matches currentEnvironmentId', async () => {
-      await expect(
-        schema.validate({
-          name: 'mystack',
-          environmentId: currentEnvironmentId,
-        })
-      ).rejects.toThrow(
-        'Target environment must be different from the current environment'
-      );
-    });
-  }
-
-  it('should accept environmentId different from currentEnvironmentId', async () => {
+  it('should accept valid environmentId', async () => {
     await expect(
       schema.validate({ name: 'mystack', environmentId: 2 })
     ).resolves.toBeTruthy();

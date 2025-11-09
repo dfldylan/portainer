@@ -2,7 +2,6 @@ import { object, string, number } from 'yup';
 import { useEffect, useState } from 'react';
 
 import { STACK_NAME_VALIDATION_REGEX } from '@/react/constants';
-import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { validateForm } from '@@/form-components/validate-form';
 
@@ -13,10 +12,12 @@ import { FormSubmitValues } from './StackDuplicationForm.types';
  */
 export function useValidation({
   values,
+  currentStackName,
   currentEnvironmentId,
 }: {
   values: FormSubmitValues;
-  currentEnvironmentId: EnvironmentId;
+  currentStackName: string;
+  currentEnvironmentId: number;
 }) {
   const [validState, setValidState] = useState({
     migrate: false,
@@ -25,7 +26,10 @@ export function useValidation({
 
   useEffect(() => {
     async function validateSchemas() {
-      const migrateSchema = getMigrateValidationSchema(currentEnvironmentId);
+      const migrateSchema = getMigrateValidationSchema(
+        currentStackName,
+        currentEnvironmentId
+      );
 
       const migrateErrors = await validateForm(() => migrateSchema, {
         environmentId: values.environmentId || undefined,
@@ -36,7 +40,12 @@ export function useValidation({
     }
 
     validateSchemas();
-  }, [values.environmentId, values.newName, currentEnvironmentId]);
+  }, [
+    values.environmentId,
+    values.newName,
+    currentStackName,
+    currentEnvironmentId,
+  ]);
 
   useEffect(() => {
     async function validateSchema() {
@@ -49,7 +58,7 @@ export function useValidation({
       setValidState((state) => ({ ...state, duplicate: !duplicateErrors }));
     }
     validateSchema();
-  }, [values.environmentId, values.newName, currentEnvironmentId]);
+  }, [values.environmentId, values.newName]);
 
   return validState;
 }
@@ -81,14 +90,44 @@ export function getDuplicateValidationSchema() {
 }
 
 export function getMigrateValidationSchema(
-  currentEnvironmentId: EnvironmentId | undefined
+  currentStackName?: string,
+  currentEnvironmentId?: number
 ) {
   return object({
-    name: baseNameValidation,
-    environmentId: baseEnvValidation.test(
-      'not-same-as-current',
-      'Target environment must be different from the current environment',
-      (value) => value !== currentEnvironmentId
-    ),
+    name: baseNameValidation
+      .test(
+        'required-for-rename',
+        'Stack name is required when renaming',
+        function validate(value) {
+          const { environmentId } = this.parent;
+          // If renaming (same environment), name is required
+          if (
+            currentEnvironmentId !== undefined &&
+            environmentId === currentEnvironmentId
+          ) {
+            return !!value && value.length > 0;
+          }
+          // For migration to different environment, name is optional
+          return true;
+        }
+      )
+      .test(
+        'not-same-name-for-rename',
+        "Can't rename to the same name",
+        function validate(value) {
+          const { environmentId } = this.parent;
+          // If renaming (same environment) and name matches current stack name, reject
+          if (
+            currentStackName &&
+            currentEnvironmentId !== undefined &&
+            environmentId === currentEnvironmentId &&
+            value === currentStackName
+          ) {
+            return false;
+          }
+          return true;
+        }
+      ),
+    environmentId: baseEnvValidation,
   });
 }

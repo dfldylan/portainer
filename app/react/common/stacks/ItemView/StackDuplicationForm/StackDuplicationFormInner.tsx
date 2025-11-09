@@ -7,6 +7,7 @@ import { EnvironmentId } from '@/react/portainer/environments/types';
 import { LoadingButton } from '@@/buttons/LoadingButton';
 import { Input } from '@@/form-components/Input';
 import { FormError } from '@@/form-components/FormError';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { FormSubmitValues, ActionType } from './StackDuplicationForm.types';
 import { useValidation } from './StackDuplicationForm.validation';
@@ -15,17 +16,20 @@ import { EnvSelector } from './EnvSelector';
 interface Props {
   yamlError?: string;
   currentEnvironmentId: EnvironmentId;
+  currentStackName: string;
 }
 
 export function StackDuplicationFormInner({
   yamlError,
   currentEnvironmentId,
+  currentStackName,
 }: Props) {
   const { values, errors, setFieldValue, submitForm, isSubmitting } =
     useFormikContext<FormSubmitValues>();
 
   const validState = useValidation({
     values,
+    currentStackName,
     currentEnvironmentId,
   });
 
@@ -49,13 +53,10 @@ export function StackDuplicationFormInner({
 
   return (
     <Form>
-      <div className="form-group">
-        <span className="small mt-2">
-          <p className="text-muted">
-            This feature allows you to duplicate or migrate this stack.
-          </p>
-        </span>
-      </div>
+      <TextTip color="blue">
+        <p>This feature allows you to duplicate or migrate this stack. </p>
+        <p>To rename the stack, choose the same environment when migrating.</p>
+      </TextTip>
 
       <div className="form-group">
         <Field
@@ -79,20 +80,24 @@ export function StackDuplicationFormInner({
         error={errors.environmentId}
       />
 
-      <div className="form-group">
+      <div className="inline-flex gap-2">
         <LoadingButton
           type="button"
           color="primary"
           size="small"
           disabled={isMigrateDisabled}
           isLoading={isMigrateInProgress}
-          loadingText="Migration in progress..."
+          loadingText={
+            values.environmentId === currentEnvironmentId
+              ? 'Renaming in progress...'
+              : 'Migration in progress...'
+          }
           onClick={() => handleAction('migrate')}
           icon={ArrowRight}
           data-cy="stack-migrate-button"
           className="!ml-0"
         >
-          Migrate
+          {values.environmentId === currentEnvironmentId ? 'Rename' : 'Migrate'}
         </LoadingButton>
 
         <LoadingButton
@@ -111,7 +116,7 @@ export function StackDuplicationFormInner({
       </div>
 
       {yamlError && isEnvSelected && (
-        <div className="form-group">
+        <div className="form-group" role="alert" aria-label="Yaml Error">
           <div>
             <span className="text-danger small">{yamlError}</span>
           </div>

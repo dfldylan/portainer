@@ -61,6 +61,7 @@ export function StackDuplicationForm({
           <StackDuplicationFormInner
             yamlError={yamlError}
             currentEnvironmentId={currentEnvironmentId}
+            currentStackName={stack.Name}
           />
         </Formik>
       </WidgetBody>
@@ -77,7 +78,6 @@ export function StackDuplicationForm({
       case 'migrate':
         await handleMigrate(environmentId!, newName);
         break;
-
       default:
         break;
     }
@@ -131,7 +131,7 @@ export function StackDuplicationForm({
       return;
     }
 
-    const schema = getMigrateValidationSchema(currentEnvironmentId);
+    const schema = getMigrateValidationSchema(stack.Name, currentEnvironmentId);
     const errors = await validateForm(() => schema, {
       environmentId,
       name,

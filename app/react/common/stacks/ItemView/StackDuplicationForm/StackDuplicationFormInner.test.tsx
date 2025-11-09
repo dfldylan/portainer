@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Formik } from 'formik';
 import { http, HttpResponse } from 'msw';
@@ -13,51 +13,32 @@ import { FormSubmitValues } from './StackDuplicationForm.types';
 
 describe('StackDuplicationFormInner', () => {
   describe('initial rendering', () => {
-    it('should render form with description text', () => {
-      const { getByText } = renderFormInner();
+    it('should render form', async () => {
+      renderFormInner();
 
       expect(
-        getByText('This feature allows you to duplicate or migrate this stack.')
+        screen.getByText(
+          'This feature allows you to duplicate or migrate this stack.'
+        )
       ).toBeVisible();
-    });
-
-    it('should render stack name input field', async () => {
-      const { getByPlaceholderText } = renderFormInner();
 
       await waitFor(() => {
-        const input = getByPlaceholderText(
+        const input = screen.getByPlaceholderText(
           'Stack name (optional for migration)'
         );
         expect(input).toBeVisible();
       });
-    });
 
-    it('should render Migrate button', () => {
-      const { getByRole } = renderFormInner();
-
-      const migrateButton = getByRole('button', { name: /migrate/i });
-      expect(migrateButton).toBeVisible();
-    });
-
-    it('should render Duplicate button', () => {
-      const { getByRole } = renderFormInner();
-
-      const duplicateButton = getByRole('button', { name: /duplicate/i });
-      expect(duplicateButton).toBeVisible();
-    });
-
-    it('should have correct data-cy attributes', async () => {
-      const { container } = renderFormInner();
+      expect(screen.getByRole('button', { name: /migrate/i })).toBeVisible();
+      expect(screen.getByRole('button', { name: /duplicate/i })).toBeVisible();
 
       await waitFor(() => {
         expect(
-          container.querySelector('[data-cy="stack-duplicate-name-input"]')
+          screen.getByTestId('stack-duplicate-name-input')
         ).toBeInTheDocument();
+        expect(screen.getByTestId('stack-migrate-button')).toBeInTheDocument();
         expect(
-          container.querySelector('[data-cy="stack-migrate-button"]')
-        ).toBeInTheDocument();
-        expect(
-          container.querySelector('[data-cy="stack-duplicate-button"]')
+          screen.getByTestId('stack-duplicate-button')
         ).toBeInTheDocument();
       });
     });
@@ -88,7 +69,7 @@ describe('StackDuplicationFormInner', () => {
       });
     });
 
-    it('should disable Migrate button when environmentId matches current environment', async () => {
+    it('should show "Rename" button when environmentId matches current environment', async () => {
       const { getByRole } = renderFormInner({
         initialValues: {
           environmentId: 1,
@@ -99,8 +80,23 @@ describe('StackDuplicationFormInner', () => {
       });
 
       await waitFor(() => {
-        const migrateButton = getByRole('button', { name: /migrate/i });
-        expect(migrateButton).toBeDisabled();
+        const renameButton = getByRole('button', { name: /rename/i });
+        expect(renameButton).toBeVisible();
+      });
+    });
+
+    it('should show "Migrate" button text when environmentId differs from current environment', async () => {
+      const { getByRole } = renderFormInner({
+        initialValues: {
+          environmentId: 2,
+          newName: '',
+          actionType: 'migrate',
+        },
+        currentEnvironmentId: 1,
+      });
+
+      await waitFor(() => {
+        expect(getByRole('button', { name: 'Migrate' })).toBeVisible();
       });
     });
   });
@@ -270,7 +266,7 @@ describe('StackDuplicationFormInner', () => {
   describe('YAML error display', () => {
     it('should display yamlError when environment is selected and error exists', async () => {
       const yamlError = 'Invalid YAML format';
-      const { getByText } = renderFormInner({
+      renderFormInner({
         yamlError,
         initialValues: {
           environmentId: 2,
@@ -280,15 +276,14 @@ describe('StackDuplicationFormInner', () => {
       });
 
       await waitFor(() => {
-        const errorElement = getByText(yamlError);
+        const errorElement = screen.getByRole('alert', { name: 'Yaml Error' });
         expect(errorElement).toBeVisible();
-        expect(errorElement).toHaveClass('text-danger');
       });
     });
 
-    it('should not display yamlError when no environment is selected', () => {
+    it('should not display yamlError when no environment is selected', async () => {
       const yamlError = 'Invalid YAML format';
-      const { queryByText } = renderFormInner({
+      renderFormInner({
         yamlError,
         initialValues: {
           environmentId: undefined,
@@ -296,13 +291,13 @@ describe('StackDuplicationFormInner', () => {
           actionType: 'duplicate',
         },
       });
-
-      const errorElement = queryByText(yamlError);
-      expect(errorElement).toBeNull();
+      await waitFor(() => {
+        expect(screen.queryByRole('alert', { name: 'Yaml Error' })).toBeNull();
+      });
     });
 
     it('should not display yamlError when no error exists', async () => {
-      const { container } = renderFormInner({
+      renderFormInner({
         initialValues: {
           environmentId: 2,
           newName: 'mystack',
@@ -311,26 +306,183 @@ describe('StackDuplicationFormInner', () => {
       });
 
       await waitFor(() => {
-        const errorElements = container.querySelectorAll('.text-danger');
-        expect(errorElements).toHaveLength(0);
+        expect(screen.queryByRole('alert', { name: 'Yaml Error' })).toBeNull();
+      });
+    });
+  });
+
+  describe('rename functionality', () => {
+    it('should display rename help text', () => {
+      const { getByText } = renderFormInner();
+
+      expect(
+        getByText(
+          'To rename the stack, choose the same environment when migrating.'
+        )
+      ).toBeVisible();
+    });
+
+    it('should disable rename when current environment selected with empty name', async () => {
+      const { getByRole } = renderFormInner({
+        initialValues: {
+          environmentId: 1,
+          newName: '',
+          actionType: 'migrate',
+        },
+        currentEnvironmentId: 1,
+      });
+
+      await waitFor(() => {
+        const renameButton = getByRole('button', { name: 'Rename' });
+        expect(renameButton).toBeDisabled();
       });
     });
 
-    it('should display error in red text (text-danger class)', async () => {
-      const yamlError = 'Invalid YAML format';
-      const { getByText } = renderFormInner({
-        yamlError,
+    it('should enable rename when current environment selected with valid name', async () => {
+      const { getByRole } = renderFormInner({
         initialValues: {
-          environmentId: 2,
-          newName: 'mystack',
-          actionType: 'duplicate',
+          environmentId: 1,
+          newName: 'newname',
+          actionType: 'migrate',
         },
+        currentEnvironmentId: 1,
       });
 
       await waitFor(() => {
-        const errorElement = getByText(yamlError);
-        expect(errorElement).toHaveClass('text-danger');
-        expect(errorElement).toHaveClass('small');
+        const renameButton = getByRole('button', { name: 'Rename' });
+        expect(renameButton).toBeEnabled();
+      });
+    });
+
+    it('should show "Renaming in progress..." loading text when renaming', async () => {
+      const onSubmit = vi.fn().mockImplementation(() => new Promise(() => {})); // Never resolves
+      const { getByRole } = renderFormInner({
+        onSubmit,
+        initialValues: {
+          environmentId: 1,
+          newName: 'newname',
+          actionType: 'migrate',
+        },
+        currentEnvironmentId: 1,
+      });
+      const user = userEvent.setup();
+
+      await waitFor(() => {
+        const renameButton = getByRole('button', { name: 'Rename' });
+        expect(renameButton).toBeEnabled();
+      });
+
+      const renameButton = getByRole('button', { name: 'Rename' });
+      await user.click(renameButton);
+
+      await waitFor(() => {
+        expect(
+          getByRole('button', { name: /renaming in progress/i })
+        ).toBeInTheDocument();
+      });
+    });
+
+    it('should show "Migration in progress..." loading text when migrating to different environment', async () => {
+      const onSubmit = vi.fn().mockImplementation(() => new Promise(() => {})); // Never resolves
+      const { getByRole } = renderFormInner({
+        onSubmit,
+        initialValues: {
+          environmentId: 2,
+          newName: '',
+          actionType: 'migrate',
+        },
+        currentEnvironmentId: 1,
+      });
+      const user = userEvent.setup();
+
+      await waitFor(() => {
+        const migrateButton = getByRole('button', { name: 'Migrate' });
+        expect(migrateButton).toBeEnabled();
+      });
+
+      const migrateButton = getByRole('button', { name: 'Migrate' });
+      await user.click(migrateButton);
+
+      await waitFor(() => {
+        expect(
+          getByRole('button', { name: /migration in progress/i })
+        ).toBeInTheDocument();
+      });
+    });
+
+    it('should disable rename button when renaming to the same name', async () => {
+      const currentStackName = 'test-stack';
+      const { getByRole } = renderFormInner({
+        currentStackName,
+        initialValues: {
+          environmentId: 1,
+          newName: currentStackName,
+          actionType: 'migrate',
+        },
+        currentEnvironmentId: 1,
+      });
+
+      await waitFor(() => {
+        const renameButton = getByRole('button', { name: 'Rename' });
+        expect(renameButton).toBeDisabled();
+      });
+    });
+
+    it('should disable rename button when user types the same name', async () => {
+      const currentStackName = 'test-stack';
+      const { getByRole, getByPlaceholderText } = renderFormInner({
+        currentStackName,
+        initialValues: {
+          environmentId: 1,
+          newName: '',
+          actionType: 'migrate',
+        },
+        currentEnvironmentId: 1,
+      });
+      const user = userEvent.setup();
+
+      // Initially rename button should be disabled with empty name
+      await waitFor(() => {
+        const renameButton = getByRole('button', { name: 'Rename' });
+        expect(renameButton).toBeDisabled();
+      });
+
+      // Type a valid different name
+      const input = getByPlaceholderText('Stack name (optional for migration)');
+      await user.type(input, 'newname');
+
+      // Button should now be enabled
+      await waitFor(() => {
+        const renameButton = getByRole('button', { name: 'Rename' });
+        expect(renameButton).toBeEnabled();
+      });
+
+      // Clear and type the same name as current stack
+      await user.clear(input);
+      await user.type(input, currentStackName);
+
+      // Now the button should be disabled again
+      await waitFor(() => {
+        const renameButton = getByRole('button', { name: 'Rename' });
+        expect(renameButton).toBeDisabled();
+      });
+    });
+
+    it('should enable rename button when renaming to a different name', async () => {
+      const currentStackName = 'test-stack';
+      const { getByRole } = renderFormInner({
+        currentStackName,
+        initialValues: {
+          environmentId: 1,
+          newName: 'new-stack-name',
+          actionType: 'migrate',
+        },
+        currentEnvironmentId: 1,
+      });
+
+      await waitFor(() => {
+        const renameButton = getByRole('button', { name: 'Rename' });
+        expect(renameButton).toBeEnabled();
       });
     });
   });
@@ -339,6 +491,7 @@ describe('StackDuplicationFormInner', () => {
 function renderFormInner({
   yamlError,
   currentEnvironmentId = 1,
+  currentStackName = 'test-stack',
   onSubmit = vi.fn(),
   initialValues = {
     environmentId: undefined,
@@ -348,6 +501,7 @@ function renderFormInner({
 }: {
   yamlError?: string;
   currentEnvironmentId?: number;
+  currentStackName?: string;
   onSubmit?: (values: FormSubmitValues) => void | Promise<void>;
   initialValues?: FormSubmitValues;
 } = {}) {
@@ -370,6 +524,7 @@ function renderFormInner({
       <StackDuplicationFormInner
         yamlError={yamlError}
         currentEnvironmentId={currentEnvironmentId}
+        currentStackName={currentStackName}
       />
     </Formik>
   ));
