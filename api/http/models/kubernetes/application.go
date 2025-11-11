@@ -12,7 +12,7 @@ type K8sApplication struct {
 	Name                    string                                 `json:"Name"`
 	Image                   string                                 `json:"Image"`
 	Containers              []interface{}                          `json:"Containers,omitempty"`
-	Services                []corev1.Service                       `json:"Services"`
+	Services                []corev1.Service                       `json:"Services" swaggerignore:"true"`
 	CreationDate            time.Time                              `json:"CreationDate"`
 	ApplicationOwner        string                                 `json:"ApplicationOwner,omitempty"`
 	StackName               string                                 `json:"StackName,omitempty"`
@@ -38,7 +38,7 @@ type K8sApplication struct {
 	Labels                  map[string]string                      `json:"Labels,omitempty"`
 	Annotations             map[string]string                      `json:"Annotations,omitempty"`
 	Resource                K8sApplicationResource                 `json:"Resource,omitempty"`
-	HorizontalPodAutoscaler *autoscalingv2.HorizontalPodAutoscaler `json:"HorizontalPodAutoscaler,omitempty"`
+	HorizontalPodAutoscaler *autoscalingv2.HorizontalPodAutoscaler `json:"HorizontalPodAutoscaler,omitempty" swaggerignore:"true"`
 	CustomResourceMetadata  CustomResourceMetadata                 `json:"CustomResourceMetadata,omitempty"`
 }
 
