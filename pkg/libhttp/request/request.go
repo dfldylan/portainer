@@ -5,6 +5,7 @@ package request
 
 import (
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 	"strconv"
@@ -158,4 +159,47 @@ func RetrieveJSONQueryParameter(request *http.Request, name string, target any, 
 	}
 
 	return json.Unmarshal([]byte(queryParameter), target)
+}
+
+// RetrieveArrayQueryParameter returns the value of a query parameter as a string array.
+// it will return nil if the query parameter is not found.
+//
+// Example:
+//
+//	GET /api/resource?filter=foo&filter=bar
+//	RetrieveArrayQueryParameter(request, "filter") => []string{"foo", "bar"}
+func RetrieveArrayQueryParameter(r *http.Request, parameter string) []string {
+	list, exists := r.Form[parameter+"[]"]
+	if !exists {
+		return nil
+	}
+
+	return list
+}
+
+func RetrieveNumberArrayQueryParameter[T ~int](r *http.Request, parameter string) ([]T, error) {
+	if r.Form == nil {
+		err := r.ParseForm()
+		if err != nil {
+			return nil, fmt.Errorf("Unable to parse form: %w", err)
+		}
+	}
+
+	list := RetrieveArrayQueryParameter(r, parameter)
+	if list == nil {
+		return nil, nil
+	}
+
+	var result []T
+	for _, item := range list {
+		number, err := strconv.Atoi(item)
+		if err != nil {
+			return nil, fmt.Errorf("Unable to parse parameter %q: %w", parameter, err)
+
+		}
+
+		result = append(result, T(number))
+	}
+
+	return result, nil
 }

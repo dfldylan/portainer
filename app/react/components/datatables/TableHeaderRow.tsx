@@ -1,4 +1,4 @@
-import { Header, flexRender } from '@tanstack/react-table';
+import { Header, flexRender, TableMeta } from '@tanstack/react-table';
 
 import { filterHOC } from './Filter';
 import { TableHeaderCell } from './TableHeaderCell';
@@ -7,18 +7,23 @@ import { DefaultType } from './types';
 interface Props<D extends DefaultType = DefaultType> {
   headers: Header<D, unknown>[];
   onSortChange?(colId: string, desc: boolean): void;
+  tableMeta: TableMeta<D> | undefined;
 }
 
 export function TableHeaderRow<D extends DefaultType = DefaultType>({
   headers,
   onSortChange,
+  tableMeta,
 }: Props<D>) {
   return (
     <tr>
       {headers.map((header) => {
         const sortDirection = header.column.getIsSorted();
         const {
-          meta: { className, width } = { className: '', width: undefined },
+          meta: { className, width, filter = filterHOC('Filter') } = {
+            className: '',
+            width: undefined,
+          },
         } = header.column.columnDef;
 
         return (
@@ -43,13 +48,10 @@ export function TableHeaderRow<D extends DefaultType = DefaultType>({
             renderFilter={
               header.column.getCanFilter()
                 ? () =>
-                    flexRender(
-                      header.column.columnDef.meta?.filter ||
-                        filterHOC('Filter'),
-                      {
-                        column: header.column,
-                      }
-                    )
+                    flexRender(filter, {
+                      column: header.column,
+                      tableMeta,
+                    })
                 : undefined
             }
           />
