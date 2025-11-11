@@ -65,6 +65,11 @@ type (
 		ForceUpdate bool
 
 		DeployerOptionsPayload DeployerOptionsPayload
+
+		// Used only for EE async edge agent
+		// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+		// Deprecated(2.36): use DeployerOptionsPayload.ForceRecreate instead
+		ReadyRePullImage bool
 	}
 
 	DeployerOptionsPayload struct {

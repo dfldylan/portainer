@@ -24,6 +24,10 @@ type updateComposeStackPayload struct {
 	StackFileContent string `example:"version: 3\n services:\n web:\n image:nginx"`
 	// A list of environment(endpoint) variables used during stack deployment
 	Env []portainer.Pair
+	// RepullImageAndRedeploy indicates whether to force repulling images and redeploying the stack
+	RepullImageAndRedeploy bool
+
+	// Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility
 	// Force a pulling to current image with the original tag though the image is already the latest
 	PullImage bool `example:"false"`
 }
@@ -43,6 +47,10 @@ type updateSwarmStackPayload struct {
 	Env []portainer.Pair
 	// Prune services that are no longer referenced (only available for Swarm stacks)
 	Prune bool `example:"true"`
+	// RepullImageAndRedeploy indicates whether to force repulling images and redeploying the stack
+	RepullImageAndRedeploy bool
+
+	// Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility
 	// Force a pulling to current image with the original tag though the image is already the latest
 	PullImage bool `example:"false"`
 }
@@ -206,6 +214,7 @@ func (handler *Handler) updateComposeStack(tx dataservices.DataStoreTx, r *http.
 		return httperror.BadRequest("Invalid request payload", err)
 	}
 
+	payload.RepullImageAndRedeploy = payload.RepullImageAndRedeploy || payload.PullImage
 	stack.Env = payload.Env
 
 	if stack.GitConfig != nil {
@@ -233,8 +242,8 @@ func (handler *Handler) updateComposeStack(tx dataservices.DataStoreTx, r *http.
 		endpoint,
 		handler.FileService,
 		handler.StackDeployer,
-		payload.PullImage,
-		false)
+		payload.RepullImageAndRedeploy,
+		payload.RepullImageAndRedeploy)
 	if err != nil {
 		if rollbackErr := handler.FileService.RollbackStackFile(stackFolder, stack.EntryPoint); rollbackErr != nil {
 			log.Warn().Err(rollbackErr).Msg("rollback stack file error")
@@ -271,7 +280,7 @@ func (handler *Handler) updateSwarmStack(tx dataservices.DataStoreTx, r *http.Re
 	if err := request.DecodeAndValidateJSONPayload(r, &payload); err != nil {
 		return httperror.BadRequest("Invalid request payload", err)
 	}
-
+	payload.RepullImageAndRedeploy = payload.RepullImageAndRedeploy || payload.PullImage
 	stack.Env = payload.Env
 
 	if stack.GitConfig != nil {
@@ -300,7 +309,7 @@ func (handler *Handler) updateSwarmStack(tx dataservices.DataStoreTx, r *http.Re
 		handler.FileService,
 		handler.StackDeployer,
 		payload.Prune,
-		payload.PullImage)
+		payload.RepullImageAndRedeploy)
 	if err != nil {
 		if rollbackErr := handler.FileService.RollbackStackFile(stackFolder, stack.EntryPoint); rollbackErr != nil {
 			log.Warn().Err(rollbackErr).Msg("rollback stack file error")

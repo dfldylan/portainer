@@ -188,7 +188,7 @@ angular.module('portainer.app').controller('StackController', [
         }
 
         $scope.state.actionInProgress = true;
-        StackService.updateStack(stack, stackFile, env, prune, result.pullImage)
+        StackService.updateStack(stack, stackFile, env, prune, result.repullImageAndRedeploy)
           .then(function success() {
             Notifications.success('Success', 'Stack successfully deployed');
             $scope.state.isEditorDirty = false;

@@ -227,7 +227,7 @@ angular.module('portainer.app').factory('StackService', [
       return deferred.promise;
     };
 
-    service.updateStack = function (stack, stackFile, env, prune, pullImage) {
+    service.updateStack = function (stack, stackFile, env, prune, repullImageAndRedeploy) {
       return Stack.update(
         { endpointId: stack.EndpointId },
         {
@@ -235,7 +235,7 @@ angular.module('portainer.app').factory('StackService', [
           StackFileContent: stackFile,
           Env: env,
           Prune: prune,
-          PullImage: pullImage,
+          RepullImageAndRedeploy: repullImageAndRedeploy,
         }
       ).$promise;
     };
