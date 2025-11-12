@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { Menu, MenuButton, MenuPopover } from '@reach/menu-button';
 import { Column, Row, TableMeta } from '@tanstack/react-table';
 import { Check, Filter } from 'lucide-react';
+import _ from 'lodash';
 
 import { getValueAsArrayOfStrings } from '@/portainer/helpers/array';
 
@@ -26,6 +27,14 @@ export function MultipleSelectionFilter({
   menuTitle = 'Filter by state',
 }: MultipleSelectionFilterProps) {
   const enabled = value.length > 0;
+
+  // This will make sure that if the current value has options that are not in the options list,
+  // they will still be displayed in the filter menu.
+  const optionsWithValues = useMemo(
+    () => _.uniq([...options, ...value]),
+    [options, value]
+  );
+
   return (
     <div>
       <Menu>
@@ -41,7 +50,7 @@ export function MultipleSelectionFilter({
           <div className="tableMenu">
             <div className="menuHeader">{menuTitle}</div>
             <div className="menuContent">
-              {options.map((option, index) => (
+              {optionsWithValues.map((option, index) => (
                 <div className="md-checkbox" key={index}>
                   <input
                     id={`filter_${filterKey}_${index}`}
