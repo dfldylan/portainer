@@ -251,6 +251,7 @@ export const ngModule = angular
       'fileName',
       'placeholder',
       'showToolbar',
+      'aria-label',
     ])
   )
   .component(

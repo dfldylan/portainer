@@ -2,12 +2,11 @@ import { ResourceControlType } from '@/react/portainer/access-control/types';
 import { AccessControlFormData } from 'Portainer/components/accessControlForm/porAccessControlFormModel';
 import { FeatureId } from '@/react/portainer/feature-flags/enums';
 import { StackStatus, StackType } from '@/react/common/stacks/types';
-import { extractContainerNames } from '@/portainer/helpers/stackHelper';
+import { extractContainerNames } from '@/react/docker/stacks/ItemView/container-names';
 import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
-import { confirm, confirmDelete, confirmWebEditorDiscard } from '@@/modals/confirm';
+import { confirm, confirmDelete } from '@@/modals/confirm';
 import { ModalType } from '@@/modals';
 import { buildConfirmButton } from '@@/modals/utils';
-import { getDockerComposeSchema } from '@/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
 
 angular.module('portainer.app').controller('StackController', [
   '$async',
@@ -69,41 +68,10 @@ angular.module('portainer.app').controller('StackController', [
       migrationInProgress: false,
       showEditorTab: false,
       yamlError: false,
-      isEditorDirty: false,
     };
 
     $scope.formValues = {
-      Prune: false,
-      Endpoint: null,
       AccessControlData: new AccessControlFormData(),
-      Env: [],
-    };
-
-    $window.onbeforeunload = () => {
-      if ($scope.stackFileContent && $scope.state.isEditorDirty) {
-        return '';
-      }
-    };
-
-    $scope.$on('$destroy', function () {
-      $scope.state.isEditorDirty = false;
-    });
-
-    $scope.handleEnvVarChange = handleEnvVarChange;
-    function handleEnvVarChange(value) {
-      $scope.formValues.Env = value;
-    }
-
-    $scope.onEnableWebhookChange = function (enable) {
-      $scope.$evalAsync(() => {
-        $scope.formValues.EnableWebhook = enable;
-      });
-    };
-
-    $scope.onPruneChange = function (enable) {
-      $scope.$evalAsync(() => {
-        $scope.formValues.Prune = enable;
-      });
     };
 
     $scope.showEditor = function () {
@@ -125,7 +93,11 @@ angular.module('portainer.app').controller('StackController', [
           return;
         }
 
-        $scope.deployStack();
+        deployStack({
+          stackFileContent: $scope.stackFileContent,
+          environmentVariables: FormHelper.removeInvalidEnvVars($scope.stack.Env),
+          prune: false,
+        });
       });
     };
 
@@ -168,16 +140,29 @@ angular.module('portainer.app').controller('StackController', [
         });
     };
 
-    $scope.deployStack = function () {
+    $scope.onEditorSubmit = function () {
+      $scope.state.actionInProgress = true;
+    };
+
+    $scope.onEditorSubmitSettled = function () {
+      $scope.state.actionInProgress = false;
+    };
+
+    /**
+     * Deploy a stack
+     * @param {Object} stack
+     * @param {string} stack.stackFileContent - The stack file content to deploy
+     * @param {import('@@/form-components/EnvironmentVariablesFieldset').EnvVarValues} stack.environmentVariables - Array of environment variables
+     * @param {boolean} stack.prune - Whether to prune services that are no longer referenced
+     * @returns {void}
+     */
+    function deployStack({ stackFileContent, environmentVariables, prune }) {
       const stack = $scope.stack;
       const isSwarmStack = stack.Type === 1;
       confirmStackUpdate('Do you want to force an update of the stack?', isSwarmStack).then(function (result) {
         if (!result) {
           return;
         }
-        var stackFile = $scope.stackFileContent;
-        var env = FormHelper.removeInvalidEnvVars($scope.formValues.Env);
-        var prune = $scope.formValues.Prune;
 
         // TODO: this is a work-around for stacks created with Portainer version >= 1.17.1
         // The EndpointID property is not available for these stacks, we can pass
@@ -188,10 +173,9 @@ angular.module('portainer.app').controller('StackController', [
         }
 
         $scope.state.actionInProgress = true;
-        StackService.updateStack(stack, stackFile, env, prune, result.repullImageAndRedeploy)
+        StackService.updateStack(stack, stackFileContent, environmentVariables, prune, result.pullImage)
           .then(function success() {
             Notifications.success('Success', 'Stack successfully deployed');
-            $scope.state.isEditorDirty = false;
             $state.reload();
           })
           .catch(function error(err) {
@@ -201,15 +185,7 @@ angular.module('portainer.app').controller('StackController', [
             $scope.state.actionInProgress = false;
           });
       });
-    };
-
-    $scope.editorUpdate = function (value) {
-      if ($scope.stackFileContent.replace(/(\r\n|\n|\r)/gm, '') !== value.replace(/(\r\n|\n|\r)/gm, '')) {
-        $scope.state.isEditorDirty = true;
-        $scope.stackFileContent = value;
-        $scope.state.yamlError = StackHelper.validateYAML($scope.stackFileContent, $scope.containerNames, $scope.state.originalContainerNames);
-      }
-    };
+    }
 
     $scope.stopStack = stopStack;
     function stopStack() {
@@ -293,9 +269,17 @@ angular.module('portainer.app').controller('StackController', [
             if (isSwarm && $scope.stack.Status === StackStatus.Active) {
               assignSwarmStackResources(data.resources, agentProxy);
             }
-            $scope.state.originalContainerNames = extractContainerNames($scope.stackFileContent);
+            $scope.state.originalContainerNames = extractContainerNames(data.stackFile);
 
-            $scope.state.yamlError = StackHelper.validateYAML($scope.stackFileContent, $scope.containerNames, $scope.state.originalContainerNames);
+            $scope.state.yamlError = StackHelper.validateYAML(data.stackFile, $scope.containerNames, $scope.state.originalContainerNames);
+
+            $scope.editorTabInitialValues = {
+              stackFileContent: data.stackFile,
+              environmentVariables: $scope.stack.Env,
+              enableWebhook: !!$scope.stack.Webhook,
+              webhookId: $scope.stack.Webhook,
+              prune: !!($scope.stack.Option && $scope.stack.Option.Prune),
+            };
           })
           .catch(function error(err) {
             Notifications.error('Failure', err, 'Unable to retrieve stack details');
@@ -372,12 +356,6 @@ angular.module('portainer.app').controller('StackController', [
         });
     }
 
-    this.uiCanExit = async function () {
-      if ($scope.stackFileContent && $scope.state.isEditorDirty) {
-        return confirmWebEditorDiscard();
-      }
-    };
-
     async function canManageStacks() {
       return endpoint.SecuritySettings.allowStackManagementForRegularUsers || Authentication.isAdmin();
     }
@@ -416,12 +394,6 @@ angular.module('portainer.app').controller('StackController', [
       }
 
       $scope.composeSyntaxMaxVersion = endpoint.ComposeSyntaxMaxVersion;
-
-      try {
-        $scope.dockerComposeSchema = await getDockerComposeSchema();
-      } catch (err) {
-        Notifications.error('Failure', err, 'Unable to load schema validation for editor');
-      }
     }
 
     initView();
