@@ -30,4 +30,5 @@ export type GitCredential = {
   name: string;
   username: string;
   creationDate: number;
+  authorizationType: AuthTypeOption;
 };
