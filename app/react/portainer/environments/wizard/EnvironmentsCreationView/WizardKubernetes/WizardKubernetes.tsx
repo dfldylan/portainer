@@ -27,9 +27,9 @@ interface Props {
 }
 
 type CreationType =
-  | 'agent'
   | 'edgeAgentStandard'
   | 'edgeAgentAsync'
+  | 'agent'
   | 'kubeconfig';
 
 const options: BoxSelectorOption<CreationType>[] = _.compact([
