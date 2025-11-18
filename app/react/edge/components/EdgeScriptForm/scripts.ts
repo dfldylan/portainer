@@ -139,29 +139,33 @@ export function buildWindowsStandaloneCommand(
 ) {
   const { allowSelfSignedCertificates, edgeIdGenerator, envVars } = properties;
 
-  const env = buildDockerEnvVars(envVars, [
-    ...buildDefaultDockerEnvVars(
-      edgeKey,
-      allowSelfSignedCertificates,
-      edgeIdGenerator ? '$Env:PORTAINER_EDGE_ID' : edgeId,
-      agentSecret,
-      useAsyncMode
-    ),
-    ...metaEnvVars(properties),
-  ]);
+  const env = buildDockerEnvVars(
+    envVars,
+    [
+      ...buildDefaultDockerEnvVars(
+        edgeKey,
+        allowSelfSignedCertificates,
+        edgeIdGenerator ? '$Env:PORTAINER_EDGE_ID' : edgeId,
+        agentSecret,
+        useAsyncMode
+      ),
+      ...metaEnvVars(properties),
+    ],
+    '`'
+  );
 
   return `${
     edgeIdGenerator
       ? `$Env:PORTAINER_EDGE_ID = "@(${edgeIdGenerator})" \n\n`
       : ''
   }\
-docker run -d \\
-  --mount type=npipe,src=\\\\.\\pipe\\docker_engine,dst=\\\\.\\pipe\\docker_engine \\
-  --mount type=bind,src=C:\\ProgramData\\docker\\volumes,dst=C:\\ProgramData\\docker\\volumes \\
-  --mount type=volume,src=portainer_agent_data,dst=C:\\data \\
-  --restart always \\
-   ${env} \\
-  --name portainer_edge_agent \\
+docker run -d \`
+  --mount type=npipe,src=\\\\.\\pipe\\docker_engine,dst=\\\\.\\pipe\\docker_engine \`
+  --mount type=bind,src=C:\\ProgramData\\docker\\volumes,dst=C:\\ProgramData\\docker\\volumes \`
+  --mount type=volume,src=portainer_agent_data,dst=C:\\data \`
+  --restart always \`
+   ${env} \`
+  --name portainer_edge_agent \`
   portainer/agent:${agentVersion}
   `;
 }
@@ -219,36 +223,40 @@ export function buildWindowsSwarmCommand(
 ) {
   const { allowSelfSignedCertificates, edgeIdGenerator, envVars } = properties;
 
-  const env = buildDockerEnvVars(envVars, [
-    ...buildDefaultDockerEnvVars(
-      edgeKey,
-      allowSelfSignedCertificates,
-      edgeIdGenerator ? '$Env:PORTAINER_EDGE_ID' : edgeId,
-      agentSecret,
-      useAsyncMode
-    ),
-    'AGENT_CLUSTER_ADDR=tasks.portainer_edge_agent',
-    ...metaEnvVars(properties),
-  ]);
+  const env = buildDockerEnvVars(
+    envVars,
+    [
+      ...buildDefaultDockerEnvVars(
+        edgeKey,
+        allowSelfSignedCertificates,
+        edgeIdGenerator ? '$Env:PORTAINER_EDGE_ID' : edgeId,
+        agentSecret,
+        useAsyncMode
+      ),
+      'AGENT_CLUSTER_ADDR=tasks.portainer_edge_agent',
+      ...metaEnvVars(properties),
+    ],
+    '`'
+  );
 
   return `${
     edgeIdGenerator
       ? `$Env:PORTAINER_EDGE_ID = "@(${edgeIdGenerator})" \n\n`
       : ''
   }\
-docker network create \\
-  --driver overlay \\
+docker network create \`
+  --driver overlay \`
   portainer_agent_network;
 
-docker service create \\
-  --name portainer_edge_agent \\
-  --network portainer_agent_network \\
-  ${env} \\
-  --mode global \\
-  --constraint 'node.platform.os == windows' \\
-  --mount type=npipe,src=\\\\.\\pipe\\docker_engine,dst=\\\\.\\pipe\\docker_engine \\
-  --mount type=bind,src=C:\\ProgramData\\docker\\volumes,dst=C:\\ProgramData\\docker\\volumes \\
-  --mount type=volume,src=portainer_agent_data,dst=C:\\data \\
+docker service create \`
+  --name portainer_edge_agent \`
+  --network portainer_agent_network \`
+  ${env} \`
+  --mode global \`
+  --constraint 'node.platform.os == windows' \`
+  --mount type=npipe,src=\\\\.\\pipe\\docker_engine,dst=\\\\.\\pipe\\docker_engine \`
+  --mount type=bind,src=C:\\ProgramData\\docker\\volumes,dst=C:\\ProgramData\\docker\\volumes \`
+  --mount type=volume,src=portainer_agent_data,dst=C:\\data \`
   portainer/agent:${agentVersion}
 `;
 }
@@ -278,10 +286,14 @@ export function buildLinuxKubernetesCommand(
   return `${idEnvVar}curl https://downloads.portainer.io/ee${agentShortVersion}/portainer-edge-agent-setup.sh | bash -s -- "${edgeIdVar}" "${edgeKey}" "${selfSigned}" "${agentSecret}" "${allEnvVars}"`;
 }
 
-function buildDockerEnvVars(envVars: string, moreVars: string[]) {
+function buildDockerEnvVars(
+  envVars: string,
+  moreVars: string[],
+  lineContinuationToken = '\\'
+) {
   const vars = moreVars.concat(envVars.split(',').filter((s) => s.length > 0));
 
-  return vars.map((s) => `-e ${s}`).join(' \\\n  ');
+  return vars.map((s) => `-e ${s}`).join(` ${lineContinuationToken}\n  `);
 }
 
 function buildDefaultDockerEnvVars(
