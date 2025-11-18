@@ -112,8 +112,6 @@ export function buildLinuxPodmanCommand(
   return `${
     edgeIdGenerator ? `PORTAINER_EDGE_ID=$(${edgeIdGenerator}) \n\n` : ''
   }\
-sudo systemctl enable --now podman.socket
-
 sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
@@ -125,7 +123,7 @@ sudo podman run -d \\
   --privileged \\
   ${env} \\
   --name portainer_edge_agent \\
-  portainer/agent:${agentVersion}
+  docker.io/portainer/agent:${agentVersion}
   `;
 }
 

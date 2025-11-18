@@ -27,9 +27,7 @@ exports[`'buildLinuxKubernetesCommand' > should generate command with tags 1`] =
 exports[`'buildLinuxKubernetesCommand' > should generate command without agent secret 1`] = `"curl https://downloads.portainer.io/ee2-19/portainer-edge-agent-setup.sh | bash -s -- "test-edge-id" "test-edge-key" "0" "undefined" """`;
 
 exports[`'buildLinuxPodmanCommand' > should generate basic command with minimal configuration 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -44,14 +42,12 @@ sudo podman run -d \\
   -e EDGE_INSECURE_POLL=0 \\
   -e AGENT_SECRET=test-secret \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with all meta variables 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -69,14 +65,12 @@ sudo podman run -d \\
   -e PORTAINER_GROUP=5 \\
   -e PORTAINER_TAGS=10:20 \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with async mode enabled 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -92,14 +86,12 @@ sudo podman run -d \\
   -e AGENT_SECRET=test-secret \\
   -e EDGE_ASYNC=1 \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with custom environment variables 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -116,14 +108,12 @@ sudo podman run -d \\
   -e MY_VAR=value1 \\
   -e ANOTHER_VAR=value2 \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with edge ID generator 1`] = `
 "PORTAINER_EDGE_ID=$(uuidgen) 
-
-sudo systemctl enable --now podman.socket
 
 sudo podman volume create portainer_agent_data
 
@@ -140,14 +130,12 @@ sudo podman run -d \\
   -e EDGE_INSECURE_POLL=0 \\
   -e AGENT_SECRET=test-secret \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with edge groups 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -163,14 +151,12 @@ sudo podman run -d \\
   -e AGENT_SECRET=test-secret \\
   -e EDGE_GROUPS=1:2:3 \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with empty agent secret 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -184,14 +170,12 @@ sudo podman run -d \\
   -e EDGE_KEY=test-edge-key \\
   -e EDGE_INSECURE_POLL=0 \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with portainer group 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -207,14 +191,12 @@ sudo podman run -d \\
   -e AGENT_SECRET=test-secret \\
   -e PORTAINER_GROUP=5 \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with self-signed certificates allowed 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -229,14 +211,12 @@ sudo podman run -d \\
   -e EDGE_INSECURE_POLL=1 \\
   -e AGENT_SECRET=test-secret \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command with tags 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -252,14 +232,12 @@ sudo podman run -d \\
   -e AGENT_SECRET=test-secret \\
   -e PORTAINER_TAGS=10:20:30 \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
 exports[`'buildLinuxPodmanCommand' > should generate command without agent secret 1`] = `
-"sudo systemctl enable --now podman.socket
-
-sudo podman volume create portainer_agent_data
+"sudo podman volume create portainer_agent_data
 
 sudo podman run -d \\
   -v /run/podman/podman.sock:/var/run/docker.sock \\
@@ -273,7 +251,7 @@ sudo podman run -d \\
   -e EDGE_KEY=test-edge-key \\
   -e EDGE_INSECURE_POLL=0 \\
   --name portainer_edge_agent \\
-  portainer/agent:2.19.0
+  docker.io/portainer/agent:2.19.0
   "
 `;
 
