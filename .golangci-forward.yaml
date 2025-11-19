@@ -9,3 +9,8 @@ linters:
         - pattern: ^dataservices.DataStore.(EdgeGroup|EdgeJob|EdgeStack|EndpointRelation|Endpoint|GitCredential|Registry|ResourceControl|Role|Settings|Snapshot|Stack|Tag|User)$
           msg: Use a transaction instead
       analyze-types: true
+  exclusions:
+    rules:
+      - path: _test\.go
+        linters:
+          - forbidigo
