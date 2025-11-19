@@ -269,7 +269,7 @@ function InnerForm({
 
       <PrivateRegistryFieldset
         value={values.privateRegistryId}
-        onSelect={(value) => setFieldValue('privateRegistryId', value)}
+        onChange={(value) => setFieldValue('privateRegistryId', value)}
         registries={registriesQuery.data ?? []}
         formInvalid={!isValid}
         method="repository"
