@@ -40,6 +40,7 @@ type K8sApplication struct {
 	Resource                K8sApplicationResource                 `json:"Resource,omitempty"`
 	HorizontalPodAutoscaler *autoscalingv2.HorizontalPodAutoscaler `json:"HorizontalPodAutoscaler,omitempty" swaggerignore:"true"`
 	CustomResourceMetadata  CustomResourceMetadata                 `json:"CustomResourceMetadata,omitempty"`
+	StackKind               string                                 `json:"StackKind,omitempty"`
 }
 
 type Metadata struct {

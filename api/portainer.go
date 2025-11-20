@@ -347,6 +347,10 @@ type (
 		DeploymentType EdgeStackDeploymentType `json:"DeploymentType"`
 		// Uses the manifest's namespaces instead of the default one
 		UseManifestNamespaces bool
+		// The username id which created this stack
+		CreatedByUserId string `example:"1"`
+		// The username which created this stack
+		CreatedBy string `example:"admin"`
 	}
 
 	EdgeStackStatusForEnv struct {

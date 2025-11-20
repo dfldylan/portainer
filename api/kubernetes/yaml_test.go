@@ -40,6 +40,7 @@ metadata:
     io.portainer.kubernetes.application.kind: git
     io.portainer.kubernetes.application.name: best-name
     io.portainer.kubernetes.application.owner: best-owner
+    io.portainer.kubernetes.application.owner.id: ""
     io.portainer.kubernetes.application.stack: best-name
     io.portainer.kubernetes.application.stackid: "123"
   name: busybox
@@ -88,6 +89,7 @@ metadata:
     io.portainer.kubernetes.application.kind: git
     io.portainer.kubernetes.application.name: best-name
     io.portainer.kubernetes.application.owner: best-owner
+    io.portainer.kubernetes.application.owner.id: ""
     io.portainer.kubernetes.application.stack: best-name
     io.portainer.kubernetes.application.stackid: "123"
   name: busybox
@@ -177,6 +179,7 @@ items:
         io.portainer.kubernetes.application.kind: git
         io.portainer.kubernetes.application.name: best-name
         io.portainer.kubernetes.application.owner: best-owner
+        io.portainer.kubernetes.application.owner.id: ""
         io.portainer.kubernetes.application.stack: best-name
         io.portainer.kubernetes.application.stackid: "123"
       name: web
@@ -198,6 +201,7 @@ items:
         io.portainer.kubernetes.application.kind: git
         io.portainer.kubernetes.application.name: best-name
         io.portainer.kubernetes.application.owner: best-owner
+        io.portainer.kubernetes.application.owner.id: ""
         io.portainer.kubernetes.application.stack: best-name
         io.portainer.kubernetes.application.stackid: "123"
       name: redis
@@ -221,6 +225,7 @@ items:
         io.portainer.kubernetes.application.kind: git
         io.portainer.kubernetes.application.name: best-name
         io.portainer.kubernetes.application.owner: best-owner
+        io.portainer.kubernetes.application.owner.id: ""
         io.portainer.kubernetes.application.stack: best-name
         io.portainer.kubernetes.application.stackid: "123"
       name: web
@@ -303,6 +308,7 @@ metadata:
     io.portainer.kubernetes.application.kind: git
     io.portainer.kubernetes.application.name: best-name
     io.portainer.kubernetes.application.owner: best-owner
+    io.portainer.kubernetes.application.owner.id: ""
     io.portainer.kubernetes.application.stack: best-name
     io.portainer.kubernetes.application.stackid: "123"
   name: busybox
@@ -329,6 +335,7 @@ metadata:
     io.portainer.kubernetes.application.kind: git
     io.portainer.kubernetes.application.name: best-name
     io.portainer.kubernetes.application.owner: best-owner
+    io.portainer.kubernetes.application.owner.id: ""
     io.portainer.kubernetes.application.stack: best-name
     io.portainer.kubernetes.application.stackid: "123"
   name: web
@@ -348,6 +355,7 @@ metadata:
     io.portainer.kubernetes.application.kind: git
     io.portainer.kubernetes.application.name: best-name
     io.portainer.kubernetes.application.owner: best-owner
+    io.portainer.kubernetes.application.owner.id: ""
     io.portainer.kubernetes.application.stack: best-name
     io.portainer.kubernetes.application.stackid: "123"
   name: busybox
@@ -397,6 +405,7 @@ metadata:
     io.portainer.kubernetes.application.kind: git
     io.portainer.kubernetes.application.name: best-name
     io.portainer.kubernetes.application.owner: best-owner
+    io.portainer.kubernetes.application.owner.id: ""
     io.portainer.kubernetes.application.stack: best-name
     io.portainer.kubernetes.application.stackid: "123"
   name: web
@@ -619,6 +628,7 @@ metadata:
     io.portainer.kubernetes.application.kind: git
     io.portainer.kubernetes.application.name: best-name
     io.portainer.kubernetes.application.owner: best-owner
+    io.portainer.kubernetes.application.owner.id: ""
     io.portainer.kubernetes.application.stack: best-name
     io.portainer.kubernetes.application.stackid: "123"
 ---
@@ -630,6 +640,7 @@ metadata:
     io.portainer.kubernetes.application.kind: git
     io.portainer.kubernetes.application.name: best-name
     io.portainer.kubernetes.application.owner: best-owner
+    io.portainer.kubernetes.application.owner.id: ""
     io.portainer.kubernetes.application.stack: best-name
     io.portainer.kubernetes.application.stackid: "123"
 `

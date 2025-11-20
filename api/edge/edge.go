@@ -70,6 +70,13 @@ type (
 		// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
 		// Deprecated(2.36): use DeployerOptionsPayload.ForceRecreate instead
 		ReadyRePullImage bool
+
+		// CreatedBy is the username that created this stack
+		// Used for adding labels to Kubernetes manifests
+		CreatedBy string
+		// CreatedByUserId is the user ID that created this stack
+		// Used for adding labels to Kubernetes manifests
+		CreatedByUserId string
 	}
 
 	DeployerOptionsPayload struct {

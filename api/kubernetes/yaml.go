@@ -13,11 +13,13 @@ import (
 )
 
 const (
-	labelPortainerAppStack   = "io.portainer.kubernetes.application.stack"
-	labelPortainerAppStackID = "io.portainer.kubernetes.application.stackid"
-	labelPortainerAppName    = "io.portainer.kubernetes.application.name"
-	labelPortainerAppOwner   = "io.portainer.kubernetes.application.owner"
-	labelPortainerAppKind    = "io.portainer.kubernetes.application.kind"
+	labelPortainerAppStack     = "io.portainer.kubernetes.application.stack"
+	labelPortainerAppStackID   = "io.portainer.kubernetes.application.stackid"
+	labelPortainerAppName      = "io.portainer.kubernetes.application.name"
+	labelPortainerAppOwner     = "io.portainer.kubernetes.application.owner"
+	labelPortainerAppOwnerId   = "io.portainer.kubernetes.application.owner.id"
+	labelPortainerAppKind      = "io.portainer.kubernetes.application.kind"
+	labelPortainerAppStackKind = "io.portainer.kubernetes.application.stackKind"
 )
 
 // KubeAppLabels are labels applied to all resources deployed in a kubernetes stack
@@ -25,18 +27,28 @@ type KubeAppLabels struct {
 	StackID   int
 	StackName string
 	Owner     string
+	OwnerId   string
 	Kind      string
+	StackKind string
 }
 
 // ToMap converts KubeAppLabels to a map[string]string
 func (kal *KubeAppLabels) ToMap() map[string]string {
-	return map[string]string{
+	labels := map[string]string{
 		labelPortainerAppStackID: strconv.Itoa(kal.StackID),
 		labelPortainerAppStack:   stackutils.SanitizeLabel(kal.StackName),
 		labelPortainerAppName:    stackutils.SanitizeLabel(kal.StackName),
 		labelPortainerAppOwner:   stackutils.SanitizeLabel(kal.Owner),
 		labelPortainerAppKind:    kal.Kind,
+		labelPortainerAppOwnerId: kal.OwnerId,
 	}
+
+	// Add optional labels only if they are non-empty
+	if kal.StackKind != "" {
+		labels[labelPortainerAppStackKind] = kal.StackKind
+	}
+
+	return labels
 }
 
 // GetHelmAppLabels returns the labels to be applied to portainer deployed helm applications
