@@ -1,6 +1,7 @@
 import { CellContext } from '@tanstack/react-table';
 
 import { useIsSystemNamespace } from '@/react/kubernetes/namespaces/queries/useIsSystemNamespace';
+import { EdgeStackBadge } from '@/react/kubernetes/applications/ListView/ApplicationsDatatable/EdgeStackBadge';
 
 import { Link } from '@@/Link';
 import { SystemBadge } from '@@/Badge/SystemBadge';
@@ -18,6 +19,7 @@ function Cell({
   row: { original: item },
 }: CellContext<ApplicationRowData, string>) {
   const isSystem = useIsSystemNamespace(item.ResourcePool);
+  const isEdgeStack = !isSystem && item.StackKind === 'edge';
 
   return (
     <div className="flex items-center gap-2">
@@ -43,10 +45,10 @@ function Cell({
         </Link>
       )}
 
-      {isSystem ? (
-        <SystemBadge className="ml-auto" />
-      ) : (
-        !item.ApplicationOwner && <ExternalBadge className="ml-auto" />
+      {isSystem && <SystemBadge className="ml-auto" />}
+      {isEdgeStack && <EdgeStackBadge className="ml-auto" />}
+      {!isSystem && !item.ApplicationOwner && (
+        <ExternalBadge className="ml-auto" />
       )}
     </div>
   );

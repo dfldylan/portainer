@@ -106,5 +106,7 @@ func (handler *Handler) endpointEdgeStackInspect(w http.ResponseWriter, r *http.
 		StackFileContent: fileContent,
 		Name:             edgeStack.Name,
 		Namespace:        namespace,
+		CreatedBy:        edgeStack.CreatedBy,
+		CreatedByUserId:  edgeStack.CreatedByUserId,
 	})
 }

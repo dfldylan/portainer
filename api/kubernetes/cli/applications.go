@@ -263,6 +263,7 @@ func populateApplicationFromDeployment(application *models.K8sApplication, deplo
 	application.ApplicationOwner = deployment.Labels["io.portainer.kubernetes.application.owner"]
 	application.StackID = deployment.Labels["io.portainer.kubernetes.application.stackid"]
 	application.StackName = deployment.Labels["io.portainer.kubernetes.application.stack"]
+	application.StackKind = deployment.Labels["io.portainer.kubernetes.application.stackKind"]
 	application.Labels = deployment.Labels
 	application.MatchLabels = deployment.Spec.Selector.MatchLabels
 	application.CreationDate = deployment.CreationTimestamp.Time
@@ -292,6 +293,7 @@ func populateApplicationFromStatefulSet(application *models.K8sApplication, stat
 	application.ApplicationOwner = statefulSet.Labels["io.portainer.kubernetes.application.owner"]
 	application.StackID = statefulSet.Labels["io.portainer.kubernetes.application.stackid"]
 	application.StackName = statefulSet.Labels["io.portainer.kubernetes.application.stack"]
+	application.StackKind = statefulSet.Labels["io.portainer.kubernetes.application.stackKind"]
 	application.Labels = statefulSet.Labels
 	application.MatchLabels = statefulSet.Spec.Selector.MatchLabels
 	application.CreationDate = statefulSet.CreationTimestamp.Time
@@ -321,6 +323,7 @@ func populateApplicationFromDaemonSet(application *models.K8sApplication, daemon
 	application.ApplicationOwner = daemonSet.Labels["io.portainer.kubernetes.application.owner"]
 	application.StackID = daemonSet.Labels["io.portainer.kubernetes.application.stackid"]
 	application.StackName = daemonSet.Labels["io.portainer.kubernetes.application.stack"]
+	application.StackKind = daemonSet.Labels["io.portainer.kubernetes.application.stackKind"]
 	application.Labels = daemonSet.Labels
 	application.MatchLabels = daemonSet.Spec.Selector.MatchLabels
 	application.CreationDate = daemonSet.CreationTimestamp.Time
@@ -351,6 +354,7 @@ func populateApplicationFromPod(application *models.K8sApplication, pod corev1.P
 	application.ApplicationOwner = pod.Labels["io.portainer.kubernetes.application.owner"]
 	application.StackID = pod.Labels["io.portainer.kubernetes.application.stackid"]
 	application.StackName = pod.Labels["io.portainer.kubernetes.application.stack"]
+	application.StackKind = pod.Labels["io.portainer.kubernetes.application.stackKind"]
 	application.Labels = pod.Labels
 	application.MatchLabels = pod.Labels
 	application.CreationDate = pod.CreationTimestamp.Time

@@ -22,7 +22,7 @@ export function useStackFile(
   );
 }
 
-async function getStackFile(
+export async function getStackFile(
   stackId: StackId,
   { version }: { version?: string | number } = {}
 ) {
