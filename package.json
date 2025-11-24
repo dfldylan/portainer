@@ -76,7 +76,6 @@
     "angular-utils-pagination": "~0.11.1",
     "angularjs-scroll-glue": "^2.2.0",
     "angularjs-slider": "^6.4.0",
-    "angulartics": "^1.6.0",
     "axios": "^1.7",
     "axios-cache-interceptor": "^1.4.1",
     "axios-progress-bar": "portainer/progress-bar-4-axios",
