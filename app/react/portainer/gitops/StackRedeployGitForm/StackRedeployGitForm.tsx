@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import { GitStackPayload } from '@/react/common/stacks/types';
+import { GitStackPayload, StackType } from '@/react/common/stacks/types';
 import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
 import {
   baseStackWebhookUrl,
@@ -234,7 +234,7 @@ export function StackRedeployGitForm({
   );
 
   const handleSubmit = useCallback(async () => {
-    const isSwarmStack = stack.Type === 1;
+    const isSwarmStack = stack.Type === StackType.DockerSwarm;
     const result = await confirmStackUpdate(
       'Any changes to this stack or application made locally in Portainer will be overridden, which may cause service interruption. Do you wish to continue?',
       isSwarmStack
@@ -356,7 +356,7 @@ export function StackRedeployGitForm({
           value={formValues.AutoUpdate!}
           onChange={handleChangeAutoUpdate}
           environmentType="DOCKER"
-          isForcePullVisible={stack.Type !== 3}
+          isForcePullVisible={stack.Type !== StackType.Kubernetes}
           baseWebhookUrl={state.baseWebhookUrl}
           webhookId={state.webhookId}
           webhooksDocs="/user/docker/stacks/webhooks"
@@ -429,25 +429,26 @@ export function StackRedeployGitForm({
           isFoldable
         />
 
-        {stack.Type === 1 && endpoint.apiVersion >= 1.27 && (
-          <FormSection title="Options">
-            <div className="form-group">
-              <div className="col-sm-12">
-                <SwitchField
-                  name="prune"
-                  checked={formValues.Option.Prune || false}
-                  tooltip="Prune services that are no longer referenced."
-                  labelClass="col-sm-3 col-lg-2"
-                  label="Prune services"
-                  onChange={(value: boolean) =>
-                    handleChange({ Option: { Prune: value } })
-                  }
-                  data-cy="stack-prune-services-switch"
-                />
+        {stack.Type === StackType.DockerSwarm &&
+          endpoint.apiVersion >= 1.27 && (
+            <FormSection title="Options">
+              <div className="form-group">
+                <div className="col-sm-12">
+                  <SwitchField
+                    name="prune"
+                    checked={formValues.Option.Prune || false}
+                    tooltip="Prune services that are no longer referenced."
+                    labelClass="col-sm-3 col-lg-2"
+                    label="Prune services"
+                    onChange={(value: boolean) =>
+                      handleChange({ Option: { Prune: value } })
+                    }
+                    data-cy="stack-prune-services-switch"
+                  />
+                </div>
               </div>
-            </div>
-          </FormSection>
-        )}
+            </FormSection>
+          )}
 
         <FormSection title="Actions">
           <LoadingButton

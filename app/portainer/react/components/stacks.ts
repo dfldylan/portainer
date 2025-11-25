@@ -6,6 +6,7 @@ import { StackDuplicationForm } from '@/react/common/stacks/ItemView/StackDuplic
 import { StackEditorTab } from '@/react/docker/stacks/ItemView/StackEditorTab/StackEditorTab';
 import { withUIRouter } from '@/react-tools/withUIRouter';
 import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { StackInfoTab } from '@/react/docker/stacks/ItemView/StackInfoTab/StackInfoTab';
 
 export const stacksModule = angular
   .module('portainer.app.react.components.stacks', [])
@@ -31,5 +32,20 @@ export const stacksModule = angular
       'containerNames',
       'originalContainerNames',
       'onSubmitSettled',
+    ])
+  )
+
+  .component(
+    'stackInfoTab',
+    r2a(withUIRouter(withCurrentUser(StackInfoTab)), [
+      'stack',
+      'stackName',
+      'stackFileContent',
+      'isRegular',
+      'isExternal',
+      'isOrphaned',
+      'environmentId',
+      'isOrphanedRunning',
+      'yamlError',
     ])
   ).name;

@@ -99,4 +99,7 @@ export const handlers = [
       message: 'Registry connection successful',
     })
   ),
+  http.put('/api/resource_controls/:id', () =>
+    HttpResponse.json({ success: true })
+  ),
 ];
