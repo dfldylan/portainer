@@ -54,19 +54,20 @@ vi.mock('@/portainer/helpers/webhookHelper', () => ({
 
 vi.mock('@/react/portainer/gitops/AutoUpdateFieldset/utils', () => ({
   parseAutoUpdateResponse: vi.fn(() => ({
-    RepositoryAutomaticUpdates: false,
+    RepositoryAutomaticUpdates: true,
     RepositoryMechanism: 'Webhook',
     RepositoryFetchInterval: '5m',
     ForcePullImage: false,
     RepositoryAutomaticUpdatesForce: false,
   })),
-  transformAutoUpdateViewModel: vi.fn(() => ({
-    RepositoryAutomaticUpdates: false,
-    RepositoryMechanism: 'Webhook',
-    RepositoryFetchInterval: '5m',
-    ForcePullImage: false,
-    RepositoryAutomaticUpdatesForce: false,
-  })),
+  transformAutoUpdateViewModel: vi.fn(
+    (_viewModel: unknown, webhookId: string) => ({
+      Interval: '',
+      Webhook: webhookId,
+      ForceUpdate: false,
+      ForcePullImage: false,
+    })
+  ),
 }));
 
 // Mock router hooks
@@ -625,13 +626,57 @@ describe('StackRedeployGitForm', () => {
   });
 
   describe('Webhook configuration', () => {
-    it('should generate webhook ID on initialization', () => {
-      renderComponent();
+    it('should generate webhook ID when no webhook is provided and use it in save settings', async () => {
+      const user = userEvent.setup();
+      const propsWithoutWebhook = {
+        ...defaultProps,
+        stack: {
+          ...defaultProps.stack,
+          AutoUpdate: {
+            ...defaultProps.stack.AutoUpdate,
+            Webhook: '',
+          },
+        },
+      };
+      mockCreateWebhookId.mockReturnValue('generated-webhook-id');
+      mockUpdateGitStackSettingsMutation.mutateAsync.mockResolvedValue({});
+      renderComponent(propsWithoutWebhook);
 
       expect(mockCreateWebhookId).toHaveBeenCalled();
+
+      // Make a change to enable save button
+      const toggleButton = screen.getByTestId(
+        'advanced-configuration-toggle-button'
+      );
+      await user.click(toggleButton);
+
+      const tlsSwitch = screen.getByTestId(
+        'gitops-skip-tls-verification-switch'
+      );
+      await user.click(tlsSwitch);
+
+      const saveButton = screen.getByTestId('stack-save-settings-button');
+      await user.click(saveButton);
+
+      await waitFor(() => {
+        expect(
+          mockUpdateGitStackSettingsMutation.mutateAsync
+        ).toHaveBeenCalledWith(
+          expect.objectContaining({
+            stackId: 1,
+            endpointId: 1,
+            payload: expect.objectContaining({
+              AutoUpdate: expect.objectContaining({
+                Webhook: 'generated-webhook-id',
+              }),
+            }),
+          })
+        );
+      });
     });
 
-    it('should use existing webhook ID from stack if available', () => {
+    it('should use existing webhook ID from stack without generating new one', async () => {
+      const user = userEvent.setup();
       const propsWithWebhook = {
         ...defaultProps,
         stack: {
@@ -642,9 +687,40 @@ describe('StackRedeployGitForm', () => {
           },
         },
       };
+      mockUpdateGitStackSettingsMutation.mutateAsync.mockResolvedValue({});
       renderComponent(propsWithWebhook);
 
-      expect(mockCreateWebhookId).toHaveBeenCalled();
+      expect(mockCreateWebhookId).not.toHaveBeenCalled();
+
+      // Make a change to enable save button
+      const toggleButton = screen.getByTestId(
+        'advanced-configuration-toggle-button'
+      );
+      await user.click(toggleButton);
+
+      const tlsSwitch = screen.getByTestId(
+        'gitops-skip-tls-verification-switch'
+      );
+      await user.click(tlsSwitch);
+
+      const saveButton = screen.getByTestId('stack-save-settings-button');
+      await user.click(saveButton);
+
+      await waitFor(() => {
+        expect(
+          mockUpdateGitStackSettingsMutation.mutateAsync
+        ).toHaveBeenCalledWith(
+          expect.objectContaining({
+            stackId: 1,
+            endpointId: 1,
+            payload: expect.objectContaining({
+              AutoUpdate: expect.objectContaining({
+                Webhook: 'existing-webhook-id',
+              }),
+            }),
+          })
+        );
+      });
     });
   });
 });

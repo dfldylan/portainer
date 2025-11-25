@@ -85,22 +85,23 @@ interface StackRedeployGitFormState {
   webhookId: string;
 }
 
-const defaultState: StackRedeployGitFormState = {
-  inProgress: false,
-  redeployInProgress: false,
-  showConfig: false,
-  hasUnsavedChanges: false,
-  baseWebhookUrl: baseStackWebhookUrl(),
-  webhookId: createWebhookId(),
-};
-
 export function StackRedeployGitForm({
   model,
   stack,
   endpoint,
 }: StackRedeployGitFormProps) {
   const router = useRouter();
-  const [state, setState] = useState(defaultState);
+  const [state, setState] = useState<StackRedeployGitFormState>(() => ({
+    inProgress: false,
+    redeployInProgress: false,
+    showConfig: false,
+    hasUnsavedChanges: false,
+    baseWebhookUrl: baseStackWebhookUrl(),
+    webhookId: buildStackWebhookId({
+      prev: undefined,
+      stackWebhookId: stack.AutoUpdate?.Webhook,
+    }),
+  }));
 
   const [formValues, setFormValues] = useState<StackRedeployGitFormModel>({
     RepositoryURL: model.URL,
@@ -133,19 +134,10 @@ export function StackRedeployGitForm({
   const initializeFormValues = useCallback(() => {
     // Extract webhook ID first - only generate if not already set
     setState((prev) => {
-      let { webhookId } = prev;
-      if (!webhookId) {
-        webhookId = createWebhookId();
-        if (stack.AutoUpdate?.Webhook) {
-          // Extract UUID from webhook URL if it's a full URL
-          webhookId = stack.AutoUpdate.Webhook;
-          if (webhookId.includes('/')) {
-            // Extract the last part of the URL which should be the UUID
-            const parts = webhookId.split('/');
-            webhookId = parts[parts.length - 1] || webhookId;
-          }
-        }
-      }
+      const webhookId = buildStackWebhookId({
+        prev: prev.webhookId,
+        stackWebhookId: stack.AutoUpdate?.Webhook,
+      });
       return { ...prev, webhookId };
     });
 
@@ -491,4 +483,22 @@ export function StackRedeployGitForm({
       </FormSection>
     </div>
   );
+}
+
+function buildStackWebhookId({
+  prev,
+  stackWebhookId,
+}: {
+  prev?: string;
+  stackWebhookId: string | undefined;
+}) {
+  if (prev) {
+    return prev;
+  }
+
+  if (!stackWebhookId) {
+    return createWebhookId();
+  }
+
+  return stackWebhookId;
 }
