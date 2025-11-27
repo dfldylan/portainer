@@ -1,15 +1,13 @@
 import { AlertTriangle } from 'lucide-react';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
 import { Stack } from '@/react/common/stacks/types';
 import { StackDuplicationForm } from '@/react/common/stacks/ItemView/StackDuplicationForm/StackDuplicationForm';
-import { StackRedeployGitForm } from '@/react/portainer/gitops/StackRedeployGitForm/StackRedeployGitForm';
-import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
 import { Authorized } from '@/react/hooks/useUser';
 
 import { Icon } from '@@/Icon';
 import { FormSection } from '@@/form-components/FormSection';
 
+import { StackRedeployGitForm } from './StackRedeployGitForm/StackRedeployGitForm';
 import { StackActions } from './StackActions';
 import { AssociateStackForm } from './AssociateStackForm';
 
@@ -75,10 +73,7 @@ export function StackInfoTab({
             <>
               {stack.GitConfig && !stack.FromAppTemplate && (
                 <Authorized authorizations="PortainerStackUpdate">
-                  <StackRedeployGitFormWrapper
-                    stack={stack}
-                    environmentId={environmentId}
-                  />
+                  <StackRedeployGitForm stack={stack} />
                 </Authorized>
               )}
 
@@ -130,30 +125,5 @@ function ExternalOrphanedWarning({
         </span>
       </div>
     </FormSection>
-  );
-}
-
-function StackRedeployGitFormWrapper({
-  stack,
-  environmentId,
-}: {
-  stack: Stack;
-  environmentId: EnvironmentId;
-}) {
-  const apiVersion = useApiVersion(environmentId);
-
-  if (!stack.GitConfig) {
-    return null;
-  }
-
-  return (
-    <StackRedeployGitForm
-      model={stack.GitConfig}
-      endpoint={{
-        Id: environmentId,
-        apiVersion,
-      }}
-      stack={stack}
-    />
   );
 }

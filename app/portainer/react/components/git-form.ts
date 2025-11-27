@@ -10,7 +10,6 @@ import { AuthFieldset } from '@/react/portainer/gitops/AuthFieldset';
 import { InfoPanel } from '@/react/portainer/gitops/InfoPanel';
 import { RefField } from '@/react/portainer/gitops/RefField';
 import { TimeWindowDisplay } from '@/react/portainer/gitops/TimeWindowDisplay';
-import { StackRedeployGitForm } from '@/react/portainer/gitops/StackRedeployGitForm/StackRedeployGitForm';
 
 export const gitFormModule = angular
   .module('portainer.app.components.forms.git', [])
@@ -80,12 +79,4 @@ export const gitFormModule = angular
   .component(
     'timeWindowDisplay',
     r2a(withReactQuery(withUIRouter(TimeWindowDisplay)), [])
-  )
-  .component(
-    'stackRedeployGitForm',
-    r2a(withUIRouter(withReactQuery(withCurrentUser(StackRedeployGitForm))), [
-      'model',
-      'stack',
-      'endpoint',
-    ])
   ).name;

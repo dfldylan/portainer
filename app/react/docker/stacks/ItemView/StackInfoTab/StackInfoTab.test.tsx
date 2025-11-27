@@ -9,6 +9,10 @@ import { Stack, StackStatus, StackType } from '@/react/common/stacks/types';
 
 import { StackInfoTab } from './StackInfoTab';
 
+vi.mock('@/react/hooks/useEnvironmentId', () => ({
+  useEnvironmentId: vi.fn(() => 1),
+}));
+
 // Mock the child components to isolate testing
 vi.mock('./AssociateStackForm', () => ({
   AssociateStackForm: vi.fn(() => (
@@ -29,14 +33,11 @@ vi.mock(
   })
 );
 
-vi.mock(
-  '@/react/portainer/gitops/StackRedeployGitForm/StackRedeployGitForm',
-  () => ({
-    StackRedeployGitForm: vi.fn(() => (
-      <div data-cy="stack-redeploy-git-form">StackRedeployGitForm</div>
-    )),
-  })
-);
+vi.mock('./StackRedeployGitForm/StackRedeployGitForm', () => ({
+  StackRedeployGitForm: vi.fn(() => (
+    <div data-cy="stack-redeploy-git-form">StackRedeployGitForm</div>
+  )),
+}));
 
 describe('StackInfoTab', () => {
   describe('initial rendering', () => {

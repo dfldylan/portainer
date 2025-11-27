@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { FormikErrors } from 'formik';
 
-import { GitFormModel } from '@/react/portainer/gitops/types';
-import { PathSelector } from '@/react/portainer/gitops/ComposePathField/PathSelector';
+import {
+  PathSelector,
+  PathSelectorGitModel,
+} from '@/react/portainer/gitops/ComposePathField/PathSelector';
 import { dummyGitForm } from '@/react/portainer/gitops/RelativePathFieldset/utils';
 
 import { SwitchField } from '@@/form-components/SwitchField';
@@ -16,7 +18,7 @@ import { RelativePathModel, getPerDevConfigsFilterType } from './types';
 
 interface Props {
   values: RelativePathModel;
-  gitModel?: GitFormModel;
+  gitModel?: PathSelectorGitModel;
   onChange: (value: RelativePathModel) => void;
   isEditing?: boolean;
   hideEdgeConfigs?: boolean;

@@ -1,11 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
+import { HttpResponse } from 'msw';
+import _ from 'lodash';
 
 import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 import { withTestRouter } from '@/react/test-utils/withRouter';
-import { useUpdateGitStack } from '@/react/portainer/gitops/queries/useUpdateGitStack';
-import { useUpdateGitStackSettings } from '@/react/portainer/gitops/queries/useUpdateGitStackSettings';
 import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
 import { confirmEnableTLSVerify } from '@/react/portainer/gitops/utils';
 import {
@@ -13,10 +13,13 @@ import {
   createWebhookId,
 } from '@/portainer/helpers/webhookHelper';
 import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { Stack } from '@/react/common/stacks/types';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
+import { http, server } from '@/setup-tests/server';
 
 import { StackRedeployGitForm } from './StackRedeployGitForm';
 
-// Extract the props type from the component
 type StackRedeployGitFormProps = React.ComponentProps<
   typeof StackRedeployGitForm
 >;
@@ -29,14 +32,6 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
       reload: vi.fn(),
     },
   })),
-}));
-
-vi.mock('@/react/portainer/gitops/queries/useUpdateGitStack', () => ({
-  useUpdateGitStack: vi.fn(),
-}));
-
-vi.mock('@/react/portainer/gitops/queries/useUpdateGitStackSettings', () => ({
-  useUpdateGitStackSettings: vi.fn(),
 }));
 
 vi.mock('@/react/common/stacks/common/confirm-stack-update', () => ({
@@ -116,7 +111,8 @@ vi.mock('@/react/portainer/gitops/RefField', () => ({
   RefField: vi.fn(() => <div data-testid="ref-field">Ref Field</div>),
 }));
 
-vi.mock('@/react/portainer/gitops/AuthFieldset', () => ({
+vi.mock('@/react/portainer/gitops/AuthFieldset', async (importOriginal) => ({
+  ...(await importOriginal()),
   AuthFieldset: vi.fn(() => (
     <div data-testid="auth-fieldset">
       <div>Repository Authentication</div>
@@ -133,91 +129,62 @@ vi.mock(
   })
 );
 
+vi.mock('@@/form-components/MultiRegistrySelectFieldset', () => ({
+  MultiRegistrySelectFieldset: vi.fn(
+    ({
+      options,
+    }: {
+      options: Array<{ Id: number; Name: string }>;
+      value: number[];
+    }) => (
+      <div data-testid="multi-registry-select">
+        {options?.map((registry: { Id: number; Name: string }) => (
+          <span key={registry.Id}>{registry.Name}</span>
+        ))}
+      </div>
+    )
+  ),
+}));
+
 vi.mock('@/portainer/services/notifications', () => ({
   notifySuccess: vi.fn(),
   notifyError: vi.fn(),
 }));
 
-const mockUseUpdateGitStack = vi.mocked(useUpdateGitStack);
-const mockUseUpdateGitStackSettings = vi.mocked(useUpdateGitStackSettings);
+vi.mock('@/react/docker/proxy/queries/useVersion', () => ({
+  useApiVersion: vi.fn(),
+}));
+
+// In test setup or beforeEach
+beforeEach(() => {
+  vi.mocked(useApiVersion).mockReturnValue(1.27);
+});
+
 const mockConfirmStackUpdate = vi.mocked(confirmStackUpdate);
 const mockConfirmEnableTLSVerify = vi.mocked(confirmEnableTLSVerify);
 const mockBaseStackWebhookUrl = vi.mocked(baseStackWebhookUrl);
 const mockCreateWebhookId = vi.mocked(createWebhookId);
 
 describe('StackRedeployGitForm', () => {
-  const defaultProps: StackRedeployGitFormProps = {
-    model: {
-      URL: 'https://github.com/test/repo',
-      ReferenceName: 'refs/heads/main',
-      ConfigFilePath: 'docker-compose.yml',
-      ConfigHash: 'abc123',
-      TLSSkipVerify: false,
-    },
-    stack: {
-      Id: 1,
-      EndpointId: 1,
-      Type: 1, // Swarm stack
-      Env: [
-        { name: 'ENV1', value: 'value1' },
-        { name: 'ENV2', value: 'value2' },
-      ],
-      Option: {
-        Prune: false,
-      },
-      AdditionalFiles: ['file1.yml', 'file2.yml'],
-      AutoUpdate: {
-        Interval: '5m',
-        Webhook: 'test-webhook-id',
-        ForceUpdate: false,
-        ForcePullImage: false,
-      },
-    },
-    endpoint: {
-      apiVersion: 1.27,
-      Id: 1,
-    },
-  };
-
-  const mockUpdateGitStackMutation = {
-    mutateAsync: vi.fn(),
-    isLoading: false,
-    error: null,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } as any;
-
-  const mockUpdateGitStackSettingsMutation = {
-    mutateAsync: vi.fn(),
-    isLoading: false,
-    error: null,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } as any;
-
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mockUseUpdateGitStack.mockReturnValue(mockUpdateGitStackMutation as any);
-    mockUseUpdateGitStackSettings.mockReturnValue(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      mockUpdateGitStackSettingsMutation as any
-    );
     mockConfirmStackUpdate.mockResolvedValue({ pullImage: false });
     mockConfirmEnableTLSVerify.mockResolvedValue(true);
     mockBaseStackWebhookUrl.mockReturnValue(
       'http://localhost:9000/api/webhooks'
     );
     mockCreateWebhookId.mockReturnValue('test-webhook-id');
-  });
 
-  function renderComponent(props = {}) {
-    const Component = withTestQueryProvider(
-      withTestRouter(() => (
-        <StackRedeployGitForm {...defaultProps} {...props} />
-      ))
+    server.use(
+      http.put('/api/stacks/:id/git/redeploy', () =>
+        HttpResponse.json({ success: true })
+      ),
+      http.post('/api/stacks/:id/git', () =>
+        HttpResponse.json({ success: true })
+      )
     );
-    return render(<Component />);
-  }
+  });
 
   describe('Basic rendering', () => {
     it('should render the form with correct sections', () => {
@@ -226,7 +193,8 @@ describe('StackRedeployGitForm', () => {
       expect(
         screen.getByText('Redeploy from git repository')
       ).toBeInTheDocument();
-      expect(screen.getByText('Options')).toBeInTheDocument();
+
+      expect(screen.getByText('Options')).toBeInTheDocument(); // available only when apiVersion is >= 1.27
       expect(screen.getByText('Actions')).toBeInTheDocument();
     });
 
@@ -313,10 +281,14 @@ describe('StackRedeployGitForm', () => {
 
     it('should call confirmEnableTLSVerify when enabling TLS verification', async () => {
       const user = userEvent.setup();
-      const propsWithTLSDisabled = {
-        ...defaultProps,
-        model: { ...defaultProps.model, TLSSkipVerify: true },
+      const propsWithTLSDisabled: DeepPartial<StackRedeployGitFormProps> = {
+        stack: {
+          GitConfig: {
+            TLSSkipVerify: true,
+          },
+        },
       };
+
       renderComponent(propsWithTLSDisabled);
 
       const toggleButton = screen.getByTestId(
@@ -335,6 +307,7 @@ describe('StackRedeployGitForm', () => {
 
   describe('Options section', () => {
     it('should show prune services option for swarm stacks with API version >= 1.27', () => {
+      vi.mocked(useApiVersion).mockReturnValue(1.27);
       renderComponent();
 
       expect(screen.getByText('Prune services')).toBeInTheDocument();
@@ -344,21 +317,20 @@ describe('StackRedeployGitForm', () => {
     });
 
     it('should not show options section for non-swarm stacks', () => {
-      const propsWithComposeStack = {
-        ...defaultProps,
-        stack: { ...defaultProps.stack, Type: 2 }, // Compose stack
-      };
-      renderComponent(propsWithComposeStack);
+      vi.mocked(useApiVersion).mockReturnValue(1.27);
+
+      renderComponent({
+        stack: {
+          Type: 2,
+        },
+      });
 
       expect(screen.queryByText('Options')).not.toBeInTheDocument();
     });
 
     it('should not show options section for older API versions', () => {
-      const propsWithOldAPI = {
-        ...defaultProps,
-        endpoint: { ...defaultProps.endpoint, apiVersion: 1.26 },
-      };
-      renderComponent(propsWithOldAPI);
+      vi.mocked(useApiVersion).mockReturnValue(1.26);
+      renderComponent();
 
       expect(screen.queryByText('Options')).not.toBeInTheDocument();
     });
@@ -379,30 +351,38 @@ describe('StackRedeployGitForm', () => {
     });
 
     it('should call updateGitStack mutation when confirmed', async () => {
+      let requestBody: unknown = null;
+      server.use(
+        http.put('/api/stacks/:id/git/redeploy', async ({ request }) => {
+          requestBody = await request.json();
+          return HttpResponse.json({ success: true });
+        })
+      );
+
       const user = userEvent.setup();
-      mockUpdateGitStackMutation.mutateAsync.mockResolvedValue({});
       renderComponent();
 
       const redeployButton = screen.getByTestId('stack-redeploy-button');
       await user.click(redeployButton);
 
       await waitFor(() => {
-        expect(mockUpdateGitStackMutation.mutateAsync).toHaveBeenCalledWith({
-          env: defaultProps.stack.Env,
-          prune: false,
-          RepositoryReferenceName: 'refs/heads/main',
-          RepositoryAuthentication: false,
-          RepositoryGitCredentialID: 0,
-          RepositoryUsername: '',
-          RepositoryPassword: '',
-          PullImage: false,
-        });
+        expect(requestBody).toEqual(
+          expect.objectContaining({
+            prune: false,
+            RepositoryReferenceName: 'refs/heads/main',
+          })
+        );
       });
     });
 
     it('should notify success on successful redeploy', async () => {
+      server.use(
+        http.put('/api/stacks/:id/git/redeploy', async () =>
+          HttpResponse.json({ success: true })
+        )
+      );
+
       const user = userEvent.setup();
-      mockUpdateGitStackMutation.mutateAsync.mockResolvedValue({});
 
       renderComponent();
 
@@ -416,10 +396,13 @@ describe('StackRedeployGitForm', () => {
 
     it('should disable redeploy button when in progress', async () => {
       const user = userEvent.setup();
-      // Mock the mutation to simulate loading state
-      mockUpdateGitStackMutation.mutateAsync.mockImplementation(
-        () => new Promise(() => {})
-      ); // Never resolves
+      server.use(
+        http.put('/api/stacks/:id/git/redeploy', async () => {
+          // never resolve
+          await new Promise(() => {});
+          return HttpResponse.json({ success: true });
+        })
+      );
       renderComponent();
 
       const redeployButton = screen.getByTestId('stack-redeploy-button');
@@ -434,8 +417,16 @@ describe('StackRedeployGitForm', () => {
 
   describe('Save settings functionality', () => {
     it('should call updateGitStackSettings mutation when save button is clicked', async () => {
+      let requestBody: unknown;
+      server.use(
+        http.post('/api/stacks/:id/git', async ({ request }) => {
+          requestBody = await request.json();
+          return HttpResponse.json({ success: true });
+        })
+      );
+
       const user = userEvent.setup();
-      mockUpdateGitStackSettingsMutation.mutateAsync.mockResolvedValue({});
+
       renderComponent();
 
       // Make a change to enable the save button
@@ -453,18 +444,13 @@ describe('StackRedeployGitForm', () => {
       await user.click(saveButton);
 
       await waitFor(() => {
-        expect(
-          mockUpdateGitStackSettingsMutation.mutateAsync
-        ).toHaveBeenCalledWith({
-          stackId: 1,
-          endpointId: 1,
-          payload: expect.objectContaining({
-            env: defaultProps.stack.Env,
+        expect(requestBody).toEqual(
+          expect.objectContaining({
             RepositoryReferenceName: 'refs/heads/main',
             prune: false,
             TLSSkipVerify: true,
-          }),
-        });
+          })
+        );
       });
     });
 
@@ -495,7 +481,13 @@ describe('StackRedeployGitForm', () => {
     });
 
     it('should disable save button when in progress', () => {
-      mockUpdateGitStackSettingsMutation.isLoading = true;
+      server.use(
+        http.post('/api/stacks/:id/git', async () => {
+          // never resolve
+          await new Promise(() => {});
+          return HttpResponse.json({ success: true });
+        })
+      );
       renderComponent();
 
       const saveButton = screen.getByTestId('stack-save-settings-button');
@@ -524,12 +516,18 @@ describe('StackRedeployGitForm', () => {
       await user.click(tlsSwitch);
 
       // Should now have unsaved changes
-      expect(saveButton).not.toBeDisabled();
+      await waitFor(() => {
+        expect(saveButton).not.toBeDisabled();
+      });
     });
 
     it('should clear unsaved changes after successful save', async () => {
       const user = userEvent.setup();
-      mockUpdateGitStackSettingsMutation.mutateAsync.mockResolvedValue({});
+      server.use(
+        http.put('/api/stacks/:id/git/redeploy', async () =>
+          HttpResponse.json({ success: true })
+        )
+      );
       renderComponent();
 
       // Make a change
@@ -556,9 +554,12 @@ describe('StackRedeployGitForm', () => {
   describe('Error handling', () => {
     it('should handle updateGitStack mutation errors gracefully', async () => {
       const user = userEvent.setup();
-      mockUpdateGitStackMutation.mutateAsync.mockRejectedValue(
-        new Error('Update failed')
+      server.use(
+        http.put('/api/stacks/:id/git/redeploy', async () =>
+          HttpResponse.json({ error: 'Update failed' }, { status: 400 })
+        )
       );
+
       renderComponent();
 
       const redeployButton = screen.getByTestId('stack-redeploy-button');
@@ -571,9 +572,12 @@ describe('StackRedeployGitForm', () => {
 
     it('should handle updateGitStackSettings mutation errors gracefully', async () => {
       const user = userEvent.setup();
-      mockUpdateGitStackSettingsMutation.mutateAsync.mockRejectedValue(
-        new Error('Save failed')
+      server.use(
+        http.post('/api/stacks/:id/git', async () =>
+          HttpResponse.json({ error: 'Update failed' }, { status: 400 })
+        )
       );
+
       renderComponent();
 
       // Make a change to enable save button
@@ -592,7 +596,7 @@ describe('StackRedeployGitForm', () => {
 
       // Should not clear unsaved changes on error
       await waitFor(() => {
-        expect(saveButton).not.toBeDisabled();
+        expect(saveButton).toBeEnabled();
       });
     });
   });
@@ -600,10 +604,8 @@ describe('StackRedeployGitForm', () => {
   describe('Git authentication', () => {
     it('should handle git authentication configuration', async () => {
       const user = userEvent.setup();
-      const propsWithAuth = {
-        ...defaultProps,
+      const propsWithAuth: DeepPartial<StackRedeployGitFormProps> = {
         stack: {
-          ...defaultProps.stack,
           GitConfig: {
             Authentication: {
               Username: 'testuser',
@@ -627,20 +629,23 @@ describe('StackRedeployGitForm', () => {
 
   describe('Webhook configuration', () => {
     it('should generate webhook ID when no webhook is provided and use it in save settings', async () => {
+      let requestBody: unknown;
+      server.use(
+        http.post('/api/stacks/:id/git', async ({ request }) => {
+          requestBody = await request.json();
+          return HttpResponse.json({ success: true });
+        })
+      );
       const user = userEvent.setup();
-      const propsWithoutWebhook = {
-        ...defaultProps,
+      mockCreateWebhookId.mockReturnValue('generated-webhook-id');
+
+      renderComponent({
         stack: {
-          ...defaultProps.stack,
           AutoUpdate: {
-            ...defaultProps.stack.AutoUpdate,
             Webhook: '',
           },
         },
-      };
-      mockCreateWebhookId.mockReturnValue('generated-webhook-id');
-      mockUpdateGitStackSettingsMutation.mutateAsync.mockResolvedValue({});
-      renderComponent(propsWithoutWebhook);
+      });
 
       expect(mockCreateWebhookId).toHaveBeenCalled();
 
@@ -659,16 +664,10 @@ describe('StackRedeployGitForm', () => {
       await user.click(saveButton);
 
       await waitFor(() => {
-        expect(
-          mockUpdateGitStackSettingsMutation.mutateAsync
-        ).toHaveBeenCalledWith(
+        expect(requestBody).toEqual(
           expect.objectContaining({
-            stackId: 1,
-            endpointId: 1,
-            payload: expect.objectContaining({
-              AutoUpdate: expect.objectContaining({
-                Webhook: 'generated-webhook-id',
-              }),
+            AutoUpdate: expect.objectContaining({
+              Webhook: 'generated-webhook-id',
             }),
           })
         );
@@ -677,18 +676,21 @@ describe('StackRedeployGitForm', () => {
 
     it('should use existing webhook ID from stack without generating new one', async () => {
       const user = userEvent.setup();
-      const propsWithWebhook = {
-        ...defaultProps,
+      let requestBody: unknown;
+      server.use(
+        http.post('/api/stacks/:id/git', async ({ request }) => {
+          requestBody = await request.json();
+          return HttpResponse.json({ success: true });
+        })
+      );
+
+      renderComponent({
         stack: {
-          ...defaultProps.stack,
           AutoUpdate: {
-            ...defaultProps.stack.AutoUpdate,
             Webhook: 'existing-webhook-id',
           },
         },
-      };
-      mockUpdateGitStackSettingsMutation.mutateAsync.mockResolvedValue({});
-      renderComponent(propsWithWebhook);
+      });
 
       expect(mockCreateWebhookId).not.toHaveBeenCalled();
 
@@ -707,16 +709,10 @@ describe('StackRedeployGitForm', () => {
       await user.click(saveButton);
 
       await waitFor(() => {
-        expect(
-          mockUpdateGitStackSettingsMutation.mutateAsync
-        ).toHaveBeenCalledWith(
+        expect(requestBody).toEqual(
           expect.objectContaining({
-            stackId: 1,
-            endpointId: 1,
-            payload: expect.objectContaining({
-              AutoUpdate: expect.objectContaining({
-                Webhook: 'existing-webhook-id',
-              }),
+            AutoUpdate: expect.objectContaining({
+              Webhook: 'existing-webhook-id',
             }),
           })
         );
@@ -724,3 +720,47 @@ describe('StackRedeployGitForm', () => {
     });
   });
 });
+
+const defaultProps: StackRedeployGitFormProps = {
+  stack: {
+    GitConfig: {
+      URL: 'https://github.com/test/repo',
+      ReferenceName: 'refs/heads/main',
+      ConfigFilePath: 'docker-compose.yml',
+      ConfigHash: 'abc123',
+      TLSSkipVerify: false,
+    },
+    Name: 'stack',
+
+    Id: 1,
+    EndpointId: 1,
+    Type: 1, // Swarm stack
+    Env: [
+      { name: 'ENV1', value: 'value1' },
+      { name: 'ENV2', value: 'value2' },
+    ],
+    Option: {
+      Prune: false,
+      Force: false,
+    },
+    AdditionalFiles: ['file1.yml', 'file2.yml'],
+    AutoUpdate: {
+      Interval: '5m',
+      Webhook: 'test-webhook-id',
+      ForceUpdate: false,
+      ForcePullImage: false,
+    },
+  } as Stack,
+};
+
+type DeepPartial<T> = T extends object
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T;
+
+function renderComponent(props: DeepPartial<StackRedeployGitFormProps> = {}) {
+  const Component = withTestQueryProvider(
+    withUserProvider(withTestRouter(StackRedeployGitForm))
+  );
+  // merge deep the props
+  return render(<Component {..._.merge({}, defaultProps, props)} />);
+}

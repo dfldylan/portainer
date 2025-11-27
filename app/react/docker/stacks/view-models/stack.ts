@@ -6,6 +6,8 @@ import {
   RepoConfigResponse,
 } from '@/react/portainer/gitops/types';
 
+import { EnvVar } from '@@/form-components/EnvironmentVariablesFieldset/types';
+
 import { IResource } from '../../components/datatable/createOwnershipColumn';
 
 export class StackViewModel implements IResource {
@@ -19,7 +21,7 @@ export class StackViewModel implements IResource {
 
   SwarmId: string;
 
-  Env: { name: string; value: string }[];
+  Env: EnvVar[];
 
   Option: { Prune: boolean; Force: boolean } | undefined;
 

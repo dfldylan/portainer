@@ -5,6 +5,8 @@ import {
   RepoConfigResponse,
 } from '@/react/portainer/gitops/types';
 
+import { EnvVar } from '@@/form-components/EnvironmentVariablesFieldset/types';
+
 export type StackId = number;
 
 export enum StackType {
@@ -34,10 +36,7 @@ export interface Stack {
   EndpointId: number;
   SwarmId: string;
   EntryPoint: string;
-  Env: {
-    name: string;
-    value: string;
-  }[];
+  Env: EnvVar[];
   ResourceControl?: ResourceControlResponse;
   Status: StackStatus;
   ProjectPath: string;
@@ -67,7 +66,7 @@ export type StackFile = {
 };
 
 export interface GitStackPayload {
-  env: Array<{ name: string; value: string }>;
+  env: Array<EnvVar>;
   prune?: boolean;
   RepositoryReferenceName?: string;
   RepositoryAuthentication?: boolean;
