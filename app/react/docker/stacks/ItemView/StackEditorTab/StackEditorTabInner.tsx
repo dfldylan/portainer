@@ -51,7 +51,6 @@ export function StackEditorTabInner({
     setFieldValue,
     isSubmitting,
     isValid,
-    dirty,
     initialValues,
   } = useFormikContext<StackEditorFormValues>();
 
@@ -168,7 +167,7 @@ export function StackEditorTabInner({
 
       <Authorized authorizations="PortainerStackUpdate">
         <FormActions
-          isValid={isValid && !isDeployDisabled && dirty}
+          isValid={isValid && !isDeployDisabled}
           isLoading={isSubmitting}
           loadingText="Deployment in progress..."
           submitLabel="Update the stack"

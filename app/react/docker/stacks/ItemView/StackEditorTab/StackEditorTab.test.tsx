@@ -149,11 +149,6 @@ describe('form submission', () => {
       expect(screen.getByTestId('stack-editor')).toBeInTheDocument();
     });
 
-    // Make form dirty
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' # modified');
-
-    // Submit form
     const deployButton = screen.getByTestId('stack-deploy-button');
     await waitFor(() => {
       expect(deployButton).toBeEnabled();
@@ -175,9 +170,6 @@ describe('form submission', () => {
     await waitFor(() => {
       expect(screen.getByTestId('stack-editor')).toBeInTheDocument();
     });
-
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' ');
 
     const deployButton = screen.getByTestId('stack-deploy-button');
     await waitFor(() => {
@@ -208,16 +200,20 @@ describe('form submission', () => {
       })
     );
 
-    renderComponent({ stackId: 42 });
+    const initialValues: Partial<StackEditorFormValues> = {
+      stackFileContent: 'version: "3.8"',
+      environmentVariables: [],
+      webhookId: '',
+      prune: false,
+      registries: [],
+    };
+
+    renderComponent({ stackId: 42, initialValues });
     const user = userEvent.setup();
 
     await waitFor(() => {
       expect(screen.getByTestId('stack-editor')).toBeInTheDocument();
     });
-
-    const editor = screen.getByTestId('stack-editor');
-    await user.clear(editor);
-    await user.type(editor, 'version: "3.8"');
 
     const deployButton = screen.getByTestId('stack-deploy-button');
     await waitFor(() => {
@@ -259,9 +255,6 @@ describe('form submission', () => {
       expect(screen.getByTestId('stack-editor')).toBeInTheDocument();
     });
 
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' ');
-
     const deployButton = screen.getByTestId('stack-deploy-button');
     await waitFor(() => {
       expect(deployButton).toBeEnabled();
@@ -289,9 +282,6 @@ describe('form submission', () => {
     await waitFor(() => {
       expect(screen.getByTestId('stack-editor')).toBeInTheDocument();
     });
-
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' ');
 
     const deployButton = screen.getByTestId('stack-deploy-button');
     await waitFor(() => {
@@ -322,9 +312,6 @@ describe('form submission', () => {
     await waitFor(() => {
       expect(screen.getByTestId('stack-editor')).toBeInTheDocument();
     });
-
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' ');
 
     const deployButton = screen.getByTestId('stack-deploy-button');
     await waitFor(() => {

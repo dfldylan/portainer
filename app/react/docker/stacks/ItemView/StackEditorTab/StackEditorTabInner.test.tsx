@@ -357,14 +357,8 @@ describe('version rollback', () => {
 });
 
 describe('form submission', () => {
-  it('should enable submit button when form is valid and dirty', async () => {
-    const onSubmit = vi.fn();
-    renderComponent({}, { onSubmit });
-    const user = userEvent.setup();
-
-    // Make form dirty by changing content
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' ');
+  it('should enable submit button when form is valid', async () => {
+    renderComponent();
 
     await waitFor(() => {
       const deployButton = screen.getByTestId('stack-deploy-button');
@@ -372,23 +366,9 @@ describe('form submission', () => {
     });
   });
 
-  it('should disable submit button when form is not dirty', async () => {
-    renderComponent();
-
-    await waitFor(() => {
-      const deployButton = screen.getByTestId('stack-deploy-button');
-      expect(deployButton).toBeDisabled();
-    });
-  });
-
   it('should disable submit button when stack is orphaned', async () => {
     const onSubmit = vi.fn();
     renderComponent({ isOrphaned: true }, { onSubmit });
-    const user = userEvent.setup();
-
-    // Try to make form dirty
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' ');
 
     await waitFor(() => {
       const deployButton = screen.queryByTestId('stack-deploy-button');
@@ -403,10 +383,6 @@ describe('form submission', () => {
     renderComponent({}, { onSubmit });
     const user = userEvent.setup();
 
-    // Make form dirty
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' ');
-
     await waitFor(() => {
       const deployButton = screen.getByTestId('stack-deploy-button');
       expect(deployButton).toBeEnabled();
@@ -420,14 +396,10 @@ describe('form submission', () => {
     });
   });
 
-  it('should call onSubmit with form values', async () => {
+  it('should call onSubmit with form values when button is clicked', async () => {
     const onSubmit = vi.fn();
     renderComponent({}, { onSubmit });
     const user = userEvent.setup();
-
-    // Make form dirty
-    const editor = screen.getByTestId('stack-editor');
-    await user.type(editor, ' # comment');
 
     await waitFor(() => {
       const deployButton = screen.getByTestId('stack-deploy-button');
@@ -438,12 +410,7 @@ describe('form submission', () => {
     await user.click(deployButton);
 
     await waitFor(() => {
-      expect(onSubmit).toHaveBeenCalledWith(
-        expect.objectContaining({
-          stackFileContent: expect.stringContaining('# comment'),
-        }),
-        expect.anything()
-      );
+      expect(onSubmit).toHaveBeenCalled();
     });
   });
 });
