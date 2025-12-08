@@ -69,9 +69,14 @@ if [ "$PLATFORM" = "darwin" ]; then
   PLATFORM="linux"
 fi
 
+BINARY_NAME="portainer"
+if [ "$PLATFORM" = "windows" ]; then
+  BINARY_NAME="portainer.exe"
+fi
+
 GOOS=${PLATFORM} GOARCH=${ARCH} CGO_ENABLED=0 go build \
 	-trimpath \
 	--installsuffix cgo \
 	--ldflags "$ldflags" \
-	-o "../dist/portainer" \
+	-o "../dist/${BINARY_NAME}" \
 	./cmd/portainer/
