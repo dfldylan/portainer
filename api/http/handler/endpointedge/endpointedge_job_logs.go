@@ -56,7 +56,7 @@ func (handler *Handler) endpointEdgeJobsLogs(w http.ResponseWriter, r *http.Requ
 	}
 
 	if err := handler.DataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
-		return handler.getEdgeJobLobs(tx, endpoint.ID, portainer.EdgeJobID(edgeJobID), payload)
+		return handler.updateEdgeJobLogs(tx, endpoint.ID, portainer.EdgeJobID(edgeJobID), payload)
 	}); err != nil {
 		var httpErr *httperror.HandlerError
 		if errors.As(err, &httpErr) {
@@ -70,7 +70,7 @@ func (handler *Handler) endpointEdgeJobsLogs(w http.ResponseWriter, r *http.Requ
 	return response.JSON(w, nil)
 }
 
-func (handler *Handler) getEdgeJobLobs(tx dataservices.DataStoreTx, endpointID portainer.EndpointID, edgeJobID portainer.EdgeJobID, payload logsPayload) error {
+func (handler *Handler) updateEdgeJobLogs(tx dataservices.DataStoreTx, endpointID portainer.EndpointID, edgeJobID portainer.EdgeJobID, payload logsPayload) error {
 	endpoint, err := tx.Endpoint().Endpoint(endpointID)
 	if tx.IsErrObjectNotFound(err) {
 		return httperror.NotFound("Unable to find an environment with the specified identifier inside the database", err)
@@ -83,6 +83,11 @@ func (handler *Handler) getEdgeJobLobs(tx dataservices.DataStoreTx, endpointID p
 		return httperror.NotFound("Unable to find an edge job with the specified identifier inside the database", err)
 	} else if err != nil {
 		return httperror.InternalServerError("Unable to find an edge job with the specified identifier inside the database", err)
+	}
+
+	if resp, err := handler.buildSchedules(tx, endpoint, []portainer.EdgeJob{*edgeJob}); err != nil || len(resp) == 0 {
+		return httperror.InternalServerError("Unable to verify if the edge job is assigned to the environment",
+			fmt.Errorf("unable to verify if the edge job is assigned to the environment: %w. Environment name: %s", err, endpoint.Name))
 	}
 
 	if err := handler.FileService.StoreEdgeJobTaskLogFileFromBytes(strconv.Itoa(int(edgeJobID)), strconv.Itoa(int(endpoint.ID)), []byte(payload.FileContent)); err != nil {

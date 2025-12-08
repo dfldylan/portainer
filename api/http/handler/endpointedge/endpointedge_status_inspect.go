@@ -170,7 +170,7 @@ func (handler *Handler) inspectStatus(tx dataservices.DataStoreTx, r *http.Reque
 		Credentials:     tunnel.Credentials,
 	}
 
-	schedules, handlerErr := handler.buildSchedules(tx, endpoint)
+	schedules, handlerErr := handler.buildAllSchedules(tx, endpoint)
 	if handlerErr != nil {
 		return nil, handlerErr
 	}
@@ -208,13 +208,17 @@ func parseAgentPlatform(r *http.Request) (portainer.EndpointType, error) {
 	}
 }
 
-func (handler *Handler) buildSchedules(tx dataservices.DataStoreTx, endpoint *portainer.Endpoint) ([]edgeJobResponse, *httperror.HandlerError) {
-	schedules := []edgeJobResponse{}
-
+func (handler *Handler) buildAllSchedules(tx dataservices.DataStoreTx, endpoint *portainer.Endpoint) ([]edgeJobResponse, *httperror.HandlerError) {
 	edgeJobs, err := tx.EdgeJob().ReadAll()
 	if err != nil {
 		return nil, httperror.InternalServerError("Unable to retrieve Edge Jobs", err)
 	}
+
+	return handler.buildSchedules(tx, endpoint, edgeJobs)
+}
+
+func (handler *Handler) buildSchedules(tx dataservices.DataStoreTx, endpoint *portainer.Endpoint, edgeJobs []portainer.EdgeJob) ([]edgeJobResponse, *httperror.HandlerError) {
+	schedules := []edgeJobResponse{}
 
 	endpointGroups, err := tx.EndpointGroup().ReadAll()
 	if err != nil {
@@ -240,17 +244,10 @@ func (handler *Handler) buildSchedules(tx dataservices.DataStoreTx, endpoint *po
 			continue
 		}
 
-		var collectLogs bool
-		if _, ok := job.GroupLogsCollection[endpoint.ID]; ok {
-			collectLogs = job.GroupLogsCollection[endpoint.ID].CollectLogs
-		} else {
-			collectLogs = job.Endpoints[endpoint.ID].CollectLogs
-		}
-
 		schedule := edgeJobResponse{
 			ID:             job.ID,
 			CronExpression: job.CronExpression,
-			CollectLogs:    collectLogs,
+			CollectLogs:    job.GroupLogsCollection[endpoint.ID].CollectLogs || job.Endpoints[endpoint.ID].CollectLogs,
 			Version:        job.Version,
 		}
 
