@@ -7,6 +7,7 @@ import (
 	portainer "github.com/portainer/portainer/api"
 	httperrors "github.com/portainer/portainer/api/http/errors"
 	"github.com/portainer/portainer/api/http/security"
+	"github.com/portainer/portainer/api/internal/registryutils"
 	"github.com/portainer/portainer/api/pendingactions/handlers"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
@@ -80,7 +81,7 @@ func (handler *Handler) deleteKubernetesSecrets(registry *portainer.Registry) {
 			for _, ns := range access.Namespaces {
 				if err := cli.DeleteRegistrySecret(registry.ID, ns); err != nil {
 					failedNamespaces = append(failedNamespaces, ns)
-					log.Warn().Err(err).Msgf("Unable to delete registry secret %q from namespace %q for environment %d. Retrying offline", cli.RegistrySecretName(registry.ID), ns, endpointId)
+					log.Warn().Err(err).Msgf("Unable to delete registry secret %q from namespace %q for environment %d. Retrying offline", registryutils.RegistrySecretName(registry.ID), ns, endpointId)
 				}
 			}
 

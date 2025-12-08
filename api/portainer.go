@@ -29,6 +29,8 @@ type (
 	AccessPolicy struct {
 		// Role identifier. Reference the role that will be associated to this access policy
 		RoleID RoleID `json:"RoleId" example:"1"`
+		// Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
+		Namespaces []string `json:"Namespaces,omitempty"`
 	}
 
 	// AgentPlatform represents a platform type for an Agent
@@ -536,6 +538,65 @@ type (
 		Tags []string `json:"Tags,omitempty"`
 	}
 
+	PolicyChartSummary struct {
+		ChartName   string `json:"ChartName"`
+		Fingerprint string `json:"Fingerprint"`
+	}
+
+	PolicyChartStatus struct {
+		ChartName   string            `json:"chartName"`
+		Fingerprint string            `json:"fingerprint"`
+		Status      HelmInstallStatus `json:"status"`
+		Message     string            `json:"message"`
+		Namespace   string            `json:"namespace"`
+	}
+
+	ImageBundle struct {
+		FileName     string `json:"FileName"`
+		EncodedTarGz string `json:"EncodedTarGz"`
+	}
+
+	PolicyChartBundle struct {
+		PolicyChartSummary
+		EncodedTgz          string             `json:"EncodedTgz"`
+		Namespace           string             `json:"Namespace"`
+		PreReleaseManifest  string             `json:"PreReleaseManifest,omitempty"`
+		EncodedValues       string             `json:"EncodedValues"`
+		PreInstallDeletions []ResourceDeletion `json:"PreInstallDeletions,omitempty"`
+		PreInstallAdoptions []ResourceAdoption `json:"PreInstallAdoptions,omitempty"`
+	}
+
+	// ResourceDeletion identifies an existing Kubernetes resource to delete before policy install
+	ResourceDeletion struct {
+		APIVersion string `json:"apiVersion" example:"v1" yaml:"apiVersion"`
+		Kind       string `json:"kind" example:"Secret" yaml:"kind"`
+		Name       string `json:"name" example:"registry-1" yaml:"name"`
+		Namespace  string `json:"namespace,omitempty" example:"default" yaml:"namespace,omitempty"`
+	}
+
+	// ResourceAdoption identifies an existing Kubernetes resource to adopt into a Helm release
+	ResourceAdoption struct {
+		APIVersion string `json:"apiVersion" example:"v1" yaml:"apiVersion"`
+		Kind       string `json:"kind" example:"Secret" yaml:"kind"`
+		Name       string `json:"name" example:"registry-1" yaml:"name"`
+		Namespace  string `json:"namespace,omitempty" example:"default" yaml:"namespace,omitempty"`
+	}
+
+	// RestoreSettings contains instructions for restoring environment-level settings
+	RestoreSettings struct {
+		Manifest string `json:"manifest"` // Base64-encoded Kubernetes YAML manifest
+	}
+
+	// RestoreSettingsBundle maps restore type to restoration instructions
+	RestoreSettingsBundle map[PolicyType]RestoreSettings
+
+	PolicyID int
+
+	// PolicyType represents the type of policy
+	PolicyType string
+)
+
+type (
 	// EndpointGroupID represents an environment(endpoint) group identifier
 	EndpointGroupID int
 
@@ -868,9 +929,11 @@ type (
 	RegistryAccesses map[EndpointID]RegistryAccessPolicies
 
 	RegistryAccessPolicies struct {
+		// Docker specific fields (with docker, users/teams have access to a registry)
 		UserAccessPolicies UserAccessPolicies `json:"UserAccessPolicies"`
 		TeamAccessPolicies TeamAccessPolicies `json:"TeamAccessPolicies"`
-		Namespaces         []string           `json:"Namespaces"`
+		// Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)
+		Namespaces []string `json:"Namespaces"`
 	}
 
 	// RegistryID represents a registry identifier
@@ -2368,4 +2431,25 @@ const (
 const (
 	ContainerEngineDocker = "docker"
 	ContainerEnginePodman = "podman"
+)
+
+const (
+	// PolicyType constants
+	RbacK8s        PolicyType = "rbac-k8s"
+	SecurityK8s    PolicyType = "security-k8s"
+	SetupK8s       PolicyType = "setup-k8s"
+	RegistryK8s    PolicyType = "registry-k8s"
+	RbacDocker     PolicyType = "rbac-docker"
+	SecurityDocker PolicyType = "security-docker"
+	SetupDocker    PolicyType = "setup-docker"
+	RegistryDocker PolicyType = "registry-docker"
+)
+
+type HelmInstallStatus string
+
+const (
+	HelmInstallStatusInstalling   HelmInstallStatus = "installing"
+	HelmInstallStatusInstalled    HelmInstallStatus = "installed"
+	HelmInstallStatusFailed       HelmInstallStatus = "failed"
+	HelmInstallStatusUninstalling HelmInstallStatus = "uninstalling"
 )

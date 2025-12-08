@@ -210,6 +210,7 @@ export const ngModule = angular
       'aria-label',
       'size',
       'loadingMessage',
+      'getOptionValue',
     ])
   )
   .component(

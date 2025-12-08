@@ -153,6 +153,8 @@ func initInstallClient(actionConfig *action.Configuration, installOpts options.I
 	installClient.Timeout = installOpts.Timeout
 	installClient.Version = installOpts.Version
 	installClient.DryRun = installOpts.DryRun
+	installClient.TakeOwnership = installOpts.TakeOwnership
+	installClient.CreateNamespace = installOpts.CreateNamespace
 	err := configureChartPathOptions(&installClient.ChartPathOptions, installOpts.Version, installOpts.Repo, installOpts.Registry)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to configure chart path options for helm release installation")

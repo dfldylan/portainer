@@ -26,6 +26,8 @@ type InstallOptions struct {
 	DryRun                  bool
 	Timeout                 time.Duration
 	KubernetesClusterAccess *KubernetesClusterAccess
+	TakeOwnership           bool
+	CreateNamespace         bool
 
 	// GitOps related options
 	GitConfig  *gittypes.RepoConfig

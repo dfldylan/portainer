@@ -171,6 +171,7 @@ func initUpgradeClient(actionConfig *action.Configuration, upgradeOpts options.I
 	upgradeClient.Wait = upgradeOpts.Wait
 	upgradeClient.Version = upgradeOpts.Version
 	upgradeClient.DryRun = upgradeOpts.DryRun
+	upgradeClient.TakeOwnership = upgradeOpts.TakeOwnership // Equivalent to --take-ownership flag
 	err := configureChartPathOptions(&upgradeClient.ChartPathOptions, upgradeOpts.Version, upgradeOpts.Repo, upgradeOpts.Registry)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to configure chart path options for helm release upgrade")
@@ -187,7 +188,7 @@ func initUpgradeClient(actionConfig *action.Configuration, upgradeOpts options.I
 		upgradeClient.Timeout = upgradeOpts.Timeout
 	}
 	if upgradeOpts.Namespace == "" {
-		upgradeOpts.Namespace = "default"
+		upgradeClient.Namespace = "default"
 	} else {
 		upgradeClient.Namespace = upgradeOpts.Namespace
 	}
