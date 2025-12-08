@@ -31,7 +31,7 @@ func TestUpdateUnrelatedEdgeJobLogs(t *testing.T) {
 	})
 	require.NoError(t, err)
 
-	// There is not relation between the edge job and the endpoint, so the
+	// There is no relation between the edge job and the endpoint, so the
 	// update must fail
 	err = store.UpdateTx(func(tx dataservices.DataStoreTx) error {
 		return h.updateEdgeJobLogs(tx, endpointID, edgeJobID, payload)
