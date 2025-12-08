@@ -24,8 +24,8 @@ func (payload *logsPayload) Validate(r *http.Request) error {
 }
 
 // endpointEdgeJobsLogs
-// @summary Inspect an EdgeJob Log
-// @description **Access policy**: public
+// @summary Update the logs collected from an Edge Job
+// @description Authorized only if the request is done by an Edge Environment(Endpoint)
 // @tags edge, endpoints
 // @accept json
 // @produce json
@@ -34,6 +34,7 @@ func (payload *logsPayload) Validate(r *http.Request) error {
 // @success 200
 // @failure 500
 // @failure 400
+// @failure 403
 // @router /endpoints/{id}/edge/jobs/{jobID}/logs [post]
 func (handler *Handler) endpointEdgeJobsLogs(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	endpoint, err := middlewares.FetchEndpoint(r)
