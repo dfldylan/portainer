@@ -1,11 +1,13 @@
 import { imageContainsURL } from '@/react/docker/images/utils';
+import {
+  Registry,
+  RegistryId,
+} from '@/react/portainer/registries/types/registry';
+import { getURL } from '@/react/portainer/registries/utils/getUrl';
 
 import { ImageConfigValues } from '@@/ImageConfigFieldset';
 
-import { Registry, RegistryId } from '../types/registry';
-
 import { findBestMatchRegistry } from './findRegistryMatch';
-import { getURL } from './getUrl';
 
 export function getDefaultImageConfig(): ImageConfigValues {
   return {

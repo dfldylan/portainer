@@ -1,7 +1,10 @@
 import { http, HttpResponse } from 'msw';
 import { SystemInfo, SystemVersion } from 'docker-types/generated/1.44';
 
+import { dockerImagesHandlers } from './docker/images';
+
 export const dockerHandlers = [
+  ...dockerImagesHandlers,
   http.get<never, never, SystemInfo>(
     '/api/endpoints/:endpointId/docker/info',
     () =>

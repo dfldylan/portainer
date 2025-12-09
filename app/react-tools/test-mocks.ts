@@ -8,14 +8,10 @@ import {
   Environment,
 } from '@/react/portainer/environments/types';
 
-export function createMockUsers(
-  count: number,
-  roles: Role | Role[] | ((id: UserId) => Role)
-): User[] {
-  return _.range(1, count + 1).map((value) => ({
-    Id: value,
-    Username: `user${value}`,
-    Role: getRoles(roles, value),
+export function createMockUser(overrides: Partial<User> = {}) {
+  return {
+    Id: 1,
+    Username: 'user',
     RoleName: '',
     AuthenticationMethod: '',
     Checked: false,
@@ -24,8 +20,24 @@ export function createMockUsers(
     UseCache: false,
     ThemeSettings: {
       color: 'auto',
+      subtleUpgradeButton: false,
+      ...overrides.ThemeSettings,
     },
-  }));
+    ...overrides,
+  } as User;
+}
+
+export function createMockUsers(
+  count: number,
+  roles: Role | Role[] | ((id: UserId) => Role)
+): User[] {
+  return _.range(1, count + 1).map((value) =>
+    createMockUser({
+      Id: value,
+      Username: `user${value}`,
+      Role: getRoles(roles, value),
+    })
+  );
 }
 
 function getRoles(

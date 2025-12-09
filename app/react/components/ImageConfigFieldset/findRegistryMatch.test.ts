@@ -1,4 +1,8 @@
-import { Registry, RegistryId, RegistryTypes } from '../types/registry';
+import {
+  Registry,
+  RegistryId,
+  RegistryTypes,
+} from '../../portainer/registries/types/registry';
 
 import { findBestMatchRegistry } from './findRegistryMatch';
 

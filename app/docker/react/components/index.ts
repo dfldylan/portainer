@@ -11,7 +11,6 @@ import { HealthStatus } from '@/react/docker/containers/ItemView/HealthStatus';
 import { GpusList } from '@/react/docker/host/SetupView/GpusList';
 import { InsightsBox } from '@/react/components/InsightsBox';
 import { BetaAlert } from '@/react/portainer/environments/update-schedules/common/BetaAlert';
-import { ImagesDatatable } from '@/react/docker/images/ListView/ImagesDatatable/ImagesDatatable';
 import { EventsDatatable } from '@/react/docker/events/EventsDatatables';
 import { AgentHostBrowser } from '@/react/docker/host/BrowseView/AgentHostBrowser';
 import { AgentVolumeBrowser } from '@/react/docker/volumes/BrowseView/AgentVolumeBrowser';
@@ -68,16 +67,6 @@ const ngModule = angular
     ])
   )
   .component('betaAlert', r2a(BetaAlert, ['className', 'message', 'isHtml']))
-  .component(
-    'dockerImagesDatatable',
-    r2a(withUIRouter(withCurrentUser(ImagesDatatable)), [
-      'onRemove',
-      'isExportInProgress',
-      'isHostColumnVisible',
-      'onDownload',
-      'onRemove',
-    ])
-  )
   .component(
     'agentHostBrowserReact',
     r2a(withUIRouter(withCurrentUser(AgentHostBrowser)), [
