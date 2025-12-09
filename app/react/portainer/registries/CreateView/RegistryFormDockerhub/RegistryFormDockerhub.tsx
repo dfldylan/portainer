@@ -2,8 +2,6 @@ import { Formik, Form } from 'formik';
 import { SchemaOf, object, string } from 'yup';
 import { useState } from 'react';
 
-import { useAnalytics } from '@/react/hooks/useAnalytics';
-
 import { FormControl } from '@@/form-components/FormControl';
 import { Input } from '@@/form-components/Input';
 import { FormSection } from '@@/form-components/FormSection';
@@ -33,7 +31,6 @@ export function RegistryFormDockerhub({
   isLoading,
   nameIsUsed,
 }: Props) {
-  const { trackEvent } = useAnalytics();
   const [isConnectionTested, setIsConnectionTested] = useState(false);
 
   return (
@@ -142,10 +139,6 @@ export function RegistryFormDockerhub({
   );
 
   function handleSubmit(values: RegistryFormDockerhubValues) {
-    trackEvent('portainer-registry-creation', {
-      category: 'portainer',
-      metadata: { type: 'dockerhub' },
-    });
     return onSubmit(values);
   }
 }

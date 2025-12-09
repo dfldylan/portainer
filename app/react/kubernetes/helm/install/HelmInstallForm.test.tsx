@@ -13,7 +13,6 @@ import { HelmInstallForm } from './HelmInstallForm';
 
 const mockMutate = vi.fn();
 const mockNotifySuccess = vi.fn();
-const mockTrackEvent = vi.fn();
 const mockRouterGo = vi.fn();
 
 // Mock the router hook to provide endpointId
@@ -58,12 +57,6 @@ vi.mock('./queries/useHelmChartValues', () => ({
   useHelmChartValues: vi.fn().mockReturnValue({
     data: { values: 'test-values' },
     isInitialLoading: false,
-  }),
-}));
-
-vi.mock('@/react/hooks/useAnalytics', () => ({
-  useAnalytics: vi.fn().mockReturnValue({
-    trackEvent: vi.fn((...args) => mockTrackEvent(...args)),
   }),
 }));
 
@@ -163,12 +156,6 @@ describe('HelmInstallForm', () => {
     onSuccessCallback();
 
     // Check that success handlers were called
-    expect(mockTrackEvent).toHaveBeenCalledWith('kubernetes-helm-install', {
-      category: 'kubernetes',
-      metadata: {
-        'chart-name': 'test-chart',
-      },
-    });
     expect(mockNotifySuccess).toHaveBeenCalledWith(
       'Success',
       'Helm chart successfully installed'

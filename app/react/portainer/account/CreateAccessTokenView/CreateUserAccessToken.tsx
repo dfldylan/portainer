@@ -2,7 +2,6 @@ import { Formik } from 'formik';
 import { useState } from 'react';
 
 import { useCurrentUser } from '@/react/hooks/useUser';
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 import { AuthenticationMethod } from '@/react/portainer/settings/types';
 
 import { Widget } from '@@/Widget';
@@ -25,7 +24,6 @@ export function CreateUserAccessToken() {
   const mutation = useCreateUserAccessTokenMutation();
   const { user } = useCurrentUser();
   const [newAPIToken, setNewAPIToken] = useState('');
-  const { trackEvent } = useAnalytics();
   const settings = usePublicSettings();
 
   const requirePassword =
@@ -78,9 +76,5 @@ export function CreateUserAccessToken() {
         },
       }
     );
-
-    trackEvent('portainer-account-access-token-create', {
-      category: 'portainer',
-    });
   }
 }

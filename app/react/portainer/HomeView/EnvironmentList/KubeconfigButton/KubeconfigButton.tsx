@@ -3,7 +3,6 @@ import { Download } from 'lucide-react';
 
 import { Environment } from '@/react/portainer/environments/types';
 import { isKubernetesEnvironment } from '@/react/portainer/environments/utils';
-import { trackEvent } from '@/angulartics.matomo/analytics-services';
 import { Query } from '@/react/portainer/environments/queries/useEnvironmentList';
 
 import { Button } from '@@/buttons';
@@ -67,10 +66,6 @@ export function KubeconfigButton({ environments, envQueryParams }: Props) {
     if (!environments) {
       return;
     }
-
-    trackEvent('kubernetes-kubectl-kubeconfig-multi', {
-      category: 'kubernetes',
-    });
 
     setIsOpen(true);
   }

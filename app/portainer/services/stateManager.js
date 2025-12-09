@@ -3,19 +3,7 @@ import moment from 'moment';
 angular.module('portainer.app').factory('StateManager', StateManagerFactory);
 
 /* @ngInject */
-function StateManagerFactory(
-  $async,
-  $q,
-  SystemService,
-  InfoHelper,
-  LocalStorage,
-  SettingsService,
-  StatusService,
-  APPLICATION_CACHE_VALIDITY,
-  AgentPingService,
-  $analytics,
-  EndpointProvider
-) {
+function StateManagerFactory($async, $q, SystemService, InfoHelper, LocalStorage, SettingsService, StatusService, APPLICATION_CACHE_VALIDITY, AgentPingService, EndpointProvider) {
   var manager = {};
 
   var state = {
@@ -101,7 +89,6 @@ function StateManagerFactory(
 
   manager.updateEnableTelemetry = function updateEnableTelemetry(enableTelemetry) {
     state.application.enableTelemetry = enableTelemetry;
-    $analytics.setOptOut(!enableTelemetry);
     LocalStorage.storeApplicationState(state.application);
   };
 
@@ -164,8 +151,6 @@ function StateManagerFactory(
       }
 
       state.loading = false;
-      $analytics.setPortainerStatus(state.application.instanceId, state.application.version);
-      $analytics.setOptOut(!state.application.enableTelemetry);
       return state;
     });
   }

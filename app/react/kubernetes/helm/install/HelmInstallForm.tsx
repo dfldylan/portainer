@@ -3,7 +3,6 @@ import { Formik, FormikProps } from 'formik';
 import { useRouter } from '@uirouter/react';
 
 import { notifySuccess } from '@/portainer/services/notifications';
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 import { useCanExit } from '@/react/hooks/useCanExit';
 import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
@@ -36,7 +35,6 @@ export function HelmInstallForm({
   const environmentId = useEnvironmentId();
   const [previewIsValid, setPreviewIsValid] = useState(false);
   const router = useRouter();
-  const analytics = useAnalytics();
   const helmRepoVersionsQuery = useHelmRepoVersions(
     selectedChart.name,
     60 * 60 * 1000, // 1 hour
@@ -112,12 +110,6 @@ export function HelmInstallForm({
       },
       {
         onSuccess() {
-          analytics.trackEvent('kubernetes-helm-install', {
-            category: 'kubernetes',
-            metadata: {
-              'chart-name': selectedChart.name,
-            },
-          });
           notifySuccess('Success', 'Helm chart successfully installed');
 
           // Reset the form so page can be navigated away from without getting "Are you sure?"

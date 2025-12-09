@@ -9,7 +9,6 @@ import {
   Environment,
   EnvironmentId,
 } from '@/react/portainer/environments/types';
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 import { FeatureId } from '@/react/portainer/feature-flags/enums';
 
 import { FormSection } from '@@/form-components/FormSection';
@@ -36,7 +35,6 @@ import { useConfigureClusterMutation } from './useConfigureClusterMutation';
 import { handleSubmitConfigureCluster } from './handleSubmitConfigureCluster';
 
 export function ConfigureForm() {
-  const { trackEvent } = useAnalytics();
   const configureClusterMutation = useConfigureClusterMutation();
   // get the initial values
   const { data: environment } = useCurrentEnvironment();
@@ -68,7 +66,6 @@ export function ConfigureForm() {
           initialValues,
           configureClusterMutation,
           formikHelpers,
-          trackEvent,
           environment
         );
       }}

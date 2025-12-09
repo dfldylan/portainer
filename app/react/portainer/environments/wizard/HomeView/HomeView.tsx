@@ -1,7 +1,6 @@
 import { Wand2, Plug2 } from 'lucide-react';
 
 import { EnvironmentType } from '@/react/portainer/environments/types';
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 import DockerIcon from '@/assets/ico/vendor/docker-icon.svg?c';
 import Kube from '@/assets/ico/kube.svg?c';
 
@@ -16,7 +15,6 @@ import styles from './HomeView.module.css';
 
 export function HomeView() {
   const localEnvironmentAdded = useConnectLocalEnvironment();
-  const { trackEvent } = useAnalytics();
   return (
     <>
       <PageHeader
@@ -79,7 +77,6 @@ export function HomeView() {
                         }
                         title="Get Started"
                         description="Proceed using the local environment which Portainer is running in"
-                        onClick={() => trackLocalEnvironmentAnalytics()}
                       />
                     </Link>
                   )}
@@ -102,13 +99,6 @@ export function HomeView() {
       </div>
     </>
   );
-
-  function trackLocalEnvironmentAnalytics() {
-    trackEvent('endpoint-wizard-endpoint-select', {
-      category: 'portainer',
-      metadata: { environment: 'Get-started-local-environment' },
-    });
-  }
 }
 
 function getTypeLabel(type?: EnvironmentType) {

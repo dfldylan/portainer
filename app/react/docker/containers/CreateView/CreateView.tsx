@@ -8,7 +8,6 @@ import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
 import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
 import { Registry } from '@/react/portainer/registries/types/registry';
 import { notifySuccess } from '@/portainer/services/notifications';
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 import { useDebouncedValue } from '@/react/hooks/useDebouncedValue';
 
 import { PageHeader } from '@@/PageHeader';
@@ -49,7 +48,6 @@ function CreateForm() {
   const environmentId = useEnvironmentId();
   const router = useRouter();
   const isWindows = useIsWindows(environmentId);
-  const { trackEvent } = useAnalytics();
   const isAdminQuery = useIsEdgeAdmin();
   const { authorized: isEnvironmentAdmin } = useIsEnvironmentAdmin({
     adminOnlyCE: true,
@@ -170,24 +168,11 @@ function CreateForm() {
       },
       {
         onSuccess() {
-          sendAnalytics(values, registry);
           notifySuccess('Success', 'Container successfully created');
           router.stateService.go('docker.containers');
         },
       }
     );
-  }
-
-  function sendAnalytics(values: Values, registry?: Registry) {
-    const containerImage = registry?.URL
-      ? `${registry?.URL}/${values.image}`
-      : values.image;
-    if (values.resources.gpu.enabled) {
-      trackEvent('gpuContainerCreated', {
-        category: 'docker',
-        metadata: { gpu: values.resources.gpu, containerImage },
-      });
-    }
   }
 }
 

@@ -9,7 +9,6 @@ import {
   Environment,
   EnvironmentId,
 } from '@/react/portainer/environments/types';
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 
 import { Stepper } from '@@/Stepper';
 import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
@@ -50,12 +49,11 @@ export function EnvironmentCreationView() {
   });
 
   const envTypes = useParamEnvironmentTypes();
-  const { trackEvent } = useAnalytics();
   const router = useRouter();
   const steps = _.compact(
     envTypes.map((id) => environmentTypes.find((eType) => eType.id === id))
   );
-  const { analytics, setAnalytics } = useAnalyticsState();
+  const { setAnalytics } = useAnalyticsState();
 
   const {
     currentStep,
@@ -144,15 +142,6 @@ export function EnvironmentCreationView() {
   }
 
   function handleFinish() {
-    trackEvent('endpoint-wizard-environment-add-finish', {
-      category: 'portainer',
-      metadata: Object.fromEntries(
-        Object.entries(analytics).map(([key, value]) => [
-          _.kebabCase(key),
-          value,
-        ])
-      ),
-    });
     if (referrer === 'environments') {
       router.stateService.go('portainer.endpoints');
       return;

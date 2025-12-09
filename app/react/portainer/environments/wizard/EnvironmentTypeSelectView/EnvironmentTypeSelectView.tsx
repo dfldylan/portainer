@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from '@uirouter/react';
-import _ from 'lodash';
 import { Wand2 } from 'lucide-react';
-
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 
 import { Button } from '@@/buttons';
 import { PageHeader } from '@@/PageHeader';
@@ -15,12 +12,10 @@ import {
   EnvironmentOptionValue,
   existingEnvironmentTypes,
   newEnvironmentTypes,
-  environmentTypes,
 } from './environment-types';
 
 export function EnvironmentTypeSelectView() {
   const [types, setTypes] = useState<EnvironmentOptionValue[]>([]);
-  const { trackEvent } = useAnalytics();
   const router = useRouter();
 
   return (
@@ -81,17 +76,6 @@ export function EnvironmentTypeSelectView() {
     if (types.length === 0) {
       return;
     }
-
-    const steps = _.compact(
-      types.map((id) => environmentTypes.find((eType) => eType.id === id))
-    );
-
-    trackEvent('endpoint-wizard-endpoint-select', {
-      category: 'portainer',
-      metadata: {
-        environment: steps.map((step) => step.label).join('/'),
-      },
-    });
 
     router.stateService.go('portainer.wizard.endpoints.create', {
       envType: types,
