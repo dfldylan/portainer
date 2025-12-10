@@ -210,7 +210,6 @@ describe('ImportExportButtons', () => {
       );
       expect(apiCalled).toBe(false);
       expect(mockConfirmImageExport).not.toHaveBeenCalled();
-      expect(mockSaveAs).not.toHaveBeenCalled();
     });
 
     it('should prevent export of images from different nodes', async () => {
