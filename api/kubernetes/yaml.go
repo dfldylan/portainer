@@ -9,7 +9,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/portainer/portainer/api/stacks/stackutils"
-	"gopkg.in/yaml.v3"
+	"go.yaml.in/yaml/v3"
 )
 
 const (

@@ -8,7 +8,7 @@ import (
 	"mime"
 
 	"github.com/segmentio/encoding/json"
-	"gopkg.in/yaml.v3"
+	"go.yaml.in/yaml/v3"
 )
 
 // GetJSONObject will extract an object from a specific property of another JSON object.
