@@ -10,7 +10,7 @@ import { useVersionedStackFile } from './useVersionedStackFile';
 
 describe('useVersionedStackFile', () => {
   const defaultStackId = 1;
-  const defaultVersion = '2';
+  const defaultVersion = 2;
   const mockOnLoad = vi.fn();
 
   beforeEach(() => {
@@ -66,7 +66,6 @@ describe('useVersionedStackFile', () => {
 
       renderHookWithProviders({
         stackId: defaultStackId,
-        version: '',
         onLoad: mockOnLoad,
       });
 
@@ -148,7 +147,7 @@ describe('useVersionedStackFile', () => {
 
       renderHookWithProviders({
         stackId: defaultStackId,
-        version: '5',
+        version: 5,
         onLoad: mockOnLoad,
       });
 
@@ -207,7 +206,7 @@ describe('useVersionedStackFile', () => {
 
       const { rerender } = renderHookWithProviders({
         stackId: defaultStackId,
-        version: '3',
+        version: 3,
         onLoad: mockOnLoad,
       });
 
@@ -220,7 +219,7 @@ describe('useVersionedStackFile', () => {
       // Change version to 2
       rerender({
         stackId: defaultStackId,
-        version: '2',
+        version: 2,
         onLoad: mockOnLoad,
       });
 
@@ -245,7 +244,7 @@ describe('useVersionedStackFile', () => {
 
       const { rerender } = renderHookWithProviders({
         stackId: defaultStackId,
-        version: '1',
+        version: 1,
         onLoad: mockOnLoad,
       });
 
@@ -258,7 +257,7 @@ describe('useVersionedStackFile', () => {
       // Change to version 2
       rerender({
         stackId: defaultStackId,
-        version: '2',
+        version: 2,
         onLoad: mockOnLoad,
       });
 
@@ -281,7 +280,7 @@ describe('useVersionedStackFile', () => {
 
       const { rerender } = renderHookWithProviders({
         stackId: defaultStackId,
-        version: '3',
+        version: 3,
         onLoad: mockOnLoad,
       });
 
@@ -508,12 +507,12 @@ function renderHookWithProviders({
   onLoad,
 }: {
   stackId: number;
-  version?: string;
+  version?: number;
   onLoad: (content: string) => void;
 }) {
   const Wrapper = withTestQueryProvider<{
     stackId: number;
-    version?: string;
+    version?: number;
     onLoad: (content: string) => void;
   }>(({ children }) => <>{children}</>);
 

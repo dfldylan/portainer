@@ -23,7 +23,7 @@ interface UseContainers {
 }
 
 export function useContainers<T = ContainerListViewModel[]>(
-  environmentId: EnvironmentId,
+  environmentId: EnvironmentId | undefined,
   {
     autoRefreshRate,
     select,
@@ -36,13 +36,13 @@ export function useContainers<T = ContainerListViewModel[]>(
   } = {}
 ) {
   return useQuery(
-    queryKeys.filters(environmentId, params),
-    () => getContainers(environmentId, params),
+    queryKeys.filters(environmentId!, params),
+    () => getContainers(environmentId!, params),
     {
       ...withGlobalError('Unable to retrieve containers'),
       refetchInterval: autoRefreshRate ?? false,
       select,
-      enabled,
+      enabled: enabled && !!environmentId,
     }
   );
 }

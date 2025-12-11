@@ -7,6 +7,7 @@ import {
   ContainerEngine,
   Environment,
 } from '@/react/portainer/environments/types';
+import { Stack, StackStatus, StackType } from '@/react/common/stacks/types';
 
 export function createMockUser(overrides: Partial<User> = {}) {
   return {
@@ -189,4 +190,29 @@ export function createMockQueryResult<TData, TError = unknown>(
   };
 
   return { ...defaultResult, ...overrides };
+}
+
+export function createMockStack(overrides?: Partial<Stack>): Stack {
+  return {
+    Id: 1,
+    Name: 'test-stack',
+    Type: StackType.DockerCompose,
+    EndpointId: 1,
+    SwarmId: '',
+    EntryPoint: 'docker-compose.yml',
+    Env: [],
+    Status: StackStatus.Active,
+    ProjectPath: '/data/compose/1',
+    CreationDate: Date.now(),
+    CreatedBy: 'admin',
+    UpdateDate: Date.now(),
+    UpdatedBy: 'admin',
+    FromAppTemplate: false,
+    IsComposeFormat: true,
+    SupportRelativePath: false,
+    FilesystemPath: '/data/compose/1',
+    StackFileVersion: 1,
+    PreviousDeploymentInfo: undefined,
+    ...overrides,
+  };
 }

@@ -29,12 +29,14 @@ export function StackActions({
   isRegular,
   environmentId,
   isExternal,
+  status,
 }: {
   stack: Stack;
   fileContent?: string;
   isRegular?: boolean;
   environmentId: number;
   isExternal: boolean;
+  status: Stack['Status'];
 }) {
   const router = useRouter();
   const startStackMutation = useStartStackMutation();
@@ -49,7 +51,6 @@ export function StackActions({
     detachFromGitMutation.isLoading;
 
   const stackId = stack.Id;
-  const status = stack.Status;
 
   return (
     <div className="flex items-center gap-2">

@@ -1,12 +1,12 @@
 import { Box } from 'lucide-react';
 
 import { ContainerListViewModel } from '@/react/docker/containers/types';
-import { Environment } from '@/react/portainer/environments/types';
 import { createStore } from '@/react/docker/containers/ListView/ContainersDatatable/datatable-store';
 import { useColumns } from '@/react/docker/containers/ListView/ContainersDatatable/columns';
 import { ContainersDatatableActions } from '@/react/docker/containers/ListView/ContainersDatatable/ContainersDatatableActions';
 import { ContainersDatatableSettings } from '@/react/docker/containers/ListView/ContainersDatatable/ContainersDatatableSettings';
 import { useShowGPUsColumn } from '@/react/docker/containers/utils';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
 
 import { Datatable, Table } from '@@/datatables';
 import {
@@ -20,8 +20,9 @@ import {
 import { TableSettingsProvider } from '@@/datatables/useTableSettings';
 import { useTableState } from '@@/datatables/useTableState';
 
-import { useContainers } from '../../../docker/containers/queries/useContainers';
-import { RowProvider } from '../../../docker/containers/ListView/ContainersDatatable/RowContext';
+import { RowProvider } from '../../containers/ListView/ContainersDatatable/RowContext';
+
+import { useComposeStackContainers } from './useComposeStackContainers';
 
 const storageKey = 'stack-containers';
 const settingsStore = createStore(storageKey);
@@ -35,22 +36,28 @@ const actions = [
 ];
 
 export interface Props {
-  environment: Environment;
   stackName: string;
 }
 
-export function StackContainersDatatable({ environment, stackName }: Props) {
+export function StackContainersDatatable({ stackName }: Props) {
+  const environmentQuery = useCurrentEnvironment();
   const tableState = useTableState(settingsStore, storageKey);
 
-  const isGPUsColumnVisible = useShowGPUsColumn(environment.Id);
+  const isGPUsColumnVisible = useShowGPUsColumn(environmentQuery.data);
   const columns = useColumns(false, isGPUsColumnVisible);
 
-  const containersQuery = useContainers(environment.Id, {
-    filters: {
-      label: [`com.docker.compose.project=${stackName}`],
-    },
-    autoRefreshRate: tableState.autoRefreshRate * 1000,
-  });
+  const containersQuery = useComposeStackContainers(
+    { environmentId: environmentQuery.data?.Id, stackName },
+    {
+      autoRefreshRate: tableState.autoRefreshRate * 1000,
+    }
+  );
+
+  if (!environmentQuery.data) {
+    return null;
+  }
+
+  const environment = environmentQuery.data;
 
   return (
     <RowProvider context={{ environment }}>

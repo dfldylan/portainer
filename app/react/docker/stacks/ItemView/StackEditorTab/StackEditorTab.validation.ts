@@ -33,7 +33,7 @@ export function getValidationSchema(
     environmentVariables: envVarValidation(),
     prune: boolean().default(false),
     registries: array(number().required()).default([]),
-    rollbackTo: string().notRequired(),
+    rollbackTo: number().notRequired(),
     webhookId: string().default(''),
   });
 }

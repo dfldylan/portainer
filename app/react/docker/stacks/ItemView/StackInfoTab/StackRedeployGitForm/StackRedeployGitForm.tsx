@@ -119,7 +119,7 @@ export function StackRedeployGitForm({ stack }: { stack: Stack }) {
     }
 
     const payload: GitStackPayload = {
-      PullImage: result.pullImage,
+      RepullImageAndRedeploy: result.repullImageAndRedeploy,
       env: values.env,
       RepositoryReferenceName: values.refName,
       RepositoryAuthentication: values.auth.RepositoryAuthentication,

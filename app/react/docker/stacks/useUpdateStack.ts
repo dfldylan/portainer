@@ -18,8 +18,8 @@ type Payload = {
   env?: EnvVarValues;
   prune?: boolean;
   webhook?: string;
-  pullImage?: boolean;
-  rollbackTo?: string;
+  repullImageAndRedeploy?: boolean;
+  rollbackTo?: number;
   registries?: Array<Registry['Id']>;
 };
 

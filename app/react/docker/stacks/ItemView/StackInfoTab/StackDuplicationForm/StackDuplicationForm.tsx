@@ -3,6 +3,7 @@ import { Copy } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
 import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { Stack } from '@/react/common/stacks/types';
 
 import { Widget } from '@@/Widget';
 import { WidgetBody } from '@@/Widget/WidgetBody';
@@ -11,8 +12,6 @@ import { validateForm } from '@@/form-components/validate-form';
 import { confirm } from '@@/modals/confirm';
 import { ModalType } from '@@/modals';
 import { buildConfirmButton } from '@@/modals/utils';
-
-import { Stack } from '../../types';
 
 import { FormSubmitValues } from './StackDuplicationForm.types';
 import { StackDuplicationFormInner } from './StackDuplicationFormInner';

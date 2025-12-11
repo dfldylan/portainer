@@ -9,7 +9,7 @@ export function useVersionedStackFile({
   onLoad,
 }: {
   stackId: Stack['Id'];
-  version?: string;
+  version?: number;
   onLoad(content: string): void;
 }) {
   const fileQuery = useStackFile(stackId, { version }, { enabled: !!version });

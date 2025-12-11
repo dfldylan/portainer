@@ -6,8 +6,8 @@ import { server } from '@/setup-tests/server';
 import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 import { Environment } from '@/react/portainer/environments/types';
 import { EnvironmentGroup } from '@/react/portainer/environments/environment-groups/types';
-
-import { Stack, StackType } from '../../types';
+import { Stack } from '@/react/common/stacks/types';
+import { createMockStack } from '@/react-tools/test-mocks';
 
 import { StackDuplicationForm } from './StackDuplicationForm';
 
@@ -45,31 +45,6 @@ it('should display rename help text', async () => {
     ).toBeVisible();
   });
 });
-
-function createMockStack(overrides?: Partial<Stack>): Stack {
-  return {
-    Id: 1,
-    Name: 'test-stack',
-    Type: StackType.DockerCompose,
-    EndpointId: 1,
-    SwarmId: '',
-    EntryPoint: 'docker-compose.yml',
-    Env: [{ name: 'VAR1', value: 'value1' }],
-    Status: 1,
-    ProjectPath: '/data/compose/1',
-    CreationDate: Date.now(),
-    CreatedBy: 'admin',
-    UpdateDate: Date.now(),
-    UpdatedBy: 'admin',
-    FromAppTemplate: false,
-    IsComposeFormat: true,
-    SupportRelativePath: false,
-    FilesystemPath: '/data/compose/1',
-    StackFileVersion: '3.7',
-    PreviousDeploymentInfo: null,
-    ...overrides,
-  };
-}
 
 function renderComponent({
   stack = createMockStack(),

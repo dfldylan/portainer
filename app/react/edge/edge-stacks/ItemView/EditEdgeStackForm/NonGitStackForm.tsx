@@ -114,7 +114,7 @@ export function NonGitStackForm({ edgeStack }: { edgeStack: EdgeStack }) {
         return;
       }
 
-      rePullImage = result.pullImage;
+      rePullImage = result.repullImageAndRedeploy;
     }
 
     const updateVersion = !!(

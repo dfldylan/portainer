@@ -46,7 +46,7 @@ export function ContainersDatatable({
   isHostColumnVisible,
   environment,
 }: Props) {
-  const isGPUsColumnVisible = useShowGPUsColumn(environment.Id);
+  const isGPUsColumnVisible = useShowGPUsColumn(environment);
   const columns = useColumns(isHostColumnVisible, isGPUsColumnVisible);
   const tableState = useTableState(settingsStore, storageKey);
 

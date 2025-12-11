@@ -169,7 +169,7 @@ describe('StackRedeployGitForm', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    mockConfirmStackUpdate.mockResolvedValue({ pullImage: false });
+    mockConfirmStackUpdate.mockResolvedValue({ repullImageAndRedeploy: false });
     mockConfirmEnableTLSVerify.mockResolvedValue(true);
     mockBaseStackWebhookUrl.mockReturnValue(
       'http://localhost:9000/api/webhooks'

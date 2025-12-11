@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 
 import { server } from '@/setup-tests/server';
 import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 import { withUserProvider } from '@/react/test-utils/withUserProvider';
 import { withTestRouter } from '@/react/test-utils/withRouter';
-import { Stack, StackStatus, StackType } from '@/react/common/stacks/types';
+import { createMockStack } from '@/react-tools/test-mocks';
 
 import { StackInfoTab } from './StackInfoTab';
 
@@ -24,14 +24,11 @@ vi.mock('./StackActions', () => ({
   StackActions: vi.fn(() => <div data-cy="stack-actions">StackActions</div>),
 }));
 
-vi.mock(
-  '@/react/common/stacks/ItemView/StackDuplicationForm/StackDuplicationForm',
-  () => ({
-    StackDuplicationForm: vi.fn(() => (
-      <div data-cy="stack-duplication-form">StackDuplicationForm</div>
-    )),
-  })
-);
+vi.mock('./StackDuplicationForm/StackDuplicationForm', () => ({
+  StackDuplicationForm: vi.fn(() => (
+    <div data-cy="stack-duplication-form">StackDuplicationForm</div>
+  )),
+}));
 
 vi.mock('./StackRedeployGitForm/StackRedeployGitForm', () => ({
   StackRedeployGitForm: vi.fn(() => (
@@ -39,262 +36,268 @@ vi.mock('./StackRedeployGitForm/StackRedeployGitForm', () => ({
   )),
 }));
 
-describe('StackInfoTab', () => {
-  describe('initial rendering', () => {
-    it('should render stack name', () => {
-      renderComponent({ stackName: 'my-test-stack' });
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
-      expect(screen.getByText('my-test-stack')).toBeVisible();
-    });
+describe('initial rendering', () => {
+  it('should render stack name', () => {
+    renderComponent({ stackName: 'my-test-stack' });
 
-    it('should render StackActions when stack exists', () => {
-      const mockStack = createMockStack();
-      renderComponent({ stack: mockStack });
-
-      expect(screen.getByTestId('stack-actions')).toBeVisible();
-    });
-
-    it('should not render StackActions when stack is undefined', () => {
-      renderComponent({ stack: undefined });
-
-      expect(screen.queryByTestId('stack-actions')).not.toBeInTheDocument();
-    });
-
-    it('should render stack details section', () => {
-      renderComponent();
-
-      expect(screen.getByText('Stack details')).toBeVisible();
-    });
+    expect(screen.getByText('my-test-stack')).toBeVisible();
   });
 
-  describe('external and orphaned warnings', () => {
-    it('should show external stack warning when isExternal is true', () => {
-      renderComponent({ isExternal: true });
+  it('should render StackActions when stack exists', () => {
+    const mockStack = createMockStack();
+    renderComponent({ stack: mockStack });
 
-      expect(
-        screen.getByText(/This stack was created outside of Portainer/i)
-      ).toBeVisible();
-      expect(screen.getByText('Information')).toBeVisible();
-    });
-
-    it('should show orphaned stack warning when isOrphaned is true', () => {
-      renderComponent({ isOrphaned: true });
-
-      expect(screen.getByText(/This stack is orphaned/i)).toBeVisible();
-      expect(screen.getByText(/Associate to this environment/i)).toBeVisible();
-    });
-
-    it('should show orphaned warning when isOrphanedRunning is true', () => {
-      renderComponent({ isOrphanedRunning: true, isOrphaned: false });
-
-      expect(screen.getByText(/This stack is orphaned/i)).toBeVisible();
-    });
-
-    it('should show orphaned warning when both isOrphaned and isOrphanedRunning are true', () => {
-      renderComponent({ isOrphaned: true, isOrphanedRunning: true });
-
-      expect(screen.getByText(/This stack is orphaned/i)).toBeVisible();
-    });
-
-    it('should show both warnings when isExternal and isOrphaned are true', () => {
-      renderComponent({ isExternal: true, isOrphaned: true });
-
-      expect(
-        screen.getByText(/This stack was created outside of Portainer/i)
-      ).toBeVisible();
-      expect(screen.getByText(/This stack is orphaned/i)).toBeVisible();
-    });
-
-    it('should not show warnings when both isExternal and isOrphaned are false', () => {
-      renderComponent({ isExternal: false, isOrphaned: false });
-
-      expect(screen.queryByText('Information')).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(/This stack was created outside of Portainer/i)
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(/This stack is orphaned/i)
-      ).not.toBeInTheDocument();
-    });
+    expect(screen.getByTestId('stack-actions')).toBeVisible();
   });
 
-  describe('conditional form rendering', () => {
-    it('should render AssociateStackForm when stack is orphaned', () => {
-      const mockStack = createMockStack();
-      renderComponent({
-        stack: mockStack,
-        isOrphaned: true,
-      });
+  it('should not render StackActions when stack is undefined', () => {
+    renderComponent({ stack: undefined });
 
-      expect(screen.getByTestId('associate-stack-form')).toBeVisible();
-      expect(
-        screen.queryByTestId('stack-duplication-form')
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByTestId('stack-redeploy-git-form')
-      ).not.toBeInTheDocument();
+    expect(screen.queryByTestId('stack-actions')).not.toBeInTheDocument();
+  });
+
+  it('should render stack details section', () => {
+    renderComponent();
+
+    expect(screen.getByText('Stack details')).toBeVisible();
+  });
+});
+
+describe('external and orphaned warnings', () => {
+  it('should show external stack warning when isExternal is true', () => {
+    renderComponent({ isExternal: true });
+
+    expect(
+      screen.getByText(/This stack was created outside of Portainer/i)
+    ).toBeVisible();
+    expect(screen.getByText('Information')).toBeVisible();
+  });
+
+  it('should show orphaned stack warning when isOrphaned is true', () => {
+    renderComponent({ isOrphaned: true });
+
+    expect(screen.getByText(/This stack is orphaned/i)).toBeVisible();
+    expect(screen.getByText(/Associate to this environment/i)).toBeVisible();
+  });
+
+  it('should show orphaned warning when isOrphanedRunning is true', () => {
+    renderComponent({ isOrphanedRunning: true, isOrphaned: false });
+
+    expect(screen.getByText(/This stack is orphaned/i)).toBeVisible();
+  });
+
+  it('should show orphaned warning when both isOrphaned and isOrphanedRunning are true', () => {
+    renderComponent({ isOrphaned: true, isOrphanedRunning: true });
+
+    expect(screen.getByText(/This stack is orphaned/i)).toBeVisible();
+  });
+
+  it('should show both warnings when isExternal and isOrphaned are true', () => {
+    renderComponent({ isExternal: true, isOrphaned: true });
+
+    expect(
+      screen.getByText(/This stack was created outside of Portainer/i)
+    ).toBeVisible();
+    expect(screen.getByText(/This stack is orphaned/i)).toBeVisible();
+  });
+
+  it('should not show warnings when both isExternal and isOrphaned are false', () => {
+    renderComponent({ isExternal: false, isOrphaned: false });
+
+    expect(screen.queryByText('Information')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/This stack was created outside of Portainer/i)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/This stack is orphaned/i)
+    ).not.toBeInTheDocument();
+  });
+});
+
+describe('conditional form rendering', () => {
+  it('should render AssociateStackForm when stack is orphaned', () => {
+    const mockStack = createMockStack();
+    renderComponent({
+      stack: mockStack,
+      isOrphaned: true,
     });
 
-    it('should not render AssociateStackForm when only isOrphanedRunning is true', () => {
-      const mockStack = createMockStack();
-      renderComponent({
-        stack: mockStack,
-        isOrphanedRunning: true,
-        isOrphaned: false,
-      });
+    expect(screen.getByTestId('associate-stack-form')).toBeVisible();
+    expect(
+      screen.queryByTestId('stack-duplication-form')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('stack-redeploy-git-form')
+    ).not.toBeInTheDocument();
+  });
 
-      // isOrphanedRunning alone doesn't trigger the form, only isOrphaned does
-      expect(
-        screen.queryByTestId('associate-stack-form')
-      ).not.toBeInTheDocument();
-      // Should show duplication form instead if regular
-      expect(screen.getByTestId('stack-duplication-form')).toBeVisible();
+  it('should not render AssociateStackForm when only isOrphanedRunning is true', () => {
+    const mockStack = createMockStack();
+    renderComponent({
+      stack: mockStack,
+      isOrphanedRunning: true,
+      isOrphaned: false,
     });
 
-    it('should render StackRedeployGitForm when stack has GitConfig and is not from template', () => {
-      const mockStack = createMockStack({
-        GitConfig: {
-          URL: 'https://github.com/test/repo',
-          ReferenceName: 'main',
-          ConfigFilePath: 'docker-compose.yml',
-          ConfigHash: '',
-          TLSSkipVerify: false,
-        },
-        FromAppTemplate: false,
-      });
-      renderComponent({
-        stack: mockStack,
-        isOrphaned: false,
-        isRegular: true,
-      });
+    // isOrphanedRunning alone doesn't trigger the form, only isOrphaned does
+    expect(
+      screen.queryByTestId('associate-stack-form')
+    ).not.toBeInTheDocument();
 
+    expect(screen.getByTestId('stack-duplication-form')).toBeVisible();
+  });
+
+  it('should render StackRedeployGitForm when stack has GitConfig and is not from template', async () => {
+    const mockStack = createMockStack({
+      GitConfig: {
+        URL: 'https://github.com/test/repo',
+        ReferenceName: 'main',
+        ConfigFilePath: 'docker-compose.yml',
+        ConfigHash: '',
+        TLSSkipVerify: false,
+      },
+      FromAppTemplate: false,
+    });
+    renderComponent({
+      stack: mockStack,
+      isOrphaned: false,
+      isRegular: true,
+    });
+
+    await waitFor(() => {
       expect(screen.getByTestId('stack-redeploy-git-form')).toBeVisible();
     });
-
-    it('should not render StackRedeployGitForm when stack is from app template', () => {
-      const mockStack = createMockStack({
-        GitConfig: {
-          URL: 'https://github.com/test/repo',
-          ReferenceName: 'main',
-          ConfigFilePath: 'docker-compose.yml',
-          ConfigHash: '',
-          TLSSkipVerify: false,
-        },
-        FromAppTemplate: true,
-      });
-      renderComponent({
-        stack: mockStack,
-        isOrphaned: false,
-        isRegular: true,
-      });
-
-      expect(
-        screen.queryByTestId('stack-redeploy-git-form')
-      ).not.toBeInTheDocument();
-    });
-
-    it('should not render StackRedeployGitForm when stack has no GitConfig', () => {
-      const mockStack = createMockStack({
-        GitConfig: undefined,
-      });
-      renderComponent({
-        stack: mockStack,
-        isOrphaned: false,
-        isRegular: true,
-      });
-
-      expect(
-        screen.queryByTestId('stack-redeploy-git-form')
-      ).not.toBeInTheDocument();
-    });
-
-    it('should render StackDuplicationForm when stack is regular and not orphaned', () => {
-      const mockStack = createMockStack();
-      renderComponent({
-        stack: mockStack,
-        isRegular: true,
-        isOrphaned: false,
-      });
-
-      expect(screen.getByTestId('stack-duplication-form')).toBeVisible();
-    });
-
-    it('should not render StackDuplicationForm when stack is not regular', () => {
-      const mockStack = createMockStack();
-      renderComponent({
-        stack: mockStack,
-        isRegular: false,
-        isOrphaned: false,
-      });
-
-      expect(
-        screen.queryByTestId('stack-duplication-form')
-      ).not.toBeInTheDocument();
-    });
-
-    it('should not render any forms when stack is undefined', () => {
-      renderComponent({ stack: undefined });
-
-      expect(
-        screen.queryByTestId('associate-stack-form')
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByTestId('stack-duplication-form')
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByTestId('stack-redeploy-git-form')
-      ).not.toBeInTheDocument();
-    });
   });
 
-  describe('git and duplication form combination', () => {
-    it('should render both StackRedeployGitForm and StackDuplicationForm when conditions met', () => {
-      const mockStack = createMockStack({
-        GitConfig: {
-          URL: 'https://github.com/test/repo',
-          ReferenceName: 'main',
-          ConfigFilePath: 'docker-compose.yml',
-          ConfigHash: '',
-          TLSSkipVerify: false,
-        },
-        FromAppTemplate: false,
-      });
-      renderComponent({
-        stack: mockStack,
-        isRegular: true,
-        isOrphaned: false,
-      });
+  it('should not render StackRedeployGitForm when stack is from app template', () => {
+    const mockStack = createMockStack({
+      GitConfig: {
+        URL: 'https://github.com/test/repo',
+        ReferenceName: 'main',
+        ConfigFilePath: 'docker-compose.yml',
+        ConfigHash: '',
+        TLSSkipVerify: false,
+      },
+      FromAppTemplate: true,
+    });
+    renderComponent({
+      stack: mockStack,
+      isOrphaned: false,
+      isRegular: true,
+    });
 
+    expect(
+      screen.queryByTestId('stack-redeploy-git-form')
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not render StackRedeployGitForm when stack has no GitConfig', () => {
+    const mockStack = createMockStack({
+      GitConfig: undefined,
+    });
+    renderComponent({
+      stack: mockStack,
+      isOrphaned: false,
+      isRegular: true,
+    });
+
+    expect(
+      screen.queryByTestId('stack-redeploy-git-form')
+    ).not.toBeInTheDocument();
+  });
+
+  it('should render StackDuplicationForm when stack is regular and not orphaned', () => {
+    const mockStack = createMockStack();
+    renderComponent({
+      stack: mockStack,
+      isRegular: true,
+      isOrphaned: false,
+    });
+
+    expect(screen.getByTestId('stack-duplication-form')).toBeVisible();
+  });
+
+  it('should not render StackDuplicationForm when stack is not regular', () => {
+    const mockStack = createMockStack();
+    renderComponent({
+      stack: mockStack,
+      isRegular: false,
+      isOrphaned: false,
+    });
+
+    expect(
+      screen.queryByTestId('stack-duplication-form')
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not render any forms when stack is undefined', () => {
+    renderComponent({ stack: undefined });
+
+    expect(
+      screen.queryByTestId('associate-stack-form')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('stack-duplication-form')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('stack-redeploy-git-form')
+    ).not.toBeInTheDocument();
+  });
+});
+
+describe('git and duplication form combination', () => {
+  it('should render both StackRedeployGitForm and StackDuplicationForm when conditions met', async () => {
+    const mockStack = createMockStack({
+      GitConfig: {
+        URL: 'https://github.com/test/repo',
+        ReferenceName: 'main',
+        ConfigFilePath: 'docker-compose.yml',
+        ConfigHash: '',
+        TLSSkipVerify: false,
+      },
+      FromAppTemplate: false,
+    });
+    renderComponent({
+      stack: mockStack,
+      isRegular: true,
+      isOrphaned: false,
+    });
+
+    await waitFor(() => {
       expect(screen.getByTestId('stack-redeploy-git-form')).toBeVisible();
       expect(screen.getByTestId('stack-duplication-form')).toBeVisible();
     });
   });
+});
 
-  describe('stack file content and environment id passing', () => {
-    it('should pass stackFileContent to child components', () => {
-      const mockStack = createMockStack();
-      const stackFileContent =
-        'version: "3"\nservices:\n  web:\n    image: nginx';
-      renderComponent({
-        stack: mockStack,
-        stackFileContent,
-        isRegular: true,
-      });
-
-      expect(screen.getByTestId('stack-actions')).toBeVisible();
-      expect(screen.getByTestId('stack-duplication-form')).toBeVisible();
+describe('stack file content and environment id passing', () => {
+  it('should pass stackFileContent to child components', () => {
+    const mockStack = createMockStack();
+    const stackFileContent =
+      'version: "3"\nservices:\n  web:\n    image: nginx';
+    renderComponent({
+      stack: mockStack,
+      stackFileContent,
+      isRegular: true,
     });
 
-    it('should pass environmentId to child components', () => {
-      const mockStack = createMockStack();
-      renderComponent({
-        stack: mockStack,
-        environmentId: 42,
-        isRegular: true,
-      });
+    expect(screen.getByTestId('stack-actions')).toBeVisible();
+    expect(screen.getByTestId('stack-duplication-form')).toBeVisible();
+  });
 
-      expect(screen.getByTestId('stack-actions')).toBeVisible();
+  it('should pass environmentId to child components', () => {
+    const mockStack = createMockStack();
+    renderComponent({
+      stack: mockStack,
+      environmentId: 42,
+      isRegular: true,
     });
+
+    expect(screen.getByTestId('stack-actions')).toBeVisible();
   });
 });
 
@@ -333,29 +336,4 @@ function renderComponent({
       yamlError={yamlError}
     />
   );
-}
-
-function createMockStack(overrides?: Partial<Stack>): Stack {
-  return {
-    Id: 1,
-    Name: 'test-stack',
-    Type: StackType.DockerCompose,
-    EndpointId: 1,
-    SwarmId: '',
-    EntryPoint: 'docker-compose.yml',
-    Env: [],
-    Status: StackStatus.Active,
-    ProjectPath: '/data/compose/1',
-    CreationDate: Date.now(),
-    CreatedBy: 'admin',
-    UpdateDate: Date.now(),
-    UpdatedBy: 'admin',
-    FromAppTemplate: false,
-    IsComposeFormat: true,
-    FilesystemPath: '/data/compose/1',
-    StackFileVersion: '3',
-    PreviousDeploymentInfo: null,
-    SupportRelativePath: false,
-    ...overrides,
-  };
 }

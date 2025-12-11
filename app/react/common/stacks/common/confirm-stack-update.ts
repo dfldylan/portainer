@@ -18,5 +18,5 @@ export async function confirmStackUpdate(
     }
   );
 
-  return result ? { pullImage: result.value } : undefined;
+  return result ? { repullImageAndRedeploy: result.value } : undefined;
 }

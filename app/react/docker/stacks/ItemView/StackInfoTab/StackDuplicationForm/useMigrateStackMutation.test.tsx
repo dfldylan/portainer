@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 
 import { server } from '@/setup-tests/server';
 
-import { StackType } from '../../types';
+import { StackType } from '../../../../../common/stacks/types';
 
 import { routeMigrationRequest } from './useMigrateStackMutation';
 

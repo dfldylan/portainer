@@ -10,12 +10,14 @@ import { ListView } from '@/react/docker/events/ListView';
 import { containersModule } from './containers';
 import { configsModule } from './configs';
 import { imagesModule } from './images';
+import { stacksModule } from './stacks';
 
 export const viewsModule = angular
   .module('portainer.docker.react.views', [
     containersModule,
     configsModule,
     imagesModule,
+    stacksModule,
   ])
   .component(
     'dockerDashboardView',

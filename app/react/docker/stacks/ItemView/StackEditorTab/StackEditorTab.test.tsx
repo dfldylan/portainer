@@ -7,8 +7,7 @@ import { ComponentProps } from 'react';
 import { server } from '@/setup-tests/server';
 import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { createMockUsers } from '@/react-tools/test-mocks';
-import { StackType } from '@/react/common/stacks/types';
+import { createMockUsers, createMockStack } from '@/react-tools/test-mocks';
 import { EnvironmentType } from '@/react/portainer/environments/types';
 import { Role } from '@/portainer/users/types';
 import { withTestRouter } from '@/react/test-utils/withRouter';
@@ -16,23 +15,24 @@ import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-u
 import { notifyError, notifySuccess } from '@/portainer/services/notifications';
 
 import { StackEditorTab } from './StackEditorTab';
-import { StackEditorFormValues } from './StackEditorTab.types';
 
 const defaultProps = {
-  stackType: StackType.DockerCompose,
-  composeSyntaxMaxVersion: 3,
+  stack: createMockStack({
+    EndpointId: 5,
+    PreviousDeploymentInfo: {
+      Version: 1,
+      FileVersion: 2,
+    },
+    Option: {
+      Prune: false,
+      Force: false,
+    },
+    Webhook: '',
+  }),
+  originalFileContent: 'version: "3"\nservices:\n  web:\n    image: nginx',
   isOrphaned: false,
-  onSubmit: vi.fn(),
-  initialValues: {
-    stackFileContent: 'version: "3"\nservices:\n  web:\n    image: nginx',
-    environmentVariables: [],
-    webhookId: '',
-    prune: false,
-  },
   containerNames: [],
   originalContainerNames: [],
-  versions: [1, 2, 3],
-  stackId: 1,
 };
 
 // Mock the hooks and child component
@@ -140,28 +140,6 @@ describe('initial loading', () => {
 });
 
 describe('form submission', () => {
-  it('should call onSubmit callback when form is submitted', async () => {
-    const onSubmit = vi.fn();
-    renderComponent({ onSubmit });
-    const user = userEvent.setup();
-
-    await waitFor(() => {
-      expect(screen.getByTestId('stack-editor')).toBeInTheDocument();
-    });
-
-    const deployButton = screen.getByTestId('stack-deploy-button');
-    await waitFor(() => {
-      expect(deployButton).toBeEnabled();
-    });
-
-    await user.click(deployButton);
-
-    await waitFor(() => {
-      // onSubmit is a notification callback with no parameters
-      expect(onSubmit).toHaveBeenCalledWith();
-    });
-  });
-
   it('should show confirmation dialog before submitting', async () => {
     const mockConfirm = vi.mocked(confirmStackUpdate);
     renderComponent();
@@ -200,15 +178,7 @@ describe('form submission', () => {
       })
     );
 
-    const initialValues: Partial<StackEditorFormValues> = {
-      stackFileContent: 'version: "3.8"',
-      environmentVariables: [],
-      webhookId: '',
-      prune: false,
-      registries: [],
-    };
-
-    renderComponent({ stackId: 42, initialValues });
+    renderComponent({ stack: createMockStack({ Id: 42 }) });
     const user = userEvent.setup();
 
     await waitFor(() => {
@@ -225,11 +195,10 @@ describe('form submission', () => {
     await waitFor(
       () => {
         expect(capturedRequestBody).toEqual({
-          stackFileContent: 'version: "3.8"',
+          stackFileContent: defaultProps.originalFileContent,
           env: [],
           prune: false,
-          webhook: '',
-          registries: [],
+          repullImageAndRedeploy: false,
         });
       },
       { timeout: 3000 }
@@ -274,9 +243,9 @@ describe('form submission', () => {
     expect(mutationCalled).toBe(false);
   });
 
-  it('should call onSubmitSettled callback and show success notification after mutation completes', async () => {
-    const onSubmitSettled = vi.fn();
-    renderComponent({ onSubmitSettled });
+  it('should call onSubmitSuccess callback and show success notification after mutation completes', async () => {
+    const onSubmitSuccess = vi.fn();
+    renderComponent({ onSubmitSuccess });
     const user = userEvent.setup();
 
     await waitFor(() => {
@@ -295,7 +264,7 @@ describe('form submission', () => {
         'Success',
         'Stack successfully deployed'
       );
-      expect(onSubmitSettled).toHaveBeenCalled();
+      expect(onSubmitSuccess).toHaveBeenCalled();
     });
   });
 
@@ -331,19 +300,17 @@ describe('form submission', () => {
 
 describe('container name validation', () => {
   it('should validate container names using provided containerNames', async () => {
-    const initialValues: Partial<StackEditorFormValues> = {
-      stackFileContent: `
+    const originalFileContent = `
 version: "3"
 services:
   web:
     image: nginx
     container_name: existing-container
-`,
-    };
+`;
 
     const containerNames = ['existing-container', 'other-container'];
 
-    renderComponent({ initialValues, containerNames });
+    renderComponent({ originalFileContent, containerNames });
 
     await waitFor(() => {
       expect(
@@ -353,21 +320,19 @@ services:
   });
 
   it('should not show error when container name is in originalContainerNames', async () => {
-    const initialValues: Partial<StackEditorFormValues> = {
-      stackFileContent: `
+    const originalFileContent = `
 version: "3"
 services:
   web:
     image: nginx
     container_name: my-container
-`,
-    };
+`;
 
     const containerNames = ['my-container', 'other-container'];
     const originalContainerNames = ['my-container'];
 
     renderComponent({
-      initialValues,
+      originalFileContent,
       containerNames,
       originalContainerNames,
     });
@@ -383,11 +348,9 @@ services:
   });
 
   it('should validate YAML syntax errors', async () => {
-    const initialValues: Partial<StackEditorFormValues> = {
-      stackFileContent: 'invalid: [yaml syntax',
-    };
+    const originalFileContent = 'invalid: [yaml syntax';
 
-    renderComponent({ initialValues });
+    renderComponent({ originalFileContent });
 
     await waitFor(() => {
       expect(

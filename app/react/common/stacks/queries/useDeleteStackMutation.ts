@@ -20,7 +20,18 @@ export function useDeleteStackMutation() {
 
   return useMutation({
     mutationFn: deleteStack,
-    onSuccess: () => queryClient.invalidateQueries(queryKeys.base()),
+    onSuccess: (_, variables) => {
+      // Remove the deleted stack's query data to prevent refetch attempts
+      if (variables.id) {
+        queryClient.removeQueries(queryKeys.stack(variables.id));
+        queryClient.removeQueries(queryKeys.stackFile(variables.id));
+      }
+
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.base(),
+        // exact: true,
+      });
+    },
     ...withGlobalError('Unable to delete stack'),
   });
 }

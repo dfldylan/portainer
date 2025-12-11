@@ -42,7 +42,7 @@ export function useIsWindows(environmentId: EnvironmentId) {
   return !!query.data;
 }
 
-export function useIsStandAlone(environmentId: EnvironmentId) {
+export function useIsStandAlone(environmentId: EnvironmentId | undefined) {
   const query = useInfo(environmentId, {
     select: (info) => !info.Swarm?.NodeID,
   });

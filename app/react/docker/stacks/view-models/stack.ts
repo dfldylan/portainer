@@ -57,7 +57,7 @@ export class StackViewModel implements IResource {
 
   Webhook: string | undefined;
 
-  StackFileVersion: string;
+  StackFileVersion: number;
 
   PreviousDeploymentInfo: unknown;
 

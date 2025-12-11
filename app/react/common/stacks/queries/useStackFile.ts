@@ -9,12 +9,12 @@ import { queryKeys } from './query-keys';
 
 export function useStackFile(
   stackId?: StackId,
-  { version }: { version?: string | number } = {},
+  { version, commitHash }: { version?: number; commitHash?: string } = {},
   { enabled = true }: { enabled?: boolean } = {}
 ) {
   return useQuery(
-    queryKeys.stackFile(stackId, { version }),
-    () => getStackFile(stackId!, { version }),
+    queryKeys.stackFile(stackId, { version, commitHash }),
+    () => getStackFile(stackId!, { version, commitHash }),
     {
       ...withGlobalError('Unable to retrieve stack'),
       enabled: !!stackId && enabled,
@@ -24,11 +24,11 @@ export function useStackFile(
 
 export async function getStackFile(
   stackId: StackId,
-  { version }: { version?: string | number } = {}
+  { version, commitHash }: { version?: number; commitHash?: string } = {}
 ) {
   try {
     const { data } = await axios.get<StackFile>(`/stacks/${stackId}/file`, {
-      params: { version },
+      params: { version, commitHash },
     });
     return data;
   } catch (e) {

@@ -29,6 +29,24 @@ export enum StackStatus {
   Inactive,
 }
 
+/**
+ * Records the deployment information of a stack, including version tracking and git configuration details
+ */
+export interface StackDeploymentInfo {
+  /**
+   * Version of the stack and also the deployed version in edge agent
+   */
+  Version: number;
+  /**
+   * Version of the stack file, used to detect changes
+   */
+  FileVersion: number;
+  /**
+   * Commit hash of the git repository used for deploying the stack
+   */
+  ConfigHash?: string;
+}
+
 export interface Stack {
   Id: number;
   Name: string;
@@ -57,8 +75,8 @@ export interface Stack {
   Webhook?: string;
   SupportRelativePath: boolean;
   FilesystemPath: string;
-  StackFileVersion: string;
-  PreviousDeploymentInfo: unknown;
+  StackFileVersion: number;
+  PreviousDeploymentInfo?: StackDeploymentInfo;
 }
 
 export type StackFile = {
@@ -74,7 +92,7 @@ export interface GitStackPayload {
   RepositoryUsername?: string;
   RepositoryPassword?: string;
   RepositoryAuthorizationType?: AuthTypeOption;
-  PullImage?: boolean;
+  RepullImageAndRedeploy?: boolean;
   AutoUpdate?: AutoUpdateResponse | null;
   TLSSkipVerify?: boolean;
   Registries?: number[];

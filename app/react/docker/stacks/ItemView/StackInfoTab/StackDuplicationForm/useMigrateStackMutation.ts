@@ -4,8 +4,8 @@ import { getSwarm } from '@/react/docker/proxy/queries/useSwarm';
 import { EnvironmentId } from '@/react/portainer/environments/types';
 import axios, { parseAxiosError } from '@/portainer/services/axios';
 
-import { StackType } from '../../types';
-import { buildStackUrl } from '../../queries/buildUrl';
+import { StackType } from '../../../../../common/stacks/types';
+import { buildStackUrl } from '../../../../../common/stacks/queries/buildUrl';
 
 export function useMigrateStackMutation() {
   return useMutation({

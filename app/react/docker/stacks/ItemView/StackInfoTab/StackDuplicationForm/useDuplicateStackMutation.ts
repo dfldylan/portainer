@@ -4,9 +4,9 @@ import { getSwarm } from '@/react/docker/proxy/queries/useSwarm';
 import { Pair } from '@/react/portainer/settings/types';
 import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { createStandaloneStackFromFileContent } from '../../queries/useCreateStack/createStandaloneStackFromFileContent';
-import { createSwarmStackFromFileContent } from '../../queries/useCreateStack/createSwarmStackFromFileContent';
-import { StackType } from '../../types';
+import { createStandaloneStackFromFileContent } from '../../../../../common/stacks/queries/useCreateStack/createStandaloneStackFromFileContent';
+import { createSwarmStackFromFileContent } from '../../../../../common/stacks/queries/useCreateStack/createSwarmStackFromFileContent';
+import { StackType } from '../../../../../common/stacks/types';
 
 export function useDuplicateStackMutation() {
   return useMutation({

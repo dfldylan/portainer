@@ -19,7 +19,7 @@ import { WebhookFieldset } from './WebhookFieldset';
 import { useVersionedStackFile } from './useVersionedStackFile';
 
 interface StackEditorTabInnerProps {
-  stackType: StackType;
+  stackType: StackType | undefined;
   composeSyntaxMaxVersion: number;
   apiVersion: number;
   envType: EnvironmentType;
@@ -139,7 +139,7 @@ export function StackEditorTabInner({
       {envType !== EnvironmentType.EdgeAgentOnDocker && (
         <WebhookFieldset
           onChange={(value) => setFieldValue('webhookId', value)}
-          value={values.webhookId}
+          value={values.webhookId || ''}
         />
       )}
 

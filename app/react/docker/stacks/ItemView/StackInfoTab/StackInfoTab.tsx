@@ -1,12 +1,16 @@
 import { AlertTriangle } from 'lucide-react';
 
-import { Stack } from '@/react/common/stacks/types';
-import { StackDuplicationForm } from '@/react/common/stacks/ItemView/StackDuplicationForm/StackDuplicationForm';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { Stack, StackStatus, StackType } from '@/react/common/stacks/types';
 import { Authorized } from '@/react/hooks/useUser';
 
 import { Icon } from '@@/Icon';
 import { FormSection } from '@@/form-components/FormSection';
 
+import { useSwarmStackResources } from '../useSwarmStackServices';
+import { useComposeStackContainers } from '../useComposeStackContainers';
+
+import { StackDuplicationForm } from './StackDuplicationForm/StackDuplicationForm';
 import { StackRedeployGitForm } from './StackRedeployGitForm/StackRedeployGitForm';
 import { StackActions } from './StackActions';
 import { AssociateStackForm } from './AssociateStackForm';
@@ -32,9 +36,15 @@ export function StackInfoTab({
   isOrphaned,
   isOrphanedRunning,
   environmentId,
-
   yamlError,
 }: StackInfoTabProps) {
+  const status = useStackStatus({
+    status: stack?.Status,
+    environmentId,
+    name: stackName,
+    type: stack?.Type,
+  });
+
   return (
     <>
       <ExternalOrphanedWarning
@@ -54,6 +64,7 @@ export function StackInfoTab({
                 isRegular={isRegular}
                 environmentId={environmentId}
                 isExternal={isExternal}
+                status={status}
               />
             </div>
           )}
@@ -126,4 +137,37 @@ function ExternalOrphanedWarning({
       </div>
     </FormSection>
   );
+}
+
+function useStackStatus({
+  status,
+  name,
+  type,
+  environmentId,
+}: {
+  status: Stack['Status'] | undefined;
+  name: string;
+  type: Stack['Type'] | undefined;
+  environmentId: EnvironmentId;
+}) {
+  const servicesQuery = useSwarmStackResources(name, {
+    enabled: type === StackType.DockerSwarm && !status,
+  });
+  const containersQuery = useComposeStackContainers(
+    { environmentId, stackName: name },
+    {
+      enabled: type === StackType.DockerCompose && !status,
+    }
+  );
+
+  const derivedSwarmStatus = servicesQuery.data?.length
+    ? StackStatus.Active
+    : StackStatus.Inactive;
+  const derivedComposeStatus = containersQuery.data?.length
+    ? StackStatus.Active
+    : StackStatus.Inactive;
+  const derivedStatus =
+    type === StackType.DockerSwarm ? derivedSwarmStatus : derivedComposeStatus;
+
+  return status || derivedStatus;
 }

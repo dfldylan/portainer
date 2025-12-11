@@ -1,5 +1,6 @@
 import { Formik } from 'formik';
 import { useRouter } from '@uirouter/react';
+import _ from 'lodash';
 
 import { Stack, StackType } from '@/react/common/stacks/types';
 import { useDockerComposeSchema } from '@/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
@@ -15,31 +16,28 @@ import { getValidationSchema } from './StackEditorTab.validation';
 import { StackEditorTabInner } from './StackEditorTabInner';
 
 interface StackEditorTabProps {
-  stackType: StackType;
-  composeSyntaxMaxVersion: number;
   isOrphaned: boolean;
-  initialValues: Partial<StackEditorFormValues>;
   containerNames?: string[];
   originalContainerNames?: string[];
-  versions: Array<number>;
-  stackId: Stack['Id'];
+  stack: Stack;
+  originalFileContent: string;
 
-  onSubmit?(): void;
-  onSubmitSettled?(): void;
+  onSubmitSuccess?(): void;
 }
 
 export function StackEditorTab({
-  stackType,
-  composeSyntaxMaxVersion,
   isOrphaned,
-  initialValues,
+
   containerNames = [],
   originalContainerNames = [],
-  versions,
-  stackId,
-  onSubmit = () => {},
-  onSubmitSettled = () => {},
+  originalFileContent,
+  onSubmitSuccess = () => {},
+  stack,
 }: StackEditorTabProps) {
+  const versions = _.compact([
+    stack.StackFileVersion,
+    stack.PreviousDeploymentInfo?.FileVersion,
+  ]);
   const router = useRouter();
   const mutation = useUpdateStackMutation();
   const envQuery = useCurrentEnvironment();
@@ -51,26 +49,28 @@ export function StackEditorTab({
   }
 
   const envType = envQuery.data?.Type;
+  const composeSyntaxMaxVersion = parseFloat(
+    envQuery.data?.ComposeSyntaxMaxVersion
+  );
+
+  const initialValues: StackEditorFormValues = {
+    environmentVariables: stack.Env,
+    prune: !!(stack.Option && stack.Option.Prune),
+    stackFileContent: originalFileContent,
+    webhookId: stack.Webhook,
+  };
 
   return (
     <Formik
-      initialValues={{
-        registries: [],
-        stackFileContent: '',
-        environmentVariables: [],
-        webhookId: '',
-        prune: false,
-        ...initialValues,
-      }}
+      initialValues={initialValues}
       validationSchema={getValidationSchema(
         containerNames,
         originalContainerNames
       )}
       onSubmit={async (values) => {
-        onSubmit();
         const response = await confirmStackUpdate(
           'Do you want to force an update of the stack?',
-          stackType === StackType.DockerSwarm
+          stack.Type === StackType.DockerSwarm
         );
 
         if (!response) {
@@ -79,28 +79,25 @@ export function StackEditorTab({
 
         mutation.mutate(
           {
-            stackId,
+            stackId: stack.Id,
             environmentId: envQuery.data.Id,
             payload: {
               stackFileContent: values.stackFileContent,
               env: values.environmentVariables,
               prune: values.prune,
               webhook: values.webhookId,
-              pullImage: response.pullImage,
+              repullImageAndRedeploy: response.repullImageAndRedeploy,
               rollbackTo: values.rollbackTo,
-              registries: values.registries,
             },
           },
           {
             onSuccess() {
               notifySuccess('Success', 'Stack successfully deployed');
               router.stateService.reload();
+              onSubmitSuccess();
             },
             onError(err) {
               notifyError('Failure', err as Error, 'Unable to create stack');
-            },
-            onSettled() {
-              onSubmitSettled();
             },
           }
         );
@@ -109,8 +106,8 @@ export function StackEditorTab({
       enableReinitialize
     >
       <StackEditorTabInner
-        stackId={stackId}
-        stackType={stackType}
+        stackId={stack.Id}
+        stackType={stack.Type}
         composeSyntaxMaxVersion={composeSyntaxMaxVersion}
         isOrphaned={isOrphaned}
         apiVersion={apiVersion}

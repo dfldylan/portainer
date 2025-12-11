@@ -51,7 +51,6 @@ const defaultInitialValues: StackEditorFormValues = {
   environmentVariables: [],
   webhookId: '',
   prune: false,
-  registries: [],
 };
 
 beforeEach(() => {
@@ -302,14 +301,14 @@ describe('version rollback', () => {
     const mockUseVersionedStackFile = vi.mocked(useVersionedStackFile);
     const initialValues = {
       ...defaultInitialValues,
-      rollbackTo: '2',
+      rollbackTo: 2,
     };
 
     renderComponent({ stackId: 5 }, { initialValues });
 
     expect(mockUseVersionedStackFile).toHaveBeenCalledWith({
       stackId: 5,
-      version: '2',
+      version: 2,
       onLoad: expect.any(Function),
     });
   });
