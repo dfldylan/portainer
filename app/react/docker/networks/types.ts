@@ -1,5 +1,5 @@
-import { PortainerResponse } from '@/react/docker/types';
-import { ContainerId } from '@/react/docker/containers/types';
+import { PortainerResponse } from '@CE/react/docker/types';
+import { ContainerId } from '@CE/react/docker/containers/types';
 
 export type IPConfig = {
   Subnet: string;

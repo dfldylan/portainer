@@ -1,7 +1,7 @@
 import { Row } from '@tanstack/react-table';
 
-import { filterHOC } from '@@/datatables/Filter';
-import { Link } from '@@/Link';
+import { filterHOC } from '@@CE/datatables/Filter';
+import { Link } from '@@CE/Link';
 
 import { Job } from '../types';
 

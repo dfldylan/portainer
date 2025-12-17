@@ -10,13 +10,13 @@ import Moment from 'moment';
 import { useStore } from 'zustand';
 import { AlertCircle, Bell, CheckCircle, Trash2 } from 'lucide-react';
 
-import { AutomationTestingProps } from '@/types';
-import { useUser } from '@/react/hooks/useUser';
-import { ToastNotification } from '@/react/portainer/notifications/types';
+import { AutomationTestingProps } from '@CE/types';
+import { useUser } from '@CE/react/hooks/useUser';
+import { ToastNotification } from '@CE/react/portainer/notifications/types';
 
-import { Icon } from '@@/Icon';
-import { Link } from '@@/Link';
-import { Button } from '@@/buttons';
+import { Icon } from '@@CE/Icon';
+import { Link } from '@@CE/Link';
+import { Button } from '@@CE/buttons';
 
 import { notificationsStore } from '../../portainer/notifications/notifications-store';
 

@@ -1,5 +1,5 @@
-import { FormControl } from '@@/form-components/FormControl';
-import { Select } from '@@/form-components/Input';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Select } from '@@CE/form-components/Input';
 
 import { Platform } from '../../templates/types';
 

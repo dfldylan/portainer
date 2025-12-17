@@ -1,11 +1,11 @@
 import { AlertTriangle } from 'lucide-react';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { Stack, StackStatus, StackType } from '@/react/common/stacks/types';
-import { Authorized } from '@/react/hooks/useUser';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { Stack, StackStatus, StackType } from '@CE/react/common/stacks/types';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Icon } from '@@/Icon';
-import { FormSection } from '@@/form-components/FormSection';
+import { Icon } from '@@CE/Icon';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { useSwarmStackResources } from '../useSwarmStackServices';
 import { useComposeStackContainers } from '../useComposeStackContainers';

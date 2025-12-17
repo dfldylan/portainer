@@ -1,15 +1,15 @@
 import { CellContext } from '@tanstack/react-table';
 import { Users } from 'lucide-react';
 
-import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { DecoratedRegistry } from '@/react/portainer/registries/ListView/RegistriesDatatable/types';
-import { RegistryTypes } from '@/react/portainer/registries/types/registry';
-import { columnHelper } from '@/react/portainer/registries/ListView/RegistriesDatatable/columns/helper';
-import { BrowseButton } from '@/react/portainer/registries/ListView/RegistriesDatatable/columns/actions';
+import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { DecoratedRegistry } from '@CE/react/portainer/registries/ListView/RegistriesDatatable/types';
+import { RegistryTypes } from '@CE/react/portainer/registries/types/registry';
+import { columnHelper } from '@CE/react/portainer/registries/ListView/RegistriesDatatable/columns/helper';
+import { BrowseButton } from '@CE/react/portainer/registries/ListView/RegistriesDatatable/columns/actions';
 
-import { Button } from '@@/buttons';
-import { Link } from '@@/Link';
+import { Button } from '@@CE/buttons';
+import { Link } from '@@CE/Link';
 
 export const actions = columnHelper.display({
   header: 'Actions',

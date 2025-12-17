@@ -1,7 +1,7 @@
 import { ContainerSummary } from 'docker-types/generated/1.44';
 
-import { PortainerResponse } from '@/react/docker/types';
-import { WithRequiredProperties } from '@/types';
+import { PortainerResponse } from '@CE/react/docker/types';
+import { WithRequiredProperties } from '@CE/types';
 
 export type SummaryNetworkSettings = NonNullable<
   ContainerSummary['NetworkSettings']

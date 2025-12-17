@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 import { DecoratedUser } from '../types';
 

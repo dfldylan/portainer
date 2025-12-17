@@ -1,9 +1,9 @@
 import { FormikErrors } from 'formik';
 
-import { useIsEdgeAdmin } from '@/react/hooks/useUser';
+import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
 
-import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
-import { SwitchField } from '@@/form-components/SwitchField';
+import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 import { EditDetails } from '../EditDetails';
 import { ResourceControlOwnership, AccessControlFormData } from '../types';

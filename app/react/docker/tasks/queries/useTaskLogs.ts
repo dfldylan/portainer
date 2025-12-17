@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { TaskId, TaskLogsParams } from '@/react/docker/tasks/types';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { TaskId, TaskLogsParams } from '@CE/react/docker/tasks/types';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 

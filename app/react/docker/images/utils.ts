@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
-import { trimSHA } from '@/docker/filters/utils';
+import { trimSHA } from '@CE/docker/filters/utils';
 import {
   Registry,
   RegistryTypes,
-} from '@/react/portainer/registries/types/registry';
+} from '@CE/react/portainer/registries/types/registry';
 
 import { DockerImage } from './types';
 import { DockerImageResponse } from './types/response';

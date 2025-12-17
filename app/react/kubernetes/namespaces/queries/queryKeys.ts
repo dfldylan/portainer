@@ -1,6 +1,6 @@
 import { compact } from 'lodash';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 
 export const queryKeys = {
   list: (

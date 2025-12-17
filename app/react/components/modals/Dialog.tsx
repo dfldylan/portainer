@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState, useRef } from 'react';
 
-import { Button } from '@@/buttons';
+import { Button } from '@@CE/buttons';
 
 import { ButtonOptions, ModalType } from './types';
 import { openModal } from './open-modal';

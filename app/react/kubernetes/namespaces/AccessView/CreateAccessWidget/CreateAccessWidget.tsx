@@ -3,20 +3,23 @@ import { Formik } from 'formik';
 import { useMemo } from 'react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { useIsRBACEnabled } from '@/react/kubernetes/cluster/useIsRBACEnabled';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { RBACAlert } from '@/react/kubernetes/cluster/ConfigureView/ConfigureForm/RBACAlert';
-import { useUsers } from '@/portainer/users/queries';
-import { PortainerNamespaceAccessesConfigMap } from '@/react/kubernetes/configs/constants';
-import { useConfigMap } from '@/react/kubernetes/configs/queries/useConfigMap';
-import { useTeams } from '@/react/portainer/users/teams/queries';
-import { useUpdateK8sConfigMapMutation } from '@/react/kubernetes/configs/queries/useUpdateK8sConfigMapMutation';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { Configuration } from '@/react/kubernetes/configs/types';
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useIsRBACEnabled } from '@CE/react/kubernetes/cluster/useIsRBACEnabled';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { RBACAlert } from '@CE/react/kubernetes/cluster/ConfigureView/ConfigureForm/RBACAlert';
+import { useUsers } from '@CE/portainer/users/queries';
+import { PortainerNamespaceAccessesConfigMap } from '@CE/react/kubernetes/configs/constants';
+import { useConfigMap } from '@CE/react/kubernetes/configs/queries/useConfigMap';
+import { useTeams } from '@CE/react/portainer/users/teams/queries';
+import { useUpdateK8sConfigMapMutation } from '@CE/react/kubernetes/configs/queries/useUpdateK8sConfigMapMutation';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { Configuration } from '@CE/react/kubernetes/configs/types';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
-import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
-import { TextTip } from '@@/Tip/TextTip';
+import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { EnvironmentAccess } from '../types';
 import { createAuthorizeAccessConfigMapPayload } from '../createAccessConfigMapPayload';

@@ -4,19 +4,22 @@ import { vi } from 'vitest';
 import { HttpResponse } from 'msw';
 import _ from 'lodash';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
-import { confirmEnableTLSVerify } from '@/react/portainer/gitops/utils';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { confirmStackUpdate } from '@CE/react/common/stacks/common/confirm-stack-update';
+import { confirmEnableTLSVerify } from '@CE/react/portainer/gitops/utils';
 import {
   baseStackWebhookUrl,
   createWebhookId,
-} from '@/portainer/helpers/webhookHelper';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { Stack } from '@/react/common/stacks/types';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
-import { http, server } from '@/setup-tests/server';
+} from '@CE/portainer/helpers/webhookHelper';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { Stack } from '@CE/react/common/stacks/types';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { useApiVersion } from '@CE/react/docker/proxy/queries/useVersion';
+import { http, server } from '@CE/setup-tests/server';
 
 import { StackRedeployGitForm } from './StackRedeployGitForm';
 
@@ -34,20 +37,20 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
   })),
 }));
 
-vi.mock('@/react/common/stacks/common/confirm-stack-update', () => ({
+vi.mock('@CE/react/common/stacks/common/confirm-stack-update', () => ({
   confirmStackUpdate: vi.fn(),
 }));
 
-vi.mock('@/react/portainer/gitops/utils', () => ({
+vi.mock('@CE/react/portainer/gitops/utils', () => ({
   confirmEnableTLSVerify: vi.fn(),
 }));
 
-vi.mock('@/portainer/helpers/webhookHelper', () => ({
+vi.mock('@CE/portainer/helpers/webhookHelper', () => ({
   baseStackWebhookUrl: vi.fn(),
   createWebhookId: vi.fn(),
 }));
 
-vi.mock('@/react/portainer/gitops/AutoUpdateFieldset/utils', () => ({
+vi.mock('@CE/react/portainer/gitops/AutoUpdateFieldset/utils', () => ({
   parseAutoUpdateResponse: vi.fn(() => ({
     RepositoryAutomaticUpdates: true,
     RepositoryMechanism: 'Webhook',
@@ -66,23 +69,23 @@ vi.mock('@/react/portainer/gitops/AutoUpdateFieldset/utils', () => ({
 }));
 
 // Mock router hooks
-vi.mock('@/react/hooks/useEnvironmentId', () => ({
+vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: vi.fn(() => 1),
 }));
 
-vi.mock('@/react/hooks/useCurrentEnvironment', () => ({
+vi.mock('@CE/react/hooks/useCurrentEnvironment', () => ({
   useCurrentEnvironment: vi.fn(() => ({ Id: 1, Name: 'test' })),
 }));
 
 // Mock components that require router context
-vi.mock('@/react/portainer/gitops/TimeWindowDisplay', () => ({
+vi.mock('@CE/react/portainer/gitops/TimeWindowDisplay', () => ({
   TimeWindowDisplay: vi.fn(() => (
     <div data-testid="time-window-display">Time Window Display</div>
   )),
 }));
 
 vi.mock(
-  '@/react/components/form-components/EnvironmentVariablesFieldset/StackEnvironmentVariablesPanel',
+  '@CE/react/components/form-components/EnvironmentVariablesFieldset/StackEnvironmentVariablesPanel',
   () => ({
     StackEnvironmentVariablesPanel: vi.fn(() => (
       <div data-testid="environment-variables-panel">
@@ -92,7 +95,7 @@ vi.mock(
   })
 );
 
-vi.mock('@/react/portainer/gitops/InfoPanel', () => ({
+vi.mock('@CE/react/portainer/gitops/InfoPanel', () => ({
   InfoPanel: vi.fn(({ url, configFilePath }) => (
     <div data-testid="info-panel">
       <span>{url}</span>
@@ -101,17 +104,17 @@ vi.mock('@/react/portainer/gitops/InfoPanel', () => ({
   )),
 }));
 
-vi.mock('@/react/portainer/gitops/AutoUpdateFieldset', () => ({
+vi.mock('@CE/react/portainer/gitops/AutoUpdateFieldset', () => ({
   AutoUpdateFieldset: vi.fn(() => (
     <div data-testid="auto-update-fieldset">Auto Update Fieldset</div>
   )),
 }));
 
-vi.mock('@/react/portainer/gitops/RefField', () => ({
+vi.mock('@CE/react/portainer/gitops/RefField', () => ({
   RefField: vi.fn(() => <div data-testid="ref-field">Ref Field</div>),
 }));
 
-vi.mock('@/react/portainer/gitops/AuthFieldset', async (importOriginal) => ({
+vi.mock('@CE/react/portainer/gitops/AuthFieldset', async (importOriginal) => ({
   ...(await importOriginal()),
   AuthFieldset: vi.fn(() => (
     <div data-testid="auth-fieldset">
@@ -121,7 +124,7 @@ vi.mock('@/react/portainer/gitops/AuthFieldset', async (importOriginal) => ({
 }));
 
 vi.mock(
-  '@/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset',
+  '@CE/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset',
   () => ({
     RelativePathFieldset: vi.fn(() => (
       <div data-testid="relative-path-fieldset">Relative Path Fieldset</div>
@@ -129,7 +132,7 @@ vi.mock(
   })
 );
 
-vi.mock('@@/form-components/MultiRegistrySelectFieldset', () => ({
+vi.mock('@@CE/form-components/MultiRegistrySelectFieldset', () => ({
   MultiRegistrySelectFieldset: vi.fn(
     ({
       options,
@@ -146,12 +149,12 @@ vi.mock('@@/form-components/MultiRegistrySelectFieldset', () => ({
   ),
 }));
 
-vi.mock('@/portainer/services/notifications', () => ({
+vi.mock('@CE/portainer/services/notifications', () => ({
   notifySuccess: vi.fn(),
   notifyError: vi.fn(),
 }));
 
-vi.mock('@/react/docker/proxy/queries/useVersion', () => ({
+vi.mock('@CE/react/docker/proxy/queries/useVersion', () => ({
   useApiVersion: vi.fn(),
 }));
 

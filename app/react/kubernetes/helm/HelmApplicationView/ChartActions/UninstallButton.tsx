@@ -1,9 +1,9 @@
 import { useRouter } from '@uirouter/react';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { DeleteButton } from '@@/buttons/DeleteButton';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
 
 import { useUninstallHelmAppMutation } from '../../helmReleaseQueries/useUninstallHelmAppMutation';
 

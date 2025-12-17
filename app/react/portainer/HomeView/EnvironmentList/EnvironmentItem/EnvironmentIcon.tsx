@@ -1,17 +1,17 @@
-import { getEnvironmentTypeIcon } from '@/react/portainer/environments/utils';
-import dockerEdge from '@/assets/ico/docker-edge-environment.svg';
-import podmanEdge from '@/assets/ico/podman-edge-environment.svg';
-import kube from '@/assets/images/kubernetes_endpoint.png';
-import kubeEdge from '@/assets/ico/kubernetes-edge-environment.svg';
+import { getEnvironmentTypeIcon } from '@CE/react/portainer/environments/utils';
+import dockerEdge from '@CE/assets/ico/docker-edge-environment.svg';
+import podmanEdge from '@CE/assets/ico/podman-edge-environment.svg';
+import kube from '@CE/assets/images/kubernetes_endpoint.png';
+import kubeEdge from '@CE/assets/ico/kubernetes-edge-environment.svg';
 import {
   ContainerEngine,
   EnvironmentType,
-} from '@/react/portainer/environments/types';
-import azure from '@/assets/ico/vendor/azure.svg';
-import docker from '@/assets/ico/vendor/docker.svg';
-import podman from '@/assets/ico/vendor/podman.svg';
+} from '@CE/react/portainer/environments/types';
+import azure from '@CE/assets/ico/vendor/azure.svg';
+import docker from '@CE/assets/ico/vendor/docker.svg';
+import podman from '@CE/assets/ico/vendor/podman.svg';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 interface Props {
   type: EnvironmentType;

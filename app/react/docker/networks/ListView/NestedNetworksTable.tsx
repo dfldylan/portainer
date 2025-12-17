@@ -1,6 +1,6 @@
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { NestedDatatable } from '@@/datatables/NestedDatatable';
+import { NestedDatatable } from '@@CE/datatables/NestedDatatable';
 
 import { useIsSwarm } from '../../proxy/queries/useInfo';
 

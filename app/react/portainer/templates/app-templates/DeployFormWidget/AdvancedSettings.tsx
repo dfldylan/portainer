@@ -1,8 +1,8 @@
 import { Minus, Plus } from 'lucide-react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
 
-import { Icon } from '@@/Icon';
-import { Button } from '@@/buttons';
+import { Icon } from '@@CE/Icon';
+import { Button } from '@@CE/buttons';
 
 export function AdvancedSettings({
   children,

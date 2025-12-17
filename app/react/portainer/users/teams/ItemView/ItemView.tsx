@@ -1,11 +1,11 @@
 import { useRouter } from '@uirouter/react';
 
-import { useUsers } from '@/portainer/users/queries';
-import { useIsPureAdmin } from '@/react/hooks/useUser';
-import { usePublicSettings } from '@/react/portainer/settings/queries';
+import { useUsers } from '@CE/portainer/users/queries';
+import { useIsPureAdmin } from '@CE/react/hooks/useUser';
+import { usePublicSettings } from '@CE/react/portainer/settings/queries';
 
-import { TextTip } from '@@/Tip/TextTip';
-import { PageHeader } from '@@/PageHeader';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { PageHeader } from '@@CE/PageHeader';
 
 import { useTeam, useTeamMemberships } from '../queries';
 

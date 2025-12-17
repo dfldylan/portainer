@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import { RotateCw, List } from 'lucide-react';
 import { FormikErrors } from 'formik';
 
-import { InputGroup } from '@@/form-components/InputGroup';
-import { Button } from '@@/buttons';
-import { FormError } from '@@/form-components/FormError';
-import { isArrayErrorType } from '@@/form-components/formikUtils';
+import { InputGroup } from '@@CE/form-components/InputGroup';
+import { Button } from '@@CE/buttons';
+import { FormError } from '@@CE/form-components/FormError';
+import { isArrayErrorType } from '@@CE/form-components/formikUtils';
 
 import { ConfigurationOverrideKey, ConfigurationType } from './types';
 

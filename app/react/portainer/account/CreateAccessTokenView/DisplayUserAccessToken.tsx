@@ -1,7 +1,7 @@
-import { Button, CopyButton } from '@@/buttons';
-import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
-import { TextTip } from '@@/Tip/TextTip';
-import { Link } from '@@/Link';
+import { Button, CopyButton } from '@@CE/buttons';
+import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Link } from '@@CE/Link';
 
 export function DisplayUserAccessToken({ apikey }: { apikey: string }) {
   return (

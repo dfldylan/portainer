@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { ArrowRight } from 'lucide-react';
 
-import { Icon } from '@@/Icon';
-import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
-import { FormError } from '@@/form-components/FormError';
-import { InputGroup } from '@@/form-components/InputGroup';
-import { ItemProps } from '@@/form-components/InputList';
-import { InputLabeled } from '@@/form-components/Input/InputLabeled';
+import { Icon } from '@@CE/Icon';
+import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
+import { FormError } from '@@CE/form-components/FormError';
+import { InputGroup } from '@@CE/form-components/InputGroup';
+import { ItemProps } from '@@CE/form-components/InputList';
+import { InputLabeled } from '@@CE/form-components/Input/InputLabeled';
 
 import { Volume } from './types';
 import { useInputContext } from './context';

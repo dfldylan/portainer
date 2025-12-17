@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { Select } from '@@/form-components/ReactSelect';
+import { Select } from '@@CE/form-components/ReactSelect';
 
 interface Namespace {
   id: string;

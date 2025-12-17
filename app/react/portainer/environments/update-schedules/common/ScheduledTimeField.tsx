@@ -6,10 +6,10 @@ import {
   isoDate,
   parseIsoDate,
   TIME_FORMAT,
-} from '@/portainer/filters/filters';
+} from '@CE/portainer/filters/filters';
 
-import { DateTimeField, FORMAT } from '@@/DateTimeField';
-import { TextTip } from '@@/Tip/TextTip';
+import { DateTimeField, FORMAT } from '@@CE/DateTimeField';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { FormValues } from './types';
 

@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import { r2a } from '@/react-tools/react2angular';
-import { withUIRouter } from '@/react-tools/withUIRouter';
-import { NodesDatatable } from '@/react/docker/swarm/SwarmView/NodesDatatable';
+import { r2a } from '@CE/react-tools/react2angular';
+import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { NodesDatatable } from '@CE/react/docker/swarm/SwarmView/NodesDatatable';
 
 export const swarmModule = angular
   .module('portainer.docker.react.components.swarm', [])

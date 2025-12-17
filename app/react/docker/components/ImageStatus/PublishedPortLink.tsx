@@ -1,6 +1,6 @@
 import { ExternalLink } from 'lucide-react';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 type Props = {
   hostURL?: string;

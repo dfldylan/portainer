@@ -2,17 +2,17 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
-import { StackContainersDatatable } from '@/react/docker/stacks/ItemView/StackContainersDatatable';
-import { AccessControlPanel } from '@/react/portainer/access-control';
-import { useStack } from '@/react/common/stacks/queries/useStack';
-import { Stack, StackType } from '@/react/common/stacks/types';
-import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
-import { ResourceControlType } from '@/react/portainer/access-control/types';
-import { queryKeys } from '@/react/common/stacks/queries/query-keys';
-import { useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { notifyError } from '@/portainer/services/notifications';
+import { StackContainersDatatable } from '@CE/react/docker/stacks/ItemView/StackContainersDatatable';
+import { AccessControlPanel } from '@CE/react/portainer/access-control';
+import { useStack } from '@CE/react/common/stacks/queries/useStack';
+import { Stack, StackType } from '@CE/react/common/stacks/types';
+import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
+import { ResourceControlType } from '@CE/react/portainer/access-control/types';
+import { queryKeys } from '@CE/react/common/stacks/queries/query-keys';
+import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { notifyError } from '@CE/portainer/services/notifications';
 
-import { PageHeader } from '@@/PageHeader';
+import { PageHeader } from '@@CE/PageHeader';
 
 import { StackDetails } from './StackDetails';
 import { StackServicesDatatable } from './StackServicesDatatable';

@@ -1,6 +1,6 @@
-import { withLimitToBE } from '@/react/hooks/useLimitToBE';
+import { withLimitToBE } from '@CE/react/hooks/useLimitToBE';
 
-import { PageHeader } from '@@/PageHeader';
+import { PageHeader } from '@@CE/PageHeader';
 
 import { AutomaticEdgeEnvCreation } from './AutomaticEdgeEnvCreation';
 

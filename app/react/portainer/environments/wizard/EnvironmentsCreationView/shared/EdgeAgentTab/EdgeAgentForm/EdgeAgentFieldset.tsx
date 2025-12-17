@@ -1,6 +1,6 @@
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
-import { PortainerTunnelAddrField } from '@/react/portainer/common/PortainerTunnelAddrField';
-import { PortainerUrlField } from '@/react/portainer/common/PortainerUrlField';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { PortainerTunnelAddrField } from '@CE/react/portainer/common/PortainerTunnelAddrField';
+import { PortainerUrlField } from '@CE/react/portainer/common/PortainerUrlField';
 
 import { NameField } from '../../NameField';
 

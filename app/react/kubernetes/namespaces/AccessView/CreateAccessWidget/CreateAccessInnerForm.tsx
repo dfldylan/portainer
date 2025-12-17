@@ -2,20 +2,20 @@ import { Form, FormikProps } from 'formik';
 import { Plus } from 'lucide-react';
 import { useMemo } from 'react';
 
-import { useEnvironment } from '@/react/portainer/environments/queries';
-import { useGroup } from '@/react/portainer/environments/environment-groups/queries';
-import { useUsers } from '@/portainer/users/queries';
-import { useTeams } from '@/react/portainer/users/teams/queries/useTeams';
-import { User } from '@/portainer/users/types';
-import { Environment } from '@/react/portainer/environments/types';
-import { Team } from '@/react/portainer/users/teams/types';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { EnvironmentGroup } from '@/react/portainer/environments/environment-groups/types';
-import { useIsEdgeAdmin } from '@/react/hooks/useUser';
+import { useEnvironment } from '@CE/react/portainer/environments/queries';
+import { useGroup } from '@CE/react/portainer/environments/environment-groups/queries';
+import { useUsers } from '@CE/portainer/users/queries';
+import { useTeams } from '@CE/react/portainer/users/teams/queries/useTeams';
+import { User } from '@CE/portainer/users/types';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { Team } from '@CE/react/portainer/users/teams/types';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { EnvironmentGroup } from '@CE/react/portainer/environments/environment-groups/types';
+import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
 
-import { LoadingButton } from '@@/buttons';
-import { FormControl } from '@@/form-components/FormControl';
-import { Link } from '@@/Link';
+import { LoadingButton } from '@@CE/buttons';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Link } from '@@CE/Link';
 
 import { NamespaceAccessUsersSelector } from '../NamespaceAccessUsersSelector';
 import { EnvironmentAccess, NamespaceAccess } from '../types';

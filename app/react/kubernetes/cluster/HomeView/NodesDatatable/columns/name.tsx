@@ -1,9 +1,9 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { Authorized } from '@/react/hooks/useUser';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Link } from '@@/Link';
-import { Badge } from '@@/Badge';
+import { Link } from '@@CE/Link';
+import { Badge } from '@@CE/Badge';
 
 import { NodeRowData } from '../types';
 

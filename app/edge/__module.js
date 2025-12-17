@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import { AccessHeaders } from '@/portainer/authorization-guard';
+import { AccessHeaders } from '@CE/portainer/authorization-guard';
 import { reactModule } from './react';
 
 angular

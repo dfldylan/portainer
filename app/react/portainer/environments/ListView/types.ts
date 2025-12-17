@@ -1,4 +1,4 @@
-import { Environment } from '@/react/portainer/environments/types';
+import { Environment } from '@CE/react/portainer/environments/types';
 
 export type EnvironmentListItem = {
   GroupName?: string;

@@ -2,14 +2,14 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { Circle, Code as CodeIcon, File } from 'lucide-react';
 import { useState } from 'react';
 
-import { trimContainerName } from '@/docker/filters/utils';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { trimContainerName } from '@CE/docker/filters/utils';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { JsonTree } from '@@/JsonTree';
-import { PageHeader } from '@@/PageHeader';
-import { Widget } from '@@/Widget';
-import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
-import { Code } from '@@/Code';
+import { JsonTree } from '@@CE/JsonTree';
+import { PageHeader } from '@@CE/PageHeader';
+import { Widget } from '@@CE/Widget';
+import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
+import { Code } from '@@CE/Code';
 
 import { useContainerInspect } from '../queries/useContainerInspect';
 

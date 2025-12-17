@@ -1,4 +1,4 @@
-import { EnvironmentRelationsPayload } from '@/react/portainer/environments/queries/useUpdateEnvironmentsRelationsMutation';
+import { EnvironmentRelationsPayload } from '@CE/react/portainer/environments/queries/useUpdateEnvironmentsRelationsMutation';
 
 import { WaitingRoomEnvironment } from '../../types';
 

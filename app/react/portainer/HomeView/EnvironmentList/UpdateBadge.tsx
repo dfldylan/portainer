@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import clsx from 'clsx';
 
-import { useSupportedAgentVersions } from '@/react/portainer/environments/update-schedules/queries/useSupportedAgentVersions';
+import { useSupportedAgentVersions } from '@CE/react/portainer/environments/update-schedules/queries/useSupportedAgentVersions';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 export function UpdateBadge() {
   const version = useAgentLatestVersion();

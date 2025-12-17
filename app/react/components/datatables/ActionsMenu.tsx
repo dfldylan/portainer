@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Menu, MenuList, MenuButton } from '@reach/menu-button';
 import { MoreVertical } from 'lucide-react';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 import styles from './ActionsMenu.module.css';
 

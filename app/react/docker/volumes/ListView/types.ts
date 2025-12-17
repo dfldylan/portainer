@@ -1,3 +1,3 @@
-import { VolumeViewModel } from '@/docker/models/volume';
+import { VolumeViewModel } from '@CE/docker/models/volume';
 
 export type DecoratedVolume = VolumeViewModel & { dangling: boolean };

@@ -3,18 +3,18 @@ import { Key } from 'lucide-react';
 import { useState } from 'react';
 import { SchemaOf, bool, object } from 'yup';
 
-import { withHideOnExtension } from '@/react/hooks/withHideOnExtension';
+import { withHideOnExtension } from '@CE/react/hooks/withHideOnExtension';
 
-import { Widget } from '@@/Widget';
-import { LoadingButton } from '@@/buttons';
+import { Widget } from '@@CE/Widget';
+import { LoadingButton } from '@@CE/buttons';
 import {
   file,
   withFileExtension,
-} from '@@/form-components/yup-file-validation';
-import { TextTip } from '@@/Tip/TextTip';
-import { FormControl } from '@@/form-components/FormControl';
-import { FileUploadField } from '@@/form-components/FileUpload';
-import { SwitchField } from '@@/form-components/SwitchField';
+} from '@@CE/form-components/yup-file-validation';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FileUploadField } from '@@CE/form-components/FileUpload';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 import { useUpdateSSLConfigMutation } from '../useUpdateSSLConfigMutation';
 import { useSSLSettings } from '../../queries/useSSLSettings';

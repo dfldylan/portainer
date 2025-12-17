@@ -1,10 +1,10 @@
 import { BoxIcon, List } from 'lucide-react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { usePublicSettings } from '@/react/portainer/settings/queries/usePublicSettings';
+import { usePublicSettings } from '@CE/react/portainer/settings/queries/usePublicSettings';
 
-import { PageHeader } from '@@/PageHeader';
-import { Tab, WidgetTabs, findSelectedTabIndex } from '@@/Widget/WidgetTabs';
+import { PageHeader } from '@@CE/PageHeader';
+import { Tab, WidgetTabs, findSelectedTabIndex } from '@@CE/Widget/WidgetTabs';
 
 import { ApplicationsDatatable } from './ApplicationsDatatable';
 import { ApplicationsStacksDatatable } from './ApplicationsStacksDatatable';

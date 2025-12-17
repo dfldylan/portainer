@@ -1,6 +1,6 @@
 import { object, string, boolean, array, number, SchemaOf } from 'yup';
 
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
 import { IngressControllerClassMap } from '../../ingressClass/types';
 

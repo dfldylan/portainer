@@ -3,12 +3,12 @@ import { Zap } from 'lucide-react';
 import {
   Environment,
   EnvironmentType,
-} from '@/react/portainer/environments/types';
+} from '@CE/react/portainer/environments/types';
 import {
   isEdgeEnvironment,
   isLocalEnvironment,
   isAgentEnvironment,
-} from '@/react/portainer/environments/utils';
+} from '@CE/react/portainer/environments/utils';
 
 export function EnvironmentTypeTag({
   environment,

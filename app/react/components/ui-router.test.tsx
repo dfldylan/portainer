@@ -1,7 +1,7 @@
 import { UISref, UIView } from '@uirouter/react';
 import { render, screen } from '@testing-library/react';
 
-import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
 
 function RelativePathLink() {
   return (

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { PageHeader } from '@@/PageHeader';
-import { useTableStateWithoutStorage } from '@@/datatables/useTableState';
-import { BEOverlay } from '@@/BEFeatureIndicator/BEOverlay';
+import { PageHeader } from '@@CE/PageHeader';
+import { useTableStateWithoutStorage } from '@@CE/datatables/useTableState';
+import { BEOverlay } from '@@CE/BEFeatureIndicator/BEOverlay';
 
 import { FeatureId } from '../../feature-flags/enums';
 

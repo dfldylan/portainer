@@ -1,7 +1,7 @@
-import { AccessControlFormData } from '@/react/portainer/access-control/types';
-import { PortMapping } from '@/react/docker/containers/CreateView/BaseForm/PortsMappingField';
-import { VolumesTabValues } from '@/react/docker/containers/CreateView/VolumesTab';
-import { LabelsTabValues } from '@/react/docker/containers/CreateView/LabelsTab';
+import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
+import { PortMapping } from '@CE/react/docker/containers/CreateView/BaseForm/PortsMappingField';
+import { VolumesTabValues } from '@CE/react/docker/containers/CreateView/VolumesTab';
+import { LabelsTabValues } from '@CE/react/docker/containers/CreateView/LabelsTab';
 
 import { EnvVarsValue } from '../EnvVarsFieldset';
 

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
-import { PortainerSelect } from '@@/form-components/PortainerSelect';
-import { TableHeaderSortIcons } from '@@/datatables/TableHeaderSortIcons';
+import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
+import { TableHeaderSortIcons } from '@@CE/datatables/TableHeaderSortIcons';
 
 import {
   SortOptions,

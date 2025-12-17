@@ -1,6 +1,6 @@
 import { TableMeta as BaseTableMeta } from '@tanstack/react-table';
 
-import { VolumeViewModel } from '@/docker/models/volume';
+import { VolumeViewModel } from '@CE/docker/models/volume';
 
 interface TableMeta {
   isBrowseVisible: boolean;

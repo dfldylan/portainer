@@ -1,6 +1,6 @@
-import { r2a } from '@/react-tools/react2angular';
+import { r2a } from '@CE/react-tools/react2angular';
 
-import { SwitchField } from '@@/form-components/SwitchField';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 export const switchField = r2a(SwitchField, [
   'tooltip',

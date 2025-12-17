@@ -1,5 +1,5 @@
-import { TagId } from '@/portainer/tags/types';
-import { EnvironmentGroupId } from '@/react/portainer/environments/types';
+import { TagId } from '@CE/portainer/tags/types';
+import { EnvironmentGroupId } from '@CE/react/portainer/environments/types';
 
 import { EdgeGroup } from '../../edge-groups/types';
 

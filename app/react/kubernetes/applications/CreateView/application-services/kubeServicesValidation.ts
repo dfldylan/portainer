@@ -1,6 +1,6 @@
 import { SchemaOf, array, object, boolean, string, mixed, number } from 'yup';
 
-import { nanNumberSchema } from '@/react-tools/yup-schemas';
+import { nanNumberSchema } from '@CE/react-tools/yup-schemas';
 
 import { ServiceFormValues, ServicePort } from './types';
 import { prependWithSlash } from './utils';

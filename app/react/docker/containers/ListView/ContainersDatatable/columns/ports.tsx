@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { CellContext } from '@tanstack/react-table';
 
-import { PublishedPortLink } from '@/react/docker/components/ImageStatus/PublishedPortLink';
-import type { ContainerListViewModel } from '@/react/docker/containers/types';
+import { PublishedPortLink } from '@CE/react/docker/components/ImageStatus/PublishedPortLink';
+import type { ContainerListViewModel } from '@CE/react/docker/containers/types';
 
 import { useRowContext } from '../RowContext';
 

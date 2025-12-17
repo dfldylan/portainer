@@ -1,4 +1,4 @@
-import { commandStringToArray } from '@/docker/helpers/containers';
+import { commandStringToArray } from '@CE/docker/helpers/containers';
 
 import { CreateContainerRequest } from '../types';
 

@@ -1,9 +1,9 @@
 import { SchemaOf, array, boolean, number, object, ref, string } from 'yup';
 import { useMemo } from 'react';
 
-import { usePublicSettings } from '@/react/portainer/settings/queries';
-import { AuthenticationMethod } from '@/react/portainer/settings/types';
-import { useUsers } from '@/portainer/users/queries';
+import { usePublicSettings } from '@CE/react/portainer/settings/queries';
+import { AuthenticationMethod } from '@CE/react/portainer/settings/types';
+import { useUsers } from '@CE/portainer/users/queries';
 
 import { FormValues } from './FormValues';
 

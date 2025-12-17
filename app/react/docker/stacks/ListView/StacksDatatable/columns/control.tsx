@@ -6,10 +6,10 @@ import {
   isExternalStack,
   isOrphanedStack,
   isRegularStack,
-} from '@/react/docker/stacks/view-models/utils';
+} from '@CE/react/docker/stacks/view-models/utils';
 
-import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
-import { Icon } from '@@/Icon';
+import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
+import { Icon } from '@@CE/Icon';
 
 import { DecoratedStack } from '../types';
 

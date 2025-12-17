@@ -1,7 +1,7 @@
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
-import { BETeaserButton } from '@@/BETeaserButton';
-import { Tooltip } from '@@/Tip/Tooltip';
+import { BETeaserButton } from '@@CE/BETeaserButton';
+import { Tooltip } from '@@CE/Tip/Tooltip';
 
 export function AnnotationsBeTeaser() {
   return (

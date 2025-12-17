@@ -1,8 +1,8 @@
 import { FlaskConical } from 'lucide-react';
 
-import { useExperimentalSettings } from '@/react/portainer/settings/queries';
+import { useExperimentalSettings } from '@CE/react/portainer/settings/queries';
 
-import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
+import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
 
 import { ExperimentalFeaturesSettingsForm } from './ExperimentalFeaturesForm';
 

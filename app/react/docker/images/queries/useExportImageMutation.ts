@@ -2,9 +2,9 @@ import { RawAxiosRequestHeaders } from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { saveAs } from 'file-saver';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 

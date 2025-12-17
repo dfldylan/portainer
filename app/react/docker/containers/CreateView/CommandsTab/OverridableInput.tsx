@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
-import { Button } from '@@/buttons';
-import { InputGroup } from '@@/form-components/InputGroup';
+import { Button } from '@@CE/buttons';
+import { InputGroup } from '@@CE/form-components/InputGroup';
 
 export function OverridableInput({
   value,

@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import { DescribeModal } from './DescribeModal';
 
 const mockUseDescribeResource = vi.fn();
 
 // Mock the CodeEditor component instead of yaml-schema
-vi.mock('@@/CodeEditor', () => ({
+vi.mock('@@CE/CodeEditor', () => ({
   CodeEditor: ({
     value,
     'data-cy': dataCy,

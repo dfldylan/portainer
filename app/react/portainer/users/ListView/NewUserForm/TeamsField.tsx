@@ -1,8 +1,8 @@
 import { useField } from 'formik';
 
-import { Link } from '@@/Link';
-import { TeamsSelector } from '@@/TeamsSelector';
-import { FormControl } from '@@/form-components/FormControl';
+import { Link } from '@@CE/Link';
+import { TeamsSelector } from '@@CE/TeamsSelector';
+import { FormControl } from '@@CE/form-components/FormControl';
 
 import { Team } from '../../teams/types';
 

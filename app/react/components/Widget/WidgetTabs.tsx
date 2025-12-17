@@ -2,8 +2,8 @@ import { RawParams, useCurrentStateAndParams } from '@uirouter/react';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 
-import { Icon } from '@@/Icon';
-import { Link } from '@@/Link';
+import { Icon } from '@@CE/Icon';
+import { Link } from '@@CE/Link';
 
 export interface Tab {
   name: ReactNode;

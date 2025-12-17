@@ -1,9 +1,9 @@
 import { GaugeIcon } from 'lucide-react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { Widget } from '@@/Widget';
-import { DetailsTable } from '@@/DetailsTable';
+import { Widget } from '@@CE/Widget';
+import { DetailsTable } from '@@CE/DetailsTable';
 
 import { useAgentNodes } from '../agent/queries/useAgentNodes';
 import { useApiVersion } from '../agent/queries/useApiVersion';

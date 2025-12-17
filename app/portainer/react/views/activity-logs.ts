@@ -1,9 +1,9 @@
 import angular from 'angular';
 
-import { r2a } from '@/react-tools/react2angular';
-import { withUIRouter } from '@/react-tools/withUIRouter';
-import { ActivityLogsView } from '@/react/portainer/logs/ActivityLogsView/ActivityLogsView';
-import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { r2a } from '@CE/react-tools/react2angular';
+import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { ActivityLogsView } from '@CE/react/portainer/logs/ActivityLogsView/ActivityLogsView';
+import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
 
 export const activityLogsModule = angular
   .module('portainer.app.react.views.activity-logs', [])

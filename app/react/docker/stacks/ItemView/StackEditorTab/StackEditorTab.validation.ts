@@ -1,6 +1,6 @@
 import { object, string, boolean, SchemaOf, array, number } from 'yup';
 
-import { envVarValidation } from '@@/form-components/EnvironmentVariablesFieldset';
+import { envVarValidation } from '@@CE/form-components/EnvironmentVariablesFieldset';
 
 import { StackEditorFormValues } from './StackEditorTab.types';
 import { validateYAML } from './stackYamlValidation';

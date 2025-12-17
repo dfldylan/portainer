@@ -1,7 +1,7 @@
 import {
   TeamAccessViewModel,
   UserAccessViewModel,
-} from '@/portainer/models/access';
+} from '@CE/portainer/models/access';
 
 export type Access = UserAccessViewModel | TeamAccessViewModel;
 

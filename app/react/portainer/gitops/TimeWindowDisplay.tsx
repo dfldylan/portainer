@@ -1,9 +1,9 @@
 import moment from 'moment';
 import 'moment-timezone';
 
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
 
-import { TextTip } from '@@/Tip/TextTip';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { withEdition } from '../feature-flags/withEdition';
 

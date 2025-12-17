@@ -1,4 +1,4 @@
-import { buildNameColumn } from '@@/datatables/buildNameColumn';
+import { buildNameColumn } from '@@CE/datatables/buildNameColumn';
 
 import { DecoratedItem } from '../types';
 

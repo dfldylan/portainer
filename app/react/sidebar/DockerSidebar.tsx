@@ -14,10 +14,10 @@ import {
 import {
   type Environment,
   type EnvironmentId,
-} from '@/react/portainer/environments/types';
-import { Authorized, useIsEnvironmentAdmin } from '@/react/hooks/useUser';
-import { useInfo } from '@/react/docker/proxy/queries/useInfo';
-import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
+} from '@CE/react/portainer/environments/types';
+import { Authorized, useIsEnvironmentAdmin } from '@CE/react/hooks/useUser';
+import { useInfo } from '@CE/react/docker/proxy/queries/useInfo';
+import { useApiVersion } from '@CE/react/docker/proxy/queries/useVersion';
 
 import { SidebarItem } from './SidebarItem';
 import { DashboardLink } from './items/DashboardLink';

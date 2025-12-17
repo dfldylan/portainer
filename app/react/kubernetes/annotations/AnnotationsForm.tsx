@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
 import { Trash2 } from 'lucide-react';
 
-import { FormError } from '@@/form-components/FormError';
-import { Button } from '@@/buttons';
-import { isArrayErrorType } from '@@/form-components/formikUtils';
+import { FormError } from '@@CE/form-components/FormError';
+import { Button } from '@@CE/buttons';
+import { isArrayErrorType } from '@@CE/form-components/formikUtils';
 
 import { Annotation, AnnotationErrors } from './types';
 

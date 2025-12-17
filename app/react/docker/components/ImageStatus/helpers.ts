@@ -1,8 +1,8 @@
 import { Loader } from 'lucide-react';
 
-import UpdatesAvailable from '@/assets/ico/icon_updates-available.svg?c';
-import UpToDate from '@/assets/ico/icon_up-to-date.svg?c';
-import UpdatesUnknown from '@/assets/ico/icon_updates-unknown.svg?c';
+import UpdatesAvailable from '@CE/assets/ico/icon_updates-available.svg?c';
+import UpToDate from '@CE/assets/ico/icon_up-to-date.svg?c';
+import UpdatesUnknown from '@CE/assets/ico/icon_updates-unknown.svg?c';
 
 import { ImageStatus } from './types';
 

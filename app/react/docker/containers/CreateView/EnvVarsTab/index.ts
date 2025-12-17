@@ -1,4 +1,4 @@
-import { envVarValidation } from '@@/form-components/EnvironmentVariablesFieldset';
+import { envVarValidation } from '@@CE/form-components/EnvironmentVariablesFieldset';
 
 import { toRequest } from './toRequest';
 import { toViewModel, getDefaultViewModel } from './toViewModel';

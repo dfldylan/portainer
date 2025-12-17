@@ -1,7 +1,7 @@
-import { StackId } from '@/react/common/stacks/types';
-import { useGitRefs } from '@/react/portainer/gitops/queries/useGitRefs';
+import { StackId } from '@CE/react/common/stacks/types';
+import { useGitRefs } from '@CE/react/portainer/gitops/queries/useGitRefs';
 
-import { PortainerSelect } from '@@/form-components/PortainerSelect';
+import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
 
 import { getAuthentication } from '../utils';
 

@@ -1,12 +1,12 @@
 import { Fragment } from 'react';
 import { Network } from 'lucide-react';
 
-import DockerNetworkHelper from '@/docker/helpers/networkHelper';
-import { Authorized } from '@/react/hooks/useUser';
+import DockerNetworkHelper from '@CE/docker/helpers/networkHelper';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { TableContainer, TableTitle } from '@@/datatables';
-import { DetailsTable } from '@@/DetailsTable';
-import { DeleteButton } from '@@/buttons/DeleteButton';
+import { TableContainer, TableTitle } from '@@CE/datatables';
+import { DetailsTable } from '@@CE/DetailsTable';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
 
 import { isSystemNetwork } from '../network.helper';
 import { DockerNetwork, IPConfig } from '../types';

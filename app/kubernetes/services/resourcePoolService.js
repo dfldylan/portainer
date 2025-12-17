@@ -3,7 +3,7 @@ import _ from 'lodash-es';
 import angular from 'angular';
 import KubernetesResourcePoolConverter from 'Kubernetes/converters/resourcePool';
 import KubernetesResourceQuotaHelper from 'Kubernetes/helpers/resourceQuotaHelper';
-import { getNamespaces } from '@/react/kubernetes/namespaces/queries/useNamespacesQuery';
+import { getNamespaces } from '@CE/react/kubernetes/namespaces/queries/useNamespacesQuery';
 
 /* @ngInject */
 export function KubernetesResourcePoolService(

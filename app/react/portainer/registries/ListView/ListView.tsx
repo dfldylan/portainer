@@ -1,5 +1,5 @@
-import { PageHeader } from '@@/PageHeader';
-import { InformationPanel } from '@@/InformationPanel';
+import { PageHeader } from '@@CE/PageHeader';
+import { InformationPanel } from '@@CE/InformationPanel';
 
 import { RegistriesDatatable } from './RegistriesDatatable';
 

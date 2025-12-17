@@ -1,5 +1,5 @@
-import { Environment } from '@/react/portainer/environments/types';
-import { isEdgeEnvironment } from '@/react/portainer/environments/utils';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { isEdgeEnvironment } from '@CE/react/portainer/environments/utils';
 
 import { Role, User } from './types';
 

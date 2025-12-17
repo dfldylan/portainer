@@ -2,10 +2,10 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { DaemonSet, Deployment, StatefulSet } from 'kubernetes-types/apps/v1';
 import { Pod } from 'kubernetes-types/core/v1';
 
-import { withGlobalError } from '@/react-tools/react-query';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { isFulfilled } from '@/portainer/helpers/promise-utils';
-import axios from '@/portainer/services/axios';
+import { withGlobalError } from '@CE/react-tools/react-query';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { isFulfilled } from '@CE/portainer/helpers/promise-utils';
+import axios from '@CE/portainer/services/axios';
 
 import { AppKind, Application } from '../types';
 import { parseKubernetesAxiosError } from '../../axiosError';

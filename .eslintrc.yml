@@ -37,8 +37,8 @@ rules:
       {
         pathGroups:
           [
-            { pattern: '@@/**', group: 'internal', position: 'after' },
-            { pattern: '@/**', group: 'internal' },
+            { pattern: '@@CE/**', group: 'internal', position: 'after' },
+            { pattern: '@CE/**', group: 'internal' },
             { pattern: '{Kubernetes,Portainer,Agent,Azure,Docker}/**', group: 'internal' },
           ],
         groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
@@ -49,15 +49,15 @@ rules:
     - error
     - patterns:
         - group:
-            - '@/react/test-utils/*'
+            - '@CE/react/test-utils/*'
           message: 'These utils are just for test files'
 
 settings:
   'import/resolver':
     alias:
       map:
-        - ['@@', './app/react/components']
-        - ['@', './app']
+        - ['@@CE', './app/react/components']
+        - ['@CE', './app']
       extensions: ['.js', '.ts', '.tsx']
     typescript: true
     node: true
@@ -92,7 +92,7 @@ overrides:
         [
           'error',
           {
-            pathGroups: [{ pattern: '@@/**', group: 'internal', position: 'after' }, { pattern: '@/**', group: 'internal' }],
+            pathGroups: [{ pattern: '@@CE/**', group: 'internal', position: 'after' }, { pattern: '@CE/**', group: 'internal' }],
             groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
             'newlines-between': 'always',
           },
@@ -124,7 +124,7 @@ overrides:
         - error
         - patterns:
             - group:
-                - '@/react/test-utils/*'
+                - '@CE/react/test-utils/*'
               message: 'These utils are just for test files'
     overrides: # allow props spreading for hoc files
       - files:

@@ -1,7 +1,7 @@
 import { Sha256 } from '@aws-crypto/sha256-js';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 
 import { RegistryId } from '../../types/registry';
 import { buildProxyUrl } from '../../queries/build-url';

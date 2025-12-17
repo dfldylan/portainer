@@ -5,15 +5,15 @@ import _ from 'lodash';
 import {
   ContainerEngine,
   Environment,
-} from '@/react/portainer/environments/types';
-import { commandsTabs } from '@/react/edge/components/EdgeScriptForm/scripts';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
-import EdgeAgentStandardIcon from '@/react/edge/components/edge-agent-standard.svg?c';
-import EdgeAgentAsyncIcon from '@/react/edge/components/edge-agent-async.svg?c';
+} from '@CE/react/portainer/environments/types';
+import { commandsTabs } from '@CE/react/edge/components/EdgeScriptForm/scripts';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import EdgeAgentStandardIcon from '@CE/react/edge/components/edge-agent-standard.svg?c';
+import EdgeAgentAsyncIcon from '@CE/react/edge/components/edge-agent-async.svg?c';
 
-import { BoxSelector, type BoxSelectorOption } from '@@/BoxSelector';
-import { BadgeIcon } from '@@/BadgeIcon';
-import { Alert } from '@@/Alert';
+import { BoxSelector, type BoxSelectorOption } from '@@CE/BoxSelector';
+import { BadgeIcon } from '@@CE/BadgeIcon';
+import { Alert } from '@@CE/Alert';
 
 import { AnalyticsStateKey } from '../types';
 import { EdgeAgentTab } from '../shared/EdgeAgentTab';

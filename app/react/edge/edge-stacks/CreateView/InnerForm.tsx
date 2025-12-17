@@ -1,11 +1,11 @@
 import { Form, useFormikContext } from 'formik';
 
-import { applySetStateAction } from '@/react-tools/apply-set-state-action';
-import { EnvironmentType } from '@/react/portainer/environments/types';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import { applySetStateAction } from '@CE/react-tools/apply-set-state-action';
+import { EnvironmentType } from '@CE/react/portainer/environments/types';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
-import { EnvironmentVariablesPanel } from '@@/form-components/EnvironmentVariablesFieldset';
-import { FormActions } from '@@/form-components/FormActions';
+import { EnvironmentVariablesPanel } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { FormActions } from '@@CE/form-components/FormActions';
 
 import { EdgeGroupsSelector } from '../components/EdgeGroupsSelector';
 import { EdgeStackDeploymentTypeSelector } from '../components/EdgeStackDeploymentTypeSelector';

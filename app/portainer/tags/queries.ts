@@ -4,8 +4,8 @@ import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@/react-tools/react-query';
-import { EnvironmentId } from '@/react/portainer/environments/types';
+} from '@CE/react-tools/react-query';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 
 import { createTag, getTags } from './tags.service';
 import { Tag, TagId } from './types';

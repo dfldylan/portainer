@@ -1,4 +1,4 @@
-import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
+import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
 import { DockerHubViewModel } from 'Portainer/models/dockerhub';
 
 angular.module('portainer.app').factory('TemplateService', TemplateServiceFactory);

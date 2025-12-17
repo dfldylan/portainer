@@ -2,12 +2,12 @@ import _ from 'lodash';
 import { http, HttpResponse } from 'msw';
 import { render } from '@testing-library/react';
 
-import { createMockTeams, createMockUsers } from '@/react-tools/test-mocks';
-import { server } from '@/setup-tests/server';
-import { Role } from '@/portainer/users/types';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { createMockTeams, createMockUsers } from '@CE/react-tools/test-mocks';
+import { server } from '@CE/setup-tests/server';
+import { Role } from '@CE/portainer/users/types';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import {
   ResourceControlOwnership,

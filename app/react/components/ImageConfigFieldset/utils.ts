@@ -1,7 +1,7 @@
 import {
   Registry,
   RegistryTypes,
-} from '@/react/portainer/registries/types/registry';
+} from '@CE/react/portainer/registries/types/registry';
 
 export function getIsDockerHubRegistry(registry?: Registry | null) {
   return (

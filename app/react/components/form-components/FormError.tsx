@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import clsx from 'clsx';
 import { AlertTriangle } from 'lucide-react';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 interface Props {
   className?: string;

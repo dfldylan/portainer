@@ -1,7 +1,7 @@
-import { useUsers } from '@/portainer/users/queries';
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useUsers } from '@CE/portainer/users/queries';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
-import { PageHeader } from '@@/PageHeader';
+import { PageHeader } from '@@CE/PageHeader';
 
 import { useTeams } from '../queries';
 

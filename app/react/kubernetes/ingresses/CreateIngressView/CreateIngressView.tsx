@@ -3,18 +3,21 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { v4 as uuidv4 } from 'uuid';
 import { debounce } from 'lodash';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useK8sSecrets } from '@/react/kubernetes/configs/queries/useK8sSecrets';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { useAuthorizations } from '@/react/hooks/useUser';
-import { Annotation } from '@/react/kubernetes/annotations/types';
-import { prepareAnnotations } from '@/react/kubernetes/utils';
-import { useNamespaceAccessRedirect } from '@/react/kubernetes/namespaces/hooks/useNamespaceAccessRedirect';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useK8sSecrets } from '@CE/react/kubernetes/configs/queries/useK8sSecrets';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { useAuthorizations } from '@CE/react/hooks/useUser';
+import { Annotation } from '@CE/react/kubernetes/annotations/types';
+import { prepareAnnotations } from '@CE/react/kubernetes/utils';
+import { useNamespaceAccessRedirect } from '@CE/react/kubernetes/namespaces/hooks/useNamespaceAccessRedirect';
 
-import { Link } from '@@/Link';
-import { PageHeader } from '@@/PageHeader';
-import { Option } from '@@/form-components/Input/Select';
-import { Button } from '@@/buttons';
+import { Link } from '@@CE/Link';
+import { PageHeader } from '@@CE/PageHeader';
+import { Option } from '@@CE/form-components/Input/Select';
+import { Button } from '@@CE/buttons';
 
 import { useNamespacesQuery } from '../../namespaces/queries/useNamespacesQuery';
 import { Ingress, IngressController } from '../types';

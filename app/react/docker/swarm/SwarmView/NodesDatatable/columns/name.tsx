@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { NodeViewModel } from '@/docker/models/node';
+import { NodeViewModel } from '@CE/docker/models/node';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 import { isTableMeta } from '../types';
 

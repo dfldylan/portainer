@@ -3,15 +3,15 @@ import { Settings } from 'lucide-react';
 import { Formik, Form as FormikForm } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { notifySuccess } from '@/portainer/services/notifications';
-import { withLimitToBE } from '@/react/hooks/useLimitToBE';
-import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { withLimitToBE } from '@CE/react/hooks/useLimitToBE';
+import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
 
-import { PageHeader } from '@@/PageHeader';
-import { Widget } from '@@/Widget';
-import { LoadingButton } from '@@/buttons';
-import { TextTip } from '@@/Tip/TextTip';
-import { Link } from '@@/Link';
+import { PageHeader } from '@@CE/PageHeader';
+import { Widget } from '@@CE/Widget';
+import { LoadingButton } from '@@CE/buttons';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Link } from '@@CE/Link';
 
 import { ScheduleType } from '../types';
 import { useCreateMutation } from '../queries/create';

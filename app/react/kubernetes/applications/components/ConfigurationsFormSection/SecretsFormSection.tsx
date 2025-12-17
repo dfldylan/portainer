@@ -1,12 +1,12 @@
 import { FormikErrors } from 'formik';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useK8sSecrets } from '@/react/kubernetes/configs/queries/useK8sSecrets';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useK8sSecrets } from '@CE/react/kubernetes/configs/queries/useK8sSecrets';
 
-import { FormSection } from '@@/form-components/FormSection/FormSection';
-import { TextTip } from '@@/Tip/TextTip';
-import { InputList } from '@@/form-components/InputList';
-import { InlineLoader } from '@@/InlineLoader';
+import { FormSection } from '@@CE/form-components/FormSection/FormSection';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { InputList } from '@@CE/form-components/InputList';
+import { InlineLoader } from '@@CE/InlineLoader';
 
 import { ConfigurationItem } from './ConfigurationItem';
 import { ConfigurationFormValues } from './types';

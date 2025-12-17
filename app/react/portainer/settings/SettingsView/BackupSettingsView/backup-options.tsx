@@ -1,8 +1,8 @@
 import { DownloadCloud, UploadCloud } from 'lucide-react';
 
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
-import { BadgeIcon } from '@@/BadgeIcon';
+import { BadgeIcon } from '@@CE/BadgeIcon';
 
 export enum BackupFormType {
   S3 = 's3',

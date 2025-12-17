@@ -1,8 +1,8 @@
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
-import { useUnauthorizedRedirect } from '@/react/hooks/useUnauthorizedRedirect';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { useUnauthorizedRedirect } from '@CE/react/hooks/useUnauthorizedRedirect';
 
-import { PageHeader } from '@@/PageHeader';
+import { PageHeader } from '@@CE/PageHeader';
 
 import { CreateNamespaceForm } from './CreateNamespaceForm';
 

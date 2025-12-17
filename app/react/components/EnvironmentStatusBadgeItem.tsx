@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { AriaAttributes, PropsWithChildren } from 'react';
 
-import { Icon, IconProps } from '@@/Icon';
+import { Icon, IconProps } from '@@CE/Icon';
 
 export function EnvironmentStatusBadgeItem({
   className,

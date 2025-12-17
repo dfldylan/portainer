@@ -1,4 +1,4 @@
-import { parseCPU } from '@/react/kubernetes/utils';
+import { parseCPU } from '@CE/react/kubernetes/utils';
 
 import { NodeRowData } from '../types';
 

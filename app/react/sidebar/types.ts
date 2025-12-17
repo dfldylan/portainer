@@ -1,4 +1,4 @@
-import { EnvironmentType } from '@/react/portainer/environments/types';
+import { EnvironmentType } from '@CE/react/portainer/environments/types';
 
 type DockerSwarmMode = {
   provider: 'DOCKER_SWARM_MODE';

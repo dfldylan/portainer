@@ -1,9 +1,9 @@
-import { HomepageFilter } from '@/react/portainer/HomeView/EnvironmentList/HomepageFilter';
-import { useGroups } from '@/react/portainer/environments/environment-groups/queries';
-import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
-import { useTags } from '@/portainer/tags/queries';
+import { HomepageFilter } from '@CE/react/portainer/HomeView/EnvironmentList/HomepageFilter';
+import { useGroups } from '@CE/react/portainer/environments/environment-groups/queries';
+import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
+import { useTags } from '@CE/portainer/tags/queries';
 
-import { PortainerSelect } from '@@/form-components/PortainerSelect';
+import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
 
 import { useFilterStore } from './filter-store';
 

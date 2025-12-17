@@ -8,11 +8,11 @@ import {
   NetworkSettings,
 } from 'docker-types/generated/1.44';
 
-import { PortainerResponse } from '@/react/docker/types';
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { ContainerId } from '@/react/docker/containers/types';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { queryClient } from '@/react-tools/react-query';
+import { PortainerResponse } from '@CE/react/docker/types';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { ContainerId } from '@CE/react/docker/containers/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { queryClient } from '@CE/react-tools/react-query';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 import { withAgentTargetHeader } from '../../proxy/queries/utils';

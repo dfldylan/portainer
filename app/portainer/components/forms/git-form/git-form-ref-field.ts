@@ -1,10 +1,10 @@
 import { IComponentOptions, IFormController } from 'angular';
 
-import { GitFormModel } from '@/react/portainer/gitops/types';
-import { AsyncService } from '@/portainer/services/types';
-import { refFieldValidation } from '@/react/portainer/gitops/RefField/RefField';
+import { GitFormModel } from '@CE/react/portainer/gitops/types';
+import { AsyncService } from '@CE/portainer/services/types';
+import { refFieldValidation } from '@CE/react/portainer/gitops/RefField/RefField';
 
-import { validateForm } from '@@/form-components/validate-form';
+import { validateForm } from '@@CE/form-components/validate-form';
 
 class GitFormRefFieldController {
   $async: AsyncService;

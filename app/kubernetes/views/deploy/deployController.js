@@ -2,17 +2,17 @@ import angular from 'angular';
 import _ from 'lodash-es';
 import stripAnsi from 'strip-ansi';
 
-import PortainerError from '@/portainer/error';
+import PortainerError from '@CE/portainer/error';
 import { KubernetesDeployManifestTypes, KubernetesDeployBuildMethods, KubernetesDeployRequestMethods, RepositoryMechanismTypes } from 'Kubernetes/models/deploy';
-import { isTemplateVariablesEnabled, renderTemplate } from '@/react/portainer/custom-templates/components/utils';
-import { getDeploymentOptions } from '@/react/portainer/environments/environment.service';
-import { parseAutoUpdateResponse, transformAutoUpdateViewModel } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
-import { baseStackWebhookUrl, createWebhookId } from '@/portainer/helpers/webhookHelper';
-import { getVariablesFieldDefaultValues } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { KUBE_STACK_NAME_VALIDATION_REGEX } from '@/react/kubernetes/DeployView/StackName/constants';
-import { confirmWebEditorDiscard } from '@@/modals/confirm';
-import { editor, git, customTemplate, url } from '@@/BoxSelector/common-options/build-methods';
-import { kubernetes } from '@@/BoxSelector/common-options/deployment-methods';
+import { isTemplateVariablesEnabled, renderTemplate } from '@CE/react/portainer/custom-templates/components/utils';
+import { getDeploymentOptions } from '@CE/react/portainer/environments/environment.service';
+import { parseAutoUpdateResponse, transformAutoUpdateViewModel } from '@CE/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { baseStackWebhookUrl, createWebhookId } from '@CE/portainer/helpers/webhookHelper';
+import { getVariablesFieldDefaultValues } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { KUBE_STACK_NAME_VALIDATION_REGEX } from '@CE/react/kubernetes/DeployView/StackName/constants';
+import { confirmWebEditorDiscard } from '@@CE/modals/confirm';
+import { editor, git, customTemplate, url } from '@@CE/BoxSelector/common-options/build-methods';
+import { kubernetes } from '@@CE/BoxSelector/common-options/deployment-methods';
 
 class KubernetesDeployController {
   /* @ngInject */

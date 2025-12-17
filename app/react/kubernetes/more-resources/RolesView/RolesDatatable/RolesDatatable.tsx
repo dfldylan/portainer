@@ -2,24 +2,27 @@ import { Trash2, UserCheck } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { Authorized } from '@/react/hooks/useUser';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
-import { CreateFromManifestButton } from '@/react/kubernetes/components/CreateFromManifestButton';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Authorized } from '@CE/react/hooks/useUser';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
+import { CreateFromManifestButton } from '@CE/react/kubernetes/components/CreateFromManifestButton';
 import {
   DefaultDatatableSettings,
   TableSettings as KubeTableSettings,
-} from '@/react/kubernetes/datatables/DefaultDatatableSettings';
-import { useKubeStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
+} from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { useKubeStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
 
-import { confirmDelete } from '@@/modals/confirm';
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { LoadingButton } from '@@/buttons';
+import { confirmDelete } from '@@CE/modals/confirm';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { LoadingButton } from '@@CE/buttons';
 import {
   type FilteredColumnsTableSettings,
   filteredColumnsSettings,
-} from '@@/datatables/types';
+} from '@@CE/datatables/types';
 
 import { useRoleBindings } from '../RoleBindingsDatatable/queries/useRoleBindings';
 import { RoleBinding } from '../RoleBindingsDatatable/types';

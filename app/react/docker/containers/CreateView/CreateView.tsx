@@ -2,21 +2,21 @@ import { Formik } from 'formik';
 import { useRouter } from '@uirouter/react';
 import { useEffect, useState } from 'react';
 
-import { useIsEdgeAdmin, useIsEnvironmentAdmin } from '@/react/hooks/useUser';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
-import { Registry } from '@/react/portainer/registries/types/registry';
-import { notifySuccess } from '@/portainer/services/notifications';
-import { useDebouncedValue } from '@/react/hooks/useDebouncedValue';
+import { useIsEdgeAdmin, useIsEnvironmentAdmin } from '@CE/react/hooks/useUser';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { useEnvironmentRegistries } from '@CE/react/portainer/environments/queries/useEnvironmentRegistries';
+import { Registry } from '@CE/react/portainer/registries/types/registry';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useDebouncedValue } from '@CE/react/hooks/useDebouncedValue';
 
-import { PageHeader } from '@@/PageHeader';
-import { ImageConfigValues } from '@@/ImageConfigFieldset';
-import { confirmDestructive } from '@@/modals/confirm';
-import { buildConfirmButton } from '@@/modals/utils';
-import { InformationPanel } from '@@/InformationPanel';
-import { TextTip } from '@@/Tip/TextTip';
-import { HelpLink } from '@@/HelpLink';
+import { PageHeader } from '@@CE/PageHeader';
+import { ImageConfigValues } from '@@CE/ImageConfigFieldset';
+import { confirmDestructive } from '@@CE/modals/confirm';
+import { buildConfirmButton } from '@@CE/modals/utils';
+import { InformationPanel } from '@@CE/InformationPanel';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { HelpLink } from '@@CE/HelpLink';
 
 import { useContainers } from '../queries/useContainers';
 import { useSystemLimits, useIsWindows } from '../../proxy/queries/useInfo';

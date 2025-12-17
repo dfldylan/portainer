@@ -1,4 +1,4 @@
-import { EnvVarValues } from '@@/form-components/EnvironmentVariablesFieldset';
+import { EnvVarValues } from '@@CE/form-components/EnvironmentVariablesFieldset';
 
 export interface StackEditorFormValues {
   stackFileContent: string;

@@ -2,14 +2,14 @@ import { FormikErrors } from 'formik';
 import { useMemo } from 'react';
 import uuidv4 from 'uuid/v4';
 
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { StorageClass } from '@/react/portainer/environments/types';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { StorageClass } from '@CE/react/portainer/environments/types';
 
-import { Option } from '@@/form-components/PortainerSelect';
-import { InlineLoader } from '@@/InlineLoader';
-import { FormSection } from '@@/form-components/FormSection';
-import { InputList } from '@@/form-components/InputList';
-import { TextTip } from '@@/Tip/TextTip';
+import { Option } from '@@CE/form-components/PortainerSelect';
+import { InlineLoader } from '@@CE/InlineLoader';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { InputList } from '@@CE/form-components/InputList';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { ApplicationFormValues } from '../../types';
 

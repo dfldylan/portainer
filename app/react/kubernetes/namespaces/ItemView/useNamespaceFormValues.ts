@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import { StorageClass } from '@/react/portainer/environments/types';
-import { Registry } from '@/react/portainer/registries/types/registry';
-import { parseCPU } from '@/react/kubernetes/utils';
+import { StorageClass } from '@CE/react/portainer/environments/types';
+import { Registry } from '@CE/react/portainer/registries/types/registry';
+import { parseCPU } from '@CE/react/kubernetes/utils';
 
 import { NamespaceFormValues, PortainerNamespace } from '../types';
 import { megaBytesValue, convertBase2ToMiB } from '../resourceQuotaUtils';

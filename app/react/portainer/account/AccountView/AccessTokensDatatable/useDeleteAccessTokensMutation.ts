@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { withError, withInvalidate } from '@/react-tools/react-query';
-import { useCurrentUser } from '@/react/hooks/useUser';
-import { promiseSequence } from '@/portainer/helpers/promise-utils';
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { withError, withInvalidate } from '@CE/react-tools/react-query';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 
 import { AccessToken } from '../../access-tokens/types';
 import { buildUrl } from '../../access-tokens/queries/build-url';

@@ -1,11 +1,11 @@
-import { imageContainsURL } from '@/react/docker/images/utils';
+import { imageContainsURL } from '@CE/react/docker/images/utils';
 import {
   Registry,
   RegistryId,
-} from '@/react/portainer/registries/types/registry';
-import { getURL } from '@/react/portainer/registries/utils/getUrl';
+} from '@CE/react/portainer/registries/types/registry';
+import { getURL } from '@CE/react/portainer/registries/utils/getUrl';
 
-import { ImageConfigValues } from '@@/ImageConfigFieldset';
+import { ImageConfigValues } from '@@CE/ImageConfigFieldset';
 
 import { findBestMatchRegistry } from './findRegistryMatch';
 

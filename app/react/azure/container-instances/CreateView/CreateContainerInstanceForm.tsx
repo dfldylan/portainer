@@ -2,16 +2,16 @@ import { Field, Form, Formik } from 'formik';
 import { useRouter } from '@uirouter/react';
 import { Plus } from 'lucide-react';
 
-import { ContainerInstanceFormValues } from '@/react/azure/types';
-import * as notifications from '@/portainer/services/notifications';
-import { useCurrentUser } from '@/react/hooks/useUser';
-import { AccessControlForm } from '@/react/portainer/access-control/AccessControlForm';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { ContainerInstanceFormValues } from '@CE/react/azure/types';
+import * as notifications from '@CE/portainer/services/notifications';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { AccessControlForm } from '@CE/react/portainer/access-control/AccessControlForm';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input, Select } from '@@/form-components/Input';
-import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
-import { LoadingButton } from '@@/buttons/LoadingButton';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input, Select } from '@@CE/form-components/Input';
+import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
 
 import { validationSchema } from './CreateContainerInstanceForm.validation';
 import { PortsMappingField } from './PortsMappingField';

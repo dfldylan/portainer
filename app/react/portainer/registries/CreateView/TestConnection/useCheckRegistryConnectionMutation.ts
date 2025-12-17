@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 
 interface RegistryPingPayload {
   Username: string;

@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { PropsWithChildren, useState } from 'react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
-import { Icon } from '@@/Icon';
-import { Link } from '@@/Link';
-import { CollapseExpandButton } from '@@/CollapseExpandButton';
+import { Icon } from '@@CE/Icon';
+import { Link } from '@@CE/Link';
+import { CollapseExpandButton } from '@@CE/CollapseExpandButton';
 
 import { useSidebarState } from '../useSidebarState';
 

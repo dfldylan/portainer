@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import { Fragment } from 'react';
 import { Taint } from 'kubernetes-types/core/v1';
 
-import { nodeAffinityValues } from '@/kubernetes/filters/application';
-import { useAuthorizations } from '@/react/hooks/useUser';
+import { nodeAffinityValues } from '@CE/kubernetes/filters/application';
+import { useAuthorizations } from '@CE/react/hooks/useUser';
 
 import { Affinity, Label, NodePlacementRowData } from '../types';
 

@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';
 import sanitize from 'sanitize-html';
 
-import { useUIState } from '@/react/hooks/useUIState';
+import { useUIState } from '@CE/react/hooks/useUIState';
 
-import { InformationPanel } from '@@/InformationPanel';
+import { InformationPanel } from '@@CE/InformationPanel';
 
 import { getMotd } from './home.service';
 

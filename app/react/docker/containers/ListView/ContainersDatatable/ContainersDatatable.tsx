@@ -1,22 +1,22 @@
 import { Box } from 'lucide-react';
 
-import { ContainerListViewModel } from '@/react/docker/containers/types';
-import { useShowGPUsColumn } from '@/react/docker/containers/utils';
-import { Environment } from '@/react/portainer/environments/types';
+import { ContainerListViewModel } from '@CE/react/docker/containers/types';
+import { useShowGPUsColumn } from '@CE/react/docker/containers/utils';
+import { Environment } from '@CE/react/portainer/environments/types';
 
-import { Datatable, Table } from '@@/datatables';
+import { Datatable, Table } from '@@CE/datatables';
 import {
   ColumnVisibilityMenu,
   getColumnVisibilityState,
-} from '@@/datatables/ColumnVisibilityMenu';
+} from '@@CE/datatables/ColumnVisibilityMenu';
 import {
   QuickActionsSettings,
   buildAction,
-} from '@@/datatables/QuickActionsSettings';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
-import { withColumnFilters } from '@@/datatables/extend-options/withColumnFilters';
-import { TableSettingsProvider } from '@@/datatables/useTableSettings';
-import { useTableState } from '@@/datatables/useTableState';
+} from '@@CE/datatables/QuickActionsSettings';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
+import { withColumnFilters } from '@@CE/datatables/extend-options/withColumnFilters';
+import { TableSettingsProvider } from '@@CE/datatables/useTableSettings';
+import { useTableState } from '@@CE/datatables/useTableState';
 
 import { useContainers } from '../../queries/useContainers';
 

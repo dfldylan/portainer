@@ -4,8 +4,8 @@ import {
   mutationOptions,
   withGlobalError,
   withInvalidate,
-} from '@/react-tools/react-query';
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+} from '@CE/react-tools/react-query';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 
 import { CustomTemplate } from '../types';
 

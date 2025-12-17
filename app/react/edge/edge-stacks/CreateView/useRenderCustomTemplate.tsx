@@ -1,11 +1,11 @@
 import { SetStateAction, useEffect, useState } from 'react';
 
-import { renderTemplate } from '@/react/portainer/custom-templates/components/utils';
-import { useCustomTemplateFile } from '@/react/portainer/templates/custom-templates/queries/useCustomTemplateFile';
-import { useCustomTemplate } from '@/react/portainer/templates/custom-templates/queries/useCustomTemplate';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
-import { StackType } from '@/react/common/stacks/types';
-import { toGitFormModel } from '@/react/portainer/gitops/types';
+import { renderTemplate } from '@CE/react/portainer/custom-templates/components/utils';
+import { useCustomTemplateFile } from '@CE/react/portainer/templates/custom-templates/queries/useCustomTemplateFile';
+import { useCustomTemplate } from '@CE/react/portainer/templates/custom-templates/queries/useCustomTemplate';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
+import { StackType } from '@CE/react/common/stacks/types';
+import { toGitFormModel } from '@CE/react/portainer/gitops/types';
 
 import { DeploymentType } from '../types';
 import { getDefaultStaggerConfig } from '../components/StaggerFieldset.types';

@@ -1,10 +1,10 @@
 import { FormikErrors } from 'formik';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useNamespacesQuery } from '@/react/kubernetes/namespaces/queries/useNamespacesQuery';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useNamespacesQuery } from '@CE/react/kubernetes/namespaces/queries/useNamespacesQuery';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { PortainerSelect } from '@@/form-components/PortainerSelect';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
 
 type Props = {
   onChange: (value: string) => void;

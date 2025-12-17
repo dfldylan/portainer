@@ -17,7 +17,7 @@ import { RefAttributes, useMemo, useCallback } from 'react';
 import ReactSelectType from 'react-select/dist/declarations/src/Select';
 
 import './ReactSelect.css';
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
 const PAGE_SIZE = 100;
 const MAX_OPTIONS_WITHOUT_PAGINATION = 1000;

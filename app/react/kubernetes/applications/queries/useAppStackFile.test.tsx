@@ -3,8 +3,8 @@ import { waitFor } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { HttpResponse } from 'msw';
 
-import { server, http } from '@/setup-tests/server';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { server, http } from '@CE/setup-tests/server';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import { useAppStackFile } from './useAppStackFile';
 

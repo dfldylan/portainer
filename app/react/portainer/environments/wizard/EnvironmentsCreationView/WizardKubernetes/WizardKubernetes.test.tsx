@@ -2,8 +2,8 @@ import { HttpResponse } from 'msw';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { server, http } from '@/setup-tests/server';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { server, http } from '@CE/setup-tests/server';
 
 import { WizardKubernetes } from './WizardKubernetes';
 

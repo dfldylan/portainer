@@ -2,14 +2,14 @@ import { ArrowUp } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { notifySuccess } from '@/portainer/services/notifications';
-import { semverCompare } from '@/react/common/semver-utils';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { semverCompare } from '@CE/react/common/semver-utils';
 
-import { Button, LoadingButton } from '@@/buttons';
-import { InlineLoader } from '@@/InlineLoader';
-import { Tooltip } from '@@/Tip/Tooltip';
-import { Link } from '@@/Link';
+import { Button, LoadingButton } from '@@CE/buttons';
+import { InlineLoader } from '@@CE/InlineLoader';
+import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Link } from '@@CE/Link';
 
 import { HelmRelease, UpdateHelmReleasePayload } from '../../types';
 import { useUpdateHelmReleaseMutation } from '../../helmReleaseQueries/useUpdateHelmReleaseMutation';

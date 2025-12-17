@@ -2,11 +2,11 @@ import { FormikErrors } from 'formik';
 import { SchemaOf, string } from 'yup';
 import { useMemo } from 'react';
 
-import { STACK_NAME_VALIDATION_REGEX } from '@/react/constants';
-import { EnvironmentType } from '@/react/portainer/environments/types';
+import { STACK_NAME_VALIDATION_REGEX } from '@CE/react/constants';
+import { EnvironmentType } from '@CE/react/portainer/environments/types';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
 
 import { EdgeStack } from '../types';
 import { useEdgeStacks } from '../queries/useEdgeStacks';

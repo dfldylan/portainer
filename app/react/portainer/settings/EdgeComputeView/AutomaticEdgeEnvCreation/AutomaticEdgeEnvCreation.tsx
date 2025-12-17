@@ -1,6 +1,6 @@
 import { Laptop } from 'lucide-react';
 
-import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
+import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
 
 import { useSettings } from '../../queries';
 

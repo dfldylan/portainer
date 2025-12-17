@@ -1,5 +1,5 @@
-import { BasicTableSettings } from '@@/datatables/types';
-import { TableState } from '@@/datatables/useTableState';
+import { BasicTableSettings } from '@@CE/datatables/types';
+import { TableState } from '@@CE/datatables/useTableState';
 
 import {
   PaginationQuery,

@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import type { FeatureId } from '@/react/portainer/feature-flags/enums';
+import type { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
-import { IconProps } from '@@/Icon';
+import { IconProps } from '@@CE/Icon';
 
 export type Value = number | string | boolean;
 

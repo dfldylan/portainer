@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { FormikErrors } from 'formik';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { InputList } from '@@/form-components/InputList';
-import { ItemProps } from '@@/form-components/InputList/InputList';
-import { isErrorType } from '@@/form-components/formikUtils';
-import { FormError } from '@@/form-components/FormError';
-import { InputGroup } from '@@/form-components/InputGroup';
-import { Option, PortainerSelect } from '@@/form-components/PortainerSelect';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { InputList } from '@@CE/form-components/InputList';
+import { ItemProps } from '@@CE/form-components/InputList/InputList';
+import { isErrorType } from '@@CE/form-components/formikUtils';
+import { FormError } from '@@CE/form-components/FormError';
+import { InputGroup } from '@@CE/form-components/InputGroup';
+import { Option, PortainerSelect } from '@@CE/form-components/PortainerSelect';
 
 import { TaintEffect } from '../../types';
 

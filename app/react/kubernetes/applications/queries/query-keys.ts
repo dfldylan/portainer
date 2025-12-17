@@ -1,4 +1,4 @@
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 
 export type GetAppsParams = {
   namespace?: string;

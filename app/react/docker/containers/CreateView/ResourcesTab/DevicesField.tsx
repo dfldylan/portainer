@@ -2,9 +2,9 @@ import { FormikErrors } from 'formik';
 import { array, object, SchemaOf, string } from 'yup';
 import { DeviceMapping } from 'docker-types/generated/1.44';
 
-import { FormError } from '@@/form-components/FormError';
-import { InputList, ItemProps } from '@@/form-components/InputList';
-import { InputLabeled } from '@@/form-components/Input/InputLabeled';
+import { FormError } from '@@CE/form-components/FormError';
+import { InputList, ItemProps } from '@@CE/form-components/InputList';
+import { InputLabeled } from '@@CE/form-components/Input/InputLabeled';
 
 interface Device {
   pathOnHost: string;

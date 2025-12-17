@@ -4,20 +4,20 @@ import { Plug2 } from 'lucide-react';
 import {
   ContainerEngine,
   Environment,
-} from '@/react/portainer/environments/types';
-import { useCreateEdgeAgentEnvironmentMutation } from '@/react/portainer/environments/queries/useCreateEnvironmentMutation';
-import { Settings } from '@/react/portainer/settings/types';
-import { EdgeCheckinIntervalField } from '@/react/edge/components/EdgeCheckInIntervalField';
+} from '@CE/react/portainer/environments/types';
+import { useCreateEdgeAgentEnvironmentMutation } from '@CE/react/portainer/environments/queries/useCreateEnvironmentMutation';
+import { Settings } from '@CE/react/portainer/settings/types';
+import { EdgeCheckinIntervalField } from '@CE/react/edge/components/EdgeCheckInIntervalField';
 import {
   EdgeAsyncIntervalsForm,
   EDGE_ASYNC_INTERVAL_USE_DEFAULT,
-} from '@/react/edge/components/EdgeAsyncIntervalsForm';
-import { useSettings } from '@/react/portainer/settings/queries';
-import { buildDefaultValue as buildTunnelDefaultValue } from '@/react/portainer/common/PortainerTunnelAddrField';
-import { buildDefaultValue as buildApiUrlDefaultValue } from '@/react/portainer/common/PortainerUrlField';
+} from '@CE/react/edge/components/EdgeAsyncIntervalsForm';
+import { useSettings } from '@CE/react/portainer/settings/queries';
+import { buildDefaultValue as buildTunnelDefaultValue } from '@CE/react/portainer/common/PortainerTunnelAddrField';
+import { buildDefaultValue as buildApiUrlDefaultValue } from '@CE/react/portainer/common/PortainerUrlField';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { LoadingButton } from '@@/buttons/LoadingButton';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
 
 import { MoreSettingsSection } from '../../MoreSettingsSection';
 

@@ -5,15 +5,15 @@ import clsx from 'clsx';
 import {
   isLimitedToBE,
   isBE,
-} from '@/react/portainer/feature-flags/feature-flags.service';
-import { success as notifySuccess } from '@/portainer/services/notifications';
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
+} from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { success as notifySuccess } from '@CE/portainer/services/notifications';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { LoadingButton } from '@@/buttons/LoadingButton';
-import { Input } from '@@/form-components/Input';
-import { SwitchField } from '@@/form-components/SwitchField';
-import { BEOverlay } from '@@/BEFeatureIndicator/BEOverlay';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
+import { Input } from '@@CE/form-components/Input';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { BEOverlay } from '@@CE/BEFeatureIndicator/BEOverlay';
 
 import {
   useBackupS3Settings,

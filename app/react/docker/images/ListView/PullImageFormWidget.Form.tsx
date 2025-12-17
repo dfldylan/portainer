@@ -1,8 +1,8 @@
 import { Form, useFormikContext } from 'formik';
 
-import { ImageConfigFieldset } from '@@/ImageConfigFieldset';
-import { FormSection } from '@@/form-components/FormSection';
-import { FormActions } from '@@/form-components/FormActions';
+import { ImageConfigFieldset } from '@@CE/ImageConfigFieldset';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { FormActions } from '@@CE/form-components/FormActions';
 
 import { NodeSelector } from '../../agent/NodeSelector';
 

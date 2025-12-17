@@ -2,15 +2,15 @@ import { ArrowUpCircle } from 'lucide-react';
 import { useState } from 'react';
 import clsx from 'clsx';
 
-import { useNodesCount } from '@/react/portainer/system/useNodesCount';
+import { useNodesCount } from '@CE/react/portainer/system/useNodesCount';
 import {
   ContainerPlatform,
   useSystemInfo,
-} from '@/react/portainer/system/useSystemInfo';
-import { useCurrentUser } from '@/react/hooks/useUser';
-import { withEdition } from '@/react/portainer/feature-flags/withEdition';
-import { withHideOnExtension } from '@/react/hooks/withHideOnExtension';
-import { useUser } from '@/portainer/users/queries/useUser';
+} from '@CE/react/portainer/system/useSystemInfo';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { withEdition } from '@CE/react/portainer/feature-flags/withEdition';
+import { withHideOnExtension } from '@CE/react/hooks/withHideOnExtension';
+import { useUser } from '@CE/portainer/users/queries/useUser';
 
 import { useSidebarState } from '../useSidebarState';
 

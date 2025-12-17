@@ -3,9 +3,9 @@ import { Plus } from 'lucide-react';
 import { SchemaOf, object, string } from 'yup';
 import { useReducer } from 'react';
 
-import { Button } from '@@/buttons';
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
+import { Button } from '@@CE/buttons';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
 
 export function AddLabelForm({
   onSubmit,

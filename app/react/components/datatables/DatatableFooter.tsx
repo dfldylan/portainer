@@ -1,4 +1,4 @@
-import { PaginationControls } from '@@/PaginationControls';
+import { PaginationControls } from '@@CE/PaginationControls';
 
 import { Table } from './Table';
 import { SelectedRowsCount } from './SelectedRowsCount';

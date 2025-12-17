@@ -7,20 +7,23 @@ import { Row } from '@tanstack/react-table';
 import {
   Namespaces,
   PortainerNamespace,
-} from '@/react/kubernetes/namespaces/types';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { pluralize } from '@/portainer/helpers/strings';
-import { DefaultDatatableSettings } from '@/react/kubernetes/datatables/DefaultDatatableSettings';
-import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
-import { useNamespacesQuery } from '@/react/kubernetes/namespaces/queries/useNamespacesQuery';
-import { CreateFromManifestButton } from '@/react/kubernetes/components/CreateFromManifestButton';
-import { createStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
+} from '@CE/react/kubernetes/namespaces/types';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { pluralize } from '@CE/portainer/helpers/strings';
+import { DefaultDatatableSettings } from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
+import { useNamespacesQuery } from '@CE/react/kubernetes/namespaces/queries/useNamespacesQuery';
+import { CreateFromManifestButton } from '@CE/react/kubernetes/components/CreateFromManifestButton';
+import { createStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
 
-import { Datatable, Table, TableSettingsMenu } from '@@/datatables';
-import { useTableState } from '@@/datatables/useTableState';
-import { DeleteButton } from '@@/buttons/DeleteButton';
+import { Datatable, Table, TableSettingsMenu } from '@@CE/datatables';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
 
 import { useMutationDeleteServices, useClusterServices } from '../../service';
 import { Service } from '../../types';

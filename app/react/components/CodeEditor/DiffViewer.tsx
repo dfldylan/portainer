@@ -1,7 +1,7 @@
 import CodeMirrorMerge from 'react-codemirror-merge';
 import clsx from 'clsx';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
 import { FileNameHeader, FileNameHeaderRow } from './FileNameHeader';
 import styles from './CodeEditor.module.css';

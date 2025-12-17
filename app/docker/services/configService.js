@@ -1,9 +1,9 @@
-import { getConfig } from '@/react/docker/configs/queries/useConfig';
-import { getConfigs } from '@/react/docker/configs/queries/useConfigs';
+import { getConfig } from '@CE/react/docker/configs/queries/useConfig';
+import { getConfigs } from '@CE/react/docker/configs/queries/useConfigs';
 
-import { deleteConfig } from '@/react/docker/configs/queries/useDeleteConfigMutation';
-import { createConfig } from '@/react/docker/configs/queries/useCreateConfigMutation';
-import { ConfigViewModel } from '@/react/docker/configs/model';
+import { deleteConfig } from '@CE/react/docker/configs/queries/useDeleteConfigMutation';
+import { createConfig } from '@CE/react/docker/configs/queries/useCreateConfigMutation';
+import { ConfigViewModel } from '@CE/react/docker/configs/model';
 
 angular.module('portainer.docker').factory('ConfigService', ConfigServiceFactory);
 

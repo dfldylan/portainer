@@ -1,15 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { EdgeGroup } from '@/react/edge/edge-groups/types';
-import { RegistryId } from '@/react/portainer/registries/types/registry';
-import { Pair } from '@/react/portainer/settings/types';
+import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
+import { RegistryId } from '@CE/react/portainer/registries/types/registry';
+import { Pair } from '@CE/react/portainer/settings/types';
 import {
   AutoUpdateResponse,
   GitFormModel,
   RelativePathModel,
-} from '@/react/portainer/gitops/types';
-import { saveGitCredentialsIfNeeded } from '@/react/portainer/account/git-credentials/queries/useCreateGitCredentialsMutation';
-import { UserId } from '@/portainer/users/types';
+} from '@CE/react/portainer/gitops/types';
+import { saveGitCredentialsIfNeeded } from '@CE/react/portainer/account/git-credentials/queries/useCreateGitCredentialsMutation';
+import { UserId } from '@CE/portainer/users/types';
 
 import { DeploymentType, StaggerConfig } from '../../types';
 

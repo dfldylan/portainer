@@ -6,7 +6,7 @@ import { Context } from '../useSidebarState';
 
 import { KubectlShellButton } from './KubectlShellButton';
 
-vi.mock('@/portainer/helpers/pathHelper', () => ({
+vi.mock('@CE/portainer/helpers/pathHelper', () => ({
   baseHref: vi.fn().mockReturnValue('/portainer'),
 }));
 

@@ -1,8 +1,8 @@
 import moment from 'moment';
 import { FormikErrors } from 'formik';
 
-import { Button } from '@@/buttons';
-import { Alert } from '@@/Alert';
+import { Button } from '@@CE/buttons';
+import { Alert } from '@@CE/Alert';
 
 import { EndpointChangeWindow } from '../../types';
 

@@ -2,13 +2,13 @@ import { Pencil } from 'lucide-react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { Pod } from 'kubernetes-types/core/v1';
 
-import { Authorized, useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { useNamespaceQuery } from '@/react/kubernetes/namespaces/queries/useNamespaceQuery';
+import { Authorized, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { useNamespaceQuery } from '@CE/react/kubernetes/namespaces/queries/useNamespaceQuery';
 
-import { Widget, WidgetBody } from '@@/Widget';
-import { AddButton, Button } from '@@/buttons';
-import { Link } from '@@/Link';
-import { Icon } from '@@/Icon';
+import { Widget, WidgetBody } from '@@CE/Widget';
+import { AddButton, Button } from '@@CE/buttons';
+import { Link } from '@@CE/Link';
+import { Icon } from '@@CE/Icon';
 
 import { applicationIsKind, isExternalApplication } from '../../utils';
 import { appStackIdLabel, appStackKindLabel } from '../../constants';

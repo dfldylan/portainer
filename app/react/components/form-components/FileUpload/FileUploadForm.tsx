@@ -1,9 +1,9 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
-import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
-import { FileUploadField } from '@@/form-components/FileUpload/FileUploadField';
+import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
+import { FileUploadField } from '@@CE/form-components/FileUpload/FileUploadField';
 
 export interface Props {
   onChange(value?: File): void;

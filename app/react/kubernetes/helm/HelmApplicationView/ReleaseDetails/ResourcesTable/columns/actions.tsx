@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { CellContext } from '@tanstack/react-table';
 import { FileText } from 'lucide-react';
 
-import { Button } from '@@/buttons';
-import { Icon } from '@@/Icon';
+import { Button } from '@@CE/buttons';
+import { Icon } from '@@CE/Icon';
 
 import { ResourceRow } from '../types';
 import { DescribeModal } from '../DescribeModal';

@@ -1,4 +1,4 @@
-import { ImageLayer } from '@/react/docker/proxy/queries/images/useImageHistory';
+import { ImageLayer } from '@CE/react/docker/proxy/queries/images/useImageHistory';
 
 export class ImageLayerViewModel implements ImageLayer {
   Id: ImageLayer['Id'];

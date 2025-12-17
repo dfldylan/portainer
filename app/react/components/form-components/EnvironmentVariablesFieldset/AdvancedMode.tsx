@@ -1,10 +1,10 @@
 import { List } from 'lucide-react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
-import { CodeEditor } from '@@/CodeEditor';
-import { TextTip } from '@@/Tip/TextTip';
-import { Button } from '@@/buttons';
+import { CodeEditor } from '@@CE/CodeEditor';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Button } from '@@CE/buttons';
 
 import { convertToArrayOfStrings, parseDotEnvFile } from './utils';
 import { type Values } from './types';

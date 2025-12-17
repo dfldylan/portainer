@@ -1,25 +1,25 @@
 import { Form, FormikErrors, useFormikContext } from 'formik';
 import { RefreshCw } from 'lucide-react';
 
-import { CommonFields } from '@/react/portainer/custom-templates/components/CommonFields';
-import { CustomTemplatesVariablesDefinitionField } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
-import { PlatformField } from '@/react/portainer/custom-templates/components/PlatformSelector';
-import { GitForm } from '@/react/portainer/gitops/GitForm';
-import { isTemplateVariablesEnabled } from '@/react/portainer/custom-templates/components/utils';
-import { TemplateTypeSelector } from '@/react/portainer/custom-templates/components/TemplateTypeSelector';
-import { applySetStateAction } from '@/react-tools/apply-set-state-action';
-import { EdgeTemplateSettings } from '@/react/portainer/templates/custom-templates/types';
-import { EdgeSettingsFieldset } from '@/react/portainer/templates/custom-templates/CreateView/EdgeSettingsFieldset';
-import { StackType } from '@/react/common/stacks/types';
-import { textByType } from '@/react/common/stacks/common/form-texts';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { AccessControlForm } from '@/react/portainer/access-control';
-import { AccessControlFormData } from '@/react/portainer/access-control/types';
+import { CommonFields } from '@CE/react/portainer/custom-templates/components/CommonFields';
+import { CustomTemplatesVariablesDefinitionField } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
+import { PlatformField } from '@CE/react/portainer/custom-templates/components/PlatformSelector';
+import { GitForm } from '@CE/react/portainer/gitops/GitForm';
+import { isTemplateVariablesEnabled } from '@CE/react/portainer/custom-templates/components/utils';
+import { TemplateTypeSelector } from '@CE/react/portainer/custom-templates/components/TemplateTypeSelector';
+import { applySetStateAction } from '@CE/react-tools/apply-set-state-action';
+import { EdgeTemplateSettings } from '@CE/react/portainer/templates/custom-templates/types';
+import { EdgeSettingsFieldset } from '@CE/react/portainer/templates/custom-templates/CreateView/EdgeSettingsFieldset';
+import { StackType } from '@CE/react/common/stacks/types';
+import { textByType } from '@CE/react/common/stacks/common/form-texts';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { AccessControlForm } from '@CE/react/portainer/access-control';
+import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
 
-import { WebEditorForm, usePreventExit } from '@@/WebEditorForm';
-import { FormActions } from '@@/form-components/FormActions';
-import { Button } from '@@/buttons';
-import { FormError } from '@@/form-components/FormError';
+import { WebEditorForm, usePreventExit } from '@@CE/WebEditorForm';
+import { FormActions } from '@@CE/form-components/FormActions';
+import { Button } from '@@CE/buttons';
+import { FormError } from '@@CE/form-components/FormError';
 
 import { useParseTemplateOnFileChange } from '../useParseTemplateOnFileChange';
 

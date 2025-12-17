@@ -1,8 +1,8 @@
 import {
   Environment,
   EnvironmentId,
-} from '@/react/portainer/environments/types';
-import { EnvironmentGroup } from '@/react/portainer/environments/environment-groups/types';
+} from '@CE/react/portainer/environments/types';
+import { EnvironmentGroup } from '@CE/react/portainer/environments/environment-groups/types';
 
 import { RbacRole } from '../types';
 import { Team, TeamId } from '../../teams/types';

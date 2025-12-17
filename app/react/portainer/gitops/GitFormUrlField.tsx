@@ -6,14 +6,14 @@ import { string, StringSchema } from 'yup';
 import {
   checkRepo,
   useCheckRepo,
-} from '@/react/portainer/gitops/queries/useCheckRepo';
-import { useDebounce } from '@/react/hooks/useDebounce';
-import { isPortainerError } from '@/portainer/error';
+} from '@CE/react/portainer/gitops/queries/useCheckRepo';
+import { useDebounce } from '@CE/react/hooks/useDebounce';
+import { isPortainerError } from '@CE/portainer/error';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { Button } from '@@/buttons';
-import { useCachedValidation } from '@@/form-components/useCachedTest';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { Button } from '@@CE/buttons';
+import { useCachedValidation } from '@@CE/form-components/useCachedTest';
 
 import { isBE } from '../feature-flags/feature-flags.service';
 

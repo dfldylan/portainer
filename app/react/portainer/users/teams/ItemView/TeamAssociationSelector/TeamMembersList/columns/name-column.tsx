@@ -1,14 +1,14 @@
 import { MinusCircle } from 'lucide-react';
 import { CellContext } from '@tanstack/react-table';
 
-import { User, UserId } from '@/portainer/users/types';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { User, UserId } from '@CE/portainer/users/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 import {
   useRemoveMemberMutation,
   useTeamMemberships,
-} from '@/react/portainer/users/teams/queries';
+} from '@CE/react/portainer/users/teams/queries';
 
-import { Button } from '@@/buttons';
+import { Button } from '@@CE/buttons';
 
 import { useRowContext } from '../RowContext';
 

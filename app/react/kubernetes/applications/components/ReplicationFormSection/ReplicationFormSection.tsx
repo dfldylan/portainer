@@ -1,9 +1,9 @@
 import { FormikErrors } from 'formik';
 import { round } from 'lodash';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { TextTip } from '@@/Tip/TextTip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { ReplicaCountFormValues } from './types';
 

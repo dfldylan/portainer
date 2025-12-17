@@ -1,9 +1,9 @@
 import { Field, useField } from 'formik';
 import { string } from 'yup';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { isValidUrl } from '@@/form-components/validate-url';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { isValidUrl } from '@@CE/form-components/validate-url';
 
 interface Props {
   fieldName: string;

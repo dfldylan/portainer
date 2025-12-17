@@ -1,14 +1,14 @@
 import { FormikErrors } from 'formik';
 import { object, SchemaOf } from 'yup';
 
-import { useSystemLimits } from '@/react/docker/proxy/queries/useInfo';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { nanNumberSchema } from '@/react-tools/yup-schemas';
+import { useSystemLimits } from '@CE/react/docker/proxy/queries/useInfo';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { nanNumberSchema } from '@CE/react-tools/yup-schemas';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { FormSection } from '@@/form-components/FormSection';
-import { Slider } from '@@/form-components/Slider';
-import { SliderWithInput } from '@@/form-components/Slider/SliderWithInput';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { Slider } from '@@CE/form-components/Slider';
+import { SliderWithInput } from '@@CE/form-components/Slider/SliderWithInput';
 
 import { CreateContainerRequest } from '../types';
 

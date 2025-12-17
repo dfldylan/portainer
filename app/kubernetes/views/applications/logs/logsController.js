@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import { concatLogsToString, formatLogs } from '@/docker/helpers/logHelper';
+import { concatLogsToString, formatLogs } from '@CE/docker/helpers/logHelper';
 
 class KubernetesApplicationLogsController {
   /* @ngInject */

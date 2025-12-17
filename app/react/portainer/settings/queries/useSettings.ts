@@ -4,7 +4,7 @@ import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@/react-tools/react-query';
+} from '@CE/react-tools/react-query';
 
 import {
   updateSettings,

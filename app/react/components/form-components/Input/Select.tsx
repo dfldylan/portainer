@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { SelectHTMLAttributes } from 'react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
 export interface Option<T extends string | number>
   extends Partial<AutomationTestingProps> {

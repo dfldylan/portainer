@@ -1,7 +1,7 @@
 import { ComponentProps, InputHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
 import { InputGroup } from '../InputGroup';
 

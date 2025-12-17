@@ -1,9 +1,9 @@
 import { SetStateAction } from 'react';
 import { FormikErrors } from 'formik';
 
-import { getVariablesFieldDefaultValues } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
+import { getVariablesFieldDefaultValues } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
 
 import { getDefaultValues as getAppVariablesDefaultValues } from '../../../../portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
 

@@ -1,11 +1,11 @@
 import DateTimePicker from 'react-datetime-picker';
 import { Calendar, X } from 'lucide-react';
 
-import { isoDate } from '@/portainer/filters/filters';
-import { AutomationTestingProps } from '@/types';
+import { isoDate } from '@CE/portainer/filters/filters';
+import { AutomationTestingProps } from '@CE/types';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
 
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';

@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { UserViewModel } from '@/portainer/models/user';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { UserViewModel } from '@CE/portainer/models/user';
 
 import { ManifestPreviewFormSection } from './ManifestPreviewFormSection';
 
@@ -17,13 +17,13 @@ vi.mock('../helmReleaseQueries/useHelmDryRun', () => ({
   useHelmDryRun: (...args: unknown[]) => mockUseHelmDryRun(...args),
 }));
 
-vi.mock('@/react/hooks/useDebouncedValue', () => ({
+vi.mock('@CE/react/hooks/useDebouncedValue', () => ({
   useDebouncedValue: (value: unknown, delay: number) =>
     mockUseDebouncedValue(value, delay),
 }));
 
 // Mock the CodeEditor and DiffViewer components
-vi.mock('@@/CodeEditor', () => ({
+vi.mock('@@CE/CodeEditor', () => ({
   CodeEditor: ({
     'data-cy': dataCy,
     value,
@@ -37,7 +37,7 @@ vi.mock('@@/CodeEditor', () => ({
   ),
 }));
 
-vi.mock('@@/CodeEditor/DiffViewer', () => ({
+vi.mock('@@CE/CodeEditor/DiffViewer', () => ({
   DiffViewer: ({
     'data-cy': dataCy,
     originalCode,

@@ -1,4 +1,4 @@
-import { Tooltip } from '@@/Tip/Tooltip';
+import { Tooltip } from '@@CE/Tip/Tooltip';
 
 import { columnHelper } from './helper';
 

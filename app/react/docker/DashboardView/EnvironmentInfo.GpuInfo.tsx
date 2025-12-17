@@ -1,4 +1,4 @@
-import { DetailsTable } from '@@/DetailsTable';
+import { DetailsTable } from '@@CE/DetailsTable';
 
 import { DockerSnapshot } from '../snapshots/types';
 

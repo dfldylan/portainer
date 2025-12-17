@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { nodeStatusBadge } from '@/docker/filters/utils';
+import { nodeStatusBadge } from '@CE/docker/filters/utils';
 
 import { columnHelper } from './column-helper';
 

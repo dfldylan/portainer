@@ -1,9 +1,9 @@
 import { Check, XIcon } from 'lucide-react';
 import { useField } from 'formik';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { InputGroup } from '@@/form-components/InputGroup';
-import { Icon } from '@@/Icon';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { InputGroup } from '@@CE/form-components/InputGroup';
+import { Icon } from '@@CE/Icon';
 
 import { FormValues } from './FormValues';
 

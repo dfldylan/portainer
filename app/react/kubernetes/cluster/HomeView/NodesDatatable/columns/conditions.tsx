@@ -1,8 +1,8 @@
 import { NodeCondition } from 'kubernetes-types/core/v1';
 import { CellContext } from '@tanstack/react-table';
 
-import { Badge } from '@@/Badge';
-import { Tooltip } from '@@/Tip/Tooltip';
+import { Badge } from '@@CE/Badge';
+import { Tooltip } from '@@CE/Tip/Tooltip';
 
 import { NodeRowData } from '../types';
 

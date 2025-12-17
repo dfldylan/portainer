@@ -1,11 +1,11 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { Authorized } from '@/react/hooks/useUser';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { ExternalBadge } from '@@/Badge/ExternalBadge';
-import { SystemBadge } from '@@/Badge/SystemBadge';
-import { UnusedBadge } from '@@/Badge/UnusedBadge';
-import { Link } from '@@/Link';
+import { ExternalBadge } from '@@CE/Badge/ExternalBadge';
+import { SystemBadge } from '@@CE/Badge/SystemBadge';
+import { UnusedBadge } from '@@CE/Badge/UnusedBadge';
+import { Link } from '@@CE/Link';
 
 import { ConfigMapRowData } from '../types';
 

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { withGlobalError } from '@/react-tools/react-query';
+import { withGlobalError } from '@CE/react-tools/react-query';
 
 import { EnvironmentGroupId } from '../types';
 

@@ -7,16 +7,19 @@ import {
 } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import { Authorized } from '@/react/hooks/useUser';
-import { Stack, StackStatus } from '@/react/common/stacks/types';
-import { useDeleteStackMutation } from '@/react/common/stacks/queries/useDeleteStackMutation';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { Authorized } from '@CE/react/hooks/useUser';
+import { Stack, StackStatus } from '@CE/react/common/stacks/types';
+import { useDeleteStackMutation } from '@CE/react/common/stacks/queries/useDeleteStackMutation';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
 
-import { Button, LoadingButton } from '@@/buttons';
-import { Link } from '@@/Link';
-import { confirm, confirmDelete } from '@@/modals/confirm';
-import { ModalType } from '@@/modals/Modal/types';
-import { buildConfirmButton } from '@@/modals/utils';
+import { Button, LoadingButton } from '@@CE/buttons';
+import { Link } from '@@CE/Link';
+import { confirm, confirmDelete } from '@@CE/modals/confirm';
+import { ModalType } from '@@CE/modals/Modal/types';
+import { buildConfirmButton } from '@@CE/modals/utils';
 
 import { useUpdateStackMutation } from '../../useUpdateStack';
 

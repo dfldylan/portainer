@@ -1,7 +1,7 @@
 import { Layers } from 'lucide-react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { WidgetTitle, WidgetBody, Widget } from '@@/Widget';
+import { WidgetTitle, WidgetBody, Widget } from '@@CE/Widget';
 
 export function NamespaceDetailsWidget() {
   const {

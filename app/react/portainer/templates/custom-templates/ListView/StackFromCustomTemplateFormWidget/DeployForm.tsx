@@ -1,35 +1,35 @@
 import { useRouter } from '@uirouter/react';
 import { Formik, Form } from 'formik';
 
-import { notifySuccess } from '@/portainer/services/notifications';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 import {
   CreateStackPayload,
   useCreateStack,
-} from '@/react/common/stacks/queries/useCreateStack/useCreateStack';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { AccessControlForm } from '@/react/portainer/access-control';
-import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
-import { NameField } from '@/react/common/stacks/CreateView/NameField';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
+} from '@CE/react/common/stacks/queries/useCreateStack/useCreateStack';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { AccessControlForm } from '@CE/react/portainer/access-control';
+import { parseAccessControlFormData } from '@CE/react/portainer/access-control/utils';
+import { NameField } from '@CE/react/common/stacks/CreateView/NameField';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
 import {
   isTemplateVariablesEnabled,
   renderTemplate,
-} from '@/react/portainer/custom-templates/components/utils';
+} from '@CE/react/portainer/custom-templates/components/utils';
 import {
   CustomTemplatesVariablesField,
   getVariablesFieldDefaultValues,
-} from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { StackType } from '@/react/common/stacks/types';
-import { toGitFormModel } from '@/react/portainer/gitops/types';
-import { AdvancedSettings } from '@/react/portainer/templates/app-templates/DeployFormWidget/AdvancedSettings';
-import { useSwarmId } from '@/react/docker/proxy/queries/useSwarm';
+} from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { StackType } from '@CE/react/common/stacks/types';
+import { toGitFormModel } from '@CE/react/portainer/gitops/types';
+import { AdvancedSettings } from '@CE/react/portainer/templates/app-templates/DeployFormWidget/AdvancedSettings';
+import { useSwarmId } from '@CE/react/docker/proxy/queries/useSwarm';
 
-import { Button } from '@@/buttons';
-import { FormActions } from '@@/form-components/FormActions';
-import { FormSection } from '@@/form-components/FormSection';
-import { WebEditorForm } from '@@/WebEditorForm';
-import { Link } from '@@/Link';
+import { Button } from '@@CE/buttons';
+import { FormActions } from '@@CE/form-components/FormActions';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { WebEditorForm } from '@@CE/WebEditorForm';
+import { Link } from '@@CE/Link';
 
 import { FormValues } from './types';
 import { useValidation } from './useValidation';

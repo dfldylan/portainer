@@ -1,5 +1,5 @@
-import { Widget, WidgetBody } from '@/react/components/Widget';
-import { ResourceReservation } from '@/react/kubernetes/components/ResourceReservation';
+import { Widget, WidgetBody } from '@CE/react/components/Widget';
+import { ResourceReservation } from '@CE/react/kubernetes/components/ResourceReservation';
 
 import { useClusterResourceReservationData } from './useClusterResourceReservationData';
 

@@ -1,15 +1,15 @@
 import { GaugeIcon } from 'lucide-react';
 
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { stripProtocol } from '@/portainer/filters/filters';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { stripProtocol } from '@CE/portainer/filters/filters';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 import {
   isAgentEnvironment,
   isEdgeEnvironment,
-} from '@/react/portainer/environments/utils';
+} from '@CE/react/portainer/environments/utils';
 
-import { DetailsTable } from '@@/DetailsTable';
-import { Widget } from '@@/Widget';
+import { DetailsTable } from '@@CE/DetailsTable';
+import { Widget } from '@@CE/Widget';
 
 import { useIsSwarmManager } from '../proxy/queries/useInfo';
 

@@ -1,10 +1,10 @@
 import { useField } from 'formik';
 import { PropsWithChildren } from 'react';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
-import { TagSelector } from '@@/TagSelector';
-import { FormSection } from '@@/form-components/FormSection';
+import { TagSelector } from '@@CE/TagSelector';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { GroupField } from './GroupsField';
 

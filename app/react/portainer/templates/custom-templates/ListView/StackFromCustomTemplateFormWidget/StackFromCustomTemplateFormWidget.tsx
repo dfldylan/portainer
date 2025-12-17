@@ -1,9 +1,9 @@
-import { DeployWidget } from '@/react/portainer/templates/components/DeployWidget';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
-import { useCustomTemplateFile } from '@/react/portainer/templates/custom-templates/queries/useCustomTemplateFile';
-import { useCustomTemplate } from '@/react/portainer/templates/custom-templates/queries/useCustomTemplate';
+import { DeployWidget } from '@CE/react/portainer/templates/components/DeployWidget';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
+import { useCustomTemplateFile } from '@CE/react/portainer/templates/custom-templates/queries/useCustomTemplateFile';
+import { useCustomTemplate } from '@CE/react/portainer/templates/custom-templates/queries/useCustomTemplate';
 
-import { TextTip } from '@@/Tip/TextTip';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { useIsDeployable } from './useIsDeployable';
 import { DeployForm } from './DeployForm';

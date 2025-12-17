@@ -2,16 +2,16 @@ import { useStore } from 'zustand';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect, useState } from 'react';
 
-import { environmentStore } from '@/react/hooks/current-environment-store';
-import { Environment } from '@/react/portainer/environments/types';
-import { snapshotEndpoints } from '@/react/portainer/environments/environment.service';
-import { isEdgeEnvironment } from '@/react/portainer/environments/utils';
-import * as notifications from '@/portainer/services/notifications';
+import { environmentStore } from '@CE/react/hooks/current-environment-store';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { snapshotEndpoints } from '@CE/react/portainer/environments/environment.service';
+import { isEdgeEnvironment } from '@CE/react/portainer/environments/utils';
+import * as notifications from '@CE/portainer/services/notifications';
 
-import { confirm } from '@@/modals/confirm';
-import { PageHeader } from '@@/PageHeader';
-import { ModalType } from '@@/modals';
-import { buildConfirmButton } from '@@/modals/utils';
+import { confirm } from '@@CE/modals/confirm';
+import { PageHeader } from '@@CE/PageHeader';
+import { ModalType } from '@@CE/modals';
+import { buildConfirmButton } from '@@CE/modals/utils';
 
 import { EnvironmentList } from './EnvironmentList';
 import { EdgeLoadingSpinner } from './EdgeLoadingSpinner';

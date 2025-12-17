@@ -1,6 +1,6 @@
 import { Node, Endpoints, EndpointAddress } from 'kubernetes-types/core/v1';
 
-import { StatusBadgeType } from '@@/StatusBadge';
+import { StatusBadgeType } from '@@CE/StatusBadge';
 
 import { NodeAvailability } from './types';
 

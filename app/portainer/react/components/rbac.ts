@@ -1,9 +1,9 @@
 import angular from 'angular';
 
-import { r2a } from '@/react-tools/react2angular';
-import { withReactQuery } from '@/react-tools/withReactQuery';
-import { withUIRouter } from '@/react-tools/withUIRouter';
-import { AccessDatatable } from '@/react/portainer/access-control/AccessManagement/AccessDatatable/AccessDatatable';
+import { r2a } from '@CE/react-tools/react2angular';
+import { withReactQuery } from '@CE/react-tools/withReactQuery';
+import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { AccessDatatable } from '@CE/react/portainer/access-control/AccessManagement/AccessDatatable/AccessDatatable';
 
 export const rbacModule = angular
   .module('portainer.app.react.components.rbac', [])

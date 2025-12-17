@@ -2,7 +2,7 @@ import { compare } from 'fast-json-patch';
 import { Service, ServiceSpec } from 'kubernetes-types/core/v1';
 import { ObjectMeta } from 'kubernetes-types/meta/v1';
 
-import { Ingress as IngressFormValues } from '@/react/kubernetes/ingresses/types';
+import { Ingress as IngressFormValues } from '@CE/react/kubernetes/ingresses/types';
 
 import {
   appNameLabel,

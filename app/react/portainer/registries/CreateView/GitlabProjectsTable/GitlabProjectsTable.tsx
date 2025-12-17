@@ -1,11 +1,11 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { ListIcon } from 'lucide-react';
 
-import { createPersistedStore } from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
-import { Datatable } from '@@/datatables';
-import { withControlledSelected } from '@@/datatables/extend-options/withControlledSelected';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+import { createPersistedStore } from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { Datatable } from '@@CE/datatables';
+import { withControlledSelected } from '@@CE/datatables/extend-options/withControlledSelected';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
 
 import { RegistryGitlabProject } from '../../types/gitlabProject';
 

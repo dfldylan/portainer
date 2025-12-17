@@ -1,10 +1,10 @@
 import { useStore } from 'zustand';
 
-import { notifySuccess } from '@/portainer/services/notifications';
-import { environmentStore } from '@/react/hooks/current-environment-store';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { environmentStore } from '@CE/react/hooks/current-environment-store';
 
-import { PageHeader } from '@@/PageHeader';
-import { confirmDelete } from '@@/modals/confirm';
+import { PageHeader } from '@@CE/PageHeader';
+import { confirmDelete } from '@@CE/modals/confirm';
 
 import { Environment } from '../types';
 

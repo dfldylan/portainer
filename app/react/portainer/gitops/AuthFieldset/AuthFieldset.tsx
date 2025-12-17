@@ -2,14 +2,14 @@ import { FormikErrors } from 'formik';
 import { boolean, mixed, number, object, SchemaOf, string } from 'yup';
 import { useState } from 'react';
 
-import { GitAuthModel } from '@/react/portainer/gitops/types';
+import { GitAuthModel } from '@CE/react/portainer/gitops/types';
 import {
   AuthTypeOption,
   GitCredential,
-} from '@/react/portainer/account/git-credentials/types';
+} from '@CE/react/portainer/account/git-credentials/types';
 
-import { SwitchField } from '@@/form-components/SwitchField';
-import { TextTip } from '@@/Tip/TextTip';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { isBE } from '../../feature-flags/feature-flags.service';
 

@@ -1,6 +1,6 @@
 import { components, MultiValueGenericProps } from 'react-select';
 
-import { Select } from '@@/form-components/ReactSelect';
+import { Select } from '@@CE/form-components/ReactSelect';
 
 interface Option {
   Name: string;

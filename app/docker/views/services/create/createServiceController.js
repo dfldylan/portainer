@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 
-import * as envVarsUtils from '@/react/components/form-components/EnvironmentVariablesFieldset/utils';
+import * as envVarsUtils from '@CE/react/components/form-components/EnvironmentVariablesFieldset/utils';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
 import { AccessControlFormData } from '../../../../portainer/components/accessControlForm/porAccessControlFormModel';
 

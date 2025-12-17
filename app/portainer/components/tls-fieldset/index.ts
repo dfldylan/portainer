@@ -3,8 +3,8 @@ import angular from 'angular';
 import {
   TLSFieldset,
   tlsConfigValidation,
-} from '@/react/components/TLSFieldset';
-import { withFormValidation } from '@/react-tools/withFormValidation';
+} from '@CE/react/components/TLSFieldset';
+import { withFormValidation } from '@CE/react-tools/withFormValidation';
 
 export const ngModule = angular.module(
   'portainer.app.components.tls-fieldset',

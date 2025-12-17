@@ -2,9 +2,9 @@ import { CellContext } from '@tanstack/react-table';
 import _ from 'lodash';
 import { useSref } from '@uirouter/react';
 
-import type { ContainerListViewModel } from '@/react/docker/containers/types';
+import type { ContainerListViewModel } from '@CE/react/docker/containers/types';
 
-import { useTableSettings } from '@@/datatables/useTableSettings';
+import { useTableSettings } from '@@CE/datatables/useTableSettings';
 
 import { TableSettings } from '../types';
 

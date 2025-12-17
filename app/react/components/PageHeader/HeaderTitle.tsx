@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
-import { ContextHelp } from '@@/PageHeader/ContextHelp';
+import { ContextHelp } from '@@CE/PageHeader/ContextHelp';
 
 import { useHeaderContext } from './HeaderContainer';
 import { NotificationsMenu } from './NotificationsMenu';

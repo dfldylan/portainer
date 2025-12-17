@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode, useState } from 'react';
 
-import { CollapseExpandButton } from '@@/CollapseExpandButton';
+import { CollapseExpandButton } from '@@CE/CollapseExpandButton';
 
 import { FormSectionTitle } from '../FormSectionTitle';
 

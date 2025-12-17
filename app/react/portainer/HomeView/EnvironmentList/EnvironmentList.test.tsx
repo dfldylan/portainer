@@ -1,12 +1,12 @@
 import { http, HttpResponse } from 'msw';
 import { render } from '@testing-library/react';
 
-import { Environment } from '@/react/portainer/environments/types';
-import { UserViewModel } from '@/portainer/models/user';
-import { server } from '@/setup-tests/server';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { UserViewModel } from '@CE/portainer/models/user';
+import { server } from '@CE/setup-tests/server';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import { EnvironmentList } from './EnvironmentList';
 

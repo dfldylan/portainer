@@ -1,4 +1,4 @@
-import { BoxSelector } from '@@/BoxSelector';
+import { BoxSelector } from '@@CE/BoxSelector';
 
 import { EnvironmentOption, EnvironmentOptionValue } from './environment-types';
 

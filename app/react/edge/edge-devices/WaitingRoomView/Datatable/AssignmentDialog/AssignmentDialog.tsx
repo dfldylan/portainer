@@ -1,15 +1,15 @@
 import { Form, Formik } from 'formik';
 
-import { addPlural } from '@/portainer/helpers/strings';
-import { useUpdateEnvironmentsRelationsMutation } from '@/react/portainer/environments/queries/useUpdateEnvironmentsRelationsMutation';
-import { notifySuccess } from '@/portainer/services/notifications';
-import { BetaAlert } from '@/react/portainer/environments/update-schedules/common/BetaAlert';
+import { addPlural } from '@CE/portainer/helpers/strings';
+import { useUpdateEnvironmentsRelationsMutation } from '@CE/react/portainer/environments/queries/useUpdateEnvironmentsRelationsMutation';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { BetaAlert } from '@CE/react/portainer/environments/update-schedules/common/BetaAlert';
 
-import { Checkbox } from '@@/form-components/Checkbox';
-import { FormControl } from '@@/form-components/FormControl';
-import { OnSubmit, Modal } from '@@/modals';
-import { TextTip } from '@@/Tip/TextTip';
-import { Button, LoadingButton } from '@@/buttons';
+import { Checkbox } from '@@CE/form-components/Checkbox';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { OnSubmit, Modal } from '@@CE/modals';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Button, LoadingButton } from '@@CE/buttons';
 
 import { WaitingRoomEnvironment } from '../../types';
 

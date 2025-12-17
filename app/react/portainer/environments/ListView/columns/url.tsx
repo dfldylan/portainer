@@ -5,13 +5,13 @@ import {
   EnvironmentStatus,
   EnvironmentStatusMessage,
   EnvironmentType,
-} from '@/react/portainer/environments/types';
-import { notifySuccess } from '@/portainer/services/notifications';
+} from '@CE/react/portainer/environments/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
-import { Button } from '@@/buttons';
-import { Icon } from '@@/Icon';
-import { Tooltip } from '@@/Tip/Tooltip';
+import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
+import { Button } from '@@CE/buttons';
+import { Icon } from '@@CE/Icon';
+import { Tooltip } from '@@CE/Tip/Tooltip';
 
 import { EnvironmentListItem } from '../types';
 import { useUpdateEnvironmentMutation } from '../../queries/useUpdateEnvironmentMutation';

@@ -1,4 +1,4 @@
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 
 interface GenerateUrlResponse {
   edgeKey: string;

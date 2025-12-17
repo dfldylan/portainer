@@ -3,7 +3,7 @@ import {
   hiddenColumnsSettings,
   createPersistedStore,
   filteredColumnsSettings,
-} from '@@/datatables/types';
+} from '@@CE/datatables/types';
 
 import { QuickAction, TableSettings } from './types';
 

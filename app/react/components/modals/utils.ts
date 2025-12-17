@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
 
-import { Button } from '@@/buttons';
+import { Button } from '@@CE/buttons';
 
 import { ButtonOptions } from './types';
 

@@ -1,13 +1,13 @@
 import { Radio } from 'lucide-react';
 
-import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { url } from '@/react/portainer/registries/ListView/RegistriesDatatable/columns/url';
-import { AddButton } from '@/react/portainer/registries/ListView/RegistriesDatatable/AddButton';
+import { useEnvironmentRegistries } from '@CE/react/portainer/environments/queries/useEnvironmentRegistries';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { url } from '@CE/react/portainer/registries/ListView/RegistriesDatatable/columns/url';
+import { AddButton } from '@CE/react/portainer/registries/ListView/RegistriesDatatable/AddButton';
 
-import { Datatable } from '@@/datatables';
-import { createPersistedStore } from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
+import { Datatable } from '@@CE/datatables';
+import { createPersistedStore } from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
 
 import { name } from './columns/name';
 import { actions } from './columns/actions';

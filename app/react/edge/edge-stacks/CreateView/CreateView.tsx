@@ -1,4 +1,4 @@
-import { PageHeader } from '@@/PageHeader';
+import { PageHeader } from '@@CE/PageHeader';
 
 import { CreateForm } from './CreateForm';
 

@@ -7,7 +7,7 @@ import {
   role,
   name,
   status,
-} from '@/react/docker/swarm/SwarmView/NodesDatatable/columns';
+} from '@CE/react/docker/swarm/SwarmView/NodesDatatable/columns';
 
 export function useColumns(isIpColumnVisible: boolean) {
   return useMemo(

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { AlertCircle } from 'lucide-react';
 import clsx from 'clsx';
 
-import { Icon, IconMode } from '@@/Icon';
+import { Icon, IconMode } from '@@CE/Icon';
 
 type Color = 'orange' | 'blue' | 'red' | 'green';
 

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { StackType } from '@/react/common/stacks/types';
-import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { StackType } from '@CE/react/common/stacks/types';
+import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
 
 import { IResource } from '../../components/datatable/createOwnershipColumn';
 

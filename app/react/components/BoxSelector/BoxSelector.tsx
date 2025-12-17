@@ -1,4 +1,4 @@
-import { FormError } from '@@/form-components/FormError';
+import { FormError } from '@@CE/form-components/FormError';
 
 import styles from './BoxSelector.module.css';
 import { BoxSelectorItem } from './BoxSelectorItem';

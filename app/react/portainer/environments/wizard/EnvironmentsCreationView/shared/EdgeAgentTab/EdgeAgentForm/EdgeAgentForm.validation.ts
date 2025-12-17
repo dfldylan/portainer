@@ -3,9 +3,9 @@ import { number, object, SchemaOf, string } from 'yup';
 import {
   edgeAsyncIntervalsValidation,
   EdgeAsyncIntervalsValues,
-} from '@/react/edge/components/EdgeAsyncIntervalsForm';
-import { validation as urlValidation } from '@/react/portainer/common/PortainerTunnelAddrField';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+} from '@CE/react/edge/components/EdgeAsyncIntervalsForm';
+import { validation as urlValidation } from '@CE/react/portainer/common/PortainerTunnelAddrField';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
 import { metadataValidation } from '../../MetadataFieldset/validation';
 import { useNameValidation } from '../../NameField';

@@ -1,9 +1,9 @@
 import { Config } from 'docker-types/generated/1.44';
 import { useQuery } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { withGlobalError } from '@/react-tools/react-query';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { withGlobalError } from '@CE/react-tools/react-query';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 

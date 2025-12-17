@@ -1,7 +1,7 @@
 import angular from 'angular';
 import uuidv4 from 'uuid/v4';
-import { getEnvironments } from '@/react/portainer/environments/environment.service';
-import { dispatchCacheRefreshEvent } from '@/portainer/services/http-request.helper';
+import { getEnvironments } from '@CE/react/portainer/environments/environment.service';
+import { dispatchCacheRefreshEvent } from '@CE/portainer/services/http-request.helper';
 
 class AuthenticationController {
   /* @ngInject */

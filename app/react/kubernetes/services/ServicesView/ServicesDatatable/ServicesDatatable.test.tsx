@@ -2,19 +2,19 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { HttpResponse } from 'msw';
 
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { createMockUsers } from '@/react-tools/test-mocks';
-import { server, http } from '@/setup-tests/server';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { createMockUsers } from '@CE/react-tools/test-mocks';
+import { server, http } from '@CE/setup-tests/server';
 
 import { ServicesDatatable } from './ServicesDatatable';
 
-vi.mock('@/react/hooks/useEnvironmentId', () => ({
+vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => 1,
 }));
 
-vi.mock('@/portainer/services/notifications', () => ({
+vi.mock('@CE/portainer/services/notifications', () => ({
   notifyError: vi.fn(),
   notifySuccess: vi.fn(),
 }));

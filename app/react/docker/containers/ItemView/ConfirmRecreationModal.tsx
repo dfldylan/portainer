@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { Modal, OnSubmit, ModalType, openModal } from '@@/modals';
-import { Button } from '@@/buttons';
-import { SwitchField } from '@@/form-components/SwitchField';
-import { TextTip } from '@@/Tip/TextTip';
+import { Modal, OnSubmit, ModalType, openModal } from '@@CE/modals';
+import { Button } from '@@CE/buttons';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 interface Props {
   onSubmit: OnSubmit<{ pullLatest: boolean }>;

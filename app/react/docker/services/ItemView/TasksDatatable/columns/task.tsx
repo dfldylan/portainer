@@ -1,9 +1,9 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { isAgentEnvironment } from '@/react/portainer/environments/utils';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { isAgentEnvironment } from '@CE/react/portainer/environments/utils';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 import { DecoratedTask } from '../types';
 import { getTableMeta } from '../meta';

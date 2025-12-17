@@ -1,12 +1,12 @@
 import { Form, useFormikContext } from 'formik';
 import { useMemo } from 'react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Option, PortainerSelect } from '@@/form-components/PortainerSelect';
-import { FormSection } from '@@/form-components/FormSection';
-import { LoadingButton } from '@@/buttons';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Option, PortainerSelect } from '@@CE/form-components/PortainerSelect';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { LoadingButton } from '@@CE/buttons';
 
 import { Chart } from '../types';
 import { useHelmChartValues } from '../helmChartSourceQueries/useHelmChartValues';

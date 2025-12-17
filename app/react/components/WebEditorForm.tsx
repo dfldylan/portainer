@@ -8,7 +8,7 @@ import {
 import { useTransitionHook } from '@uirouter/react';
 import { JSONSchema7 } from 'json-schema';
 
-import { CodeEditor } from '@@/CodeEditor';
+import { CodeEditor } from '@@CE/CodeEditor';
 
 import { FormSectionTitle } from './form-components/FormSectionTitle';
 import { FormError } from './form-components/FormError';

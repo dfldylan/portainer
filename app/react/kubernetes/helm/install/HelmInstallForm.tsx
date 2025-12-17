@@ -2,12 +2,12 @@ import { useRef, useState } from 'react';
 import { Formik, FormikProps } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { notifySuccess } from '@/portainer/services/notifications';
-import { useCanExit } from '@/react/hooks/useCanExit';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useCanExit } from '@CE/react/hooks/useCanExit';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { confirm, confirmGenericDiscard } from '@@/modals/confirm';
-import { Option } from '@@/form-components/PortainerSelect';
+import { confirm, confirmGenericDiscard } from '@@CE/modals/confirm';
+import { Option } from '@@CE/form-components/PortainerSelect';
 
 import { Chart } from '../types';
 import { useUpdateHelmReleaseMutation } from '../helmReleaseQueries/useUpdateHelmReleaseMutation';

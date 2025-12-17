@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { saveAs } from 'file-saver';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 
 import { Query } from './useActivityLogs';
 

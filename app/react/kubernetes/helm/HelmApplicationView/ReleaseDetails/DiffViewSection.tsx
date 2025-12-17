@@ -1,8 +1,8 @@
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
-import { DiffViewer } from '@@/CodeEditor/DiffViewer';
-import { Loading } from '@@/Widget';
-import { Alert } from '@@/Alert';
+import { DiffViewer } from '@@CE/CodeEditor/DiffViewer';
+import { Loading } from '@@CE/Widget';
+import { Alert } from '@@CE/Alert';
 
 import { CompareRevisionNumberFetched, SelectedRevisionNumber } from './types';
 

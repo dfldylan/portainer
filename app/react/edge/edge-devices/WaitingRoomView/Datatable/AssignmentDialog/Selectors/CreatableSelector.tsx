@@ -1,11 +1,11 @@
 import { useField } from 'formik';
 import _ from 'lodash';
 
-import { Select } from '@@/form-components/ReactSelect';
+import { Select } from '@@CE/form-components/ReactSelect';
 import {
   Option,
   Option as OptionType,
-} from '@@/form-components/PortainerSelect';
+} from '@@CE/form-components/PortainerSelect';
 
 export function CreatableSelector({
   name,

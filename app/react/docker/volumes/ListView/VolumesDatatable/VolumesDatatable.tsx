@@ -1,7 +1,7 @@
 import { Database } from 'lucide-react';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
 import {
   BasicTableSettings,
   FilteredColumnsTableSettings,
@@ -9,12 +9,12 @@ import {
   RefreshableTableSettings,
   createPersistedStore,
   refreshableSettings,
-} from '@@/datatables/types';
-import { useRepeater } from '@@/datatables/useRepeater';
-import { useTableState } from '@@/datatables/useTableState';
-import { withMeta } from '@@/datatables/extend-options/withMeta';
-import { withColumnFilters } from '@@/datatables/extend-options/withColumnFilters';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+} from '@@CE/datatables/types';
+import { useRepeater } from '@@CE/datatables/useRepeater';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { withMeta } from '@@CE/datatables/extend-options/withMeta';
+import { withColumnFilters } from '@@CE/datatables/extend-options/withColumnFilters';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
 
 import { DecoratedVolume } from '../types';
 

@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { buildUrl } from '@/react/docker/services/queries/build-url';
-import { ServiceId } from '@/react/docker/services/types';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { buildUrl } from '@CE/react/docker/services/queries/build-url';
+import { ServiceId } from '@CE/react/docker/services/types';
 
 type ServiceLogsParams = {
   stdout?: boolean;

@@ -1,21 +1,21 @@
 import { Formik, Form } from 'formik';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { AccessControlForm } from '@/react/portainer/access-control';
-import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
-import { NameField } from '@/react/docker/containers/CreateView/BaseForm/NameField';
-import { NetworkSelector } from '@/react/docker/containers/components/NetworkSelector';
-import { PortsMappingField } from '@/react/docker/containers/CreateView/BaseForm/PortsMappingField';
-import { VolumesTab } from '@/react/docker/containers/CreateView/VolumesTab';
-import { HostsFileEntries } from '@/react/docker/containers/CreateView/NetworkTab/HostsFileEntries';
-import { LabelsTab } from '@/react/docker/containers/CreateView/LabelsTab';
-import { HostnameField } from '@/react/docker/containers/CreateView/NetworkTab/HostnameField';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { AccessControlForm } from '@CE/react/portainer/access-control';
+import { parseAccessControlFormData } from '@CE/react/portainer/access-control/utils';
+import { NameField } from '@CE/react/docker/containers/CreateView/BaseForm/NameField';
+import { NetworkSelector } from '@CE/react/docker/containers/components/NetworkSelector';
+import { PortsMappingField } from '@CE/react/docker/containers/CreateView/BaseForm/PortsMappingField';
+import { VolumesTab } from '@CE/react/docker/containers/CreateView/VolumesTab';
+import { HostsFileEntries } from '@CE/react/docker/containers/CreateView/NetworkTab/HostsFileEntries';
+import { LabelsTab } from '@CE/react/docker/containers/CreateView/LabelsTab';
+import { HostnameField } from '@CE/react/docker/containers/CreateView/NetworkTab/HostnameField';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { FormSection } from '@@/form-components/FormSection';
-import { FormActions } from '@@/form-components/FormActions';
-import { Button } from '@@/buttons';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { FormActions } from '@@CE/form-components/FormActions';
+import { Button } from '@@CE/buttons';
 
 import { TemplateViewModel } from '../../view-model';
 import { AdvancedSettings } from '../AdvancedSettings';

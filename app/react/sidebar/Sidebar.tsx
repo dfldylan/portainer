@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { Home } from 'lucide-react';
 
-import { useIsEdgeAdmin, useIsPureAdmin } from '@/react/hooks/useUser';
-import { useIsCurrentUserTeamLeader } from '@/portainer/users/queries';
-import { usePublicSettings } from '@/react/portainer/settings/queries';
+import { useIsEdgeAdmin, useIsPureAdmin } from '@CE/react/hooks/useUser';
+import { useIsCurrentUserTeamLeader } from '@CE/portainer/users/queries';
+import { usePublicSettings } from '@CE/react/portainer/settings/queries';
 
 import styles from './Sidebar.module.css';
 import { EdgeComputeSidebar } from './EdgeComputeSidebar';

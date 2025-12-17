@@ -4,10 +4,10 @@ import { Form, Formik } from 'formik';
 import { useStore } from 'zustand';
 import { object, string } from 'yup';
 
-import { Button } from '@@/buttons';
-import { Tooltip } from '@@/Tip/Tooltip';
-import { Input } from '@@/form-components/Input';
-import { FormError } from '@@/form-components/FormError';
+import { Button } from '@@CE/buttons';
+import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Input } from '@@CE/form-components/Input';
+import { FormError } from '@@CE/form-components/FormError';
 
 import { Tag } from '../types';
 import { newNamesStore } from '../useRetagState';

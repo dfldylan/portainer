@@ -1,13 +1,13 @@
 import { FormikErrors } from 'formik';
 
-import { useIsEdgeAdmin } from '@/react/hooks/useUser';
+import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
 
-import { SwitchField } from '@@/form-components/SwitchField';
-import { Link } from '@@/Link';
-import { TextTip } from '@@/Tip/TextTip';
-import { Input } from '@@/form-components/Input';
-import { FormError } from '@@/form-components/FormError';
-import { Tooltip } from '@@/Tip/Tooltip';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { Link } from '@@CE/Link';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Input } from '@@CE/form-components/Input';
+import { FormError } from '@@CE/form-components/FormError';
+import { Tooltip } from '@@CE/Tip/Tooltip';
 
 import { AutoScalingFormValues } from './types';
 

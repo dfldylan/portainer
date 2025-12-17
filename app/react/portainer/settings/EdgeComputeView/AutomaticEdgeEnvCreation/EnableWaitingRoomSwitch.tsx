@@ -1,10 +1,10 @@
 import { useField } from 'formik';
 
-import { confirm } from '@@/modals/confirm';
-import { FormControl } from '@@/form-components/FormControl';
-import { Switch } from '@@/form-components/SwitchField/Switch';
-import { buildConfirmButton } from '@@/modals/utils';
-import { ModalType } from '@@/modals';
+import { confirm } from '@@CE/modals/confirm';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Switch } from '@@CE/form-components/SwitchField/Switch';
+import { buildConfirmButton } from '@@CE/modals/utils';
+import { ModalType } from '@@CE/modals';
 
 export function EnabledWaitingRoomSwitch() {
   const [inputProps, meta, helpers] = useField<boolean>('EnableWaitingRoom');

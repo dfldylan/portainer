@@ -1,9 +1,9 @@
 import { object, string, number } from 'yup';
 import { useEffect, useState } from 'react';
 
-import { STACK_NAME_VALIDATION_REGEX } from '@/react/constants';
+import { STACK_NAME_VALIDATION_REGEX } from '@CE/react/constants';
 
-import { validateForm } from '@@/form-components/validate-form';
+import { validateForm } from '@@CE/form-components/validate-form';
 
 import { FormSubmitValues } from './StackDuplicationForm.types';
 

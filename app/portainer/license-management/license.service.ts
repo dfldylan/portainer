@@ -5,7 +5,7 @@ import {
   getLicenseInfo,
   unsubscribe,
   subscribe,
-} from '@/react/portainer/licenses/license.service';
+} from '@CE/react/portainer/licenses/license.service';
 
 /* @ngInject */
 export function LicenseService() {

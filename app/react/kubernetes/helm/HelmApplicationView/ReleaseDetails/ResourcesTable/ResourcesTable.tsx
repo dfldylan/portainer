@@ -1,18 +1,18 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useHelmRelease } from '@/react/kubernetes/helm/helmReleaseQueries/useHelmRelease';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useHelmRelease } from '@CE/react/kubernetes/helm/helmReleaseQueries/useHelmRelease';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
 import {
   createPersistedStore,
   refreshableSettings,
   TableSettingsWithRefreshable,
-} from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
-import { Widget } from '@@/Widget';
-import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
-import { TextTip } from '@@/Tip/TextTip';
+} from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { Widget } from '@@CE/Widget';
+import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { columns } from './columns';
 import { useResourceRows } from './useResourceRows';

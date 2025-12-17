@@ -1,6 +1,6 @@
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { isAgentEnvironment } from '@/react/portainer/environments/utils';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { isAgentEnvironment } from '@CE/react/portainer/environments/utils';
 
 import { useIsSwarm } from './useInfo';
 

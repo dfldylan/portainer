@@ -4,24 +4,27 @@ import { Row } from '@tanstack/react-table';
 import clsx from 'clsx';
 import { useMemo } from 'react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useAuthorizations, Authorized } from '@/react/hooks/useUser';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useAuthorizations, Authorized } from '@CE/react/hooks/useUser';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
 import {
   DefaultDatatableSettings,
   TableSettings as KubeTableSettings,
-} from '@/react/kubernetes/datatables/DefaultDatatableSettings';
-import { CreateFromManifestButton } from '@/react/kubernetes/components/CreateFromManifestButton';
-import { useKubeStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
+} from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { CreateFromManifestButton } from '@CE/react/kubernetes/components/CreateFromManifestButton';
+import { useKubeStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
 
-import { confirmDelete } from '@@/modals/confirm';
-import { Datatable, Table, TableSettingsMenu } from '@@/datatables';
-import { LoadingButton } from '@@/buttons';
+import { confirmDelete } from '@@CE/modals/confirm';
+import { Datatable, Table, TableSettingsMenu } from '@@CE/datatables';
+import { LoadingButton } from '@@CE/buttons';
 import {
   type FilteredColumnsTableSettings,
   filteredColumnsSettings,
-} from '@@/datatables/types';
+} from '@@CE/datatables/types';
 
 import { RoleBinding } from './types';
 import { columns } from './columns';

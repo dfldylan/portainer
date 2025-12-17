@@ -1,11 +1,11 @@
 import { ExternalLink } from 'lucide-react';
 import { CellContext } from '@tanstack/react-table';
 
-import { ContainerGroup } from '@/react/azure/types';
-import { getPorts } from '@/react/azure/utils';
-import { getSchemeFromPort } from '@/react/common/network-utils';
+import { ContainerGroup } from '@CE/react/azure/types';
+import { getPorts } from '@CE/react/azure/utils';
+import { getSchemeFromPort } from '@CE/react/common/network-utils';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 import { columnHelper } from './helper';
 

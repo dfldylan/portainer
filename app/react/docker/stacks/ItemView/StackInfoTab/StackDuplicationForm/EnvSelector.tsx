@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 
-import { useEnvironmentList } from '@/react/portainer/environments/queries';
-import { useGroups } from '@/react/portainer/environments/environment-groups/queries';
-import { Environment } from '@/react/portainer/environments/types';
-import { EnvironmentGroup } from '@/react/portainer/environments/environment-groups/types';
+import { useEnvironmentList } from '@CE/react/portainer/environments/queries';
+import { useGroups } from '@CE/react/portainer/environments/environment-groups/queries';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { EnvironmentGroup } from '@CE/react/portainer/environments/environment-groups/types';
 
 import {
   PortainerSelect,
   GroupOption,
-} from '@@/form-components/PortainerSelect';
-import { FormError } from '@@/form-components/FormError';
+} from '@@CE/form-components/PortainerSelect';
+import { FormError } from '@@CE/form-components/FormError';
 
 export function EnvSelector({
   value,

@@ -1,9 +1,9 @@
 import { X } from 'lucide-react';
 
-import { Widget } from '@@/Widget';
-import { Button } from '@@/buttons/Button';
-import { FallbackImage } from '@@/FallbackImage';
-import { Icon } from '@@/Icon';
+import { Widget } from '@@CE/Widget';
+import { Button } from '@@CE/buttons/Button';
+import { FallbackImage } from '@@CE/FallbackImage';
+import { Icon } from '@@CE/Icon';
 
 import { Chart } from '../types';
 

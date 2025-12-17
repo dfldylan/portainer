@@ -4,9 +4,9 @@ import { Briefcase } from 'lucide-react';
 
 import './BEFeatureIndicator.css';
 
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 import { getFeatureDetails } from './utils';
 

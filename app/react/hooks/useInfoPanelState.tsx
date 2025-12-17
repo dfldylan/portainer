@@ -1,4 +1,4 @@
-import { useUIState } from '@/react/hooks/useUIState';
+import { useUIState } from '@CE/react/hooks/useUIState';
 
 export function useInfoPanelState(panelId: string) {
   const uiStateStore = useUIState();

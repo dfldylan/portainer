@@ -1,13 +1,13 @@
 import { RotateCcw } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { LoadingButton } from '@@/buttons';
-import { buildConfirmButton } from '@@/modals/utils';
-import { confirm } from '@@/modals/confirm';
-import { ModalType } from '@@/modals';
+import { LoadingButton } from '@@CE/buttons';
+import { buildConfirmButton } from '@@CE/modals/utils';
+import { confirm } from '@@CE/modals/confirm';
+import { ModalType } from '@@CE/modals';
 
 import { useHelmRollbackMutation } from '../../helmReleaseQueries/useHelmRollbackMutation';
 

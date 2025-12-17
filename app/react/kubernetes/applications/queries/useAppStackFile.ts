@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { withGlobalError } from '@/react-tools/react-query';
-import { getEdgeStackFile } from '@/react/edge/edge-stacks/queries/useEdgeStackFile';
-import { getStackFile } from '@/react/common/stacks/queries/useStackFile';
+import { withGlobalError } from '@CE/react-tools/react-query';
+import { getEdgeStackFile } from '@CE/react/edge/edge-stacks/queries/useEdgeStackFile';
+import { getStackFile } from '@CE/react/common/stacks/queries/useStackFile';
 
 import { queryKeys } from './query-keys';
 

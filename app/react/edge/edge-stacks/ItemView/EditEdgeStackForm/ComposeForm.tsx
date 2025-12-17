@@ -1,9 +1,9 @@
 import { useFormikContext } from 'formik';
 
-import { useDockerComposeSchema } from '@/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
+import { useDockerComposeSchema } from '@CE/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
 
-import { TextTip } from '@@/Tip/TextTip';
-import { WebEditorForm } from '@@/WebEditorForm';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { WebEditorForm } from '@@CE/WebEditorForm';
 
 import { DeploymentType } from '../../types';
 

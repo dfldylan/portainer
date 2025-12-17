@@ -1,8 +1,8 @@
 import {
   EnvVarValues,
   EnvironmentVariablesPanel,
-} from '@@/form-components/EnvironmentVariablesFieldset';
-import { ArrayError } from '@@/form-components/InputList/InputList';
+} from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { ArrayError } from '@@CE/form-components/InputList/InputList';
 
 export function EnvVarsTab({
   values,

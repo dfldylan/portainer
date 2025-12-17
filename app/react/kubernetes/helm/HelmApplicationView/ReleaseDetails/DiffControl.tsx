@@ -1,10 +1,10 @@
 import { ChangeEvent } from 'react';
 
-import { useDebounce } from '@/react/hooks/useDebounce';
+import { useDebounce } from '@CE/react/hooks/useDebounce';
 
-import { RadioGroup, RadioGroupOption } from '@@/RadioGroup/RadioGroup';
-import { Input } from '@@/form-components/Input';
-import { Checkbox } from '@@/form-components/Checkbox';
+import { RadioGroup, RadioGroupOption } from '@@CE/RadioGroup/RadioGroup';
+import { Input } from '@@CE/form-components/Input';
+import { Checkbox } from '@@CE/form-components/Checkbox';
 
 import {
   LatestRevisionNumber,

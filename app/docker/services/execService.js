@@ -1,4 +1,4 @@
-import { resizeTTY } from '@/react/docker/proxy/queries/useExecResizeTTYMutation';
+import { resizeTTY } from '@CE/react/docker/proxy/queries/useExecResizeTTYMutation';
 
 angular.module('portainer.docker').factory('ExecService', ExecServiceFactory);
 

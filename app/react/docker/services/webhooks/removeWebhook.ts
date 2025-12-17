@@ -1,6 +1,6 @@
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { promiseSequence } from '@/portainer/helpers/promise-utils';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
 
 import { getWebhooks } from './getWebhooks';
 import { Webhook } from './types';

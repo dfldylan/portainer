@@ -1,13 +1,13 @@
 import { Formik } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { notifySuccess } from '@/portainer/services/notifications';
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { useEnvironmentRegistries } from '@CE/react/portainer/environments/queries/useEnvironmentRegistries';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
-import { Widget, WidgetBody } from '@@/Widget';
+import { Widget, WidgetBody } from '@@CE/Widget';
 
 import { useIngressControllerClassMapQuery } from '../../cluster/ingressClass/useIngressControllerClassMap';
 import { NamespaceInnerForm } from '../components/NamespaceForm/NamespaceInnerForm';

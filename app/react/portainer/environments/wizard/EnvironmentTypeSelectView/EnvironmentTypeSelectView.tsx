@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useRouter } from '@uirouter/react';
 import { Wand2 } from 'lucide-react';
 
-import { Button } from '@@/buttons';
-import { PageHeader } from '@@/PageHeader';
-import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
-import { FormSection } from '@@/form-components/FormSection';
+import { Button } from '@@CE/buttons';
+import { PageHeader } from '@@CE/PageHeader';
+import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { EnvironmentSelector } from './EnvironmentSelector';
 import {

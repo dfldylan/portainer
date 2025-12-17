@@ -1,8 +1,8 @@
 import { Secret } from 'docker-types/generated/1.44';
 
-import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
-import { PortainerResponse } from '@/react/docker/types';
-import { IResource } from '@/react/docker/components/datatable/createOwnershipColumn';
+import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
+import { PortainerResponse } from '@CE/react/docker/types';
+import { IResource } from '@CE/react/docker/components/datatable/createOwnershipColumn';
 
 export class SecretViewModel implements IResource {
   Id: string;

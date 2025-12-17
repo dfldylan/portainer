@@ -1,6 +1,6 @@
 import { RestartPolicy } from 'docker-types/generated/1.44';
 
-import { BasicTableSettings } from '@@/datatables/types';
+import { BasicTableSettings } from '@@CE/datatables/types';
 
 import { Pair } from '../../settings/types';
 

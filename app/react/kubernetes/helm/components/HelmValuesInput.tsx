@@ -1,6 +1,6 @@
-import { FormControl } from '@@/form-components/FormControl';
-import { CodeEditor } from '@@/CodeEditor';
-import { ShortcutsTooltip } from '@@/CodeEditor/ShortcutsTooltip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { CodeEditor } from '@@CE/CodeEditor';
+import { ShortcutsTooltip } from '@@CE/CodeEditor/ShortcutsTooltip';
 
 type Props = {
   values: string;

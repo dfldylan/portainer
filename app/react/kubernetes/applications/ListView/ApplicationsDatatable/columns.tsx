@@ -1,13 +1,13 @@
 import { CellContext, Row } from '@tanstack/react-table';
 import { useRef } from 'react';
 
-import { isoDate } from '@/portainer/filters/filters';
-import { useIsSystemNamespace } from '@/react/kubernetes/namespaces/queries/useIsSystemNamespace';
+import { isoDate } from '@CE/portainer/filters/filters';
+import { useIsSystemNamespace } from '@CE/react/kubernetes/namespaces/queries/useIsSystemNamespace';
 
-import { Link } from '@@/Link';
-import { SystemBadge } from '@@/Badge/SystemBadge';
-import { filterHOC } from '@@/datatables/Filter';
-import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
+import { Link } from '@@CE/Link';
+import { SystemBadge } from '@@CE/Badge/SystemBadge';
+import { filterHOC } from '@@CE/datatables/Filter';
+import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
 
 import { Application } from './types';
 import { helper } from './columns.helper';

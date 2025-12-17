@@ -1,11 +1,11 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { History, Search } from 'lucide-react';
 
-import { isoDateFromTimestamp } from '@/portainer/filters/filters';
+import { isoDateFromTimestamp } from '@CE/portainer/filters/filters';
 
-import { ExpandableDatatable } from '@@/datatables/ExpandableDatatable';
-import { Button } from '@@/buttons';
-import { JsonTree } from '@@/JsonTree';
+import { ExpandableDatatable } from '@@CE/datatables/ExpandableDatatable';
+import { Button } from '@@CE/buttons';
+import { JsonTree } from '@@CE/JsonTree';
 
 import { ActivityLog } from './types';
 import { getSortType } from './useActivityLogs';

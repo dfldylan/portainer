@@ -3,22 +3,22 @@ import { useCallback, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import { useTransitionHook } from '@uirouter/react';
 
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { IngressClassDatatable } from '@/react/kubernetes/cluster/ingressClass/IngressClassDatatable';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { IngressClassDatatable } from '@CE/react/kubernetes/cluster/ingressClass/IngressClassDatatable';
 import {
   Environment,
   EnvironmentId,
-} from '@/react/portainer/environments/types';
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
+} from '@CE/react/portainer/environments/types';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { TextTip } from '@@/Tip/TextTip';
-import { SwitchField } from '@@/form-components/SwitchField';
-import { FormActions } from '@@/form-components/FormActions';
-import { confirm } from '@@/modals/confirm';
-import { ModalType } from '@@/modals';
-import { buildConfirmButton } from '@@/modals/utils';
-import { InsightsBox } from '@@/InsightsBox';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { FormActions } from '@@CE/form-components/FormActions';
+import { confirm } from '@@CE/modals/confirm';
+import { ModalType } from '@@CE/modals';
+import { buildConfirmButton } from '@@CE/modals/utils';
+import { InsightsBox } from '@@CE/InsightsBox';
 
 import { useIngressControllerClassMapQuery } from '../../ingressClass/useIngressControllerClassMap';
 import { IngressControllerClassMap } from '../../ingressClass/types';

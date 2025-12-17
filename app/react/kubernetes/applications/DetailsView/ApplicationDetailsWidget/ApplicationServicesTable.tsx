@@ -1,11 +1,11 @@
 import { Service } from 'kubernetes-types/core/v1';
 import { ExternalLink } from 'lucide-react';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { useEnvironment } from '@/react/portainer/environments/queries';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { useEnvironment } from '@CE/react/portainer/environments/queries';
 
-import { Icon } from '@@/Icon';
-import { TextTip } from '@@/Tip/TextTip';
+import { Icon } from '@@CE/Icon';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 type Props = {
   environmentId: EnvironmentId;

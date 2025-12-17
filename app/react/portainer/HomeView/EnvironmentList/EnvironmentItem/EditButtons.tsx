@@ -2,17 +2,17 @@ import { Edit2, Settings } from 'lucide-react';
 import { ReactNode } from 'react';
 import clsx from 'clsx';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 import {
   Environment,
   PlatformType,
-} from '@/react/portainer/environments/types';
+} from '@CE/react/portainer/environments/types';
 import {
   isEdgeAsync as checkEdgeAsync,
   getPlatformType,
-} from '@/react/portainer/environments/utils';
+} from '@CE/react/portainer/environments/utils';
 
-import { LinkButton } from '@@/LinkButton';
+import { LinkButton } from '@@CE/LinkButton';
 
 export function EditButtons({ environment }: { environment: Environment }) {
   const { isPureAdmin } = useCurrentUser();

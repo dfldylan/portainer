@@ -3,26 +3,26 @@ import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { useCheckRepo } from '@/react/portainer/gitops/queries/useCheckRepo';
-import { useDebounce } from '@/react/hooks/useDebounce';
-import { isPortainerError } from '@/portainer/error';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { useCheckRepo } from '@CE/react/portainer/gitops/queries/useCheckRepo';
+import { useDebounce } from '@CE/react/hooks/useDebounce';
+import { isPortainerError } from '@CE/portainer/error';
 
 import { GitFormModel } from './types';
 import { GitFormUrlField } from './GitFormUrlField';
 import { getAuthentication } from './utils';
 
 // Mock the dependencies
-vi.mock('@/react/portainer/gitops/queries/useCheckRepo', () => ({
+vi.mock('@CE/react/portainer/gitops/queries/useCheckRepo', () => ({
   useCheckRepo: vi.fn(),
   checkRepo: vi.fn(),
 }));
 
-vi.mock('@/react/hooks/useDebounce', () => ({
+vi.mock('@CE/react/hooks/useDebounce', () => ({
   useDebounce: vi.fn(),
 }));
 
-vi.mock('@/portainer/error', () => ({
+vi.mock('@CE/portainer/error', () => ({
   isPortainerError: vi.fn(),
 }));
 

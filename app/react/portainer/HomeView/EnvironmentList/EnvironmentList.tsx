@@ -3,7 +3,7 @@ import { HardDrive, RefreshCcw } from 'lucide-react';
 import _ from 'lodash';
 import { useStore } from 'zustand';
 
-import { usePaginationLimitState } from '@/react/hooks/usePaginationLimitState';
+import { usePaginationLimitState } from '@CE/react/hooks/usePaginationLimitState';
 import {
   Environment,
   EnvironmentType,
@@ -11,22 +11,22 @@ import {
   PlatformType,
   EdgeTypes,
   EnvironmentGroupId,
-} from '@/react/portainer/environments/types';
+} from '@CE/react/portainer/environments/types';
 import {
   refetchIfAnyOffline,
   useEnvironmentList,
-} from '@/react/portainer/environments/queries/useEnvironmentList';
-import { useGroups } from '@/react/portainer/environments/environment-groups/queries';
-import { EnvironmentsQueryParams } from '@/react/portainer/environments/environment.service';
-import { useIsPureAdmin } from '@/react/hooks/useUser';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
-import { environmentStore } from '@/react/hooks/current-environment-store';
+} from '@CE/react/portainer/environments/queries/useEnvironmentList';
+import { useGroups } from '@CE/react/portainer/environments/environment-groups/queries';
+import { EnvironmentsQueryParams } from '@CE/react/portainer/environments/environment.service';
+import { useIsPureAdmin } from '@CE/react/hooks/useUser';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { environmentStore } from '@CE/react/hooks/current-environment-store';
 
-import { TableFooter } from '@@/datatables/TableFooter';
-import { TableContainer, TableTitle } from '@@/datatables';
-import { Button } from '@@/buttons';
-import { PaginationControls } from '@@/PaginationControls';
-import { SearchBar, useSearchBarState } from '@@/datatables/SearchBar';
+import { TableFooter } from '@@CE/datatables/TableFooter';
+import { TableContainer, TableTitle } from '@@CE/datatables';
+import { Button } from '@@CE/buttons';
+import { PaginationControls } from '@@CE/PaginationControls';
+import { SearchBar, useSearchBarState } from '@@CE/datatables/SearchBar';
 
 import { useHomePageFilter } from './HomepageFilter';
 import { ConnectionType } from './types';

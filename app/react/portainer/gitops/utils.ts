@@ -1,4 +1,4 @@
-import { confirm } from '@@/modals/confirm';
+import { confirm } from '@@CE/modals/confirm';
 
 import { GitFormModel } from './types';
 

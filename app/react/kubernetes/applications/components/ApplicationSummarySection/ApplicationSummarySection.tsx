@@ -1,5 +1,5 @@
-import { FormSection } from '@@/form-components/FormSection';
-import { TextTip } from '@@/Tip/TextTip';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { ApplicationFormValues } from '../../types';
 

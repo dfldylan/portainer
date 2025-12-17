@@ -1,11 +1,11 @@
 import { List } from 'lucide-react';
 
-import { queryOptionsFromTableState } from '@/react/common/api/listQueryParams';
+import { queryOptionsFromTableState } from '@CE/react/common/api/listQueryParams';
 
-import { Datatable } from '@@/datatables';
-import { useTableState } from '@@/datatables/useTableState';
-import { withMeta } from '@@/datatables/extend-options/withMeta';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+import { Datatable } from '@@CE/datatables';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { withMeta } from '@@CE/datatables/extend-options/withMeta';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
 
 import { EdgeJob, LogsStatus } from '../../types';
 import { useJobResults } from '../../queries/jobResults/useJobResults';

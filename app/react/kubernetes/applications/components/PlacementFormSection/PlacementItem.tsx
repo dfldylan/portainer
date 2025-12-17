@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 
-import { ItemProps } from '@@/form-components/InputList';
-import { Select } from '@@/form-components/ReactSelect';
-import { isErrorType } from '@@/form-components/formikUtils';
-import { FormError } from '@@/form-components/FormError';
+import { ItemProps } from '@@CE/form-components/InputList';
+import { Select } from '@@CE/form-components/ReactSelect';
+import { isErrorType } from '@@CE/form-components/formikUtils';
+import { FormError } from '@@CE/form-components/FormError';
 
 import { NodeLabels, Placement } from './types';
 

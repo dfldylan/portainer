@@ -3,14 +3,14 @@ import { CalendarCheck2 } from 'lucide-react';
 import {
   DefaultDatatableSettings,
   TableSettings as KubeTableSettings,
-} from '@/react/kubernetes/datatables/DefaultDatatableSettings';
+} from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
 import {
   type FilteredColumnsTableSettings,
   BasicTableSettings,
-} from '@@/datatables/types';
-import { TableState } from '@@/datatables/useTableState';
+} from '@@CE/datatables/types';
+import { TableState } from '@@CE/datatables/useTableState';
 
 import { columns } from '../JobsDatatable/columns';
 import { Job } from '../JobsDatatable/types';

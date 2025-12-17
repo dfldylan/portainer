@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 import { KubernetesSecretCreatePayload, KubernetesSecretUpdatePayload } from 'Kubernetes/models/secret/payloads';
 import { KubernetesApplicationSecret } from 'Kubernetes/models/secret/models';
 import { KubernetesPortainerConfigurationDataAnnotation } from 'Kubernetes/models/configuration/models';
-import { ConfigurationOwnerUsernameLabel } from '@/react/kubernetes/configs/constants';
+import { ConfigurationOwnerUsernameLabel } from '@CE/react/kubernetes/configs/constants';
 import { KubernetesConfigurationFormValuesEntry } from 'Kubernetes/models/configuration/formvalues';
 import { KubernetesSecretTypeOptions } from 'Kubernetes/models/configuration/models';
 class KubernetesSecretConverter {

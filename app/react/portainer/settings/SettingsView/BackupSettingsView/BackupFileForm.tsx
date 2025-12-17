@@ -1,9 +1,9 @@
 import { Download } from 'lucide-react';
 import { Formik, Form } from 'formik';
 
-import { notifySuccess } from '@/portainer/services/notifications';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { LoadingButton } from '@@/buttons/LoadingButton';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
 
 import { DownloadBackupPayload } from './queries/useDownloadBackupMutation';
 import { useDownloadBackupMutation } from './queries';

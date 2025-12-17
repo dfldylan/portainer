@@ -1,11 +1,11 @@
 import { TagIcon } from 'lucide-react';
 import { useStore } from 'zustand';
 
-import { Datatable } from '@@/datatables';
-import { useTableStateWithStorage } from '@@/datatables/useTableState';
-import { DeleteButton } from '@@/buttons/DeleteButton';
-import { withMeta } from '@@/datatables/extend-options/withMeta';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+import { Datatable } from '@@CE/datatables';
+import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { withMeta } from '@@CE/datatables/extend-options/withMeta';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
 
 import { Tag } from './types';
 import { useColumns } from './columns/useColumns';

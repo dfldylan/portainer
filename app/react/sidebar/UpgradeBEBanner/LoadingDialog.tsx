@@ -1,10 +1,10 @@
 import { Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import { useSystemStatus } from '@/react/portainer/system/useSystemStatus';
+import { useSystemStatus } from '@CE/react/portainer/system/useSystemStatus';
 
-import { Modal } from '@@/modals/Modal';
-import { Icon } from '@@/Icon';
+import { Modal } from '@@CE/modals/Modal';
+import { Icon } from '@@CE/Icon';
 
 export function LoadingDialog() {
   useWaitForServerStatus();

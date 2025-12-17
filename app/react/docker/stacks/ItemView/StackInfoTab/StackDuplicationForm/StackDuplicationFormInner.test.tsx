@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { Formik } from 'formik';
 import { http, HttpResponse } from 'msw';
 
-import { server } from '@/setup-tests/server';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { Environment } from '@/react/portainer/environments/types';
-import { EnvironmentGroup } from '@/react/portainer/environments/environment-groups/types';
+import { server } from '@CE/setup-tests/server';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { EnvironmentGroup } from '@CE/react/portainer/environments/environment-groups/types';
 
 import { StackDuplicationFormInner } from './StackDuplicationFormInner';
 import { FormSubmitValues } from './StackDuplicationForm.types';

@@ -1,4 +1,4 @@
-import { ContainerDetailsJSON } from '@/react/docker/containers/queries/useContainer';
+import { ContainerDetailsJSON } from '@CE/react/docker/containers/queries/useContainer';
 
 import { capabilities } from './types';
 import { Values } from './CapabilitiesTab';

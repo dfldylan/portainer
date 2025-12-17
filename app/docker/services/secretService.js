@@ -1,7 +1,7 @@
-import { getSecret } from '@/react/docker/proxy/queries/secrets/useSecret';
-import { getSecrets } from '@/react/docker/proxy/queries/secrets/useSecrets';
-import { removeSecret } from '@/react/docker/proxy/queries/secrets/useRemoveSecretMutation';
-import { createSecret } from '@/react/docker/proxy/queries/secrets/useCreateSecretMutation';
+import { getSecret } from '@CE/react/docker/proxy/queries/secrets/useSecret';
+import { getSecrets } from '@CE/react/docker/proxy/queries/secrets/useSecrets';
+import { removeSecret } from '@CE/react/docker/proxy/queries/secrets/useRemoveSecretMutation';
+import { createSecret } from '@CE/react/docker/proxy/queries/secrets/useCreateSecretMutation';
 
 import { SecretViewModel } from '../models/secret';
 

@@ -1,6 +1,6 @@
 import { Node } from 'docker-types/generated/1.44';
 
-import { ServiceViewModel } from '@/docker/models/service';
+import { ServiceViewModel } from '@CE/docker/models/service';
 
 class ConstraintModel {
   op: string;

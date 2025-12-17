@@ -9,7 +9,7 @@ import {
 } from 'kubernetes-types/apps/v1';
 import { Pod } from 'kubernetes-types/core/v1';
 
-import { parseCPU, safeFilesizeParser } from '@/react/kubernetes/utils';
+import { parseCPU, safeFilesizeParser } from '@CE/react/kubernetes/utils';
 
 import { Application, ApplicationPatch, Revision } from './types';
 import {

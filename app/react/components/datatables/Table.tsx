@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { AriaAttributes, PropsWithChildren } from 'react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
 import { TableContainer } from './TableContainer';
 import { TableActions } from './TableActions';

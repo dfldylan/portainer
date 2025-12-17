@@ -1,6 +1,6 @@
-import { InlineLoader } from '@@/InlineLoader';
-import { Widget } from '@@/Widget/Widget';
-import { WidgetBody } from '@@/Widget';
+import { InlineLoader } from '@@CE/InlineLoader';
+import { Widget } from '@@CE/Widget/Widget';
+import { WidgetBody } from '@@CE/Widget';
 
 import { YAMLInspector } from '../../../components/YAMLInspector';
 

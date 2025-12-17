@@ -1,7 +1,7 @@
-import { StorageClass } from '@/react/portainer/environments/types';
+import { StorageClass } from '@CE/react/portainer/environments/types';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { TextTip } from '@@/Tip/TextTip';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { StorageQuotaItem } from './StorageQuotaItem';
 

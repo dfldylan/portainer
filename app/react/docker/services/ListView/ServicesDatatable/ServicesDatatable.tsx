@@ -2,23 +2,23 @@ import { Shuffle } from 'lucide-react';
 import { Row } from '@tanstack/react-table';
 import { useRef } from 'react';
 
-import { ServiceViewModel } from '@/docker/models/service';
-import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { ServiceViewModel } from '@CE/docker/models/service';
+import { useApiVersion } from '@CE/react/docker/proxy/queries/useVersion';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { IconProps } from '@@/Icon';
-import { ExpandableDatatable } from '@@/datatables/ExpandableDatatable';
+import { IconProps } from '@@CE/Icon';
+import { ExpandableDatatable } from '@@CE/datatables/ExpandableDatatable';
 import {
   createPersistedStore,
   refreshableSettings,
   hiddenColumnsSettings,
-} from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
-import { useRepeater } from '@@/datatables/useRepeater';
-import { defaultGlobalFilterFn } from '@@/datatables/Datatable';
-import { getColumnVisibilityState } from '@@/datatables/ColumnVisibilityMenu';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
-import { withGlobalFilter } from '@@/datatables/extend-options/withGlobalFilter';
+} from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { useRepeater } from '@@CE/datatables/useRepeater';
+import { defaultGlobalFilterFn } from '@@CE/datatables/Datatable';
+import { getColumnVisibilityState } from '@@CE/datatables/ColumnVisibilityMenu';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
+import { withGlobalFilter } from '@@CE/datatables/extend-options/withGlobalFilter';
 
 import { DecoratedTask } from '../../ItemView/TasksDatatable/types';
 

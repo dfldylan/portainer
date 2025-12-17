@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import {
   RegistryFormDockerhub,

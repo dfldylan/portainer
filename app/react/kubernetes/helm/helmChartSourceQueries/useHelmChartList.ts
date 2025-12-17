@@ -1,8 +1,8 @@
 import { compact } from 'lodash';
 import { useQuery } from '@tanstack/react-query';
 
-import axios from '@/portainer/services/axios';
-import { withGlobalError } from '@/react-tools/react-query';
+import axios from '@CE/portainer/services/axios';
+import { withGlobalError } from '@CE/react-tools/react-query';
 
 import { Chart, HelmChartsResponse } from '../types';
 

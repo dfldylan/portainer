@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { Laptop } from 'lucide-react';
 
-import { OpenAMTConfiguration } from '@/react/edge/edge-devices/open-amt/types';
+import { OpenAMTConfiguration } from '@CE/react/edge/edge-devices/open-amt/types';
 
-import { Switch } from '@@/form-components/SwitchField/Switch';
-import { FormControl } from '@@/form-components/FormControl';
-import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
-import { LoadingButton } from '@@/buttons/LoadingButton';
-import { TextTip } from '@@/Tip/TextTip';
-import { Input } from '@@/form-components/Input';
-import { FileUploadField } from '@@/form-components/FileUpload';
-import { Alert } from '@@/Alert';
+import { Switch } from '@@CE/form-components/SwitchField/Switch';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Input } from '@@CE/form-components/Input';
+import { FileUploadField } from '@@CE/form-components/FileUpload';
+import { Alert } from '@@CE/Alert';
 
 import { validationSchema } from './SettingsOpenAMT.validation';
 

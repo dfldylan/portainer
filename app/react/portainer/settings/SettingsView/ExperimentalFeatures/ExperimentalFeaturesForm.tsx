@@ -3,12 +3,12 @@ import * as yup from 'yup';
 import { useCallback } from 'react';
 import { FlaskConical } from 'lucide-react';
 
-import { notifySuccess } from '@/portainer/services/notifications';
-import { ExperimentalFeatures } from '@/react/portainer/settings/types';
-import { useUpdateExperimentalSettingsMutation } from '@/react/portainer/settings/queries';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { ExperimentalFeatures } from '@CE/react/portainer/settings/types';
+import { useUpdateExperimentalSettingsMutation } from '@CE/react/portainer/settings/queries';
 
-import { LoadingButton } from '@@/buttons/LoadingButton';
-import { TextTip } from '@@/Tip/TextTip';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 interface FormValues {}
 

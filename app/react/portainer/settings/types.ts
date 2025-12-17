@@ -1,4 +1,4 @@
-import { TeamId } from '@/react/portainer/users/teams/types';
+import { TeamId } from '@CE/react/portainer/users/teams/types';
 
 export interface TLSConfiguration {
   TLS: boolean;

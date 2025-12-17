@@ -1,5 +1,5 @@
-import { InputList } from '@@/form-components/InputList';
-import { ArrayError } from '@@/form-components/InputList/InputList';
+import { InputList } from '@@CE/form-components/InputList';
+import { ArrayError } from '@@CE/form-components/InputList/InputList';
 
 import { Item } from './Item';
 import { Values } from './types';

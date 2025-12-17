@@ -1,6 +1,6 @@
-import { openSwitchPrompt } from '@@/modals/SwitchPrompt';
-import { ModalType } from '@@/modals';
-import { buildConfirmButton } from '@@/modals/utils';
+import { openSwitchPrompt } from '@@CE/modals/SwitchPrompt';
+import { ModalType } from '@@CE/modals';
+import { buildConfirmButton } from '@@CE/modals/utils';
 
 export async function confirmServiceForceUpdate(message: string) {
   const result = await openSwitchPrompt('Are you sure?', 'Re-pull image', {

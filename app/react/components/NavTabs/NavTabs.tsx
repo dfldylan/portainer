@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { ComponentProps, ReactNode } from 'react';
 
-import { Button } from '@@/buttons';
+import { Button } from '@@CE/buttons';
 
 import styles from './NavTabs.module.css';
 

@@ -186,15 +186,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@@': path.resolve(projectRoot, 'app/react/components'),
-      '@': path.resolve(projectRoot, 'app'),
-      Agent: path.resolve(projectRoot, 'app/agent'),
-      Azure: path.resolve(projectRoot, 'app/azure'),
-      Docker: path.resolve(projectRoot, 'app/docker'),
-      Kubernetes: path.resolve(projectRoot, 'app/kubernetes'),
-      Portainer: path.resolve(projectRoot, 'app/portainer'),
       'lodash-es': 'lodash',
-      'yaml-schema': path.resolve(projectRoot, 'node_modules/codemirror-json-schema/dist/yaml'),
     },
     extensions: ['.js', '.ts', '.tsx'],
     plugins: [

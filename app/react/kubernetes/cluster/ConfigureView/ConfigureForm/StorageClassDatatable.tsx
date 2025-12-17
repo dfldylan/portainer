@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik';
 
-import { TextTip } from '@@/Tip/TextTip';
-import { Switch } from '@@/form-components/SwitchField/Switch';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Switch } from '@@CE/form-components/SwitchField/Switch';
 
 import { StorageAccessModeSelector } from './StorageAccessModeSelector';
 import { ConfigureFormValues, StorageClassFormValues } from './types';

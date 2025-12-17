@@ -1,10 +1,10 @@
 import { http, HttpResponse } from 'msw';
 import { render } from '@testing-library/react';
 
-import { server } from '@/setup-tests/server';
-import { isoDate } from '@/portainer/filters/filters';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { server } from '@CE/setup-tests/server';
+import { isoDate } from '@CE/portainer/filters/filters';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import { BackupFailedPanel } from './BackupFailedPanel';
 

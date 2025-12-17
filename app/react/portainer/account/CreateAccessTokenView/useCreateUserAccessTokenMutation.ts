@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { withError } from '@/react-tools/react-query';
-import { notifySuccess } from '@/portainer/services/notifications';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { withError } from '@CE/react-tools/react-query';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
 import { ApiKeyFormValues } from './types';
 

@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 
-import { UserViewModel } from '@/portainer/models/user';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { UserViewModel } from '@CE/portainer/models/user';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
 
 import { UsersList } from './UsersList';
 

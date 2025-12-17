@@ -1,4 +1,4 @@
-import { Settings } from '@/react/portainer/settings/types';
+import { Settings } from '@CE/react/portainer/settings/types';
 
 import { isBE } from '../../feature-flags/feature-flags.service';
 

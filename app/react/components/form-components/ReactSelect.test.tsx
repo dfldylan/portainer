@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import selectEvent from '@/react/test-utils/react-select';
+import selectEvent from '@CE/react/test-utils/react-select';
 
 import { Select } from './ReactSelect';
 

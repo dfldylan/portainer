@@ -2,9 +2,9 @@ import moment from 'moment';
 import { useMemo } from 'react';
 import { FormikErrors } from 'formik';
 
-import { Select } from '@@/form-components/ReactSelect';
-import { Option } from '@@/form-components/PortainerSelect';
-import { FormError } from '@@/form-components/FormError';
+import { Select } from '@@CE/form-components/ReactSelect';
+import { Option } from '@@CE/form-components/PortainerSelect';
+import { FormError } from '@@CE/form-components/FormError';
 
 import { EndpointChangeWindow } from '../../types';
 

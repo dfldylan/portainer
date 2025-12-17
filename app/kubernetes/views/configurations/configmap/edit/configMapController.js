@@ -7,9 +7,9 @@ import KubernetesConfigurationHelper from 'Kubernetes/helpers/configurationHelpe
 import KubernetesConfigurationConverter from 'Kubernetes/converters/configuration';
 import KubernetesEventHelper from 'Kubernetes/helpers/eventHelper';
 import KubernetesNamespaceHelper from 'Kubernetes/helpers/namespaceHelper';
-import { pluralize } from '@/portainer/helpers/strings';
+import { pluralize } from '@CE/portainer/helpers/strings';
 
-import { confirmUpdate, confirmWebEditorDiscard } from '@@/modals/confirm';
+import { confirmUpdate, confirmWebEditorDiscard } from '@@CE/modals/confirm';
 import { isConfigurationFormValid } from '../../validation';
 
 class KubernetesConfigMapController {

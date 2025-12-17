@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
-import { RestrictedSecretBadge } from '@/react/kubernetes/configs/RestrictedSecretBadge';
+import { RestrictedSecretBadge } from '@CE/react/kubernetes/configs/RestrictedSecretBadge';
 
-import { Button, CopyButton } from '@@/buttons';
+import { Button, CopyButton } from '@@CE/buttons';
 
 import styles from './SensitiveDetails.module.css';
 

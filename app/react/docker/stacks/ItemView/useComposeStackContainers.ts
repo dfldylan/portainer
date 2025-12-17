@@ -1,5 +1,5 @@
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { COMPOSE_STACK_NAME_LABEL } from '@/react/constants';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { COMPOSE_STACK_NAME_LABEL } from '@CE/react/constants';
 
 import { useContainers } from '../../containers/queries/useContainers';
 

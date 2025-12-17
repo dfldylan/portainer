@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 import { Check, X } from 'lucide-react';
 
-import { Badge } from '@@/Badge';
-import { Icon } from '@@/Icon';
+import { Badge } from '@@CE/Badge';
+import { Icon } from '@@CE/Icon';
 
 import type { IngressControllerClassMap } from '../../types';
 

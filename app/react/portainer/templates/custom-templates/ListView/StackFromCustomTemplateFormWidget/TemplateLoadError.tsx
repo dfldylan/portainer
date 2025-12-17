@@ -1,9 +1,9 @@
-import { UserId } from '@/portainer/users/types';
-import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
+import { UserId } from '@CE/portainer/users/types';
+import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
 
-import { Link } from '@@/Link';
-import { FormError } from '@@/form-components/FormError';
+import { Link } from '@@CE/Link';
+import { FormError } from '@@CE/form-components/FormError';
 
 export function TemplateLoadError({
   templateId,

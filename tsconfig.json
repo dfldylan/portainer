@@ -30,8 +30,8 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "paths": {
       // paths relative to the baseUrl
-      "@@/*": ["react/components/*"],
-      "@/*": ["./*", "../app/*"],
+      "@@CE/*": ["react/components/*"],
+      "@CE/*": ["./*", "../app/*"],
       "Agent/*": ["agent/*"],
       "Azure/*": ["azure/*"],
       "Docker/*": ["docker/*"],

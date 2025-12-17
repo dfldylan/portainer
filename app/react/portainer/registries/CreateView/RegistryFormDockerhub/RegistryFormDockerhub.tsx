@@ -2,11 +2,11 @@ import { Formik, Form } from 'formik';
 import { SchemaOf, object, string } from 'yup';
 import { useState } from 'react';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { FormSection } from '@@/form-components/FormSection';
-import { TextTip } from '@@/Tip/TextTip';
-import { FormActions } from '@@/form-components/FormActions';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { FormActions } from '@@CE/form-components/FormActions';
 
 import { RegistryTestConnection } from '../TestConnection/RegistryTestConnection';
 

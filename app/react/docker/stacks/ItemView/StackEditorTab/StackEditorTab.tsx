@@ -2,12 +2,15 @@ import { Formik } from 'formik';
 import { useRouter } from '@uirouter/react';
 import _ from 'lodash';
 
-import { Stack, StackType } from '@/react/common/stacks/types';
-import { useDockerComposeSchema } from '@/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
-import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { Stack, StackType } from '@CE/react/common/stacks/types';
+import { useDockerComposeSchema } from '@CE/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
+import { useApiVersion } from '@CE/react/docker/proxy/queries/useVersion';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { confirmStackUpdate } from '@CE/react/common/stacks/common/confirm-stack-update';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
 
 import { useUpdateStackMutation } from '../../useUpdateStack';
 

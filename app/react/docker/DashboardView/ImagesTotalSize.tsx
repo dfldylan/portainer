@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { PieChart } from 'lucide-react';
 
-import { Icon } from '@/react/components/Icon';
-import { humanize } from '@/portainer/filters/filters';
+import { Icon } from '@CE/react/components/Icon';
+import { humanize } from '@CE/portainer/filters/filters';
 
 interface Props {
   imagesTotalSize: number;

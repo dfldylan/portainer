@@ -1,8 +1,8 @@
 import { boolean, object, SchemaOf, string } from 'yup';
 
-import { validationSchema as accessControlSchema } from '@/react/portainer/access-control/AccessControlForm/AccessControlForm.validation';
+import { validationSchema as accessControlSchema } from '@CE/react/portainer/access-control/AccessControlForm/AccessControlForm.validation';
 
-import { imageConfigValidation } from '@@/ImageConfigFieldset';
+import { imageConfigValidation } from '@@CE/ImageConfigFieldset';
 
 import { Values } from './BaseForm';
 import { validationSchema as portsSchema } from './PortsMappingField.validation';

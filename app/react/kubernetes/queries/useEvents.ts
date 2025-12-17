@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Event } from '@/react/kubernetes/queries/types';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import axios from '@/portainer/services/axios';
-import { withGlobalError } from '@/react-tools/react-query';
+import { Event } from '@CE/react/kubernetes/queries/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import axios from '@CE/portainer/services/axios';
+import { withGlobalError } from '@CE/react-tools/react-query';
 
 import { parseKubernetesAxiosError } from '../axiosError';
 

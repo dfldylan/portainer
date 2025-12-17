@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { createVolume } from '@/react/docker/volumes/queries/useCreateVolume';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { createVolume } from '@CE/react/docker/volumes/queries/useCreateVolume';
 
 export function useCreateLocalVolumes() {
   const environmentId = useEnvironmentId();

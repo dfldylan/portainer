@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
 import { ConfigurationDetails } from './ConfigurationDetails';
 import { InnerTable } from './InnerTable';

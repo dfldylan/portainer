@@ -1,13 +1,13 @@
 import { History } from 'lucide-react';
 import { ReactNode } from 'react';
 
-import { Event } from '@/react/kubernetes/queries/types';
-import { IndexOptional } from '@/react/kubernetes/configs/types';
-import { TableSettings } from '@/react/kubernetes/datatables/DefaultDatatableSettings';
+import { Event } from '@CE/react/kubernetes/queries/types';
+import { IndexOptional } from '@CE/react/kubernetes/configs/types';
+import { TableSettings } from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
-import { TableState } from '@@/datatables/useTableState';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
+import { TableState } from '@@CE/datatables/useTableState';
 
 import { columns } from './columns';
 

@@ -1,10 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { CalendarCheck2, CalendarSync } from 'lucide-react';
 
-import { useUnauthorizedRedirect } from '@/react/hooks/useUnauthorizedRedirect';
+import { useUnauthorizedRedirect } from '@CE/react/hooks/useUnauthorizedRedirect';
 
-import { PageHeader } from '@@/PageHeader';
-import { WidgetTabs, Tab, findSelectedTabIndex } from '@@/Widget/WidgetTabs';
+import { PageHeader } from '@@CE/PageHeader';
+import { WidgetTabs, Tab, findSelectedTabIndex } from '@@CE/Widget/WidgetTabs';
 
 import { JobsDatatable } from './JobsDatatable/JobsDatatable';
 import { CronJobsDatatable } from './CronJobsDatatable/CronJobsDatatable';

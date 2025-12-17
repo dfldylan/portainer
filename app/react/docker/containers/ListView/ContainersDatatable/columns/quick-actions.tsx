@@ -1,10 +1,10 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { useAuthorizations } from '@/react/hooks/useUser';
-import { ContainerQuickActions } from '@/react/docker/containers/components/ContainerQuickActions';
-import { ContainerListViewModel } from '@/react/docker/containers/types';
+import { useAuthorizations } from '@CE/react/hooks/useUser';
+import { ContainerQuickActions } from '@CE/react/docker/containers/components/ContainerQuickActions';
+import { ContainerListViewModel } from '@CE/react/docker/containers/types';
 
-import { useTableSettings } from '@@/datatables/useTableSettings';
+import { useTableSettings } from '@@CE/datatables/useTableSettings';
 
 import { TableSettings } from '../types';
 

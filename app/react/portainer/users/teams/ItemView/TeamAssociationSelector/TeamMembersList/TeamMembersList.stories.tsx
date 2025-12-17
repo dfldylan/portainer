@@ -1,11 +1,11 @@
 import { Meta } from '@storybook/react';
 import { useMemo, useState } from 'react';
 
-import { UserContext } from '@/react/hooks/useUser';
-import { createMockUsers } from '@/react-tools/test-mocks';
-import { UserViewModel } from '@/portainer/models/user';
-import { Role } from '@/portainer/users/types';
-import { TeamRole } from '@/react/portainer/users/teams/types';
+import { UserContext } from '@CE/react/hooks/useUser';
+import { createMockUsers } from '@CE/react-tools/test-mocks';
+import { UserViewModel } from '@CE/portainer/models/user';
+import { Role } from '@CE/portainer/users/types';
+import { TeamRole } from '@CE/react/portainer/users/teams/types';
 
 import { TeamMembersList } from './TeamMembersList';
 

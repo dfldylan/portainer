@@ -1,8 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
-import { useCurrentUser } from '@/react/hooks/useUser';
-import { StackType } from '@/react/common/stacks/types';
+import { parseAccessControlFormData } from '@CE/react/portainer/access-control/utils';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { StackType } from '@CE/react/common/stacks/types';
 
 import { Platform } from '../../types';
 import { useAppTemplateFile } from '../../app-templates/queries/useAppTemplateFile';

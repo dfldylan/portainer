@@ -1,8 +1,8 @@
 import { ComponentProps, PropsWithChildren } from 'react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
-import { LoadingButton } from '@@/buttons';
+import { LoadingButton } from '@@CE/buttons';
 
 import { FormSection } from './FormSection';
 

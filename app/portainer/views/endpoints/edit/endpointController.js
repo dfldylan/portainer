@@ -1,16 +1,16 @@
 import _ from 'lodash-es';
 import uuidv4 from 'uuid/v4';
 
-import { PortainerEndpointTypes } from '@/portainer/models/endpoint/models';
-import EndpointHelper from '@/portainer/helpers/endpointHelper';
+import { PortainerEndpointTypes } from '@CE/portainer/models/endpoint/models';
+import EndpointHelper from '@CE/portainer/helpers/endpointHelper';
 import { getAMTInfo } from 'Portainer/hostmanagement/open-amt/open-amt.service';
-import { confirmDestructive } from '@@/modals/confirm';
-import { isEdgeEnvironment, isDockerAPIEnvironment } from '@/react/portainer/environments/utils';
+import { isEdgeEnvironment, isDockerAPIEnvironment } from '@CE/react/portainer/environments/utils';
 
-import { commandsTabs } from '@/react/edge/components/EdgeScriptForm/scripts';
-import { confirmDisassociate } from '@/react/portainer/environments/ItemView/ConfirmDisassociateModel';
-import { buildConfirmButton } from '@@/modals/utils';
-import { getInfo } from '@/react/docker/proxy/queries/useInfo';
+import { commandsTabs } from '@CE/react/edge/components/EdgeScriptForm/scripts';
+import { confirmDisassociate } from '@CE/react/portainer/environments/ItemView/ConfirmDisassociateModel';
+import { getInfo } from '@CE/react/docker/proxy/queries/useInfo';
+import { buildConfirmButton } from '@@CE/modals/utils';
+import { confirmDestructive } from '@@CE/modals/confirm';
 
 angular.module('portainer.app').controller('EndpointController', EndpointController);
 

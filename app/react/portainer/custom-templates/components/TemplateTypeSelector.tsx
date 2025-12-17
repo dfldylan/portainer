@@ -1,7 +1,7 @@
-import { StackType } from '@/react/common/stacks/types';
+import { StackType } from '@CE/react/common/stacks/types';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Select } from '@@/form-components/Input';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Select } from '@@CE/form-components/Input';
 
 const typeOptions = [
   { label: 'Swarm', value: StackType.DockerSwarm },

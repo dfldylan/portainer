@@ -2,26 +2,29 @@ import { useMemo } from 'react';
 import { Trash2, CalendarCheck2 } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
 import {
   DefaultDatatableSettings,
   TableSettings as KubeTableSettings,
-} from '@/react/kubernetes/datatables/DefaultDatatableSettings';
-import { useKubeStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
-import { CreateFromManifestButton } from '@/react/kubernetes/components/CreateFromManifestButton';
+} from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { useKubeStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
+import { CreateFromManifestButton } from '@CE/react/kubernetes/components/CreateFromManifestButton';
 
-import { confirmDelete } from '@@/modals/confirm';
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { LoadingButton } from '@@/buttons';
+import { confirmDelete } from '@@CE/modals/confirm';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { LoadingButton } from '@@CE/buttons';
 import {
   type FilteredColumnsTableSettings,
   filteredColumnsSettings,
-} from '@@/datatables/types';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
-import { withColumnFilters } from '@@/datatables/extend-options/withColumnFilters';
+} from '@@CE/datatables/types';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
+import { withColumnFilters } from '@@CE/datatables/extend-options/withColumnFilters';
 
 import { useJobs } from './queries/useJobs';
 import { columns } from './columns';

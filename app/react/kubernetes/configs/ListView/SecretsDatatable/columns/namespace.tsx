@@ -1,8 +1,8 @@
 import { Row } from '@tanstack/react-table';
 
-import { filterHOC } from '@/react/components/datatables/Filter';
+import { filterHOC } from '@CE/react/components/datatables/Filter';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 import { SecretRowData } from '../types';
 

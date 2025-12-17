@@ -1,5 +1,5 @@
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { UserId } from '@/portainer/users/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { UserId } from '@CE/portainer/users/types';
 
 export const queryKeys = {
   // Environment-scoped Helm queries (following kubernetes pattern)

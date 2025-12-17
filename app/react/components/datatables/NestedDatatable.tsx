@@ -8,7 +8,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
 import { defaultGetRowId } from './defaultGetRowId';
 import { Table } from './Table';

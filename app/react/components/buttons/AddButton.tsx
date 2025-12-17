@@ -1,9 +1,9 @@
 import { Plus } from 'lucide-react';
 import { ComponentProps, PropsWithChildren } from 'react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 import { Button } from './Button';
 

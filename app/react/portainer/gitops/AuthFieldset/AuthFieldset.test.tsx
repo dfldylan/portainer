@@ -4,8 +4,8 @@ import { render, screen } from '@testing-library/react';
 import {
   GitCredential,
   AuthTypeOption,
-} from '@/react/portainer/account/git-credentials/types';
-import { GitAuthModel } from '@/react/portainer/gitops/types';
+} from '@CE/react/portainer/account/git-credentials/types';
+import { GitAuthModel } from '@CE/react/portainer/gitops/types';
 
 import { AuthFieldset, gitAuthValidation } from './AuthFieldset';
 
@@ -15,7 +15,7 @@ vi.mock('../../feature-flags/feature-flags.service', () => ({
   isLimitedToBE: () => false,
 }));
 
-vi.mock('@/react/hooks/useDebounce', () => ({
+vi.mock('@CE/react/hooks/useDebounce', () => ({
   useDebounce: (value: unknown, callback: (value: unknown) => void) => [
     value,
     callback,

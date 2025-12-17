@@ -10,7 +10,7 @@ import {
 } from 'yup';
 import { useMemo } from 'react';
 
-import { file } from '@@/form-components/yup-file-validation';
+import { file } from '@@CE/form-components/yup-file-validation';
 
 import { useNameValidation } from '../components/EdgeJobForm/NameField';
 import { cronValidation } from '../components/EdgeJobForm/AdvancedCronFieldset';

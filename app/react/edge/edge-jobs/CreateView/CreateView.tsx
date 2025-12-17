@@ -1,5 +1,5 @@
-import { PageHeader } from '@@/PageHeader';
-import { Widget } from '@@/Widget';
+import { PageHeader } from '@@CE/PageHeader';
+import { Widget } from '@@CE/Widget';
 
 import { CreateEdgeJobForm } from './CreateEdgeJobForm';
 

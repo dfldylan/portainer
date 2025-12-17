@@ -1,4 +1,4 @@
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 
 import { EndpointProviderInterface } from './endpointProvider';
 
@@ -62,19 +62,19 @@ export function AngularToReact(
    *
    * **New format**
    * ```
-   * // file:: '@/react/.../useService.ts'
+   * // file:: '@CE/react/.../useService.ts'
    * // this function has `environmentId` as first parameter, which doesn't match the old AngularJS service signature
    * export async function getService(environmentId: EnvironmentId, serviceId: ServiceId) {
    *   // axios.get()
    * }
-   * // file:: '@/react/.../useServices.ts'
+   * // file:: '@CE/react/.../useServices.ts'
    * // this function has `environmentId` as first parameter, which matches the old AngularJS service signature
    * export async function listServices(environmentId: EnvironmentId, serviceId: ServiceId) {
    *   // axios.get()
    * }
    * // file:: AngularJS service.js
-   * import { getService } from '@/react/.../useService.ts';
-   * import { listServices } from '@/react/.../useServices.ts';
+   * import { getService } from '@CE/react/.../useService.ts';
+   * import { listServices } from '@CE/react/.../useServices.ts';
    *
    * // ngInject
    * function ServiceServiceFactory(AngularToReact) {

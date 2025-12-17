@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
-import { transformAutoUpdateViewModel } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
-import { StackViewModel } from '@/react/docker/stacks/view-models/stack';
+import { transformAutoUpdateViewModel } from '@CE/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { StackViewModel } from '@CE/react/docker/stacks/view-models/stack';
 
 angular.module('portainer.app').factory('StackService', [
   '$q',

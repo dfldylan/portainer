@@ -1,13 +1,13 @@
 import { RefreshCw } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import { ServiceViewModel } from '@/docker/models/service';
-import { Authorized } from '@/react/hooks/useUser';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { ServiceViewModel } from '@CE/docker/models/service';
+import { Authorized } from '@CE/react/hooks/useUser';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { AddButton, Button, ButtonGroup } from '@@/buttons';
-import { DeleteButton } from '@@/buttons/DeleteButton';
+import { AddButton, Button, ButtonGroup } from '@@CE/buttons';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
 
 import { confirmServiceForceUpdate } from '../../common/update-service-modal';
 

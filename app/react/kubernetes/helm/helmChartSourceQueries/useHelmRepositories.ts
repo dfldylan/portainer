@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { compact } from 'lodash';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { UserId } from '@/portainer/users/types';
-import { withGlobalError } from '@/react-tools/react-query';
-import { useCurrentUser } from '@/react/hooks/useUser';
-import { Option } from '@/react/components/form-components/PortainerSelect';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { UserId } from '@CE/portainer/users/types';
+import { withGlobalError } from '@CE/react-tools/react-query';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { Option } from '@CE/react/components/form-components/PortainerSelect';
 
 import { HelmRegistriesResponse } from '../types';
 import { RepoValue } from '../components/HelmRegistrySelect';

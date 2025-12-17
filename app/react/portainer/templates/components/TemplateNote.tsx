@@ -1,6 +1,6 @@
 import sanitize from 'sanitize-html';
 
-import { FormSection } from '@@/form-components/FormSection';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 export function TemplateNote({ note }: { note?: string }) {
   if (!note) {

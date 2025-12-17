@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { useAuthorizations } from '@/react/hooks/useUser';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { useAuthorizations } from '@CE/react/hooks/useUser';
 
 import { usePullImageMutation } from '../queries/usePullImageMutation';
 
@@ -11,7 +11,7 @@ import { PullImageFormWidget } from './PullImageFormWidget';
 
 // Mocks
 vi.mock(
-  '@/react/hooks/useUser',
+  '@CE/react/hooks/useUser',
   async (importOriginal: () => Promise<object>) => {
     const actual = await importOriginal();
     return {
@@ -21,11 +21,11 @@ vi.mock(
   }
 );
 
-vi.mock('@/react/hooks/useEnvironmentId', () => ({
+vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => 1,
 }));
 
-vi.mock('@/portainer/services/notifications', () => ({
+vi.mock('@CE/portainer/services/notifications', () => ({
   notifySuccess: vi.fn(),
 }));
 
@@ -36,7 +36,7 @@ vi.mock('../queries/usePullImageMutation', () => ({
   })),
 }));
 
-vi.mock('@@/ImageConfigFieldset/getImageConfig', () => ({
+vi.mock('@@CE/ImageConfigFieldset/getImageConfig', () => ({
   getDefaultImageConfig: () => ({
     image: '',
     registryId: 0,

@@ -1,14 +1,14 @@
 import { CellContext, Column } from '@tanstack/react-table';
 import { Search } from 'lucide-react';
 
-import { truncate } from '@/portainer/filters/filters';
-import { getValueAsArrayOfStrings } from '@/portainer/helpers/array';
-import { Authorized } from '@/react/hooks/useUser';
+import { truncate } from '@CE/portainer/filters/filters';
+import { getValueAsArrayOfStrings } from '@CE/portainer/helpers/array';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Button } from '@@/buttons';
-import { Link } from '@@/Link';
-import { MultipleSelectionFilter } from '@@/datatables/Filter';
-import { UnusedBadge } from '@@/Badge/UnusedBadge';
+import { Button } from '@@CE/buttons';
+import { Link } from '@@CE/Link';
+import { MultipleSelectionFilter } from '@@CE/datatables/Filter';
+import { UnusedBadge } from '@@CE/Badge/UnusedBadge';
 
 import { DecoratedVolume } from '../../types';
 import { getTableMeta } from '../tableMeta';

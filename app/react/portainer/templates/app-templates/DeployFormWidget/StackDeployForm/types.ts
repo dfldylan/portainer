@@ -1,4 +1,4 @@
-import { AccessControlFormData } from '@/react/portainer/access-control/types';
+import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
 
 export interface FormValues {
   name: string;

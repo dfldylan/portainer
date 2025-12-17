@@ -1,10 +1,10 @@
 import { Field, useField } from 'formik';
 
-import { TextTip } from '@@/Tip/TextTip';
-import { FormControl } from '@@/form-components/FormControl';
-import { FormSection } from '@@/form-components/FormSection';
-import { Input } from '@@/form-components/Input';
-import { ExternalLink } from '@@/ExternalLink';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { Input } from '@@CE/form-components/Input';
+import { ExternalLink } from '@@CE/ExternalLink';
 
 export function HelmSection() {
   const [{ name }, { error }] = useField<string>('helmRepositoryUrl');

@@ -2,17 +2,17 @@ import { Field, Form, Formik } from 'formik';
 import { useReducer } from 'react';
 import { Plug2 } from 'lucide-react';
 
-import { useCreateRemoteEnvironmentMutation } from '@/react/portainer/environments/queries/useCreateEnvironmentMutation';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { useCreateRemoteEnvironmentMutation } from '@CE/react/portainer/environments/queries/useCreateEnvironmentMutation';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 import {
   Environment,
   EnvironmentCreationTypes,
-} from '@/react/portainer/environments/types';
-import { TLSFieldset } from '@/react/components/TLSFieldset/TLSFieldset';
+} from '@CE/react/portainer/environments/types';
+import { TLSFieldset } from '@CE/react/components/TLSFieldset/TLSFieldset';
 
-import { LoadingButton } from '@@/buttons/LoadingButton';
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
 
 import { NameField } from '../../shared/NameField';
 import { MoreSettingsSection } from '../../shared/MoreSettingsSection';

@@ -1,6 +1,6 @@
-import { Authorized } from '@/react/hooks/useUser';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 import { columnHelper } from './helper';
 

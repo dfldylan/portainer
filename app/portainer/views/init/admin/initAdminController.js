@@ -1,6 +1,6 @@
-import { getEnvironments } from '@/react/portainer/environments/environment.service';
-import { restoreOptions } from '@/react/portainer/init/InitAdminView/restore-options';
-import { privacyPolicyUrl } from '@/react/portainer/settings/SettingsView/ApplicationSettingsPanel/EnableTelemetryField';
+import { getEnvironments } from '@CE/react/portainer/environments/environment.service';
+import { restoreOptions } from '@CE/react/portainer/init/InitAdminView/restore-options';
+import { privacyPolicyUrl } from '@CE/react/portainer/settings/SettingsView/ApplicationSettingsPanel/EnableTelemetryField';
 
 angular.module('portainer.app').controller('InitAdminController', [
   '$scope',

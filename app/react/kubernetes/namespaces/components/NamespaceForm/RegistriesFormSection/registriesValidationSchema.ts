@@ -1,6 +1,6 @@
 import { SchemaOf, array, object, number, string } from 'yup';
 
-import { Registry } from '@/react/portainer/registries/types/registry';
+import { Registry } from '@CE/react/portainer/registries/types/registry';
 
 export const registriesValidationSchema: SchemaOf<Registry[]> = array(
   object({

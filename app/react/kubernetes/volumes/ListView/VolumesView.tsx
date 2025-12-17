@@ -1,8 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { Database, HardDrive } from 'lucide-react';
 
-import { PageHeader } from '@@/PageHeader';
-import { WidgetTabs, Tab, findSelectedTabIndex } from '@@/Widget/WidgetTabs';
+import { PageHeader } from '@@CE/PageHeader';
+import { WidgetTabs, Tab, findSelectedTabIndex } from '@@CE/Widget/WidgetTabs';
 
 import { VolumesDatatable } from './VolumesDatatable';
 import { StorageDatatable } from './StorageDatatable';

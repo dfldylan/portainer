@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { mockLocalizeDate } from '@/setup-tests/mock-localizeDate';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { mockLocalizeDate } from '@CE/setup-tests/mock-localizeDate';
 
 import { HelmRelease } from '../types';
 

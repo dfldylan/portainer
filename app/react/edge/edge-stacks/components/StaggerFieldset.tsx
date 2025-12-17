@@ -1,12 +1,12 @@
 import { number, string, object, SchemaOf } from 'yup';
 import { FormikErrors } from 'formik';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { RadioGroup } from '@@/RadioGroup/RadioGroup';
-import { Input } from '@@/form-components/Input';
-import { TextTip } from '@@/Tip/TextTip';
-import { FormControl } from '@@/form-components/FormControl';
-import { Button, ButtonGroup } from '@@/buttons';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { RadioGroup } from '@@CE/RadioGroup/RadioGroup';
+import { Input } from '@@CE/form-components/Input';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Button, ButtonGroup } from '@@CE/buttons';
 
 import { StaggerParallelFieldset } from './StaggerParallelFieldset';
 import {

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
 
 import { InnerTable } from './InnerTable';
 import { Application } from './types';
@@ -10,7 +10,7 @@ import { Application } from './types';
 // Mock the necessary hooks
 const mockUseEnvironmentId = vi.fn(() => 1);
 
-vi.mock('@/react/hooks/useEnvironmentId', () => ({
+vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => mockUseEnvironmentId(),
 }));
 

@@ -1,8 +1,8 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { error as notifyError } from '@/portainer/services/notifications';
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { error as notifyError } from '@CE/portainer/services/notifications';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 
 import { Service } from './types';
 

@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { UserViewModel } from '@/portainer/models/user';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { UserViewModel } from '@CE/portainer/models/user';
 
 import { Chart } from '../types';
 
@@ -29,7 +29,7 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
 }));
 
 // Mock dependencies
-vi.mock('@/portainer/services/notifications', () => ({
+vi.mock('@CE/portainer/services/notifications', () => ({
   notifySuccess: vi.fn((title: string, text: string) =>
     mockNotifySuccess(title, text)
   ),

@@ -1,7 +1,7 @@
-import { notifySuccess } from '@/portainer/services/notifications';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { DeleteButton } from '@@/buttons/DeleteButton';
-import { AddButton } from '@@/buttons';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { AddButton } from '@@CE/buttons';
 
 import { AccessToken } from '../../access-tokens/types';
 

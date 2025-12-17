@@ -1,8 +1,8 @@
 import { ExternalLinkIcon } from 'lucide-react';
 
-import { getSchemeFromPort } from '@/react/common/network-utils';
+import { getSchemeFromPort } from '@CE/react/common/network-utils';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 import { Application } from './types';
 

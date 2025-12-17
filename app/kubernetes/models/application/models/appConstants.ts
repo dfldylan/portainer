@@ -2,8 +2,8 @@ import {
   AppType,
   AppDataAccessPolicy,
   DeploymentType,
-} from '@/react/kubernetes/applications/types';
-import { ServiceType } from '@/react/kubernetes/services/types';
+} from '@CE/react/kubernetes/applications/types';
+import { ServiceType } from '@CE/react/kubernetes/services/types';
 
 // The following constants are used by angular views and can be removed once they are no longer referenced
 export const KubernetesApplicationTypes: Record<AppType, AppType> = {

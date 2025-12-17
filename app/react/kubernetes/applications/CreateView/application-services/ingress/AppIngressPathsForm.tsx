@@ -5,15 +5,15 @@ import { useMemo } from 'react';
 import {
   useIngressControllers,
   useIngresses,
-} from '@/react/kubernetes/ingresses/queries';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+} from '@CE/react/kubernetes/ingresses/queries';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { FormError } from '@@/form-components/FormError';
-import { Button } from '@@/buttons';
-import { SwitchField } from '@@/form-components/SwitchField';
-import { TextTip } from '@@/Tip/TextTip';
-import { Link } from '@@/Link';
-import { Icon } from '@@/Icon';
+import { FormError } from '@@CE/form-components/FormError';
+import { Button } from '@@CE/buttons';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Link } from '@@CE/Link';
+import { Icon } from '@@CE/Icon';
 
 import { ServicePortIngressPath } from '../types';
 

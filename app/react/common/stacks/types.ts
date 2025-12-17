@@ -1,11 +1,11 @@
-import { ResourceControlResponse } from '@/react/portainer/access-control/types';
-import { AuthTypeOption } from '@/react/portainer/account/git-credentials/types';
+import { ResourceControlResponse } from '@CE/react/portainer/access-control/types';
+import { AuthTypeOption } from '@CE/react/portainer/account/git-credentials/types';
 import {
   AutoUpdateResponse,
   RepoConfigResponse,
-} from '@/react/portainer/gitops/types';
+} from '@CE/react/portainer/gitops/types';
 
-import { EnvVar } from '@@/form-components/EnvironmentVariablesFieldset/types';
+import { EnvVar } from '@@CE/form-components/EnvironmentVariablesFieldset/types';
 
 export type StackId = number;
 

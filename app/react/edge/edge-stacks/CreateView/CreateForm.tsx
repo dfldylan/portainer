@@ -1,18 +1,18 @@
 import { Formik } from 'formik';
 import { useState, useMemo } from 'react';
 
-import { toGitFormModel } from '@/react/portainer/gitops/types';
-import { getDefaultRelativePathModel } from '@/react/portainer/gitops/RelativePathFieldset/types';
-import { createWebhookId } from '@/portainer/helpers/webhookHelper';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
-import { useCustomTemplate } from '@/react/portainer/templates/custom-templates/queries/useCustomTemplate';
-import { getVariablesFieldDefaultValues } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { useAppTemplate } from '@/react/portainer/templates/app-templates/queries/useAppTemplates';
-import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
-import { getDefaultValues as getEnvVarDefaultValues } from '@/react/portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
-import { parseAutoUpdateResponse } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { toGitFormModel } from '@CE/react/portainer/gitops/types';
+import { getDefaultRelativePathModel } from '@CE/react/portainer/gitops/RelativePathFieldset/types';
+import { createWebhookId } from '@CE/portainer/helpers/webhookHelper';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
+import { useCustomTemplate } from '@CE/react/portainer/templates/custom-templates/queries/useCustomTemplate';
+import { getVariablesFieldDefaultValues } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { useAppTemplate } from '@CE/react/portainer/templates/app-templates/queries/useAppTemplates';
+import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
+import { getDefaultValues as getEnvVarDefaultValues } from '@CE/react/portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
+import { parseAutoUpdateResponse } from '@CE/react/portainer/gitops/AutoUpdateFieldset/utils';
 
-import { Widget } from '@@/Widget';
+import { Widget } from '@@CE/Widget';
 
 import { DeploymentType } from '../types';
 import { getDefaultStaggerConfig } from '../components/StaggerFieldset.types';

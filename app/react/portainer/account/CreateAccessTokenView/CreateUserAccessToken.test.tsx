@@ -1,10 +1,10 @@
 import userEvent from '@testing-library/user-event';
 import { render, waitFor } from '@testing-library/react';
 
-import { UserViewModel } from '@/portainer/models/user';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { UserViewModel } from '@CE/portainer/models/user';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import { CreateUserAccessToken } from './CreateUserAccessToken';
 

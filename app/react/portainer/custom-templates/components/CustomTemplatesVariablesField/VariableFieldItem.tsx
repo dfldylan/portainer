@@ -1,5 +1,5 @@
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
 
 import { VariableDefinition } from '../CustomTemplatesVariablesDefinitionField/CustomTemplatesVariablesDefinitionField';
 

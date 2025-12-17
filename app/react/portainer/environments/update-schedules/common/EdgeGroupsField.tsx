@@ -1,10 +1,10 @@
 import { FormikErrors, FormikHandlers } from 'formik';
 
-import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
+import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Select } from '@@/form-components/ReactSelect';
-import { TextTip } from '@@/Tip/TextTip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Select } from '@@CE/form-components/ReactSelect';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { FormValues } from './types';
 

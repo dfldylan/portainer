@@ -1,9 +1,9 @@
 import { Download } from 'lucide-react';
 import { useState } from 'react';
 
-import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
-import { FormSection } from '@@/form-components/FormSection';
-import { BoxSelector } from '@@/BoxSelector';
+import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { BoxSelector } from '@@CE/BoxSelector';
 
 import { BackupFormType, options } from './backup-options';
 import { BackupFileForm } from './BackupFileForm';

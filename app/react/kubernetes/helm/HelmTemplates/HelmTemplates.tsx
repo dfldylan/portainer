@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
-import { FormSection } from '@@/form-components/FormSection';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { useHelmHTTPChartList } from '../helmChartSourceQueries/useHelmChartList';
 import { Chart } from '../types';

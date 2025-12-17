@@ -1,17 +1,17 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import LaptopCode from '@/assets/ico/laptop-code.svg?c';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useApplications } from '@/react/kubernetes/applications/queries/useApplications';
+import LaptopCode from '@CE/assets/ico/laptop-code.svg?c';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useApplications } from '@CE/react/kubernetes/applications/queries/useApplications';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
-import { useTableStateWithStorage } from '@@/datatables/useTableState';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
+import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
 import {
   BasicTableSettings,
   refreshableSettings,
   RefreshableTableSettings,
-} from '@@/datatables/types';
+} from '@@CE/datatables/types';
 
 import { useColumns } from './columns';
 

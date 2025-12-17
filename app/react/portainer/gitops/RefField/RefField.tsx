@@ -1,12 +1,12 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import { SchemaOf, string } from 'yup';
 
-import { StackId } from '@/react/common/stacks/types';
-import { useStateWrapper } from '@/react/hooks/useStateWrapper';
+import { StackId } from '@CE/react/common/stacks/types';
+import { useStateWrapper } from '@CE/react/hooks/useStateWrapper';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { TextTip } from '@@/Tip/TextTip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { isBE } from '../../feature-flags/feature-flags.service';
 

@@ -1,14 +1,14 @@
 import { useMemo, useEffect } from 'react';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
-import helm from '@/assets/ico/vendor/helm.svg?c';
-import { isPureAdmin } from '@/portainer/users/user.helpers';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import helm from '@CE/assets/ico/vendor/helm.svg?c';
+import { isPureAdmin } from '@CE/portainer/users/user.helpers';
 
-import { Link } from '@@/Link';
-import { Datatable } from '@@/datatables';
-import { createPersistedStore } from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
-import { TextTip } from '@@/Tip/TextTip';
+import { Link } from '@@CE/Link';
+import { Datatable } from '@@CE/datatables';
+import { createPersistedStore } from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { columns } from './columns';
 import { HelmRepositoryDatatableActions } from './HelmRepositoryDatatableActions';

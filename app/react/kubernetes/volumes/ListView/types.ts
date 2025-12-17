@@ -1,5 +1,5 @@
-import { StorageClass } from '@/kubernetes/models/storage-class/StorageClass';
-import { Volume } from '@/kubernetes/models/volume/Volume';
+import { StorageClass } from '@CE/kubernetes/models/storage-class/StorageClass';
+import { Volume } from '@CE/kubernetes/models/volume/Volume';
 
 import { K8sVolOwningApplication } from '../types';
 

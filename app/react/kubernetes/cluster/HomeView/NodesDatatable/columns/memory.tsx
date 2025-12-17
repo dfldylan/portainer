@@ -1,7 +1,7 @@
 import {
   bytesToReadableFormat,
   safeFilesizeParser,
-} from '@/react/kubernetes/utils';
+} from '@CE/react/kubernetes/utils';
 
 import { NodeRowData } from '../types';
 

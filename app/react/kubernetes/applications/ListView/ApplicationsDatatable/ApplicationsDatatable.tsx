@@ -3,21 +3,21 @@ import { BoxIcon } from 'lucide-react';
 import { groupBy, partition } from 'lodash';
 import { useRouter } from '@uirouter/react';
 
-import { DefaultDatatableSettings } from '@/react/kubernetes/datatables/DefaultDatatableSettings';
-import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
-import { CreateFromManifestButton } from '@/react/kubernetes/components/CreateFromManifestButton';
-import { useNamespacesQuery } from '@/react/kubernetes/namespaces/queries/useNamespacesQuery';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useAuthorizations } from '@/react/hooks/useUser';
-import { isSystemNamespace } from '@/react/kubernetes/namespaces/queries/useIsSystemNamespace';
-import { KubernetesApplicationTypes } from '@/kubernetes/models/application/models/appConstants';
-import { useEnvironment } from '@/react/portainer/environments/queries';
-import { useIngresses } from '@/react/kubernetes/ingresses/queries';
+import { DefaultDatatableSettings } from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
+import { CreateFromManifestButton } from '@CE/react/kubernetes/components/CreateFromManifestButton';
+import { useNamespacesQuery } from '@CE/react/kubernetes/namespaces/queries/useNamespacesQuery';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useAuthorizations } from '@CE/react/hooks/useUser';
+import { isSystemNamespace } from '@CE/react/kubernetes/namespaces/queries/useIsSystemNamespace';
+import { KubernetesApplicationTypes } from '@CE/kubernetes/models/application/models/appConstants';
+import { useEnvironment } from '@CE/react/portainer/environments/queries';
+import { useIngresses } from '@CE/react/kubernetes/ingresses/queries';
 
-import { TableSettingsMenu } from '@@/datatables';
-import { DeleteButton } from '@@/buttons/DeleteButton';
-import { AddButton } from '@@/buttons';
-import { ExpandableDatatable } from '@@/datatables/ExpandableDatatable';
+import { TableSettingsMenu } from '@@CE/datatables';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { AddButton } from '@@CE/buttons';
+import { ExpandableDatatable } from '@@CE/datatables/ExpandableDatatable';
 
 import { NamespaceFilter } from '../ApplicationsStacksDatatable/NamespaceFilter';
 import {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
 import { UploadLicenseDialog } from './UploadLicenseDialog';
 import { LoadingDialog } from './LoadingDialog';

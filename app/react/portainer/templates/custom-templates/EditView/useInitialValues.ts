@@ -1,7 +1,7 @@
-import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
-import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { toGitFormModel } from '@/react/portainer/gitops/types';
-import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { parseAccessControlFormData } from '@CE/react/portainer/access-control/utils';
+import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { toGitFormModel } from '@CE/react/portainer/gitops/types';
+import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
 
 import { CustomTemplate } from '../types';
 

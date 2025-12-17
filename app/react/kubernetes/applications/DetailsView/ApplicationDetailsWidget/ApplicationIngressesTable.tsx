@@ -1,12 +1,12 @@
 import { Service } from 'kubernetes-types/core/v1';
 import { useMemo } from 'react';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { useIngresses } from '@/react/kubernetes/ingresses/queries';
-import { Ingress } from '@/react/kubernetes/ingresses/types';
-import { Authorized } from '@/react/hooks/useUser';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { useIngresses } from '@CE/react/kubernetes/ingresses/queries';
+import { Ingress } from '@CE/react/kubernetes/ingresses/types';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 type Props = {
   environmentId: EnvironmentId;

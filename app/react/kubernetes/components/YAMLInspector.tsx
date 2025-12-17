@@ -2,14 +2,14 @@ import { useMemo, useState } from 'react';
 import YAML from 'yaml';
 import { Minus, Plus } from 'lucide-react';
 
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
-import { AutomationTestingProps } from '@/types';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { AutomationTestingProps } from '@CE/types';
 
-import { WebEditorForm } from '@@/WebEditorForm';
-import { Button } from '@@/buttons';
-import { BETeaserButton } from '@@/BETeaserButton';
-import { Alert } from '@@/Alert';
-import { Loading } from '@@/Widget/Loading';
+import { WebEditorForm } from '@@CE/WebEditorForm';
+import { Button } from '@@CE/buttons';
+import { BETeaserButton } from '@@CE/BETeaserButton';
+import { Alert } from '@@CE/Alert';
+import { Loading } from '@@CE/Widget/Loading';
 
 type Props = {
   identifier: string;

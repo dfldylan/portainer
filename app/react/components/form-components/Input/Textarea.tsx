@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { TextareaHTMLAttributes } from 'react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
 export function TextArea({
   className,

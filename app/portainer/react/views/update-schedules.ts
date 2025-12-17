@@ -1,15 +1,15 @@
 import angular from 'angular';
 import { StateRegistry } from '@uirouter/angularjs';
 
-import { r2a } from '@/react-tools/react2angular';
+import { r2a } from '@CE/react-tools/react2angular';
 import {
   ListView,
   CreateView,
   ItemView,
-} from '@/react/portainer/environments/update-schedules';
-import { withUIRouter } from '@/react-tools/withUIRouter';
-import { withReactQuery } from '@/react-tools/withReactQuery';
-import { withCurrentUser } from '@/react-tools/withCurrentUser';
+} from '@CE/react/portainer/environments/update-schedules';
+import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { withReactQuery } from '@CE/react-tools/withReactQuery';
+import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
 
 export const updateSchedulesModule = angular
   .module('portainer.edge.updateSchedules', [])

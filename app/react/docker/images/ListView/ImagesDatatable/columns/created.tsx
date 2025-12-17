@@ -1,4 +1,4 @@
-import { isoDateFromTimestamp } from '@/portainer/filters/filters';
+import { isoDateFromTimestamp } from '@CE/portainer/filters/filters';
 
 import { columnHelper } from './helper';
 

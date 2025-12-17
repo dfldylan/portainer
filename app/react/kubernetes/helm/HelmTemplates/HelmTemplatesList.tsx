@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
 
-import { PortainerSelect } from '@/react/components/form-components/PortainerSelect';
+import { PortainerSelect } from '@CE/react/components/form-components/PortainerSelect';
 
-import { SearchBar } from '@@/datatables/SearchBar';
-import { InlineLoader } from '@@/InlineLoader';
+import { SearchBar } from '@@CE/datatables/SearchBar';
+import { InlineLoader } from '@@CE/InlineLoader';
 
 import { Chart } from '../types';
 import { RepoValue } from '../components/HelmRegistrySelect';

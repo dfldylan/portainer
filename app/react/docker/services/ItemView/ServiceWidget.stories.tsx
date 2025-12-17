@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
 
 import { ServiceWidget } from './ServiceWidget';
 

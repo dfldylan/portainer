@@ -1,6 +1,6 @@
-import { ping } from '@/react/docker/proxy/queries/usePing';
-import { getInfo } from '@/react/docker/proxy/queries/useInfo';
-import { getVersion } from '@/react/docker/proxy/queries/useVersion';
+import { ping } from '@CE/react/docker/proxy/queries/usePing';
+import { getInfo } from '@CE/react/docker/proxy/queries/useInfo';
+import { getVersion } from '@CE/react/docker/proxy/queries/useVersion';
 
 angular.module('portainer.docker').factory('SystemService', SystemServiceFactory);
 

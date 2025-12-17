@@ -1,11 +1,11 @@
 import { Edit, Trash2 } from 'lucide-react';
 
-import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { StackType } from '@/react/common/stacks/types';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
+import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { StackType } from '@CE/react/common/stacks/types';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
 
-import { Button } from '@@/buttons';
-import { Link } from '@@/Link';
+import { Button } from '@@CE/buttons';
+import { Link } from '@@CE/Link';
 
 import { TemplateItem } from '../../components/TemplateItem';
 

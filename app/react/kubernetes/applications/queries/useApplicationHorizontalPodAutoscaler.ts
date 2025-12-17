@@ -4,9 +4,9 @@ import {
   HorizontalPodAutoscalerList,
 } from 'kubernetes-types/autoscaling/v1';
 
-import { withGlobalError } from '@/react-tools/react-query';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import axios from '@/portainer/services/axios';
+import { withGlobalError } from '@CE/react-tools/react-query';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import axios from '@CE/portainer/services/axios';
 
 import type { Application } from '../types';
 import { parseKubernetesAxiosError } from '../../axiosError';

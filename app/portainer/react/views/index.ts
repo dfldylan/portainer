@@ -1,17 +1,17 @@
 import angular from 'angular';
 
-import { HomeView } from '@/react/portainer/HomeView';
-import { withCurrentUser } from '@/react-tools/withCurrentUser';
-import { r2a } from '@/react-tools/react2angular';
-import { withReactQuery } from '@/react-tools/withReactQuery';
-import { withUIRouter } from '@/react-tools/withUIRouter';
-import { CreateUserAccessToken } from '@/react/portainer/account/CreateAccessTokenView';
-import { EdgeComputeSettingsView } from '@/react/portainer/settings/EdgeComputeView/EdgeComputeSettingsView';
-import { EdgeAutoCreateScriptView } from '@/react/portainer/environments/EdgeAutoCreateScriptView';
-import { ListView as EnvironmentsListView } from '@/react/portainer/environments/ListView';
-import { BackupSettingsPanel } from '@/react/portainer/settings/SettingsView/BackupSettingsView/BackupSettingsPanel';
-import { SettingsView } from '@/react/portainer/settings/SettingsView/SettingsView';
-import { CreateHelmRepositoriesView } from '@/react/portainer/account/helm-repositories/CreateHelmRepositoryView';
+import { HomeView } from '@CE/react/portainer/HomeView';
+import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
+import { r2a } from '@CE/react-tools/react2angular';
+import { withReactQuery } from '@CE/react-tools/withReactQuery';
+import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { CreateUserAccessToken } from '@CE/react/portainer/account/CreateAccessTokenView';
+import { EdgeComputeSettingsView } from '@CE/react/portainer/settings/EdgeComputeView/EdgeComputeSettingsView';
+import { EdgeAutoCreateScriptView } from '@CE/react/portainer/environments/EdgeAutoCreateScriptView';
+import { ListView as EnvironmentsListView } from '@CE/react/portainer/environments/ListView';
+import { BackupSettingsPanel } from '@CE/react/portainer/settings/SettingsView/BackupSettingsView/BackupSettingsPanel';
+import { SettingsView } from '@CE/react/portainer/settings/SettingsView/SettingsView';
+import { CreateHelmRepositoriesView } from '@CE/react/portainer/account/helm-repositories/CreateHelmRepositoryView';
 
 import { wizardModule } from './wizard';
 import { teamsModule } from './teams';

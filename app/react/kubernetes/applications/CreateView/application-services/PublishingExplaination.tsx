@@ -1,6 +1,6 @@
-import ingressDiagram from '@/assets/images/ingress-explanatory-diagram.png';
+import ingressDiagram from '@CE/assets/images/ingress-explanatory-diagram.png';
 
-import { FormSection } from '@@/form-components/FormSection';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 export function PublishingExplaination() {
   return (

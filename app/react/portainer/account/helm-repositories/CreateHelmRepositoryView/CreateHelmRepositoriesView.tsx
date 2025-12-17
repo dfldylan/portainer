@@ -1,5 +1,5 @@
-import { PageHeader } from '@@/PageHeader';
-import { Widget, WidgetBody } from '@@/Widget';
+import { PageHeader } from '@@CE/PageHeader';
+import { Widget, WidgetBody } from '@@CE/Widget';
 
 import { CreateHelmRepositoryForm } from './CreateHelmRespositoriesForm';
 

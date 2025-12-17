@@ -1,6 +1,6 @@
 import { Row, Table as TableInstance } from '@tanstack/react-table';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
 import { Table } from './Table';
 import { DefaultType } from './types';

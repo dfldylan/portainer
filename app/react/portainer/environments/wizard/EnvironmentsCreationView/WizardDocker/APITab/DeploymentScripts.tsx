@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { CopyButton } from '@@/buttons/CopyButton';
-import { Code } from '@@/Code';
-import { NavTabs } from '@@/NavTabs';
-import { NavContainer } from '@@/NavTabs/NavContainer';
-import { TextTip } from '@@/Tip/TextTip';
+import { CopyButton } from '@@CE/buttons/CopyButton';
+import { Code } from '@@CE/Code';
+import { NavTabs } from '@@CE/NavTabs';
+import { NavContainer } from '@@CE/NavTabs/NavContainer';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 const deployments = [
   {

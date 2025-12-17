@@ -1,6 +1,6 @@
 import { ColumnDef, Row, Table } from '@tanstack/react-table';
 
-import { Checkbox } from '@@/form-components/Checkbox';
+import { Checkbox } from '@@CE/form-components/Checkbox';
 
 function allRowsSelected<T>(table: Table<T>) {
   const { rows } = table.getCoreRowModel();

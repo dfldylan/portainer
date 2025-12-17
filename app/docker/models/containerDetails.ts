@@ -1,7 +1,7 @@
-import { IResource } from '@/react/docker/components/datatable/createOwnershipColumn';
-import { ContainerDetailsResponse } from '@/react/docker/containers/queries/useContainer';
-import { PortainerResponse } from '@/react/docker/types';
-import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { IResource } from '@CE/react/docker/components/datatable/createOwnershipColumn';
+import { ContainerDetailsResponse } from '@CE/react/docker/containers/queries/useContainer';
+import { PortainerResponse } from '@CE/react/docker/types';
+import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
 
 export class ContainerDetailsViewModel
   implements IResource, Pick<PortainerResponse<unknown>, 'IsPortainer'>

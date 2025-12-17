@@ -1,7 +1,7 @@
 import { values } from 'lodash';
 
-import { ContainerStats } from '@/react/docker/containers/queries/useContainerStats';
-import { ValueOf } from '@/types';
+import { ContainerStats } from '@CE/react/docker/containers/queries/useContainerStats';
+import { ValueOf } from '@CE/types';
 
 /**
  * This type is arbitrary and only defined based on what we use / observed from the API responses.

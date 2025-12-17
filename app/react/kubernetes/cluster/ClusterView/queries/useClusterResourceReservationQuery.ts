@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { Node } from 'kubernetes-types/core/v1';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { getTotalResourcesForAllApplications } from '@/react/kubernetes/metrics/queries/useMetricsForApplications';
-import { getMebibytes, safeFilesizeParser } from '@/react/kubernetes/utils';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { getTotalResourcesForAllApplications } from '@CE/react/kubernetes/metrics/queries/useMetricsForApplications';
+import { getMebibytes, safeFilesizeParser } from '@CE/react/kubernetes/utils';
 
 export function useClusterResourceReservationQuery(
   environmentId: EnvironmentId,

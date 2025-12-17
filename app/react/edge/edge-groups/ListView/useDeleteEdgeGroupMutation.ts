@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { promiseSequence } from '@/portainer/helpers/promise-utils';
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@/react-tools/react-query';
+} from '@CE/react-tools/react-query';
 
 import { EdgeGroup } from '../types';
 import { buildUrl } from '../queries/build-url';

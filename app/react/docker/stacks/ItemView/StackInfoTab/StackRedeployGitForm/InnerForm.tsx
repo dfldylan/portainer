@@ -1,15 +1,15 @@
 import { Form, useFormikContext } from 'formik';
 
-import { Stack, StackType } from '@/react/common/stacks/types';
-import { baseStackWebhookUrl } from '@/portainer/helpers/webhookHelper';
-import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { AutoUpdateFieldset } from '@/react/portainer/gitops/AutoUpdateFieldset';
-import { InfoPanel } from '@/react/portainer/gitops/InfoPanel';
-import { TimeWindowDisplay } from '@/react/portainer/gitops/TimeWindowDisplay';
+import { Stack, StackType } from '@CE/react/common/stacks/types';
+import { baseStackWebhookUrl } from '@CE/portainer/helpers/webhookHelper';
+import { useApiVersion } from '@CE/react/docker/proxy/queries/useVersion';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { AutoUpdateFieldset } from '@CE/react/portainer/gitops/AutoUpdateFieldset';
+import { InfoPanel } from '@CE/react/portainer/gitops/InfoPanel';
+import { TimeWindowDisplay } from '@CE/react/portainer/gitops/TimeWindowDisplay';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { StackEnvironmentVariablesPanel } from '@@/form-components/EnvironmentVariablesFieldset';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { StackEnvironmentVariablesPanel } from '@@CE/form-components/EnvironmentVariablesFieldset';
 
 import { FormValues } from './types';
 import { AdvancedConfigurationSection } from './AdvancedConfigurationSection';

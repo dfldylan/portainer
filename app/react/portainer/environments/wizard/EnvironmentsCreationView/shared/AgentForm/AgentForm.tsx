@@ -2,15 +2,15 @@ import { Form, Formik } from 'formik';
 import { useReducer } from 'react';
 import { Plug2 } from 'lucide-react';
 
-import { useCreateAgentEnvironmentMutation } from '@/react/portainer/environments/queries/useCreateEnvironmentMutation';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { useCreateAgentEnvironmentMutation } from '@CE/react/portainer/environments/queries/useCreateEnvironmentMutation';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 import {
   ContainerEngine,
   Environment,
-} from '@/react/portainer/environments/types';
-import { CreateAgentEnvironmentValues } from '@/react/portainer/environments/environment.service/create';
+} from '@CE/react/portainer/environments/types';
+import { CreateAgentEnvironmentValues } from '@CE/react/portainer/environments/environment.service/create';
 
-import { LoadingButton } from '@@/buttons/LoadingButton';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
 
 import { NameField } from '../NameField';
 import { MoreSettingsSection } from '../MoreSettingsSection';

@@ -1,5 +1,5 @@
-import { TagId } from '@/portainer/tags/types';
-import { DockerSnapshot } from '@/react/docker/snapshots/types';
+import { TagId } from '@CE/portainer/tags/types';
+import { DockerSnapshot } from '@CE/react/docker/snapshots/types';
 
 export type EnvironmentGroupId = number;
 

@@ -2,9 +2,9 @@ import { DefaultBodyType, HttpResponse } from 'msw';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { http, server } from '@/setup-tests/server';
-import selectEvent from '@/react/test-utils/react-select';
-import { mockCodeMirror } from '@/setup-tests/mock-codemirror';
+import { http, server } from '@CE/setup-tests/server';
+import selectEvent from '@CE/react/test-utils/react-select';
+import { mockCodeMirror } from '@CE/setup-tests/mock-codemirror';
 
 import { renderCreateForm } from './utils.test';
 

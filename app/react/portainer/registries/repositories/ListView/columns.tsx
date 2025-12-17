@@ -1,7 +1,7 @@
 import { createColumnHelper, CellContext } from '@tanstack/react-table';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { Link } from '@@/Link';
+import { Link } from '@@CE/Link';
 
 import { useRepositoryTags } from './useRepositoryTags';
 import { Repository } from './types';

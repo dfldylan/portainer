@@ -1,13 +1,13 @@
 import { IFormController } from 'angular';
 import { FormikErrors } from 'formik';
 
-import { DeployMethod, GitFormModel } from '@/react/portainer/gitops/types';
-import { validateGitForm } from '@/react/portainer/gitops/GitForm';
-import { notifyError } from '@/portainer/services/notifications';
-import { IAuthenticationService } from '@/portainer/services/types';
-import { getGitCredentials } from '@/react/portainer/account/git-credentials/git-credentials.service';
-import { GitCredential } from '@/react/portainer/account/git-credentials/types';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import { DeployMethod, GitFormModel } from '@CE/react/portainer/gitops/types';
+import { validateGitForm } from '@CE/react/portainer/gitops/GitForm';
+import { notifyError } from '@CE/portainer/services/notifications';
+import { IAuthenticationService } from '@CE/portainer/services/types';
+import { getGitCredentials } from '@CE/react/portainer/account/git-credentials/git-credentials.service';
+import { GitCredential } from '@CE/react/portainer/account/git-credentials/types';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
 export default class GitFormController {
   errors?: FormikErrors<GitFormModel>;

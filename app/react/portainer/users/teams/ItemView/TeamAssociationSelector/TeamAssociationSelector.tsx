@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { User } from '@/portainer/users/types';
+import { User } from '@CE/portainer/users/types';
 
 import { TeamId, TeamMembership } from '../../types';
 

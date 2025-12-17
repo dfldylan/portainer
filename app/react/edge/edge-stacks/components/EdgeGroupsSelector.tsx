@@ -1,13 +1,13 @@
 import _ from 'lodash';
 import { useState } from 'react';
 
-import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
 
-import { Select } from '@@/form-components/ReactSelect';
-import { FormError } from '@@/form-components/FormError';
-import { Link } from '@@/Link';
-import { FormControl } from '@@/form-components/FormControl';
-import { FormSection } from '@@/form-components/FormSection';
+import { Select } from '@@CE/form-components/ReactSelect';
+import { FormError } from '@@CE/form-components/FormError';
+import { Link } from '@@CE/Link';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { useEdgeGroups } from '../../edge-groups/queries/useEdgeGroups';
 

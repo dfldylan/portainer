@@ -1,13 +1,13 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { promiseSequence } from '@/portainer/helpers/promise-utils';
-import { withGlobalError, withInvalidate } from '@/react-tools/react-query';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { notifySuccess } from '@/portainer/services/notifications';
-import { pluralize } from '@/portainer/helpers/strings';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
+import { withGlobalError, withInvalidate } from '@CE/react-tools/react-query';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { pluralize } from '@CE/portainer/helpers/strings';
 
-import { DeleteButton } from '@@/buttons/DeleteButton';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
 
 import { ConfigViewModel } from '../../model';
 import { queryKeys } from '../../queries/query-keys';

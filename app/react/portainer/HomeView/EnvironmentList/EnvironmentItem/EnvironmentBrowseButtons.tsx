@@ -1,16 +1,16 @@
 import { History, Wifi, WifiOff, X } from 'lucide-react';
 import clsx from 'clsx';
 
-import { Environment } from '@/react/portainer/environments/types';
+import { Environment } from '@CE/react/portainer/environments/types';
 import {
   getDashboardRoute,
   isEdgeAsync as checkEdgeAsync,
-} from '@/react/portainer/environments/utils';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+} from '@CE/react/portainer/environments/utils';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
-import { Icon } from '@@/Icon';
-import { LinkButton } from '@@/LinkButton';
-import { Button } from '@@/buttons';
+import { Icon } from '@@CE/Icon';
+import { LinkButton } from '@@CE/LinkButton';
+import { Button } from '@@CE/buttons';
 
 type BrowseStatus = 'snapshot' | 'connected' | 'disconnected';
 

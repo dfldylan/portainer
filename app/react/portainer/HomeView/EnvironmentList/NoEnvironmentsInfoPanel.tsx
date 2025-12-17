@@ -1,6 +1,6 @@
-import { InformationPanel } from '@@/InformationPanel';
-import { Link } from '@@/Link';
-import { TextTip } from '@@/Tip/TextTip';
+import { InformationPanel } from '@@CE/InformationPanel';
+import { Link } from '@@CE/Link';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 export function NoEnvironmentsInfoPanel({ isAdmin }: { isAdmin: boolean }) {
   return (

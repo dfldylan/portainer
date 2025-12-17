@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { User } from '@/portainer/users/types';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { User } from '@CE/portainer/users/types';
 import {
   mutationOptions,
   withInvalidate,
   queryClient,
-} from '@/react-tools/react-query';
-import { userQueryKeys } from '@/portainer/users/queries/queryKeys';
-import { useCurrentUser } from '@/react/hooks/useUser';
+} from '@CE/react-tools/react-query';
+import { userQueryKeys } from '@CE/portainer/users/queries/queryKeys';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
 export function useUpdateUserMutation() {
   const {

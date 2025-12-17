@@ -4,15 +4,18 @@ import { http, HttpResponse } from 'msw';
 import { vi } from 'vitest';
 import { ComponentProps } from 'react';
 
-import { server } from '@/setup-tests/server';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { createMockUsers, createMockStack } from '@/react-tools/test-mocks';
-import { EnvironmentType } from '@/react/portainer/environments/types';
-import { Role } from '@/portainer/users/types';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { server } from '@CE/setup-tests/server';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { createMockUsers, createMockStack } from '@CE/react-tools/test-mocks';
+import { EnvironmentType } from '@CE/react/portainer/environments/types';
+import { Role } from '@CE/portainer/users/types';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { confirmStackUpdate } from '@CE/react/common/stacks/common/confirm-stack-update';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
 
 import { StackEditorTab } from './StackEditorTab';
 
@@ -36,7 +39,7 @@ const defaultProps = {
 };
 
 // Mock the hooks and child component
-vi.mock('@@/WebEditorForm', () => ({
+vi.mock('@@CE/WebEditorForm', () => ({
   usePreventExit: vi.fn(),
 }));
 
@@ -51,13 +54,13 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
   })),
 }));
 
-vi.mock('@/react/common/stacks/common/confirm-stack-update', () => ({
+vi.mock('@CE/react/common/stacks/common/confirm-stack-update', () => ({
   confirmStackUpdate: vi.fn(() =>
     Promise.resolve({ repullImageAndRedeploy: false })
   ),
 }));
 
-vi.mock('@/portainer/services/notifications', () => ({
+vi.mock('@CE/portainer/services/notifications', () => ({
   notifyError: vi.fn(),
   notifySuccess: vi.fn(),
 }));

@@ -2,9 +2,9 @@ import { SchemaOf, array, boolean, object, string } from 'yup';
 import filesizeParser from 'filesize-parser';
 import _ from 'lodash';
 
-import { StorageClass } from '@/react/portainer/environments/types';
+import { StorageClass } from '@CE/react/portainer/environments/types';
 
-import { buildUniquenessTest } from '@@/form-components/validate-unique';
+import { buildUniquenessTest } from '@@CE/form-components/validate-unique';
 
 import { ExistingVolume, PersistedFolderFormValue } from './types';
 

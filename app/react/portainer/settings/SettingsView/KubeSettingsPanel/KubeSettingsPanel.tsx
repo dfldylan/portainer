@@ -1,12 +1,12 @@
 import { Form, Formik } from 'formik';
 import { useQueryClient } from '@tanstack/react-query';
 
-import kubeIcon from '@/assets/ico/kube.svg?c';
-import { notifySuccess } from '@/portainer/services/notifications';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import kubeIcon from '@CE/assets/ico/kube.svg?c';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { LoadingButton } from '@@/buttons';
-import { Widget } from '@@/Widget';
+import { LoadingButton } from '@@CE/buttons';
+import { Widget } from '@@CE/Widget';
 
 import { useUpdateSettingsMutation } from '../../queries';
 import { Settings } from '../../types';

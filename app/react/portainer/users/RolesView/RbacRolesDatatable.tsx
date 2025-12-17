@@ -2,12 +2,12 @@ import { FileCode } from 'lucide-react';
 import { createColumnHelper } from '@tanstack/react-table';
 import _ from 'lodash';
 
-import { RoleTypes } from '@/portainer/rbac/models/role';
+import { RoleTypes } from '@CE/portainer/rbac/models/role';
 
-import { Datatable } from '@@/datatables';
-import { createPersistedStore } from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
-import { BEFeatureIndicator } from '@@/BEFeatureIndicator';
+import { Datatable } from '@@CE/datatables';
+import { createPersistedStore } from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { BEFeatureIndicator } from '@@CE/BEFeatureIndicator';
 
 import { isBE } from '../../feature-flags/feature-flags.service';
 import { FeatureId } from '../../feature-flags/enums';

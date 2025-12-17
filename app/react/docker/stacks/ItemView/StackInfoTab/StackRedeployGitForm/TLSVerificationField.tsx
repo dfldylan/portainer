@@ -1,6 +1,6 @@
-import { confirmEnableTLSVerify } from '@/react/portainer/gitops/utils';
+import { confirmEnableTLSVerify } from '@CE/react/portainer/gitops/utils';
 
-import { SwitchField } from '@@/form-components/SwitchField';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 interface Props {
   value: boolean;

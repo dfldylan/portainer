@@ -1,6 +1,6 @@
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { UserId } from '@/portainer/users/types';
-import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { UserId } from '@CE/portainer/users/types';
+import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
 
 export enum ScheduleType {
   Update = 1,

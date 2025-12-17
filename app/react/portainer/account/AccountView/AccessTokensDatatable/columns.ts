@@ -1,6 +1,6 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { isoDateFromTimestamp } from '@/portainer/filters/filters';
+import { isoDateFromTimestamp } from '@CE/portainer/filters/filters';
 
 import { AccessToken } from '../../access-tokens/types';
 

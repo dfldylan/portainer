@@ -1,9 +1,9 @@
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useEnvironmentDeploymentOptions } from '@/react/portainer/environments/queries/useEnvironment';
-import { useAuthorizations } from '@/react/hooks/useUser';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentDeploymentOptions } from '@CE/react/portainer/environments/queries/useEnvironment';
+import { useAuthorizations } from '@CE/react/hooks/useUser';
 
-import { WebEditorForm } from '@@/WebEditorForm';
-import { TextTip } from '@@/Tip/TextTip';
+import { WebEditorForm } from '@@CE/WebEditorForm';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 type StackFileContent = string;
 

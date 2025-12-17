@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-import { server } from '@/setup-tests/server';
+import { server } from '@CE/setup-tests/server';
 
 import { StackType } from '../../../../../common/stacks/types';
 

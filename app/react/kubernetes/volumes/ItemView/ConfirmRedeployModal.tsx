@@ -1,5 +1,5 @@
-import { confirm } from '@@/modals/confirm';
-import { buildConfirmButton } from '@@/modals/utils';
+import { confirm } from '@@CE/modals/confirm';
+import { buildConfirmButton } from '@@CE/modals/utils';
 
 export function confirmRedeploy() {
   return confirm({

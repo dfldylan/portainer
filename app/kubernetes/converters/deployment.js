@@ -11,7 +11,7 @@ import {
 import KubernetesApplicationHelper from 'Kubernetes/helpers/application';
 import KubernetesResourceReservationHelper from 'Kubernetes/helpers/resourceReservationHelper';
 import KubernetesCommonHelper from 'Kubernetes/helpers/commonHelper';
-import { buildImageFullURIFromModel } from '@/react/docker/images/utils';
+import { buildImageFullURIFromModel } from '@CE/react/docker/images/utils';
 
 class KubernetesDeploymentConverter {
   /**

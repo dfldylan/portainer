@@ -1,12 +1,12 @@
 import { render, screen, within } from '@testing-library/react';
 import { HttpResponse } from 'msw';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { server, http } from '@/setup-tests/server';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { server, http } from '@CE/setup-tests/server';
 import {
   createMockEnvironment,
   createMockQueryResult,
-} from '@/react-tools/test-mocks';
+} from '@CE/react-tools/test-mocks';
 
 import { ClusterResourceReservation } from './ClusterResourceReservation';
 
@@ -15,15 +15,15 @@ const mockUseEnvironmentId = vi.fn(() => 3);
 const mockUseCurrentEnvironment = vi.fn();
 
 // Set up mock implementations for hooks
-vi.mock('@/react/hooks/useUser', () => ({
+vi.mock('@CE/react/hooks/useUser', () => ({
   useAuthorizations: () => mockUseAuthorizations(),
 }));
 
-vi.mock('@/react/hooks/useEnvironmentId', () => ({
+vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => mockUseEnvironmentId(),
 }));
 
-vi.mock('@/react/hooks/useCurrentEnvironment', () => ({
+vi.mock('@CE/react/hooks/useCurrentEnvironment', () => ({
   useCurrentEnvironment: () => mockUseCurrentEnvironment(),
 }));
 

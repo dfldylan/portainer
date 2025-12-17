@@ -10,12 +10,12 @@ import {
   Shuffle,
 } from 'lucide-react';
 
-import Memory from '@/assets/ico/memory.svg?c';
-import { addPlural } from '@/portainer/helpers/strings';
-import { DockerSnapshot } from '@/react/docker/snapshots/types';
-import { humanize } from '@/portainer/filters/filters';
+import Memory from '@CE/assets/ico/memory.svg?c';
+import { addPlural } from '@CE/portainer/helpers/strings';
+import { DockerSnapshot } from '@CE/react/docker/snapshots/types';
+import { humanize } from '@CE/portainer/filters/filters';
 
-import { StatsItem } from '@@/StatsItem';
+import { StatsItem } from '@@CE/StatsItem';
 
 interface Props {
   snapshot?: DockerSnapshot;

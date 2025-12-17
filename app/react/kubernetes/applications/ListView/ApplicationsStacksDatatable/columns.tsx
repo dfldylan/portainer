@@ -1,12 +1,12 @@
 import { FileText } from 'lucide-react';
 import { CellContext, createColumnHelper } from '@tanstack/react-table';
 
-import { useIsSystemNamespace } from '@/react/kubernetes/namespaces/queries/useIsSystemNamespace';
+import { useIsSystemNamespace } from '@CE/react/kubernetes/namespaces/queries/useIsSystemNamespace';
 
-import { buildExpandColumn } from '@@/datatables/expand-column';
-import { Link } from '@@/Link';
-import { Icon } from '@@/Icon';
-import { SystemBadge } from '@@/Badge/SystemBadge';
+import { buildExpandColumn } from '@@CE/datatables/expand-column';
+import { Link } from '@@CE/Link';
+import { Icon } from '@@CE/Icon';
+import { SystemBadge } from '@@CE/Badge/SystemBadge';
 
 import { Stack } from './types';
 

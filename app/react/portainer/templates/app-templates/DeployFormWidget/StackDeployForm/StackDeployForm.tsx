@@ -1,24 +1,24 @@
 import { useRouter } from '@uirouter/react';
 import { Formik, Form } from 'formik';
 
-import { notifySuccess } from '@/portainer/services/notifications';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 import {
   SwarmCreatePayload,
   useCreateStack,
-} from '@/react/common/stacks/queries/useCreateStack/useCreateStack';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { AccessControlForm } from '@/react/portainer/access-control';
-import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
-import { TemplateType } from '@/react/portainer/templates/app-templates/types';
-import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
-import { NameField } from '@/react/common/stacks/CreateView/NameField';
-import { useSwarmId } from '@/react/docker/proxy/queries/useSwarm';
+} from '@CE/react/common/stacks/queries/useCreateStack/useCreateStack';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { AccessControlForm } from '@CE/react/portainer/access-control';
+import { parseAccessControlFormData } from '@CE/react/portainer/access-control/utils';
+import { TemplateType } from '@CE/react/portainer/templates/app-templates/types';
+import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
+import { NameField } from '@CE/react/common/stacks/CreateView/NameField';
+import { useSwarmId } from '@CE/react/docker/proxy/queries/useSwarm';
 
-import { Button } from '@@/buttons';
-import { FormActions } from '@@/form-components/FormActions';
-import { FormSection } from '@@/form-components/FormSection';
-import { TextTip } from '@@/Tip/TextTip';
+import { Button } from '@@CE/buttons';
+import { FormActions } from '@@CE/form-components/FormActions';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { EnvVarsFieldset } from '../EnvVarsFieldset';
 

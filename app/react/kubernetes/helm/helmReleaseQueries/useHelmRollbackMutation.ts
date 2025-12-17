@@ -1,13 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 import {
   queryClient,
   withInvalidate,
   withGlobalError,
-} from '@/react-tools/react-query';
-import axios from '@/portainer/services/axios';
-import { queryKeys as applicationsQueryKeys } from '@/react/kubernetes/applications/queries/query-keys';
+} from '@CE/react-tools/react-query';
+import axios from '@CE/portainer/services/axios';
+import { queryKeys as applicationsQueryKeys } from '@CE/react/kubernetes/applications/queries/query-keys';
 
 import { queryKeys } from './query-keys';
 

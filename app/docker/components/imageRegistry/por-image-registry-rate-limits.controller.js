@@ -1,4 +1,4 @@
-import { isAgentEnvironment, isLocalEnvironment } from '@/react/portainer/environments/utils';
+import { isAgentEnvironment, isLocalEnvironment } from '@CE/react/portainer/environments/utils';
 
 export default class porImageRegistryContainerController {
   /* @ngInject */

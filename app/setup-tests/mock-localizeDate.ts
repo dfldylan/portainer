@@ -1,6 +1,6 @@
 export function mockLocalizeDate() {
   // Mock localizeDate to always use en-US and UTC
-  vi.mock('@/react/common/date-utils', () => ({
+  vi.mock('@CE/react/common/date-utils', () => ({
     localizeDate: (date: Date) =>
       date
         .toLocaleString('en-US', {

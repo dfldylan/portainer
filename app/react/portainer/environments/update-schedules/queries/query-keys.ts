@@ -1,7 +1,7 @@
 import {
   EdgeGroupId,
   EnvironmentId,
-} from '@/react/portainer/environments/types';
+} from '@CE/react/portainer/environments/types';
 
 import { EdgeUpdateSchedule } from '../types';
 

@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { getSwarm } from '@/react/docker/proxy/queries/useSwarm';
-import { Pair } from '@/react/portainer/settings/types';
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import { getSwarm } from '@CE/react/docker/proxy/queries/useSwarm';
+import { Pair } from '@CE/react/portainer/settings/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 
 import { createStandaloneStackFromFileContent } from '../../../../../common/stacks/queries/useCreateStack/createStandaloneStackFromFileContent';
 import { createSwarmStackFromFileContent } from '../../../../../common/stacks/queries/useCreateStack/createSwarmStackFromFileContent';

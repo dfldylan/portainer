@@ -1,4 +1,4 @@
-import { CreateContainerRequest } from '@/react/docker/containers/CreateView/types';
+import { CreateContainerRequest } from '@CE/react/docker/containers/CreateView/types';
 
 import { capabilities } from './types';
 import { Values } from './CapabilitiesTab';

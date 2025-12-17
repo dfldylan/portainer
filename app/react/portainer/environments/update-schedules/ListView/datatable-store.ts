@@ -5,7 +5,7 @@ import {
   SettableColumnsTableSettings,
   createPersistedStore,
   BasicTableSettings,
-} from '@/react/components/datatables/types';
+} from '@CE/react/components/datatables/types';
 
 interface TableSettings
   extends BasicTableSettings,

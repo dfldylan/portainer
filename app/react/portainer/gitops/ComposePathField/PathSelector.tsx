@@ -1,6 +1,6 @@
-import { useSearch } from '@/react/portainer/gitops/queries/useSearch';
+import { useSearch } from '@CE/react/portainer/gitops/queries/useSearch';
 
-import { AutocompleteSelect } from '@@/form-components/AutocompleteSelect';
+import { AutocompleteSelect } from '@@CE/form-components/AutocompleteSelect';
 
 import { getAuthentication } from '../utils';
 import { GitFormModel } from '../types';

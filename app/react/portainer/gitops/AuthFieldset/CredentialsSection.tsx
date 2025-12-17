@@ -1,10 +1,10 @@
 import { FormikErrors } from 'formik';
 
-import { useDebounce } from '@/react/hooks/useDebounce';
+import { useDebounce } from '@CE/react/hooks/useDebounce';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { RadioGroup } from '@@/RadioGroup/RadioGroup';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { RadioGroup } from '@@CE/RadioGroup/RadioGroup';
 
 import { AuthTypeOption } from '../../account/git-credentials/types';
 import { isBE } from '../../feature-flags/feature-flags.service';

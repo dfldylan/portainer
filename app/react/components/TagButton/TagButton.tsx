@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Trash2 } from 'lucide-react';
 
-import { Icon } from '@/react/components/Icon';
+import { Icon } from '@CE/react/components/Icon';
 
 import styles from './TagButton.module.css';
 

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Download } from 'lucide-react';
 
-import { Environment } from '@/react/portainer/environments/types';
-import { isKubernetesEnvironment } from '@/react/portainer/environments/utils';
-import { Query } from '@/react/portainer/environments/queries/useEnvironmentList';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { isKubernetesEnvironment } from '@CE/react/portainer/environments/utils';
+import { Query } from '@CE/react/portainer/environments/queries/useEnvironmentList';
 
-import { Button } from '@@/buttons';
-import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
+import { Button } from '@@CE/buttons';
+import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
 
 import { KubeconfigPrompt } from './KubeconfigPrompt';
 

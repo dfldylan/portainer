@@ -1,9 +1,9 @@
 import { FormikErrors } from 'formik';
 import { Plus } from 'lucide-react';
 
-import { Card } from '@@/Card';
-import { TextTip } from '@@/Tip/TextTip';
-import { Button } from '@@/buttons';
+import { Card } from '@@CE/Card';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Button } from '@@CE/buttons';
 
 import {
   serviceFormDefaultValues,

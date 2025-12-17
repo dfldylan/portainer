@@ -1,12 +1,12 @@
 import { FormikErrors } from 'formik';
 
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
-import { type AutoUpdateModel } from '@/react/portainer/gitops/types';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { type AutoUpdateModel } from '@CE/react/portainer/gitops/types';
 
-import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
-import { FormControl } from '@@/form-components/FormControl';
-import { SwitchField } from '@@/form-components/SwitchField';
-import { TextTip } from '@@/Tip/TextTip';
+import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { ForceDeploymentSwitch } from './ForceDeploymentSwitch';
 import { IntervalField } from './IntervalField';

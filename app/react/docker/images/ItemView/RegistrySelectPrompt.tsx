@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { Registry } from '@/react/portainer/registries/types/registry';
+import { Registry } from '@CE/react/portainer/registries/types/registry';
 
-import { Modal, OnSubmit, openModal } from '@@/modals';
-import { Button } from '@@/buttons';
-import { PortainerSelect } from '@@/form-components/PortainerSelect';
+import { Modal, OnSubmit, openModal } from '@@CE/modals';
+import { Button } from '@@CE/buttons';
+import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
 
 interface Props {
   registries: Registry[];

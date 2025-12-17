@@ -1,12 +1,12 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { isExternalApplication } from '@/react/kubernetes/applications/utils';
-import { useIsSystemNamespace } from '@/react/kubernetes/namespaces/queries/useIsSystemNamespace';
-import { Application } from '@/react/kubernetes/applications/ListView/ApplicationsDatatable/types';
+import { isExternalApplication } from '@CE/react/kubernetes/applications/utils';
+import { useIsSystemNamespace } from '@CE/react/kubernetes/namespaces/queries/useIsSystemNamespace';
+import { Application } from '@CE/react/kubernetes/applications/ListView/ApplicationsDatatable/types';
 
-import { Link } from '@@/Link';
-import { SystemBadge } from '@@/Badge/SystemBadge';
-import { ExternalBadge } from '@@/Badge/ExternalBadge';
+import { Link } from '@@CE/Link';
+import { SystemBadge } from '@@CE/Badge/SystemBadge';
+import { ExternalBadge } from '@@CE/Badge/ExternalBadge';
 
 import { helper } from './columns.helper';
 

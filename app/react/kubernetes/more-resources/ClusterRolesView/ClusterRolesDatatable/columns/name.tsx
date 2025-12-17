@@ -1,5 +1,5 @@
-import { SystemBadge } from '@@/Badge/SystemBadge';
-import { UnusedBadge } from '@@/Badge/UnusedBadge';
+import { SystemBadge } from '@@CE/Badge/SystemBadge';
+import { UnusedBadge } from '@@CE/Badge/UnusedBadge';
 
 import { columnHelper } from './helper';
 

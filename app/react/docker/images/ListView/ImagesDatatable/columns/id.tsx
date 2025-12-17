@@ -1,12 +1,12 @@
 import { CellContext, Column } from '@tanstack/react-table';
 
-import { truncate } from '@/portainer/filters/filters';
-import { getValueAsArrayOfStrings } from '@/portainer/helpers/array';
-import { ImagesListResponse } from '@/react/docker/images/queries/useImages';
+import { truncate } from '@CE/portainer/filters/filters';
+import { getValueAsArrayOfStrings } from '@CE/portainer/helpers/array';
+import { ImagesListResponse } from '@CE/react/docker/images/queries/useImages';
 
-import { MultipleSelectionFilter } from '@@/datatables/Filter';
-import { UnusedBadge } from '@@/Badge/UnusedBadge';
-import { Link } from '@@/Link';
+import { MultipleSelectionFilter } from '@@CE/datatables/Filter';
+import { UnusedBadge } from '@@CE/Badge/UnusedBadge';
+import { Link } from '@@CE/Link';
 
 import { columnHelper } from './helper';
 

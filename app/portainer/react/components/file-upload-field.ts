@@ -1,6 +1,6 @@
-import { r2a } from '@/react-tools/react2angular';
+import { r2a } from '@CE/react-tools/react2angular';
 
-import { FileUploadField } from '@@/form-components/FileUpload';
+import { FileUploadField } from '@@CE/form-components/FileUpload';
 
 export const fileUploadField = r2a(FileUploadField, [
   'onChange',

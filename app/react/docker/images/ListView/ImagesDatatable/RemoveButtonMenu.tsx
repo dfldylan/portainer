@@ -3,16 +3,16 @@ import { Menu, MenuButton, MenuItem, MenuPopover } from '@reach/menu-button';
 import { positionRight } from '@reach/popover';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { Authorized } from '@/react/hooks/useUser';
-import { withInvalidate } from '@/react-tools/react-query';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { notifySuccess } from '@/portainer/services/notifications';
-import { processItemsInBatches } from '@/react/common/processItemsInBatches';
+import { Authorized } from '@CE/react/hooks/useUser';
+import { withInvalidate } from '@CE/react-tools/react-query';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { processItemsInBatches } from '@CE/react/common/processItemsInBatches';
 
-import { Button, ButtonGroup } from '@@/buttons';
-import { ButtonWithRef } from '@@/buttons/Button';
-import { confirmDestructive } from '@@/modals/confirm';
-import { buildConfirmButton } from '@@/modals/utils';
+import { Button, ButtonGroup } from '@@CE/buttons';
+import { ButtonWithRef } from '@@CE/buttons/Button';
+import { confirmDestructive } from '@@CE/modals/confirm';
+import { buildConfirmButton } from '@@CE/modals/utils';
 
 import { ImagesListResponse } from '../../queries/useImages';
 import { queryKeys } from '../../queries/queryKeys';

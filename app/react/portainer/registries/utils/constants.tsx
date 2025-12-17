@@ -1,11 +1,11 @@
 import { Edit } from 'lucide-react';
 
-import Docker from '@/assets/ico/vendor/docker.svg?c';
-import Ecr from '@/assets/ico/vendor/ecr.svg?c';
-import Quay from '@/assets/ico/vendor/quay.svg?c';
-import Proget from '@/assets/ico/vendor/proget.svg?c';
-import Azure from '@/assets/ico/vendor/azure.svg?c';
-import Gitlab from '@/assets/ico/vendor/gitlab.svg?c';
+import Docker from '@CE/assets/ico/vendor/docker.svg?c';
+import Ecr from '@CE/assets/ico/vendor/ecr.svg?c';
+import Quay from '@CE/assets/ico/vendor/quay.svg?c';
+import Proget from '@CE/assets/ico/vendor/proget.svg?c';
+import Azure from '@CE/assets/ico/vendor/azure.svg?c';
+import Gitlab from '@CE/assets/ico/vendor/gitlab.svg?c';
 
 import { RegistryTypes } from '../types/registry';
 

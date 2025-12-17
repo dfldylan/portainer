@@ -1,12 +1,12 @@
 import { Clipboard } from 'lucide-react';
 
-import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
-import { AddButton } from '@@/buttons';
-import { useTableState } from '@@/datatables/useTableState';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
+import { AddButton } from '@@CE/buttons';
+import { useTableState } from '@@CE/datatables/useTableState';
 
 import { useConfigsList } from '../../queries/useConfigs';
 import { ConfigViewModel } from '../../model';

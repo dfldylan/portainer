@@ -1,8 +1,8 @@
 import { Meta, Story } from '@storybook/react';
 import { useMemo } from 'react';
 
-import { UserContext } from '@/react/hooks/useUser';
-import { UserViewModel } from '@/portainer/models/user';
+import { UserContext } from '@CE/react/hooks/useUser';
+import { UserViewModel } from '@CE/portainer/models/user';
 
 import { HeaderContainer } from './HeaderContainer';
 import { Breadcrumbs } from './Breadcrumbs';

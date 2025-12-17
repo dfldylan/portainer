@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { AlertCircle, ArrowLeftRight, CheckCircle } from 'lucide-react';
 
-import { LoadingButton } from '@@/buttons';
-import { TextTip } from '@@/Tip/TextTip';
+import { LoadingButton } from '@@CE/buttons';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { RegistryTypes } from '../../types/registry';
 

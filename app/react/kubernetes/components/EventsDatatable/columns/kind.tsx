@@ -1,8 +1,8 @@
 import { Row } from '@tanstack/react-table';
 
-import { Event } from '@/react/kubernetes/queries/types';
+import { Event } from '@CE/react/kubernetes/queries/types';
 
-import { filterHOC } from '@@/datatables/Filter';
+import { filterHOC } from '@@CE/datatables/Filter';
 
 import { columnHelper } from './helper';
 

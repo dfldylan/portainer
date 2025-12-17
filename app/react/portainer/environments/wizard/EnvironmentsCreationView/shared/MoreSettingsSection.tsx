@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { FormSection } from '@@/form-components/FormSection';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { MetadataFieldset } from './MetadataFieldset';
 

@@ -1,5 +1,5 @@
-import { notifySuccess } from '@/portainer/services/notifications';
-import { useCreateTagMutation, useTags } from '@/portainer/tags/queries';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useCreateTagMutation, useTags } from '@CE/portainer/tags/queries';
 
 import { CreatableSelector } from './CreatableSelector';
 

@@ -1,18 +1,18 @@
 import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useAuthorizations, Authorized } from '@/react/hooks/useUser';
-import Route from '@/assets/ico/route.svg?c';
-import { useIsDeploymentOptionHidden } from '@/react/hooks/useIsDeploymentOptionHidden';
-import { DefaultDatatableSettings } from '@/react/kubernetes/datatables/DefaultDatatableSettings';
-import { createStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
-import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useAuthorizations, Authorized } from '@CE/react/hooks/useUser';
+import Route from '@CE/assets/ico/route.svg?c';
+import { useIsDeploymentOptionHidden } from '@CE/react/hooks/useIsDeploymentOptionHidden';
+import { DefaultDatatableSettings } from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { createStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
+import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { AddButton } from '@@/buttons';
-import { useTableState } from '@@/datatables/useTableState';
-import { DeleteButton } from '@@/buttons/DeleteButton';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { AddButton } from '@@CE/buttons';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
 
 import { DeleteIngressesRequest, Ingress } from '../types';
 import { useDeleteIngresses, useIngresses } from '../queries';

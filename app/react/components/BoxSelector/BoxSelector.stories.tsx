@@ -2,9 +2,9 @@ import { Meta } from '@storybook/react';
 import { useState } from 'react';
 import { Anchor, Briefcase } from 'lucide-react';
 
-import Docker from '@/assets/ico/vendor/docker.svg?c';
-import { init as initFeatureService } from '@/react/portainer/feature-flags/feature-flags.service';
-import { Edition, FeatureId } from '@/react/portainer/feature-flags/enums';
+import Docker from '@CE/assets/ico/vendor/docker.svg?c';
+import { init as initFeatureService } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { Edition, FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
 import { BoxSelector } from './BoxSelector';
 import { BoxSelectorOption } from './types';

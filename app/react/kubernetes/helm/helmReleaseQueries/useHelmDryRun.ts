@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import PortainerError from '@/portainer/error';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import PortainerError from '@CE/portainer/error';
 
 import { HelmRelease, UpdateHelmReleasePayload } from '../types';
 

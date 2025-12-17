@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Environment } from '@/react/portainer/environments/types';
-import { Registry } from '@/react/portainer/registries/types/registry';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { Registry } from '@CE/react/portainer/registries/types/registry';
 
 import { manifestsToTag } from '../ItemView/TagsDatatable/manifestsToTag';
 import { RepositoryTagViewModel } from '../ItemView/TagsDatatable/view-model';

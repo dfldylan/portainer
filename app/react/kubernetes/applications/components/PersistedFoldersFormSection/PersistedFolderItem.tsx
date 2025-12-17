@@ -1,15 +1,15 @@
 import clsx from 'clsx';
 
-import { StorageClass } from '@/react/portainer/environments/types';
+import { StorageClass } from '@CE/react/portainer/environments/types';
 
-import { ItemError } from '@@/form-components/InputList/InputList';
-import { Option } from '@@/form-components/PortainerSelect';
-import { InputGroup } from '@@/form-components/InputGroup';
-import { Select } from '@@/form-components/ReactSelect';
-import { Input } from '@@/form-components/Input';
-import { isErrorType } from '@@/form-components/formikUtils';
-import { FormError } from '@@/form-components/FormError';
-import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
+import { ItemError } from '@@CE/form-components/InputList/InputList';
+import { Option } from '@@CE/form-components/PortainerSelect';
+import { InputGroup } from '@@CE/form-components/InputGroup';
+import { Select } from '@@CE/form-components/ReactSelect';
+import { Input } from '@@CE/form-components/Input';
+import { isErrorType } from '@@CE/form-components/formikUtils';
+import { FormError } from '@@CE/form-components/FormError';
+import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
 
 import { ApplicationFormValues } from '../../types';
 

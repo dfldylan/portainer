@@ -1,9 +1,9 @@
-import { notifySuccess } from '@/portainer/services/notifications';
-import { useParamState } from '@/react/hooks/useParamState';
-import { ContainerEngine } from '@/react/portainer/environments/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useParamState } from '@CE/react/hooks/useParamState';
+import { ContainerEngine } from '@CE/react/portainer/environments/types';
 
-import { PageHeader } from '@@/PageHeader';
-import { confirmDelete } from '@@/modals/confirm';
+import { PageHeader } from '@@CE/PageHeader';
+import { confirmDelete } from '@@CE/modals/confirm';
 
 import { useCustomTemplates } from '../queries/useCustomTemplates';
 import { useDeleteTemplateMutation } from '../queries/useDeleteTemplateMutation';

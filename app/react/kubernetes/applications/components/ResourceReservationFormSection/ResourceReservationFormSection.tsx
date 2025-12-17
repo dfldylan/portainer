@@ -1,11 +1,11 @@
 import { FormikErrors } from 'formik';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { TextTip } from '@@/Tip/TextTip';
-import { SliderWithInput } from '@@/form-components/Slider/SliderWithInput';
-import { FormControl } from '@@/form-components/FormControl';
-import { FormError } from '@@/form-components/FormError';
-import { Slider } from '@@/form-components/Slider';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { SliderWithInput } from '@@CE/form-components/Slider/SliderWithInput';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FormError } from '@@CE/form-components/FormError';
+import { Slider } from '@@CE/form-components/Slider';
 
 import { ResourceQuotaFormValues } from './types';
 

@@ -1,9 +1,9 @@
 import angular from 'angular';
 import { StateRegistry, StateService } from '@uirouter/angularjs';
 
-import { Environment } from '@/react/portainer/environments/types';
-import { notifyError } from '@/portainer/services/notifications';
-import { StateManager } from '@/portainer/services/types';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { notifyError } from '@CE/portainer/services/notifications';
+import { StateManager } from '@CE/portainer/services/types';
 
 import { reactModule } from './react';
 

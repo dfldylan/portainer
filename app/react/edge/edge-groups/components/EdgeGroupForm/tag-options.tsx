@@ -1,6 +1,6 @@
 import { Tag } from 'lucide-react';
 
-import { BoxSelectorOption } from '@@/BoxSelector';
+import { BoxSelectorOption } from '@@CE/BoxSelector';
 
 export const tagOptions: ReadonlyArray<BoxSelectorOption<boolean>> = [
   {

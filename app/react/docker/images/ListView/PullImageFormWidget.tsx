@@ -2,12 +2,12 @@ import { DownloadIcon } from 'lucide-react';
 import { Formik } from 'formik';
 import { useState } from 'react';
 
-import { useAuthorizations } from '@/react/hooks/useUser';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { useAuthorizations } from '@CE/react/hooks/useUser';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { getDefaultImageConfig } from '@@/ImageConfigFieldset/getImageConfig';
-import { Widget } from '@@/Widget';
+import { getDefaultImageConfig } from '@@CE/ImageConfigFieldset/getImageConfig';
+import { Widget } from '@@CE/Widget';
 
 import { usePullImageMutation } from '../queries/usePullImageMutation';
 

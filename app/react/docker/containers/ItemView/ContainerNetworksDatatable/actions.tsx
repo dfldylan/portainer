@@ -1,12 +1,12 @@
 import { CellContext } from '@tanstack/react-table';
 import { useRouter } from '@uirouter/react';
 
-import { Authorized } from '@/react/hooks/useUser';
-import { useDisconnectContainer } from '@/react/docker/networks/queries/useDisconnectContainerMutation';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { Authorized } from '@CE/react/hooks/useUser';
+import { useDisconnectContainer } from '@CE/react/docker/networks/queries/useDisconnectContainerMutation';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { LoadingButton } from '@@/buttons';
+import { LoadingButton } from '@@CE/buttons';
 
 import { TableNetwork, isContainerNetworkTableMeta } from './types';
 import { columnHelper } from './helper';

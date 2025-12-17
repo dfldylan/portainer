@@ -2,15 +2,15 @@ import { MinusIcon, PlusIcon } from 'lucide-react';
 import { useReducer } from 'react';
 import { useFormikContext } from 'formik';
 
-import { Stack } from '@/react/common/stacks/types';
-import { AuthFieldset } from '@/react/portainer/gitops/AuthFieldset';
-import { RefField } from '@/react/portainer/gitops/RefField';
-import { RelativePathFieldset } from '@/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
-import { RelativePathModel } from '@/react/portainer/gitops/types';
-import { RefFieldModel } from '@/react/portainer/gitops/RefField/types';
+import { Stack } from '@CE/react/common/stacks/types';
+import { AuthFieldset } from '@CE/react/portainer/gitops/AuthFieldset';
+import { RefField } from '@CE/react/portainer/gitops/RefField';
+import { RelativePathFieldset } from '@CE/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
+import { RelativePathModel } from '@CE/react/portainer/gitops/types';
+import { RefFieldModel } from '@CE/react/portainer/gitops/RefField/types';
 
-import { Icon } from '@@/Icon';
-import { Button } from '@@/buttons';
+import { Icon } from '@@CE/Icon';
+import { Button } from '@@CE/buttons';
 
 import { FormValues } from './types';
 import { TLSVerificationField } from './TLSVerificationField';

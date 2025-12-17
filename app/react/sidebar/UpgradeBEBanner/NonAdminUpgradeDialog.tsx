@@ -1,8 +1,8 @@
 import { ExternalLink } from 'lucide-react';
 
-import { Button } from '@@/buttons';
-import { Modal } from '@@/modals/Modal';
-import { ModalType } from '@@/modals/Modal/types';
+import { Button } from '@@CE/buttons';
+import { Modal } from '@@CE/modals/Modal';
+import { ModalType } from '@@CE/modals/Modal/types';
 
 export function NonAdminUpgradeDialog({
   onDismiss,

@@ -1,5 +1,5 @@
-import { LoadingButton } from '@@/buttons/LoadingButton';
-import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
+import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
 
 export interface Props {
   onSubmit(): void;

@@ -8,9 +8,9 @@ import { UISrefProps, useSref } from '@uirouter/react';
 import clsx from 'clsx';
 import { User, ChevronDown } from 'lucide-react';
 
-import { queryClient } from '@/react-tools/react-query';
-import { AutomationTestingProps } from '@/types';
-import { useUser } from '@/react/hooks/useUser';
+import { queryClient } from '@CE/react-tools/react-query';
+import { AutomationTestingProps } from '@CE/types';
+import { useUser } from '@CE/react/hooks/useUser';
 
 import styles from './HeaderTitle.module.css';
 

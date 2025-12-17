@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { selectRegistry } from '@/react/docker/images/ItemView/RegistrySelectPrompt';
+import { selectRegistry } from '@CE/react/docker/images/ItemView/RegistrySelectPrompt';
 
 angular.module('portainer.app').factory('RegistryModalService', RegistryModalService);
 

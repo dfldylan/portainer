@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 import { BarChart } from 'lucide-react';
 
-import { Link } from '@@/Link';
-import { Icon } from '@@/Icon';
+import { Link } from '@@CE/Link';
+import { Icon } from '@@CE/Icon';
 
 import { NodeRowData } from '../types';
 

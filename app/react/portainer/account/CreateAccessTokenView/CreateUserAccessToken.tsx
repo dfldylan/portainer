@@ -1,11 +1,11 @@
 import { Formik } from 'formik';
 import { useState } from 'react';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
-import { AuthenticationMethod } from '@/react/portainer/settings/types';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { AuthenticationMethod } from '@CE/react/portainer/settings/types';
 
-import { Widget } from '@@/Widget';
-import { PageHeader } from '@@/PageHeader';
+import { Widget } from '@@CE/Widget';
+import { PageHeader } from '@@CE/PageHeader';
 
 import { usePublicSettings } from '../../settings/queries/usePublicSettings';
 

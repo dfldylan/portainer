@@ -1,5 +1,5 @@
-import { FormControl } from '@@/form-components/FormControl';
-import { ProgressBar } from '@@/ProgressBar';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { ProgressBar } from '@@CE/ProgressBar';
 
 interface ResourceUsageItemProps {
   value: number;

@@ -2,7 +2,7 @@ import { HelpCircle } from 'lucide-react';
 import clsx from 'clsx';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { useSystemVersion } from '@/react/portainer/system/useSystemVersion';
+import { useSystemVersion } from '@CE/react/portainer/system/useSystemVersion';
 
 import headerStyles from './HeaderTitle.module.css';
 

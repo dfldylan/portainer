@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 type AlertType = 'success' | 'error' | 'info' | 'warn' | 'default';
 

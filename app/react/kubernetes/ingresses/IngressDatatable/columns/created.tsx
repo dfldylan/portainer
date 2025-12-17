@@ -1,5 +1,5 @@
-import { formatDate } from '@/portainer/filters/filters';
-import { appOwnerLabel } from '@/react/kubernetes/applications/constants';
+import { formatDate } from '@CE/portainer/filters/filters';
+import { appOwnerLabel } from '@CE/react/kubernetes/applications/constants';
 
 import { columnHelper } from './helper';
 

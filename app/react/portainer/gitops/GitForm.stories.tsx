@@ -2,8 +2,8 @@ import { Meta } from '@storybook/react';
 import { Form, Formik } from 'formik';
 import { http, HttpResponse } from 'msw';
 
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { GitCredential } from '@/react/portainer/account/git-credentials/types';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { GitCredential } from '@CE/react/portainer/account/git-credentials/types';
 
 import { GitForm, buildGitValidationSchema } from './GitForm';
 import { DeployMethod, GitFormModel } from './types';

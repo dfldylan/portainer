@@ -8,8 +8,8 @@ import {
   PauseCircle,
 } from 'lucide-react';
 
-import { Icon, IconMode } from '@@/Icon';
-import { Tooltip } from '@@/Tip/Tooltip';
+import { Icon, IconMode } from '@@CE/Icon';
+import { Tooltip } from '@@CE/Tip/Tooltip';
 
 import { DecoratedEdgeStack, StatusSummary, SummarizedStatus } from './types';
 

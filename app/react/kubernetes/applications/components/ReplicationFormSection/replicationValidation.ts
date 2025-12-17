@@ -1,6 +1,6 @@
 import { SchemaOf, object } from 'yup';
 
-import { nanNumberSchema } from '@/react-tools/yup-schemas';
+import { nanNumberSchema } from '@CE/react-tools/yup-schemas';
 
 import { ReplicaCountFormValues } from './types';
 

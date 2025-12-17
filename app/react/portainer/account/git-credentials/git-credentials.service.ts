@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { success as notifySuccess } from '@/portainer/services/notifications';
-import { UserId } from '@/portainer/users/types';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { success as notifySuccess } from '@CE/portainer/services/notifications';
+import { UserId } from '@CE/portainer/users/types';
 
 import { isBE } from '../../feature-flags/feature-flags.service';
 

@@ -1,12 +1,12 @@
 import { Database } from 'lucide-react';
 
-import { StorageClass } from '@/react/portainer/environments/types';
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
-import { Authorized } from '@/react/hooks/useUser';
+import { StorageClass } from '@CE/react/portainer/environments/types';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Icon } from '@@/Icon';
-import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
-import { SwitchField } from '@@/form-components/SwitchField';
+import { Icon } from '@@CE/Icon';
+import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 type Props = {
   storageClass: StorageClass;

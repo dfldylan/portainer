@@ -1,8 +1,8 @@
 import { useField, Field } from 'formik';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { SwitchField } from '@@/form-components/SwitchField';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 import { useToggledValue } from '../useToggledValue';
 

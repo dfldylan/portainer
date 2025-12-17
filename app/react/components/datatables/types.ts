@@ -2,7 +2,7 @@ import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ColumnFiltersState } from '@tanstack/react-table';
 
-import { keyBuilder } from '@/react/hooks/useLocalStorage';
+import { keyBuilder } from '@CE/react/hooks/useLocalStorage';
 
 export type DefaultType = object;
 

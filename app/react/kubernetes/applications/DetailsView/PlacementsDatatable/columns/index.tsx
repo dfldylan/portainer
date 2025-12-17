@@ -1,4 +1,4 @@
-import { buildExpandColumn } from '@@/datatables/expand-column';
+import { buildExpandColumn } from '@@CE/datatables/expand-column';
 
 import { NodePlacementRowData } from '../../types';
 

@@ -1,6 +1,6 @@
 import { useRouter } from '@uirouter/react';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
 import {
   CreateHelmRepositoryPayload,

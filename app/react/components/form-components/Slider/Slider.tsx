@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import RcSlider from 'rc-slider';
 import { HandleProps } from 'rc-slider/lib/Handles/Handle';
 
-import { SliderTooltip } from '@@/Tip/SliderTooltip';
+import { SliderTooltip } from '@@CE/Tip/SliderTooltip';
 
 import styles from './Slider.module.css';
 

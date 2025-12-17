@@ -1,6 +1,6 @@
 import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 
 import { isBE } from '../feature-flags/feature-flags.service';
 

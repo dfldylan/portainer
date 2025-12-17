@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 import { Network } from 'lucide-react';
 import { EndpointSettings, NetworkSettings } from 'docker-types/generated/1.44';
 
-import { createPersistedStore } from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
-import { ExpandableDatatable } from '@@/datatables/ExpandableDatatable';
-import { withMeta } from '@@/datatables/extend-options/withMeta';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+import { createPersistedStore } from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { ExpandableDatatable } from '@@CE/datatables/ExpandableDatatable';
+import { withMeta } from '@@CE/datatables/extend-options/withMeta';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
 
 import { ContainerListViewModel } from '../../types';
 

@@ -1,4 +1,4 @@
-import { TextTip } from '@@/Tip/TextTip';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 export function TimeTip() {
   return (

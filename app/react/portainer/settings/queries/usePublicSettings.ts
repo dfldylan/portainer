@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { withError } from '@/react-tools/react-query';
+import { withError } from '@CE/react-tools/react-query';
 
 import { getPublicSettings } from '../settings.service';
 import { PublicSettingsResponse } from '../types';

@@ -1,9 +1,9 @@
 import angular from 'angular';
 import moment from 'moment';
 import filesizeParser from 'filesize-parser';
-import { PORTAINER_FADEOUT } from '@/constants';
-import { getMetricsForNode } from '@/react/kubernetes/metrics/queries/useNodeMetricsQuery';
-import { parseCPU } from '@/react/kubernetes/utils';
+import { PORTAINER_FADEOUT } from '@CE/constants';
+import { getMetricsForNode } from '@CE/react/kubernetes/metrics/queries/useNodeMetricsQuery';
+import { parseCPU } from '@CE/react/kubernetes/utils';
 
 class KubernetesNodeStatsController {
   /* @ngInject */

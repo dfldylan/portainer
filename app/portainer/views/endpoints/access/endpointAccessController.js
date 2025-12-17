@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
 class EndpointAccessController {
   /* @ngInject */

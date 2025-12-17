@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { server } from '@/setup-tests/server';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { server } from '@CE/setup-tests/server';
 
 import { SettingsView } from './SettingsView';
 

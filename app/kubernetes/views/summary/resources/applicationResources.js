@@ -9,7 +9,7 @@ import KubernetesApplicationConverter from 'Kubernetes/converters/application';
 import KubernetesServiceConverter from 'Kubernetes/converters/service';
 import { KubernetesIngressConverter } from 'Kubernetes/ingress/converter';
 import KubernetesPersistentVolumeClaimConverter from 'Kubernetes/converters/persistentVolumeClaim';
-import { generateNewIngressesFromFormPaths } from '@/react/kubernetes/applications/CreateView/application-services/utils';
+import { generateNewIngressesFromFormPaths } from '@CE/react/kubernetes/applications/CreateView/application-services/utils';
 
 const { CREATE, UPDATE, DELETE } = KubernetesResourceActions;
 

@@ -1,5 +1,5 @@
-import { FormSection } from '@@/form-components/FormSection';
-import { SwitchField } from '@@/form-components/SwitchField';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 import { capabilities } from './types';
 

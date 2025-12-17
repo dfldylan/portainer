@@ -4,8 +4,8 @@ import {
   refreshableSettings,
   createPersistedStore,
   ZustandSetFunc,
-} from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
+} from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
 
 import { TableSettings } from './DefaultDatatableSettings';
 import { systemResourcesSettings } from './SystemResourcesSettings';

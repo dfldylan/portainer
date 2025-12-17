@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { error as notifyError } from '@/portainer/services/notifications';
-import { getBackupStatus } from '@/portainer/services/api/backup.service';
-import { isoDate } from '@/portainer/filters/filters';
+import { error as notifyError } from '@CE/portainer/services/notifications';
+import { getBackupStatus } from '@CE/portainer/services/api/backup.service';
+import { isoDate } from '@CE/portainer/filters/filters';
 
-import { InformationPanel } from '@@/InformationPanel';
-import { TextTip } from '@@/Tip/TextTip';
-import { Link } from '@@/Link';
+import { InformationPanel } from '@@CE/InformationPanel';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { Link } from '@@CE/Link';
 
 export function BackupFailedPanel() {
   const { status, isLoading } = useBackupStatus();

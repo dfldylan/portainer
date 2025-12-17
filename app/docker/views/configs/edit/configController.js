@@ -1,4 +1,4 @@
-import { ResourceControlType } from '@/react/portainer/access-control/types';
+import { ResourceControlType } from '@CE/react/portainer/access-control/types';
 
 angular.module('portainer.docker').controller('ConfigController', [
   '$scope',

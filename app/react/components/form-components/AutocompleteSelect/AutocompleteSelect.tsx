@@ -10,10 +10,10 @@ import {
 } from '@reach/combobox';
 import clsx from 'clsx';
 
-import { useDebounce } from '@/react/hooks/useDebounce';
-import { AutomationTestingProps } from '@/types';
+import { useDebounce } from '@CE/react/hooks/useDebounce';
+import { AutomationTestingProps } from '@CE/types';
 
-import { Option } from '@@/form-components/PortainerSelect';
+import { Option } from '@@CE/form-components/PortainerSelect';
 
 import styles from './AutocompleteSelect.module.css';
 

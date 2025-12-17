@@ -1,10 +1,10 @@
 import { CellContext } from '@tanstack/react-table';
 import { Users } from 'lucide-react';
 
-import { EnvironmentStatus } from '@/react/portainer/environments/types';
+import { EnvironmentStatus } from '@CE/react/portainer/environments/types';
 
-import { Button } from '@@/buttons';
-import { Link } from '@@/Link';
+import { Button } from '@@CE/buttons';
+import { Link } from '@@CE/Link';
 
 import { EnvironmentListItem } from '../types';
 

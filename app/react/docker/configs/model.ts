@@ -1,7 +1,7 @@
 import { Config } from 'docker-types/generated/1.44';
 
-import { PortainerResponse } from '@/react/docker/types';
-import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { PortainerResponse } from '@CE/react/docker/types';
+import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
 
 import { IResource } from '../components/datatable/createOwnershipColumn';
 

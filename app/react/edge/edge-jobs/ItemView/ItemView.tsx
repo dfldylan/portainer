@@ -1,11 +1,11 @@
 import { ListIcon, WrenchIcon } from 'lucide-react';
 
-import { useIdParam } from '@/react/hooks/useIdParam';
-import { useParamState } from '@/react/hooks/useParamState';
+import { useIdParam } from '@CE/react/hooks/useIdParam';
+import { useParamState } from '@CE/react/hooks/useParamState';
 
-import { PageHeader } from '@@/PageHeader';
-import { Widget } from '@@/Widget';
-import { NavTabs } from '@@/NavTabs';
+import { PageHeader } from '@@CE/PageHeader';
+import { Widget } from '@@CE/Widget';
+import { NavTabs } from '@@CE/NavTabs';
 
 import { useEdgeJob } from '../queries/useEdgeJob';
 

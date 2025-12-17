@@ -3,7 +3,7 @@ import {
   buildImageFromDockerfileContentAndFiles,
   buildImageFromURL,
   buildImageFromUpload,
-} from '@/react/docker/images/queries/useBuildImageMutation';
+} from '@CE/react/docker/images/queries/useBuildImageMutation';
 
 import { ImageBuildModel } from '../models/build';
 

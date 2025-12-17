@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { UserId } from '@/portainer/users/types';
-import { withGlobalError, withInvalidate } from '@/react-tools/react-query';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { UserId } from '@CE/portainer/users/types';
+import { withGlobalError, withInvalidate } from '@CE/react-tools/react-query';
 
 import { TeamRole } from '../types';
 

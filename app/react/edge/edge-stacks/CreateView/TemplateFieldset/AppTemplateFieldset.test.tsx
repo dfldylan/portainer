@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 
-import { EnvVarType } from '@/react/portainer/templates/app-templates/view-model';
+import { EnvVarType } from '@CE/react/portainer/templates/app-templates/view-model';
 import {
   AppTemplate,
   TemplateType,
-} from '@/react/portainer/templates/app-templates/types';
-import { server } from '@/setup-tests/server';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+} from '@CE/react/portainer/templates/app-templates/types';
+import { server } from '@CE/setup-tests/server';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import { AppTemplateFieldset } from './AppTemplateFieldset';
 

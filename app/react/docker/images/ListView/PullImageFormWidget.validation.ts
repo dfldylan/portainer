@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { SchemaOf, object, string } from 'yup';
 
-import { imageConfigValidation } from '@@/ImageConfigFieldset';
+import { imageConfigValidation } from '@@CE/ImageConfigFieldset';
 
 import { FormValues } from './PullImageFormWidget.types';
 

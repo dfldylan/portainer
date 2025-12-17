@@ -2,7 +2,7 @@ import angular from 'angular';
 
 import { PortainerEndpointTypes } from 'Portainer/models/endpoint/models';
 
-import { EnvironmentStatus } from '@/react/portainer/environments/types';
+import { EnvironmentStatus } from '@CE/react/portainer/environments/types';
 
 import { reactModule } from './react';
 
@@ -431,7 +431,7 @@ angular.module('portainer.docker', ['portainer.app', reactModule]).config([
       url: '/:id?nodeName',
       views: {
         'content@': {
-          templateUrl: '~@/docker/views/containers/edit/container.html',
+          templateUrl: './views/containers/edit/container.html',
           controller: 'ContainerController',
         },
       },

@@ -1,5 +1,5 @@
-import { getEnvironments } from '@/react/portainer/environments/environment.service';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { getEnvironments } from '@CE/react/portainer/environments/environment.service';
+import { notifyError, notifySuccess } from '@CE/portainer/services/notifications';
 
 angular.module('portainer.app').controller('GroupController', function GroupController($async, $q, $scope, $state, $transition$, GroupService, Notifications) {
   $scope.state = {

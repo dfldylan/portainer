@@ -1,10 +1,10 @@
 import { createColumnHelper, CellContext } from '@tanstack/react-table';
 import { Users } from 'lucide-react';
 
-import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
 
-import { Icon } from '@@/Icon';
-import { Link } from '@@/Link';
+import { Icon } from '@@CE/Icon';
+import { Link } from '@@CE/Link';
 
 import { AccessViewerPolicyModel } from './model';
 

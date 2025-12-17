@@ -1,7 +1,7 @@
 import { CellContext } from '@tanstack/react-table';
 import { useSref } from '@uirouter/react';
 
-import type { ContainerListViewModel } from '@/react/docker/containers/types';
+import type { ContainerListViewModel } from '@CE/react/docker/containers/types';
 
 import { columnHelper } from './helper';
 

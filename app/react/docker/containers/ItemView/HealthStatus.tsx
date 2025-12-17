@@ -1,9 +1,9 @@
 import { ComponentProps } from 'react';
 import { HeartPulse, Server } from 'lucide-react';
 
-import { TableContainer, TableTitle } from '@@/datatables';
-import { DetailsTable } from '@@/DetailsTable';
-import { Icon } from '@@/Icon';
+import { TableContainer, TableTitle } from '@@CE/datatables';
+import { DetailsTable } from '@@CE/DetailsTable';
+import { Icon } from '@@CE/Icon';
 
 import { Health } from '../types/response';
 

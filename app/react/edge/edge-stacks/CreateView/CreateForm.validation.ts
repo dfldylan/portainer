@@ -11,21 +11,21 @@ import {
 import { useMemo } from 'react';
 import Lazy from 'yup/lib/Lazy';
 
-import { buildGitValidationSchema } from '@/react/portainer/gitops/GitForm';
-import { useGitCredentials } from '@/react/portainer/account/git-credentials/git-credentials.service';
-import { useCurrentUser } from '@/react/hooks/useUser';
-import { relativePathValidation } from '@/react/portainer/gitops/RelativePathFieldset/validation';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
-import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
+import { buildGitValidationSchema } from '@CE/react/portainer/gitops/GitForm';
+import { useGitCredentials } from '@CE/react/portainer/account/git-credentials/git-credentials.service';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { relativePathValidation } from '@CE/react/portainer/gitops/RelativePathFieldset/validation';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
+import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
 import {
   DeployMethod,
   GitFormModel,
   RelativePathModel,
-} from '@/react/portainer/gitops/types';
-import { EnvironmentType } from '@/react/portainer/environments/types';
+} from '@CE/react/portainer/gitops/types';
+import { EnvironmentType } from '@CE/react/portainer/environments/types';
 
-import { envVarValidation } from '@@/form-components/EnvironmentVariablesFieldset';
-import { file } from '@@/form-components/yup-file-validation';
+import { envVarValidation } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { file } from '@@CE/form-components/yup-file-validation';
 
 import { DeploymentType } from '../types';
 import { staggerConfigValidation } from '../components/StaggerFieldset';

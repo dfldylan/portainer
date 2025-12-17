@@ -2,18 +2,18 @@ import { Form, Formik, useFormikContext } from 'formik';
 import { Key } from 'lucide-react';
 import { SchemaOf, object } from 'yup';
 
-import { notifySuccess } from '@/portainer/services/notifications';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { Widget } from '@@/Widget';
-import { TextTip } from '@@/Tip/TextTip';
-import { FileUploadField } from '@@/form-components/FileUpload';
-import { FormControl } from '@@/form-components/FormControl';
+import { Widget } from '@@CE/Widget';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { FileUploadField } from '@@CE/form-components/FileUpload';
+import { FormControl } from '@@CE/form-components/FormControl';
 import {
   file,
   withFileExtension,
-} from '@@/form-components/yup-file-validation';
-import { FormActions } from '@@/form-components/FormActions';
-import { BEOverlay } from '@@/BEFeatureIndicator/BEOverlay';
+} from '@@CE/form-components/yup-file-validation';
+import { FormActions } from '@@CE/form-components/FormActions';
+import { BEOverlay } from '@@CE/BEFeatureIndicator/BEOverlay';
 
 import { FeatureId } from '../../feature-flags/enums';
 

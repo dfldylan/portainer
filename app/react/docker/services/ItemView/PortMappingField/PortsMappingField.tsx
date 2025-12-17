@@ -1,17 +1,17 @@
 import { List, Trash2 } from 'lucide-react';
 
-import { Authorized } from '@/react/hooks/useUser';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
-import { FormError } from '@@/form-components/FormError';
+import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
+import { FormError } from '@@CE/form-components/FormError';
 import {
   ArrayError,
   ItemProps,
   useInputList,
-} from '@@/form-components/InputList/InputList';
-import { Table } from '@@/datatables';
-import { Button } from '@@/buttons';
-import { Select } from '@@/form-components/Input';
+} from '@@CE/form-components/InputList/InputList';
+import { Table } from '@@CE/datatables';
+import { Button } from '@@CE/buttons';
+import { Select } from '@@CE/form-components/Input';
 
 import { ServiceWidget } from '../ServiceWidget';
 

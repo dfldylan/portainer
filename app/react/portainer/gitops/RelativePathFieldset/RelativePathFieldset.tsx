@@ -4,15 +4,15 @@ import { FormikErrors } from 'formik';
 import {
   PathSelector,
   PathSelectorGitModel,
-} from '@/react/portainer/gitops/ComposePathField/PathSelector';
-import { dummyGitForm } from '@/react/portainer/gitops/RelativePathFieldset/utils';
+} from '@CE/react/portainer/gitops/ComposePathField/PathSelector';
+import { dummyGitForm } from '@CE/react/portainer/gitops/RelativePathFieldset/utils';
 
-import { SwitchField } from '@@/form-components/SwitchField';
-import { TextTip } from '@@/Tip/TextTip';
-import { FormControl } from '@@/form-components/FormControl';
-import { Input, Select } from '@@/form-components/Input';
-import { useDocsUrl } from '@@/PageHeader/ContextHelp';
-import { InsightsBox } from '@@/InsightsBox';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input, Select } from '@@CE/form-components/Input';
+import { useDocsUrl } from '@@CE/PageHeader/ContextHelp';
+import { InsightsBox } from '@@CE/InsightsBox';
 
 import { RelativePathModel, getPerDevConfigsFilterType } from './types';
 

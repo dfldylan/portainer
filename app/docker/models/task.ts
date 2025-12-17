@@ -1,6 +1,6 @@
 import { Task } from 'docker-types/generated/1.44';
 
-import { DeepPick } from '@/types/deepPick';
+import { DeepPick } from '@CE/types/deepPick';
 
 export class TaskViewModel {
   Id: NonNullable<Task['ID']>;

@@ -1,17 +1,17 @@
 import { groupBy } from 'lodash';
 
-import { getUniqueTagListFromImages } from '@/react/docker/images/utils';
-import { getImage } from '@/react/docker/proxy/queries/images/useImage';
-import { parseAxiosError } from '@/portainer/services/axios';
-import { getImages } from '@/react/docker/proxy/queries/images/useImages';
-import { getContainers } from '@/react/docker/containers/queries/useContainers';
-import { getImageHistory } from '@/react/docker/proxy/queries/images/useImageHistory';
-import { pullImage } from '@/react/docker/images/queries/usePullImageMutation';
-import { pushImage } from '@/react/docker/images/queries/usePushImageMutation';
-import { removeImage } from '@/react/docker/proxy/queries/images/useRemoveImageMutation';
-import { tagImage } from '@/react/docker/proxy/queries/images/useTagImageMutation';
-import { downloadImages } from '@/react/docker/proxy/queries/images/useDownloadImages';
-import { uploadImages } from '@/react/docker/proxy/queries/images/useUploadImageMutation';
+import { getUniqueTagListFromImages } from '@CE/react/docker/images/utils';
+import { getImage } from '@CE/react/docker/proxy/queries/images/useImage';
+import { parseAxiosError } from '@CE/portainer/services/axios';
+import { getImages } from '@CE/react/docker/proxy/queries/images/useImages';
+import { getContainers } from '@CE/react/docker/containers/queries/useContainers';
+import { getImageHistory } from '@CE/react/docker/proxy/queries/images/useImageHistory';
+import { pullImage } from '@CE/react/docker/images/queries/usePullImageMutation';
+import { pushImage } from '@CE/react/docker/images/queries/usePushImageMutation';
+import { removeImage } from '@CE/react/docker/proxy/queries/images/useRemoveImageMutation';
+import { tagImage } from '@CE/react/docker/proxy/queries/images/useTagImageMutation';
+import { downloadImages } from '@CE/react/docker/proxy/queries/images/useDownloadImages';
+import { uploadImages } from '@CE/react/docker/proxy/queries/images/useUploadImageMutation';
 
 import { ImageViewModel } from '../models/image';
 import { ImageDetailsViewModel } from '../models/imageDetails';

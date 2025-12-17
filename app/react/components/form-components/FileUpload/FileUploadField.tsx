@@ -1,10 +1,10 @@
 import { ChangeEvent, ComponentProps, createRef } from 'react';
 import { Upload, XCircle } from 'lucide-react';
 
-import { AutomationTestingProps } from '@/types';
+import { AutomationTestingProps } from '@CE/types';
 
-import { Button } from '@@/buttons';
-import { Icon } from '@@/Icon';
+import { Button } from '@@CE/buttons';
+import { Icon } from '@@CE/Icon';
 
 import styles from './FileUploadField.module.css';
 

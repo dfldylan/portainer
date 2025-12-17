@@ -2,11 +2,11 @@ import userEvent from '@testing-library/user-event';
 import { HttpResponse, http } from 'msw';
 import { render } from '@testing-library/react';
 
-import { UserViewModel } from '@/portainer/models/user';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { server } from '@/setup-tests/server';
+import { UserViewModel } from '@CE/portainer/models/user';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { server } from '@CE/setup-tests/server';
 
 import { CreateContainerInstanceForm } from './CreateContainerInstanceForm';
 

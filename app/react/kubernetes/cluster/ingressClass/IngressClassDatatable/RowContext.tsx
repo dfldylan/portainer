@@ -1,6 +1,6 @@
-import { Environment } from '@/react/portainer/environments/types';
+import { Environment } from '@CE/react/portainer/environments/types';
 
-import { createRowContext } from '@@/datatables/RowContext';
+import { createRowContext } from '@@CE/datatables/RowContext';
 
 interface RowContextState {
   environment: Environment;

@@ -1,6 +1,6 @@
 import { useField } from 'formik';
 
-import { SwitchField } from '@@/form-components/SwitchField';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 import { FormValues } from './FormValues';
 

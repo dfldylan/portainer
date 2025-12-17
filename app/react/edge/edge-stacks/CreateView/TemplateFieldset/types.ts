@@ -1,5 +1,5 @@
-import { VariablesFieldValue } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { EnvVarsValue } from '@/react/portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
+import { VariablesFieldValue } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { EnvVarsValue } from '@CE/react/portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
 
 export type SelectedTemplateValue =
   | { templateId: number; type: 'custom' }

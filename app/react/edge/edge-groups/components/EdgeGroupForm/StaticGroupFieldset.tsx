@@ -1,10 +1,10 @@
 import { useFormikContext } from 'formik';
 
-import { AssociatedEdgeGroupEnvironmentsSelector } from '@/react/edge/components/AssociatedEdgeGroupEnvironmentsSelector';
+import { AssociatedEdgeGroupEnvironmentsSelector } from '@CE/react/edge/components/AssociatedEdgeGroupEnvironmentsSelector';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { confirmDestructive } from '@@/modals/confirm';
-import { buildConfirmButton } from '@@/modals/utils';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { confirmDestructive } from '@@CE/modals/confirm';
+import { buildConfirmButton } from '@@CE/modals/utils';
 
 import { FormValues } from './types';
 

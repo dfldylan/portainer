@@ -1,24 +1,24 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import { downloadKubeconfigFile } from '@/react/portainer/HomeView/EnvironmentList/KubeconfigButton/kubeconfig.service';
-import * as notifications from '@/portainer/services/notifications';
+import { downloadKubeconfigFile } from '@CE/react/portainer/HomeView/EnvironmentList/KubeconfigButton/kubeconfig.service';
+import * as notifications from '@CE/portainer/services/notifications';
 import {
   Environment,
   EnvironmentType,
-} from '@/react/portainer/environments/types';
-import { usePaginationLimitState } from '@/react/hooks/usePaginationLimitState';
-import { usePublicSettings } from '@/react/portainer/settings/queries';
+} from '@CE/react/portainer/environments/types';
+import { usePaginationLimitState } from '@CE/react/hooks/usePaginationLimitState';
+import { usePublicSettings } from '@CE/react/portainer/settings/queries';
 import {
   Query,
   useEnvironmentList,
-} from '@/react/portainer/environments/queries/useEnvironmentList';
-import { useListSelection } from '@/react/hooks/useListSelection';
+} from '@CE/react/portainer/environments/queries/useEnvironmentList';
+import { useListSelection } from '@CE/react/hooks/useListSelection';
 
-import { Modal } from '@@/modals';
-import { PaginationControls } from '@@/PaginationControls';
-import { Checkbox } from '@@/form-components/Checkbox';
-import { Button } from '@@/buttons';
+import { Modal } from '@@CE/modals';
+import { PaginationControls } from '@@CE/PaginationControls';
+import { Checkbox } from '@@CE/form-components/Checkbox';
+import { Button } from '@@CE/buttons';
 
 import styles from './KubeconfigPrompt.module.css';
 

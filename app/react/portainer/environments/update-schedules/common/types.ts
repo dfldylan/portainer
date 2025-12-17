@@ -1,4 +1,4 @@
-import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
 
 import { ScheduleType } from '../types';
 

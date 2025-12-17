@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { ReactNode } from 'react';
 
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { UserViewModel } from '@/portainer/models/user';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { UserViewModel } from '@CE/portainer/models/user';
 
 import { NodeView } from './NodeView';
 
@@ -15,7 +15,7 @@ let mockParams: { endpointId: number; nodeName: string; tab?: string } = {
 };
 
 // Mock Link component to avoid ui-router relative state resolution in tests
-vi.mock('@@/Link', () => ({
+vi.mock('@@CE/Link', () => ({
   Link: ({
     children,
     'data-cy': dataCy,
@@ -65,7 +65,7 @@ vi.mock('./NodeYamlInspector', () => ({
   NodeYamlInspector: () => <div data-cy="yaml-view">YAML content</div>,
 }));
 
-vi.mock('@/react/hooks/useEnvironmentId', () => ({
+vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => 1,
 }));
 

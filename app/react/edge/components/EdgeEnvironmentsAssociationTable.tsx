@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react';
 
-import { useEnvironmentList } from '@/react/portainer/environments/queries';
-import { EdgeTypes, Environment } from '@/react/portainer/environments/types';
-import { useGroups } from '@/react/portainer/environments/environment-groups/queries';
-import { useTags } from '@/portainer/tags/queries';
-import { EnvironmentsQueryParams } from '@/react/portainer/environments/environment.service';
-import { AutomationTestingProps } from '@/types';
+import { useEnvironmentList } from '@CE/react/portainer/environments/queries';
+import { EdgeTypes, Environment } from '@CE/react/portainer/environments/types';
+import { useGroups } from '@CE/react/portainer/environments/environment-groups/queries';
+import { useTags } from '@CE/portainer/tags/queries';
+import { EnvironmentsQueryParams } from '@CE/react/portainer/environments/environment.service';
+import { AutomationTestingProps } from '@CE/types';
 
-import { useTableStateWithoutStorage } from '@@/datatables/useTableState';
-import { Datatable, TableRow } from '@@/datatables';
+import { useTableStateWithoutStorage } from '@@CE/datatables/useTableState';
+import { Datatable, TableRow } from '@@CE/datatables';
 
 import { columns, DecoratedEnvironment } from './associationTableColumnHelper';
 

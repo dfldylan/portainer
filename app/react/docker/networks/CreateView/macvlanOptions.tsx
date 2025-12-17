@@ -1,6 +1,6 @@
 import { Share2, Sliders } from 'lucide-react';
 
-import { BoxSelectorOption } from '@@/BoxSelector';
+import { BoxSelectorOption } from '@@CE/BoxSelector';
 
 export function getOptions(
   hasNetworks: boolean

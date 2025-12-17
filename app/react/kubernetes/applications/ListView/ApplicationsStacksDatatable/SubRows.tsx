@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 
-import KubernetesApplicationHelper from '@/kubernetes/helpers/application';
-import KubernetesNamespaceHelper from '@/kubernetes/helpers/namespaceHelper';
+import KubernetesApplicationHelper from '@CE/kubernetes/helpers/application';
+import KubernetesNamespaceHelper from '@CE/kubernetes/helpers/namespaceHelper';
 
-import { Link } from '@@/Link';
-import { ExternalBadge } from '@@/Badge/ExternalBadge';
+import { Link } from '@@CE/Link';
+import { ExternalBadge } from '@@CE/Badge/ExternalBadge';
 
 import { Stack } from './types';
 

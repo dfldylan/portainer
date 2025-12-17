@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { BarChart, FileText, Info, Paperclip, Terminal } from 'lucide-react';
 
-import { ContainerStatus } from '@/react/docker/containers/types';
-import { Authorized } from '@/react/hooks/useUser';
+import { ContainerStatus } from '@CE/react/docker/containers/types';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Icon } from '@@/Icon';
-import { Link } from '@@/Link';
+import { Icon } from '@@CE/Icon';
+import { Link } from '@@CE/Link';
 
 import styles from './ContainerQuickActions.module.css';
 

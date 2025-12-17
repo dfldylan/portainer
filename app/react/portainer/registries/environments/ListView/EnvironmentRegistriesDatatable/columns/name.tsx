@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { DecoratedRegistry } from '@/react/portainer/registries/ListView/RegistriesDatatable/types';
-import { columnHelper } from '@/react/portainer/registries/ListView/RegistriesDatatable/columns/helper';
-import { NameCell } from '@/react/portainer/registries/ListView/RegistriesDatatable/columns/name';
+import { DecoratedRegistry } from '@CE/react/portainer/registries/ListView/RegistriesDatatable/types';
+import { columnHelper } from '@CE/react/portainer/registries/ListView/RegistriesDatatable/columns/helper';
+import { NameCell } from '@CE/react/portainer/registries/ListView/RegistriesDatatable/columns/name';
 
 export const name = columnHelper.accessor('Name', {
   header: 'Name',

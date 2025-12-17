@@ -1,11 +1,11 @@
-import { DecoratedTask } from '@/react/docker/services/ItemView/TasksDatatable/types';
-import { status } from '@/react/docker/services/ItemView/TasksDatatable/columns/status';
-import { actions } from '@/react/docker/services/ItemView/TasksDatatable/columns/actions';
-import { slot } from '@/react/docker/services/ItemView/TasksDatatable/columns/slot';
-import { node } from '@/react/docker/services/ItemView/TasksDatatable/columns/node';
-import { updated } from '@/react/docker/services/ItemView/TasksDatatable/columns/updated';
+import { DecoratedTask } from '@CE/react/docker/services/ItemView/TasksDatatable/types';
+import { status } from '@CE/react/docker/services/ItemView/TasksDatatable/columns/status';
+import { actions } from '@CE/react/docker/services/ItemView/TasksDatatable/columns/actions';
+import { slot } from '@CE/react/docker/services/ItemView/TasksDatatable/columns/slot';
+import { node } from '@CE/react/docker/services/ItemView/TasksDatatable/columns/node';
+import { updated } from '@CE/react/docker/services/ItemView/TasksDatatable/columns/updated';
 
-import { NestedDatatable } from '@@/datatables/NestedDatatable';
+import { NestedDatatable } from '@@CE/datatables/NestedDatatable';
 
 import { task } from './task-column';
 

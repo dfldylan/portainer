@@ -3,17 +3,17 @@ import { Form, Formik, useFormikContext } from 'formik';
 import { object } from 'yup';
 import { useRouter } from '@uirouter/react';
 
-import { AccessControlForm } from '@/react/portainer/access-control';
-import { AccessControlFormData } from '@/react/portainer/access-control/types';
-import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
-import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { validationSchema as accessControlValidation } from '@/react/portainer/access-control/AccessControlForm/AccessControlForm.validation';
-import { useSwarmId } from '@/react/docker/proxy/queries/useSwarm';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { AccessControlForm } from '@CE/react/portainer/access-control';
+import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
+import { parseAccessControlFormData } from '@CE/react/portainer/access-control/utils';
+import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { validationSchema as accessControlValidation } from '@CE/react/portainer/access-control/AccessControlForm/AccessControlForm.validation';
+import { useSwarmId } from '@CE/react/docker/proxy/queries/useSwarm';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { LoadingButton } from '@@/buttons';
-import { FormSection } from '@@/form-components/FormSection';
+import { LoadingButton } from '@@CE/buttons';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { useAssociateStackToEnvironmentMutation } from './useAssociateStackToEnvironmentMutation';
 

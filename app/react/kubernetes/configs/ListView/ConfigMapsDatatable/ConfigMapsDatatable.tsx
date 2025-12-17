@@ -1,22 +1,22 @@
 import { useMemo } from 'react';
 import { FileCode } from 'lucide-react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
-import { DefaultDatatableSettings } from '@/react/kubernetes/datatables/DefaultDatatableSettings';
-import { createStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
-import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
-import { useIsDeploymentOptionHidden } from '@/react/hooks/useIsDeploymentOptionHidden';
-import { pluralize } from '@/portainer/helpers/strings';
-import { useNamespacesQuery } from '@/react/kubernetes/namespaces/queries/useNamespacesQuery';
-import { PortainerNamespace } from '@/react/kubernetes/namespaces/types';
-import { CreateFromManifestButton } from '@/react/kubernetes/components/CreateFromManifestButton';
-import { isSystemNamespace } from '@/react/kubernetes/namespaces/queries/useIsSystemNamespace';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
+import { DefaultDatatableSettings } from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { createStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
+import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
+import { useIsDeploymentOptionHidden } from '@CE/react/hooks/useIsDeploymentOptionHidden';
+import { pluralize } from '@CE/portainer/helpers/strings';
+import { useNamespacesQuery } from '@CE/react/kubernetes/namespaces/queries/useNamespacesQuery';
+import { PortainerNamespace } from '@CE/react/kubernetes/namespaces/types';
+import { CreateFromManifestButton } from '@CE/react/kubernetes/components/CreateFromManifestButton';
+import { isSystemNamespace } from '@CE/react/kubernetes/namespaces/queries/useIsSystemNamespace';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { AddButton } from '@@/buttons';
-import { useTableState } from '@@/datatables/useTableState';
-import { DeleteButton } from '@@/buttons/DeleteButton';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { AddButton } from '@@CE/buttons';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
 
 import { IndexOptional, Configuration } from '../../types';
 import { useDeleteConfigMaps } from '../../queries/useDeleteConfigMaps';

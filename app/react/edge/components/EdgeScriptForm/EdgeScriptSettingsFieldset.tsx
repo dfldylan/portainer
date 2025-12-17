@@ -1,12 +1,12 @@
 import { useFormikContext, Field } from 'formik';
 
-import { GroupField } from '@/react/portainer/environments/wizard/EnvironmentsCreationView/shared/MetadataFieldset/GroupsField';
+import { GroupField } from '@CE/react/portainer/environments/wizard/EnvironmentsCreationView/shared/MetadataFieldset/GroupsField';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { SwitchField } from '@@/form-components/SwitchField';
-import { TextTip } from '@@/Tip/TextTip';
-import { TagSelector } from '@@/TagSelector';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { TagSelector } from '@@CE/TagSelector';
 
 import { EdgeGroupsSelector } from '../../edge-stacks/components/EdgeGroupsSelector';
 

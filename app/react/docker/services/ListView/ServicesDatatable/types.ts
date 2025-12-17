@@ -2,7 +2,7 @@ import {
   BasicTableSettings,
   RefreshableTableSettings,
   SettableColumnsTableSettings,
-} from '@@/datatables/types';
+} from '@@CE/datatables/types';
 
 export type TableSettings = {
   /** expanded is true (all expanded) or a record where each key value pair sets the state of the mentioned row */

@@ -1,9 +1,9 @@
 import { ArrowDownCircle } from 'lucide-react';
 
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
-import Microsoft from '@/assets/ico/vendor/microsoft.svg?c';
-import Ldap from '@/assets/ico/ldap.svg?c';
-import OAuth from '@/assets/ico/oauth.svg?c';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import Microsoft from '@CE/assets/ico/vendor/microsoft.svg?c';
+import Ldap from '@CE/assets/ico/ldap.svg?c';
+import OAuth from '@CE/assets/ico/oauth.svg?c';
 
 export const options = [
   {

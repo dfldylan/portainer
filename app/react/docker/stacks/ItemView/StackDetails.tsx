@@ -1,13 +1,13 @@
 import { Edit2, List } from 'lucide-react';
 import _ from 'lodash';
 
-import { useParamState } from '@/react/hooks/useParamState';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { Stack } from '@/react/common/stacks/types';
-import { useStackFile } from '@/react/common/stacks/queries/useStackFile';
+import { useParamState } from '@CE/react/hooks/useParamState';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Stack } from '@CE/react/common/stacks/types';
+import { useStackFile } from '@CE/react/common/stacks/queries/useStackFile';
 
-import { NavTabs } from '@@/NavTabs';
-import { WidgetBody, Widget } from '@@/Widget';
+import { NavTabs } from '@@CE/NavTabs';
+import { WidgetBody, Widget } from '@@CE/Widget';
 
 import { useContainers } from '../../containers/queries/useContainers';
 

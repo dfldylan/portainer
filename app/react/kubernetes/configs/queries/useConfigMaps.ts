@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { ConfigMap, ConfigMapList } from 'kubernetes-types/core/v1';
 
-import axios from '@/portainer/services/axios';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { withGlobalError } from '@/react-tools/react-query';
+import axios from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { withGlobalError } from '@CE/react-tools/react-query';
 
 import { parseKubernetesAxiosError } from '../../axiosError';
 

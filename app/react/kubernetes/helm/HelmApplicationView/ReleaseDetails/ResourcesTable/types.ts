@@ -1,4 +1,4 @@
-import { StatusBadgeType } from '@@/StatusBadge';
+import { StatusBadgeType } from '@@CE/StatusBadge';
 
 export type ResourceLink = {
   to?: string;

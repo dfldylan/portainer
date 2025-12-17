@@ -1,10 +1,10 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { ContainerQuickActions } from '@/react/docker/containers/components/ContainerQuickActions';
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { isAgentEnvironment } from '@/react/portainer/environments/utils';
-import { QuickActionsState } from '@/react/docker/containers/components/ContainerQuickActions/ContainerQuickActions';
-import { TaskTableQuickActions } from '@/react/docker/services/common/TaskTableQuickActions';
+import { ContainerQuickActions } from '@CE/react/docker/containers/components/ContainerQuickActions';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { isAgentEnvironment } from '@CE/react/portainer/environments/utils';
+import { QuickActionsState } from '@CE/react/docker/containers/components/ContainerQuickActions/ContainerQuickActions';
+import { TaskTableQuickActions } from '@CE/react/docker/services/common/TaskTableQuickActions';
 
 import { DecoratedTask } from '../types';
 

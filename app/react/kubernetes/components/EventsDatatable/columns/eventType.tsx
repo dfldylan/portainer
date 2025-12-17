@@ -1,9 +1,9 @@
 import { Row } from '@tanstack/react-table';
 
-import { Event } from '@/react/kubernetes/queries/types';
+import { Event } from '@CE/react/kubernetes/queries/types';
 
-import { Badge, BadgeType } from '@@/Badge';
-import { filterHOC } from '@@/datatables/Filter';
+import { Badge, BadgeType } from '@@CE/Badge';
+import { filterHOC } from '@@CE/datatables/Filter';
 
 import { columnHelper } from './helper';
 

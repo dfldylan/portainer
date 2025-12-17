@@ -1,4 +1,4 @@
-import { InsightsBox } from '@@/InsightsBox';
+import { InsightsBox } from '@@CE/InsightsBox';
 
 export function HelmInsightsBox() {
   return (

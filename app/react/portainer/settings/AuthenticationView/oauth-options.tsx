@@ -1,9 +1,9 @@
 import { Edit } from 'lucide-react';
 
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
-import Microsoft from '@/assets/ico/vendor/microsoft.svg?c';
-import Google from '@/assets/ico/vendor/google.svg?c';
-import Github from '@/assets/ico/vendor/github.svg?c';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import Microsoft from '@CE/assets/ico/vendor/microsoft.svg?c';
+import Google from '@CE/assets/ico/vendor/google.svg?c';
+import Github from '@CE/assets/ico/vendor/github.svg?c';
 
 export const options = [
   {

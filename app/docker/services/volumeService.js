@@ -1,7 +1,7 @@
-import { getVolumes } from '@/react/docker/volumes/queries/useVolumes';
-import { getVolume } from '@/react/docker/volumes/queries/useVolume';
-import { removeVolume } from '@/react/docker/volumes/queries/useRemoveVolumeMutation';
-import { createVolume } from '@/react/docker/volumes/queries/useCreateVolumeMutation';
+import { getVolumes } from '@CE/react/docker/volumes/queries/useVolumes';
+import { getVolume } from '@CE/react/docker/volumes/queries/useVolume';
+import { removeVolume } from '@CE/react/docker/volumes/queries/useRemoveVolumeMutation';
+import { createVolume } from '@CE/react/docker/volumes/queries/useCreateVolumeMutation';
 
 import { VolumeViewModel } from '../models/volume';
 

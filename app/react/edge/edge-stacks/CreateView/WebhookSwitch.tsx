@@ -1,5 +1,5 @@
-import { TextTip } from '@@/Tip/TextTip';
-import { SwitchField } from '@@/form-components/SwitchField';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 export function WebhookSwitch({
   value,

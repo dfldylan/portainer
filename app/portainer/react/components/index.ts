@@ -1,45 +1,45 @@
 import angular from 'angular';
 
-import { r2a } from '@/react-tools/react2angular';
-import { withCurrentUser } from '@/react-tools/withCurrentUser';
-import { withReactQuery } from '@/react-tools/withReactQuery';
-import { withUIRouter } from '@/react-tools/withUIRouter';
-import { AnnotationsBeTeaser } from '@/react/kubernetes/annotations/AnnotationsBeTeaser';
-import { withFormValidation } from '@/react-tools/withFormValidation';
-import { GroupAssociationTable } from '@/react/portainer/environments/environment-groups/components/GroupAssociationTable';
-import { AssociatedEnvironmentsSelector } from '@/react/portainer/environments/environment-groups/components/AssociatedEnvironmentsSelector';
-import { withControlledInput } from '@/react-tools/withControlledInput';
-import { NamespacePortainerSelect } from '@/react/kubernetes/applications/components/NamespaceSelector/NamespaceSelector';
+import { r2a } from '@CE/react-tools/react2angular';
+import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
+import { withReactQuery } from '@CE/react-tools/withReactQuery';
+import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { AnnotationsBeTeaser } from '@CE/react/kubernetes/annotations/AnnotationsBeTeaser';
+import { withFormValidation } from '@CE/react-tools/withFormValidation';
+import { GroupAssociationTable } from '@CE/react/portainer/environments/environment-groups/components/GroupAssociationTable';
+import { AssociatedEnvironmentsSelector } from '@CE/react/portainer/environments/environment-groups/components/AssociatedEnvironmentsSelector';
+import { withControlledInput } from '@CE/react-tools/withControlledInput';
+import { NamespacePortainerSelect } from '@CE/react/kubernetes/applications/components/NamespaceSelector/NamespaceSelector';
 
 import {
   EnvironmentVariablesFieldset,
   EnvironmentVariablesPanel,
   StackEnvironmentVariablesPanel,
   envVarValidation,
-} from '@@/form-components/EnvironmentVariablesFieldset';
-import { Icon } from '@@/Icon';
-import { ReactQueryDevtoolsWrapper } from '@@/ReactQueryDevtoolsWrapper';
-import { PageHeader } from '@@/PageHeader';
-import { TagSelector } from '@@/TagSelector';
-import { Loading } from '@@/Widget/Loading';
-import { PasswordCheckHint } from '@@/PasswordCheckHint';
-import { Tooltip } from '@@/Tip/Tooltip';
-import { Badge } from '@@/Badge';
-import { TableColumnHeaderAngular } from '@@/datatables/TableHeaderCell';
-import { DashboardItem } from '@@/DashboardItem';
-import { SearchBar } from '@@/datatables/SearchBar';
-import { FallbackImage } from '@@/FallbackImage';
-import { BadgeIcon } from '@@/BadgeIcon';
-import { TeamsSelector } from '@@/TeamsSelector';
-import { TerminalTooltip } from '@@/TerminalTooltip';
-import { PortainerSelect } from '@@/form-components/PortainerSelect';
-import { Slider } from '@@/form-components/Slider';
-import { TagButton } from '@@/TagButton';
-import { BETeaserButton } from '@@/BETeaserButton';
-import { CodeEditor } from '@@/CodeEditor';
-import { HelpLink } from '@@/HelpLink';
-import { TextTip } from '@@/Tip/TextTip';
-import { InlineLoader } from '@@/InlineLoader/InlineLoader';
+} from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { Icon } from '@@CE/Icon';
+import { ReactQueryDevtoolsWrapper } from '@@CE/ReactQueryDevtoolsWrapper';
+import { PageHeader } from '@@CE/PageHeader';
+import { TagSelector } from '@@CE/TagSelector';
+import { Loading } from '@@CE/Widget/Loading';
+import { PasswordCheckHint } from '@@CE/PasswordCheckHint';
+import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Badge } from '@@CE/Badge';
+import { TableColumnHeaderAngular } from '@@CE/datatables/TableHeaderCell';
+import { DashboardItem } from '@@CE/DashboardItem';
+import { SearchBar } from '@@CE/datatables/SearchBar';
+import { FallbackImage } from '@@CE/FallbackImage';
+import { BadgeIcon } from '@@CE/BadgeIcon';
+import { TeamsSelector } from '@@CE/TeamsSelector';
+import { TerminalTooltip } from '@@CE/TerminalTooltip';
+import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
+import { Slider } from '@@CE/form-components/Slider';
+import { TagButton } from '@@CE/TagButton';
+import { BETeaserButton } from '@@CE/BETeaserButton';
+import { CodeEditor } from '@@CE/CodeEditor';
+import { HelpLink } from '@@CE/HelpLink';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { InlineLoader } from '@@CE/InlineLoader/InlineLoader';
 
 import { fileUploadField } from './file-upload-field';
 import { switchField } from './switch-field';

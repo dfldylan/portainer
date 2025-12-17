@@ -1,4 +1,4 @@
-import { cpuHumanValue } from '@/react/kubernetes/applications/utils/cpuHumanValue';
+import { cpuHumanValue } from '@CE/react/kubernetes/applications/utils/cpuHumanValue';
 import { nodeAffinityValues } from './application';
 
 angular

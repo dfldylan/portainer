@@ -1,14 +1,14 @@
 import { Settings as SettingsIcon } from 'lucide-react';
 import { Field, Form, Formik, useFormikContext } from 'formik';
 
-import { EdgeCheckinIntervalField } from '@/react/edge/components/EdgeCheckInIntervalField';
-import { useUpdateSettingsMutation } from '@/react/portainer/settings/queries';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { EdgeCheckinIntervalField } from '@CE/react/edge/components/EdgeCheckInIntervalField';
+import { useUpdateSettingsMutation } from '@CE/react/portainer/settings/queries';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { Widget } from '@@/Widget';
-import { LoadingButton } from '@@/buttons';
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
+import { Widget } from '@@CE/Widget';
+import { LoadingButton } from '@@CE/buttons';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
 
 import { type Settings } from '../../types';
 

@@ -1,8 +1,8 @@
-import { Settings } from '@/react/portainer/settings/types';
+import { Settings } from '@CE/react/portainer/settings/types';
 
-import { confirmDestructive } from '@@/modals/confirm';
-import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
-import { buildConfirmButton } from '@@/modals/utils';
+import { confirmDestructive } from '@@CE/modals/confirm';
+import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
+import { buildConfirmButton } from '@@CE/modals/utils';
 
 import { PasswordLengthSlider } from './PasswordLengthSlider/PasswordLengthSlider';
 import { SaveAuthSettingsButton } from './SaveAuthSettingsButton';

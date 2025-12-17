@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { Option, PortainerSelect } from '@@/form-components/PortainerSelect';
+import { Option, PortainerSelect } from '@@CE/form-components/PortainerSelect';
 
 import { ListState, TemplateType } from './types';
 import { TemplateViewModel } from './view-model';

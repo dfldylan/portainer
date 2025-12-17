@@ -1,8 +1,8 @@
 import { bool, object, SchemaOf, string } from 'yup';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { FormSection } from '@@/form-components/FormSection';
-import { SwitchField } from '@@/form-components/SwitchField';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { SwitchField } from '@@CE/form-components/SwitchField';
 
 import { RuntimeSelector } from './RuntimeSelector';
 

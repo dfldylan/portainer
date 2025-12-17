@@ -1,4 +1,4 @@
-import { parseArrayOfStrings } from '@@/form-components/EnvironmentVariablesFieldset/utils';
+import { parseArrayOfStrings } from '@@CE/form-components/EnvironmentVariablesFieldset/utils';
 
 import { ContainerDetailsJSON } from '../../queries/useContainer';
 

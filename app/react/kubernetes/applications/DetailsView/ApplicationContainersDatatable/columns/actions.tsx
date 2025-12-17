@@ -1,9 +1,9 @@
 import { BarChart, FileText, Terminal } from 'lucide-react';
 
-import { Authorized } from '@/react/hooks/useUser';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Link } from '@@/Link';
-import { Icon } from '@@/Icon';
+import { Link } from '@@CE/Link';
+import { Icon } from '@@CE/Icon';
 
 import { columnHelper } from './helper';
 

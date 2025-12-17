@@ -1,8 +1,8 @@
 import { Form, Formik, useFormikContext } from 'formik';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { BoxSelector } from '@@/BoxSelector';
-import { FormActions } from '@@/form-components/FormActions';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { BoxSelector } from '@@CE/BoxSelector';
+import { FormActions } from '@@CE/form-components/FormActions';
 
 import { EdgeGroup } from '../../types';
 

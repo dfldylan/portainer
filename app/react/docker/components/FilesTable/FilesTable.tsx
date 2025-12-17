@@ -1,14 +1,14 @@
 import { CornerLeftUp, File as FileIcon, Upload } from 'lucide-react';
 import { useState } from 'react';
 
-import { Authorized } from '@/react/hooks/useUser';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { Datatable } from '@@/datatables';
-import { BasicTableSettings } from '@@/datatables/types';
-import { Button } from '@@/buttons';
-import { TableState } from '@@/datatables/useTableState';
-import { withMeta } from '@@/datatables/extend-options/withMeta';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+import { Datatable } from '@@CE/datatables';
+import { BasicTableSettings } from '@@CE/datatables/types';
+import { Button } from '@@CE/buttons';
+import { TableState } from '@@CE/datatables/useTableState';
+import { withMeta } from '@@CE/datatables/extend-options/withMeta';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
 
 import { FileData } from './types';
 import { columns } from './columns';

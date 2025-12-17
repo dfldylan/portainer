@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import * as featureFlags from '@/react/portainer/feature-flags/feature-flags.service';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import * as featureFlags from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
 
 import { SidebarProvider } from '../useSidebarState';
 

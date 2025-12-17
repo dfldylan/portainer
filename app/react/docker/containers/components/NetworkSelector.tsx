@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 
-import { useNetworks } from '@/react/docker/networks/queries/useNetworks';
-import { DockerNetwork } from '@/react/docker/networks/types';
-import { useIsSwarm } from '@/react/docker/proxy/queries/useInfo';
-import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useIsPodman } from '@/react/portainer/environments/queries/useIsPodman';
+import { useNetworks } from '@CE/react/docker/networks/queries/useNetworks';
+import { DockerNetwork } from '@CE/react/docker/networks/types';
+import { useIsSwarm } from '@CE/react/docker/proxy/queries/useInfo';
+import { useApiVersion } from '@CE/react/docker/proxy/queries/useVersion';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useIsPodman } from '@CE/react/portainer/environments/queries/useIsPodman';
 
-import { Option, PortainerSelect } from '@@/form-components/PortainerSelect';
+import { Option, PortainerSelect } from '@@CE/form-components/PortainerSelect';
 
 export function NetworkSelector({
   onChange,

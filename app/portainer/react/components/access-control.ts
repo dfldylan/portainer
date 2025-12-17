@@ -1,14 +1,14 @@
 import angular from 'angular';
 
-import { r2a } from '@/react-tools/react2angular';
-import { withCurrentUser } from '@/react-tools/withCurrentUser';
-import { withReactQuery } from '@/react-tools/withReactQuery';
-import { withUIRouter } from '@/react-tools/withUIRouter';
-import { PorAccessControlFormTeamSelector } from '@/react/portainer/access-control/PorAccessControlForm/TeamsSelector';
-import { PorAccessControlFormUserSelector } from '@/react/portainer/access-control/PorAccessControlForm/UsersSelector';
-import { PorAccessManagementUsersSelector } from '@/react/portainer/access-control/AccessManagement/PorAccessManagementUsersSelector';
-import { AccessTypeSelector } from '@/react/portainer/access-control/EditDetails/AccessTypeSelector';
-import { AccessControlPanel } from '@/react/portainer/access-control';
+import { r2a } from '@CE/react-tools/react2angular';
+import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
+import { withReactQuery } from '@CE/react-tools/withReactQuery';
+import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { PorAccessControlFormTeamSelector } from '@CE/react/portainer/access-control/PorAccessControlForm/TeamsSelector';
+import { PorAccessControlFormUserSelector } from '@CE/react/portainer/access-control/PorAccessControlForm/UsersSelector';
+import { PorAccessManagementUsersSelector } from '@CE/react/portainer/access-control/AccessManagement/PorAccessManagementUsersSelector';
+import { AccessTypeSelector } from '@CE/react/portainer/access-control/EditDetails/AccessTypeSelector';
+import { AccessControlPanel } from '@CE/react/portainer/access-control';
 
 export const accessControlModule = angular
   .module('portainer.app.react.components.access-control', [])

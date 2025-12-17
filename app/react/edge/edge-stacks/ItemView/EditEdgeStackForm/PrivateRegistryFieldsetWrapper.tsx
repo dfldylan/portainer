@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-import { notifyError } from '@/portainer/services/notifications';
+import { notifyError } from '@CE/portainer/services/notifications';
 import {
   PrivateRegistryFieldset,
   REGISTRY_CREDENTIALS_ENABLED,
-} from '@/react/edge/edge-stacks/components/PrivateRegistryFieldset';
-import { useRegistries } from '@/react/portainer/registries/queries/useRegistries';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+} from '@CE/react/edge/edge-stacks/components/PrivateRegistryFieldset';
+import { useRegistries } from '@CE/react/portainer/registries/queries/useRegistries';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
 import { useParseRegistries } from '../../queries/useParseRegistries';
 

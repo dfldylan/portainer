@@ -1,15 +1,15 @@
 import { Code } from 'lucide-react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { Datatable, TableSettingsMenu } from '@@/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
-import { useTableStateWithStorage } from '@@/datatables/useTableState';
+import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
+import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
 import {
   BasicTableSettings,
   refreshableSettings,
   RefreshableTableSettings,
-} from '@@/datatables/types';
+} from '@@CE/datatables/types';
 
 import { useApplications } from '../../applications/queries/useApplications';
 

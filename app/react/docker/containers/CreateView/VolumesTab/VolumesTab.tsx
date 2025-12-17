@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 
-import { useIsEnvironmentAdmin } from '@/react/hooks/useUser';
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { useIsEnvironmentAdmin } from '@CE/react/hooks/useUser';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
 
-import { InputList } from '@@/form-components/InputList';
-import { ArrayError } from '@@/form-components/InputList/InputList';
+import { InputList } from '@@CE/form-components/InputList';
+import { ArrayError } from '@@CE/form-components/InputList/InputList';
 
 import { Values, Volume } from './types';
 import { InputContext } from './context';

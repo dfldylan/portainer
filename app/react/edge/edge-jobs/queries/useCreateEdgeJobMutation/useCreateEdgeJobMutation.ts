@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { EdgeGroup } from '@/react/edge/edge-groups/types';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { withInvalidate } from '@/react-tools/react-query';
+import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { withInvalidate } from '@CE/react-tools/react-query';
 
 import { queryKeys } from '../query-keys';
 

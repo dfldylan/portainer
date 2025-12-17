@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 
-import { notifySuccess } from '@/portainer/services/notifications';
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 
-import { Button } from '@@/buttons';
-import { Icon } from '@@/Icon';
+import { Button } from '@@CE/buttons';
+import { Icon } from '@@CE/Icon';
 
 import { EdgeStack } from '../../types';
 

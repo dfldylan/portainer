@@ -1,4 +1,4 @@
-import { processItemsInBatches } from '@/react/common/processItemsInBatches';
+import { processItemsInBatches } from '@CE/react/common/processItemsInBatches';
 
 angular.module('portainer.docker').controller('VolumesController', [
   '$q',

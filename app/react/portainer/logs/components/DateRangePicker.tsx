@@ -6,7 +6,7 @@ import { FormikErrors } from 'formik';
 import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
-import { FormControl } from '@@/form-components/FormControl';
+import { FormControl } from '@@CE/form-components/FormControl';
 
 import 'react-datetime-picker/dist/DateTimePicker.css';
 

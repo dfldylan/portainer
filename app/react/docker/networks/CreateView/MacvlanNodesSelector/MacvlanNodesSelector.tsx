@@ -1,13 +1,13 @@
 import { HardDrive } from 'lucide-react';
 
-import { NodeViewModel } from '@/docker/models/node';
+import { NodeViewModel } from '@CE/docker/models/node';
 
-import { Datatable } from '@@/datatables';
-import { createPersistedStore } from '@@/datatables/types';
-import { useTableState } from '@@/datatables/useTableState';
-import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
-import { withMeta } from '@@/datatables/extend-options/withMeta';
-import { withControlledSelected } from '@@/datatables/extend-options/withControlledSelected';
+import { Datatable } from '@@CE/datatables';
+import { createPersistedStore } from '@@CE/datatables/types';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
+import { withMeta } from '@@CE/datatables/extend-options/withMeta';
+import { withControlledSelected } from '@@CE/datatables/extend-options/withControlledSelected';
 
 import { useColumns } from './useColumns';
 

@@ -1,21 +1,21 @@
 import { ChangeEvent, useEffect } from 'react';
 import { Plus, RefreshCw, Trash2 } from 'lucide-react';
 
-import Route from '@/assets/ico/route.svg?c';
+import Route from '@CE/assets/ico/route.svg?c';
 
-import { Link } from '@@/Link';
-import { Option } from '@@/form-components/Input/Select';
-import { FormError } from '@@/form-components/FormError';
-import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
-import { Tooltip } from '@@/Tip/Tooltip';
-import { Button } from '@@/buttons';
-import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
-import { TextTip } from '@@/Tip/TextTip';
-import { InlineLoader } from '@@/InlineLoader';
-import { Select } from '@@/form-components/ReactSelect';
-import { Card } from '@@/Card';
-import { InputGroup } from '@@/form-components/InputGroup';
-import { Input } from '@@/form-components/Input';
+import { Link } from '@@CE/Link';
+import { Option } from '@@CE/form-components/Input/Select';
+import { FormError } from '@@CE/form-components/FormError';
+import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
+import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Button } from '@@CE/buttons';
+import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { InlineLoader } from '@@CE/InlineLoader';
+import { Select } from '@@CE/form-components/ReactSelect';
+import { Card } from '@@CE/Card';
+import { InputGroup } from '@@CE/form-components/InputGroup';
+import { Input } from '@@CE/form-components/Input';
 
 import { AnnotationsForm } from '../../annotations/AnnotationsForm';
 

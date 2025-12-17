@@ -1,12 +1,12 @@
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 import {
   AutoUpdateResponse,
   RelativePathModel,
   RepoConfigResponse,
-} from '@/react/portainer/gitops/types';
-import { RegistryId } from '@/react/portainer/registries/types/registry';
+} from '@CE/react/portainer/gitops/types';
+import { RegistryId } from '@CE/react/portainer/registries/types/registry';
 
-import { EnvVar } from '@@/form-components/EnvironmentVariablesFieldset/types';
+import { EnvVar } from '@@CE/form-components/EnvironmentVariablesFieldset/types';
 
 import { EdgeGroup } from '../edge-groups/types';
 

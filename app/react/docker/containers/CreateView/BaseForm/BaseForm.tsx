@@ -1,21 +1,24 @@
 import { useFormikContext } from 'formik';
 
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { Authorized } from '@/react/hooks/useUser';
-import { AccessControlForm } from '@/react/portainer/access-control';
-import { AccessControlFormData } from '@/react/portainer/access-control/types';
-import { EnvironmentType } from '@/react/portainer/environments/types';
-import { NodeSelector } from '@/react/docker/agent/NodeSelector';
-import { useIsSwarm } from '@/react/docker/proxy/queries/useInfo';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { isAgentEnvironment } from '@/react/portainer/environments/utils';
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { Authorized } from '@CE/react/hooks/useUser';
+import { AccessControlForm } from '@CE/react/portainer/access-control';
+import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
+import { EnvironmentType } from '@CE/react/portainer/environments/types';
+import { NodeSelector } from '@CE/react/docker/agent/NodeSelector';
+import { useIsSwarm } from '@CE/react/docker/proxy/queries/useInfo';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { isAgentEnvironment } from '@CE/react/portainer/environments/utils';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
-import { FormSection } from '@@/form-components/FormSection';
-import { SwitchField } from '@@/form-components/SwitchField';
-import { ImageConfigFieldset, ImageConfigValues } from '@@/ImageConfigFieldset';
-import { LoadingButton } from '@@/buttons';
-import { Widget } from '@@/Widget';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import {
+  ImageConfigFieldset,
+  ImageConfigValues,
+} from '@@CE/ImageConfigFieldset';
+import { LoadingButton } from '@@CE/buttons';
+import { Widget } from '@@CE/Widget';
 
 import {
   PortsMappingField,

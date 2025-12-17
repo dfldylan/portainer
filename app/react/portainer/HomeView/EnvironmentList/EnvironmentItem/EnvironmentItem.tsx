@@ -5,23 +5,23 @@ import clsx from 'clsx';
 import {
   isoDateFromTimestamp,
   stripProtocol,
-} from '@/portainer/filters/filters';
+} from '@CE/portainer/filters/filters';
 import {
   type Environment,
   PlatformType,
-} from '@/react/portainer/environments/types';
+} from '@CE/react/portainer/environments/types';
 import {
   getDashboardRoute,
   getPlatformType,
   isEdgeEnvironment,
-} from '@/react/portainer/environments/utils';
-import type { TagId } from '@/portainer/tags/types';
-import { useTags } from '@/portainer/tags/queries';
+} from '@CE/react/portainer/environments/utils';
+import type { TagId } from '@CE/portainer/tags/types';
+import { useTags } from '@CE/portainer/tags/queries';
 
-import { EdgeIndicator } from '@@/EdgeIndicator';
-import { EnvironmentStatusBadge } from '@@/EnvironmentStatusBadge';
-import { Link } from '@@/Link';
-import { BlocklistItem } from '@@/Blocklist/BlocklistItem';
+import { EdgeIndicator } from '@@CE/EdgeIndicator';
+import { EnvironmentStatusBadge } from '@@CE/EnvironmentStatusBadge';
+import { Link } from '@@CE/Link';
+import { BlocklistItem } from '@@CE/Blocklist/BlocklistItem';
 
 import { EnvironmentIcon } from './EnvironmentIcon';
 import { EnvironmentStats } from './EnvironmentStats';

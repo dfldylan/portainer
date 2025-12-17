@@ -2,7 +2,7 @@ import { Loader2 } from 'lucide-react';
 import { ReactNode } from 'react';
 import clsx from 'clsx';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 type Size = 'xs' | 'sm' | 'md';
 

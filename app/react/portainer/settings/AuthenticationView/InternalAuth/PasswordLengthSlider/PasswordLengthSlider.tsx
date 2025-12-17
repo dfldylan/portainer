@@ -3,7 +3,7 @@ import RcSlider from 'rc-slider';
 import clsx from 'clsx';
 import { Lock, XCircle, CheckCircle } from 'lucide-react';
 
-import { SliderTooltip } from '@@/Tip/SliderTooltip';
+import { SliderTooltip } from '@@CE/Tip/SliderTooltip';
 
 import 'rc-slider/assets/index.css';
 

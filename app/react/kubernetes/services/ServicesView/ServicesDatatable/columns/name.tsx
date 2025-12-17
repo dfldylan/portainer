@@ -1,7 +1,7 @@
-import { Authorized } from '@/react/hooks/useUser';
+import { Authorized } from '@CE/react/hooks/useUser';
 
-import { SystemBadge } from '@@/Badge/SystemBadge';
-import { ExternalBadge } from '@@/Badge/ExternalBadge';
+import { SystemBadge } from '@@CE/Badge/SystemBadge';
+import { ExternalBadge } from '@@CE/Badge/ExternalBadge';
 
 import { columnHelper } from './helper';
 

@@ -1,14 +1,14 @@
 import { http, HttpResponse } from 'msw';
 import { render, within } from '@testing-library/react';
 
-import { server } from '@/setup-tests/server';
-import { UserViewModel } from '@/portainer/models/user';
-import { Team, TeamId } from '@/react/portainer/users/teams/types';
-import { createMockTeams } from '@/react-tools/test-mocks';
-import { UserId } from '@/portainer/users/types';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withTestRouter } from '@/react/test-utils/withRouter';
+import { server } from '@CE/setup-tests/server';
+import { UserViewModel } from '@CE/portainer/models/user';
+import { Team, TeamId } from '@CE/react/portainer/users/teams/types';
+import { createMockTeams } from '@CE/react-tools/test-mocks';
+import { UserId } from '@CE/portainer/users/types';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
 
 import { ResourceControlOwnership, AccessControlFormData } from '../types';
 import { ResourceControlViewModel } from '../models/ResourceControlViewModel';

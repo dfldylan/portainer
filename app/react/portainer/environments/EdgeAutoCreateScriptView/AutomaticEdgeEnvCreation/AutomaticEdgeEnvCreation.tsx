@@ -2,21 +2,21 @@ import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { Laptop } from 'lucide-react';
 
-import { generateKey } from '@/react/portainer/environments/environment.service/edge';
-import { EdgeScriptForm } from '@/react/edge/components/EdgeScriptForm';
-import { commandsTabs } from '@/react/edge/components/EdgeScriptForm/scripts';
-import { useSettings } from '@/react/portainer/settings/queries';
-import EdgeAgentStandardIcon from '@/react/edge/components/edge-agent-standard.svg?c';
-import EdgeAgentAsyncIcon from '@/react/edge/components/edge-agent-async.svg?c';
+import { generateKey } from '@CE/react/portainer/environments/environment.service/edge';
+import { EdgeScriptForm } from '@CE/react/edge/components/EdgeScriptForm';
+import { commandsTabs } from '@CE/react/edge/components/EdgeScriptForm/scripts';
+import { useSettings } from '@CE/react/portainer/settings/queries';
+import EdgeAgentStandardIcon from '@CE/react/edge/components/edge-agent-standard.svg?c';
+import EdgeAgentAsyncIcon from '@CE/react/edge/components/edge-agent-async.svg?c';
 
-import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
-import { TextTip } from '@@/Tip/TextTip';
-import { BoxSelector } from '@@/BoxSelector';
-import { FormSection } from '@@/form-components/FormSection';
-import { CopyButton } from '@@/buttons';
-import { Link } from '@@/Link';
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
+import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { BoxSelector } from '@@CE/BoxSelector';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { CopyButton } from '@@CE/buttons';
+import { Link } from '@@CE/Link';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
 
 const commands = {
   linux: [

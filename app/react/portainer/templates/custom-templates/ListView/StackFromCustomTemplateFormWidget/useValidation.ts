@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { object, string } from 'yup';
 
-import { accessControlFormValidation } from '@/react/portainer/access-control/AccessControlForm';
-import { useNameValidation } from '@/react/common/stacks/CreateView/NameField';
-import { variablesFieldValidation } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { VariableDefinition } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
-import { EnvironmentId } from '@/react/portainer/environments/types';
+import { accessControlFormValidation } from '@CE/react/portainer/access-control/AccessControlForm';
+import { useNameValidation } from '@CE/react/common/stacks/CreateView/NameField';
+import { variablesFieldValidation } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { VariableDefinition } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
 
 export function useValidation({
   environmentId,

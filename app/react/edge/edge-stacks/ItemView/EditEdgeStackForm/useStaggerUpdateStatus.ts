@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
 import { EdgeStack } from '../../types';
 import { queryKeys } from '../../queries/query-keys';

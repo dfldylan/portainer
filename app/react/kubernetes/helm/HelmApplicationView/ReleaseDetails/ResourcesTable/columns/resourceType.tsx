@@ -1,6 +1,6 @@
 import { Row } from '@tanstack/react-table';
 
-import { filterHOC } from '@@/datatables/Filter';
+import { filterHOC } from '@@CE/datatables/Filter';
 
 import { ResourceRow } from '../types';
 

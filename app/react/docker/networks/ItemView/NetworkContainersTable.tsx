@@ -1,14 +1,14 @@
 import { Server, Trash2 } from 'lucide-react';
 
-import { Authorized } from '@/react/hooks/useUser';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { Icon } from '@/react/components/Icon';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { Authorized } from '@CE/react/hooks/useUser';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { Icon } from '@CE/react/components/Icon';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { TableContainer, TableTitle } from '@@/datatables';
-import { DetailsTable } from '@@/DetailsTable';
-import { Button } from '@@/buttons';
-import { Link } from '@@/Link';
+import { TableContainer, TableTitle } from '@@CE/datatables';
+import { DetailsTable } from '@@CE/DetailsTable';
+import { Button } from '@@CE/buttons';
+import { Link } from '@@CE/Link';
 
 import { NetworkContainer, NetworkId } from '../types';
 import { useDisconnectContainer } from '../queries/useDisconnectContainerMutation';

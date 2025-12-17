@@ -3,12 +3,12 @@ import { compact } from 'lodash';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { AlertTriangle } from 'lucide-react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useEvents } from '@/react/kubernetes/queries/useEvents';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEvents } from '@CE/react/kubernetes/queries/useEvents';
 
-import { NavTabs, Option } from '@@/NavTabs';
-import { Badge } from '@@/Badge';
-import { Icon } from '@@/Icon';
+import { NavTabs, Option } from '@@CE/NavTabs';
+import { Badge } from '@@CE/Badge';
+import { Icon } from '@@CE/Icon';
 
 import { HelmRelease } from '../../types';
 import { useHelmHistory } from '../../helmReleaseQueries/useHelmHistory';

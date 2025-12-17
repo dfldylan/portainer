@@ -1,7 +1,7 @@
 import { ComponentType, useMemo } from 'react';
 
-import { UserContext } from '@/react/hooks/useUser';
-import { User } from '@/portainer/users/types';
+import { UserContext } from '@CE/react/hooks/useUser';
+import { User } from '@CE/portainer/users/types';
 
 const mockUser: User = {
   EndpointAuthorizations: [],

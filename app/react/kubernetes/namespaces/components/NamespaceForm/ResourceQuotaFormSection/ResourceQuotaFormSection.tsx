@@ -1,15 +1,15 @@
 import { FormikErrors } from 'formik';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { FormError } from '@@/form-components/FormError';
-import { FormSection } from '@@/form-components/FormSection';
-import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
-import { Slider } from '@@/form-components/Slider';
-import { SwitchField } from '@@/form-components/SwitchField';
-import { TextTip } from '@@/Tip/TextTip';
-import { SliderWithInput } from '@@/form-components/Slider/SliderWithInput';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FormError } from '@@CE/form-components/FormError';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
+import { Slider } from '@@CE/form-components/Slider';
+import { SwitchField } from '@@CE/form-components/SwitchField';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { SliderWithInput } from '@@CE/form-components/Slider/SliderWithInput';
 
 import { useClusterResourceLimitsQuery } from '../../../queries/useResourceLimitsQuery';
 

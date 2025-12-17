@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import { Loader2 } from 'lucide-react';
 
-import { Icon } from '@@/Icon';
+import { Icon } from '@@CE/Icon';
 
 import { type Props as ButtonProps, Button } from './Button';
 

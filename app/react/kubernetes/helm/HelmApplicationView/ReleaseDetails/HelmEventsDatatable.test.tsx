@@ -1,13 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { HttpResponse } from 'msw';
 
-import { Event } from '@/react/kubernetes/queries/types';
-import { server, http } from '@/setup-tests/server';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { UserViewModel } from '@/portainer/models/user';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { mockLocalizeDate } from '@/setup-tests/mock-localizeDate';
+import { Event } from '@CE/react/kubernetes/queries/types';
+import { server, http } from '@CE/setup-tests/server';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { UserViewModel } from '@CE/portainer/models/user';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { mockLocalizeDate } from '@CE/setup-tests/mock-localizeDate';
 
 import { GenericResource } from '../../types';
 
@@ -19,7 +19,7 @@ import {
 const mockUseEnvironmentId = vi.fn();
 mockLocalizeDate();
 
-vi.mock('@/react/hooks/useEnvironmentId', () => ({
+vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => mockUseEnvironmentId(),
 }));
 

@@ -2,13 +2,13 @@ import { Formik, Form } from 'formik';
 import { X, CheckSquare } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import { ServiceViewModel } from '@/docker/models/service';
-import { useUpdateServiceMutation } from '@/react/docker/services/queries/useUpdateServiceMutation';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { convertServiceToConfig } from '@/react/docker/services/common/convertServiceToConfig';
-import { notifySuccess } from '@/portainer/services/notifications';
+import { ServiceViewModel } from '@CE/docker/models/service';
+import { useUpdateServiceMutation } from '@CE/react/docker/services/queries/useUpdateServiceMutation';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { convertServiceToConfig } from '@CE/react/docker/services/common/convertServiceToConfig';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { Button, LoadingButton } from '@@/buttons';
+import { Button, LoadingButton } from '@@CE/buttons';
 
 export function ScaleForm({
   onClose,

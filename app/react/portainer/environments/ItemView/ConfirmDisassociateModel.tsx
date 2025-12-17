@@ -1,6 +1,6 @@
-import { confirm } from '@@/modals/confirm';
-import { ModalType } from '@@/modals';
-import { buildConfirmButton } from '@@/modals/utils';
+import { confirm } from '@@CE/modals/confirm';
+import { ModalType } from '@@CE/modals';
+import { buildConfirmButton } from '@@CE/modals/utils';
 
 export function confirmDisassociate() {
   const message = (

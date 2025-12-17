@@ -1,5 +1,5 @@
-import { baseHref } from '@/portainer/helpers/pathHelper';
-import { OAuthStyle } from '@/react/portainer/settings/types';
+import { baseHref } from '@CE/portainer/helpers/pathHelper';
+import { OAuthStyle } from '@CE/react/portainer/settings/types';
 
 export default {
   microsoft: {

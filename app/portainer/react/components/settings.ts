@@ -1,18 +1,18 @@
 import angular from 'angular';
 
-import { SettingsOpenAMT } from '@/react/portainer/settings/EdgeComputeView/SettingsOpenAMT';
-import { InternalAuth } from '@/react/portainer/settings/AuthenticationView/InternalAuth';
-import { r2a } from '@/react-tools/react2angular';
-import { withReactQuery } from '@/react-tools/withReactQuery';
-import { withUIRouter } from '@/react-tools/withUIRouter';
-import { LDAPUsersTable } from '@/react/portainer/settings/AuthenticationView/LDAPAuth/LDAPUsersTable';
-import { LDAPGroupsTable } from '@/react/portainer/settings/AuthenticationView/LDAPAuth/LDAPGroupsTable';
-import { ApplicationSettingsPanel } from '@/react/portainer/settings/SettingsView/ApplicationSettingsPanel';
-import { KubeSettingsPanel } from '@/react/portainer/settings/SettingsView/KubeSettingsPanel';
-import { HelmCertPanel } from '@/react/portainer/settings/SettingsView/HelmCertPanel';
-import { HiddenContainersPanel } from '@/react/portainer/settings/SettingsView/HiddenContainersPanel/HiddenContainersPanel';
-import { SSLSettingsPanelWrapper } from '@/react/portainer/settings/SettingsView/SSLSettingsPanel/SSLSettingsPanel';
-import { AuthStyleField } from '@/react/portainer/settings/AuthenticationView/OAuth';
+import { SettingsOpenAMT } from '@CE/react/portainer/settings/EdgeComputeView/SettingsOpenAMT';
+import { InternalAuth } from '@CE/react/portainer/settings/AuthenticationView/InternalAuth';
+import { r2a } from '@CE/react-tools/react2angular';
+import { withReactQuery } from '@CE/react-tools/withReactQuery';
+import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { LDAPUsersTable } from '@CE/react/portainer/settings/AuthenticationView/LDAPAuth/LDAPUsersTable';
+import { LDAPGroupsTable } from '@CE/react/portainer/settings/AuthenticationView/LDAPAuth/LDAPGroupsTable';
+import { ApplicationSettingsPanel } from '@CE/react/portainer/settings/SettingsView/ApplicationSettingsPanel';
+import { KubeSettingsPanel } from '@CE/react/portainer/settings/SettingsView/KubeSettingsPanel';
+import { HelmCertPanel } from '@CE/react/portainer/settings/SettingsView/HelmCertPanel';
+import { HiddenContainersPanel } from '@CE/react/portainer/settings/SettingsView/HiddenContainersPanel/HiddenContainersPanel';
+import { SSLSettingsPanelWrapper } from '@CE/react/portainer/settings/SettingsView/SSLSettingsPanel/SSLSettingsPanel';
+import { AuthStyleField } from '@CE/react/portainer/settings/AuthenticationView/OAuth';
 
 export const settingsModule = angular
   .module('portainer.app.react.components.settings', [])

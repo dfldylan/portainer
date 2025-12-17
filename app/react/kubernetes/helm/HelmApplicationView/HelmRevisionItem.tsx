@@ -1,8 +1,8 @@
-import { localizeDate } from '@/react/common/date-utils';
+import { localizeDate } from '@CE/react/common/date-utils';
 
-import { BlocklistItem } from '@@/Blocklist/BlocklistItem';
-import { Link } from '@@/Link';
-import { Badge } from '@@/Badge';
+import { BlocklistItem } from '@@CE/Blocklist/BlocklistItem';
+import { Link } from '@@CE/Link';
+import { Badge } from '@@CE/Badge';
 
 import { HelmRelease } from '../types';
 import { getStatusColor, getStatusText } from '../helm-status-utils';

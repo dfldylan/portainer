@@ -1,16 +1,16 @@
 import angular from 'angular';
 
-import { AccessControlFormData } from '@/portainer/components/accessControlForm/porAccessControlFormModel';
-import { STACK_NAME_VALIDATION_REGEX } from '@/react/constants';
-import { RepositoryMechanismTypes } from '@/kubernetes/models/deploy';
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
-import { isTemplateVariablesEnabled, renderTemplate } from '@/react/portainer/custom-templates/components/utils';
-import { editor, upload, git, customTemplate } from '@@/BoxSelector/common-options/build-methods';
-import { confirmWebEditorDiscard } from '@@/modals/confirm';
-import { parseAutoUpdateResponse, transformAutoUpdateViewModel } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
-import { baseStackWebhookUrl, createWebhookId } from '@/portainer/helpers/webhookHelper';
-import { getVariablesFieldDefaultValues } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { getDockerComposeSchema } from '@/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
+import { AccessControlFormData } from '@CE/portainer/components/accessControlForm/porAccessControlFormModel';
+import { STACK_NAME_VALIDATION_REGEX } from '@CE/react/constants';
+import { RepositoryMechanismTypes } from '@CE/kubernetes/models/deploy';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { isTemplateVariablesEnabled, renderTemplate } from '@CE/react/portainer/custom-templates/components/utils';
+import { parseAutoUpdateResponse, transformAutoUpdateViewModel } from '@CE/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { baseStackWebhookUrl, createWebhookId } from '@CE/portainer/helpers/webhookHelper';
+import { getVariablesFieldDefaultValues } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { getDockerComposeSchema } from '@CE/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
+import { confirmWebEditorDiscard } from '@@CE/modals/confirm';
+import { editor, upload, git, customTemplate } from '@@CE/BoxSelector/common-options/build-methods';
 
 angular
   .module('portainer.app')

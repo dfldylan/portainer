@@ -1,4 +1,4 @@
-import { addPlural } from '@/react/common/string-utils';
+import { addPlural } from '@CE/react/common/string-utils';
 
 interface SelectedRowsCountProps {
   value: number;

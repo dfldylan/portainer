@@ -1,7 +1,7 @@
 import { CellContext, Row } from '@tanstack/react-table';
 
-import { StatusBadge } from '@@/StatusBadge';
-import { filterHOC } from '@@/datatables/Filter';
+import { StatusBadge } from '@@CE/StatusBadge';
+import { filterHOC } from '@@CE/datatables/Filter';
 
 import { ResourceRow } from '../types';
 

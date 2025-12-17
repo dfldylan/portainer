@@ -2,11 +2,11 @@ import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useCallback } from 'react';
 
-import { notifySuccess } from '@/portainer/services/notifications';
-import { useUpdateSettingsMutation } from '@/react/portainer/settings/queries';
-import { Settings } from '@/react/portainer/settings/types';
+import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useUpdateSettingsMutation } from '@CE/react/portainer/settings/queries';
+import { Settings } from '@CE/react/portainer/settings/types';
 
-import { LoadingButton } from '@@/buttons/LoadingButton';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
 
 import { EnabledWaitingRoomSwitch } from './EnableWaitingRoomSwitch';
 

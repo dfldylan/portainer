@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { Icon, IconProps } from '@@/Icon';
+import { Icon, IconProps } from '@@CE/Icon';
 
 export type BadgeSize = 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 

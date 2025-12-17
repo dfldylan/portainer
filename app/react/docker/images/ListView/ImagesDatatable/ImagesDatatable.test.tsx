@@ -1,12 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { server } from '@/setup-tests/server';
-import { createMockUser } from '@/react-tools/test-mocks';
-import { Role, User } from '@/portainer/users/types';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { server } from '@CE/setup-tests/server';
+import { createMockUser } from '@CE/react-tools/test-mocks';
+import { Role, User } from '@CE/portainer/users/types';
 
 import { ImagesListResponse } from '../../queries/useImages';
 
@@ -19,7 +19,7 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
   })),
 }));
 
-vi.mock('@@/Link', () => ({
+vi.mock('@@CE/Link', () => ({
   Link: ({
     children,
     'data-cy': dataCy,

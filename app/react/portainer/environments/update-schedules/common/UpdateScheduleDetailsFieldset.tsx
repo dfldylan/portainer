@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import { Environment } from '@/react/portainer/environments/types';
-import { semverCompare } from '@/react/common/semver-utils';
+import { Environment } from '@CE/react/portainer/environments/types';
+import { semverCompare } from '@CE/react/common/semver-utils';
 
-import { TextTip } from '@@/Tip/TextTip';
+import { TextTip } from '@@CE/Tip/TextTip';
 
 import { VersionSelect } from './VersionSelect';
 import { ScheduledTimeField } from './ScheduledTimeField';

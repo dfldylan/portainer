@@ -1,4 +1,4 @@
-import { ContainerListViewModel } from '@/react/docker/containers/types';
+import { ContainerListViewModel } from '@CE/react/docker/containers/types';
 
 export type DockerContainerSnapshot = ContainerListViewModel & {
   Env: string[];

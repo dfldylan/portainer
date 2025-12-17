@@ -1,9 +1,9 @@
 import { Rocket } from 'lucide-react';
 import { PropsWithChildren } from 'react';
 
-import { FallbackImage } from '@@/FallbackImage';
-import { Icon } from '@@/Icon';
-import { Widget } from '@@/Widget';
+import { FallbackImage } from '@@CE/FallbackImage';
+import { Icon } from '@@CE/Icon';
+import { Widget } from '@@CE/Widget';
 
 import { TemplateNote } from './TemplateNote';
 

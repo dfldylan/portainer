@@ -1,9 +1,9 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
-import { withTestRouter } from '@/react/test-utils/withRouter';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { GenericResource } from '@/react/kubernetes/helm/types';
+import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { GenericResource } from '@CE/react/kubernetes/helm/types';
 
 import { ResourcesTable } from './ResourcesTable';
 
@@ -17,11 +17,11 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
   useCurrentStateAndParams: () => mockUseCurrentStateAndParams(),
 }));
 
-vi.mock('@/react/hooks/useEnvironmentId', () => ({
+vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => mockUseEnvironmentId(),
 }));
 
-vi.mock('@/react/kubernetes/helm/helmReleaseQueries/useHelmRelease', () => ({
+vi.mock('@CE/react/kubernetes/helm/helmReleaseQueries/useHelmRelease', () => ({
   useHelmRelease: () => mockUseHelmRelease(),
 }));
 

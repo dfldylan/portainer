@@ -1,13 +1,13 @@
 import { AlertTriangle, Code, History, Minimize2 } from 'lucide-react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import LaptopCode from '@/assets/ico/laptop-code.svg?c';
-import { useNamespaceAccessRedirect } from '@/react/kubernetes/namespaces/hooks/useNamespaceAccessRedirect';
+import LaptopCode from '@CE/assets/ico/laptop-code.svg?c';
+import { useNamespaceAccessRedirect } from '@CE/react/kubernetes/namespaces/hooks/useNamespaceAccessRedirect';
 
-import { PageHeader } from '@@/PageHeader';
-import { Tab, WidgetTabs, findSelectedTabIndex } from '@@/Widget/WidgetTabs';
-import { Icon } from '@@/Icon';
-import { Badge } from '@@/Badge';
+import { PageHeader } from '@@CE/PageHeader';
+import { Tab, WidgetTabs, findSelectedTabIndex } from '@@CE/Widget/WidgetTabs';
+import { Icon } from '@@CE/Icon';
+import { Badge } from '@@CE/Badge';
 
 import { EventsDatatable } from '../../components/EventsDatatable';
 

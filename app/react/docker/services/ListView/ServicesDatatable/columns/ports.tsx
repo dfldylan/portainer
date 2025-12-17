@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { ServiceViewModel } from '@/docker/models/service';
-import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { PublishedPortLink } from '@/react/docker/components/ImageStatus/PublishedPortLink';
+import { ServiceViewModel } from '@CE/docker/models/service';
+import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { PublishedPortLink } from '@CE/react/docker/components/ImageStatus/PublishedPortLink';
 
 import { columnHelper } from './helper';
 

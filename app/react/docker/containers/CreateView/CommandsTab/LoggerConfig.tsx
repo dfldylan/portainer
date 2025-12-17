@@ -2,17 +2,17 @@ import { FormikErrors } from 'formik';
 import { array, object, SchemaOf, string } from 'yup';
 import _ from 'lodash';
 
-import { useLoggingPlugins } from '@/react/docker/proxy/queries/usePlugins';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useIsPodman } from '@/react/portainer/environments/queries/useIsPodman';
+import { useLoggingPlugins } from '@CE/react/docker/proxy/queries/usePlugins';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useIsPodman } from '@CE/react/portainer/environments/queries/useIsPodman';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { FormSection } from '@@/form-components/FormSection';
-import { InputGroup } from '@@/form-components/InputGroup';
-import { InputList, ItemProps } from '@@/form-components/InputList';
-import { PortainerSelect } from '@@/form-components/PortainerSelect';
-import { TextTip } from '@@/Tip/TextTip';
-import { FormError } from '@@/form-components/FormError';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { FormSection } from '@@CE/form-components/FormSection';
+import { InputGroup } from '@@CE/form-components/InputGroup';
+import { InputList, ItemProps } from '@@CE/form-components/InputList';
+import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { FormError } from '@@CE/form-components/FormError';
 
 export interface LogConfig {
   type: string;

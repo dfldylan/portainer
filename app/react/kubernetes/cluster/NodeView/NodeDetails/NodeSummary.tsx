@@ -1,20 +1,20 @@
 import { Node, Endpoints } from 'kubernetes-types/core/v1';
 import { useMemo } from 'react';
 
-import { formatDate } from '@/portainer/filters/filters';
+import { formatDate } from '@CE/portainer/filters/filters';
 import {
   getRole,
   getInternalNodeIpAddress,
   getNodeApiDetails,
   getNodeStatus,
   getAvailability,
-} from '@/react/kubernetes/cluster/nodeUtils';
+} from '@CE/react/kubernetes/cluster/nodeUtils';
 
-import { Badge } from '@@/Badge';
-import { DetailsTable } from '@@/DetailsTable';
-import { StatusBadge, StatusBadgeType } from '@@/StatusBadge';
-import { PortainerSelect, Option } from '@@/form-components/PortainerSelect';
-import { FormError } from '@@/form-components/FormError';
+import { Badge } from '@@CE/Badge';
+import { DetailsTable } from '@@CE/DetailsTable';
+import { StatusBadge, StatusBadgeType } from '@@CE/StatusBadge';
+import { PortainerSelect, Option } from '@@CE/form-components/PortainerSelect';
+import { FormError } from '@@CE/form-components/FormError';
 
 import { NodeAvailability } from '../../types';
 

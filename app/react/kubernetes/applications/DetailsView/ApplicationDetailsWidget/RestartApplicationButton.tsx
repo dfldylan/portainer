@@ -1,6 +1,6 @@
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
 
-import { BETeaserButton } from '@@/BETeaserButton';
+import { BETeaserButton } from '@@CE/BETeaserButton';
 
 export function RestartApplicationButton() {
   return (

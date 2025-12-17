@@ -1,13 +1,13 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { AlertTriangle, Code, Layers, History } from 'lucide-react';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useNamespaceAccessRedirect } from '@/react/kubernetes/namespaces/hooks/useNamespaceAccessRedirect';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useNamespaceAccessRedirect } from '@CE/react/kubernetes/namespaces/hooks/useNamespaceAccessRedirect';
 
-import { PageHeader } from '@@/PageHeader';
-import { findSelectedTabIndex, Tab, WidgetTabs } from '@@/Widget/WidgetTabs';
-import { Badge } from '@@/Badge';
-import { Icon } from '@@/Icon';
+import { PageHeader } from '@@CE/PageHeader';
+import { findSelectedTabIndex, Tab, WidgetTabs } from '@@CE/Widget/WidgetTabs';
+import { Badge } from '@@CE/Badge';
+import { Icon } from '@@CE/Icon';
 
 import { useEventWarningsCount } from '../../queries/useEvents';
 import { NamespaceYAMLEditor } from '../components/NamespaceYamlEditor';

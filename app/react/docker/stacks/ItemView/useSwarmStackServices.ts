@@ -1,19 +1,19 @@
 import { useQueryClient } from '@tanstack/react-query';
 import _ from 'lodash';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { useEnvironment } from '@/react/portainer/environments/queries';
-import { isAgentEnvironment } from '@/react/portainer/environments/utils';
-import { useTasks } from '@/react/docker/proxy/queries/tasks/useTasks';
-import { queryKeys as tasksQueryKeys } from '@/react/docker/proxy/queries/tasks/query-keys';
-import { TaskViewModel } from '@/docker/models/task';
-import { useServices } from '@/react/docker/services/queries/useServices';
-import { queryKeys as servicesQueryKeys } from '@/react/docker/services/queries/query-keys';
-import { ServiceViewModel } from '@/docker/models/service';
-import { useContainers } from '@/react/docker/containers/queries/useContainers';
-import { queryKeys as containersQueryKeys } from '@/react/docker/containers/queries/query-keys';
-import { ContainerListViewModel } from '@/react/docker/containers/types';
-import { SWARM_STACK_NAME_LABEL } from '@/react/constants';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironment } from '@CE/react/portainer/environments/queries';
+import { isAgentEnvironment } from '@CE/react/portainer/environments/utils';
+import { useTasks } from '@CE/react/docker/proxy/queries/tasks/useTasks';
+import { queryKeys as tasksQueryKeys } from '@CE/react/docker/proxy/queries/tasks/query-keys';
+import { TaskViewModel } from '@CE/docker/models/task';
+import { useServices } from '@CE/react/docker/services/queries/useServices';
+import { queryKeys as servicesQueryKeys } from '@CE/react/docker/services/queries/query-keys';
+import { ServiceViewModel } from '@CE/docker/models/service';
+import { useContainers } from '@CE/react/docker/containers/queries/useContainers';
+import { queryKeys as containersQueryKeys } from '@CE/react/docker/containers/queries/query-keys';
+import { ContainerListViewModel } from '@CE/react/docker/containers/types';
+import { SWARM_STACK_NAME_LABEL } from '@CE/react/constants';
 
 import { associateContainerToTask } from '../../tasks/utils';
 import { associateServiceTasks } from '../../services/utils';

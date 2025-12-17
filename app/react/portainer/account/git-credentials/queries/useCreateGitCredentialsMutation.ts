@@ -1,10 +1,13 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { GitAuthModel } from '@/react/portainer/gitops/types';
-import { useCurrentUser } from '@/react/hooks/useUser';
-import { UserId } from '@/portainer/users/types';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { GitAuthModel } from '@CE/react/portainer/gitops/types';
+import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { UserId } from '@CE/portainer/users/types';
 
 import { GitCredential } from '../types';
 import { buildGitUrl } from '../git-credentials.service';

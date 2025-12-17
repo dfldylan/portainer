@@ -1,8 +1,8 @@
 import {
   PaginationTableSettings,
   SortableTableSettings,
-} from '@/react/components/datatables/types';
-import { SupportedIngControllerTypes } from '@/react/kubernetes/cluster/ingressClass/types';
+} from '@CE/react/components/datatables/types';
+import { SupportedIngControllerTypes } from '@CE/react/kubernetes/cluster/ingressClass/types';
 
 export interface TableSettings
   extends SortableTableSettings,

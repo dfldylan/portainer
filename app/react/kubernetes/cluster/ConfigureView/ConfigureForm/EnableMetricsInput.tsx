@@ -2,12 +2,12 @@ import { Field, useFormikContext } from 'formik';
 import { useState } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
 
-import { useGetMetricsMutation } from '@/react/kubernetes/queries/useGetMetricsMutation';
+import { useGetMetricsMutation } from '@CE/react/kubernetes/queries/useGetMetricsMutation';
 
-import { TextTip } from '@@/Tip/TextTip';
-import { FormControl } from '@@/form-components/FormControl';
-import { Switch } from '@@/form-components/SwitchField/Switch';
-import { InlineLoader } from '@@/InlineLoader';
+import { TextTip } from '@@CE/Tip/TextTip';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Switch } from '@@CE/form-components/SwitchField/Switch';
+import { InlineLoader } from '@@CE/InlineLoader';
 
 import { ConfigureFormValues } from './types';
 

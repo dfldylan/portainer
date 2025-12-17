@@ -1,14 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { deleteContainerGroup } from '@/react/azure/services/container-groups.service';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { promiseSequence } from '@/portainer/helpers/promise-utils';
-import { useContainerGroups } from '@/react/azure/queries/useContainerGroups';
-import { useSubscriptions } from '@/react/azure/queries/useSubscriptions';
+import { deleteContainerGroup } from '@CE/react/azure/services/container-groups.service';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
+import { useContainerGroups } from '@CE/react/azure/queries/useContainerGroups';
+import { useSubscriptions } from '@CE/react/azure/queries/useSubscriptions';
 
-import { PageHeader } from '@@/PageHeader';
+import { PageHeader } from '@@CE/PageHeader';
 
 import { ContainersDatatable } from './ContainersDatatable';
 

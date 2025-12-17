@@ -1,9 +1,9 @@
-import { removeService } from '@/react/docker/services/ListView/ServicesDatatable/useRemoveServicesMutation';
-import { createService } from '@/react/docker/services/queries/useCreateServiceMutation';
-import { getService } from '@/react/docker/services/queries/useService';
-import { getServices } from '@/react/docker/services/queries/useServices';
-import { updateService } from '@/react/docker/services/queries/useUpdateServiceMutation';
-import { getServiceLogs } from '@/react/docker/services/queries/useServiceLogs';
+import { removeService } from '@CE/react/docker/services/ListView/ServicesDatatable/useRemoveServicesMutation';
+import { createService } from '@CE/react/docker/services/queries/useCreateServiceMutation';
+import { getService } from '@CE/react/docker/services/queries/useService';
+import { getServices } from '@CE/react/docker/services/queries/useServices';
+import { updateService } from '@CE/react/docker/services/queries/useUpdateServiceMutation';
+import { getServiceLogs } from '@CE/react/docker/services/queries/useServiceLogs';
 
 import { ServiceViewModel } from '../models/service';
 import { formatLogs } from '../helpers/logHelper';

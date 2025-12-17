@@ -2,11 +2,11 @@ import { Edit } from 'lucide-react';
 import _ from 'lodash';
 import { useMemo, useState } from 'react';
 
-import { DatatableHeader } from '@@/datatables/DatatableHeader';
-import { Table } from '@@/datatables';
-import { useTableState } from '@@/datatables/useTableState';
-import { createPersistedStore } from '@@/datatables/types';
-import { DatatableFooter } from '@@/datatables/DatatableFooter';
+import { DatatableHeader } from '@@CE/datatables/DatatableHeader';
+import { Table } from '@@CE/datatables';
+import { useTableState } from '@@CE/datatables/useTableState';
+import { createPersistedStore } from '@@CE/datatables/types';
+import { DatatableFooter } from '@@CE/datatables/DatatableFooter';
 
 import { AppTemplatesListItem } from './AppTemplatesListItem';
 import { TemplateViewModel } from './view-model';

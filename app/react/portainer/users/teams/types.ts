@@ -1,4 +1,4 @@
-import { type UserId } from '@/portainer/users/types';
+import { type UserId } from '@CE/portainer/users/types';
 
 export type TeamId = number;
 

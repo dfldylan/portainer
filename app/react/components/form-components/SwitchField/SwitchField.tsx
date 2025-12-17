@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import uuid from 'uuid';
 import { ComponentProps, PropsWithChildren, ReactNode, useState } from 'react';
 
-import { FeatureId } from '@/react/portainer/feature-flags/enums';
-import { AutomationTestingProps } from '@/types';
+import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { AutomationTestingProps } from '@CE/types';
 
-import { Tooltip } from '@@/Tip/Tooltip';
+import { Tooltip } from '@@CE/Tip/Tooltip';
 
 import styles from './SwitchField.module.css';
 import { Switch } from './Switch';

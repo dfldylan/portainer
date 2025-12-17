@@ -1,4 +1,4 @@
-import { BoxSelector } from '@@/BoxSelector';
+import { BoxSelector } from '@@CE/BoxSelector';
 
 import { Team } from '../../users/teams/types';
 import { ResourceControlOwnership } from '../types';

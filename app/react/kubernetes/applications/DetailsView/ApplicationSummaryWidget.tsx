@@ -4,20 +4,23 @@ import { useEffect, useState } from 'react';
 import { Pod } from 'kubernetes-types/core/v1';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { Authorized } from '@/react/hooks/useUser';
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { usePublicSettings } from '@/react/portainer/settings/queries';
-import { GlobalDeploymentOptions } from '@/react/portainer/settings/types';
+import { Authorized } from '@CE/react/hooks/useUser';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { usePublicSettings } from '@CE/react/portainer/settings/queries';
+import { GlobalDeploymentOptions } from '@CE/react/portainer/settings/types';
 
-import { DetailsTable } from '@@/DetailsTable';
-import { Link } from '@@/Link';
-import { LoadingButton } from '@@/buttons';
-import { WidgetBody, Widget } from '@@/Widget';
-import { InlineLoader } from '@@/InlineLoader';
-import { Icon } from '@@/Icon';
-import { Note } from '@@/Note';
-import { ExternalBadge } from '@@/Badge/ExternalBadge';
-import { SystemBadge } from '@@/Badge/SystemBadge';
+import { DetailsTable } from '@@CE/DetailsTable';
+import { Link } from '@@CE/Link';
+import { LoadingButton } from '@@CE/buttons';
+import { WidgetBody, Widget } from '@@CE/Widget';
+import { InlineLoader } from '@@CE/InlineLoader';
+import { Icon } from '@@CE/Icon';
+import { Note } from '@@CE/Note';
+import { ExternalBadge } from '@@CE/Badge/ExternalBadge';
+import { SystemBadge } from '@@CE/Badge/SystemBadge';
 
 import {
   appStackNameLabel,

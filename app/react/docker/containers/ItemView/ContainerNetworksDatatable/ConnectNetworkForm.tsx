@@ -2,12 +2,12 @@ import { Form, Formik } from 'formik';
 import { SchemaOf, object, string } from 'yup';
 import { useRouter } from '@uirouter/react';
 
-import { useAuthorizations } from '@/react/hooks/useUser';
-import { useConnectContainerMutation } from '@/react/docker/networks/queries/useConnectContainerMutation';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useAuthorizations } from '@CE/react/hooks/useUser';
+import { useConnectContainerMutation } from '@CE/react/docker/networks/queries/useConnectContainerMutation';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { LoadingButton } from '@@/buttons';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { LoadingButton } from '@@CE/buttons';
 
 import { NetworkSelector } from '../../components/NetworkSelector';
 

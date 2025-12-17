@@ -1,10 +1,10 @@
 import { Field, Form, Formik } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input } from '@@/form-components/Input';
-import { LoadingButton } from '@@/buttons/LoadingButton';
-import { Button } from '@@/buttons';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@CE/form-components/Input';
+import { LoadingButton } from '@@CE/buttons/LoadingButton';
+import { Button } from '@@CE/buttons';
 
 import { HelmRepositoryFormValues } from '../../AccountView/HelmRepositoryDatatable/types';
 

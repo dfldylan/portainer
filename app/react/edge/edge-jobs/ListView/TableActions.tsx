@@ -1,7 +1,7 @@
-import { notifySuccess } from '@/portainer/services/notifications';
+import { notifySuccess } from '@CE/portainer/services/notifications';
 
-import { AddButton } from '@@/buttons';
-import { DeleteButton } from '@@/buttons/DeleteButton';
+import { AddButton } from '@@CE/buttons';
+import { DeleteButton } from '@@CE/buttons/DeleteButton';
 
 import { EdgeJob } from '../types';
 

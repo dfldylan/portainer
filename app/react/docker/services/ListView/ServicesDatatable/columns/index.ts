@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import _ from 'lodash';
 
-import { ServiceViewModel } from '@/docker/models/service';
-import { isoDate } from '@/portainer/filters/filters';
-import { createOwnershipColumn } from '@/react/docker/components/datatable/createOwnershipColumn';
+import { ServiceViewModel } from '@CE/docker/models/service';
+import { isoDate } from '@CE/portainer/filters/filters';
+import { createOwnershipColumn } from '@CE/react/docker/components/datatable/createOwnershipColumn';
 
-import { buildNameColumn } from '@@/datatables/buildNameColumn';
-import { buildExpandColumn } from '@@/datatables/expand-column';
+import { buildNameColumn } from '@@CE/datatables/buildNameColumn';
+import { buildExpandColumn } from '@@CE/datatables/expand-column';
 
 import { image } from './image';
 import { columnHelper } from './helper';

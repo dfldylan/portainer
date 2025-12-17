@@ -1,7 +1,7 @@
 import { Network } from 'lucide-react';
 
-import { TableContainer, TableTitle } from '@@/datatables';
-import { DetailsTable } from '@@/DetailsTable';
+import { TableContainer, TableTitle } from '@@CE/datatables';
+import { DetailsTable } from '@@CE/DetailsTable';
 
 import { NetworkOptions } from '../types';
 

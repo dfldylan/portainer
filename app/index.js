@@ -5,8 +5,8 @@ import './i18n';
 import angular from 'angular';
 import { UI_ROUTER_REACT_HYBRID } from '@uirouter/react-hybrid';
 
-import { Edition } from '@/react/portainer/feature-flags/enums';
-import { init as initFeatureService } from '@/react/portainer/feature-flags/feature-flags.service';
+import { Edition } from '@CE/react/portainer/feature-flags/enums';
+import { init as initFeatureService } from '@CE/react/portainer/feature-flags/feature-flags.service';
 
 import './agent';
 import { azureModule } from './azure';

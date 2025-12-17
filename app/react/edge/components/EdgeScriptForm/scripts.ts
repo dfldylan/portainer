@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { getAgentShortVersion } from '@/portainer/views/endpoints/helpers';
+import { getAgentShortVersion } from '@CE/portainer/views/endpoints/helpers';
 
 import { ScriptFormValues, Platform } from './types';
 

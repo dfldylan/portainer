@@ -1,12 +1,12 @@
 import { FormikErrors } from 'formik';
 
-import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
-import { useAppTemplate } from '@/react/portainer/templates/app-templates/queries/useAppTemplates';
-import { TemplateNote } from '@/react/portainer/templates/components/TemplateNote';
+import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
+import { useAppTemplate } from '@CE/react/portainer/templates/app-templates/queries/useAppTemplates';
+import { TemplateNote } from '@CE/react/portainer/templates/components/TemplateNote';
 import {
   EnvVarsFieldset,
   EnvVarsValue,
-} from '@/react/portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
+} from '@CE/react/portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
 
 export function AppTemplateFieldset({
   templateId,

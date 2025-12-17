@@ -1,29 +1,29 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@/portainer/services/axios';
+import axios, { parseAxiosError } from '@CE/portainer/services/axios';
 import {
   Environment,
   EnvironmentId,
   EnvironmentType,
-} from '@/react/portainer/environments/types';
+} from '@CE/react/portainer/environments/types';
 import {
   Registry,
   RegistryId,
-} from '@/react/portainer/registries/types/registry';
-import { createWebhook } from '@/react/portainer/webhooks/createWebhook';
-import { WebhookType } from '@/react/portainer/webhooks/types';
+} from '@CE/react/portainer/registries/types/registry';
+import { createWebhook } from '@CE/react/portainer/webhooks/createWebhook';
+import { WebhookType } from '@CE/react/portainer/webhooks/types';
 import {
   AccessControlFormData,
   ResourceControlResponse,
-} from '@/react/portainer/access-control/types';
-import { applyResourceControl } from '@/react/portainer/access-control/access-control.service';
-import PortainerError from '@/portainer/error';
+} from '@CE/react/portainer/access-control/types';
+import { applyResourceControl } from '@CE/react/portainer/access-control/access-control.service';
+import PortainerError from '@CE/portainer/error';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@/react-tools/react-query';
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+} from '@CE/react-tools/react-query';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 
 import { pullImage } from '../../images/queries/usePullImageMutation';
 import {

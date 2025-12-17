@@ -3,8 +3,8 @@ import { ComponentProps } from 'react';
 import { HttpResponse } from 'msw';
 import { render, fireEvent } from '@testing-library/react';
 
-import { http, server } from '@/setup-tests/server';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { http, server } from '@CE/setup-tests/server';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import { ImageConfigFieldset } from './ImageConfigFieldset';
 import { Values } from './types';

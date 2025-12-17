@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { FormikErrors } from 'formik';
 
-import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
 import {
   useIngressControllers,
   useIngresses,
-} from '@/react/kubernetes/ingresses/queries';
+} from '@CE/react/kubernetes/ingresses/queries';
 
-import { FormSection } from '@@/form-components/FormSection';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { ServiceFormValues, ServiceTypeOption, ServiceType } from './types';
 import { generateUniqueName } from './utils';

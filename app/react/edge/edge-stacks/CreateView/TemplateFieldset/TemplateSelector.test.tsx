@@ -2,12 +2,12 @@ import { vi } from 'vitest';
 import { HttpResponse, http } from 'msw';
 import { render, screen } from '@testing-library/react';
 
-import { AppTemplate } from '@/react/portainer/templates/app-templates/types';
-import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
-import { server } from '@/setup-tests/server';
-import selectEvent from '@/react/test-utils/react-select';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
-import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
+import { AppTemplate } from '@CE/react/portainer/templates/app-templates/types';
+import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
+import { server } from '@CE/setup-tests/server';
+import selectEvent from '@CE/react/test-utils/react-select';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
 
 import { TemplateSelector } from './TemplateSelector';
 

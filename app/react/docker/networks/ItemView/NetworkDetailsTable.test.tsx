@@ -1,10 +1,10 @@
 import { HttpResponse, http } from 'msw';
 import { render, screen } from '@testing-library/react';
 
-import { UserViewModel } from '@/portainer/models/user';
-import { server } from '@/setup-tests/server';
-import { withUserProvider } from '@/react/test-utils/withUserProvider';
-import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { UserViewModel } from '@CE/portainer/models/user';
+import { server } from '@CE/setup-tests/server';
+import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
 
 import { DockerNetwork } from '../types';
 

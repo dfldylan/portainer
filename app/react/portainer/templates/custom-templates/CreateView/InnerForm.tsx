@@ -1,23 +1,23 @@
 import { Form, FormikErrors, useFormikContext } from 'formik';
 
-import { CommonFields } from '@/react/portainer/custom-templates/components/CommonFields';
-import { CustomTemplatesVariablesDefinitionField } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
-import { PlatformField } from '@/react/portainer/custom-templates/components/PlatformSelector';
-import { GitForm } from '@/react/portainer/gitops/GitForm';
-import { isTemplateVariablesEnabled } from '@/react/portainer/custom-templates/components/utils';
-import { TemplateTypeSelector } from '@/react/portainer/custom-templates/components/TemplateTypeSelector';
-import { AccessControlForm } from '@/react/portainer/access-control';
-import { EnvironmentId } from '@/react/portainer/environments/types';
-import { applySetStateAction } from '@/react-tools/apply-set-state-action';
-import { AccessControlFormData } from '@/react/portainer/access-control/types';
-import { textByType } from '@/react/common/stacks/common/form-texts';
-import { StackType } from '@/react/common/stacks/types';
+import { CommonFields } from '@CE/react/portainer/custom-templates/components/CommonFields';
+import { CustomTemplatesVariablesDefinitionField } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
+import { PlatformField } from '@CE/react/portainer/custom-templates/components/PlatformSelector';
+import { GitForm } from '@CE/react/portainer/gitops/GitForm';
+import { isTemplateVariablesEnabled } from '@CE/react/portainer/custom-templates/components/utils';
+import { TemplateTypeSelector } from '@CE/react/portainer/custom-templates/components/TemplateTypeSelector';
+import { AccessControlForm } from '@CE/react/portainer/access-control';
+import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { applySetStateAction } from '@CE/react-tools/apply-set-state-action';
+import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
+import { textByType } from '@CE/react/common/stacks/common/form-texts';
+import { StackType } from '@CE/react/common/stacks/types';
 
-import { BoxSelector } from '@@/BoxSelector';
-import { WebEditorForm, usePreventExit } from '@@/WebEditorForm';
-import { FileUploadForm } from '@@/form-components/FileUpload';
-import { FormActions } from '@@/form-components/FormActions';
-import { FormSection } from '@@/form-components/FormSection';
+import { BoxSelector } from '@@CE/BoxSelector';
+import { WebEditorForm, usePreventExit } from '@@CE/WebEditorForm';
+import { FileUploadForm } from '@@CE/form-components/FileUpload';
+import { FormActions } from '@@CE/form-components/FormActions';
+import { FormSection } from '@@CE/form-components/FormSection';
 
 import { EdgeTemplateSettings } from '../types';
 import { useParseTemplateOnFileChange } from '../useParseTemplateOnFileChange';

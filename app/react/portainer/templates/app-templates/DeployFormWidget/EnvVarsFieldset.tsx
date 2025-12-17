@@ -1,10 +1,10 @@
 import { FormikErrors } from 'formik';
 import { SchemaOf, object, string } from 'yup';
 
-import { TemplateEnv } from '@/react/portainer/templates/app-templates/types';
+import { TemplateEnv } from '@CE/react/portainer/templates/app-templates/types';
 
-import { FormControl } from '@@/form-components/FormControl';
-import { Input, Select } from '@@/form-components/Input';
+import { FormControl } from '@@CE/form-components/FormControl';
+import { Input, Select } from '@@CE/form-components/Input';
 
 type Value = Record<string, string | undefined>;
 

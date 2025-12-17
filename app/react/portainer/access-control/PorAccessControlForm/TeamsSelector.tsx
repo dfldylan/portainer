@@ -1,6 +1,6 @@
-import { Team } from '@/react/portainer/users/teams/types';
+import { Team } from '@CE/react/portainer/users/teams/types';
 
-import { Select } from '@@/form-components/ReactSelect';
+import { Select } from '@@CE/form-components/ReactSelect';
 
 interface Props {
   value: Team[];

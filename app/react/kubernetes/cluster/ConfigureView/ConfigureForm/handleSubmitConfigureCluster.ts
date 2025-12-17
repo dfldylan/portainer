@@ -3,9 +3,12 @@ import { StorageClass } from 'kubernetes-types/storage/v1';
 import { compare } from 'fast-json-patch';
 import { UseMutationResult } from '@tanstack/react-query';
 
-import { notifyError, notifySuccess } from '@/portainer/services/notifications';
-import { UpdateEnvironmentPayload } from '@/react/portainer/environments/queries/useUpdateEnvironmentMutation';
-import { Environment } from '@/react/portainer/environments/types';
+import {
+  notifyError,
+  notifySuccess,
+} from '@CE/portainer/services/notifications';
+import { UpdateEnvironmentPayload } from '@CE/react/portainer/environments/queries/useUpdateEnvironmentMutation';
+import { Environment } from '@CE/react/portainer/environments/types';
 
 import { ConfigureFormValues, StorageClassFormValues } from './types';
 import { ConfigureClusterPayloads } from './useConfigureClusterMutation';

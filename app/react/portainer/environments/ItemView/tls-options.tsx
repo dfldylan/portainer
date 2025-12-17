@@ -1,6 +1,6 @@
 import { Shield } from 'lucide-react';
 
-import { BoxSelectorOption } from '@@/BoxSelector';
+import { BoxSelectorOption } from '@@CE/BoxSelector';
 
 export const tlsOptions: ReadonlyArray<BoxSelectorOption<string>> = [
   {

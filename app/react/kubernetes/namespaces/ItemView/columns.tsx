@@ -2,11 +2,11 @@ import { createColumnHelper } from '@tanstack/react-table';
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { usePublicSettings } from '@/react/portainer/settings/queries';
-import { humanize } from '@/portainer/filters/filters';
+import { usePublicSettings } from '@CE/react/portainer/settings/queries';
+import { humanize } from '@CE/portainer/filters/filters';
 
-import { Link } from '@@/Link';
-import { ExternalBadge } from '@@/Badge/ExternalBadge';
+import { Link } from '@@CE/Link';
+import { ExternalBadge } from '@@CE/Badge/ExternalBadge';
 
 import { isExternalApplication } from '../../applications/utils';
 import { cpuHumanValue } from '../../applications/utils/cpuHumanValue';
