@@ -1,15 +1,15 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useQueryClient } from '@tanstack/react-query';
 
-import helm from '@CE/assets/ico/vendor/helm.svg?c';
-import { PageHeader } from '@CE/react/components/PageHeader';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { Authorized } from '@CE/react/hooks/useUser';
-import { useNamespaceAccessRedirect } from '@CE/react/kubernetes/namespaces/hooks/useNamespaceAccessRedirect';
+import helm from '@/assets/ico/vendor/helm.svg?c';
+import { PageHeader } from '@/react/components/PageHeader';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { Authorized } from '@/react/hooks/useUser';
+import { useNamespaceAccessRedirect } from '@/react/kubernetes/namespaces/hooks/useNamespaceAccessRedirect';
 
-import { WidgetTitle, WidgetBody, Widget, Loading } from '@@CE/Widget';
-import { Card } from '@@CE/Card';
-import { Alert } from '@@CE/Alert';
+import { WidgetTitle, WidgetBody, Widget, Loading } from '@@/Widget';
+import { Card } from '@@/Card';
+import { Alert } from '@@/Alert';
 
 import { HelmRelease } from '../types';
 import { useIsSystemNamespace } from '../../namespaces/queries/useIsSystemNamespace';

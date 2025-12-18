@@ -1,7 +1,7 @@
 import { Book } from 'lucide-react';
 
-import { Datatable } from '@@CE/datatables';
-import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
+import { Datatable } from '@@/datatables';
+import { useTableStateWithStorage } from '@@/datatables/useTableState';
 
 import { Repository } from './types';
 import { columns } from './columns';

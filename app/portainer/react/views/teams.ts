@@ -1,12 +1,12 @@
 import angular from 'angular';
 import { StateRegistry } from '@uirouter/angularjs';
 
-import { ItemView, ListView } from '@CE/react/portainer/users/teams';
-import { r2a } from '@CE/react-tools/react2angular';
-import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
-import { withUIRouter } from '@CE/react-tools/withUIRouter';
-import { AccessHeaders } from '@CE/portainer/authorization-guard';
+import { ItemView, ListView } from '@/react/portainer/users/teams';
+import { r2a } from '@/react-tools/react2angular';
+import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { withReactQuery } from '@/react-tools/withReactQuery';
+import { withUIRouter } from '@/react-tools/withUIRouter';
+import { AccessHeaders } from '@/portainer/authorization-guard';
 
 export const teamsModule = angular
   .module('portainer.app.teams', [])

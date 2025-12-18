@@ -4,7 +4,7 @@ import {
   API_ENDPOINT_EDGE_STACKS,
   API_ENDPOINT_STACKS,
   API_ENDPOINT_WEBHOOKS,
-} from '@CE/constants';
+} from '@/constants';
 
 import { baseHref } from './pathHelper';
 

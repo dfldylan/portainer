@@ -1,6 +1,6 @@
-import { getNode } from '@CE/react/docker/proxy/queries/nodes/useNode';
-import { getNodes } from '@CE/react/docker/proxy/queries/nodes/useNodes';
-import { updateNode } from '@CE/react/docker/proxy/queries/nodes/useUpdateNodeMutation';
+import { getNode } from '@/react/docker/proxy/queries/nodes/useNode';
+import { getNodes } from '@/react/docker/proxy/queries/nodes/useNodes';
+import { updateNode } from '@/react/docker/proxy/queries/nodes/useUpdateNodeMutation';
 
 import { NodeViewModel } from '../models/node';
 

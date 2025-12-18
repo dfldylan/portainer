@@ -1,8 +1,8 @@
 import { Meta, Story } from '@storybook/react';
 import { List } from 'lucide-react';
 
-import { Link } from '@@CE/Link';
-import { IconProps } from '@@CE/Icon';
+import { Link } from '@@/Link';
+import { IconProps } from '@@/Icon';
 
 import { DashboardItem } from './DashboardItem';
 

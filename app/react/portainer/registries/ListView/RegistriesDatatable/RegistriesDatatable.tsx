@@ -1,8 +1,8 @@
 import { Radio } from 'lucide-react';
 
-import { Datatable } from '@@CE/datatables';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
+import { Datatable } from '@@/datatables';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { useRegistries } from '../../queries/useRegistries';
 

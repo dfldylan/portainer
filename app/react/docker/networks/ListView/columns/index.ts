@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { createOwnershipColumn } from '@CE/react/docker/components/datatable/createOwnershipColumn';
+import { createOwnershipColumn } from '@/react/docker/components/datatable/createOwnershipColumn';
 
-import { buildExpandColumn } from '@@CE/datatables/expand-column';
+import { buildExpandColumn } from '@@/datatables/expand-column';
 
 import { DecoratedNetwork } from '../types';
 

@@ -1,21 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import {
-  EdgeTypes,
-  EnvironmentId,
-} from '@CE/react/portainer/environments/types';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
-import { useIntegratedLicenseInfo } from '@CE/react/portainer/licenses/use-license.service';
-import { useEnvironmentList } from '@CE/react/portainer/environments/queries';
+import { EdgeTypes, EnvironmentId } from '@/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { promiseSequence } from '@/portainer/helpers/promise-utils';
+import { useIntegratedLicenseInfo } from '@/react/portainer/licenses/use-license.service';
+import { useEnvironmentList } from '@/react/portainer/environments/queries';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
-import { queryKey as nodesCountQueryKey } from '@CE/react/portainer/system/useNodesCount';
-import { LicenseType } from '@CE/react/portainer/licenses/types';
-import { environmentQueryKeys } from '@CE/react/portainer/environments/queries/query-keys';
+} from '@/react-tools/react-query';
+import { queryKey as nodesCountQueryKey } from '@/react/portainer/system/useNodesCount';
+import { LicenseType } from '@/react/portainer/licenses/types';
+import { environmentQueryKeys } from '@/react/portainer/environments/queries/query-keys';
 
 export function useAssociateDeviceMutation() {
   const queryClient = useQueryClient();

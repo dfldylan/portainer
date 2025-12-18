@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
 import { inheritedName } from './inheritedName';
 import { name } from './name';

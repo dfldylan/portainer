@@ -1,7 +1,7 @@
-import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { useCurrentUser } from '@/react/hooks/useUser';
 
-import { InsightsBox } from '@@CE/InsightsBox';
-import { Link } from '@@CE/Link';
+import { InsightsBox } from '@@/InsightsBox';
+import { Link } from '@@/Link';
 
 export function StackNameLabelInsight() {
   const { isPureAdmin } = useCurrentUser();

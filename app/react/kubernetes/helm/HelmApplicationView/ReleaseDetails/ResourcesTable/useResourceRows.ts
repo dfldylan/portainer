@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import { GenericResource } from '@CE/react/kubernetes/helm/types';
+import { GenericResource } from '@/react/kubernetes/helm/types';
 
-import { StatusBadgeType } from '@@CE/StatusBadge';
+import { StatusBadgeType } from '@@/StatusBadge';
 
 import { ResourceLink, ResourceRow } from './types';
 

@@ -2,14 +2,14 @@ import { Terminal } from 'xterm';
 import { fit } from 'xterm/lib/addons/fit/fit';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { baseHref } from '@CE/portainer/helpers/pathHelper';
-import { terminalClose } from '@CE/portainer/services/terminal-window';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { error as notifyError } from '@CE/portainer/services/notifications';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { baseHref } from '@/portainer/helpers/pathHelper';
+import { terminalClose } from '@/portainer/services/terminal-window';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { error as notifyError } from '@/portainer/services/notifications';
 
-import { Alert } from '@@CE/Alert';
-import { Button } from '@@CE/buttons';
+import { Alert } from '@@/Alert';
+import { Button } from '@@/buttons';
 
 type Socket = WebSocket | null;
 type ShellState = 'loading' | 'connected' | 'disconnected';

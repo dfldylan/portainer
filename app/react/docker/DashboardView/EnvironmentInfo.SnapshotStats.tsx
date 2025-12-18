@@ -1,9 +1,9 @@
 import { CpuIcon } from 'lucide-react';
 
-import { humanize } from '@CE/portainer/filters/filters';
-import memoryIcon from '@CE/assets/ico/memory.svg?c';
+import { humanize } from '@/portainer/filters/filters';
+import memoryIcon from '@/assets/ico/memory.svg?c';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { DockerSnapshot } from '../snapshots/types';
 

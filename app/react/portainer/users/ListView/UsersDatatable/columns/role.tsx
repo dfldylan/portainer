@@ -1,9 +1,9 @@
 import { User, UserPlus } from 'lucide-react';
 
-import { isEdgeAdmin } from '@CE/portainer/users/user.helpers';
-import { RoleNames } from '@CE/portainer/users/types';
+import { isEdgeAdmin } from '@/portainer/users/user.helpers';
+import { RoleNames } from '@/portainer/users/types';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { helper } from './helper';
 

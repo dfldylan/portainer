@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios, {
   isDefaultResponse,
   parseAxiosError,
-} from '@CE/portainer/services/axios';
+} from '@/portainer/services/axios';
 
 interface Creds {
   username?: string;

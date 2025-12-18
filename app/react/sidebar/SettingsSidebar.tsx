@@ -8,8 +8,8 @@ import {
   Bell,
 } from 'lucide-react';
 
-import { usePublicSettings } from '@CE/react/portainer/settings/queries';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { usePublicSettings } from '@/react/portainer/settings/queries';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
 import { SidebarItem } from './SidebarItem';
 import { SidebarSection } from './SidebarSection';

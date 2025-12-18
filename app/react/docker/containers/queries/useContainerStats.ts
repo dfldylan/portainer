@@ -1,5 +1,5 @@
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 import { ContainerId } from '../types';

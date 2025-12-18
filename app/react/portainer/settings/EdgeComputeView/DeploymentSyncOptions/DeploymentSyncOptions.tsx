@@ -2,15 +2,15 @@ import { Form, Formik } from 'formik';
 import { useReducer } from 'react';
 import { Laptop } from 'lucide-react';
 
-import { EdgeCheckinIntervalField } from '@CE/react/edge/components/EdgeCheckInIntervalField';
-import { EdgeAsyncIntervalsForm } from '@CE/react/edge/components/EdgeAsyncIntervalsForm';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { EdgeCheckinIntervalField } from '@/react/edge/components/EdgeCheckInIntervalField';
+import { EdgeAsyncIntervalsForm } from '@/react/edge/components/EdgeAsyncIntervalsForm';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { LoadingButton } from '@@CE/buttons/LoadingButton';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
+import { FormSection } from '@@/form-components/FormSection';
+import { LoadingButton } from '@@/buttons/LoadingButton';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { useSettings, useUpdateSettingsMutation } from '../../queries';
 

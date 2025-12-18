@@ -1,6 +1,6 @@
-import { ModalType } from '@@CE/modals';
-import { openConfirm } from '@@CE/modals/confirm';
-import { buildConfirmButton } from '@@CE/modals/utils';
+import { ModalType } from '@@/modals';
+import { openConfirm } from '@@/modals/confirm';
+import { buildConfirmButton } from '@@/modals/utils';
 
 export async function confirmImageExport() {
   return openConfirm({

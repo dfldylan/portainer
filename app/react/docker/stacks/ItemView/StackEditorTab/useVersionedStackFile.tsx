@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import { useStackFile } from '@CE/react/common/stacks/queries/useStackFile';
-import { Stack } from '@CE/react/common/stacks/types';
+import { useStackFile } from '@/react/common/stacks/queries/useStackFile';
+import { Stack } from '@/react/common/stacks/types';
 
 export function useVersionedStackFile({
   stackId,

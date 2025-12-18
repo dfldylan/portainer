@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { InputGroup } from '@@CE/form-components/InputGroup';
+import { InputGroup } from '@@/form-components/InputGroup';
 
 type Props = {
   serviceIndex: number;

@@ -1,4 +1,4 @@
-import { PageHeader } from '@@CE/PageHeader';
+import { PageHeader } from '@@/PageHeader';
 
 import { useIsSwarmAgent } from '../../proxy/queries/useIsSwarmAgent';
 

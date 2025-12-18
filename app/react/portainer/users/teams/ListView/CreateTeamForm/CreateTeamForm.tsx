@@ -2,16 +2,16 @@ import { Formik, Field, Form } from 'formik';
 import { useReducer } from 'react';
 import { Plus } from 'lucide-react';
 
-import { User } from '@CE/portainer/users/types';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { usePublicSettings } from '@CE/react/portainer/settings/queries';
+import { User } from '@/portainer/users/types';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { usePublicSettings } from '@/react/portainer/settings/queries';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Widget } from '@@CE/Widget';
-import { Input } from '@@CE/form-components/Input';
-import { UsersSelector } from '@@CE/UsersSelector';
-import { LoadingButton } from '@@CE/buttons/LoadingButton';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { FormControl } from '@@/form-components/FormControl';
+import { Widget } from '@@/Widget';
+import { Input } from '@@/form-components/Input';
+import { UsersSelector } from '@@/UsersSelector';
+import { LoadingButton } from '@@/buttons/LoadingButton';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { Team } from '../../types';
 import { useAddTeamMutation } from '../../queries/useAddTeamMutation';

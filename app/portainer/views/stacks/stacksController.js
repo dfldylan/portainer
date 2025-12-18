@@ -1,4 +1,4 @@
-import { processItemsInBatches } from '@CE/react/common/processItemsInBatches';
+import { processItemsInBatches } from '@/react/common/processItemsInBatches';
 
 angular.module('portainer.app').controller('StacksController', StacksController);
 

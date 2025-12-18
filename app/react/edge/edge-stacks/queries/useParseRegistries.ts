@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { RegistryId } from '@CE/react/portainer/registries/types/registry';
+import { RegistryId } from '@/react/portainer/registries/types/registry';
 import axios, {
   json2formData,
   parseAxiosError,
-} from '@CE/portainer/services/axios';
+} from '@/portainer/services/axios';
 
 import { buildUrl } from './buildUrl';
 

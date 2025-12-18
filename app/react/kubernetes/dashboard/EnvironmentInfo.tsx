@@ -1,11 +1,11 @@
 import { Gauge } from 'lucide-react';
 
-import { stripProtocol } from '@CE/portainer/filters/filters';
-import { useTagsForEnvironment } from '@CE/portainer/tags/queries';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useEnvironment } from '@CE/react/portainer/environments/queries';
+import { stripProtocol } from '@/portainer/filters/filters';
+import { useTagsForEnvironment } from '@/portainer/tags/queries';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironment } from '@/react/portainer/environments/queries';
 
-import { Widget, WidgetTitle, WidgetBody } from '@@CE/Widget';
+import { Widget, WidgetTitle, WidgetBody } from '@@/Widget';
 
 export function EnvironmentInfo() {
   const environmentId = useEnvironmentId();

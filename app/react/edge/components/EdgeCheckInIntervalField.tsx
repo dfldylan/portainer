@@ -1,5 +1,5 @@
-import { FormControl, Size } from '@@CE/form-components/FormControl';
-import { Select } from '@@CE/form-components/Input';
+import { FormControl, Size } from '@@/form-components/FormControl';
+import { Select } from '@@/form-components/Input';
 
 import { Options, useIntervalOptions } from './useIntervalOptions';
 

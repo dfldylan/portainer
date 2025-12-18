@@ -1,14 +1,14 @@
 import { RefreshCw } from 'lucide-react';
 
-import { Registry } from '@CE/react/portainer/registries/types/registry';
+import { Registry } from '@/react/portainer/registries/types/registry';
 
-import { Select } from '@@CE/form-components/ReactSelect';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Button } from '@@CE/buttons';
-import { FormError } from '@@CE/form-components/FormError';
-import { SwitchField } from '@@CE/form-components/SwitchField';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { FormSection } from '@@CE/form-components/FormSection';
+import { Select } from '@@/form-components/ReactSelect';
+import { FormControl } from '@@/form-components/FormControl';
+import { Button } from '@@/buttons';
+import { FormError } from '@@/form-components/FormError';
+import { SwitchField } from '@@/form-components/SwitchField';
+import { TextTip } from '@@/Tip/TextTip';
+import { FormSection } from '@@/form-components/FormSection';
 
 interface Props {
   value?: number;

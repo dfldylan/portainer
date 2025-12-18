@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { TableSettings } from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { TableSettings } from '@/react/kubernetes/datatables/DefaultDatatableSettings';
 
 import {
   refreshableSettings,
   createPersistedStore,
   ZustandSetFunc,
-} from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
+} from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { systemResourcesSettings } from '../../datatables/SystemResourcesSettings';
 

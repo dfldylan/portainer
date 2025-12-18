@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { useQueries } from '@tanstack/react-query';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { withError } from '@CE/react-tools/react-query';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { withError } from '@/react-tools/react-query';
 
 import { ProviderViewModel, Subscription } from '../types';
 import { azureErrorParser } from '../services/utils';

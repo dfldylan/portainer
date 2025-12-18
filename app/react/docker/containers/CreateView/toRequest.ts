@@ -1,5 +1,5 @@
-import { Registry } from '@CE/react/portainer/registries/types/registry';
-import { buildImageFullURI } from '@CE/react/docker/images/utils';
+import { Registry } from '@/react/portainer/registries/types/registry';
+import { buildImageFullURI } from '@/react/docker/images/utils';
 
 import { baseFormUtils } from './BaseForm';
 import { capabilitiesTabUtils } from './CapabilitiesTab';

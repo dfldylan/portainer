@@ -1,6 +1,6 @@
 import { compact } from 'lodash';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 /**
  * Build docker URL for Environment

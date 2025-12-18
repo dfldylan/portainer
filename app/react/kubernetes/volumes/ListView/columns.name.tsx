@@ -1,11 +1,11 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { Link } from '@@CE/Link';
-import { SystemBadge } from '@@CE/Badge/SystemBadge';
-import { ExternalBadge } from '@@CE/Badge/ExternalBadge';
-import { UnusedBadge } from '@@CE/Badge/UnusedBadge';
+import { Link } from '@@/Link';
+import { SystemBadge } from '@@/Badge/SystemBadge';
+import { ExternalBadge } from '@@/Badge/ExternalBadge';
+import { UnusedBadge } from '@@/Badge/UnusedBadge';
 
 import { useNamespacesQuery } from '../../namespaces/queries/useNamespacesQuery';
 import { isVolumeUsed } from '../utils';

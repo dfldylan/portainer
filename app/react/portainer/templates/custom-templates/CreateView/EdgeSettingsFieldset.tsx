@@ -1,14 +1,14 @@
 import { FormikErrors } from 'formik';
 import { SetStateAction } from 'react';
 
-import { RelativePathFieldset } from '@CE/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
-import { PrivateRegistryFieldsetWrapper } from '@CE/react/edge/edge-stacks/ItemView/EditEdgeStackForm/PrivateRegistryFieldsetWrapper';
-import { PrePullToggle } from '@CE/react/edge/edge-stacks/components/PrePullToggle';
-import { RetryDeployToggle } from '@CE/react/edge/edge-stacks/components/RetryDeployToggle';
-import { EdgeTemplateSettings } from '@CE/react/portainer/templates/custom-templates/types';
-import { GitFormModel } from '@CE/react/portainer/gitops/types';
+import { RelativePathFieldset } from '@/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
+import { PrivateRegistryFieldsetWrapper } from '@/react/edge/edge-stacks/ItemView/EditEdgeStackForm/PrivateRegistryFieldsetWrapper';
+import { PrePullToggle } from '@/react/edge/edge-stacks/components/PrePullToggle';
+import { RetryDeployToggle } from '@/react/edge/edge-stacks/components/RetryDeployToggle';
+import { EdgeTemplateSettings } from '@/react/portainer/templates/custom-templates/types';
+import { GitFormModel } from '@/react/portainer/gitops/types';
 
-import { FormSection } from '@@CE/form-components/FormSection';
+import { FormSection } from '@@/form-components/FormSection';
 
 export function EdgeSettingsFieldset({
   values,

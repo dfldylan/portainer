@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestRouter } from '@/react/test-utils/withRouter';
 
 import { TagsDatatable } from './TagsDatatable';
 import { Tag } from './types';
@@ -17,7 +17,7 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
 }));
 
 // Mock the Link component to capture route parameters and generate proper hrefs
-vi.mock('@@CE/Link', () => ({
+vi.mock('@@/Link', () => ({
   Link: ({
     children,
     params,

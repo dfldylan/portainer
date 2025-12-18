@@ -1,10 +1,10 @@
 import { FormikErrors } from 'formik';
 
-import { useStateWrapper } from '@CE/react/hooks/useStateWrapper';
+import { useStateWrapper } from '@/react/hooks/useStateWrapper';
 
-import { FormError } from '@@CE/form-components/FormError';
-import { InputGroup } from '@@CE/form-components/InputGroup';
-import { InputList, ItemProps } from '@@CE/form-components/InputList';
+import { FormError } from '@@/form-components/FormError';
+import { InputGroup } from '@@/form-components/InputGroup';
+import { InputList, ItemProps } from '@@/form-components/InputList';
 
 interface Props {
   value: Array<string>;

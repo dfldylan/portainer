@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 import {
   PaginatedResults,
   withPaginationHeaders,
-} from '@CE/react/common/api/pagination.types';
+} from '@/react/common/api/pagination.types';
 import {
   BaseQueryOptions,
   BaseQueryParams,
   queryParamsFromQueryOptions,
-} from '@CE/react/common/api/listQueryParams';
+} from '@/react/common/api/listQueryParams';
 
 import { EdgeJob, JobResult } from '../../types';
 import { sortOptions } from '../../ItemView/ResultsDatatable/columns';

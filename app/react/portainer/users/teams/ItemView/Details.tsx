@@ -1,10 +1,10 @@
 import { useRouter } from '@uirouter/react';
 import { Users } from 'lucide-react';
 
-import { usePublicSettings } from '@CE/react/portainer/settings/queries';
+import { usePublicSettings } from '@/react/portainer/settings/queries';
 
-import { Widget } from '@@CE/Widget';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Widget } from '@@/Widget';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { Team, TeamMembership, TeamRole } from '../types';
 import { useDeleteTeamMutation } from '../queries/useDeleteTeamMutation';

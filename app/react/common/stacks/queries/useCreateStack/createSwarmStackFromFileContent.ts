@@ -1,6 +1,6 @@
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { Pair } from '@CE/react/portainer/settings/types';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { Pair } from '@/react/portainer/settings/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { Stack } from '../../types';
 

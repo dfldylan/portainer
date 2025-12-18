@@ -1,9 +1,9 @@
 import { SetStateAction, useEffect, useState } from 'react';
 
-import { renderTemplate } from '@CE/react/portainer/custom-templates/components/utils';
-import { useAppTemplate } from '@CE/react/portainer/templates/app-templates/queries/useAppTemplates';
-import { useAppTemplateFile } from '@CE/react/portainer/templates/app-templates/queries/useAppTemplateFile';
-import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
+import { renderTemplate } from '@/react/portainer/custom-templates/components/utils';
+import { useAppTemplate } from '@/react/portainer/templates/app-templates/queries/useAppTemplates';
+import { useAppTemplateFile } from '@/react/portainer/templates/app-templates/queries/useAppTemplateFile';
+import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
 
 import { DeploymentType } from '../types';
 import { getDefaultStaggerConfig } from '../components/StaggerFieldset.types';

@@ -1,4 +1,4 @@
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { queryKeys as dockerQueryKeys } from '../../queries/utils';
 import { Filters } from '../types';

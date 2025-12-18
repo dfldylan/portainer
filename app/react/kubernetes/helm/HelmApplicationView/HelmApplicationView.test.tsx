@@ -1,13 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { HttpResponse } from 'msw';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { server, http } from '@CE/setup-tests/server';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { UserViewModel } from '@CE/portainer/models/user';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { mockCodeMirror } from '@CE/setup-tests/mock-codemirror';
-import { mockLocalizeDate } from '@CE/setup-tests/mock-localizeDate';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { server, http } from '@/setup-tests/server';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { UserViewModel } from '@/portainer/models/user';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { mockCodeMirror } from '@/setup-tests/mock-codemirror';
+import { mockLocalizeDate } from '@/setup-tests/mock-localizeDate';
 
 import { HelmApplicationView } from './HelmApplicationView';
 
@@ -21,7 +21,7 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
   useCurrentStateAndParams: () => mockUseCurrentStateAndParams(),
 }));
 
-vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
+vi.mock('@/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => mockUseEnvironmentId(),
 }));
 

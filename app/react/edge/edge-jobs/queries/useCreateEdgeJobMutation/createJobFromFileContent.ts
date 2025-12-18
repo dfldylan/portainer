@@ -1,6 +1,6 @@
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { EdgeJob } from '../../types';
 import { buildUrl } from '../build-url';

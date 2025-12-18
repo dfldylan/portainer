@@ -1,9 +1,9 @@
-import { UserId } from '@CE/portainer/users/types';
-import { StackType } from '@CE/react/common/stacks/types';
+import { UserId } from '@/portainer/users/types';
+import { StackType } from '@/react/common/stacks/types';
 import {
   StaggerConfig,
   getDefaultStaggerConfig,
-} from '@CE/react/edge/edge-stacks/components/StaggerFieldset.types';
+} from '@/react/edge/edge-stacks/components/StaggerFieldset.types';
 
 import { ResourceControlResponse } from '../../access-control/types';
 import { RelativePathModel, RepoConfigResponse } from '../../gitops/types';

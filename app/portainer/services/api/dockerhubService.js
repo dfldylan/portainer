@@ -1,5 +1,5 @@
-import { PortainerEndpointTypes } from '@CE/portainer/models/endpoint/models';
-import { isLocalEnvironment } from '@CE/react/portainer/environments/utils';
+import { PortainerEndpointTypes } from '@/portainer/models/endpoint/models';
+import { isLocalEnvironment } from '@/react/portainer/environments/utils';
 
 angular.module('portainer.app').factory('DockerHubService', DockerHubService);
 

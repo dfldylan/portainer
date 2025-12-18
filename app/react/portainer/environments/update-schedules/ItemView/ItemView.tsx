@@ -3,17 +3,17 @@ import { Formik, Form as FormikForm } from 'formik';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { object, SchemaOf } from 'yup';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { withLimitToBE } from '@CE/react/hooks/useLimitToBE';
-import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
-import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { withLimitToBE } from '@/react/hooks/useLimitToBE';
+import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
+import { EdgeGroup } from '@/react/edge/edge-groups/types';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget } from '@@CE/Widget';
-import { LoadingButton } from '@@CE/buttons';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { InformationPanel } from '@@CE/InformationPanel';
-import { Link } from '@@CE/Link';
+import { PageHeader } from '@@/PageHeader';
+import { Widget } from '@@/Widget';
+import { LoadingButton } from '@@/buttons';
+import { TextTip } from '@@/Tip/TextTip';
+import { InformationPanel } from '@@/InformationPanel';
+import { Link } from '@@/Link';
 
 import { useItem } from '../queries/useItem';
 import { validation } from '../common/validation';

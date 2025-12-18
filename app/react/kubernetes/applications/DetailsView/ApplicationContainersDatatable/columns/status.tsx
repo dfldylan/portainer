@@ -1,9 +1,9 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { pluralize } from '@CE/react/common/string-utils';
+import { pluralize } from '@/react/common/string-utils';
 
-import { Badge } from '@@CE/Badge';
-import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Badge } from '@@/Badge';
+import { Tooltip } from '@@/Tip/Tooltip';
 
 import { ContainerRowData } from '../types';
 

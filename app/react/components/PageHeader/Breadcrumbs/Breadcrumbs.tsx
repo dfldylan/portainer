@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 export interface Crumb {
   label: string;

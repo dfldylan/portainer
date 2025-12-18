@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { Service } from 'docker-types/generated/1.44';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { withGlobalError } from '@CE/react-tools/react-query';
-import { queryKeys } from '@CE/react/docker/services/queries/query-keys';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { buildUrl } from '@CE/react/docker/services/queries/build-url';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { withGlobalError } from '@/react-tools/react-query';
+import { queryKeys } from '@/react/docker/services/queries/query-keys';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { buildUrl } from '@/react/docker/services/queries/build-url';
 
 import { Filters } from '../types';
 import { withFiltersQueryParam } from '../../proxy/queries/utils';

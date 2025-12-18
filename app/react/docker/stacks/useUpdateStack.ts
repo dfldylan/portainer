@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 
-import axios from '@CE/portainer/services/axios';
-import { buildStackUrl } from '@CE/react/common/stacks/queries/buildUrl';
-import { Stack } from '@CE/react/common/stacks/types';
-import { Registry } from '@CE/react/portainer/registries/types/registry';
+import axios from '@/portainer/services/axios';
+import { buildStackUrl } from '@/react/common/stacks/queries/buildUrl';
+import { Stack } from '@/react/common/stacks/types';
+import { Registry } from '@/react/portainer/registries/types/registry';
 
-import { EnvVarValues } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { EnvVarValues } from '@@/form-components/EnvironmentVariablesFieldset';
 
 export function useUpdateStackMutation() {
   return useMutation({

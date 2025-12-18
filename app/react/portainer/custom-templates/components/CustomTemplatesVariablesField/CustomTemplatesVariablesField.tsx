@@ -1,6 +1,6 @@
-import { FormSection } from '@@CE/form-components/FormSection/FormSection';
-import { ArrayError } from '@@CE/form-components/InputList/InputList';
-import { FormError } from '@@CE/form-components/FormError';
+import { FormSection } from '@@/form-components/FormSection/FormSection';
+import { ArrayError } from '@@/form-components/InputList/InputList';
+import { FormError } from '@@/form-components/FormError';
 
 import { VariableDefinition } from '../CustomTemplatesVariablesDefinitionField/CustomTemplatesVariablesDefinitionField';
 

@@ -1,10 +1,10 @@
 import { Boxes, Sliders } from 'lucide-react';
 import { FormikErrors } from 'formik';
 
-import { BoxSelector, BoxSelectorOption } from '@@CE/BoxSelector';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { FormError } from '@@CE/form-components/FormError';
+import { BoxSelector, BoxSelectorOption } from '@@/BoxSelector';
+import { FormSection } from '@@/form-components/FormSection';
+import { TextTip } from '@@/Tip/TextTip';
+import { FormError } from '@@/form-components/FormError';
 
 import { DeploymentType } from '../../types';
 

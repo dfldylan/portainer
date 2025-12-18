@@ -1,6 +1,6 @@
-import { formatDate } from '@CE/portainer/filters/filters';
+import { formatDate } from '@/portainer/filters/filters';
 
-import { FORMAT } from '@@CE/DateTimeField';
+import { FORMAT } from '@@/DateTimeField';
 
 import { columnHelper } from './helper';
 

@@ -1,6 +1,6 @@
 import { CheckCircle, XCircle } from 'lucide-react';
 
-import { EnvironmentStatus } from '@CE/react/portainer/environments/types';
+import { EnvironmentStatus } from '@/react/portainer/environments/types';
 
 import { EnvironmentStatusBadgeItem } from './EnvironmentStatusBadgeItem';
 

@@ -1,7 +1,7 @@
 import { ComponentType, PropsWithChildren, ReactNode } from 'react';
 import clsx from 'clsx';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 interface Props {
   icon?: ReactNode | ComponentType<unknown>;

@@ -1,6 +1,6 @@
 import { List, Tag } from 'lucide-react';
 
-import { BoxSelectorOption } from '@@CE/BoxSelector';
+import { BoxSelectorOption } from '@@/BoxSelector';
 
 export const groupTypeOptions: ReadonlyArray<BoxSelectorOption<boolean>> = [
   {

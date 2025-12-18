@@ -1,8 +1,8 @@
 import { FileCode, Lock } from 'lucide-react';
 
-import { KubernetesConfigurationKinds } from '@CE/kubernetes/models/configuration/models';
+import { KubernetesConfigurationKinds } from '@/kubernetes/models/configuration/models';
 
-import { BoxSelectorOption } from '@@CE/BoxSelector';
+import { BoxSelectorOption } from '@@/BoxSelector';
 
 export const typeOptions: ReadonlyArray<BoxSelectorOption<number>> = [
   {

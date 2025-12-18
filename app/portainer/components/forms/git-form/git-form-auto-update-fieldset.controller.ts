@@ -1,11 +1,11 @@
 import { IFormController } from 'angular';
 import { FormikErrors } from 'formik';
 
-import { IAuthenticationService } from '@CE/portainer/services/types';
-import { AutoUpdateModel } from '@CE/react/portainer/gitops/types';
-import { autoUpdateValidation } from '@CE/react/portainer/gitops/AutoUpdateFieldset/validation';
+import { IAuthenticationService } from '@/portainer/services/types';
+import { AutoUpdateModel } from '@/react/portainer/gitops/types';
+import { autoUpdateValidation } from '@/react/portainer/gitops/AutoUpdateFieldset/validation';
 
-import { validateForm } from '@@CE/form-components/validate-form';
+import { validateForm } from '@@/form-components/validate-form';
 
 export default class GitFormAutoUpdateFieldsetController {
   errors?: FormikErrors<AutoUpdateModel> = {};

@@ -1,10 +1,10 @@
 import { Table } from '@tanstack/react-table';
 
-import { ServiceViewModel } from '@CE/docker/models/service';
+import { ServiceViewModel } from '@/docker/models/service';
 
-import { TableSettingsMenu } from '@@CE/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
-import { ColumnVisibilityMenu } from '@@CE/datatables/ColumnVisibilityMenu';
+import { TableSettingsMenu } from '@@/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { ColumnVisibilityMenu } from '@@/datatables/ColumnVisibilityMenu';
 
 import { type TableSettings as TableSettingsType } from './types';
 

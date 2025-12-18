@@ -1,4 +1,4 @@
-import featureFlagModule from '@CE/react/portainer/feature-flags';
+import featureFlagModule from '@/react/portainer/feature-flags';
 
 import './rbac';
 

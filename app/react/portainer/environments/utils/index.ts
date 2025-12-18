@@ -1,9 +1,9 @@
 import { Cloud } from 'lucide-react';
 
-import Kube from '@CE/assets/ico/kube.svg?c';
-import PodmanIcon from '@CE/assets/ico/vendor/podman-icon.svg?c';
-import DockerIcon from '@CE/assets/ico/vendor/docker-icon.svg?c';
-import MicrosoftIcon from '@CE/assets/ico/vendor/microsoft-icon.svg?c';
+import Kube from '@/assets/ico/kube.svg?c';
+import PodmanIcon from '@/assets/ico/vendor/podman-icon.svg?c';
+import DockerIcon from '@/assets/ico/vendor/docker-icon.svg?c';
+import MicrosoftIcon from '@/assets/ico/vendor/microsoft-icon.svg?c';
 
 import {
   Environment,

@@ -1,13 +1,13 @@
 import { Formik } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { useEnvironmentDeploymentOptions } from '@CE/react/portainer/environments/queries/useEnvironment';
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { isKubernetesEnvironment } from '@CE/react/portainer/environments/utils';
-import { DeployMethod } from '@CE/react/portainer/gitops/types';
-import { StackType } from '@CE/react/common/stacks/types';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { useEnvironmentDeploymentOptions } from '@/react/portainer/environments/queries/useEnvironment';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { isKubernetesEnvironment } from '@/react/portainer/environments/utils';
+import { DeployMethod } from '@/react/portainer/gitops/types';
+import { StackType } from '@/react/common/stacks/types';
 
 import { CustomTemplate } from '../types';
 import { useUpdateTemplateMutation } from '../queries/useUpdateTemplateMutation';

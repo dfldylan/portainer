@@ -1,7 +1,7 @@
-import { useDockerComposeSchema } from '@CE/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
+import { useDockerComposeSchema } from '@/react/hooks/useDockerComposeSchema/useDockerComposeSchema';
 
-import { InlineLoader } from '@@CE/InlineLoader';
-import { WebEditorForm } from '@@CE/WebEditorForm';
+import { InlineLoader } from '@@/InlineLoader';
+import { WebEditorForm } from '@@/WebEditorForm';
 
 export function DockerContentField({
   error,

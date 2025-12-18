@@ -1,9 +1,9 @@
-import { GitCredential } from '@CE/react/portainer/account/git-credentials/types';
-import { useGitCredentials } from '@CE/react/portainer/account/git-credentials/git-credentials.service';
-import { useUser } from '@CE/react/hooks/useUser';
+import { GitCredential } from '@/react/portainer/account/git-credentials/types';
+import { useGitCredentials } from '@/react/portainer/account/git-credentials/git-credentials.service';
+import { useUser } from '@/react/hooks/useUser';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Select } from '@@CE/form-components/ReactSelect';
+import { FormControl } from '@@/form-components/FormControl';
+import { Select } from '@@/form-components/ReactSelect';
 
 export function CredentialSelector({
   value,

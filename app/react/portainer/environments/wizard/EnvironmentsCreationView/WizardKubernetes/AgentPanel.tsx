@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Environment } from '@CE/react/portainer/environments/types';
+import { Environment } from '@/react/portainer/environments/types';
 
 import { AgentForm } from '../shared/AgentForm';
 

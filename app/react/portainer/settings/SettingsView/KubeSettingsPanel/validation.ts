@@ -1,8 +1,8 @@
 import { SchemaOf, object, string, boolean } from 'yup';
 
-import { nanNumberSchema } from '@CE/react-tools/yup-schemas';
+import { nanNumberSchema } from '@/react-tools/yup-schemas';
 
-import { isValidUrl } from '@@CE/form-components/validate-url';
+import { isValidUrl } from '@@/form-components/validate-url';
 
 import { FormValues } from './types';
 

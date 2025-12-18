@@ -1,6 +1,6 @@
-import { Authorized } from '@CE/react/hooks/useUser';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { TextTip } from '@@CE/Tip/TextTip';
+import { TextTip } from '@@/Tip/TextTip';
 
 interface Props {
   showSystemResources?: boolean;

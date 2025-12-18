@@ -1,17 +1,17 @@
 import { useMemo, useState } from 'react';
 import { Users, UserX } from 'lucide-react';
 
-import { User, UserId } from '@CE/portainer/users/types';
-import { TeamId, TeamRole } from '@CE/react/portainer/users/teams/types';
-import { useIsPureAdmin } from '@CE/react/hooks/useUser';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { User, UserId } from '@/portainer/users/types';
+import { TeamId, TeamRole } from '@/react/portainer/users/teams/types';
+import { useIsPureAdmin } from '@/react/hooks/useUser';
+import { notifySuccess } from '@/portainer/services/notifications';
 import {
   useRemoveMemberMutation,
   useTeamMemberships,
-} from '@CE/react/portainer/users/teams/queries';
+} from '@/react/portainer/users/teams/queries';
 
-import { Button } from '@@CE/buttons';
-import { Datatable } from '@@CE/datatables';
+import { Button } from '@@/buttons';
+import { Datatable } from '@@/datatables';
 
 import { RowContext, RowProvider } from './RowContext';
 import { columns } from './columns';

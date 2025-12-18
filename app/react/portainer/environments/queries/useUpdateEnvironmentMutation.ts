@@ -1,6 +1,6 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import { withError, withInvalidate } from '@CE/react-tools/react-query';
+import { withError, withInvalidate } from '@/react-tools/react-query';
 import {
   EnvironmentId,
   EnvironmentStatusMessage,
@@ -9,9 +9,9 @@ import {
   DeploymentOptions,
   EndpointChangeWindow,
   EnvironmentGroupId,
-} from '@CE/react/portainer/environments/types';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { TagId } from '@CE/portainer/tags/types';
+} from '@/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { TagId } from '@/portainer/tags/types';
 
 import { buildUrl } from '../environment.service/utils';
 

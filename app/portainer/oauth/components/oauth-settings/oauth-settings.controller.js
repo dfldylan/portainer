@@ -1,9 +1,9 @@
-import { baseHref } from '@CE/portainer/helpers/pathHelper';
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
-import { isLimitedToBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
-import { ModalType } from '@@CE/modals';
-import { confirm } from '@@CE/modals/confirm';
-import { buildConfirmButton } from '@@CE/modals/utils';
+import { baseHref } from '@/portainer/helpers/pathHelper';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { isLimitedToBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import { ModalType } from '@@/modals';
+import { confirm } from '@@/modals/confirm';
+import { buildConfirmButton } from '@@/modals/utils';
 import providers, { getProviderByUrl } from './providers';
 
 const MS_TENANT_ID_PLACEHOLDER = 'TENANT_ID';

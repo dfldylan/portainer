@@ -9,9 +9,9 @@ import {
 import clsx from 'clsx';
 import { UISrefProps, useSref } from '@uirouter/react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { Props as ButtonProps, ButtonWithRef } from './Button';
 

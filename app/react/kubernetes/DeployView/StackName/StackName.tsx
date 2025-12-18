@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 
-import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { useIsEdgeAdmin } from '@/react/hooks/useUser';
 
-import { Link } from '@@CE/Link';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { AutocompleteSelect } from '@@CE/form-components/AutocompleteSelect';
-import { FormError } from '@@CE/form-components/FormError';
+import { Link } from '@@/Link';
+import { TextTip } from '@@/Tip/TextTip';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { AutocompleteSelect } from '@@/form-components/AutocompleteSelect';
+import { FormError } from '@@/form-components/FormError';
 
 type Props = {
   stackName: string;

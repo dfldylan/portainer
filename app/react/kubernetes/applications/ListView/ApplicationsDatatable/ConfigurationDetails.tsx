@@ -1,4 +1,4 @@
-import { useAuthorizations } from '@CE/react/hooks/useUser';
+import { useAuthorizations } from '@/react/hooks/useUser';
 
 import { SensitiveDetails } from './SensitiveDetails';
 import { Application, ConfigKind } from './types';

@@ -1,6 +1,6 @@
-import { openSwitchPrompt } from '@@CE/modals/SwitchPrompt';
-import { ModalType } from '@@CE/modals';
-import { buildConfirmButton } from '@@CE/modals/utils';
+import { openSwitchPrompt } from '@@/modals/SwitchPrompt';
+import { ModalType } from '@@/modals';
+import { buildConfirmButton } from '@@/modals/utils';
 
 export async function confirmStackUpdate(
   message: string,

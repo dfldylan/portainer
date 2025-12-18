@@ -1,12 +1,12 @@
 import { FormikErrors } from 'formik';
 import { ArrowRight } from 'lucide-react';
 
-import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
-import { FormError } from '@@CE/form-components/FormError';
-import { InputList } from '@@CE/form-components/InputList';
-import { ItemProps } from '@@CE/form-components/InputList/InputList';
-import { Icon } from '@@CE/Icon';
-import { InputLabeled } from '@@CE/form-components/Input/InputLabeled';
+import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
+import { FormError } from '@@/form-components/FormError';
+import { InputList } from '@@/form-components/InputList';
+import { ItemProps } from '@@/form-components/InputList/InputList';
+import { Icon } from '@@/Icon';
+import { InputLabeled } from '@@/form-components/Input/InputLabeled';
 
 export type Protocol = 'tcp' | 'udp';
 

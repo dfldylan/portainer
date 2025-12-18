@@ -1,6 +1,6 @@
 import { Sliders, AlignJustify } from 'lucide-react';
 
-import { BoxSelector, BoxSelectorOption } from '@@CE/BoxSelector';
+import { BoxSelector, BoxSelectorOption } from '@@/BoxSelector';
 
 import { PlacementType } from './types';
 

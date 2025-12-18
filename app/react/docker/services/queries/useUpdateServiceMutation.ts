@@ -1,13 +1,13 @@
 import { ServiceUpdateResponse } from 'docker-types/generated/1.44';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
+} from '@/react-tools/react-query';
 
 import { ServiceUpdateConfig } from '../types';
 import { withRegistryAuthHeader } from '../../proxy/queries/utils';

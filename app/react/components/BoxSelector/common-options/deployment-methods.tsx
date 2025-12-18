@@ -1,5 +1,5 @@
-import Kubernetes from '@CE/assets/ico/vendor/kubernetes.svg?c';
-import DockerCompose from '@CE/assets/ico/vendor/docker-compose.svg?c';
+import Kubernetes from '@/assets/ico/vendor/kubernetes.svg?c';
+import DockerCompose from '@/assets/ico/vendor/docker-compose.svg?c';
 
 import { BoxSelectorOption } from '../types';
 

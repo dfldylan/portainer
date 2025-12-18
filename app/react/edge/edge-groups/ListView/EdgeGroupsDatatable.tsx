@@ -1,8 +1,8 @@
 import { LayoutGrid } from 'lucide-react';
 
-import { Datatable } from '@@CE/datatables';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { createPersistedStore } from '@@CE/datatables/types';
+import { Datatable } from '@@/datatables';
+import { useTableState } from '@@/datatables/useTableState';
+import { createPersistedStore } from '@@/datatables/types';
 
 import { useEdgeGroups } from '../queries/useEdgeGroups';
 

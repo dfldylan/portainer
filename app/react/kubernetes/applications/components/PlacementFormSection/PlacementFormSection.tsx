@@ -1,12 +1,12 @@
 import { FormikErrors } from 'formik';
 import { useMemo } from 'react';
 
-import { useNodesQuery } from '@CE/react/kubernetes/cluster/queries/useNodesQuery';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useNodesQuery } from '@/react/kubernetes/cluster/queries/useNodesQuery';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { InputList } from '@@CE/form-components/InputList';
+import { FormSection } from '@@/form-components/FormSection';
+import { TextTip } from '@@/Tip/TextTip';
+import { InputList } from '@@/form-components/InputList';
 
 import { PlacementsFormValues, NodeLabels, Placement } from './types';
 import { PlacementItem } from './PlacementItem';

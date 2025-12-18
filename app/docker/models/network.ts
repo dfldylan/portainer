@@ -1,8 +1,8 @@
 import { IPAM, Network, NetworkContainer } from 'docker-types/generated/1.44';
 
-import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
-import { IResource } from '@CE/react/docker/components/datatable/createOwnershipColumn';
-import { PortainerResponse } from '@CE/react/docker/types';
+import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { IResource } from '@/react/docker/components/datatable/createOwnershipColumn';
+import { PortainerResponse } from '@/react/docker/types';
 
 // TODO later: aggregate NetworkViewModel and DockerNetwork types
 //

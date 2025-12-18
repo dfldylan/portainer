@@ -2,14 +2,14 @@ import { Node, Endpoints } from 'kubernetes-types/core/v1';
 import { HardDrive } from 'lucide-react';
 import { useMemo } from 'react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { createStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
-import { IndexOptional } from '@CE/react/kubernetes/configs/types';
-import { useEnvironment } from '@CE/react/portainer/environments/queries';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { createStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
+import { IndexOptional } from '@/react/kubernetes/configs/types';
+import { useEnvironment } from '@/react/portainer/environments/queries';
 
-import { Datatable, TableSettingsMenu } from '@@CE/datatables';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
+import { Datatable, TableSettingsMenu } from '@@/datatables';
+import { useTableState } from '@@/datatables/useTableState';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
 
 import { useKubernetesEndpointsQuery } from '../../kubernetesEndpoint.service';
 import { useNodesQuery } from '../../queries/useNodesQuery';

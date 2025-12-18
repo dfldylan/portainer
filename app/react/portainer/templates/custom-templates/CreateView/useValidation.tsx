@@ -1,23 +1,23 @@
 import { mixed, number, object, string } from 'yup';
 import { useMemo } from 'react';
 
-import { StackType } from '@CE/react/common/stacks/types';
-import { validation as commonFieldsValidation } from '@CE/react/portainer/custom-templates/components/CommonFields';
-import { Platform } from '@CE/react/portainer/templates/types';
-import { variablesValidation } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
-import { buildGitValidationSchema } from '@CE/react/portainer/gitops/GitForm';
-import { useGitCredentials } from '@CE/react/portainer/account/git-credentials/git-credentials.service';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { useCustomTemplates } from '@CE/react/portainer/templates/custom-templates/queries/useCustomTemplates';
-import { edgeFieldsetValidation } from '@CE/react/portainer/templates/custom-templates/CreateView/EdgeSettingsFieldset.validation';
-import { DeployMethod } from '@CE/react/portainer/gitops/types';
+import { StackType } from '@/react/common/stacks/types';
+import { validation as commonFieldsValidation } from '@/react/portainer/custom-templates/components/CommonFields';
+import { Platform } from '@/react/portainer/templates/types';
+import { variablesValidation } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
+import { buildGitValidationSchema } from '@/react/portainer/gitops/GitForm';
+import { useGitCredentials } from '@/react/portainer/account/git-credentials/git-credentials.service';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { useCustomTemplates } from '@/react/portainer/templates/custom-templates/queries/useCustomTemplates';
+import { edgeFieldsetValidation } from '@/react/portainer/templates/custom-templates/CreateView/EdgeSettingsFieldset.validation';
+import { DeployMethod } from '@/react/portainer/gitops/types';
 
-import { file } from '@@CE/form-components/yup-file-validation';
+import { file } from '@@/form-components/yup-file-validation';
 import {
   editor,
   git,
   upload,
-} from '@@CE/BoxSelector/common-options/build-methods';
+} from '@@/BoxSelector/common-options/build-methods';
 
 import { initialBuildMethods } from './types';
 

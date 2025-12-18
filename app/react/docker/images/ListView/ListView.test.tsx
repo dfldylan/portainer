@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
 
 import { useIsSwarmAgent } from '../../proxy/queries/useIsSwarmAgent';
 

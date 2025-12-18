@@ -1,8 +1,8 @@
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
 import {
   BasicTableSettings,
   RefreshableTableSettings,
-} from '@@CE/datatables/types';
+} from '@@/datatables/types';
 
 import {
   SystemResourcesSettings,

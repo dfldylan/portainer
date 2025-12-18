@@ -2,14 +2,14 @@ import { Edit } from 'lucide-react';
 import _ from 'lodash';
 import { useCallback, useState } from 'react';
 
-import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
+import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
 
-import { DatatableHeader } from '@@CE/datatables/DatatableHeader';
-import { Table } from '@@CE/datatables';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { DatatableFooter } from '@@CE/datatables/DatatableFooter';
-import { AddButton } from '@@CE/buttons';
+import { DatatableHeader } from '@@/datatables/DatatableHeader';
+import { Table } from '@@/datatables';
+import { useTableState } from '@@/datatables/useTableState';
+import { createPersistedStore } from '@@/datatables/types';
+import { DatatableFooter } from '@@/datatables/DatatableFooter';
+import { AddButton } from '@@/buttons';
 
 import { CustomTemplatesListItem } from './CustomTemplatesListItem';
 

@@ -1,10 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { Plus } from 'lucide-react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { MenuButton, MenuButtonLink } from '@@CE/buttons/MenuButton';
-import { Icon } from '@@CE/Icon';
+import { MenuButton, MenuButtonLink } from '@@/buttons/MenuButton';
+import { Icon } from '@@/Icon';
 
 export function CreateFromManifestButton({
   params = {},

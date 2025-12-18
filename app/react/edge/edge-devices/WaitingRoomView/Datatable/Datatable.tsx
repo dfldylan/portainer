@@ -1,8 +1,8 @@
 import { Box } from 'lucide-react';
 
-import { Datatable as GenericDatatable } from '@@CE/datatables';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
+import { Datatable as GenericDatatable } from '@@/datatables';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { WaitingRoomEnvironment } from '../types';
 

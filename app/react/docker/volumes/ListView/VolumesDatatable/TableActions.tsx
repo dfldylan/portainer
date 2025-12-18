@@ -1,7 +1,7 @@
-import { Authorized } from '@CE/react/hooks/useUser';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { AddButton } from '@@CE/buttons';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { AddButton } from '@@/buttons';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { DecoratedVolume } from '../types';
 

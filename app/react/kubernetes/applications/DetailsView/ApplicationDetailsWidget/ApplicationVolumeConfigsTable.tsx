@@ -1,8 +1,8 @@
 import { KeyToPath, Pod, VolumeMount } from 'kubernetes-types/core/v1';
 import { Asterisk, Plus } from 'lucide-react';
 
-import { Icon } from '@@CE/Icon';
-import { Link } from '@@CE/Link';
+import { Icon } from '@@/Icon';
+import { Link } from '@@/Link';
 
 import { Application } from '../../types';
 import { applicationIsKind } from '../../utils';

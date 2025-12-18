@@ -1,19 +1,19 @@
 import { Trello } from 'lucide-react';
 
-import { NodeViewModel } from '@CE/docker/models/node';
+import { NodeViewModel } from '@/docker/models/node';
 
-import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { Datatable, TableSettingsMenu } from '@@/datatables';
 import {
   BasicTableSettings,
   RefreshableTableSettings,
   createPersistedStore,
   refreshableSettings,
-} from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { useRepeater } from '@@CE/datatables/useRepeater';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
-import { withMeta } from '@@CE/datatables/extend-options/withMeta';
-import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
+} from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { useRepeater } from '@@/datatables/useRepeater';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { withMeta } from '@@/datatables/extend-options/withMeta';
+import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
 
 import { useColumns } from './columns';
 

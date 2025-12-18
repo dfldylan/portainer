@@ -1,15 +1,15 @@
 import _ from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 
-import { useTags } from '@CE/portainer/tags/queries';
-import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
-import { useGroups } from '@CE/react/portainer/environments/environment-groups/queries';
-import { useEnvironmentList } from '@CE/react/portainer/environments/queries';
-import { EdgeTypes } from '@CE/react/portainer/environments/types';
+import { useTags } from '@/portainer/tags/queries';
+import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
+import { useGroups } from '@/react/portainer/environments/environment-groups/queries';
+import { useEnvironmentList } from '@/react/portainer/environments/queries';
+import { EdgeTypes } from '@/react/portainer/environments/types';
 import {
   Query,
   getSortType,
-} from '@CE/react/portainer/environments/queries/useEnvironmentList';
+} from '@/react/portainer/environments/queries/useEnvironmentList';
 
 import { WaitingRoomEnvironment } from '../types';
 

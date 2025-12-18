@@ -1,6 +1,6 @@
 import { object, string } from 'yup';
 
-import { isValidUrl } from '@@CE/form-components/validate-url';
+import { isValidUrl } from '@@/form-components/validate-url';
 
 export function noDuplicateURLsSchema(urls: string[]) {
   return string()

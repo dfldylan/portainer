@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { CellContext } from '@tanstack/react-table';
 
-import { ResourceControlOwnership } from '@CE/react/portainer/access-control/types';
-import { ContainerGroup } from '@CE/react/azure/types';
-import { determineOwnership } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
-import { ownershipIcon } from '@CE/react/docker/components/datatable/createOwnershipColumn';
+import { ResourceControlOwnership } from '@/react/portainer/access-control/types';
+import { ContainerGroup } from '@/react/azure/types';
+import { determineOwnership } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { ownershipIcon } from '@/react/docker/components/datatable/createOwnershipColumn';
 
 import { columnHelper } from './helper';
 

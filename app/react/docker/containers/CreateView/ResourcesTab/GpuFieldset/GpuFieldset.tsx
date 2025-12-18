@@ -7,10 +7,10 @@ import {
 } from 'react-select/dist/declarations/src/types';
 import { OptionProps } from 'react-select/dist/declarations/src/components/Option';
 
-import { Select } from '@@CE/form-components/ReactSelect';
-import { Switch } from '@@CE/form-components/SwitchField/Switch';
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { Select } from '@@/form-components/ReactSelect';
+import { Switch } from '@@/form-components/SwitchField/Switch';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { Values } from './types';
 

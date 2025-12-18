@@ -1,21 +1,21 @@
 import { Network } from 'lucide-react';
 
-import { Authorized } from '@CE/react/hooks/useUser';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Authorized } from '@/react/hooks/useUser';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { ExpandableDatatable } from '@@CE/datatables/ExpandableDatatable';
+import { ExpandableDatatable } from '@@/datatables/ExpandableDatatable';
 import {
   BasicTableSettings,
   createPersistedStore,
   refreshableSettings,
   RefreshableTableSettings,
-} from '@@CE/datatables/types';
-import { AddButton } from '@@CE/buttons';
-import { TableSettingsMenu } from '@@CE/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
-import { useRepeater } from '@@CE/datatables/useRepeater';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+} from '@@/datatables/types';
+import { AddButton } from '@@/buttons';
+import { TableSettingsMenu } from '@@/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { useRepeater } from '@@/datatables/useRepeater';
+import { useTableState } from '@@/datatables/useTableState';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { useIsSwarm } from '../../proxy/queries/useInfo';
 

@@ -5,9 +5,9 @@ import _ from 'lodash';
 
 import 'tippy.js/dist/tippy.css';
 
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
 
-import { getFeatureDetails } from '@@CE/BEFeatureIndicator/utils';
+import { getFeatureDetails } from '@@/BEFeatureIndicator/utils';
 
 import styles from './TooltipWithChildren.module.css';
 

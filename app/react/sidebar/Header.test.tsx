@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestRouter } from '@/react/test-utils/withRouter';
 
 import { Context } from './useSidebarState';
 import { Header } from './Header';
 
-vi.mock('@CE/react/portainer/feature-flags/feature-flags.service', () => ({
+vi.mock('@/react/portainer/feature-flags/feature-flags.service', () => ({
   isBE: false,
 }));
 

@@ -1,6 +1,6 @@
-import { useUnauthorizedRedirect } from '@CE/react/hooks/useUnauthorizedRedirect';
+import { useUnauthorizedRedirect } from '@/react/hooks/useUnauthorizedRedirect';
 
-import { PageHeader } from '@@CE/PageHeader';
+import { PageHeader } from '@@/PageHeader';
 
 import { ServiceAccountsDatatable } from './ServiceAccountsDatatable';
 

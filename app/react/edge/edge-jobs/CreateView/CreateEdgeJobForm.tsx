@@ -1,16 +1,16 @@
 import { Form, Formik, useFormikContext } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { EdgeGroupsSelector } from '@CE/react/edge/edge-stacks/components/EdgeGroupsSelector';
-import { AssociatedEdgeEnvironmentsSelector } from '@CE/react/edge/components/AssociatedEdgeEnvironmentsSelector';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { EdgeGroupsSelector } from '@/react/edge/edge-stacks/components/EdgeGroupsSelector';
+import { AssociatedEdgeEnvironmentsSelector } from '@/react/edge/components/AssociatedEdgeEnvironmentsSelector';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { FormActions } from '@@CE/form-components/FormActions';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { BoxSelector } from '@@CE/BoxSelector';
-import { editor, upload } from '@@CE/BoxSelector/common-options/build-methods';
-import { WebEditorForm } from '@@CE/WebEditorForm';
-import { FileUploadForm } from '@@CE/form-components/FileUpload';
+import { FormActions } from '@@/form-components/FormActions';
+import { FormSection } from '@@/form-components/FormSection';
+import { BoxSelector } from '@@/BoxSelector';
+import { editor, upload } from '@@/BoxSelector/common-options/build-methods';
+import { WebEditorForm } from '@@/WebEditorForm';
+import { FileUploadForm } from '@@/form-components/FileUpload';
 
 import { NameField } from '../components/EdgeJobForm/NameField';
 import { JobConfigurationFieldset } from '../components/EdgeJobForm/JobConfigurationFieldset';

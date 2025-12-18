@@ -1,4 +1,4 @@
-import { UserViewModel } from '@CE/portainer/models/user';
+import { UserViewModel } from '@/portainer/models/user';
 
 export function createMockUser(id: number, username: string): UserViewModel {
   return {

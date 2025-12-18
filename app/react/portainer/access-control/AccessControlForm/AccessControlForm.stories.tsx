@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react';
 import { useState } from 'react';
 
-import { UserViewModel } from '@CE/portainer/models/user';
-import { Role, User } from '@CE/portainer/users/types';
-import { isPureAdmin } from '@CE/portainer/users/user.helpers';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { UserViewModel } from '@/portainer/models/user';
+import { Role, User } from '@/portainer/users/types';
+import { isPureAdmin } from '@/portainer/users/user.helpers';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
 
 import { parseAccessControlFormData } from '../utils';
 

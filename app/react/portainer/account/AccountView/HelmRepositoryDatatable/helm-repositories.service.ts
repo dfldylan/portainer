@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { success as notifySuccess } from '@CE/portainer/services/notifications';
-import { withError } from '@CE/react-tools/react-query';
-import { pluralize } from '@CE/portainer/helpers/strings';
-import { queryKeys } from '@CE/react/kubernetes/helm/helmChartSourceQueries/query-keys';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { success as notifySuccess } from '@/portainer/services/notifications';
+import { withError } from '@/react-tools/react-query';
+import { pluralize } from '@/portainer/helpers/strings';
+import { queryKeys } from '@/react/kubernetes/helm/helmChartSourceQueries/query-keys';
+import { useCurrentUser } from '@/react/hooks/useUser';
 
 import {
   CreateHelmRepositoryPayload,

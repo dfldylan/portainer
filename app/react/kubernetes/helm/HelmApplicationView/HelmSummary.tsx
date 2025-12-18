@@ -1,8 +1,8 @@
-import { Badge } from '@CE/react/components/Badge';
-import { localizeDate } from '@CE/react/common/date-utils';
+import { Badge } from '@/react/components/Badge';
+import { localizeDate } from '@/react/common/date-utils';
 
-import { Alert } from '@@CE/Alert';
-import { Card } from '@@CE/Card';
+import { Alert } from '@@/Alert';
+import { Card } from '@@/Card';
 
 import { HelmRelease } from '../types';
 import {

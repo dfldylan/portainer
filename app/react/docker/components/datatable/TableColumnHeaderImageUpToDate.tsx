@@ -1,16 +1,16 @@
-import UpdatesAvailable from '@CE/assets/ico/icon_updates-available.svg?c';
-import UpToDate from '@CE/assets/ico/icon_up-to-date.svg?c';
-import UpdatesUnknown from '@CE/assets/ico/icon_updates-unknown.svg?c';
-import { useEnvironment } from '@CE/react/portainer/environments/queries';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import UpdatesAvailable from '@/assets/ico/icon_updates-available.svg?c';
+import UpToDate from '@/assets/ico/icon_up-to-date.svg?c';
+import UpdatesUnknown from '@/assets/ico/icon_updates-unknown.svg?c';
+import { useEnvironment } from '@/react/portainer/environments/queries';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { Icon } from '@@CE/Icon';
-import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Icon } from '@@/Icon';
+import { Tooltip } from '@@/Tip/Tooltip';
 import {
   TableColumnHeaderAngular,
   TableColumnHeaderAngularProps,
-} from '@@CE/datatables/TableHeaderCell';
+} from '@@/datatables/TableHeaderCell';
 
 export function TableColumnHeaderImageUpToDate({
   canSort,

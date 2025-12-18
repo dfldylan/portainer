@@ -1,13 +1,13 @@
 import { Eye } from 'lucide-react';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTrigger,
-} from '@@CE/Sheet';
+} from '@@/Sheet';
 
 import { HelmRelease } from '../types';
 

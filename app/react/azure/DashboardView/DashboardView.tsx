@@ -1,11 +1,11 @@
 import { Package } from 'lucide-react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import Subscription from '@CE/assets/ico/subscription.svg?c';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import Subscription from '@/assets/ico/subscription.svg?c';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { DashboardItem } from '@@CE/DashboardItem';
-import { DashboardGrid } from '@@CE/DashboardItem/DashboardGrid';
+import { PageHeader } from '@@/PageHeader';
+import { DashboardItem } from '@@/DashboardItem';
+import { DashboardGrid } from '@@/DashboardItem/DashboardGrid';
 
 import { useResourceGroups } from '../queries/useResourceGroups';
 import { useSubscriptions } from '../queries/useSubscriptions';

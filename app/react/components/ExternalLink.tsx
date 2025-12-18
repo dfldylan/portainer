@@ -2,7 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { PropsWithChildren } from 'react';
 import clsx from 'clsx';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
 interface Props {
   to: string;

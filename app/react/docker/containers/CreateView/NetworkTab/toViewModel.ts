@@ -1,4 +1,4 @@
-import { DockerNetwork } from '@CE/react/docker/networks/types';
+import { DockerNetwork } from '@/react/docker/networks/types';
 
 import { ContainerDetailsJSON } from '../../queries/useContainer';
 import { ContainerListViewModel } from '../../types';

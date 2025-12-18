@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { Registry } from '@CE/react/portainer/registries/types/registry';
-import { useEnvironmentRegistries } from '@CE/react/portainer/environments/queries/useEnvironmentRegistries';
-import { withGlobalError, withInvalidate } from '@CE/react-tools/react-query';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { Registry } from '@/react/portainer/registries/types/registry';
+import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
+import { withGlobalError, withInvalidate } from '@/react-tools/react-query';
 
 import { buildImageFullURI } from '../utils';
 import {

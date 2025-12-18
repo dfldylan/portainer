@@ -1,5 +1,5 @@
-import { StackType } from '@CE/react/common/stacks/types';
-import { useAuthorizations } from '@CE/react/hooks/useUser';
+import { StackType } from '@/react/common/stacks/types';
+import { useAuthorizations } from '@/react/hooks/useUser';
 
 import { CustomTemplatesListParams } from '../queries/useCustomTemplates';
 import { CustomTemplate } from '../types';

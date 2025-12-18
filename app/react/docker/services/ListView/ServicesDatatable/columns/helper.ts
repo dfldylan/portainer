@@ -1,5 +1,5 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { ServiceViewModel } from '@CE/docker/models/service';
+import { ServiceViewModel } from '@/docker/models/service';
 
 export const columnHelper = createColumnHelper<ServiceViewModel>();

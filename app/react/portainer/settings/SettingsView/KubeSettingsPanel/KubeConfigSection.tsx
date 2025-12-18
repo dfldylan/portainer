@@ -1,8 +1,8 @@
 import { useField } from 'formik';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
+import { FormControl } from '@@/form-components/FormControl';
+import { FormSection } from '@@/form-components/FormSection';
+import { PortainerSelect } from '@@/form-components/PortainerSelect';
 
 const options = [
   {

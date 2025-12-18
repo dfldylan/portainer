@@ -1,46 +1,46 @@
 import { Form, Formik, useFormikContext } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { AuthFieldset } from '@CE/react/portainer/gitops/AuthFieldset';
-import { AutoUpdateFieldset } from '@CE/react/portainer/gitops/AutoUpdateFieldset';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { AuthFieldset } from '@/react/portainer/gitops/AuthFieldset';
+import { AutoUpdateFieldset } from '@/react/portainer/gitops/AutoUpdateFieldset';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 import {
   parseAutoUpdateResponse,
   transformAutoUpdateViewModel,
-} from '@CE/react/portainer/gitops/AutoUpdateFieldset/utils';
-import { InfoPanel } from '@CE/react/portainer/gitops/InfoPanel';
-import { RefField } from '@CE/react/portainer/gitops/RefField';
+} from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { InfoPanel } from '@/react/portainer/gitops/InfoPanel';
+import { RefField } from '@/react/portainer/gitops/RefField';
 import {
   AutoUpdateModel,
   GitAuthModel,
   RelativePathModel,
-} from '@CE/react/portainer/gitops/types';
+} from '@/react/portainer/gitops/types';
 import {
   baseEdgeStackWebhookUrl,
   createWebhookId,
-} from '@CE/portainer/helpers/webhookHelper';
+} from '@/portainer/helpers/webhookHelper';
 import {
   parseAuthResponse,
   transformGitAuthenticationViewModel,
-} from '@CE/react/portainer/gitops/AuthFieldset/utils';
-import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
-import { DeploymentType, EdgeStack } from '@CE/react/edge/edge-stacks/types';
-import { EdgeGroupsSelector } from '@CE/react/edge/edge-stacks/components/EdgeGroupsSelector';
-import { EdgeStackDeploymentTypeSelector } from '@CE/react/edge/edge-stacks/components/EdgeStackDeploymentTypeSelector';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { EnvironmentType } from '@CE/react/portainer/environments/types';
-import { Registry } from '@CE/react/portainer/registries/types/registry';
-import { useRegistries } from '@CE/react/portainer/registries/queries/useRegistries';
-import { RelativePathFieldset } from '@CE/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
-import { parseRelativePathResponse } from '@CE/react/portainer/gitops/RelativePathFieldset/utils';
-import { useSaveCredentialsIfRequired } from '@CE/react/portainer/account/git-credentials/queries/useCreateGitCredentialsMutation';
+} from '@/react/portainer/gitops/AuthFieldset/utils';
+import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { DeploymentType, EdgeStack } from '@/react/edge/edge-stacks/types';
+import { EdgeGroupsSelector } from '@/react/edge/edge-stacks/components/EdgeGroupsSelector';
+import { EdgeStackDeploymentTypeSelector } from '@/react/edge/edge-stacks/components/EdgeStackDeploymentTypeSelector';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { EnvironmentType } from '@/react/portainer/environments/types';
+import { Registry } from '@/react/portainer/registries/types/registry';
+import { useRegistries } from '@/react/portainer/registries/queries/useRegistries';
+import { RelativePathFieldset } from '@/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
+import { parseRelativePathResponse } from '@/react/portainer/gitops/RelativePathFieldset/utils';
+import { useSaveCredentialsIfRequired } from '@/react/portainer/account/git-credentials/queries/useCreateGitCredentialsMutation';
 
-import { LoadingButton } from '@@CE/buttons';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { FormError } from '@@CE/form-components/FormError';
-import { EnvironmentVariablesPanel } from '@@CE/form-components/EnvironmentVariablesFieldset';
-import { EnvVar } from '@@CE/form-components/EnvironmentVariablesFieldset/types';
+import { LoadingButton } from '@@/buttons';
+import { FormSection } from '@@/form-components/FormSection';
+import { TextTip } from '@@/Tip/TextTip';
+import { FormError } from '@@/form-components/FormError';
+import { EnvironmentVariablesPanel } from '@@/form-components/EnvironmentVariablesFieldset';
+import { EnvVar } from '@@/form-components/EnvironmentVariablesFieldset/types';
 
 import { useEdgeGroupHasType } from '../useEdgeGroupHasType';
 import { PrivateRegistryFieldset } from '../../../components/PrivateRegistryFieldset';

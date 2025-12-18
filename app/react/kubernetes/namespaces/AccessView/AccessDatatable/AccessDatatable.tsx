@@ -2,21 +2,18 @@ import { UserX } from 'lucide-react';
 import { useMemo } from 'react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 
-import { useUsers } from '@CE/portainer/users/queries';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useTeams } from '@CE/react/portainer/users/teams/queries';
-import { PortainerNamespaceAccessesConfigMap } from '@CE/react/kubernetes/configs/constants';
-import { useConfigMap } from '@CE/react/kubernetes/configs/queries/useConfigMap';
-import { useUpdateK8sConfigMapMutation } from '@CE/react/kubernetes/configs/queries/useUpdateK8sConfigMapMutation';
-import {
-  notifyError,
-  notifySuccess,
-} from '@CE/portainer/services/notifications';
+import { useUsers } from '@/portainer/users/queries';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useTeams } from '@/react/portainer/users/teams/queries';
+import { PortainerNamespaceAccessesConfigMap } from '@/react/kubernetes/configs/constants';
+import { useConfigMap } from '@/react/kubernetes/configs/queries/useConfigMap';
+import { useUpdateK8sConfigMapMutation } from '@/react/kubernetes/configs/queries/useUpdateK8sConfigMapMutation';
+import { notifyError, notifySuccess } from '@/portainer/services/notifications';
 
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { Datatable } from '@@CE/datatables';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { Datatable } from '@@/datatables';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { parseNamespaceAccesses } from '../parseNamespaceAccesses';
 import { NamespaceAccess } from '../types';

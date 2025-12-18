@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react';
 import { UserPlus, Users } from 'lucide-react';
 
-import { User, UserId } from '@CE/portainer/users/types';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { useAddMemberMutation } from '@CE/react/portainer/users/teams/queries';
-import { TeamId } from '@CE/react/portainer/users/teams/types';
+import { User, UserId } from '@/portainer/users/types';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { useAddMemberMutation } from '@/react/portainer/users/teams/queries';
+import { TeamId } from '@/react/portainer/users/teams/types';
 
-import { Button } from '@@CE/buttons';
-import { Datatable } from '@@CE/datatables';
+import { Button } from '@@/buttons';
+import { Datatable } from '@@/datatables';
 
 import { name } from './name-column';
 import { RowProvider } from './RowContext';

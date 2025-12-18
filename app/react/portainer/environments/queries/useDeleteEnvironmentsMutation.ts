@@ -1,12 +1,12 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
+import { promiseSequence } from '@/portainer/helpers/promise-utils';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+} from '@/react-tools/react-query';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { deleteEndpoint } from '../environment.service';
 

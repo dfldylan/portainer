@@ -2,12 +2,12 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { HttpResponse, http } from 'msw';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { server } from '@CE/setup-tests/server';
-import { Role } from '@CE/portainer/users/types';
-import { createMockUsers } from '@CE/react-tools/test-mocks';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { server } from '@/setup-tests/server';
+import { Role } from '@/portainer/users/types';
+import { createMockUsers } from '@/react-tools/test-mocks';
 
 import { ConfigViewModel } from '../../model';
 

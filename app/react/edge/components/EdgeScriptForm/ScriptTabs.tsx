@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
-import { useAgentDetails } from '@CE/react/portainer/environments/queries/useAgentDetails';
+import { useAgentDetails } from '@/react/portainer/environments/queries/useAgentDetails';
 
-import { Code } from '@@CE/Code';
-import { CopyButton } from '@@CE/buttons/CopyButton';
-import { NavTabs } from '@@CE/NavTabs';
-import { NavContainer } from '@@CE/NavTabs/NavContainer';
+import { Code } from '@@/Code';
+import { CopyButton } from '@@/buttons/CopyButton';
+import { NavTabs } from '@@/NavTabs';
+import { NavContainer } from '@@/NavTabs/NavContainer';
 
 import { ScriptFormValues, Platform } from './types';
 import { CommandTab } from './scripts';

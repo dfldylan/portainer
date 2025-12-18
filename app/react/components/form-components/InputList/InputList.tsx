@@ -3,11 +3,11 @@ import { FormikErrors } from 'formik';
 import { ArrowDown, ArrowUp, Plus, RotateCw, Trash2 } from 'lucide-react';
 import clsx from 'clsx';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { Button } from '@@CE/buttons';
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { Button } from '@@/buttons';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { Input } from '../Input';
 import { FormError } from '../FormError';

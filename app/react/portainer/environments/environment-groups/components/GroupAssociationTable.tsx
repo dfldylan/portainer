@@ -2,13 +2,13 @@ import { createColumnHelper } from '@tanstack/react-table';
 import { truncate } from 'lodash';
 import { useState } from 'react';
 
-import { useEnvironmentList } from '@CE/react/portainer/environments/queries';
-import { Environment } from '@CE/react/portainer/environments/types';
-import { EnvironmentsQueryParams } from '@CE/react/portainer/environments/environment.service';
-import { AutomationTestingProps } from '@CE/types';
+import { useEnvironmentList } from '@/react/portainer/environments/queries';
+import { Environment } from '@/react/portainer/environments/types';
+import { EnvironmentsQueryParams } from '@/react/portainer/environments/environment.service';
+import { AutomationTestingProps } from '@/types';
 
-import { useTableStateWithoutStorage } from '@@CE/datatables/useTableState';
-import { Datatable, TableRow } from '@@CE/datatables';
+import { useTableStateWithoutStorage } from '@@/datatables/useTableState';
+import { Datatable, TableRow } from '@@/datatables';
 
 const columHelper = createColumnHelper<Environment>();
 

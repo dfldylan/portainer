@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { CopyButton } from '@@CE/buttons/CopyButton';
+import { CopyButton } from '@@/buttons/CopyButton';
 
 type FileNameHeaderProps = {
   fileName: string;

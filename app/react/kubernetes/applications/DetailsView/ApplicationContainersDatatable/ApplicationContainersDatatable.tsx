@@ -3,17 +3,17 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 import { Pod } from 'kubernetes-types/core/v1';
 
-import { IndexOptional } from '@CE/react/kubernetes/configs/types';
-import { createStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useEnvironment } from '@CE/react/portainer/environments/queries';
+import { IndexOptional } from '@/react/kubernetes/configs/types';
+import { createStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironment } from '@/react/portainer/environments/queries';
 
 import {
   Datatable,
   TableSettingsMenu,
   TableSettingsMenuAutoRefresh,
-} from '@@CE/datatables';
-import { useTableState } from '@@CE/datatables/useTableState';
+} from '@@/datatables';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { useApplication } from '../../queries/useApplication';
 import { useApplicationPods } from '../../queries/useApplicationPods';

@@ -1,11 +1,11 @@
 import { array, boolean, number, object, SchemaOf, string } from 'yup';
 
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { useGitCredentials } from '@CE/react/portainer/account/git-credentials/git-credentials.service';
-import { gitAuthValidation } from '@CE/react/portainer/gitops/AuthFieldset';
-import { autoUpdateValidation } from '@CE/react/portainer/gitops/AutoUpdateFieldset/validation';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { useGitCredentials } from '@/react/portainer/account/git-credentials/git-credentials.service';
+import { gitAuthValidation } from '@/react/portainer/gitops/AuthFieldset';
+import { autoUpdateValidation } from '@/react/portainer/gitops/AutoUpdateFieldset/validation';
 
-import { envVarValidation } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { envVarValidation } from '@@/form-components/EnvironmentVariablesFieldset';
 
 import { FormValues } from './types';
 

@@ -1,12 +1,12 @@
-import { Stack, StackStatus, StackType } from '@CE/react/common/stacks/types';
-import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { Stack, StackStatus, StackType } from '@/react/common/stacks/types';
+import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 import {
   AutoUpdateResponse,
   RepoConfigResponse,
-} from '@CE/react/portainer/gitops/types';
+} from '@/react/portainer/gitops/types';
 
-import { EnvVar } from '@@CE/form-components/EnvironmentVariablesFieldset/types';
+import { EnvVar } from '@@/form-components/EnvironmentVariablesFieldset/types';
 
 import { IResource } from '../../components/datatable/createOwnershipColumn';
 

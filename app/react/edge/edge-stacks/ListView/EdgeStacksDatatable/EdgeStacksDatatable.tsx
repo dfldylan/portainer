@@ -1,8 +1,8 @@
 import { Layers } from 'lucide-react';
 
-import { Datatable } from '@@CE/datatables';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { getColumnVisibilityState } from '@@CE/datatables/ColumnVisibilityMenu';
+import { Datatable } from '@@/datatables';
+import { useTableState } from '@@/datatables/useTableState';
+import { getColumnVisibilityState } from '@@/datatables/ColumnVisibilityMenu';
 
 import { useEdgeStacks } from '../../queries/useEdgeStacks';
 

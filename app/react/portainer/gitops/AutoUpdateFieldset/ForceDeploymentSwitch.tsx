@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
 
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 export function ForceDeploymentSwitch({
   checked,

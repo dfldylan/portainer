@@ -1,8 +1,8 @@
 import { ConfigMap } from 'kubernetes-types/core/v1';
 import { concat, without } from 'lodash';
 
-import { PortainerNamespaceAccessesConfigMap } from '@CE/react/kubernetes/configs/constants';
-import { Configuration } from '@CE/react/kubernetes/configs/types';
+import { PortainerNamespaceAccessesConfigMap } from '@/react/kubernetes/configs/constants';
+import { Configuration } from '@/react/kubernetes/configs/types';
 
 import { NamespaceAccess } from './types';
 

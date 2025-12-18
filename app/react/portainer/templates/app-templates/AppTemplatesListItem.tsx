@@ -1,7 +1,7 @@
-import { StackType } from '@CE/react/common/stacks/types';
+import { StackType } from '@/react/common/stacks/types';
 
-import { Button } from '@@CE/buttons';
-import { Link } from '@@CE/Link';
+import { Button } from '@@/buttons';
+import { Link } from '@@/Link';
 
 import { TemplateItem } from '../components/TemplateItem';
 

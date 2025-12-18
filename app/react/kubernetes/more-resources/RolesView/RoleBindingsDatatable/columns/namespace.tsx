@@ -1,7 +1,7 @@
 import { Row } from '@tanstack/react-table';
 
-import { Link } from '@@CE/Link';
-import { filterHOC } from '@@CE/datatables/Filter';
+import { Link } from '@@/Link';
+import { filterHOC } from '@@/datatables/Filter';
 
 import { RoleBinding } from '../types';
 

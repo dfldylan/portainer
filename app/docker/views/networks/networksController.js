@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
-import DockerNetworkHelper from '@CE/docker/helpers/networkHelper';
-import { processItemsInBatches } from '@CE/react/common/processItemsInBatches';
+import DockerNetworkHelper from '@/docker/helpers/networkHelper';
+import { processItemsInBatches } from '@/react/common/processItemsInBatches';
 
 angular.module('portainer.docker').controller('NetworksController', [
   '$q',

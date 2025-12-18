@@ -1,6 +1,6 @@
 import { object, SchemaOf, string } from 'yup';
 
-import { tlsConfigValidation } from '@CE/react/components/TLSFieldset/TLSFieldset';
+import { tlsConfigValidation } from '@/react/components/TLSFieldset/TLSFieldset';
 
 import { metadataValidation } from '../../shared/MetadataFieldset/validation';
 import { useNameValidation } from '../../shared/NameField';

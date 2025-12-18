@@ -2,15 +2,15 @@ import { Clock } from 'lucide-react';
 import { useMemo } from 'react';
 import _ from 'lodash';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { withLimitToBE } from '@CE/react/hooks/useLimitToBE';
-import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { withLimitToBE } from '@/react/hooks/useLimitToBE';
+import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
 
-import { Datatable } from '@@CE/datatables';
-import { PageHeader } from '@@CE/PageHeader';
-import { AddButton } from '@@CE/buttons';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Datatable } from '@@/datatables';
+import { PageHeader } from '@@/PageHeader';
+import { AddButton } from '@@/buttons';
+import { useTableState } from '@@/datatables/useTableState';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { useList } from '../queries/list';
 import { EdgeUpdateSchedule, StatusType } from '../types';

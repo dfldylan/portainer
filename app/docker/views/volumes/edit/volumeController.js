@@ -1,5 +1,5 @@
-import { ResourceControlType } from '@CE/react/portainer/access-control/types';
-import { confirmDelete } from '@@CE/modals/confirm';
+import { ResourceControlType } from '@/react/portainer/access-control/types';
+import { confirmDelete } from '@@/modals/confirm';
 
 angular.module('portainer.docker').controller('VolumeController', [
   '$scope',

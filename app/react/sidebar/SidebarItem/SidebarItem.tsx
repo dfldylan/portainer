@@ -2,9 +2,9 @@ import { type LucideIcon } from 'lucide-react';
 import clsx from 'clsx';
 import { MouseEventHandler, PropsWithChildren } from 'react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { useSidebarState } from '../useSidebarState';
 

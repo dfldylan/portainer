@@ -2,16 +2,16 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { HardDrive } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
-import { EdgeStackStatus, StatusType } from '@CE/react/edge/edge-stacks/types';
-import { useEnvironmentList } from '@CE/react/portainer/environments/queries';
-import { useParamState } from '@CE/react/hooks/useParamState';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { EdgeStackStatus, StatusType } from '@/react/edge/edge-stacks/types';
+import { useEnvironmentList } from '@/react/portainer/environments/queries';
+import { useParamState } from '@/react/hooks/useParamState';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { Datatable } from '@@CE/datatables';
-import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
+import { Datatable } from '@@/datatables';
+import { PortainerSelect } from '@@/form-components/PortainerSelect';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { useEdgeStack } from '../../queries/useEdgeStack';
 

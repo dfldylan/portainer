@@ -1,6 +1,6 @@
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { PageHeader } from '@CE/react/components/PageHeader';
-import { NodesDatatable } from '@CE/react/kubernetes/cluster/HomeView/NodesDatatable';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { PageHeader } from '@/react/components/PageHeader';
+import { NodesDatatable } from '@/react/kubernetes/cluster/HomeView/NodesDatatable';
 
 import { ClusterResourceReservation } from './ClusterResourceReservation';
 

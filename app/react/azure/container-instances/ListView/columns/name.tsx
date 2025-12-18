@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { ContainerGroup } from '@CE/react/azure/types';
+import { ContainerGroup } from '@/react/azure/types';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import { columnHelper } from './helper';
 

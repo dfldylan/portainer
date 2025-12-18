@@ -3,14 +3,14 @@ import { GroupBase } from 'react-select';
 import {
   PortainerSelect,
   Option,
-} from '@CE/react/components/form-components/PortainerSelect';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { RegistryTypes } from '@CE/react/portainer/registries/types/registry';
+} from '@/react/components/form-components/PortainerSelect';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { RegistryTypes } from '@/react/portainer/registries/types/registry';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Alert } from '@@CE/Alert';
-import { Link } from '@@CE/Link';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { FormControl } from '@@/form-components/FormControl';
+import { Alert } from '@@/Alert';
+import { Link } from '@@/Link';
+import { TextTip } from '@@/Tip/TextTip';
 
 export type RepoValue = {
   repoUrl?: string; // set for traditional https helm repos

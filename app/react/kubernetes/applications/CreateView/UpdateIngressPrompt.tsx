@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { Modal, openModal } from '@@CE/modals';
-import { Button } from '@@CE/buttons';
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { Modal, openModal } from '@@/modals';
+import { Button } from '@@/buttons';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 function UpdateIngressPrompt({
   onSubmit,

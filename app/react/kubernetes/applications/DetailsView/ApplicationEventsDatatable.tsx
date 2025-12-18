@@ -2,10 +2,10 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 import { compact } from 'lodash';
 
-import { createStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { createStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { useTableState } from '@@CE/datatables/useTableState';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { EventsDatatable } from '../../components/EventsDatatable';
 import { useEvents } from '../../queries/useEvents';

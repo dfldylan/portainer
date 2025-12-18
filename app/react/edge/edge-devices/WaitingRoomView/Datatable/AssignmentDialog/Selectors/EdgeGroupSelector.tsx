@@ -1,6 +1,6 @@
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { useCreateEdgeGroupMutation } from '@CE/react/edge/edge-groups/queries/useCreateEdgeGroupMutation';
-import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { useCreateEdgeGroupMutation } from '@/react/edge/edge-groups/queries/useCreateEdgeGroupMutation';
+import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
 
 import { CreatableSelector } from './CreatableSelector';
 

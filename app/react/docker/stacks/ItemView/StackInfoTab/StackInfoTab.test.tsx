@@ -1,15 +1,15 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 
-import { server } from '@CE/setup-tests/server';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { createMockStack } from '@CE/react-tools/test-mocks';
+import { server } from '@/setup-tests/server';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { createMockStack } from '@/react-tools/test-mocks';
 
 import { StackInfoTab } from './StackInfoTab';
 
-vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
+vi.mock('@/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: vi.fn(() => 1),
 }));
 

@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 import clsx from 'clsx';
 import { Loader2 } from 'lucide-react';
 
-import { Icon, IconProps } from '@CE/react/components/Icon';
-import { pluralize } from '@CE/portainer/helpers/strings';
-import { AutomationTestingProps } from '@CE/types';
+import { Icon, IconProps } from '@/react/components/Icon';
+import { pluralize } from '@/portainer/helpers/strings';
+import { AutomationTestingProps } from '@/types';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 interface Props extends IconProps, AutomationTestingProps {
   type: string;

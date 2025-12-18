@@ -1,8 +1,8 @@
 import { Box, Boxes } from 'lucide-react';
 
-import { BoxSelector, BoxSelectorOption } from '@@CE/BoxSelector';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { BoxSelector, BoxSelectorOption } from '@@/BoxSelector';
+import { FormSection } from '@@/form-components/FormSection';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { AppDataAccessPolicy } from '../types';
 

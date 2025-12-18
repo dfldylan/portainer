@@ -4,15 +4,15 @@ import { render } from '@testing-library/react';
 import {
   EnvironmentGroupId,
   Environment,
-} from '@CE/react/portainer/environments/types';
-import { UserViewModel } from '@CE/portainer/models/user';
-import { Tag } from '@CE/portainer/tags/types';
-import { createMockEnvironment } from '@CE/react-tools/test-mocks';
-import { server } from '@CE/setup-tests/server';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { EnvironmentGroup } from '@CE/react/portainer/environments/environment-groups/types';
+} from '@/react/portainer/environments/types';
+import { UserViewModel } from '@/portainer/models/user';
+import { Tag } from '@/portainer/tags/types';
+import { createMockEnvironment } from '@/react-tools/test-mocks';
+import { server } from '@/setup-tests/server';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { EnvironmentGroup } from '@/react/portainer/environments/environment-groups/types';
 
 import { EnvironmentItem } from './EnvironmentItem';
 

@@ -10,9 +10,9 @@ import KubernetesServiceHelper from 'Kubernetes/helpers/serviceHelper';
 import { KubernetesHorizontalPodAutoScalerHelper } from 'Kubernetes/horizontal-pod-auto-scaler/helper';
 import { KubernetesHorizontalPodAutoScalerConverter } from 'Kubernetes/horizontal-pod-auto-scaler/converter';
 import KubernetesPodConverter from 'Kubernetes/pod/converter';
-import { notifyError } from '@CE/portainer/services/notifications';
+import { notifyError } from '@/portainer/services/notifications';
 import { KubernetesIngressConverter } from 'Kubernetes/ingress/converter';
-import { generateNewIngressesFromFormPaths } from '@CE/react/kubernetes/applications/CreateView/application-services/utils';
+import { generateNewIngressesFromFormPaths } from '@/react/kubernetes/applications/CreateView/application-services/utils';
 import { KubernetesPod } from '../pod/models';
 
 class KubernetesApplicationService {

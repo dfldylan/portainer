@@ -1,6 +1,6 @@
-import { ModalType } from '@@CE/modals';
-import { buildConfirmButton } from '@@CE/modals/utils';
-import { confirm, confirmChangePassword, confirmDelete } from '@@CE/modals/confirm';
+import { ModalType } from '@@/modals';
+import { buildConfirmButton } from '@@/modals/utils';
+import { confirm, confirmChangePassword, confirmDelete } from '@@/modals/confirm';
 
 angular.module('portainer.app').controller('UserController', [
   '$q',

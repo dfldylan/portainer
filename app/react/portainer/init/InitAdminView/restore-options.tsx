@@ -1,8 +1,8 @@
 import { Download, Upload } from 'lucide-react';
 
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
 
-import { BoxSelectorOption } from '@@CE/BoxSelector';
+import { BoxSelectorOption } from '@@/BoxSelector';
 
 export const restoreOptions: ReadonlyArray<BoxSelectorOption<string>> = [
   {

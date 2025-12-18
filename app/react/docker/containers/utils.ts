@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
-import { useIsStandAlone } from '@CE/react/docker/proxy/queries/useInfo';
-import { Environment } from '@CE/react/portainer/environments/types';
+import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { useIsStandAlone } from '@/react/docker/proxy/queries/useInfo';
+import { Environment } from '@/react/portainer/environments/types';
 
 import { ContainerListViewModel, ContainerStatus } from './types';
 import { DockerContainerResponse } from './types/response';

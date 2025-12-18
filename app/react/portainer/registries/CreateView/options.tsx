@@ -1,4 +1,4 @@
-import { BadgeIcon } from '@@CE/BadgeIcon';
+import { BadgeIcon } from '@@/BadgeIcon';
 
 import { RegistryTypes } from '../types/registry';
 import { registryIconMap, registryLabelMap } from '../utils/constants';

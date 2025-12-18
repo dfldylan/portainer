@@ -1,8 +1,8 @@
 import { useFormikContext } from 'formik';
 import { Calendar, Edit } from 'lucide-react';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { BoxSelector, BoxSelectorOption } from '@@CE/BoxSelector';
+import { FormSection } from '@@/form-components/FormSection';
+import { BoxSelector, BoxSelectorOption } from '@@/BoxSelector';
 
 import { FormValues } from '../../CreateView/types';
 

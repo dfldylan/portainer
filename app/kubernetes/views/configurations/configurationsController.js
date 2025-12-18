@@ -1,5 +1,5 @@
 import angular from 'angular';
-import { confirmDelete } from '@@CE/modals/confirm';
+import { confirmDelete } from '@@/modals/confirm';
 import KubernetesConfigurationHelper from 'Kubernetes/helpers/configurationHelper';
 
 class KubernetesConfigurationsController {

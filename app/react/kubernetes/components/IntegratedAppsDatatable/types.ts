@@ -1,3 +1,3 @@
-import { KubernetesApplication } from '@CE/kubernetes/models/application/models';
+import { KubernetesApplication } from '@/kubernetes/models/application/models';
 
 export type IntegratedApp = KubernetesApplication;

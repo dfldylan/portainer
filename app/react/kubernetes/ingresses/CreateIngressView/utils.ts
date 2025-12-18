@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { SupportedIngControllerTypes } from '@CE/react/kubernetes/cluster/ingressClass/types';
+import { SupportedIngControllerTypes } from '@/react/kubernetes/cluster/ingressClass/types';
 
 import { TLS, Ingress } from '../types';
 import { Annotation } from '../../annotations/types';

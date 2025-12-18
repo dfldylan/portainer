@@ -1,8 +1,8 @@
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { useUnauthorizedRedirect } from '@CE/react/hooks/useUnauthorizedRedirect';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { useUnauthorizedRedirect } from '@/react/hooks/useUnauthorizedRedirect';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget, WidgetBody } from '@@CE/Widget';
+import { PageHeader } from '@@/PageHeader';
+import { Widget, WidgetBody } from '@@/Widget';
 
 import { ConfigureForm } from './ConfigureForm';
 

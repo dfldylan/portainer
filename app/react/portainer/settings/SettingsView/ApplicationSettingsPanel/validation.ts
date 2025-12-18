@@ -1,6 +1,6 @@
 import { SchemaOf, bool, boolean, number, object, string } from 'yup';
 
-import { isValidUrl } from '@@CE/form-components/validate-url';
+import { isValidUrl } from '@@/form-components/validate-url';
 
 import { Values } from './types';
 

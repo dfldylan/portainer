@@ -1,11 +1,11 @@
 import { Table } from '@tanstack/react-table';
 
-import { Authorized } from '@CE/react/hooks/useUser';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { ColumnVisibilityMenu } from '@@CE/datatables/ColumnVisibilityMenu';
-import { TableSettingsMenu } from '@@CE/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
-import { Checkbox } from '@@CE/form-components/Checkbox';
+import { ColumnVisibilityMenu } from '@@/datatables/ColumnVisibilityMenu';
+import { TableSettingsMenu } from '@@/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { Checkbox } from '@@/form-components/Checkbox';
 
 import { TableSettings } from './store';
 import { DecoratedStack } from './types';

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { CodeEditor } from '@@CE/CodeEditor';
+import { CodeEditor } from '@@/CodeEditor';
 
 import { Values } from '../../types';
 

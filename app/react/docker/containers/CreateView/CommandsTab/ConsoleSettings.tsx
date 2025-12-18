@@ -2,9 +2,9 @@ import { ReactNode } from 'react';
 import { mixed } from 'yup';
 import { ContainerConfig } from 'docker-types/generated/1.44';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { FormControl } from '@@CE/form-components/FormControl';
+import { FormControl } from '@@/form-components/FormControl';
 
 const consoleSettingTypes = ['tty', 'interactive', 'both', 'none'] as const;
 

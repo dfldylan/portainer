@@ -1,11 +1,11 @@
 import { useField } from 'formik';
 
-import { useGroups } from '@CE/react/portainer/environments/environment-groups/queries';
-import { EnvironmentGroupId } from '@CE/react/portainer/environments/types';
-import { useCreateGroupMutation } from '@CE/react/portainer/environments/environment-groups/queries/useCreateGroupMutation';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useGroups } from '@/react/portainer/environments/environment-groups/queries';
+import { EnvironmentGroupId } from '@/react/portainer/environments/types';
+import { useCreateGroupMutation } from '@/react/portainer/environments/environment-groups/queries/useCreateGroupMutation';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { Select } from '@@CE/form-components/ReactSelect';
+import { Select } from '@@/form-components/ReactSelect';
 
 import { FormValues } from '../types';
 

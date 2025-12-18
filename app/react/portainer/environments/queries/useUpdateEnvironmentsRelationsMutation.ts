@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
-import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
-import { TagId } from '@CE/portainer/tags/types';
-import { queryKeys as edgeGroupQueryKeys } from '@CE/react/edge/edge-groups/queries/query-keys';
-import { queryKeys as groupQueryKeys } from '@CE/react/portainer/environments/environment-groups/queries/query-keys';
-import { tagKeys } from '@CE/portainer/tags/queries';
+} from '@/react-tools/react-query';
+import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { TagId } from '@/portainer/tags/types';
+import { queryKeys as edgeGroupQueryKeys } from '@/react/edge/edge-groups/queries/query-keys';
+import { queryKeys as groupQueryKeys } from '@/react/portainer/environments/environment-groups/queries/query-keys';
+import { tagKeys } from '@/portainer/tags/queries';
 
 import { EnvironmentId, EnvironmentGroupId } from '../types';
 import { buildUrl } from '../environment.service/utils';

@@ -1,8 +1,8 @@
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import moment from 'moment';
 
-import { Button } from '@@CE/buttons';
-import { Input } from '@@CE/form-components/Input';
+import { Button } from '@@/buttons';
+import { Input } from '@@/form-components/Input';
 
 import { utcToTimeZone } from './utils';
 

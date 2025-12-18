@@ -1,9 +1,9 @@
 import { Plus } from 'lucide-react';
 import { FormikErrors } from 'formik';
 
-import { Card } from '@@CE/Card';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Button } from '@@CE/buttons';
+import { Card } from '@@/Card';
+import { TextTip } from '@@/Tip/TextTip';
+import { Button } from '@@/buttons';
 
 import {
   generateUniqueName,

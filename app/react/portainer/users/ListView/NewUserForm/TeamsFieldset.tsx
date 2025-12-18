@@ -1,10 +1,10 @@
 import { useFormikContext } from 'formik';
 
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { usePublicSettings } from '@CE/react/portainer/settings/queries';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { usePublicSettings } from '@/react/portainer/settings/queries';
 
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Link } from '@@CE/Link';
+import { TextTip } from '@@/Tip/TextTip';
+import { Link } from '@@/Link';
 
 import { useTeams } from '../../teams/queries';
 

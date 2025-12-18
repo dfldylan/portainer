@@ -1,9 +1,9 @@
 import { mixed, number, object, SchemaOf } from 'yup';
 
-import { variablesFieldValidation } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { VariableDefinition } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
-import { envVarsFieldsetValidation } from '@CE/react/portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
-import { TemplateEnv } from '@CE/react/portainer/templates/app-templates/types';
+import { variablesFieldValidation } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { VariableDefinition } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
+import { envVarsFieldsetValidation } from '@/react/portainer/templates/app-templates/DeployFormWidget/EnvVarsFieldset';
+import { TemplateEnv } from '@/react/portainer/templates/app-templates/types';
 
 import { Values } from './types';
 

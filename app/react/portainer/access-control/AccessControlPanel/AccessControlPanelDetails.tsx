@@ -3,17 +3,17 @@ import { PropsWithChildren } from 'react';
 import _ from 'lodash';
 import { Info } from 'lucide-react';
 
-import { truncate } from '@CE/portainer/filters/filters';
-import { UserId } from '@CE/portainer/users/types';
-import { TeamId } from '@CE/react/portainer/users/teams/types';
-import { useTeams } from '@CE/react/portainer/users/teams/queries';
-import { useUsers } from '@CE/portainer/users/queries';
-import { pluralize } from '@CE/portainer/helpers/strings';
-import { ownershipIcon } from '@CE/react/docker/components/datatable/createOwnershipColumn';
+import { truncate } from '@/portainer/filters/filters';
+import { UserId } from '@/portainer/users/types';
+import { TeamId } from '@/react/portainer/users/teams/types';
+import { useTeams } from '@/react/portainer/users/teams/queries';
+import { useUsers } from '@/portainer/users/queries';
+import { pluralize } from '@/portainer/helpers/strings';
+import { ownershipIcon } from '@/react/docker/components/datatable/createOwnershipColumn';
 
-import { Link } from '@@CE/Link';
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { Icon } from '@@CE/Icon';
+import { Link } from '@@/Link';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { Icon } from '@@/Icon';
 
 import {
   ResourceControlOwnership,

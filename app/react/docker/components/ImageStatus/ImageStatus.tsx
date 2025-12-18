@@ -1,11 +1,11 @@
 import { Loader } from 'lucide-react';
 
-import { useEnvironment } from '@CE/react/portainer/environments/queries';
-import { statusIcon } from '@CE/react/docker/components/ImageStatus/helpers';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { useEnvironment } from '@/react/portainer/environments/queries';
+import { statusIcon } from '@/react/docker/components/ImageStatus/helpers';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { ResourceID, ResourceType } from './types';
 import { useImageNotification } from './useImageNotification';

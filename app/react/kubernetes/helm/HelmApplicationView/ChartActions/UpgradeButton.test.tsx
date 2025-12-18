@@ -2,9 +2,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
 
 import {
   useHelmRepoVersions,
@@ -21,7 +21,7 @@ vi.mock('./UpgradeHelmModal', () => ({
 }));
 
 // Mock the notifications service
-vi.mock('@CE/portainer/services/notifications', () => ({
+vi.mock('@/portainer/services/notifications', () => ({
   notifySuccess: vi.fn(),
 }));
 

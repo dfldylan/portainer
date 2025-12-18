@@ -1,7 +1,7 @@
 import { User as UserIcon, Users as TeamIcon } from 'lucide-react';
 import { OptionProps, components, MultiValueGenericProps } from 'react-select';
 
-import { Select } from '@@CE/form-components/ReactSelect';
+import { Select } from '@@/form-components/ReactSelect';
 
 type Option = { Type: 'user' | 'team'; Id: number; Name: string };
 

@@ -2,7 +2,7 @@ import { CellContext } from '@tanstack/react-table';
 import { HelpCircle } from 'lucide-react';
 import clsx from 'clsx';
 
-import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
+import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
 
 import { Job } from '../types';
 

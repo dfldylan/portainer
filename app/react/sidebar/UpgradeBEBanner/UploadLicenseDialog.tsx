@@ -1,14 +1,14 @@
 import { Field, Form, Formik } from 'formik';
 import { object, SchemaOf, string } from 'yup';
 
-import { useUpgradeEditionMutation } from '@CE/react/portainer/system/useUpgradeEditionMutation';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useUpgradeEditionMutation } from '@/react/portainer/system/useUpgradeEditionMutation';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { Button, LoadingButton } from '@@CE/buttons';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Input } from '@@CE/form-components/Input';
-import { Modal } from '@@CE/modals/Modal';
-import { Alert } from '@@CE/Alert';
+import { Button, LoadingButton } from '@@/buttons';
+import { FormControl } from '@@/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
+import { Modal } from '@@/modals/Modal';
+import { Alert } from '@@/Alert';
 
 interface FormValues {
   license: string;

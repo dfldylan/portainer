@@ -1,13 +1,13 @@
 import { Form, Formik, useFormikContext } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { EdgeGroupsSelector } from '@CE/react/edge/edge-stacks/components/EdgeGroupsSelector';
-import { AssociatedEdgeEnvironmentsSelector } from '@CE/react/edge/components/AssociatedEdgeEnvironmentsSelector';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { EdgeGroupsSelector } from '@/react/edge/edge-stacks/components/EdgeGroupsSelector';
+import { AssociatedEdgeEnvironmentsSelector } from '@/react/edge/components/AssociatedEdgeEnvironmentsSelector';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { FormActions } from '@@CE/form-components/FormActions';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { WebEditorForm } from '@@CE/WebEditorForm';
+import { FormActions } from '@@/form-components/FormActions';
+import { FormSection } from '@@/form-components/FormSection';
+import { WebEditorForm } from '@@/WebEditorForm';
 
 import { NameField } from '../../components/EdgeJobForm/NameField';
 import { JobConfigurationFieldset } from '../../components/EdgeJobForm/JobConfigurationFieldset';

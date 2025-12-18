@@ -1,11 +1,8 @@
-import {
-  EdgeTypes,
-  EnvironmentId,
-} from '@CE/react/portainer/environments/types';
-import { EdgeEnvironmentsAssociationTable } from '@CE/react/edge/components/EdgeEnvironmentsAssociationTable';
+import { EdgeTypes, EnvironmentId } from '@/react/portainer/environments/types';
+import { EdgeEnvironmentsAssociationTable } from '@/react/edge/components/EdgeEnvironmentsAssociationTable';
 
-import { FormError } from '@@CE/form-components/FormError';
-import { ArrayError } from '@@CE/form-components/InputList/InputList';
+import { FormError } from '@@/form-components/FormError';
+import { ArrayError } from '@@/form-components/InputList/InputList';
 
 export function AssociatedEdgeEnvironmentsSelector({
   onChange,

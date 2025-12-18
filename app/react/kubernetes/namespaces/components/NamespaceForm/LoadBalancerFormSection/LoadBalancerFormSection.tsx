@@ -1,8 +1,8 @@
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { SwitchField } from '@@CE/form-components/SwitchField';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { FormSection } from '@@/form-components/FormSection';
+import { SwitchField } from '@@/form-components/SwitchField';
+import { TextTip } from '@@/Tip/TextTip';
 
 export function LoadBalancerFormSection() {
   return (

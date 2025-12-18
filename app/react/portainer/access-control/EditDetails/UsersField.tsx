@@ -1,8 +1,8 @@
-import { User } from '@CE/portainer/users/types';
+import { User } from '@/portainer/users/types';
 
-import { UsersSelector } from '@@CE/UsersSelector';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Link } from '@@CE/Link';
+import { UsersSelector } from '@@/UsersSelector';
+import { FormControl } from '@@/form-components/FormControl';
+import { Link } from '@@/Link';
 
 interface Props {
   name: string;

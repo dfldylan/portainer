@@ -2,15 +2,15 @@ import axios, {
   parseAxiosError,
   json2formData,
   arrayToJson,
-} from '@CE/portainer/services/axios';
+} from '@/portainer/services/axios';
 import {
   type EnvironmentGroupId,
   type Environment,
   ContainerEngine,
   EnvironmentCreationTypes,
-} from '@CE/react/portainer/environments/types';
-import { type TagId } from '@CE/portainer/tags/types';
-import { EdgeAsyncIntervalsValues } from '@CE/react/edge/components/EdgeAsyncIntervalsForm';
+} from '@/react/portainer/environments/types';
+import { type TagId } from '@/portainer/tags/types';
+import { EdgeAsyncIntervalsValues } from '@/react/edge/components/EdgeAsyncIntervalsForm';
 
 import { buildUrl } from './utils';
 

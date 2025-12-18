@@ -1,7 +1,7 @@
-import { truncate } from '@CE/portainer/filters/filters';
+import { truncate } from '@/portainer/filters/filters';
 
-import { Link } from '@@CE/Link';
-import { Badge } from '@@CE/Badge';
+import { Link } from '@@/Link';
+import { Badge } from '@@/Badge';
 
 import { columnHelper } from './helper';
 

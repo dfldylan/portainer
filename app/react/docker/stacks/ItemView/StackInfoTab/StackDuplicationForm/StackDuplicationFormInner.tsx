@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Field, Form, useFormikContext } from 'formik';
 import { Copy, ArrowRight } from 'lucide-react';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { LoadingButton } from '@@CE/buttons/LoadingButton';
-import { Input } from '@@CE/form-components/Input';
-import { FormError } from '@@CE/form-components/FormError';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { LoadingButton } from '@@/buttons/LoadingButton';
+import { Input } from '@@/form-components/Input';
+import { FormError } from '@@/form-components/FormError';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { FormSubmitValues, ActionType } from './StackDuplicationForm.types';
 import { useValidation } from './StackDuplicationForm.validation';

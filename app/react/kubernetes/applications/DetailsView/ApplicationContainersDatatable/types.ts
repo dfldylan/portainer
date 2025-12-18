@@ -1,6 +1,6 @@
 import { Container } from 'kubernetes-types/core/v1';
 
-import { BadgeType } from '@@CE/Badge';
+import { BadgeType } from '@@/Badge';
 
 export interface ContainerRowData extends Container {
   podName: string;

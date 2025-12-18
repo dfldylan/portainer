@@ -1,6 +1,6 @@
 import { Eye, Moon, Sun, RefreshCw } from 'lucide-react';
 
-import { BadgeIcon } from '@@CE/BadgeIcon';
+import { BadgeIcon } from '@@/BadgeIcon';
 
 export const options = [
   {

@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react';
 import { ArrowUp } from 'lucide-react';
 
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
-import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
-import { ChartVersion } from '@CE/react/kubernetes/helm/helmChartSourceQueries/useHelmRepoVersions';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { withReactQuery } from '@/react-tools/withReactQuery';
+import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { ChartVersion } from '@/react/kubernetes/helm/helmChartSourceQueries/useHelmRepoVersions';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { Modal, OnSubmit, openModal } from '@@CE/modals';
-import { confirm } from '@@CE/modals/confirm';
-import { Button } from '@@CE/buttons';
-import { Input } from '@@CE/form-components/Input';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { WidgetTitle } from '@@CE/Widget';
-import { Checkbox } from '@@CE/form-components/Checkbox';
-import { Option, PortainerSelect } from '@@CE/form-components/PortainerSelect';
+import { Modal, OnSubmit, openModal } from '@@/modals';
+import { confirm } from '@@/modals/confirm';
+import { Button } from '@@/buttons';
+import { Input } from '@@/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { WidgetTitle } from '@@/Widget';
+import { Checkbox } from '@@/form-components/Checkbox';
+import { Option, PortainerSelect } from '@@/form-components/PortainerSelect';
 
 import { UpdateHelmReleasePayload } from '../../types';
 import { HelmValuesInput } from '../../components/HelmValuesInput';

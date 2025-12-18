@@ -1,12 +1,9 @@
 import { array, string } from 'yup';
 
-import { FormError } from '@@CE/form-components/FormError';
-import { InputLabeled } from '@@CE/form-components/Input/InputLabeled';
-import { ItemProps } from '@@CE/form-components/InputList';
-import {
-  ArrayError,
-  InputList,
-} from '@@CE/form-components/InputList/InputList';
+import { FormError } from '@@/form-components/FormError';
+import { InputLabeled } from '@@/form-components/Input/InputLabeled';
+import { ItemProps } from '@@/form-components/InputList';
+import { ArrayError, InputList } from '@@/form-components/InputList/InputList';
 
 export const hostFileSchema = array(
   string().required('Entry is required')

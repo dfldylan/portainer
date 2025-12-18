@@ -2,8 +2,8 @@ import { useFormikContext } from 'formik';
 import { number } from 'yup';
 import { useEffect } from 'react';
 
-import { NavTabs } from '@@CE/NavTabs';
-import { NavContainer } from '@@CE/NavTabs/NavContainer';
+import { NavTabs } from '@@/NavTabs';
+import { NavContainer } from '@@/NavTabs/NavContainer';
 
 import { ScheduleType } from '../types';
 

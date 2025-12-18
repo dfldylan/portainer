@@ -1,7 +1,7 @@
 import { UIView } from '@uirouter/react';
 import { render } from '@testing-library/react';
 
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestRouter } from '@/react/test-utils/withRouter';
 
 import { AddButton } from './AddButton';
 

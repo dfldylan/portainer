@@ -1,8 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { useKubeStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
-import { useEvents } from '@CE/react/kubernetes/queries/useEvents';
-import { EventsDatatable } from '@CE/react/kubernetes/components/EventsDatatable';
+import { useKubeStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
+import { useEvents } from '@/react/kubernetes/queries/useEvents';
+import { EventsDatatable } from '@/react/kubernetes/components/EventsDatatable';
 
 type Props = {
   storageKey: string;

@@ -1,10 +1,10 @@
-import { withLimitToBE } from '@CE/react/hooks/useLimitToBE';
+import { withLimitToBE } from '@/react/hooks/useLimitToBE';
 
-import { InformationPanel } from '@@CE/InformationPanel';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { PageHeader } from '@@CE/PageHeader';
-import { Link } from '@@CE/Link';
-import { Alert } from '@@CE/Alert';
+import { InformationPanel } from '@@/InformationPanel';
+import { TextTip } from '@@/Tip/TextTip';
+import { PageHeader } from '@@/PageHeader';
+import { Link } from '@@/Link';
+import { Alert } from '@@/Alert';
 
 import { Datatable } from './Datatable';
 import { useLicenseOverused, useUntrustedCount } from './queries';

@@ -2,12 +2,12 @@ import { useFormikContext, Form } from 'formik';
 import { Settings } from 'lucide-react';
 import { useState } from 'react';
 
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useIsEnvironmentAdmin } from '@CE/react/hooks/useUser';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useIsEnvironmentAdmin } from '@/react/hooks/useUser';
 
-import { NavTabs } from '@@CE/NavTabs';
-import { Widget } from '@@CE/Widget';
+import { NavTabs } from '@@/NavTabs';
+import { Widget } from '@@/Widget';
 
 import { useApiVersion } from '../../proxy/queries/useVersion';
 

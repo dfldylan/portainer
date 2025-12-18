@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { FormikErrors } from 'formik';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { Option, PortainerSelect } from '@@CE/form-components/PortainerSelect';
-import { FormControl } from '@@CE/form-components/FormControl';
+import { Option, PortainerSelect } from '@@/form-components/PortainerSelect';
+import { FormControl } from '@@/form-components/FormControl';
 
 import { useApiVersion } from './queries/useApiVersion';
 import { useAgentNodes } from './queries/useAgentNodes';

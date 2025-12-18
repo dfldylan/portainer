@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-import { confirmDelete } from '@@CE/modals/confirm';
+import { confirmDelete } from '@@/modals/confirm';
 
 export class VolumeBrowserController {
   /* @ngInject */

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { DockerNetwork } from '@CE/react/docker/networks/types';
+import { DockerNetwork } from '@/react/docker/networks/types';
 
 import { ContainerListViewModel } from '../../types';
 import { ContainerDetailsJSON } from '../../queries/useContainer';

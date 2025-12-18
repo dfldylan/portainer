@@ -1,7 +1,7 @@
 import { ColumnDef, CellContext } from '@tanstack/react-table';
 import { UISrefProps } from '@uirouter/react';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import { DefaultType } from './types';
 import { defaultGetRowId } from './defaultGetRowId';

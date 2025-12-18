@@ -1,12 +1,12 @@
 import { Box, Database, FileCode, Layers, Lock, Shuffle } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import Route from '@CE/assets/ico/route.svg?c';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import Route from '@/assets/ico/route.svg?c';
 
-import { DashboardGrid } from '@@CE/DashboardItem/DashboardGrid';
-import { DashboardItem } from '@@CE/DashboardItem/DashboardItem';
-import { PageHeader } from '@@CE/PageHeader';
+import { DashboardGrid } from '@@/DashboardItem/DashboardGrid';
+import { DashboardItem } from '@@/DashboardItem/DashboardItem';
+import { PageHeader } from '@@/PageHeader';
 
 import { EnvironmentInfo } from './EnvironmentInfo';
 import { useGetApplicationsCountQuery } from './queries/getApplicationsCountQuery';

@@ -1,6 +1,6 @@
 import { NamespaceStatus, ResourceQuota } from 'kubernetes-types/core/v1';
 
-import { Registry } from '@CE/react/portainer/registries/types/registry';
+import { Registry } from '@/react/portainer/registries/types/registry';
 
 import { IngressControllerClassMap } from '../cluster/ingressClass/types';
 

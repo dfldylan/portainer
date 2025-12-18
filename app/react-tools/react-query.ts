@@ -7,7 +7,7 @@ import {
   QueryOptions,
 } from '@tanstack/react-query';
 
-import { notifyError } from '@CE/portainer/services/notifications';
+import { notifyError } from '@/portainer/services/notifications';
 
 /**
  * @deprecated for `useQuery` ONLY. Use `withGlobalError`.

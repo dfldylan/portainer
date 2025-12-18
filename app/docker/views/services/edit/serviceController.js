@@ -18,15 +18,15 @@ require('./includes/updateconfig.html');
 
 import _ from 'lodash-es';
 
-import * as envVarsUtils from '@CE/react/components/form-components/EnvironmentVariablesFieldset/utils';
-import { ResourceControlType } from '@CE/react/portainer/access-control/types';
-import { confirmServiceForceUpdate } from '@CE/react/docker/services/common/update-service-modal';
-import { convertServiceToConfig } from '@CE/react/docker/services/common/convertServiceToConfig';
-import { portsMappingUtils } from '@CE/react/docker/services/ItemView/PortMappingField';
+import * as envVarsUtils from '@/react/components/form-components/EnvironmentVariablesFieldset/utils';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
-import { confirm, confirmDelete } from '@@CE/modals/confirm';
-import { ModalType } from '@@CE/modals';
-import { buildConfirmButton } from '@@CE/modals/utils';
+import { ResourceControlType } from '@/react/portainer/access-control/types';
+import { confirmServiceForceUpdate } from '@/react/docker/services/common/update-service-modal';
+import { confirm, confirmDelete } from '@@/modals/confirm';
+import { ModalType } from '@@/modals';
+import { buildConfirmButton } from '@@/modals/utils';
+import { convertServiceToConfig } from '@/react/docker/services/common/convertServiceToConfig';
+import { portsMappingUtils } from '@/react/docker/services/ItemView/PortMappingField';
 
 angular.module('portainer.docker').controller('ServiceController', [
   '$q',

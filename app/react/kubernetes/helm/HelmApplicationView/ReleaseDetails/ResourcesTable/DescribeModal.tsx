@@ -1,9 +1,9 @@
-import { Alert } from '@@CE/Alert';
-import { InlineLoader } from '@@CE/InlineLoader';
-import { Modal } from '@@CE/modals';
-import { ModalBody } from '@@CE/modals/Modal/ModalBody';
-import { ModalHeader } from '@@CE/modals/Modal/ModalHeader';
-import { CodeEditor } from '@@CE/CodeEditor';
+import { Alert } from '@@/Alert';
+import { InlineLoader } from '@@/InlineLoader';
+import { Modal } from '@@/modals';
+import { ModalBody } from '@@/modals/Modal/ModalBody';
+import { ModalHeader } from '@@/modals/Modal/ModalHeader';
+import { CodeEditor } from '@@/CodeEditor';
 
 import { useDescribeResource } from './queries/useDescribeResource';
 

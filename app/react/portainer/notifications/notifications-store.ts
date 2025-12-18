@@ -1,8 +1,8 @@
 import create from 'zustand/vanilla';
 import { persist } from 'zustand/middleware';
 
-import { keyBuilder } from '@CE/react/hooks/useLocalStorage';
-import { UserId } from '@CE/portainer/users/types';
+import { keyBuilder } from '@/react/hooks/useLocalStorage';
+import { UserId } from '@/portainer/users/types';
 
 import { ToastNotification } from './types';
 

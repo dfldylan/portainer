@@ -5,9 +5,9 @@ import { KubernetesConfigurationKinds } from 'Kubernetes/models/configuration/mo
 import KubernetesConfigurationHelper from 'Kubernetes/helpers/configurationHelper';
 import KubernetesNamespaceHelper from 'Kubernetes/helpers/namespaceHelper';
 import { getServiceAccounts } from 'Kubernetes/rest/serviceAccount';
-import { typeOptions } from '@CE/react/kubernetes/configs/CreateView/options';
+import { typeOptions } from '@/react/kubernetes/configs/CreateView/options';
 
-import { confirmWebEditorDiscard } from '@@CE/modals/confirm';
+import { confirmWebEditorDiscard } from '@@/modals/confirm';
 import { isConfigurationFormValid } from '../../validation';
 
 class KubernetesCreateConfigMapController {

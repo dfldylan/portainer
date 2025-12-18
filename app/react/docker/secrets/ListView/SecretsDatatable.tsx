@@ -1,23 +1,23 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { Lock } from 'lucide-react';
 
-import { SecretViewModel } from '@CE/docker/models/secret';
-import { isoDate } from '@CE/portainer/filters/filters';
-import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
+import { SecretViewModel } from '@/docker/models/secret';
+import { isoDate } from '@/portainer/filters/filters';
+import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
 
-import { buildNameColumn } from '@@CE/datatables/buildNameColumn';
-import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { buildNameColumn } from '@@/datatables/buildNameColumn';
+import { Datatable, TableSettingsMenu } from '@@/datatables';
 import {
   BasicTableSettings,
   RefreshableTableSettings,
   createPersistedStore,
   refreshableSettings,
-} from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
-import { AddButton } from '@@CE/buttons';
-import { useRepeater } from '@@CE/datatables/useRepeater';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+} from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { AddButton } from '@@/buttons';
+import { useRepeater } from '@@/datatables/useRepeater';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { createOwnershipColumn } from '../../components/datatable/createOwnershipColumn';
 

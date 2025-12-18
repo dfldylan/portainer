@@ -2,7 +2,7 @@ import { useRouter } from '@uirouter/react';
 import { PropsWithChildren } from 'react';
 import { RefreshCw } from 'lucide-react';
 
-import { dispatchCacheRefreshEvent } from '@CE/portainer/services/http-request.helper';
+import { dispatchCacheRefreshEvent } from '@/portainer/services/http-request.helper';
 
 import { Button } from '../buttons';
 

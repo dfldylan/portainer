@@ -1,7 +1,7 @@
 import { useField } from 'formik';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Select } from '@@CE/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { Select } from '@@/form-components/Input';
 
 export const defaultCronExpression = '0 * * * *' as const;
 

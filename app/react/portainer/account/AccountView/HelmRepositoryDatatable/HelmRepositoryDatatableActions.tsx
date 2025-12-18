@@ -1,9 +1,9 @@
 import { useRouter } from '@uirouter/react';
 
-import { pluralize } from '@CE/portainer/helpers/strings';
+import { pluralize } from '@/portainer/helpers/strings';
 
-import { AddButton } from '@@CE/buttons';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { AddButton } from '@@/buttons';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { HelmRepository } from './types';
 import { useDeleteHelmRepositoriesMutation } from './helm-repositories.service';

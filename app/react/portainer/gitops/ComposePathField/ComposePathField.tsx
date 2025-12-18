@@ -1,8 +1,8 @@
-import { useStateWrapper } from '@CE/react/hooks/useStateWrapper';
+import { useStateWrapper } from '@/react/hooks/useStateWrapper';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Input } from '@@CE/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { TextTip } from '@@/Tip/TextTip';
+import { Input } from '@@/form-components/Input';
 
 import { GitFormModel } from '../types';
 import { isBE } from '../../feature-flags/feature-flags.service';

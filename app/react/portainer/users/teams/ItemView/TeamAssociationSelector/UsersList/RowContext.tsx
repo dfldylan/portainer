@@ -1,6 +1,6 @@
-import { TeamId } from '@CE/react/portainer/users/teams/types';
+import { TeamId } from '@/react/portainer/users/teams/types';
 
-import { createRowContext } from '@@CE/datatables/RowContext';
+import { createRowContext } from '@@/datatables/RowContext';
 
 interface RowContext {
   disabled?: boolean;

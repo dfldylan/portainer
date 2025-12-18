@@ -1,14 +1,14 @@
 import { PlusIcon } from 'lucide-react';
 import { Form, Formik } from 'formik';
 
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { usePublicSettings } from '@CE/react/portainer/settings/queries';
-import { AuthenticationMethod } from '@CE/react/portainer/settings/types';
-import { Role } from '@CE/portainer/users/types';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { usePublicSettings } from '@/react/portainer/settings/queries';
+import { AuthenticationMethod } from '@/react/portainer/settings/types';
+import { Role } from '@/portainer/users/types';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { Widget } from '@@CE/Widget';
-import { FormActions } from '@@CE/form-components/FormActions';
+import { Widget } from '@@/Widget';
+import { FormActions } from '@@/form-components/FormActions';
 
 import { useTeams } from '../../teams/queries';
 import { useCreateUserMutation } from '../../queries/useCreateUserMutation';

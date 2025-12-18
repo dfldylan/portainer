@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 import { Search, X } from 'lucide-react';
 import clsx from 'clsx';
 
-import { useLocalStorage } from '@CE/react/hooks/useLocalStorage';
-import { AutomationTestingProps } from '@CE/types';
-import { useDebounce } from '@CE/react/hooks/useDebounce';
+import { useLocalStorage } from '@/react/hooks/useLocalStorage';
+import { AutomationTestingProps } from '@/types';
+import { useDebounce } from '@/react/hooks/useDebounce';
 
-import { Button } from '@@CE/buttons';
+import { Button } from '@@/buttons';
 
 interface Props extends AutomationTestingProps {
   value: string;

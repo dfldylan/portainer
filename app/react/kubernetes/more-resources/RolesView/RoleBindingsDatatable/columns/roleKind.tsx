@@ -1,4 +1,4 @@
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import { columnHelper } from './helper';
 

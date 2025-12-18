@@ -20,9 +20,9 @@ import { ReactNode, useMemo } from 'react';
 import clsx from 'clsx';
 import _ from 'lodash';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { IconProps } from '@@CE/Icon';
+import { IconProps } from '@@/Icon';
 
 import { DatatableHeader } from './DatatableHeader';
 import { DatatableFooter } from './DatatableFooter';

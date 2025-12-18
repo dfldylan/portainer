@@ -1,10 +1,10 @@
 import { components, OptionProps } from 'react-select';
 
-import { truncate } from '@CE/portainer/filters/filters';
-import { useVolumes } from '@CE/react/docker/volumes/queries/useVolumes';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { truncate } from '@/portainer/filters/filters';
+import { useVolumes } from '@/react/docker/volumes/queries/useVolumes';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { Select } from '@@CE/form-components/ReactSelect';
+import { Select } from '@@/form-components/ReactSelect';
 
 export function VolumeSelector({
   value,

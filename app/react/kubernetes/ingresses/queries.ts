@@ -1,11 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 import {
   mutationOptions,
   withGlobalError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
+} from '@/react-tools/react-query';
 
 import {
   getIngresses,

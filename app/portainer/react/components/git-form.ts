@@ -1,15 +1,15 @@
 import angular from 'angular';
 
-import { r2a } from '@CE/react-tools/react2angular';
-import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
-import { withUIRouter } from '@CE/react-tools/withUIRouter';
-import { AutoUpdateFieldset } from '@CE/react/portainer/gitops/AutoUpdateFieldset';
-import { GitForm } from '@CE/react/portainer/gitops/GitForm';
-import { AuthFieldset } from '@CE/react/portainer/gitops/AuthFieldset';
-import { InfoPanel } from '@CE/react/portainer/gitops/InfoPanel';
-import { RefField } from '@CE/react/portainer/gitops/RefField';
-import { TimeWindowDisplay } from '@CE/react/portainer/gitops/TimeWindowDisplay';
+import { r2a } from '@/react-tools/react2angular';
+import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { withReactQuery } from '@/react-tools/withReactQuery';
+import { withUIRouter } from '@/react-tools/withUIRouter';
+import { AutoUpdateFieldset } from '@/react/portainer/gitops/AutoUpdateFieldset';
+import { GitForm } from '@/react/portainer/gitops/GitForm';
+import { AuthFieldset } from '@/react/portainer/gitops/AuthFieldset';
+import { InfoPanel } from '@/react/portainer/gitops/InfoPanel';
+import { RefField } from '@/react/portainer/gitops/RefField';
+import { TimeWindowDisplay } from '@/react/portainer/gitops/TimeWindowDisplay';
 
 export const gitFormModule = angular
   .module('portainer.app.components.forms.git', [])

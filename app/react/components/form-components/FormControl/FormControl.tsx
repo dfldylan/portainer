@@ -1,8 +1,8 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import clsx from 'clsx';
 
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { InlineLoader } from '@@CE/InlineLoader';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { InlineLoader } from '@@/InlineLoader';
 
 import { FormError } from '../FormError';
 

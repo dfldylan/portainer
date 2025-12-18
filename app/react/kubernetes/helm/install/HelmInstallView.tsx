@@ -1,14 +1,14 @@
 import { useState, useMemo } from 'react';
 
-import { useNamespacesQuery } from '@CE/react/kubernetes/namespaces/queries/useNamespacesQuery';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useNamespacesQuery } from '@/react/kubernetes/namespaces/queries/useNamespacesQuery';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget, WidgetBody } from '@@CE/Widget';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Input } from '@@CE/form-components/Input';
-import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
-import { FormSection } from '@@CE/form-components/FormSection';
+import { PageHeader } from '@@/PageHeader';
+import { Widget, WidgetBody } from '@@/Widget';
+import { FormControl } from '@@/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
+import { PortainerSelect } from '@@/form-components/PortainerSelect';
+import { FormSection } from '@@/form-components/FormSection';
 
 import { HelmTemplates } from '../HelmTemplates/HelmTemplates';
 

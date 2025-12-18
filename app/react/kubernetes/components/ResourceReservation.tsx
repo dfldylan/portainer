@@ -1,12 +1,12 @@
 import { round } from 'lodash';
 import { AlertTriangle } from 'lucide-react';
 
-import { FormSectionTitle } from '@CE/react/components/form-components/FormSectionTitle';
-import { TextTip } from '@CE/react/components/Tip/TextTip';
-import { ResourceUsageItem } from '@CE/react/kubernetes/components/ResourceUsageItem';
-import { getPercentageString, getSafeValue } from '@CE/react/kubernetes/utils';
+import { FormSectionTitle } from '@/react/components/form-components/FormSectionTitle';
+import { TextTip } from '@/react/components/Tip/TextTip';
+import { ResourceUsageItem } from '@/react/kubernetes/components/ResourceUsageItem';
+import { getPercentageString, getSafeValue } from '@/react/kubernetes/utils';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 interface ResourceMetrics {
   cpu: number;

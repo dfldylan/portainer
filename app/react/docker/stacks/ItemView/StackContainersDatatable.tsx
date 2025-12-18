@@ -1,24 +1,24 @@
 import { Box } from 'lucide-react';
 
-import { ContainerListViewModel } from '@CE/react/docker/containers/types';
-import { createStore } from '@CE/react/docker/containers/ListView/ContainersDatatable/datatable-store';
-import { useColumns } from '@CE/react/docker/containers/ListView/ContainersDatatable/columns';
-import { ContainersDatatableActions } from '@CE/react/docker/containers/ListView/ContainersDatatable/ContainersDatatableActions';
-import { ContainersDatatableSettings } from '@CE/react/docker/containers/ListView/ContainersDatatable/ContainersDatatableSettings';
-import { useShowGPUsColumn } from '@CE/react/docker/containers/utils';
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { ContainerListViewModel } from '@/react/docker/containers/types';
+import { createStore } from '@/react/docker/containers/ListView/ContainersDatatable/datatable-store';
+import { useColumns } from '@/react/docker/containers/ListView/ContainersDatatable/columns';
+import { ContainersDatatableActions } from '@/react/docker/containers/ListView/ContainersDatatable/ContainersDatatableActions';
+import { ContainersDatatableSettings } from '@/react/docker/containers/ListView/ContainersDatatable/ContainersDatatableSettings';
+import { useShowGPUsColumn } from '@/react/docker/containers/utils';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
 
-import { Datatable, Table } from '@@CE/datatables';
+import { Datatable, Table } from '@@/datatables';
 import {
   buildAction,
   QuickActionsSettings,
-} from '@@CE/datatables/QuickActionsSettings';
+} from '@@/datatables/QuickActionsSettings';
 import {
   ColumnVisibilityMenu,
   getColumnVisibilityState,
-} from '@@CE/datatables/ColumnVisibilityMenu';
-import { TableSettingsProvider } from '@@CE/datatables/useTableSettings';
-import { useTableState } from '@@CE/datatables/useTableState';
+} from '@@/datatables/ColumnVisibilityMenu';
+import { TableSettingsProvider } from '@@/datatables/useTableSettings';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { RowProvider } from '../../containers/ListView/ContainersDatatable/RowContext';
 

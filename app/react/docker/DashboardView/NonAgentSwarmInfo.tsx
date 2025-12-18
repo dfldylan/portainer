@@ -1,9 +1,9 @@
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useInfoPanelState } from '@CE/react/hooks/useInfoPanelState';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useInfoPanelState } from '@/react/hooks/useInfoPanelState';
 
-import { InformationPanel } from '@@CE/InformationPanel';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { HelpLink } from '@@CE/HelpLink';
+import { InformationPanel } from '@@/InformationPanel';
+import { TextTip } from '@@/Tip/TextTip';
+import { HelpLink } from '@@/HelpLink';
 
 import { useInfo } from '../proxy/queries/useInfo';
 

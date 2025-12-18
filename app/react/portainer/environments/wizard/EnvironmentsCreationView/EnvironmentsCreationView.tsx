@@ -4,19 +4,19 @@ import _ from 'lodash';
 import clsx from 'clsx';
 import { ArrowLeft, ArrowRight, Wand2 } from 'lucide-react';
 
-import { notifyError } from '@CE/portainer/services/notifications';
+import { notifyError } from '@/portainer/services/notifications';
 import {
   Environment,
   EnvironmentId,
-} from '@CE/react/portainer/environments/types';
+} from '@/react/portainer/environments/types';
 
-import { Stepper } from '@@CE/Stepper';
-import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
-import { PageHeader } from '@@CE/PageHeader';
-import { Button } from '@@CE/buttons';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { Icon } from '@@CE/Icon';
-import { Alert } from '@@CE/Alert';
+import { Stepper } from '@@/Stepper';
+import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
+import { PageHeader } from '@@/PageHeader';
+import { Button } from '@@/buttons';
+import { FormSection } from '@@/form-components/FormSection';
+import { Icon } from '@@/Icon';
+import { Alert } from '@@/Alert';
 
 import {
   EnvironmentOptionValue,

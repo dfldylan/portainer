@@ -4,15 +4,15 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useState } from 'react';
 import { FormikHelpers } from 'formik/dist/types';
 
-import { invalidateContainer } from '@CE/react/docker/containers/queries/useContainer';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { mutationOptions, withError } from '@CE/react-tools/react-query';
-import { useSystemLimits } from '@CE/react/docker/proxy/queries/useInfo';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { invalidateContainer } from '@/react/docker/containers/queries/useContainer';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { mutationOptions, withError } from '@/react-tools/react-query';
+import { useSystemLimits } from '@/react/docker/proxy/queries/useInfo';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { LoadingButton } from '@@CE/buttons';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { LoadingButton } from '@@/buttons';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { updateContainer } from '../../queries/useUpdateContainer';
 

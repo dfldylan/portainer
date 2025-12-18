@@ -1,11 +1,11 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { Authorized } from '@CE/react/hooks/useUser';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { SystemBadge } from '@@CE/Badge/SystemBadge';
-import { ExternalBadge } from '@@CE/Badge/ExternalBadge';
-import { UnusedBadge } from '@@CE/Badge/UnusedBadge';
-import { Link } from '@@CE/Link';
+import { SystemBadge } from '@@/Badge/SystemBadge';
+import { ExternalBadge } from '@@/Badge/ExternalBadge';
+import { UnusedBadge } from '@@/Badge/UnusedBadge';
+import { Link } from '@@/Link';
 
 import { SecretRowData } from '../types';
 

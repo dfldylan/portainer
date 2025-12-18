@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 
-import { taskStatusBadge } from '@CE/docker/filters/utils';
+import { taskStatusBadge } from '@/docker/filters/utils';
 
-import { multiple } from '@@CE/datatables/filter-types';
-import { filterHOC } from '@@CE/datatables/Filter';
+import { multiple } from '@@/datatables/filter-types';
+import { filterHOC } from '@@/datatables/Filter';
 
 import { columnHelper } from './helper';
 

@@ -5,9 +5,9 @@ import { Column, Row, TableMeta } from '@tanstack/react-table';
 import { Check, Filter } from 'lucide-react';
 import _ from 'lodash';
 
-import { getValueAsArrayOfStrings } from '@CE/portainer/helpers/array';
+import { getValueAsArrayOfStrings } from '@/portainer/helpers/array';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { DefaultType } from './types';
 

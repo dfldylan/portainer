@@ -3,7 +3,7 @@ import { Lightbulb, X } from 'lucide-react';
 import { ReactNode } from 'react';
 import { useStore } from 'zustand';
 
-import { Button } from '@@CE/buttons';
+import { Button } from '@@/buttons';
 
 import { insightStore } from './insights-store';
 

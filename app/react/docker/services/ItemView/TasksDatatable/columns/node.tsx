@@ -1,8 +1,8 @@
 import { Node } from 'docker-types/generated/1.44';
 import { CellContext } from '@tanstack/react-table';
 
-import { useNodes } from '@CE/react/docker/proxy/queries/nodes/useNodes';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useNodes } from '@/react/docker/proxy/queries/nodes/useNodes';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
 import { DecoratedTask } from '../types';
 

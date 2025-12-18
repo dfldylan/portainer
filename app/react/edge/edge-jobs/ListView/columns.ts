@@ -1,8 +1,8 @@
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { isoDateFromTimestamp } from '@CE/portainer/filters/filters';
+import { isoDateFromTimestamp } from '@/portainer/filters/filters';
 
-import { buildNameColumn } from '@@CE/datatables/buildNameColumn';
+import { buildNameColumn } from '@@/datatables/buildNameColumn';
 
 import { EdgeJob } from '../types';
 

@@ -4,8 +4,8 @@ import {
   Environment,
   EnvironmentStatus,
   EnvironmentType,
-} from '@CE/react/portainer/environments/types';
-import { createMockEnvironment } from '@CE/react-tools/test-mocks';
+} from '@/react/portainer/environments/types';
+import { createMockEnvironment } from '@/react-tools/test-mocks';
 
 import { EnvironmentItem } from './EnvironmentItem';
 

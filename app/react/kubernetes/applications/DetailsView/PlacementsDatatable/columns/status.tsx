@@ -1,6 +1,6 @@
 import { Check, X } from 'lucide-react';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { columnHelper } from './helper';
 

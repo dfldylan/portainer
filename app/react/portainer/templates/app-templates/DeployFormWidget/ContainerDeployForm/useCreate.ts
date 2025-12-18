@@ -1,8 +1,8 @@
 import { useRouter } from '@uirouter/react';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { useCreateOrReplaceMutation } from '@CE/react/docker/containers/CreateView/useCreateMutation';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { useCreateOrReplaceMutation } from '@/react/docker/containers/CreateView/useCreateMutation';
 
 import { TemplateViewModel } from '../../view-model';
 

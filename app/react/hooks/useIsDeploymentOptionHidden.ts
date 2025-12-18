@@ -1,4 +1,4 @@
-import { useEnvironmentDeploymentOptions } from '@CE/react/portainer/environments/queries/useEnvironment';
+import { useEnvironmentDeploymentOptions } from '@/react/portainer/environments/queries/useEnvironment';
 
 import { useEnvironmentId } from './useEnvironmentId';
 

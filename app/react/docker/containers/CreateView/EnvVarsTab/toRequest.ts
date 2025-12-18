@@ -1,5 +1,5 @@
-import { convertToArrayOfStrings } from '@@CE/form-components/EnvironmentVariablesFieldset/utils';
-import { EnvVarValues } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { convertToArrayOfStrings } from '@@/form-components/EnvironmentVariablesFieldset/utils';
+import { EnvVarValues } from '@@/form-components/EnvironmentVariablesFieldset';
 
 import { CreateContainerRequest } from '../types';
 

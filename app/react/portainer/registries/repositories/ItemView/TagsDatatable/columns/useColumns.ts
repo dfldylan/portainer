@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import _ from 'lodash';
 
-import { humanize } from '@CE/portainer/filters/filters';
-import { trimSHA } from '@CE/docker/filters/utils';
+import { humanize } from '@/portainer/filters/filters';
+import { trimSHA } from '@/docker/filters/utils';
 
-import { buildNameColumnFromObject } from '@@CE/datatables/buildNameColumn';
+import { buildNameColumnFromObject } from '@@/datatables/buildNameColumn';
 
 import { Tag } from '../types';
 

@@ -1,20 +1,20 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { HardDrive } from 'lucide-react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { humanize } from '@CE/portainer/filters/filters';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { humanize } from '@/portainer/filters/filters';
 
-import { TableSettingsMenu } from '@@CE/datatables';
+import { TableSettingsMenu } from '@@/datatables';
 import {
   BasicTableSettings,
   RefreshableTableSettings,
   refreshableSettings,
-} from '@@CE/datatables/types';
-import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
-import { ExpandableDatatable } from '@@CE/datatables/ExpandableDatatable';
-import { buildExpandColumn } from '@@CE/datatables/expand-column';
-import { Link } from '@@CE/Link';
+} from '@@/datatables/types';
+import { useTableStateWithStorage } from '@@/datatables/useTableState';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { ExpandableDatatable } from '@@/datatables/ExpandableDatatable';
+import { buildExpandColumn } from '@@/datatables/expand-column';
+import { Link } from '@@/Link';
 
 import { useAllStoragesQuery } from '../queries/useVolumesQuery';
 

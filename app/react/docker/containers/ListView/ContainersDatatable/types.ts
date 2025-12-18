@@ -3,7 +3,7 @@ import {
   FilteredColumnsTableSettings,
   RefreshableTableSettings,
   SettableColumnsTableSettings,
-} from '@@CE/datatables/types';
+} from '@@/datatables/types';
 
 export type QuickAction = 'attach' | 'exec' | 'inspect' | 'logs' | 'stats';
 

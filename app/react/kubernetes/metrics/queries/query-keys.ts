@@ -1,6 +1,6 @@
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { queryKeys as namespaceQueryKeys } from '@CE/react/kubernetes/namespaces/queries/queryKeys';
-import { queryKeys as nodeQueryKeys } from '@CE/react/kubernetes/cluster/queries/query-keys';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { queryKeys as namespaceQueryKeys } from '@/react/kubernetes/namespaces/queries/queryKeys';
+import { queryKeys as nodeQueryKeys } from '@/react/kubernetes/cluster/queries/query-keys';
 
 export const queryKeys = {
   namespaceMetrics: (environmentId: EnvironmentId, namespaceName: string) => [

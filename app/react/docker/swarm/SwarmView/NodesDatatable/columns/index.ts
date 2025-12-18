@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { humanize } from '@CE/portainer/filters/filters';
+import { humanize } from '@/portainer/filters/filters';
 
 import { columnHelper } from './column-helper';
 import { name } from './name';

@@ -3,13 +3,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { UseQueryResult } from '@tanstack/react-query';
 import { FormikErrors } from 'formik';
 
-import { Ingress } from '@CE/react/kubernetes/ingresses/types';
+import { Ingress } from '@/react/kubernetes/ingresses/types';
 
-import { Select } from '@@CE/form-components/ReactSelect';
-import { Button } from '@@CE/buttons';
-import { FormError } from '@@CE/form-components/FormError';
-import { InputGroup } from '@@CE/form-components/InputGroup';
-import { Link } from '@@CE/Link';
+import { Select } from '@@/form-components/ReactSelect';
+import { Button } from '@@/buttons';
+import { FormError } from '@@/form-components/FormError';
+import { InputGroup } from '@@/form-components/InputGroup';
+import { Link } from '@@/Link';
 
 import { IngressOption, ServicePortIngressPath } from '../types';
 

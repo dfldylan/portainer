@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 
-import { UserViewModel } from '@CE/portainer/models/user';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { UserViewModel } from '@/portainer/models/user';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 
 import { HeaderContainer } from './HeaderContainer';
 import { HeaderTitle } from './HeaderTitle';

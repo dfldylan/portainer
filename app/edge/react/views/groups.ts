@@ -1,11 +1,11 @@
 import angular from 'angular';
 
-import { r2a } from '@CE/react-tools/react2angular';
-import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
-import { withUIRouter } from '@CE/react-tools/withUIRouter';
-import { ListView } from '@CE/react/edge/edge-groups/ListView';
-import { CreateView } from '@CE/react/edge/edge-groups/CreateView/CreateView';
-import { ItemView } from '@CE/react/edge/edge-groups/ItemView/ItemView';
+import { r2a } from '@/react-tools/react2angular';
+import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { withUIRouter } from '@/react-tools/withUIRouter';
+import { ListView } from '@/react/edge/edge-groups/ListView';
+import { CreateView } from '@/react/edge/edge-groups/CreateView/CreateView';
+import { ItemView } from '@/react/edge/edge-groups/ItemView/ItemView';
 
 export const groupsModule = angular
   .module('portainer.edge.react.views.groups', [])

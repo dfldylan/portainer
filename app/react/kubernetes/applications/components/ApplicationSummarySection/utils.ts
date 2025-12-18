@@ -1,4 +1,4 @@
-import { Ingress } from '@CE/react/kubernetes/ingresses/types';
+import { Ingress } from '@/react/kubernetes/ingresses/types';
 
 import { ServiceFormValues } from '../../CreateView/application-services/types';
 import { ApplicationFormValues } from '../../types';

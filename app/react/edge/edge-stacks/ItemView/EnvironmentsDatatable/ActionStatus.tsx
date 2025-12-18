@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { useLogsStatus } from './useLogsStatus';
 

@@ -4,8 +4,8 @@ import { http, HttpResponse } from 'msw';
 import { saveAs } from 'file-saver';
 import { createElement, Fragment } from 'react';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { server } from '@CE/setup-tests/server';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { server } from '@/setup-tests/server';
 
 import {
   useExportMutation,

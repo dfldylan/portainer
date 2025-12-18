@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
 export type BadgeType =
   | 'success'

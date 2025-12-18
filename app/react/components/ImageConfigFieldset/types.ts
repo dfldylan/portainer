@@ -1,4 +1,4 @@
-import { Registry } from '@CE/react/portainer/registries/types/registry';
+import { Registry } from '@/react/portainer/registries/types/registry';
 
 export interface Values {
   useRegistry: boolean;

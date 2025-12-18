@@ -1,8 +1,8 @@
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { LoadingButton } from '@@CE/buttons';
-import { confirmUpdate } from '@@CE/modals/confirm';
+import { LoadingButton } from '@@/buttons';
+import { confirmUpdate } from '@@/modals/confirm';
 
 import { useToggleSystemNamespaceMutation } from '../../queries/useToggleSystemNamespace';
 

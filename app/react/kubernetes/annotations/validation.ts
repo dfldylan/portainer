@@ -1,6 +1,6 @@
 import { SchemaOf, array, object, string } from 'yup';
 
-import { buildUniquenessTest } from '@@CE/form-components/validate-unique';
+import { buildUniquenessTest } from '@@/form-components/validate-unique';
 
 import { Annotation } from './types';
 

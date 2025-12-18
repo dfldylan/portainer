@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { Widget, WidgetBody } from '@@CE/Widget';
+import { Widget, WidgetBody } from '@@/Widget';
 
 interface Props {
   // workaround to remove the widget, ideally we should have a different component to wrap the table with a widget

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { buildExpandColumn } from '@@CE/datatables/expand-column';
+import { buildExpandColumn } from '@@/datatables/expand-column';
 
 import { name } from './columns.name';
 import { status } from './columns.status';

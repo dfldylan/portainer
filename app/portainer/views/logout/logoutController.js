@@ -1,5 +1,5 @@
 import angular from 'angular';
-import { dispatchCacheRefreshEvent } from '@CE/portainer/services/http-request.helper';
+import { dispatchCacheRefreshEvent } from '@/portainer/services/http-request.helper';
 
 class LogoutController {
   /* @ngInject */

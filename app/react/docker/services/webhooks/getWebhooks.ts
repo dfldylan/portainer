@@ -1,5 +1,5 @@
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { buildUrl } from './build-url';
 import { Webhook } from './types';

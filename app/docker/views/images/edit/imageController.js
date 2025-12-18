@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
-import { confirmImageExport } from '@CE/react/docker/images/common/ConfirmExportModal';
-import { confirmDelete } from '@@CE/modals/confirm';
+import { confirmImageExport } from '@/react/docker/images/common/ConfirmExportModal';
+import { confirmDelete } from '@@/modals/confirm';
 
 angular.module('portainer.docker').controller('ImageController', [
   '$async',

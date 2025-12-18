@@ -13,7 +13,7 @@ vi.mock('lucide-react', () => ({
 }));
 
 // Mock UI components
-vi.mock('@@CE/Icon', () => ({
+vi.mock('@@/Icon', () => ({
   Icon: ({
     icon: IconComponent,
     ...props
@@ -25,7 +25,7 @@ vi.mock('@@CE/Icon', () => ({
 
 // Mock the Link component to capture routing props
 const mockLink = vi.fn();
-vi.mock('@@CE/Link', () => ({
+vi.mock('@@/Link', () => ({
   Link: ({
     children,
     to,

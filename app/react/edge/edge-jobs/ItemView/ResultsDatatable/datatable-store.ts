@@ -5,7 +5,7 @@ import {
   RefreshableTableSettings,
   BackendPaginationTableSettings,
   backendPaginationSettings,
-} from '@@CE/datatables/types';
+} from '@@/datatables/types';
 
 interface TableSettings
   extends BasicTableSettings,

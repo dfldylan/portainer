@@ -1,37 +1,37 @@
 // general icons
 
-import dataflow from '@CE/assets/ico/dataflow-1.svg?c';
-import git from '@CE/assets/ico/git.svg?c';
-import kube from '@CE/assets/ico/kube.svg?c';
-import ldap from '@CE/assets/ico/ldap.svg?c';
-import linux from '@CE/assets/ico/linux.svg?c';
-import memory from '@CE/assets/ico/memory.svg?c';
-import restorewindow from '@CE/assets/ico/restore-window.svg?c';
-import route from '@CE/assets/ico/route.svg?c';
-import sort from '@CE/assets/ico/sort.svg?c';
-import subscription from '@CE/assets/ico/subscription.svg?c';
-import Placeholder from '@CE/assets/ico/placeholder.svg?c'; // Placeholder is used when an icon name cant be matched
+import dataflow from '@/assets/ico/dataflow-1.svg?c';
+import git from '@/assets/ico/git.svg?c';
+import kube from '@/assets/ico/kube.svg?c';
+import ldap from '@/assets/ico/ldap.svg?c';
+import linux from '@/assets/ico/linux.svg?c';
+import memory from '@/assets/ico/memory.svg?c';
+import restorewindow from '@/assets/ico/restore-window.svg?c';
+import route from '@/assets/ico/route.svg?c';
+import sort from '@/assets/ico/sort.svg?c';
+import subscription from '@/assets/ico/subscription.svg?c';
+import Placeholder from '@/assets/ico/placeholder.svg?c'; // Placeholder is used when an icon name cant be matched
 // vendor icons
-import aws from '@CE/assets/ico/vendor/aws.svg?c';
-import azure from '@CE/assets/ico/vendor/azure.svg?c';
-import civo from '@CE/assets/ico/vendor/civo.svg?c';
-import digitalocean from '@CE/assets/ico/vendor/digitalocean.svg?c';
-import docker from '@CE/assets/ico/vendor/docker.svg?c';
-import dockericon from '@CE/assets/ico/vendor/docker-icon.svg?c';
-import dockercompose from '@CE/assets/ico/vendor/docker-compose.svg?c';
-import ecr from '@CE/assets/ico/vendor/ecr.svg?c';
-import github from '@CE/assets/ico/vendor/github.svg?c';
-import gitlab from '@CE/assets/ico/vendor/gitlab.svg?c';
-import google from '@CE/assets/ico/vendor/google.svg?c';
-import googlecloud from '@CE/assets/ico/vendor/googlecloud.svg?c';
-import kubernetes from '@CE/assets/ico/vendor/kubernetes.svg?c';
-import helm from '@CE/assets/ico/vendor/helm.svg?c';
-import akamai from '@CE/assets/ico/vendor/akamai.svg?c';
-import microsoft from '@CE/assets/ico/vendor/microsoft.svg?c';
-import microsofticon from '@CE/assets/ico/vendor/microsoft-icon.svg?c';
-import openldap from '@CE/assets/ico/vendor/openldap.svg?c';
-import proget from '@CE/assets/ico/vendor/proget.svg?c';
-import quay from '@CE/assets/ico/vendor/quay.svg?c';
+import aws from '@/assets/ico/vendor/aws.svg?c';
+import azure from '@/assets/ico/vendor/azure.svg?c';
+import civo from '@/assets/ico/vendor/civo.svg?c';
+import digitalocean from '@/assets/ico/vendor/digitalocean.svg?c';
+import docker from '@/assets/ico/vendor/docker.svg?c';
+import dockericon from '@/assets/ico/vendor/docker-icon.svg?c';
+import dockercompose from '@/assets/ico/vendor/docker-compose.svg?c';
+import ecr from '@/assets/ico/vendor/ecr.svg?c';
+import github from '@/assets/ico/vendor/github.svg?c';
+import gitlab from '@/assets/ico/vendor/gitlab.svg?c';
+import google from '@/assets/ico/vendor/google.svg?c';
+import googlecloud from '@/assets/ico/vendor/googlecloud.svg?c';
+import kubernetes from '@/assets/ico/vendor/kubernetes.svg?c';
+import helm from '@/assets/ico/vendor/helm.svg?c';
+import akamai from '@/assets/ico/vendor/akamai.svg?c';
+import microsoft from '@/assets/ico/vendor/microsoft.svg?c';
+import microsofticon from '@/assets/ico/vendor/microsoft-icon.svg?c';
+import openldap from '@/assets/ico/vendor/openldap.svg?c';
+import proget from '@/assets/ico/vendor/proget.svg?c';
+import quay from '@/assets/ico/vendor/quay.svg?c';
 
 const placeholder = Placeholder;
 

@@ -1,10 +1,10 @@
 import { FormikErrors } from 'formik';
 
-import { useIsPodman } from '@CE/react/portainer/environments/queries/useIsPodman';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useIsPodman } from '@/react/portainer/environments/queries/useIsPodman';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Input } from '@@CE/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
 
 import { NetworkSelector } from '../../components/NetworkSelector';
 

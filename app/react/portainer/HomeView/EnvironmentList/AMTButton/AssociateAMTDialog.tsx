@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 
-import { useActivateDevicesMutation } from '@CE/react/edge/edge-devices/open-amt/useActivateDevicesMutation';
-import { usePaginationLimitState } from '@CE/react/hooks/usePaginationLimitState';
-import { Query } from '@CE/react/portainer/environments/queries/useEnvironmentList';
-import { EdgeTypes, Environment } from '@CE/react/portainer/environments/types';
-import { useEnvironmentList } from '@CE/react/portainer/environments/queries';
-import { useListSelection } from '@CE/react/hooks/useListSelection';
+import { useActivateDevicesMutation } from '@/react/edge/edge-devices/open-amt/useActivateDevicesMutation';
+import { usePaginationLimitState } from '@/react/hooks/usePaginationLimitState';
+import { Query } from '@/react/portainer/environments/queries/useEnvironmentList';
+import { EdgeTypes, Environment } from '@/react/portainer/environments/types';
+import { useEnvironmentList } from '@/react/portainer/environments/queries';
+import { useListSelection } from '@/react/hooks/useListSelection';
 
-import { Checkbox } from '@@CE/form-components/Checkbox';
-import { Modal } from '@@CE/modals/Modal';
-import { PaginationControls } from '@@CE/PaginationControls';
-import { Button, LoadingButton } from '@@CE/buttons';
-import { Alert } from '@@CE/Alert';
+import { Checkbox } from '@@/form-components/Checkbox';
+import { Modal } from '@@/modals/Modal';
+import { PaginationControls } from '@@/PaginationControls';
+import { Button, LoadingButton } from '@@/buttons';
+import { Alert } from '@@/Alert';
 
 interface Props {
   envQueryParams: Query;

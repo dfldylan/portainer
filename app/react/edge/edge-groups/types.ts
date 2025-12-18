@@ -1,8 +1,8 @@
 import {
   EnvironmentId,
   EnvironmentType,
-} from '@CE/react/portainer/environments/types';
-import { TagId } from '@CE/portainer/tags/types';
+} from '@/react/portainer/environments/types';
+import { TagId } from '@/portainer/tags/types';
 
 export interface EdgeGroup {
   Id: number;

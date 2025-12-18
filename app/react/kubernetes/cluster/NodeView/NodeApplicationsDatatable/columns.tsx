@@ -1,11 +1,11 @@
 import _, { round } from 'lodash';
 import { useMemo } from 'react';
 
-import { truncate } from '@CE/portainer/filters/filters';
-import { usePublicSettings } from '@CE/react/portainer/settings/queries';
-import { bytesToReadableFormat } from '@CE/react/kubernetes/utils';
+import { truncate } from '@/portainer/filters/filters';
+import { usePublicSettings } from '@/react/portainer/settings/queries';
+import { bytesToReadableFormat } from '@/react/kubernetes/utils';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import { helper } from './columns.helper';
 import { name } from './columns.name';

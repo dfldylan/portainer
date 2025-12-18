@@ -1,7 +1,7 @@
 import { FileText } from 'lucide-react';
 
-import { Link } from '@@CE/Link';
-import { Icon } from '@@CE/Icon';
+import { Link } from '@@/Link';
+import { Icon } from '@@/Icon';
 
 import { columnHelper } from './helper';
 

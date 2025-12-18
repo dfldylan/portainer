@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { UserViewModel } from '@CE/portainer/models/user';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { TableSettings } from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { UserViewModel } from '@/portainer/models/user';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { TableSettings } from '@/react/kubernetes/datatables/DefaultDatatableSettings';
 
-import { TableState } from '@@CE/datatables/useTableState';
+import { TableState } from '@@/datatables/useTableState';
 
 import { Event } from '../../queries/types';
 

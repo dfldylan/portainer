@@ -1,7 +1,7 @@
 import { Trash2 } from 'lucide-react';
 
-import { DetailsTable } from '@@CE/DetailsTable';
-import { Button } from '@@CE/buttons';
+import { DetailsTable } from '@@/DetailsTable';
+import { Button } from '@@/buttons';
 
 import { Pair } from '../../types';
 

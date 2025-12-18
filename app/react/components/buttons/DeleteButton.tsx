@@ -1,9 +1,9 @@
 import { Trash2 } from 'lucide-react';
 import { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { confirmDelete } from '@@CE/modals/confirm';
+import { confirmDelete } from '@@/modals/confirm';
 
 import { Button } from './Button';
 import { LoadingButton } from './LoadingButton';

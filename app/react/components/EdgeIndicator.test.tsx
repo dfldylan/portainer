@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { createMockEnvironment } from '@CE/react-tools/test-mocks';
+import { createMockEnvironment } from '@/react-tools/test-mocks';
 
 import { withTestQueryProvider } from '../test-utils/withTestQuery';
 

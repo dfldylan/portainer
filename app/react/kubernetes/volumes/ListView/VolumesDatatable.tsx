@@ -1,12 +1,12 @@
 import { Database } from 'lucide-react';
 
-import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { refreshableSettings } from '@@CE/datatables/types';
-import { Datatable, TableSettingsMenu } from '@@CE/datatables';
-import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { refreshableSettings } from '@@/datatables/types';
+import { Datatable, TableSettingsMenu } from '@@/datatables';
+import { useTableStateWithStorage } from '@@/datatables/useTableState';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { systemResourcesSettings } from '../../datatables/SystemResourcesSettings';
 import { CreateFromManifestButton } from '../../components/CreateFromManifestButton';

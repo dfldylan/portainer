@@ -1,10 +1,10 @@
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useIsSwarm } from '@CE/react/docker/proxy/queries/useInfo';
-import { StackType } from '@CE/react/common/stacks/types';
-import { ContainerEngine } from '@CE/react/portainer/environments/types';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useIsSwarm } from '@/react/docker/proxy/queries/useInfo';
+import { StackType } from '@/react/common/stacks/types';
+import { ContainerEngine } from '@/react/portainer/environments/types';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget } from '@@CE/Widget';
+import { PageHeader } from '@@/PageHeader';
+import { Widget } from '@@/Widget';
 
 import { TemplateViewType, useViewType } from '../useViewType';
 

@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { queryClient, withGlobalError } from '@CE/react-tools/react-query';
-import axios from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { queryClient, withGlobalError } from '@/react-tools/react-query';
+import axios from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 import {
   error as notifyError,
   notifySuccess,
-} from '@CE/portainer/services/notifications';
-import { isFulfilled, isRejected } from '@CE/portainer/helpers/promise-utils';
-import { pluralize } from '@CE/portainer/helpers/strings';
+} from '@/portainer/services/notifications';
+import { isFulfilled, isRejected } from '@/portainer/helpers/promise-utils';
+import { pluralize } from '@/portainer/helpers/strings';
 
 import { parseKubernetesAxiosError } from '../../axiosError';
 

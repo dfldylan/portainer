@@ -1,16 +1,16 @@
 import { Eye, EyeOff } from 'lucide-react';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
-import { isLimitedToBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { isLimitedToBE } from '@/react/portainer/feature-flags/feature-flags.service';
 import {
   usePublicSettings,
   useUpdateDefaultRegistrySettingsMutation,
-} from '@CE/react/portainer/settings/queries';
+} from '@/react/portainer/settings/queries';
 
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { Button } from '@@CE/buttons';
-import { BEFeatureIndicator } from '@@CE/BEFeatureIndicator';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { Button } from '@@/buttons';
+import { BEFeatureIndicator } from '@@/BEFeatureIndicator';
 
 export function DefaultRegistryAction() {
   const settingsQuery = usePublicSettings({

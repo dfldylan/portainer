@@ -2,8 +2,8 @@ import { useQueries } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { compact, flatMap } from 'lodash';
 
-import { withGlobalError } from '@CE/react-tools/react-query';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { withGlobalError } from '@/react-tools/react-query';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 
 import { queryKeys } from './query-keys';
 

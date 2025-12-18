@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { NodeViewModel } from '@CE/docker/models/node';
+import { NodeViewModel } from '@/docker/models/node';
 
 import { columnHelper } from './column-helper';
 

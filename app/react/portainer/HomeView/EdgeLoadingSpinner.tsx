@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Settings } from 'lucide-react';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import styles from './EdgeLoadingSpinner.module.css';
 

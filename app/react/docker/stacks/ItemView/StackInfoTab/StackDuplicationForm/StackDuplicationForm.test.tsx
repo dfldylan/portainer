@@ -2,12 +2,12 @@ import { render, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import { UIRouterContext, UIRouterReact } from '@uirouter/react';
 
-import { server } from '@CE/setup-tests/server';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { Environment } from '@CE/react/portainer/environments/types';
-import { EnvironmentGroup } from '@CE/react/portainer/environments/environment-groups/types';
-import { Stack } from '@CE/react/common/stacks/types';
-import { createMockStack } from '@CE/react-tools/test-mocks';
+import { server } from '@/setup-tests/server';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { Environment } from '@/react/portainer/environments/types';
+import { EnvironmentGroup } from '@/react/portainer/environments/environment-groups/types';
+import { Stack } from '@/react/common/stacks/types';
+import { createMockStack } from '@/react-tools/test-mocks';
 
 import { StackDuplicationForm } from './StackDuplicationForm';
 

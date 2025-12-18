@@ -1,15 +1,15 @@
 import { Check, CheckCircle } from 'lucide-react';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { useDeleteEnvironmentsMutation } from '@CE/react/portainer/environments/ListView/useDeleteEnvironmentsMutation';
-import { Environment } from '@CE/react/portainer/environments/types';
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
-import { useIsPureAdmin } from '@CE/react/hooks/useUser';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { useDeleteEnvironmentsMutation } from '@/react/portainer/environments/ListView/useDeleteEnvironmentsMutation';
+import { Environment } from '@/react/portainer/environments/types';
+import { withReactQuery } from '@/react-tools/withReactQuery';
+import { useIsPureAdmin } from '@/react/hooks/useUser';
 
-import { Button } from '@@CE/buttons';
-import { openModal } from '@@CE/modals';
-import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Button } from '@@/buttons';
+import { openModal } from '@@/modals';
+import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { useAssociateDeviceMutation, useLicenseOverused } from '../queries';
 import { WaitingRoomEnvironment } from '../types';

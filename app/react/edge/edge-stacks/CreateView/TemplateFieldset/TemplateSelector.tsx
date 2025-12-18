@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 import { GroupBase } from 'react-select';
 
-import { useCustomTemplates } from '@CE/react/portainer/templates/custom-templates/queries/useCustomTemplates';
-import { useAppTemplates } from '@CE/react/portainer/templates/app-templates/queries/useAppTemplates';
-import { TemplateType } from '@CE/react/portainer/templates/app-templates/types';
-import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
-import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
+import { useCustomTemplates } from '@/react/portainer/templates/custom-templates/queries/useCustomTemplates';
+import { useAppTemplates } from '@/react/portainer/templates/app-templates/queries/useAppTemplates';
+import { TemplateType } from '@/react/portainer/templates/app-templates/types';
+import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
+import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Select as ReactSelect } from '@@CE/form-components/ReactSelect';
-import { InlineLoader } from '@@CE/InlineLoader';
+import { FormControl } from '@@/form-components/FormControl';
+import { Select as ReactSelect } from '@@/form-components/ReactSelect';
+import { InlineLoader } from '@@/InlineLoader';
 
 import { SelectedTemplateValue } from './types';
 

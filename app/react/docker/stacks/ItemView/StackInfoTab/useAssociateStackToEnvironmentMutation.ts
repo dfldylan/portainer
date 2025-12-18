@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 
-import PortainerError from '@CE/portainer/error';
-import { applyResourceControl } from '@CE/react/portainer/access-control/access-control.service';
-import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
-import axios from '@CE/portainer/services/axios';
-import { buildStackUrl } from '@CE/react/common/stacks/queries/buildUrl';
-import { Stack } from '@CE/react/common/stacks/types';
-import { withGlobalError } from '@CE/react-tools/react-query';
+import PortainerError from '@/portainer/error';
+import { applyResourceControl } from '@/react/portainer/access-control/access-control.service';
+import { AccessControlFormData } from '@/react/portainer/access-control/types';
+import axios from '@/portainer/services/axios';
+import { buildStackUrl } from '@/react/common/stacks/queries/buildUrl';
+import { Stack } from '@/react/common/stacks/types';
+import { withGlobalError } from '@/react-tools/react-query';
 
 export function useAssociateStackToEnvironmentMutation() {
   return useMutation({

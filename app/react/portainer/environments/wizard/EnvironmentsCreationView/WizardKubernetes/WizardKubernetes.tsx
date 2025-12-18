@@ -5,16 +5,16 @@ import _ from 'lodash';
 import {
   ContainerEngine,
   Environment,
-} from '@CE/react/portainer/environments/types';
-import { commandsTabs } from '@CE/react/edge/components/EdgeScriptForm/scripts';
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
-import EdgeAgentStandardIcon from '@CE/react/edge/components/edge-agent-standard.svg?c';
-import EdgeAgentAsyncIcon from '@CE/react/edge/components/edge-agent-async.svg?c';
+} from '@/react/portainer/environments/types';
+import { commandsTabs } from '@/react/edge/components/EdgeScriptForm/scripts';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import EdgeAgentStandardIcon from '@/react/edge/components/edge-agent-standard.svg?c';
+import EdgeAgentAsyncIcon from '@/react/edge/components/edge-agent-async.svg?c';
 
-import { BoxSelectorOption } from '@@CE/BoxSelector/types';
-import { BoxSelector } from '@@CE/BoxSelector';
-import { BEOverlay } from '@@CE/BEFeatureIndicator/BEOverlay';
+import { BoxSelectorOption } from '@@/BoxSelector/types';
+import { BoxSelector } from '@@/BoxSelector';
+import { BEOverlay } from '@@/BEFeatureIndicator/BEOverlay';
 
 import { AnalyticsStateKey } from '../types';
 import { EdgeAgentTab } from '../shared/EdgeAgentTab';

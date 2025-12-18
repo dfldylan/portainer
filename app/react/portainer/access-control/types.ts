@@ -1,5 +1,5 @@
-import { TeamId } from '@CE/react/portainer/users/teams/types';
-import { UserId } from '@CE/portainer/users/types/user-id';
+import { TeamId } from '@/react/portainer/users/teams/types';
+import { UserId } from '@/portainer/users/types/user-id';
 
 export type ResourceControlId = number;
 

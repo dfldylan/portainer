@@ -1,8 +1,8 @@
 import _ from 'lodash-es';
-import { isLimitedToBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { isLimitedToBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { getEnvironments } from '@CE/react/portainer/environments/environment.service';
-import { AccessViewerPolicyModel } from '@CE/react/portainer/users/RolesView/AccessViewer/model';
+import { getEnvironments } from '@/react/portainer/environments/environment.service';
+import { AccessViewerPolicyModel } from '@/react/portainer/users/RolesView/AccessViewer/model';
 
 export default class AccessViewerController {
   /* @ngInject */

@@ -1,10 +1,10 @@
 import { UserX } from 'lucide-react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { Datatable } from '@@CE/datatables';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Datatable } from '@@/datatables';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 type Item = { value: string };
 

@@ -1,18 +1,18 @@
 import { Node } from 'kubernetes-types/core/v1';
 
-import { ResourceReservation } from '@CE/react/kubernetes/components/ResourceReservation';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { useNodeMetricsQuery } from '@CE/react/kubernetes/metrics/queries/useNodeMetricsQuery';
-import { useMetricsForApplicationsQuery } from '@CE/react/kubernetes/metrics/queries/useMetricsForApplications';
+import { ResourceReservation } from '@/react/kubernetes/components/ResourceReservation';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { useNodeMetricsQuery } from '@/react/kubernetes/metrics/queries/useNodeMetricsQuery';
+import { useMetricsForApplicationsQuery } from '@/react/kubernetes/metrics/queries/useMetricsForApplications';
 import {
   ApplicationResource,
   NodeMetric,
-} from '@CE/react/kubernetes/metrics/types';
+} from '@/react/kubernetes/metrics/types';
 import {
   getMebibytes,
   parseCPU,
   safeFilesizeParser,
-} from '@CE/react/kubernetes/utils';
+} from '@/react/kubernetes/utils';
 
 export function NodeResourceReservation({
   node,

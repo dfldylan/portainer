@@ -1,10 +1,10 @@
-import { RegistryId } from '@CE/react/portainer/registries/types/registry';
+import { RegistryId } from '@/react/portainer/registries/types/registry';
 import {
   GitFormModel,
   RelativePathModel,
-} from '@CE/react/portainer/gitops/types';
+} from '@/react/portainer/gitops/types';
 
-import { EnvVarValues } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { EnvVarValues } from '@@/form-components/EnvironmentVariablesFieldset';
 
 import { EdgeGroup } from '../../edge-groups/types';
 import { DeploymentType, StaggerConfig } from '../types';

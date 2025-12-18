@@ -1,6 +1,6 @@
-import { BROWSER_OS_PLATFORM } from '@CE/react/constants';
+import { BROWSER_OS_PLATFORM } from '@/react/constants';
 
-import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Tooltip } from '@@/Tip/Tooltip';
 
 const otherEditorConfig = {
   tooltip: (

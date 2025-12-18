@@ -1,9 +1,9 @@
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import clsx from 'clsx';
 
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import fullLogoBE from './portainer_logo-BE.svg';
 import fullLogoCE from './portainer_logo-CE.svg';

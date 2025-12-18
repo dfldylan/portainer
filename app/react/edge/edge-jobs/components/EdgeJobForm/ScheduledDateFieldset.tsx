@@ -1,6 +1,6 @@
 import { useField } from 'formik';
 
-import { DateTimeField } from '@@CE/DateTimeField';
+import { DateTimeField } from '@@/DateTimeField';
 
 import { TimeTip } from './TimeTip';
 

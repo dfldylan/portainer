@@ -1,16 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { HorizontalPodAutoscaler } from 'kubernetes-types/autoscaling/v2';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { getAllSettledItems } from '@CE/portainer/helpers/promise-utils';
-import { withGlobalError } from '@CE/react-tools/react-query';
-import {
-  notifyError,
-  notifySuccess,
-} from '@CE/portainer/services/notifications';
-import { pluralize } from '@CE/portainer/helpers/strings';
-import { uninstallHelmApplication } from '@CE/react/kubernetes/helm/helmReleaseQueries/useUninstallHelmAppMutation';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { getAllSettledItems } from '@/portainer/helpers/promise-utils';
+import { withGlobalError } from '@/react-tools/react-query';
+import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { pluralize } from '@/portainer/helpers/strings';
+import { uninstallHelmApplication } from '@/react/kubernetes/helm/helmReleaseQueries/useUninstallHelmAppMutation';
 
 import { parseKubernetesAxiosError } from '../../axiosError';
 import { ApplicationRowData } from '../ListView/ApplicationsDatatable/types';

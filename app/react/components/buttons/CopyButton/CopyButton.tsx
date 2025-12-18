@@ -2,9 +2,9 @@ import { ComponentProps, PropsWithChildren } from 'react';
 import clsx from 'clsx';
 import { Check, Copy } from 'lucide-react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { Button } from '../Button';
 

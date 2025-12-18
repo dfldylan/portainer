@@ -1,11 +1,11 @@
 import { Search } from 'lucide-react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { Environment } from '@CE/react/portainer/environments/types';
+import { Environment } from '@/react/portainer/environments/types';
 
-import { Button } from '@@CE/buttons';
-import { Link } from '@@CE/Link';
-import { Icon } from '@@CE/Icon';
+import { Button } from '@@/buttons';
+import { Link } from '@@/Link';
+import { Icon } from '@@/Icon';
 
 import { LogsActions } from './LogsActions';
 

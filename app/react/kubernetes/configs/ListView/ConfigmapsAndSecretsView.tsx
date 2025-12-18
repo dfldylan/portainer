@@ -1,8 +1,8 @@
 import { FileCode, Lock } from 'lucide-react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Tab, WidgetTabs, findSelectedTabIndex } from '@@CE/Widget/WidgetTabs';
+import { PageHeader } from '@@/PageHeader';
+import { Tab, WidgetTabs, findSelectedTabIndex } from '@@/Widget/WidgetTabs';
 
 import { ConfigMapsDatatable } from './ConfigMapsDatatable';
 import { SecretsDatatable } from './SecretsDatatable';

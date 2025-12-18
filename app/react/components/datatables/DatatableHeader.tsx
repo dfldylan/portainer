@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { IconProps } from '@@CE/Icon';
+import { IconProps } from '@@/Icon';
 
 import { SearchBar } from './SearchBar';
 import { Table } from './Table';

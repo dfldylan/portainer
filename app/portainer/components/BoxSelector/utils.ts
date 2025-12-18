@@ -1,7 +1,7 @@
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
 
-import { BoxSelectorOption } from '@@CE/BoxSelector/types';
-import { IconProps } from '@@CE/Icon';
+import { BoxSelectorOption } from '@@/BoxSelector/types';
+import { IconProps } from '@@/Icon';
 
 export function buildOption<T extends number | string>(
   id: BoxSelectorOption<T>['id'],

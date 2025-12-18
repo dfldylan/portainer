@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { useRegistries } from '@CE/react/portainer/registries/queries/useRegistries';
-import { DockerHubViewModel } from '@CE/portainer/models/dockerhub';
-import { Registry } from '@CE/react/portainer/registries/types/registry';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { useEnvironmentRegistries } from '@CE/react/portainer/environments/queries/useEnvironmentRegistries';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { useRegistries } from '@/react/portainer/registries/queries/useRegistries';
+import { DockerHubViewModel } from '@/portainer/models/dockerhub';
+import { Registry } from '@/react/portainer/registries/types/registry';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
 
 import { AppTemplate } from '../types';
 import { TemplateViewModel } from '../view-model';

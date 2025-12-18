@@ -2,12 +2,12 @@ import _ from 'lodash';
 import { FormikErrors } from 'formik';
 import { ReactNode } from 'react';
 
-import { useIsStandAlone } from '@CE/react/docker/proxy/queries/useInfo';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { useIsStandAlone } from '@/react/docker/proxy/queries/useInfo';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Input } from '@@CE/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
 
 import { GpuFieldset, GpuFieldsetValues } from './GpuFieldset';
 import { Values as RuntimeValues, RuntimeSection } from './RuntimeSection';

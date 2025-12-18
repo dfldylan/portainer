@@ -1,23 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { buildUrl } from '@CE/react/portainer/environments/environment.service/utils';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { buildUrl } from '@/react/portainer/environments/environment.service/utils';
 import {
   Environment,
   EnvironmentType,
-} from '@CE/react/portainer/environments/types';
+} from '@/react/portainer/environments/types';
 import {
   isAgentEnvironment,
   isLocalEnvironment,
-} from '@CE/react/portainer/environments/utils';
-import { RegistryId } from '@CE/react/portainer/registries/types/registry';
-import { useRegistry } from '@CE/react/portainer/registries/queries/useRegistry';
+} from '@/react/portainer/environments/utils';
+import { RegistryId } from '@/react/portainer/registries/types/registry';
+import { useRegistry } from '@/react/portainer/registries/queries/useRegistry';
 
-import { Link } from '@@CE/Link';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { Link } from '@@/Link';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { getIsDockerHubRegistry } from './utils';
 

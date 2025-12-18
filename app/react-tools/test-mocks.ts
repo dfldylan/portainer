@@ -1,13 +1,13 @@
 import _ from 'lodash';
 import { QueryObserverResult } from '@tanstack/react-query';
 
-import { Team } from '@CE/react/portainer/users/teams/types';
-import { Role, User, UserId } from '@CE/portainer/users/types';
+import { Team } from '@/react/portainer/users/teams/types';
+import { Role, User, UserId } from '@/portainer/users/types';
 import {
   ContainerEngine,
   Environment,
-} from '@CE/react/portainer/environments/types';
-import { Stack, StackStatus, StackType } from '@CE/react/common/stacks/types';
+} from '@/react/portainer/environments/types';
+import { Stack, StackStatus, StackType } from '@/react/common/stacks/types';
 
 export function createMockUser(overrides: Partial<User> = {}) {
   return {

@@ -1,7 +1,7 @@
 import { Pod, PodList } from 'kubernetes-types/core/v1';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import axios from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import axios from '@/portainer/services/axios';
 
 import { parseKubernetesAxiosError } from '../../axiosError';
 

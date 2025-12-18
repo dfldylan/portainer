@@ -1,7 +1,7 @@
 import { SchemaOf, array, bool, object, string } from 'yup';
 
-import { EnvVar } from '@@CE/form-components/EnvironmentVariablesFieldset/types';
-import { buildUniquenessTest } from '@@CE/form-components/validate-unique';
+import { EnvVar } from '@@/form-components/EnvironmentVariablesFieldset/types';
+import { buildUniquenessTest } from '@@/form-components/validate-unique';
 
 export function kubeEnvVarValidationSchema(): SchemaOf<EnvVar[]> {
   return array(

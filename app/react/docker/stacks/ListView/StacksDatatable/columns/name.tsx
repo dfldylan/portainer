@@ -1,16 +1,16 @@
 import { CellContext, Column } from '@tanstack/react-table';
 
-import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
-import { getValueAsArrayOfStrings } from '@CE/portainer/helpers/array';
-import { StackStatus } from '@CE/react/common/stacks/types';
+import { useIsEdgeAdmin } from '@/react/hooks/useUser';
+import { getValueAsArrayOfStrings } from '@/portainer/helpers/array';
+import { StackStatus } from '@/react/common/stacks/types';
 import {
   isExternalStack,
   isOrphanedStack,
   isRegularStack,
-} from '@CE/react/docker/stacks/view-models/utils';
+} from '@/react/docker/stacks/view-models/utils';
 
-import { Link } from '@@CE/Link';
-import { MultipleSelectionFilter } from '@@CE/datatables/Filter';
+import { Link } from '@@/Link';
+import { MultipleSelectionFilter } from '@@/datatables/Filter';
 
 import { DecoratedStack } from '../types';
 

@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { server } from '@CE/setup-tests/server';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { server } from '@/setup-tests/server';
 
 import { RegistryTestConnection } from './RegistryTestConnection';
 

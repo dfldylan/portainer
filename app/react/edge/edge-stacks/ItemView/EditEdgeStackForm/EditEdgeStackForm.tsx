@@ -1,4 +1,4 @@
-import { EdgeStack } from '@CE/react/edge/edge-stacks/types';
+import { EdgeStack } from '@/react/edge/edge-stacks/types';
 
 import { GitForm } from './GitForm';
 import { NonGitStackForm } from './NonGitStackForm';

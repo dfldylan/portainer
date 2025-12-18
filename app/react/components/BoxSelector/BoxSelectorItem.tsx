@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import { type LucideIcon, Check } from 'lucide-react';
 import { Fragment } from 'react';
 
-import { Icon } from '@CE/react/components/Icon';
+import { Icon } from '@/react/components/Icon';
 
-import { BadgeIcon } from '@@CE/BadgeIcon';
-import { getFeatureDetails } from '@@CE/BEFeatureIndicator/utils';
+import { BadgeIcon } from '@@/BadgeIcon';
+import { getFeatureDetails } from '@@/BEFeatureIndicator/utils';
 
 import styles from './BoxSelectorItem.module.css';
 import { BoxSelectorOption, Value } from './types';

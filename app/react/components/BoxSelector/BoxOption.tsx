@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 import type { LucideIcon } from 'lucide-react';
 
-import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
+import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
 
 import styles from './BoxOption.module.css';
 import { BoxSelectorOption, Value } from './types';

@@ -1,4 +1,4 @@
-import { NestedDatatable } from '@@CE/datatables/NestedDatatable';
+import { NestedDatatable } from '@@/datatables/NestedDatatable';
 
 import { Application } from './types';
 import { useBaseColumns } from './useColumns';

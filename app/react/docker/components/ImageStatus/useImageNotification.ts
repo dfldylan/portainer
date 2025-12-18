@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import axios from '@CE/portainer/services/axios';
-import { ServiceId } from '@CE/react/docker/services/types';
-import { ContainerId } from '@CE/react/docker/containers/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import axios from '@/portainer/services/axios';
+import { ServiceId } from '@/react/docker/services/types';
+import { ContainerId } from '@/react/docker/containers/types';
 
 import { ImageStatus, ResourceID, ResourceType } from './types';
 

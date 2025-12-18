@@ -1,7 +1,7 @@
-import { useAuthorizations } from '@CE/react/hooks/useUser';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { getSafeValue } from '@CE/react/kubernetes/utils';
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
+import { useAuthorizations } from '@/react/hooks/useUser';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { getSafeValue } from '@/react/kubernetes/utils';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
 
 import {
   useClusterResourceLimitsQuery,

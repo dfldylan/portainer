@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { FormikErrors } from 'formik';
 
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { FormError } from '@@CE/form-components/FormError';
+import { FormError } from '@@/form-components/FormError';
 
 import { ResourceControlOwnership, AccessControlFormData } from '../types';
 

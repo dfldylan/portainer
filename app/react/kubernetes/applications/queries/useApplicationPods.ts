@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Pod } from 'kubernetes-types/core/v1';
 
-import { withGlobalError } from '@CE/react-tools/react-query';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { withGlobalError } from '@/react-tools/react-query';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { applicationIsKind, matchLabelsToLabelSelectorValue } from '../utils';
 import { Application } from '../types';

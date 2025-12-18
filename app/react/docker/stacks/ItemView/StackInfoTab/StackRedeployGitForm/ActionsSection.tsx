@@ -1,7 +1,7 @@
 import { RefreshCw } from 'lucide-react';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { LoadingButton } from '@@CE/buttons';
+import { FormSection } from '@@/form-components/FormSection';
+import { LoadingButton } from '@@/buttons';
 
 interface Props {
   isDirty: boolean;

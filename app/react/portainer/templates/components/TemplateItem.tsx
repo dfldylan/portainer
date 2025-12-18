@@ -1,15 +1,15 @@
 import { ReactNode } from 'react';
 import { Rocket } from 'lucide-react';
 
-import LinuxIcon from '@CE/assets/ico/linux.svg?c';
-import MicrosoftIcon from '@CE/assets/ico/vendor/microsoft.svg?c';
-import KubernetesIcon from '@CE/assets/ico/vendor/kubernetes.svg?c';
+import LinuxIcon from '@/assets/ico/linux.svg?c';
+import MicrosoftIcon from '@/assets/ico/vendor/microsoft.svg?c';
+import KubernetesIcon from '@/assets/ico/vendor/kubernetes.svg?c';
 
-import { Icon } from '@@CE/Icon';
-import { FallbackImage } from '@@CE/FallbackImage';
-import { BlocklistItem } from '@@CE/Blocklist/BlocklistItem';
-import { BadgeIcon } from '@@CE/BadgeIcon';
-import { Link } from '@@CE/Link';
+import { Icon } from '@@/Icon';
+import { FallbackImage } from '@@/FallbackImage';
+import { BlocklistItem } from '@@/Blocklist/BlocklistItem';
+import { BadgeIcon } from '@@/BadgeIcon';
+import { Link } from '@@/Link';
 
 import { Platform } from '../types';
 

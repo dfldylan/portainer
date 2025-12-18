@@ -2,20 +2,20 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import selectEvent from '@CE/react/test-utils/react-select';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { UserViewModel } from '@CE/portainer/models/user';
-import { RegistryTypes } from '@CE/react/portainer/registries/types/registry';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { User, Role } from '@CE/portainer/users/types';
+import selectEvent from '@/react/test-utils/react-select';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { UserViewModel } from '@/portainer/models/user';
+import { RegistryTypes } from '@/react/portainer/registries/types/registry';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { User, Role } from '@/portainer/users/types';
 
 import { HelmRegistrySelect, RepoValue } from './HelmRegistrySelect';
 
 // Mock the hooks with factory functions - preserve other exports
-vi.mock('@CE/react/hooks/useUser', async () => {
-  const actual = await vi.importActual('@CE/react/hooks/useUser');
+vi.mock('@/react/hooks/useUser', async () => {
+  const actual = await vi.importActual('@/react/hooks/useUser');
   return {
     ...actual,
     useCurrentUser: vi.fn(),

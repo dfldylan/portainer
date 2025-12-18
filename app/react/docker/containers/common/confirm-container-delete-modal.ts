@@ -1,6 +1,6 @@
-import { ModalType } from '@@CE/modals';
-import { openSwitchPrompt } from '@@CE/modals/SwitchPrompt';
-import { buildConfirmButton } from '@@CE/modals/utils';
+import { ModalType } from '@@/modals';
+import { openSwitchPrompt } from '@@/modals/SwitchPrompt';
+import { buildConfirmButton } from '@@/modals/utils';
 
 export async function confirmContainerDeletion(title: string) {
   const result = await openSwitchPrompt(

@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-import { server } from '@CE/setup-tests/server';
+import { server } from '@/setup-tests/server';
 
 import { getLicenses } from './license.service';
 import type { License } from './types';

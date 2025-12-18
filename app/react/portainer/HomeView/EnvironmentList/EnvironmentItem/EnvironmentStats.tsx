@@ -1,8 +1,8 @@
 import {
   Environment,
   PlatformType,
-} from '@CE/react/portainer/environments/types';
-import { getPlatformType } from '@CE/react/portainer/environments/utils';
+} from '@/react/portainer/environments/types';
+import { getPlatformType } from '@/react/portainer/environments/utils';
 
 import { EnvironmentStatsDocker } from './EnvironmentStatsDocker';
 import { EnvironmentStatsKubernetes } from './EnvironmentStatsKubernetes';

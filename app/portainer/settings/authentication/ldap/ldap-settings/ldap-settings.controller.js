@@ -1,5 +1,5 @@
-import { buildLdapSettingsModel, buildOpenLDAPSettingsModel } from '@CE/portainer/settings/authentication/ldap/ldap-settings.model';
-import { options } from '@CE/react/portainer/settings/AuthenticationView/ldap-options';
+import { buildLdapSettingsModel, buildOpenLDAPSettingsModel } from '@/portainer/settings/authentication/ldap/ldap-settings.model';
+import { options } from '@/react/portainer/settings/AuthenticationView/ldap-options';
 
 const SERVER_TYPES = {
   CUSTOM: 0,

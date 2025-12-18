@@ -3,16 +3,16 @@ import { useReducer, useState } from 'react';
 import { object, SchemaOf, string } from 'yup';
 import { Network, Plug2 } from 'lucide-react';
 
-import { useCreateAzureEnvironmentMutation } from '@CE/react/portainer/environments/queries/useCreateEnvironmentMutation';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { Environment } from '@CE/react/portainer/environments/types';
-import { EnvironmentMetadata } from '@CE/react/portainer/environments/environment.service/create';
+import { useCreateAzureEnvironmentMutation } from '@/react/portainer/environments/queries/useCreateEnvironmentMutation';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { Environment } from '@/react/portainer/environments/types';
+import { EnvironmentMetadata } from '@/react/portainer/environments/environment.service/create';
 
-import { LoadingButton } from '@@CE/buttons/LoadingButton';
-import { Input } from '@@CE/form-components/Input';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { BoxSelector, BoxSelectorOption } from '@@CE/BoxSelector';
-import { BadgeIcon } from '@@CE/BadgeIcon';
+import { LoadingButton } from '@@/buttons/LoadingButton';
+import { Input } from '@@/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { BoxSelector, BoxSelectorOption } from '@@/BoxSelector';
+import { BadgeIcon } from '@@/BadgeIcon';
 
 import { NameField, useNameValidation } from '../shared/NameField';
 import { AnalyticsStateKey } from '../types';

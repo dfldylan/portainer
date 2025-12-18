@@ -1,11 +1,11 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { Check, X } from 'lucide-react';
 
-import { isoDateFromTimestamp } from '@CE/portainer/filters/filters';
+import { isoDateFromTimestamp } from '@/portainer/filters/filters';
 
-import { multiple } from '@@CE/datatables/filter-types';
-import { filterHOC } from '@@CE/datatables/Filter';
-import { Icon } from '@@CE/Icon';
+import { multiple } from '@@/datatables/filter-types';
+import { filterHOC } from '@@/datatables/Filter';
+import { Icon } from '@@/Icon';
 
 import { ActivityType, AuthLog, AuthMethodType } from './types';
 

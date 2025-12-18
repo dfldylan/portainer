@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { useState, useEffect } from 'react';
 
-import { useSettings } from '@CE/react/portainer/settings/queries';
+import { useSettings } from '@/react/portainer/settings/queries';
 
 type Option = {
   label: string;

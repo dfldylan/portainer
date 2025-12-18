@@ -1,12 +1,9 @@
 import { SchemaOf, array, object, string } from 'yup';
 
-import { FormError } from '@@CE/form-components/FormError';
-import { Input } from '@@CE/form-components/Input';
-import { InputList } from '@@CE/form-components/InputList';
-import {
-  ArrayError,
-  ItemProps,
-} from '@@CE/form-components/InputList/InputList';
+import { FormError } from '@@/form-components/FormError';
+import { Input } from '@@/form-components/Input';
+import { InputList } from '@@/form-components/InputList';
+import { ArrayError, ItemProps } from '@@/form-components/InputList/InputList';
 
 export interface VariableDefinition {
   name: string;

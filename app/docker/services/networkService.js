@@ -1,8 +1,8 @@
-import { createNetwork } from '@CE/react/docker/networks/queries/useCreateNetworkMutation';
-import { getNetwork } from '@CE/react/docker/networks/queries/useNetwork';
-import { getNetworks } from '@CE/react/docker/networks/queries/useNetworks';
-import { deleteNetwork } from '@CE/react/docker/networks/queries/useDeleteNetworkMutation';
-import { connectContainer } from '@CE/react/docker/networks/queries/useConnectContainerMutation';
+import { createNetwork } from '@/react/docker/networks/queries/useCreateNetworkMutation';
+import { getNetwork } from '@/react/docker/networks/queries/useNetwork';
+import { getNetworks } from '@/react/docker/networks/queries/useNetworks';
+import { deleteNetwork } from '@/react/docker/networks/queries/useDeleteNetworkMutation';
+import { connectContainer } from '@/react/docker/networks/queries/useConnectContainerMutation';
 
 import { NetworkViewModel } from '../models/network';
 

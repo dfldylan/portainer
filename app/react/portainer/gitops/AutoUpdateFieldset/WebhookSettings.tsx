@@ -1,8 +1,8 @@
-import { truncateLeftRight } from '@CE/portainer/filters/filters';
+import { truncateLeftRight } from '@/portainer/filters/filters';
 
-import { HelpLink } from '@@CE/HelpLink';
-import { CopyButton } from '@@CE/buttons';
-import { FormControl } from '@@CE/form-components/FormControl';
+import { HelpLink } from '@@/HelpLink';
+import { CopyButton } from '@@/buttons';
+import { FormControl } from '@@/form-components/FormControl';
 
 export function WebhookSettings({
   value,

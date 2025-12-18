@@ -2,15 +2,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Users } from 'lucide-react';
 import { ColumnDef } from '@tanstack/react-table';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
-import { Team, TeamId } from '@CE/react/portainer/users/teams/types';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { promiseSequence } from '@/portainer/helpers/promise-utils';
+import { Team, TeamId } from '@/react/portainer/users/teams/types';
 
-import { Datatable } from '@@CE/datatables';
-import { buildNameColumn } from '@@CE/datatables/buildNameColumn';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Datatable } from '@@/datatables';
+import { buildNameColumn } from '@@/datatables/buildNameColumn';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { deleteTeam } from '../../queries/useDeleteTeamMutation';
 

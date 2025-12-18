@@ -2,17 +2,17 @@ import { Bell } from 'lucide-react';
 import { useStore } from 'zustand';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
-import { react2angular } from '@CE/react-tools/react2angular';
-import { useUser } from '@CE/react/hooks/useUser';
-import { withUIRouter } from '@CE/react-tools/withUIRouter';
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
+import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { react2angular } from '@/react-tools/react2angular';
+import { useUser } from '@/react/hooks/useUser';
+import { withUIRouter } from '@/react-tools/withUIRouter';
+import { withReactQuery } from '@/react-tools/withReactQuery';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Datatable } from '@@CE/datatables';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { PageHeader } from '@@/PageHeader';
+import { Datatable } from '@@/datatables';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { notificationsStore } from './notifications-store';
 import { ToastNotification } from './types';

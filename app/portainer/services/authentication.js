@@ -1,4 +1,4 @@
-import { hasAuthorizations as useUserHasAuthorization } from '@CE/react/hooks/useUser';
+import { hasAuthorizations as useUserHasAuthorization } from '@/react/hooks/useUser';
 import { getCurrentUser } from '../users/queries/useLoadCurrentUser';
 import * as userHelpers from '../users/user.helpers';
 import { clear as clearSessionStorage } from './session-storage';

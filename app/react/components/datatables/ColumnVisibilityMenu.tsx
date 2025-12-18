@@ -4,7 +4,7 @@ import { Menu, MenuButton, MenuList } from '@reach/menu-button';
 import { Columns } from 'lucide-react';
 import { Table } from '@tanstack/react-table';
 
-import { Checkbox } from '@@CE/form-components/Checkbox';
+import { Checkbox } from '@@/form-components/Checkbox';
 
 interface Props<D extends object> {
   onChange: (value: string[]) => void;

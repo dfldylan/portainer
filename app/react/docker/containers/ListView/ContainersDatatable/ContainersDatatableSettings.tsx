@@ -1,5 +1,5 @@
-import { Checkbox } from '@@CE/form-components/Checkbox';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
+import { Checkbox } from '@@/form-components/Checkbox';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
 
 import { TableSettings } from './types';
 import { TRUNCATE_LENGTH } from './datatable-store';

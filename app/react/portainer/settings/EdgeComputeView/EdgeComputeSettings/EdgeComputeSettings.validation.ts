@@ -1,8 +1,8 @@
 import { boolean, object, SchemaOf, string } from 'yup';
 
-import { validation as tunnelValidation } from '@CE/react/portainer/common/PortainerTunnelAddrField';
-import { validation as urlValidation } from '@CE/react/portainer/common/PortainerUrlField';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { validation as tunnelValidation } from '@/react/portainer/common/PortainerTunnelAddrField';
+import { validation as urlValidation } from '@/react/portainer/common/PortainerUrlField';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
 import { FormValues } from './types';
 

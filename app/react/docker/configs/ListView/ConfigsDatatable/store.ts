@@ -2,7 +2,7 @@ import {
   createPersistedStore,
   refreshableSettings,
   TableSettingsWithRefreshable,
-} from '@@CE/datatables/types';
+} from '@@/datatables/types';
 
 export function createStore(storageKey: string) {
   return createPersistedStore<TableSettingsWithRefreshable>(

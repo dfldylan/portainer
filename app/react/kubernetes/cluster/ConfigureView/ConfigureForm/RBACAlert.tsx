@@ -1,4 +1,4 @@
-import { Alert } from '@@CE/Alert';
+import { Alert } from '@@/Alert';
 
 export function RBACAlert() {
   return (

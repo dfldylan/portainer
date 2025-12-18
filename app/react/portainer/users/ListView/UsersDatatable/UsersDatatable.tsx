@@ -2,22 +2,22 @@ import { User as UserIcon } from 'lucide-react';
 import { useMemo } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useUsers } from '@CE/portainer/users/queries';
-import { AuthenticationMethod } from '@CE/react/portainer/settings/types';
-import { useSettings } from '@CE/react/portainer/settings/queries';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useUsers } from '@/portainer/users/queries';
+import { AuthenticationMethod } from '@/react/portainer/settings/types';
+import { useSettings } from '@/react/portainer/settings/queries';
+import { notifySuccess } from '@/portainer/services/notifications';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
-import { processItemsInBatches } from '@CE/react/common/processItemsInBatches';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
+} from '@/react-tools/react-query';
+import { processItemsInBatches } from '@/react/common/processItemsInBatches';
+import { useCurrentUser } from '@/react/hooks/useUser';
 
-import { Datatable } from '@@CE/datatables';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Datatable } from '@@/datatables';
+import { useTableState } from '@@/datatables/useTableState';
+import { createPersistedStore } from '@@/datatables/types';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { useTeamMemberships } from '../../teams/queries/useTeamMemberships';
 import { TeamId, TeamRole } from '../../teams/types';

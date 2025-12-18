@@ -1,13 +1,13 @@
-import Route from '@CE/assets/ico/route.svg?c';
+import Route from '@/assets/ico/route.svg?c';
 
-import { confirm } from '@@CE/modals/confirm';
-import { ModalType } from '@@CE/modals';
-import { Datatable } from '@@CE/datatables';
-import { Button, ButtonGroup } from '@@CE/buttons';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { buildConfirmButton } from '@@CE/modals/utils';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { confirm } from '@@/modals/confirm';
+import { ModalType } from '@@/modals';
+import { Datatable } from '@@/datatables';
+import { Button, ButtonGroup } from '@@/buttons';
+import { createPersistedStore } from '@@/datatables/types';
+import { buildConfirmButton } from '@@/modals/utils';
+import { useTableState } from '@@/datatables/useTableState';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { IngressControllerClassMap } from '../types';
 

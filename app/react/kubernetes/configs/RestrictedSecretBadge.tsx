@@ -1,5 +1,5 @@
-import { Badge } from '@@CE/Badge';
-import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
+import { Badge } from '@@/Badge';
+import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
 
 export function RestrictedSecretBadge() {
   return (

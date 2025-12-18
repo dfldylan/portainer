@@ -1,17 +1,17 @@
 import { List } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
-import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { isSystemNamespace } from '@CE/react/kubernetes/namespaces/queries/useIsSystemNamespace';
-import { useNamespacesQuery } from '@CE/react/kubernetes/namespaces/queries/useNamespacesQuery';
-import { DefaultDatatableSettings } from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
-import { useIngresses } from '@CE/react/kubernetes/ingresses/queries';
+import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
+import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { isSystemNamespace } from '@/react/kubernetes/namespaces/queries/useIsSystemNamespace';
+import { useNamespacesQuery } from '@/react/kubernetes/namespaces/queries/useNamespacesQuery';
+import { DefaultDatatableSettings } from '@/react/kubernetes/datatables/DefaultDatatableSettings';
+import { useIngresses } from '@/react/kubernetes/ingresses/queries';
 
-import { ExpandableDatatable } from '@@CE/datatables/ExpandableDatatable';
-import { TableSettingsMenu } from '@@CE/datatables';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { ExpandableDatatable } from '@@/datatables/ExpandableDatatable';
+import { TableSettingsMenu } from '@@/datatables';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { useApplications } from '../../queries/useApplications';
 import { ApplicationsTableSettings } from '../useKubeAppsTableStore';

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { useTags } from '@CE/portainer/tags/queries';
+import { useTags } from '@/portainer/tags/queries';
 
 import { useAgentVersionsList } from '../../environments/queries/useAgentVersionsList';
 import { EnvironmentStatus, PlatformType } from '../../environments/types';

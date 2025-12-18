@@ -1,8 +1,8 @@
 import _ from 'lodash-es';
 import angular from 'angular';
 
-import { RoleTypes } from '@CE/portainer/rbac/models/role';
-import { isLimitedToBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { RoleTypes } from '@/portainer/rbac/models/role';
+import { isLimitedToBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
 class PorAccessManagementController {
   /* @ngInject */

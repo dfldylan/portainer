@@ -1,11 +1,11 @@
 import { useField } from 'formik';
 
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { SwitchField } from '@@CE/form-components/SwitchField';
-import { Input } from '@@CE/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { SwitchField } from '@@/form-components/SwitchField';
+import { Input } from '@@/form-components/Input';
 
 import { useToggledValue } from '../useToggledValue';
 

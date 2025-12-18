@@ -1,11 +1,11 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { isAgentEnvironment } from '@CE/react/portainer/environments/utils';
-import { DecoratedTask } from '@CE/react/docker/services/ItemView/TasksDatatable/types';
-import { columnHelper } from '@CE/react/docker/services/ItemView/TasksDatatable/columns/helper';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { isAgentEnvironment } from '@/react/portainer/environments/utils';
+import { DecoratedTask } from '@/react/docker/services/ItemView/TasksDatatable/types';
+import { columnHelper } from '@/react/docker/services/ItemView/TasksDatatable/columns/helper';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 export const task = columnHelper.accessor('Id', {
   header: 'Task',

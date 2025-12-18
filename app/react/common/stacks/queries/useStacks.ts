@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { withError } from '@CE/react-tools/react-query';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { Stack } from '@CE/react/common/stacks/types';
+import { withError } from '@/react-tools/react-query';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { Stack } from '@/react/common/stacks/types';
 
 import { buildStackUrl } from './buildUrl';
 import { queryKeys } from './query-keys';

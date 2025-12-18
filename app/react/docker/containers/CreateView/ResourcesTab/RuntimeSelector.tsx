@@ -1,7 +1,7 @@
-import { useInfo } from '@CE/react/docker/proxy/queries/useInfo';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useInfo } from '@/react/docker/proxy/queries/useInfo';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
+import { PortainerSelect } from '@@/form-components/PortainerSelect';
 
 export function RuntimeSelector({
   value,

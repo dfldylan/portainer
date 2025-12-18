@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { AriaAttributes, PropsWithChildren } from 'react';
 
-import { Icon, IconProps } from '@@CE/Icon';
+import { Icon, IconProps } from '@@/Icon';
 
 export type StatusBadgeType =
   | 'success'

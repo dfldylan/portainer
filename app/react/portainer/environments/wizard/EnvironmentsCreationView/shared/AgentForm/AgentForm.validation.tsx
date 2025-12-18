@@ -1,6 +1,6 @@
 import { mixed, object, SchemaOf, string } from 'yup';
 
-import { CreateAgentEnvironmentValues } from '@CE/react/portainer/environments/environment.service/create';
+import { CreateAgentEnvironmentValues } from '@/react/portainer/environments/environment.service/create';
 
 import { metadataValidation } from '../MetadataFieldset/validation';
 import { useNameValidation } from '../NameField';

@@ -2,26 +2,23 @@ import { User } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { Authorized } from '@CE/react/hooks/useUser';
-import {
-  notifyError,
-  notifySuccess,
-} from '@CE/portainer/services/notifications';
-import { SystemResourceDescription } from '@CE/react/kubernetes/datatables/SystemResourceDescription';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { Authorized } from '@/react/hooks/useUser';
+import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { SystemResourceDescription } from '@/react/kubernetes/datatables/SystemResourceDescription';
 import {
   DefaultDatatableSettings,
   TableSettings as KubeTableSettings,
-} from '@CE/react/kubernetes/datatables/DefaultDatatableSettings';
-import { CreateFromManifestButton } from '@CE/react/kubernetes/components/CreateFromManifestButton';
-import { useKubeStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
+} from '@/react/kubernetes/datatables/DefaultDatatableSettings';
+import { CreateFromManifestButton } from '@/react/kubernetes/components/CreateFromManifestButton';
+import { useKubeStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
 
-import { Datatable, TableSettingsMenu } from '@@CE/datatables';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Datatable, TableSettingsMenu } from '@@/datatables';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 import {
   type FilteredColumnsTableSettings,
   filteredColumnsSettings,
-} from '@@CE/datatables/types';
+} from '@@/datatables/types';
 
 import { ServiceAccount } from '../types';
 

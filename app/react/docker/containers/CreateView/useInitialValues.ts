@@ -1,47 +1,47 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { useIsPodman } from '@CE/react/portainer/environments/queries/useIsPodman';
+import { useIsPodman } from '@/react/portainer/environments/queries/useIsPodman';
 import {
   BaseFormValues,
   baseFormUtils,
-} from '@CE/react/docker/containers/CreateView/BaseForm';
+} from '@/react/docker/containers/CreateView/BaseForm';
 import {
   CapabilitiesTabValues,
   capabilitiesTabUtils,
-} from '@CE/react/docker/containers/CreateView/CapabilitiesTab';
+} from '@/react/docker/containers/CreateView/CapabilitiesTab';
 import {
   CommandsTabValues,
   commandsTabUtils,
-} from '@CE/react/docker/containers/CreateView/CommandsTab';
+} from '@/react/docker/containers/CreateView/CommandsTab';
 import {
   LabelsTabValues,
   labelsTabUtils,
-} from '@CE/react/docker/containers/CreateView/LabelsTab';
+} from '@/react/docker/containers/CreateView/LabelsTab';
 import {
   NetworkTabValues,
   networkTabUtils,
-} from '@CE/react/docker/containers/CreateView/NetworkTab';
+} from '@/react/docker/containers/CreateView/NetworkTab';
 import {
   ResourcesTabValues,
   resourcesTabUtils,
-} from '@CE/react/docker/containers/CreateView/ResourcesTab';
+} from '@/react/docker/containers/CreateView/ResourcesTab';
 import {
   RestartPolicy,
   restartPolicyTabUtils,
-} from '@CE/react/docker/containers/CreateView/RestartPolicyTab';
+} from '@/react/docker/containers/CreateView/RestartPolicyTab';
 import {
   VolumesTabValues,
   volumesTabUtils,
-} from '@CE/react/docker/containers/CreateView/VolumesTab';
-import { envVarsTabUtils } from '@CE/react/docker/containers/CreateView/EnvVarsTab';
-import { UserId } from '@CE/portainer/users/types';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { useWebhooks } from '@CE/react/portainer/webhooks/useWebhooks';
-import { useEnvironmentRegistries } from '@CE/react/portainer/environments/queries/useEnvironmentRegistries';
+} from '@/react/docker/containers/CreateView/VolumesTab';
+import { envVarsTabUtils } from '@/react/docker/containers/CreateView/EnvVarsTab';
+import { UserId } from '@/portainer/users/types';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { useWebhooks } from '@/react/portainer/webhooks/useWebhooks';
+import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
 
-import { getImageConfig } from '@@CE/ImageConfigFieldset/getImageConfig';
-import { EnvVarValues } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { getImageConfig } from '@@/ImageConfigFieldset/getImageConfig';
+import { EnvVarValues } from '@@/form-components/EnvironmentVariablesFieldset';
 
 import { useNetworksForSelector } from '../components/NetworkSelector';
 import { useContainers } from '../queries/useContainers';

@@ -7,10 +7,10 @@ import {
   PropsWithChildren,
 } from 'react';
 
-import { isEdgeAdmin, isPureAdmin } from '@CE/portainer/users/user.helpers';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { User } from '@CE/portainer/users/types';
-import { useLoadCurrentUser } from '@CE/portainer/users/queries/useLoadCurrentUser';
+import { isEdgeAdmin, isPureAdmin } from '@/portainer/users/user.helpers';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { User } from '@/portainer/users/types';
+import { useLoadCurrentUser } from '@/portainer/users/queries/useLoadCurrentUser';
 
 import { useEnvironment } from '../portainer/environments/queries';
 import { isBE } from '../portainer/feature-flags/feature-flags.service';

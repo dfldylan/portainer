@@ -1,13 +1,13 @@
 import { Edit, Plus } from 'lucide-react';
 import { useState } from 'react';
 
-import { readFileAsText } from '@CE/portainer/services/fileUploadReact';
+import { readFileAsText } from '@/portainer/services/fileUploadReact';
 
-import { Button } from '@@CE/buttons';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { FileUploadField } from '@@CE/form-components/FileUpload';
-import { InputList } from '@@CE/form-components/InputList';
-import { ArrayError } from '@@CE/form-components/InputList/InputList';
+import { Button } from '@@/buttons';
+import { TextTip } from '@@/Tip/TextTip';
+import { FileUploadField } from '@@/form-components/FileUpload';
+import { InputList } from '@@/form-components/InputList';
+import { ArrayError } from '@@/form-components/InputList/InputList';
 
 import type { Values } from './types';
 import { parseDotEnvFile } from './utils';

@@ -2,11 +2,11 @@ import { ColumnDef } from '@tanstack/react-table';
 import { List } from 'lucide-react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { Datatable } from '@@CE/datatables';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
+import { Datatable } from '@@/datatables';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { useContainerTop } from '../queries/useContainerTop';
 import { ContainerProcesses } from '../queries/types';

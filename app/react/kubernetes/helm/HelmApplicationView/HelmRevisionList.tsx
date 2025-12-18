@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { History } from 'lucide-react';
 
-import { WidgetIcon } from '@@CE/Widget/WidgetIcon';
+import { WidgetIcon } from '@@/Widget/WidgetIcon';
 
 import { HelmRelease } from '../types';
 

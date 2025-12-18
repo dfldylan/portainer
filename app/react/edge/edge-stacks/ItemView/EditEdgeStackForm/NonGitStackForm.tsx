@@ -4,33 +4,33 @@ import { array, boolean, number, object, SchemaOf, string } from 'yup';
 import { useRouter } from '@uirouter/react';
 import _ from 'lodash';
 
-import { EdgeGroupsSelector } from '@CE/react/edge/edge-stacks/components/EdgeGroupsSelector';
-import { EdgeStackDeploymentTypeSelector } from '@CE/react/edge/edge-stacks/components/EdgeStackDeploymentTypeSelector';
+import { EdgeGroupsSelector } from '@/react/edge/edge-stacks/components/EdgeGroupsSelector';
+import { EdgeStackDeploymentTypeSelector } from '@/react/edge/edge-stacks/components/EdgeStackDeploymentTypeSelector';
 import {
   DeploymentType,
   EdgeStack,
   StaggerOption,
-} from '@CE/react/edge/edge-stacks/types';
-import { EnvironmentType } from '@CE/react/portainer/environments/types';
-import { WebhookSettings } from '@CE/react/portainer/gitops/AutoUpdateFieldset/WebhookSettings';
+} from '@/react/edge/edge-stacks/types';
+import { EnvironmentType } from '@/react/portainer/environments/types';
+import { WebhookSettings } from '@/react/portainer/gitops/AutoUpdateFieldset/WebhookSettings';
 import {
   baseEdgeStackWebhookUrl,
   createWebhookId,
-} from '@CE/portainer/helpers/webhookHelper';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { confirmStackUpdate } from '@CE/react/common/stacks/common/confirm-stack-update';
+} from '@/portainer/helpers/webhookHelper';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { SwitchField } from '@@CE/form-components/SwitchField';
-import { LoadingButton } from '@@CE/buttons';
-import { FormError } from '@@CE/form-components/FormError';
+import { FormSection } from '@@/form-components/FormSection';
+import { TextTip } from '@@/Tip/TextTip';
+import { SwitchField } from '@@/form-components/SwitchField';
+import { LoadingButton } from '@@/buttons';
+import { FormError } from '@@/form-components/FormError';
 import {
   EnvironmentVariablesPanel,
   envVarValidation,
-} from '@@CE/form-components/EnvironmentVariablesFieldset';
-import { usePreventExit } from '@@CE/WebEditorForm';
+} from '@@/form-components/EnvironmentVariablesFieldset';
+import { usePreventExit } from '@@/WebEditorForm';
 
 import {
   getEdgeStackFile,

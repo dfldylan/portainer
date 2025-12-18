@@ -2,12 +2,12 @@ import { FormikErrors } from 'formik';
 import { ChangeEvent } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 
-import { FormError } from '@@CE/form-components/FormError';
-import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
-import { Button } from '@@CE/buttons';
-import { Card } from '@@CE/Card';
-import { Widget } from '@@CE/Widget';
-import { isErrorType } from '@@CE/form-components/formikUtils';
+import { FormError } from '@@/form-components/FormError';
+import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
+import { Button } from '@@/buttons';
+import { Card } from '@@/Card';
+import { Widget } from '@@/Widget';
+import { isErrorType } from '@@/form-components/formikUtils';
 
 import { newPort } from '../utils';
 import {

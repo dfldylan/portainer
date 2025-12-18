@@ -1,7 +1,7 @@
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { InputLabeled } from '@@CE/form-components/Input/InputLabeled';
-import { Checkbox } from '@@CE/form-components/Checkbox';
+import { InputLabeled } from '@@/form-components/Input/InputLabeled';
+import { Checkbox } from '@@/form-components/Checkbox';
 
 import { Range, isRange } from './types';
 

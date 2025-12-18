@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { withGlobalError } from '@CE/react-tools/react-query';
-import { StackType } from '@CE/react/common/stacks/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { withGlobalError } from '@/react-tools/react-query';
+import { StackType } from '@/react/common/stacks/types';
 
 import { CustomTemplate } from '../types';
 

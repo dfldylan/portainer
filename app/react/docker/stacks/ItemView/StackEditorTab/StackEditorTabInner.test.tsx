@@ -5,22 +5,22 @@ import { vi } from 'vitest';
 import { ComponentProps } from 'react';
 import { JSONSchema7 } from 'json-schema';
 
-import { StackType } from '@CE/react/common/stacks/types';
-import { EnvironmentType } from '@CE/react/portainer/environments/types';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { createMockUsers } from '@CE/react-tools/test-mocks';
-import { Role } from '@CE/portainer/users/types';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { StackType } from '@/react/common/stacks/types';
+import { EnvironmentType } from '@/react/portainer/environments/types';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { createMockUsers } from '@/react-tools/test-mocks';
+import { Role } from '@/portainer/users/types';
+import { withTestRouter } from '@/react/test-utils/withRouter';
 
-import { usePreventExit } from '@@CE/WebEditorForm';
+import { usePreventExit } from '@@/WebEditorForm';
 
 import { StackEditorTabInner } from './StackEditorTabInner';
 import { StackEditorFormValues } from './StackEditorTab.types';
 import { useVersionedStackFile } from './useVersionedStackFile';
 
 // Mock the hooks
-vi.mock('@@CE/WebEditorForm', () => ({
+vi.mock('@@/WebEditorForm', () => ({
   usePreventExit: vi.fn(),
 }));
 

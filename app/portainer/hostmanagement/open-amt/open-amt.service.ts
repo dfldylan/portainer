@@ -1,11 +1,11 @@
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 import {
   OpenAMTConfiguration,
   AMTInformation,
   AuthorizationResponse,
   DeviceFeatures,
-} from '@CE/react/edge/edge-devices/open-amt/types';
+} from '@/react/edge/edge-devices/open-amt/types';
 
 const BASE_URL = '/open_amt';
 

@@ -1,6 +1,6 @@
 import { array, string, boolean, object } from 'yup';
 
-import { buildUniquenessTest } from '@@CE/form-components/validate-unique';
+import { buildUniquenessTest } from '@@/form-components/validate-unique';
 
 // https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set
 // Labels are key/value pairs. Valid label keys have two segments: an optional prefix and name, separated by a slash (/). The name segment is required and must be 63 characters or less, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between. The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots (.), not longer than 253 characters in total, followed by a slash (/).

@@ -1,9 +1,9 @@
 import { useRouter } from '@uirouter/react';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget } from '@@CE/Widget';
+import { PageHeader } from '@@/PageHeader';
+import { Widget } from '@@/Widget';
 
 import { useCreateEdgeGroupMutation } from '../queries/useCreateEdgeGroupMutation';
 import { EdgeGroupForm } from '../components/EdgeGroupForm/EdgeGroupForm';

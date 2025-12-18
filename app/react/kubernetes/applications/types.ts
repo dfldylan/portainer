@@ -12,7 +12,7 @@ import { Container, Pod, PodList, Volume } from 'kubernetes-types/core/v1';
 import { RawExtension } from 'kubernetes-types/runtime';
 import { OwnerReference } from 'kubernetes-types/meta/v1';
 
-import { EnvVarValues } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { EnvVarValues } from '@@/form-components/EnvironmentVariablesFieldset';
 
 import { Annotation } from '../annotations/types';
 import { Ingress } from '../ingresses/types';

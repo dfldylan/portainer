@@ -5,7 +5,7 @@ import {
   createPersistedStore,
   hiddenColumnsSettings,
   refreshableSettings,
-} from '@@CE/datatables/types';
+} from '@@/datatables/types';
 
 export interface TableSettings
   extends BasicTableSettings,

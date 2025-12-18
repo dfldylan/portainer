@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { Pair } from '@CE/react/portainer/settings/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { Pair } from '@/react/portainer/settings/types';
 import {
   GitFormModel,
   RelativePathModel,
-} from '@CE/react/portainer/gitops/types';
-import { applyResourceControl } from '@CE/react/portainer/access-control/access-control.service';
-import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
-import PortainerError from '@CE/portainer/error';
-import { withError, withInvalidate } from '@CE/react-tools/react-query';
+} from '@/react/portainer/gitops/types';
+import { applyResourceControl } from '@/react/portainer/access-control/access-control.service';
+import { AccessControlFormData } from '@/react/portainer/access-control/types';
+import PortainerError from '@/portainer/error';
+import { withError, withInvalidate } from '@/react-tools/react-query';
 
 import { queryKeys } from '../query-keys';
 

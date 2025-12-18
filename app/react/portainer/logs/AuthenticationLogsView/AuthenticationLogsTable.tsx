@@ -1,6 +1,6 @@
 import { History } from 'lucide-react';
 
-import { Datatable } from '@@CE/datatables';
+import { Datatable } from '@@/datatables';
 
 import { AuthLog } from './types';
 import { columns } from './columns';

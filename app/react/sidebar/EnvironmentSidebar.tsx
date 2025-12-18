@@ -8,12 +8,12 @@ import {
   PlatformType,
   EnvironmentId,
   Environment,
-} from '@CE/react/portainer/environments/types';
-import { getPlatformType } from '@CE/react/portainer/environments/utils';
-import { useEnvironment } from '@CE/react/portainer/environments/queries/useEnvironment';
-import { environmentStore } from '@CE/react/hooks/current-environment-store';
+} from '@/react/portainer/environments/types';
+import { getPlatformType } from '@/react/portainer/environments/utils';
+import { useEnvironment } from '@/react/portainer/environments/queries/useEnvironment';
+import { environmentStore } from '@/react/hooks/current-environment-store';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { getPlatformIcon } from '../portainer/environments/utils/get-platform-icon';
 

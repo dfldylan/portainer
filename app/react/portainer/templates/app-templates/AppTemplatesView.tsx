@@ -1,10 +1,10 @@
-import { useParamState } from '@CE/react/hooks/useParamState';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useInfo } from '@CE/react/docker/proxy/queries/useInfo';
-import { useApiVersion } from '@CE/react/docker/proxy/queries/useVersion';
-import { useAuthorizations } from '@CE/react/hooks/useUser';
+import { useParamState } from '@/react/hooks/useParamState';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useInfo } from '@/react/docker/proxy/queries/useInfo';
+import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
+import { useAuthorizations } from '@/react/hooks/useUser';
 
-import { PageHeader } from '@@CE/PageHeader';
+import { PageHeader } from '@@/PageHeader';
 
 import { TemplateType } from './types';
 import { useAppTemplates } from './queries/useAppTemplates';

@@ -3,12 +3,12 @@ import { Asterisk, Box, Boxes, Database } from 'lucide-react';
 import { Container, Pod, Volume } from 'kubernetes-types/core/v1';
 import { StatefulSet } from 'kubernetes-types/apps/v1';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { Icon } from '@@CE/Icon';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { Link } from '@@CE/Link';
+import { Icon } from '@@/Icon';
+import { TextTip } from '@@/Tip/TextTip';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { Link } from '@@/Link';
 
 import { Application } from '../../types';
 import { applicationIsKind } from '../../utils';

@@ -1,9 +1,9 @@
 import { Box } from 'lucide-react';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Widget } from '@@CE/Widget';
+import { TextTip } from '@@/Tip/TextTip';
+import { Widget } from '@@/Widget';
 
 import { useSettings, useUpdateSettingsMutation } from '../../queries';
 import { Pair } from '../../types';

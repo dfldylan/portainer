@@ -1,10 +1,10 @@
 import { Minimize2 } from 'lucide-react';
 import { useState } from 'react';
 
-import { ServiceViewModel } from '@CE/docker/models/service';
-import { Authorized } from '@CE/react/hooks/useUser';
+import { ServiceViewModel } from '@/docker/models/service';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { Button } from '@@CE/buttons';
+import { Button } from '@@/buttons';
 
 import { ScaleForm } from './ScaleForm';
 

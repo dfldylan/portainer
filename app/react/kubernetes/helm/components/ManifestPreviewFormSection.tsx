@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { AlertTriangle } from 'lucide-react';
 
-import { useDebouncedValue } from '@CE/react/hooks/useDebouncedValue';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { useDebouncedValue } from '@/react/hooks/useDebouncedValue';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { ExpandableMessageByLines } from '@@CE/ExpandableMessageByLines';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { CodeEditor } from '@@CE/CodeEditor';
-import { DiffViewer } from '@@CE/CodeEditor/DiffViewer';
-import { InlineLoader } from '@@CE/InlineLoader';
-import { Alert } from '@@CE/Alert';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Badge } from '@@CE/Badge';
-import { Icon } from '@@CE/Icon';
+import { ExpandableMessageByLines } from '@@/ExpandableMessageByLines';
+import { FormSection } from '@@/form-components/FormSection';
+import { CodeEditor } from '@@/CodeEditor';
+import { DiffViewer } from '@@/CodeEditor/DiffViewer';
+import { InlineLoader } from '@@/InlineLoader';
+import { Alert } from '@@/Alert';
+import { TextTip } from '@@/Tip/TextTip';
+import { Badge } from '@@/Badge';
+import { Icon } from '@@/Icon';
 
 import { useHelmDryRun } from '../helmReleaseQueries/useHelmDryRun';
 import { UpdateHelmReleasePayload } from '../types';

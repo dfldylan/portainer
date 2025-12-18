@@ -1,9 +1,9 @@
 import { CellContext, ColumnDef } from '@tanstack/react-table';
 import { Eye, EyeOff, Users } from 'lucide-react';
 
-import { ResourceControlOwnership } from '@CE/react/portainer/access-control/types';
+import { ResourceControlOwnership } from '@/react/portainer/access-control/types';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 export interface IResource {
   ResourceControl?: {

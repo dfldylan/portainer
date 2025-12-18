@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import { PageHeader } from '@@CE/PageHeader';
+import { PageHeader } from '@@/PageHeader';
 
 import { queryKeys } from '../queries/query-keys';
 

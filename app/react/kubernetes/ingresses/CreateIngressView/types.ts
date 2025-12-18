@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { Option } from '@@CE/form-components/Input/Select';
+import { Option } from '@@/form-components/Input/Select';
 
 import { Annotation, AnnotationErrors } from '../../annotations/types';
 

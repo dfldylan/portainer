@@ -3,8 +3,8 @@ import moment from 'moment';
 import _ from 'lodash-es';
 import filesizeParser from 'filesize-parser';
 import KubernetesPodConverter from 'Kubernetes/pod/converter';
-import { getMetricsForPod } from '@CE/react/kubernetes/metrics/metrics.ts';
-import { parseCPU } from '@CE/react/kubernetes/utils';
+import { getMetricsForPod } from '@/react/kubernetes/metrics/metrics.ts';
+import { parseCPU } from '@/react/kubernetes/utils';
 
 class KubernetesApplicationStatsController {
   /* @ngInject */

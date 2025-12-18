@@ -2,10 +2,10 @@ import { renderHook } from '@testing-library/react-hooks';
 import { waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 
-import { server } from '@CE/setup-tests/server';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { Stack } from '@CE/react/common/stacks/types';
-import { ResourceControlOwnership } from '@CE/react/portainer/access-control/types';
+import { server } from '@/setup-tests/server';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { Stack } from '@/react/common/stacks/types';
+import { ResourceControlOwnership } from '@/react/portainer/access-control/types';
 
 import { useAssociateStackToEnvironmentMutation } from './useAssociateStackToEnvironmentMutation';
 

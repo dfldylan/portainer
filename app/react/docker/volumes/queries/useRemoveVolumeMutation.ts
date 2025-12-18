@@ -1,7 +1,7 @@
 import { Volume } from 'docker-types/generated/1.44';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 import { withAgentTargetHeader } from '../../proxy/queries/utils';

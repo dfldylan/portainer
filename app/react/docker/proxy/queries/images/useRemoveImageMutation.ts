@@ -1,6 +1,6 @@
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { ImageId, ImageName } from '@CE/docker/models/image';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { ImageId, ImageName } from '@/docker/models/image';
 
 import { buildDockerProxyUrl } from '../buildDockerProxyUrl';
 

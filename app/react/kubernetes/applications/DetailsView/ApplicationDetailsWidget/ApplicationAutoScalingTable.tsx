@@ -1,10 +1,10 @@
 import { Move } from 'lucide-react';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { Icon } from '@@CE/Icon';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Icon } from '@@/Icon';
+import { TextTip } from '@@/Tip/TextTip';
+import { Tooltip } from '@@/Tip/Tooltip';
 
 import { Application } from '../../types';
 import { useApplicationHorizontalPodAutoscaler } from '../../queries/useApplicationHorizontalPodAutoscaler';

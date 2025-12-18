@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { useEnvironment } from '@CE/react/portainer/environments/queries';
-import { statusIcon } from '@CE/react/docker/components/ImageStatus/helpers';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { useEnvironment } from '@/react/portainer/environments/queries';
+import { statusIcon } from '@/react/docker/components/ImageStatus/helpers';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { getStackImagesStatus } from './getStackImagesStatus';
 

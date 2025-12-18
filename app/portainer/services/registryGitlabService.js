@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-import { RegistryGitlabProject } from '@CE/react/portainer/registries/types/gitlabProject';
+import { RegistryGitlabProject } from '@/react/portainer/registries/types/gitlabProject';
 import { RegistryRepositoryGitlabViewModel } from '../models/registryRepository';
 
 angular.module('portainer.app').factory('RegistryGitlabService', [

@@ -1,6 +1,6 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { Badge } from '@@CE/Badge';
+import { Badge } from '@@/Badge';
 
 import type { IngressControllerClassMap } from '../../types';
 

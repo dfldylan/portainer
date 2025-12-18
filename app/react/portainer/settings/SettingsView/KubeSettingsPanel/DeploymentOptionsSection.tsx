@@ -1,10 +1,10 @@
 import { useFormikContext } from 'formik';
 
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
-import { isLimitedToBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { isLimitedToBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { FormSection } from '@@/form-components/FormSection';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 import { KubeNoteMinimumCharacters } from './KubeNoteMinimumCharacters';
 import { FormValues } from './types';

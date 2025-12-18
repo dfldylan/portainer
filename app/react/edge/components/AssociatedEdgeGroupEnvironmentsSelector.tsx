@@ -4,10 +4,10 @@ import {
   EdgeGroupId,
   Environment,
   EnvironmentId,
-} from '@CE/react/portainer/environments/types';
+} from '@/react/portainer/environments/types';
 
-import { FormError } from '@@CE/form-components/FormError';
-import { ArrayError } from '@@CE/form-components/InputList/InputList';
+import { FormError } from '@@/form-components/FormError';
+import { ArrayError } from '@@/form-components/InputList/InputList';
 
 import { EdgeGroupAssociationTable } from './EdgeGroupAssociationTable';
 

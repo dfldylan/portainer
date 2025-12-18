@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik';
 
-import { SwitchField } from '@@CE/form-components/SwitchField';
-import { WebEditorForm } from '@@CE/WebEditorForm';
+import { SwitchField } from '@@/form-components/SwitchField';
+import { WebEditorForm } from '@@/WebEditorForm';
 
 import { DeploymentType } from '../../types';
 

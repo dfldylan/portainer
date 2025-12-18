@@ -4,10 +4,10 @@ import { CellContext } from '@tanstack/react-table';
 import {
   type ContainerListViewModel,
   ContainerStatus,
-} from '@CE/react/docker/containers/types';
+} from '@/react/docker/containers/types';
 
-import { filterHOC } from '@@CE/datatables/Filter';
-import { multiple } from '@@CE/datatables/filter-types';
+import { filterHOC } from '@@/datatables/Filter';
+import { multiple } from '@@/datatables/filter-types';
 
 import { columnHelper } from './helper';
 

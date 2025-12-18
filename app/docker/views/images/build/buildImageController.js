@@ -1,5 +1,5 @@
-import { confirmWebEditorDiscard } from '@@CE/modals/confirm';
-import { editor, upload, url } from '@@CE/BoxSelector/common-options/build-methods';
+import { confirmWebEditorDiscard } from '@@/modals/confirm';
+import { editor, upload, url } from '@@/BoxSelector/common-options/build-methods';
 
 angular.module('portainer.docker').controller('BuildImageController', BuildImageController);
 

@@ -1,7 +1,7 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { Link } from '@@CE/Link';
-import { Badge } from '@@CE/Badge';
+import { Link } from '@@/Link';
+import { Badge } from '@@/Badge';
 
 import { EdgeGroupListItemResponse } from '../../queries/useEdgeGroups';
 

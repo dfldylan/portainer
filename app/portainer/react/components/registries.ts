@@ -1,12 +1,12 @@
 import angular from 'angular';
 
-import { r2a } from '@CE/react-tools/react2angular';
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
-import { withUIRouter } from '@CE/react-tools/withUIRouter';
-import { RepositoriesDatatable } from '@CE/react/portainer/registries/repositories/ListView/RepositoriesDatatable';
-import { TagsDatatable } from '@CE/react/portainer/registries/repositories/ItemView/TagsDatatable/TagsDatatable';
-import { GitlabProjectTable } from '@CE/react/portainer/registries/CreateView/GitlabProjectsTable/GitlabProjectsTable';
-import { RegistryFormDockerhub } from '@CE/react/portainer/registries/CreateView/RegistryFormDockerhub/RegistryFormDockerhub';
+import { r2a } from '@/react-tools/react2angular';
+import { withReactQuery } from '@/react-tools/withReactQuery';
+import { withUIRouter } from '@/react-tools/withUIRouter';
+import { RepositoriesDatatable } from '@/react/portainer/registries/repositories/ListView/RepositoriesDatatable';
+import { TagsDatatable } from '@/react/portainer/registries/repositories/ItemView/TagsDatatable/TagsDatatable';
+import { GitlabProjectTable } from '@/react/portainer/registries/CreateView/GitlabProjectsTable/GitlabProjectsTable';
+import { RegistryFormDockerhub } from '@/react/portainer/registries/CreateView/RegistryFormDockerhub/RegistryFormDockerhub';
 
 export const registriesModule = angular
   .module('portainer.app.react.components.registries', [])

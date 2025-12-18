@@ -1,9 +1,9 @@
 import { LayoutGrid } from 'lucide-react';
 
-import Linux from '@CE/assets/ico/linux.svg?c';
+import Linux from '@/assets/ico/linux.svg?c';
 
-import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
-import { Icon } from '@@CE/Icon';
+import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
+import { Icon } from '@@/Icon';
 
 import { OS } from './types';
 

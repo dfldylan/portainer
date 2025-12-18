@@ -1,13 +1,13 @@
 import { HardDrive, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
-import { useEnvironmentList } from '@CE/react/portainer/environments/queries';
-import { useGroups } from '@CE/react/portainer/environments/environment-groups/queries';
+import { useEnvironmentList } from '@/react/portainer/environments/queries';
+import { useGroups } from '@/react/portainer/environments/environment-groups/queries';
 
-import { Datatable } from '@@CE/datatables';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { AddButton, Button } from '@@CE/buttons';
-import { useTableState } from '@@CE/datatables/useTableState';
+import { Datatable } from '@@/datatables';
+import { createPersistedStore } from '@@/datatables/types';
+import { AddButton, Button } from '@@/buttons';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { isBE } from '../../feature-flags/feature-flags.service';
 import { isSortType } from '../queries/useEnvironmentList';

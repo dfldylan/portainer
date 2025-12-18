@@ -1,7 +1,7 @@
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { keyBuilder } from '@CE/react/hooks/useLocalStorage';
+import { keyBuilder } from '@/react/hooks/useLocalStorage';
 
 interface InsightsStore {
   insightIDsClosed: string[];

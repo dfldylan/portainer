@@ -1,4 +1,4 @@
-import { humanize } from '@CE/portainer/filters/filters';
+import { humanize } from '@/portainer/filters/filters';
 
 import { columnHelper } from './helper';
 

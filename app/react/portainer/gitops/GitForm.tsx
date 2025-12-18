@@ -2,15 +2,15 @@ import { array, boolean, object, SchemaOf, string } from 'yup';
 import { FormikErrors } from 'formik';
 import { useState } from 'react';
 
-import { ComposePathField } from '@CE/react/portainer/gitops/ComposePathField';
-import { RefField } from '@CE/react/portainer/gitops/RefField';
-import { GitFormUrlField } from '@CE/react/portainer/gitops/GitFormUrlField';
-import { DeployMethod, GitFormModel } from '@CE/react/portainer/gitops/types';
-import { TimeWindowDisplay } from '@CE/react/portainer/gitops/TimeWindowDisplay';
+import { ComposePathField } from '@/react/portainer/gitops/ComposePathField';
+import { RefField } from '@/react/portainer/gitops/RefField';
+import { GitFormUrlField } from '@/react/portainer/gitops/GitFormUrlField';
+import { DeployMethod, GitFormModel } from '@/react/portainer/gitops/types';
+import { TimeWindowDisplay } from '@/react/portainer/gitops/TimeWindowDisplay';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { validateForm } from '@@CE/form-components/validate-form';
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { FormSection } from '@@/form-components/FormSection';
+import { validateForm } from '@@/form-components/validate-form';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 import { GitCredential } from '../account/git-credentials/types';
 

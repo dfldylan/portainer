@@ -1,8 +1,8 @@
-import { Options } from '@CE/react/edge/components/useIntervalOptions';
-import { OAuthStyle } from '@CE/react/portainer/settings/types';
+import { Options } from '@/react/edge/components/useIntervalOptions';
+import { OAuthStyle } from '@/react/portainer/settings/types';
 
-import { FormControl, Size } from '@@CE/form-components/FormControl';
-import { Select } from '@@CE/form-components/Input';
+import { FormControl, Size } from '@@/form-components/FormControl';
+import { Select } from '@@/form-components/Input';
 
 interface Props {
   value: OAuthStyle;

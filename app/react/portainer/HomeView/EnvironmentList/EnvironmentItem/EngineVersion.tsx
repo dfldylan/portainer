@@ -1,12 +1,12 @@
-import { DockerSnapshot } from '@CE/react/docker/snapshots/types';
+import { DockerSnapshot } from '@/react/docker/snapshots/types';
 import {
   Environment,
   PlatformType,
   KubernetesSnapshot,
   ContainerEngine,
-} from '@CE/react/portainer/environments/types';
-import { getPlatformType } from '@CE/react/portainer/environments/utils';
-import { getDockerEnvironmentType } from '@CE/react/portainer/environments/utils/getDockerEnvironmentType';
+} from '@/react/portainer/environments/types';
+import { getPlatformType } from '@/react/portainer/environments/utils';
+import { getDockerEnvironmentType } from '@/react/portainer/environments/utils/getDockerEnvironmentType';
 
 export function EngineVersion({ environment }: { environment: Environment }) {
   const platform = getPlatformType(environment.Type);

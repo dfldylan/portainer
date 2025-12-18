@@ -3,25 +3,25 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios, {
   json2formData,
   parseAxiosError,
-} from '@CE/portainer/services/axios';
+} from '@/portainer/services/axios';
 import {
   mutationOptions,
   withGlobalError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
-import { StackType } from '@CE/react/common/stacks/types';
-import { VariableDefinition } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField/CustomTemplatesVariablesDefinitionField';
+} from '@/react-tools/react-query';
+import { StackType } from '@/react/common/stacks/types';
+import { VariableDefinition } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField/CustomTemplatesVariablesDefinitionField';
 import {
   CustomTemplate,
   EdgeTemplateSettings,
-} from '@CE/react/portainer/templates/custom-templates/types';
-import { GitFormModel } from '@CE/react/portainer/gitops/types';
-import { DefinitionFieldValues } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
-import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
-import { applyResourceControl } from '@CE/react/portainer/access-control/access-control.service';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { UserId } from '@CE/portainer/users/types';
-import { saveGitCredentialsIfNeeded } from '@CE/react/portainer/account/git-credentials/queries/useCreateGitCredentialsMutation';
+} from '@/react/portainer/templates/custom-templates/types';
+import { GitFormModel } from '@/react/portainer/gitops/types';
+import { DefinitionFieldValues } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
+import { AccessControlFormData } from '@/react/portainer/access-control/types';
+import { applyResourceControl } from '@/react/portainer/access-control/access-control.service';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { UserId } from '@/portainer/users/types';
+import { saveGitCredentialsIfNeeded } from '@/react/portainer/account/git-credentials/queries/useCreateGitCredentialsMutation';
 
 import { Platform } from '../../types';
 

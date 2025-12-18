@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 
 import {
   RegistryFormDockerhub,

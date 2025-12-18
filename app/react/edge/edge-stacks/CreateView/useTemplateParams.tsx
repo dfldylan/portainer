@@ -1,4 +1,4 @@
-import { useParamsState } from '@CE/react/hooks/useParamState';
+import { useParamsState } from '@/react/hooks/useParamState';
 
 export function useTemplateParams() {
   const [{ templateId, templateType }, setTemplateParams] = useParamsState(

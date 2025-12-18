@@ -1,9 +1,9 @@
-import { FormSection } from '@@CE/form-components/FormSection';
+import { FormSection } from '@@/form-components/FormSection';
 import {
   EnvVarValues,
   EnvironmentVariablesFieldset,
-} from '@@CE/form-components/EnvironmentVariablesFieldset';
-import { ArrayError } from '@@CE/form-components/InputList/InputList';
+} from '@@/form-components/EnvironmentVariablesFieldset';
+import { ArrayError } from '@@/form-components/InputList/InputList';
 
 type Props = {
   values: EnvVarValues;

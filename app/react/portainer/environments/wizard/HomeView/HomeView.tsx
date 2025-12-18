@@ -1,12 +1,12 @@
 import { Wand2, Plug2 } from 'lucide-react';
 
-import DockerIcon from '@CE/assets/ico/vendor/docker-icon.svg?c';
-import Kube from '@CE/assets/ico/kube.svg?c';
-import { EnvironmentType } from '@CE/react/portainer/environments/types';
+import { EnvironmentType } from '@/react/portainer/environments/types';
+import DockerIcon from '@/assets/ico/vendor/docker-icon.svg?c';
+import Kube from '@/assets/ico/kube.svg?c';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
-import { Link } from '@@CE/Link';
+import { PageHeader } from '@@/PageHeader';
+import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
+import { Link } from '@@/Link';
 
 import { Option } from '../components/Option';
 

@@ -2,17 +2,17 @@ import { Form, useFormikContext } from 'formik';
 import { JSONSchema7 } from 'json-schema';
 import { useCallback } from 'react';
 
-import { Stack, StackType } from '@CE/react/common/stacks/types';
-import { EnvironmentType } from '@CE/react/portainer/environments/types';
-import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
+import { Stack, StackType } from '@/react/common/stacks/types';
+import { EnvironmentType } from '@/react/portainer/environments/types';
+import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
 
-import { CodeEditor } from '@@CE/CodeEditor';
-import { SwitchField } from '@@CE/form-components/SwitchField';
-import { StackEnvironmentVariablesPanel } from '@@CE/form-components/EnvironmentVariablesFieldset';
-import { FormActions } from '@@CE/form-components/FormActions';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { usePreventExit } from '@@CE/WebEditorForm';
-import { FormError } from '@@CE/form-components/FormError';
+import { CodeEditor } from '@@/CodeEditor';
+import { SwitchField } from '@@/form-components/SwitchField';
+import { StackEnvironmentVariablesPanel } from '@@/form-components/EnvironmentVariablesFieldset';
+import { FormActions } from '@@/form-components/FormActions';
+import { FormSection } from '@@/form-components/FormSection';
+import { usePreventExit } from '@@/WebEditorForm';
+import { FormError } from '@@/form-components/FormError';
 
 import { StackEditorFormValues } from './StackEditorTab.types';
 import { WebhookFieldset } from './WebhookFieldset';

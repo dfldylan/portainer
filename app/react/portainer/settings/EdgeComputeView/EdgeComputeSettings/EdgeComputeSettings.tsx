@@ -1,16 +1,16 @@
 import { Formik, Form } from 'formik';
 import { Laptop } from 'lucide-react';
 
-import { Settings } from '@CE/react/portainer/settings/types';
-import { PortainerUrlField } from '@CE/react/portainer/common/PortainerUrlField';
-import { PortainerTunnelAddrField } from '@CE/react/portainer/common/PortainerTunnelAddrField';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { Settings } from '@/react/portainer/settings/types';
+import { PortainerUrlField } from '@/react/portainer/common/PortainerUrlField';
+import { PortainerTunnelAddrField } from '@/react/portainer/common/PortainerTunnelAddrField';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { Switch } from '@@CE/form-components/SwitchField/Switch';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Widget, WidgetBody, WidgetTitle } from '@@CE/Widget';
-import { LoadingButton } from '@@CE/buttons/LoadingButton';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { Switch } from '@@/form-components/SwitchField/Switch';
+import { FormControl } from '@@/form-components/FormControl';
+import { Widget, WidgetBody, WidgetTitle } from '@@/Widget';
+import { LoadingButton } from '@@/buttons/LoadingButton';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { validationSchema } from './EdgeComputeSettings.validation';
 import { FormValues } from './types';

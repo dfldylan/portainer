@@ -3,16 +3,16 @@ import { useMemo } from 'react';
 import { Pod, Taint, Node } from 'kubernetes-types/core/v1';
 import _ from 'lodash';
 
-import { KubernetesPodNodeAffinityNodeSelectorRequirementOperators } from '@CE/kubernetes/pod/models';
-import { useNodesQuery } from '@CE/react/kubernetes/cluster/queries/useNodesQuery';
+import { KubernetesPodNodeAffinityNodeSelectorRequirementOperators } from '@/kubernetes/pod/models';
+import { useNodesQuery } from '@/react/kubernetes/cluster/queries/useNodesQuery';
 
 import {
   BasicTableSettings,
   RefreshableTableSettings,
   createPersistedStore,
   refreshableSettings,
-} from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
+} from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { Affinity, Label, NodePlacementRowData } from '../types';
 import { useApplication } from '../../queries/useApplication';

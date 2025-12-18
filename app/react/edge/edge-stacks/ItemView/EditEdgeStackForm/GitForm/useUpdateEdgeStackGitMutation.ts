@@ -1,19 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
+} from '@/react-tools/react-query';
 import {
   AutoUpdateResponse,
   GitAuthenticationResponse,
-} from '@CE/react/portainer/gitops/types';
-import { buildUrl } from '@CE/react/edge/edge-stacks/queries/buildUrl';
-import { DeploymentType, EdgeStack } from '@CE/react/edge/edge-stacks/types';
-import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
-import { Registry } from '@CE/react/portainer/registries/types/registry';
+} from '@/react/portainer/gitops/types';
+import { buildUrl } from '@/react/edge/edge-stacks/queries/buildUrl';
+import { DeploymentType, EdgeStack } from '@/react/edge/edge-stacks/types';
+import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { Registry } from '@/react/portainer/registries/types/registry';
 
 import { queryKeys } from '../../../queries/query-keys';
 

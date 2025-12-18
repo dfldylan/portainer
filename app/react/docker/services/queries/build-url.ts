@@ -1,4 +1,4 @@
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 import { ServiceId } from '../types';

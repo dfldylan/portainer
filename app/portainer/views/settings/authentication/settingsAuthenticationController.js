@@ -1,10 +1,10 @@
 import angular from 'angular';
 import _ from 'lodash-es';
 
-import { buildLdapSettingsModel, buildAdSettingsModel } from '@CE/portainer/settings/authentication/ldap/ldap-settings.model';
-import { options } from '@CE/react/portainer/settings/AuthenticationView/InternalAuth/options';
-import { SERVER_TYPES } from '@CE/react/portainer/settings/AuthenticationView/ldap-options';
-import { AuthenticationMethod } from '@CE/react/portainer/settings/types';
+import { buildLdapSettingsModel, buildAdSettingsModel } from '@/portainer/settings/authentication/ldap/ldap-settings.model';
+import { options } from '@/react/portainer/settings/AuthenticationView/InternalAuth/options';
+import { SERVER_TYPES } from '@/react/portainer/settings/AuthenticationView/ldap-options';
+import { AuthenticationMethod } from '@/react/portainer/settings/types';
 
 angular.module('portainer.app').controller('SettingsAuthenticationController', SettingsAuthenticationController);
 

@@ -1,7 +1,7 @@
-import { pluralize } from '@CE/portainer/helpers/strings';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { pluralize } from '@/portainer/helpers/strings';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { DeleteButton as BaseDeleteButton } from '@@CE/buttons/DeleteButton';
+import { DeleteButton as BaseDeleteButton } from '@@/buttons/DeleteButton';
 
 import { Registry } from '../../types/registry';
 

@@ -1,5 +1,5 @@
-import { TeamViewModel } from '@CE/portainer/models/team';
-import { UserViewModel } from '@CE/portainer/models/user';
+import { TeamViewModel } from '@/portainer/models/team';
+import { UserViewModel } from '@/portainer/models/user';
 
 export function mockExampleData() {
   const teams: TeamViewModel[] = [

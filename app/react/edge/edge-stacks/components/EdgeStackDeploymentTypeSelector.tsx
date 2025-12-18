@@ -1,11 +1,11 @@
-import { DeploymentType } from '@CE/react/edge/edge-stacks/types';
+import { DeploymentType } from '@/react/edge/edge-stacks/types';
 
-import { BoxSelector } from '@@CE/BoxSelector';
-import { BoxSelectorOption } from '@@CE/BoxSelector/types';
+import { BoxSelector } from '@@/BoxSelector';
+import { BoxSelectorOption } from '@@/BoxSelector/types';
 import {
   compose,
   kubernetes,
-} from '@@CE/BoxSelector/common-options/deployment-methods';
+} from '@@/BoxSelector/common-options/deployment-methods';
 
 interface Props {
   value: DeploymentType;

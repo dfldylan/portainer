@@ -1,9 +1,9 @@
 import { string } from 'yup';
 import parse from 'parse-duration';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Input } from '@@CE/form-components/Input';
-import { useCaretPosition } from '@@CE/form-components/useCaretPosition';
+import { FormControl } from '@@/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
+import { useCaretPosition } from '@@/form-components/useCaretPosition';
 
 export function IntervalField({
   onChange,

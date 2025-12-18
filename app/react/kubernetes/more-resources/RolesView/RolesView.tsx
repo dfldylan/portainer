@@ -1,10 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { UserCheck, Link } from 'lucide-react';
 
-import { useUnauthorizedRedirect } from '@CE/react/hooks/useUnauthorizedRedirect';
+import { useUnauthorizedRedirect } from '@/react/hooks/useUnauthorizedRedirect';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { WidgetTabs, Tab, findSelectedTabIndex } from '@@CE/Widget/WidgetTabs';
+import { PageHeader } from '@@/PageHeader';
+import { WidgetTabs, Tab, findSelectedTabIndex } from '@@/Widget/WidgetTabs';
 
 import { RolesDatatable } from './RolesDatatable';
 import { RoleBindingsDatatable } from './RoleBindingsDatatable';

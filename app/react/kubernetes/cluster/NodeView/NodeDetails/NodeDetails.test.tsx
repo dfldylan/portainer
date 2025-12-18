@@ -3,13 +3,13 @@ import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { UserViewModel } from '@CE/portainer/models/user';
-import { server } from '@CE/setup-tests/server';
-import { useAuthorizations } from '@CE/react/hooks/useUser';
-import { select } from '@CE/react/test-utils/react-select';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { UserViewModel } from '@/portainer/models/user';
+import { server } from '@/setup-tests/server';
+import { useAuthorizations } from '@/react/hooks/useUser';
+import { select } from '@/react/test-utils/react-select';
 
 import { confirmUpdateNode } from '../ConfirmUpdateNode';
 
@@ -21,12 +21,12 @@ vi.mock('../ConfirmUpdateNode', () => ({
   confirmUpdateNode: vi.fn(),
 }));
 
-vi.mock('@CE/portainer/services/notifications', () => ({
+vi.mock('@/portainer/services/notifications', () => ({
   notifySuccess: vi.fn(),
 }));
 
 vi.mock(
-  '@CE/react/hooks/useUser',
+  '@/react/hooks/useUser',
   async (importOriginal: () => Promise<object>) => {
     const actual = await importOriginal();
     return {

@@ -1,6 +1,6 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { StatusBadge } from '@@CE/StatusBadge';
+import { StatusBadge } from '@@/StatusBadge';
 
 import { NodeRowData } from '../types';
 

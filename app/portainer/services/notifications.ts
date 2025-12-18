@@ -3,9 +3,9 @@ import toastr from 'toastr';
 import sanitize from 'sanitize-html';
 import { v4 as uuid } from 'uuid';
 
-import { get as localStorageGet } from '@CE/react/hooks/useLocalStorage';
-import { notificationsStore } from '@CE/react/portainer/notifications/notifications-store';
-import { ToastNotification } from '@CE/react/portainer/notifications/types';
+import { get as localStorageGet } from '@/react/hooks/useLocalStorage';
+import { notificationsStore } from '@/react/portainer/notifications/notifications-store';
+import { ToastNotification } from '@/react/portainer/notifications/types';
 
 const { addNotification } = notificationsStore.getState();
 

@@ -1,12 +1,12 @@
 import { HardDriveIcon, LayersIcon } from 'lucide-react';
 
-import { EditEdgeStackForm } from '@CE/react/edge/edge-stacks/ItemView/EditEdgeStackForm/EditEdgeStackForm';
-import { useParamState } from '@CE/react/hooks/useParamState';
-import { useIdParam } from '@CE/react/hooks/useIdParam';
+import { EditEdgeStackForm } from '@/react/edge/edge-stacks/ItemView/EditEdgeStackForm/EditEdgeStackForm';
+import { useParamState } from '@/react/hooks/useParamState';
+import { useIdParam } from '@/react/hooks/useIdParam';
 
-import { NavTabs } from '@@CE/NavTabs';
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget } from '@@CE/Widget';
+import { NavTabs } from '@@/NavTabs';
+import { PageHeader } from '@@/PageHeader';
+import { Widget } from '@@/Widget';
 
 import { useEdgeStack } from '../queries/useEdgeStack';
 

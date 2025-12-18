@@ -1,4 +1,4 @@
-import { isoDate } from '@CE/portainer/filters/filters';
+import { isoDate } from '@/portainer/filters/filters';
 
 import { columnHelper } from './helper';
 

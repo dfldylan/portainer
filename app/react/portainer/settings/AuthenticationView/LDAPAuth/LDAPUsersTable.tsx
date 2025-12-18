@@ -1,7 +1,7 @@
 import { Users } from 'lucide-react';
 
-import { Datatable } from '@@CE/datatables';
-import { useTableStateWithoutStorage } from '@@CE/datatables/useTableState';
+import { Datatable } from '@@/datatables';
+import { useTableStateWithoutStorage } from '@@/datatables/useTableState';
 
 const columns = getColumns();
 

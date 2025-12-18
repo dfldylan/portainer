@@ -1,5 +1,5 @@
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { AuthorizationMap } from '@CE/react/portainer/users/RolesView/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { AuthorizationMap } from '@/react/portainer/users/RolesView/types';
 
 import { type UserId } from './types/user-id';
 

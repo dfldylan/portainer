@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { createOwnershipColumn } from '@CE/react/docker/components/datatable/createOwnershipColumn';
-import { ContainerListViewModel } from '@CE/react/docker/containers/types';
+import { createOwnershipColumn } from '@/react/docker/components/datatable/createOwnershipColumn';
+import { ContainerListViewModel } from '@/react/docker/containers/types';
 
 import { created } from './created';
 import { host } from './host';

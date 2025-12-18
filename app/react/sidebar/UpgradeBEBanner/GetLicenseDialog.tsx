@@ -1,5 +1,5 @@
-import { HubspotForm } from '@@CE/HubspotForm';
-import { Modal } from '@@CE/modals/Modal';
+import { HubspotForm } from '@@/HubspotForm';
+import { Modal } from '@@/modals/Modal';
 
 export function GetLicenseDialog({
   onDismiss,

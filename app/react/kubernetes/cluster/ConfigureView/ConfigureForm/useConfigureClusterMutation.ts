@@ -2,13 +2,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Operation } from 'fast-json-patch';
 import _ from 'lodash';
 
-import { withError, withInvalidate } from '@CE/react-tools/react-query';
-import { environmentQueryKeys } from '@CE/react/portainer/environments/queries/query-keys';
+import { withError, withInvalidate } from '@/react-tools/react-query';
+import { environmentQueryKeys } from '@/react/portainer/environments/queries/query-keys';
 import {
   UpdateEnvironmentPayload,
   updateEnvironment,
-} from '@CE/react/portainer/environments/queries/useUpdateEnvironmentMutation';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+} from '@/react/portainer/environments/queries/useUpdateEnvironmentMutation';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 
 import { updateIngressControllerClassMap } from '../../ingressClass/useIngressControllerClassMap';
 import { IngressControllerClassMap } from '../../ingressClass/types';

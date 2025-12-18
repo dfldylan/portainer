@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { useIsEdgeAdmin } from '@/react/hooks/useUser';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import { DecoratedRegistry } from '../types';
 

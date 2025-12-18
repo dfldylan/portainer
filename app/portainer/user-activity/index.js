@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import { NotificationsViewAngular } from '@CE/react/portainer/notifications/NotificationsView';
+import { NotificationsViewAngular } from '@/react/portainer/notifications/NotificationsView';
 import { AccessHeaders } from '../authorization-guard';
 import authLogsViewModule from './auth-logs-view';
 import { UserActivityService } from './user-activity.service';

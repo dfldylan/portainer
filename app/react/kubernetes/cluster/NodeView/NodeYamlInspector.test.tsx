@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { confirm } from '@@CE/modals/confirm';
+import { confirm } from '@@/modals/confirm';
 
 import { NodeYamlInspector } from './NodeYamlInspector';
 
@@ -40,7 +40,7 @@ vi.mock('../queries/useNodeQuery', () => ({
 }));
 
 // Mock the useAuthorizations hook
-vi.mock('@CE/react/hooks/useUser', () => ({
+vi.mock('@/react/hooks/useUser', () => ({
   useAuthorizations: vi.fn(() => ({
     authorized: true,
     isLoading: false,
@@ -48,13 +48,13 @@ vi.mock('@CE/react/hooks/useUser', () => ({
 }));
 
 // Mock the confirm modal
-vi.mock('@@CE/modals/confirm', () => ({
+vi.mock('@@/modals/confirm', () => ({
   confirm: vi.fn(() => Promise.resolve(true)),
   buildConfirmButton: vi.fn((label) => ({ label })),
 }));
 
 // Mock the Widget components
-vi.mock('@@CE/Widget', () => ({
+vi.mock('@@/Widget', () => ({
   Widget: ({ children }: { children: React.ReactNode }) => (
     <div data-cy="widget">{children}</div>
   ),

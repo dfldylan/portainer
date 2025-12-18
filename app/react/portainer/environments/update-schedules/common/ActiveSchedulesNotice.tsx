@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { Clock } from 'lucide-react';
 
-import { Environment } from '@CE/react/portainer/environments/types';
-import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
-import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
+import { Environment } from '@/react/portainer/environments/types';
+import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
+import { EdgeGroup } from '@/react/edge/edge-groups/types';
 
 import { ActiveSchedule } from '../queries/useActiveSchedules';
 import { ScheduleType } from '../types';

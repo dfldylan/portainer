@@ -1,9 +1,9 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget } from '@@CE/Widget';
+import { PageHeader } from '@@/PageHeader';
+import { Widget } from '@@/Widget';
 
 import { useCustomTemplate } from '../queries/useCustomTemplate';
 import { useViewType } from '../useViewType';

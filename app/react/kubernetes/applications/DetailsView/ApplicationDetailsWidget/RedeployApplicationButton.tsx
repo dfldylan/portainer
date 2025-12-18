@@ -2,18 +2,15 @@ import { RotateCw } from 'lucide-react';
 import { Pod } from 'kubernetes-types/core/v1';
 import { useRouter } from '@uirouter/react';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import {
-  notifySuccess,
-  notifyError,
-} from '@CE/portainer/services/notifications';
-import { Authorized } from '@CE/react/hooks/useUser';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { notifySuccess, notifyError } from '@/portainer/services/notifications';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { confirm } from '@@CE/modals/confirm';
-import { ModalType } from '@@CE/modals';
-import { buildConfirmButton } from '@@CE/modals/utils';
-import { Button } from '@@CE/buttons';
-import { Icon } from '@@CE/Icon';
+import { confirm } from '@@/modals/confirm';
+import { ModalType } from '@@/modals';
+import { buildConfirmButton } from '@@/modals/utils';
+import { Button } from '@@/buttons';
+import { Icon } from '@@/Icon';
 
 import { Application } from '../../types';
 import {

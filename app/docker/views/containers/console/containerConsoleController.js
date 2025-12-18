@@ -1,6 +1,6 @@
 import { Terminal } from 'xterm';
-import { baseHref } from '@CE/portainer/helpers/pathHelper';
-import { commandStringToArray } from '@CE/docker/helpers/containers';
+import { baseHref } from '@/portainer/helpers/pathHelper';
+import { commandStringToArray } from '@/docker/helpers/containers';
 
 angular.module('portainer.docker').controller('ContainerConsoleController', [
   '$scope',

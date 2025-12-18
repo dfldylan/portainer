@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import moment from 'moment';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { PageHeader } from '@@CE/PageHeader';
+import { PageHeader } from '@@/PageHeader';
 
 import { useEvents } from '../proxy/queries/useEvents';
 

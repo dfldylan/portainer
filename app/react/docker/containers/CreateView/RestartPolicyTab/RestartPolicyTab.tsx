@@ -1,5 +1,5 @@
-import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
-import { FormControl } from '@@CE/form-components/FormControl';
+import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
+import { FormControl } from '@@/form-components/FormControl';
 
 import { RestartPolicy } from './types';
 

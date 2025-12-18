@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
 
-import { TagId } from '@CE/portainer/tags/types';
+import { TagId } from '@/portainer/tags/types';
 
 import { TagSelector } from './TagSelector';
 

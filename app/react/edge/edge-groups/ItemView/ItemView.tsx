@@ -1,10 +1,10 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget } from '@@CE/Widget';
-import { Redirect } from '@@CE/Redirect';
+import { PageHeader } from '@@/PageHeader';
+import { Widget } from '@@/Widget';
+import { Redirect } from '@@/Redirect';
 
 import { useUpdateEdgeGroupMutation } from '../queries/useUpdateEdgeGroupMutation';
 import { EdgeGroupForm } from '../components/EdgeGroupForm/EdgeGroupForm';

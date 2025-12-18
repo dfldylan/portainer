@@ -2,7 +2,7 @@ import { SystemVersion } from 'docker-types/generated/1.44';
 import Axios, { InternalAxiosRequestConfig } from 'axios';
 import { setupCache, buildMemoryStorage } from 'axios-cache-interceptor';
 
-import { buildDockerProxyUrl } from '@CE/react/docker/proxy/queries/buildDockerProxyUrl';
+import { buildDockerProxyUrl } from '@/react/docker/proxy/queries/buildDockerProxyUrl';
 
 import { MAX_DOCKER_API_VERSION } from './dockerMaxApiVersion';
 

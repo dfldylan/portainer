@@ -1,4 +1,4 @@
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 export function RetryDeployToggle({
   value,

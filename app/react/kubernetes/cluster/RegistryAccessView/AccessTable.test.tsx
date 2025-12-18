@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 
 import { AccessTable } from './AccessTable';
 
@@ -18,7 +18,7 @@ vi.mock('lucide-react', async (importOriginal) => {
 
 // Mock DeleteButton to capture props
 const mockDeleteButton = vi.fn();
-vi.mock('@@CE/buttons/DeleteButton', () => ({
+vi.mock('@@/buttons/DeleteButton', () => ({
   DeleteButton: (props: {
     disabled: boolean;
     onConfirmed: () => void;

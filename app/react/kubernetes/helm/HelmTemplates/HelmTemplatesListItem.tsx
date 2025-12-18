@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FallbackImage } from '@CE/react/components/FallbackImage';
+import { FallbackImage } from '@/react/components/FallbackImage';
 
 import { Chart } from '../types';
 

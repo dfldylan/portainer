@@ -1,6 +1,6 @@
-import { FormError } from '@@CE/form-components/FormError';
-import { InputGroup } from '@@CE/form-components/InputGroup';
-import { ItemProps } from '@@CE/form-components/InputList';
+import { FormError } from '@@/form-components/FormError';
+import { InputGroup } from '@@/form-components/InputGroup';
+import { ItemProps } from '@@/form-components/InputList';
 
 import { Label } from './types';
 

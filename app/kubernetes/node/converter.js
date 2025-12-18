@@ -4,7 +4,7 @@ import * as JsonPatch from 'fast-json-patch';
 import { KubernetesNode, KubernetesNodeDetails, KubernetesNodeTaint, KubernetesNodeAvailabilities, KubernetesPortainerNodeDrainLabel } from 'Kubernetes/node/models';
 import { KubernetesNodeFormValues, KubernetesNodeTaintFormValues, KubernetesNodeLabelFormValues } from 'Kubernetes/node/formValues';
 import { KubernetesNodeCreatePayload, KubernetesNodeTaintPayload } from 'Kubernetes/node/payload';
-import { parseCPU } from '@CE/react/kubernetes/utils';
+import { parseCPU } from '@/react/kubernetes/utils';
 
 class KubernetesNodeConverter {
   static apiToNode(data, res) {

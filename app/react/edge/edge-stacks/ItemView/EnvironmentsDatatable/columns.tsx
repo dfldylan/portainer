@@ -4,16 +4,16 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import _ from 'lodash';
 
-import UpdatesAvailable from '@CE/assets/ico/icon_updates-available.svg?c';
-import UpToDate from '@CE/assets/ico/icon_up-to-date.svg?c';
-import { isoDateFromTimestamp } from '@CE/portainer/filters/filters';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
-import { getDashboardRoute } from '@CE/react/portainer/environments/utils';
-import { GitCommitLink } from '@CE/react/portainer/gitops/GitCommitLink';
+import UpdatesAvailable from '@/assets/ico/icon_updates-available.svg?c';
+import UpToDate from '@/assets/ico/icon_up-to-date.svg?c';
+import { isoDateFromTimestamp } from '@/portainer/filters/filters';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import { getDashboardRoute } from '@/react/portainer/environments/utils';
+import { GitCommitLink } from '@/react/portainer/gitops/GitCommitLink';
 
-import { Button } from '@@CE/buttons';
-import { Icon } from '@@CE/Icon';
-import { Link } from '@@CE/Link';
+import { Button } from '@@/buttons';
+import { Icon } from '@@/Icon';
+import { Link } from '@@/Link';
 
 import { DeploymentStatus, EdgeStackStatus, StatusType } from '../../types';
 

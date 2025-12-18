@@ -1,9 +1,9 @@
 import { FormikErrors } from 'formik';
 
-import { AutoUpdateModel } from '@CE/react/portainer/gitops/types';
+import { AutoUpdateModel } from '@/react/portainer/gitops/types';
 
-import { SwitchField } from '@@CE/form-components/SwitchField';
-import { InsightsBox } from '@@CE/InsightsBox';
+import { SwitchField } from '@@/form-components/SwitchField';
+import { InsightsBox } from '@@/InsightsBox';
 
 import { AutoUpdateSettings } from './AutoUpdateSettings';
 

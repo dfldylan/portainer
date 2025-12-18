@@ -1,11 +1,11 @@
 import { PlusCircle } from 'lucide-react';
 import { CellContext, ColumnDef } from '@tanstack/react-table';
 
-import { User } from '@CE/portainer/users/types';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { useAddMemberMutation } from '@CE/react/portainer/users/teams/queries';
+import { User } from '@/portainer/users/types';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { useAddMemberMutation } from '@/react/portainer/users/teams/queries';
 
-import { Button } from '@@CE/buttons';
+import { Button } from '@@/buttons';
 
 import { useRowContext } from './RowContext';
 

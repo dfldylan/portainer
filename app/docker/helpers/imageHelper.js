@@ -1,4 +1,4 @@
-import { buildImageFullURIFromModel, imageContainsURL, fullURIIntoRepoAndTag } from '@CE/react/docker/images/utils';
+import { buildImageFullURIFromModel, imageContainsURL, fullURIIntoRepoAndTag } from '@/react/docker/images/utils';
 
 angular.module('portainer.docker').factory('ImageHelper', ImageHelperFactory);
 function ImageHelperFactory() {

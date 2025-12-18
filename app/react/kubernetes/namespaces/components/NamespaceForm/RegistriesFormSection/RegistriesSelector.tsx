@@ -1,10 +1,10 @@
 import { MultiValue } from 'react-select';
 
-import { Registry } from '@CE/react/portainer/registries/types/registry';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
+import { Registry } from '@/react/portainer/registries/types/registry';
+import { useCurrentUser } from '@/react/hooks/useUser';
 
-import { Select } from '@@CE/form-components/ReactSelect';
-import { Link } from '@@CE/Link';
+import { Select } from '@@/form-components/ReactSelect';
+import { Link } from '@@/Link';
 
 interface Props {
   value: MultiValue<Registry>;

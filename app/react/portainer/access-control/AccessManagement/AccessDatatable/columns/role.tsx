@@ -1,10 +1,10 @@
 import { CellContext } from '@tanstack/react-table';
 import { Edit, X } from 'lucide-react';
 
-import { useRbacRoles } from '@CE/react/portainer/users/RolesView/useRbacRoles';
+import { useRbacRoles } from '@/react/portainer/users/RolesView/useRbacRoles';
 
-import { Button } from '@@CE/buttons';
-import { Select } from '@@CE/form-components/Input';
+import { Button } from '@@/buttons';
+import { Select } from '@@/form-components/Input';
 
 import { Access, getTableMeta } from '../types';
 

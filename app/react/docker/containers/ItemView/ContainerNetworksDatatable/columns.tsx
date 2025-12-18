@@ -1,5 +1,5 @@
-import { buildExpandColumn } from '@@CE/datatables/expand-column';
-import { buildNameColumnFromObject } from '@@CE/datatables/buildNameColumn';
+import { buildExpandColumn } from '@@/datatables/expand-column';
+import { buildNameColumnFromObject } from '@@/datatables/buildNameColumn';
 
 import { TableNetwork } from './types';
 import { columnHelper } from './helper';

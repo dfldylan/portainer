@@ -1,9 +1,9 @@
 import { CellContext, createColumnHelper } from '@tanstack/react-table';
 import { Users } from 'lucide-react';
 
-import { buildNameColumn } from '@@CE/datatables/buildNameColumn';
-import { Button } from '@@CE/buttons';
-import { Link } from '@@CE/Link';
+import { buildNameColumn } from '@@/datatables/buildNameColumn';
+import { Button } from '@@/buttons';
+import { Link } from '@@/Link';
 
 import { EnvironmentGroup } from '../../types';
 

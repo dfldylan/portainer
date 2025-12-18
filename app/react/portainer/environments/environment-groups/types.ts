@@ -1,4 +1,4 @@
-import { TagId } from '@CE/portainer/tags/types';
+import { TagId } from '@/portainer/tags/types';
 
 import {
   TeamAccessPolicies,

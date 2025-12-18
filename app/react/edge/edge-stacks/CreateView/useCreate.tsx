@@ -1,11 +1,11 @@
 import { useRouter } from '@uirouter/react';
 
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
-import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { transformAutoUpdateViewModel } from '@CE/react/portainer/gitops/AutoUpdateFieldset/utils';
-import { mutationOptions, withError } from '@CE/react-tools/react-query';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
+import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { transformAutoUpdateViewModel } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { mutationOptions, withError } from '@/react-tools/react-query';
 
 import {
   BasePayload,

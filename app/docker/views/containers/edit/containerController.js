@@ -1,12 +1,12 @@
 import moment from 'moment';
 import _ from 'lodash-es';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
-import { confirmContainerDeletion } from '@CE/react/docker/containers/common/confirm-container-delete-modal';
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
-import { ResourceControlType } from '@CE/react/portainer/access-control/types';
-import { confirmContainerRecreation } from '@CE/react/docker/containers/ItemView/ConfirmRecreationModal';
-import { commitContainer } from '@CE/react/docker/proxy/queries/useCommitContainerMutation';
-import { ContainerEngine } from '@CE/react/portainer/environments/types';
+import { confirmContainerDeletion } from '@/react/docker/containers/common/confirm-container-delete-modal';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { ResourceControlType } from '@/react/portainer/access-control/types';
+import { confirmContainerRecreation } from '@/react/docker/containers/ItemView/ConfirmRecreationModal';
+import { commitContainer } from '@/react/docker/proxy/queries/useCommitContainerMutation';
+import { ContainerEngine } from '@/react/portainer/environments/types';
 
 angular.module('portainer.docker').controller('ContainerController', [
   '$q',

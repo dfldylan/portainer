@@ -1,6 +1,6 @@
-import { EnvironmentStatus } from '@CE/react/portainer/environments/types';
+import { EnvironmentStatus } from '@/react/portainer/environments/types';
 
-import { updateAxiosAdapter } from '@CE/portainer/services/axios';
+import { updateAxiosAdapter } from '@/portainer/services/axios';
 import { PortainerEndpointTypes } from 'Portainer/models/endpoint/models';
 import { CACHE_REFRESH_EVENT, CACHE_DURATION } from '../portainer/services/http-request.helper';
 import { cache } from '../portainer/services/axios';

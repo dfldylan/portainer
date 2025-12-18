@@ -1,7 +1,7 @@
 import { Edit, FileText, Globe, UploadCloud } from 'lucide-react';
 
-import GitIcon from '@CE/assets/ico/git.svg?c';
-import Helm from '@CE/assets/ico/helm.svg?c';
+import GitIcon from '@/assets/ico/git.svg?c';
+import Helm from '@/assets/ico/helm.svg?c';
 
 import { BoxSelectorOption } from '../types';
 

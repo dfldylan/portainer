@@ -1,7 +1,7 @@
 import { filter, flatMap, map } from 'lodash';
 import angular from 'angular';
 import $allSettled from 'Portainer/services/allSettled';
-import { concatLogsToString, formatLogs } from '@CE/docker/helpers/logHelper';
+import { concatLogsToString, formatLogs } from '@/docker/helpers/logHelper';
 
 const colors = ['red', 'orange', 'lime', 'green', 'darkgreen', 'cyan', 'turquoise', 'teal', 'deepskyblue', 'blue', 'darkblue', 'slateblue', 'magenta', 'darkviolet'];
 

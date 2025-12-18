@@ -1,6 +1,6 @@
 import { object, string, array, number } from 'yup';
 
-import { Team } from '@CE/react/portainer/users/teams/types';
+import { Team } from '@/react/portainer/users/teams/types';
 
 export function validationSchema(teams: Team[]) {
   return object().shape({

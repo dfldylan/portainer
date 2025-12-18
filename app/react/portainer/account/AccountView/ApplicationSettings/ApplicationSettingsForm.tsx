@@ -1,13 +1,13 @@
 import { Form, Formik } from 'formik';
 
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { updateAxiosAdapter } from '@CE/portainer/services/axios';
-import { withError } from '@CE/react-tools/react-query';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { updateAxiosAdapter } from '@/portainer/services/axios';
+import { withError } from '@/react-tools/react-query';
 
-import { TextTip } from '@@CE/Tip/TextTip';
-import { LoadingButton } from '@@CE/buttons';
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { TextTip } from '@@/Tip/TextTip';
+import { LoadingButton } from '@@/buttons';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 import { useUpdateUserMutation } from '../../useUpdateUserMutation';
 

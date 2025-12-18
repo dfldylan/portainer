@@ -1,12 +1,12 @@
 import { FormikErrors } from 'formik';
 import { ArrowRight } from 'lucide-react';
 
-import { ButtonSelector } from '@@CE/form-components/ButtonSelector/ButtonSelector';
-import { FormError } from '@@CE/form-components/FormError';
-import { InputGroup } from '@@CE/form-components/InputGroup';
-import { InputList } from '@@CE/form-components/InputList';
-import { ItemProps } from '@@CE/form-components/InputList/InputList';
-import { Icon } from '@@CE/Icon';
+import { ButtonSelector } from '@@/form-components/ButtonSelector/ButtonSelector';
+import { FormError } from '@@/form-components/FormError';
+import { InputGroup } from '@@/form-components/InputGroup';
+import { InputList } from '@@/form-components/InputList';
+import { ItemProps } from '@@/form-components/InputList/InputList';
+import { Icon } from '@@/Icon';
 
 import styles from './PortsMappingField.module.css';
 

@@ -3,15 +3,15 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { Terminal as TerminalIcon } from 'lucide-react';
 import { Terminal } from 'xterm';
 
-import { baseHref } from '@CE/portainer/helpers/pathHelper';
-import { notifyError } from '@CE/portainer/services/notifications';
-import { TerminalTooltip } from '@CE/react/components/TerminalTooltip';
+import { baseHref } from '@/portainer/helpers/pathHelper';
+import { notifyError } from '@/portainer/services/notifications';
+import { TerminalTooltip } from '@/react/components/TerminalTooltip';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget, WidgetBody } from '@@CE/Widget';
-import { Icon } from '@@CE/Icon';
-import { Button } from '@@CE/buttons';
-import { Input } from '@@CE/form-components/Input';
+import { PageHeader } from '@@/PageHeader';
+import { Widget, WidgetBody } from '@@/Widget';
+import { Icon } from '@@/Icon';
+import { Button } from '@@/buttons';
+import { Input } from '@@/form-components/Input';
 
 interface StringDictionary {
   [index: string]: string;

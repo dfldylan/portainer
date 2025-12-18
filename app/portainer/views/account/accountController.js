@@ -1,6 +1,6 @@
-import { confirmChangePassword } from '@@CE/modals/confirm';
-import { openDialog } from '@@CE/modals/Dialog';
-import { buildConfirmButton } from '@@CE/modals/utils';
+import { confirmChangePassword } from '@@/modals/confirm';
+import { openDialog } from '@@/modals/Dialog';
+import { buildConfirmButton } from '@@/modals/utils';
 
 angular.module('portainer.app').controller('AccountController', [
   '$scope',

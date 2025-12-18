@@ -1,10 +1,10 @@
 import { List } from 'lucide-react';
 import { useMemo } from 'react';
 
-import { Authorized } from '@CE/react/hooks/useUser';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Authorized } from '@/react/hooks/useUser';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { Datatable, TableSettingsMenu } from '@@CE/datatables';
+import { Datatable, TableSettingsMenu } from '@@/datatables';
 import {
   BasicTableSettings,
   createPersistedStore,
@@ -12,12 +12,12 @@ import {
   filteredColumnsSettings,
   refreshableSettings,
   RefreshableTableSettings,
-} from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { AddButton } from '@@CE/buttons';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
-import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
-import { withColumnFilters } from '@@CE/datatables/extend-options/withColumnFilters';
+} from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { AddButton } from '@@/buttons';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+import { withColumnFilters } from '@@/datatables/extend-options/withColumnFilters';
 
 import { useImages } from '../../queries/useImages';
 

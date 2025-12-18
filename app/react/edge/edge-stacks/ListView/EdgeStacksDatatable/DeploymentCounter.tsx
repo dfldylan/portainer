@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 
-import { Link } from '@@CE/Link';
-import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
+import { Link } from '@@/Link';
+import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
 
 import { EdgeStack, StatusType } from '../../types';
 

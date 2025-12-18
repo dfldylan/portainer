@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { PropsWithChildren } from 'react';
 import { render } from '@testing-library/react';
 
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { withTestRouter } from '@/react/test-utils/withRouter';
 
 import { AppTemplatesListItem as BaseComponent } from './AppTemplatesListItem';
 import { TemplateViewModel } from './view-model';

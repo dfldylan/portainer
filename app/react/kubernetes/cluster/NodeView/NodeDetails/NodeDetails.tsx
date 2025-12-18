@@ -2,16 +2,16 @@ import { Node } from 'kubernetes-types/core/v1';
 import { Form, Formik, useFormikContext } from 'formik';
 import { useRouter } from '@uirouter/react';
 
-import { KubernetesEndpoint } from '@CE/kubernetes/endpoint/models';
-import { useAuthorizations } from '@CE/react/hooks/useUser';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { useApplications } from '@CE/react/kubernetes/applications/queries/useApplications';
+import { KubernetesEndpoint } from '@/kubernetes/endpoint/models';
+import { useAuthorizations } from '@/react/hooks/useUser';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { useApplications } from '@/react/kubernetes/applications/queries/useApplications';
 
-import { Loading } from '@@CE/Widget';
-import { Alert } from '@@CE/Alert';
-import { FormActions } from '@@CE/form-components/FormActions';
-import { Button } from '@@CE/buttons';
-import { isArrayErrorType } from '@@CE/form-components/formikUtils';
+import { Loading } from '@@/Widget';
+import { Alert } from '@@/Alert';
+import { FormActions } from '@@/form-components/FormActions';
+import { Button } from '@@/buttons';
+import { isArrayErrorType } from '@@/form-components/formikUtils';
 
 import { useNodeQuery } from '../../queries/useNodeQuery';
 import { useKubernetesEndpointsQuery } from '../../kubernetesEndpoint.service';

@@ -1,10 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { UserViewModel } from '@CE/portainer/models/user';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { UserViewModel } from '@/portainer/models/user';
 
 import { Chart } from '../types';
 
@@ -48,7 +48,7 @@ const selectActionMock = vi.fn();
 
 const mockUseEnvironmentId = vi.fn(() => 1);
 
-vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
+vi.mock('@/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => mockUseEnvironmentId(),
 }));
 
@@ -63,7 +63,7 @@ vi.mock('../queries/useHelmRegistries', () => ({
 
 // Mock the environment registries query
 vi.mock(
-  '@CE/react/portainer/environments/queries/useEnvironmentRegistries',
+  '@/react/portainer/environments/queries/useEnvironmentRegistries',
   () => ({
     useEnvironmentRegistries: vi.fn(() => ({
       data: [

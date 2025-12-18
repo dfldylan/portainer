@@ -1,9 +1,9 @@
 import {
   ContainerEngine,
   Environment,
-} from '@CE/react/portainer/environments/types';
+} from '@/react/portainer/environments/types';
 
-import { TextTip } from '@@CE/Tip/TextTip';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { DeploymentScripts } from './DeploymentScripts';
 import { SocketForm } from './SocketForm';

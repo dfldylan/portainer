@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import { ServiceRowData } from '../types';
 

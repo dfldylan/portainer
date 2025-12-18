@@ -1,11 +1,11 @@
 import { useFormikContext } from 'formik';
 
-import { EdgeGroupAssociationTable } from '@CE/react/edge/components/EdgeGroupAssociationTable';
-import { EdgeTypes } from '@CE/react/portainer/environments/types';
+import { EdgeGroupAssociationTable } from '@/react/edge/components/EdgeGroupAssociationTable';
+import { EdgeTypes } from '@/react/portainer/environments/types';
 
-import { BoxSelector } from '@@CE/BoxSelector';
-import { TagSelector } from '@@CE/TagSelector';
-import { FormSection } from '@@CE/form-components/FormSection';
+import { BoxSelector } from '@@/BoxSelector';
+import { TagSelector } from '@@/TagSelector';
+import { FormSection } from '@@/form-components/FormSection';
 
 import { tagOptions } from './tag-options';
 import { FormValues } from './types';

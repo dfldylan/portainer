@@ -2,22 +2,22 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { delay, http, HttpResponse } from 'msw';
 
-import { server } from '@CE/setup-tests/server';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { createMockUsers } from '@CE/react-tools/test-mocks';
-import { useSwarmId } from '@CE/react/docker/proxy/queries/useSwarm';
+import { server } from '@/setup-tests/server';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { createMockUsers } from '@/react-tools/test-mocks';
+import { useSwarmId } from '@/react/docker/proxy/queries/useSwarm';
 
 import { AssociateStackForm } from './AssociateStackForm';
 
 // Mock the useSwarmId hook to avoid React Query complexity
-vi.mock('@CE/react/docker/proxy/queries/useSwarm', () => ({
+vi.mock('@/react/docker/proxy/queries/useSwarm', () => ({
   useSwarmId: vi.fn(),
 }));
 
 // Mock the AccessControlForm to simplify testing
-vi.mock('@CE/react/portainer/access-control', () => ({
+vi.mock('@/react/portainer/access-control', () => ({
   AccessControlForm: vi.fn(({ onChange, values }) => (
     <div data-cy="access-control-form">
       <button

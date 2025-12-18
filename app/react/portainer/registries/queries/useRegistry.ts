@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
 import { Registry } from '../types/registry';
 

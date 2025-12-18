@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { useServicesQuery } from '@CE/react/kubernetes/services/service';
+import { useServicesQuery } from '@/react/kubernetes/services/service';
 
 import { useHorizontalPodAutoScaler } from '../../queries/useHorizontalPodAutoScaler';
 import { useApplication } from '../../queries/useApplication';

@@ -2,7 +2,7 @@ import { Database, Globe } from 'lucide-react';
 import { FormikErrors } from 'formik';
 import { PropsWithChildren } from 'react';
 
-import { Button } from '@@CE/buttons';
+import { Button } from '@@/buttons';
 
 import { SimpleForm } from './SimpleForm';
 import { Values } from './types';

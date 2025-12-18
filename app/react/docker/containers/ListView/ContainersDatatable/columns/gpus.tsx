@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import type { ContainerListViewModel } from '@CE/react/docker/containers/types';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useContainerGpus } from '@CE/react/docker/containers/queries/gpus';
+import type { ContainerListViewModel } from '@/react/docker/containers/types';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useContainerGpus } from '@/react/docker/containers/queries/gpus';
 
 import { columnHelper } from './helper';
 

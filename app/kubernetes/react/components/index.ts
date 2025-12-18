@@ -1,64 +1,64 @@
 import angular from 'angular';
 
-import { r2a } from '@CE/react-tools/react2angular';
-import { IngressClassDatatableAngular } from '@CE/react/kubernetes/cluster/ingressClass/IngressClassDatatable/IngressClassDatatableAngular';
-import { NamespacesSelector } from '@CE/react/kubernetes/cluster/RegistryAccessView/NamespacesSelector';
-import { NamespaceAccessUsersSelector } from '@CE/react/kubernetes/namespaces/AccessView/NamespaceAccessUsersSelector';
-import { KubeServicesForm } from '@CE/react/kubernetes/applications/CreateView/application-services/KubeServicesForm';
-import { kubeServicesValidation } from '@CE/react/kubernetes/applications/CreateView/application-services/kubeServicesValidation';
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
-import { withUIRouter } from '@CE/react-tools/withUIRouter';
+import { r2a } from '@/react-tools/react2angular';
+import { IngressClassDatatableAngular } from '@/react/kubernetes/cluster/ingressClass/IngressClassDatatable/IngressClassDatatableAngular';
+import { NamespacesSelector } from '@/react/kubernetes/cluster/RegistryAccessView/NamespacesSelector';
+import { NamespaceAccessUsersSelector } from '@/react/kubernetes/namespaces/AccessView/NamespaceAccessUsersSelector';
+import { KubeServicesForm } from '@/react/kubernetes/applications/CreateView/application-services/KubeServicesForm';
+import { kubeServicesValidation } from '@/react/kubernetes/applications/CreateView/application-services/kubeServicesValidation';
+import { withReactQuery } from '@/react-tools/withReactQuery';
+import { withUIRouter } from '@/react-tools/withUIRouter';
 import {
   ApplicationSummaryWidget,
   ApplicationDetailsWidget,
   ApplicationEventsDatatable,
-} from '@CE/react/kubernetes/applications/DetailsView';
-import { ApplicationContainersDatatable } from '@CE/react/kubernetes/applications/DetailsView/ApplicationContainersDatatable';
+} from '@/react/kubernetes/applications/DetailsView';
+import { ApplicationContainersDatatable } from '@/react/kubernetes/applications/DetailsView/ApplicationContainersDatatable';
 import {
   PlacementFormSection,
   placementValidation,
-} from '@CE/react/kubernetes/applications/components/PlacementFormSection';
-import { ApplicationSummarySection } from '@CE/react/kubernetes/applications/components/ApplicationSummarySection';
-import { withFormValidation } from '@CE/react-tools/withFormValidation';
-import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
-import { YAMLInspector } from '@CE/react/kubernetes/components/YAMLInspector';
-import { NodesDatatable } from '@CE/react/kubernetes/cluster/HomeView/NodesDatatable';
-import { StackName } from '@CE/react/kubernetes/DeployView/StackName/StackName';
-import { StackNameLabelInsight } from '@CE/react/kubernetes/DeployView/StackName/StackNameLabelInsight';
-import { SecretsFormSection } from '@CE/react/kubernetes/applications/components/ConfigurationsFormSection/SecretsFormSection';
-import { configurationsValidationSchema } from '@CE/react/kubernetes/applications/components/ConfigurationsFormSection/configurationValidationSchema';
-import { ConfigMapsFormSection } from '@CE/react/kubernetes/applications/components/ConfigurationsFormSection/ConfigMapsFormSection';
-import { PersistedFoldersFormSection } from '@CE/react/kubernetes/applications/components/PersistedFoldersFormSection';
-import { DataAccessPolicyFormSection } from '@CE/react/kubernetes/applications/CreateView/DataAccessPolicyFormSection';
-import { persistedFoldersValidation } from '@CE/react/kubernetes/applications/components/PersistedFoldersFormSection/persistedFoldersValidation';
+} from '@/react/kubernetes/applications/components/PlacementFormSection';
+import { ApplicationSummarySection } from '@/react/kubernetes/applications/components/ApplicationSummarySection';
+import { withFormValidation } from '@/react-tools/withFormValidation';
+import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { YAMLInspector } from '@/react/kubernetes/components/YAMLInspector';
+import { NodesDatatable } from '@/react/kubernetes/cluster/HomeView/NodesDatatable';
+import { StackName } from '@/react/kubernetes/DeployView/StackName/StackName';
+import { StackNameLabelInsight } from '@/react/kubernetes/DeployView/StackName/StackNameLabelInsight';
+import { SecretsFormSection } from '@/react/kubernetes/applications/components/ConfigurationsFormSection/SecretsFormSection';
+import { configurationsValidationSchema } from '@/react/kubernetes/applications/components/ConfigurationsFormSection/configurationValidationSchema';
+import { ConfigMapsFormSection } from '@/react/kubernetes/applications/components/ConfigurationsFormSection/ConfigMapsFormSection';
+import { PersistedFoldersFormSection } from '@/react/kubernetes/applications/components/PersistedFoldersFormSection';
+import { DataAccessPolicyFormSection } from '@/react/kubernetes/applications/CreateView/DataAccessPolicyFormSection';
+import { persistedFoldersValidation } from '@/react/kubernetes/applications/components/PersistedFoldersFormSection/persistedFoldersValidation';
 import {
   ResourceReservationFormSection,
   resourceReservationValidation,
-} from '@CE/react/kubernetes/applications/components/ResourceReservationFormSection';
+} from '@/react/kubernetes/applications/components/ResourceReservationFormSection';
 import {
   ReplicationFormSection,
   replicationValidation,
-} from '@CE/react/kubernetes/applications/components/ReplicationFormSection';
+} from '@/react/kubernetes/applications/components/ReplicationFormSection';
 import {
   AutoScalingFormSection,
   autoScalingValidation,
-} from '@CE/react/kubernetes/applications/components/AutoScalingFormSection';
-import { withControlledInput } from '@CE/react-tools/withControlledInput';
+} from '@/react/kubernetes/applications/components/AutoScalingFormSection';
+import { withControlledInput } from '@/react-tools/withControlledInput';
 import {
   NamespaceSelector,
   namespaceSelectorValidation,
-} from '@CE/react/kubernetes/applications/components/NamespaceSelector';
-import { EditYamlFormSection } from '@CE/react/kubernetes/applications/components/EditYamlFormSection';
+} from '@/react/kubernetes/applications/components/NamespaceSelector';
+import { EditYamlFormSection } from '@/react/kubernetes/applications/components/EditYamlFormSection';
 import {
   NameFormSection,
   appNameValidation,
-} from '@CE/react/kubernetes/applications/components/NameFormSection';
-import { deploymentTypeValidation } from '@CE/react/kubernetes/applications/components/AppDeploymentTypeFormSection/deploymentTypeValidation';
-import { AppDeploymentTypeFormSection } from '@CE/react/kubernetes/applications/components/AppDeploymentTypeFormSection/AppDeploymentTypeFormSection';
-import { EnvironmentVariablesFormSection } from '@CE/react/kubernetes/applications/components/EnvironmentVariablesFormSection/EnvironmentVariablesFormSection';
-import { kubeEnvVarValidationSchema } from '@CE/react/kubernetes/applications/components/EnvironmentVariablesFormSection/kubeEnvVarValidationSchema';
-import { IntegratedAppsDatatable } from '@CE/react/kubernetes/components/IntegratedAppsDatatable/IntegratedAppsDatatable';
-import { HelmTemplates } from '@CE/react/kubernetes/helm/HelmTemplates/HelmTemplates';
+} from '@/react/kubernetes/applications/components/NameFormSection';
+import { deploymentTypeValidation } from '@/react/kubernetes/applications/components/AppDeploymentTypeFormSection/deploymentTypeValidation';
+import { AppDeploymentTypeFormSection } from '@/react/kubernetes/applications/components/AppDeploymentTypeFormSection/AppDeploymentTypeFormSection';
+import { EnvironmentVariablesFormSection } from '@/react/kubernetes/applications/components/EnvironmentVariablesFormSection/EnvironmentVariablesFormSection';
+import { kubeEnvVarValidationSchema } from '@/react/kubernetes/applications/components/EnvironmentVariablesFormSection/kubeEnvVarValidationSchema';
+import { IntegratedAppsDatatable } from '@/react/kubernetes/components/IntegratedAppsDatatable/IntegratedAppsDatatable';
+import { HelmTemplates } from '@/react/kubernetes/helm/HelmTemplates/HelmTemplates';
 
 import { namespacesModule } from './namespaces';
 import { clusterManagementModule } from './clusterManagement';

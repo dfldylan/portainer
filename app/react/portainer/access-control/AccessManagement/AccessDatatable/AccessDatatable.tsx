@@ -5,16 +5,16 @@ import _ from 'lodash';
 import {
   TeamAccessViewModel,
   UserAccessViewModel,
-} from '@CE/portainer/models/access';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+} from '@/portainer/models/access';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { Datatable } from '@@CE/datatables';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { withMeta } from '@@CE/datatables/extend-options/withMeta';
-import { Button } from '@@CE/buttons';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
+import { Datatable } from '@@/datatables';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { withMeta } from '@@/datatables/extend-options/withMeta';
+import { Button } from '@@/buttons';
+import { TextTip } from '@@/Tip/TextTip';
+import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
 
 import { useColumns } from './columns/useColumns';
 import { Access } from './types';

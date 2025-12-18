@@ -3,23 +3,23 @@ import userEvent from '@testing-library/user-event';
 import { HttpResponse, http } from 'msw';
 import { vi, type Mock } from 'vitest';
 
-import { server } from '@CE/setup-tests/server';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
+import { server } from '@/setup-tests/server';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestRouter } from '@/react/test-utils/withRouter';
 
-import { confirm } from '@@CE/modals/confirm';
+import { confirm } from '@@/modals/confirm';
 
 import { RollbackButton } from './RollbackButton';
 
 // Mock the confirm modal function
-vi.mock('@@CE/modals/confirm', () => ({
+vi.mock('@@/modals/confirm', () => ({
   confirm: vi.fn(() => Promise.resolve(false)),
   buildConfirmButton: vi.fn((label) => ({ label })),
 }));
 
 // Mock the notifications service
-vi.mock('@CE/portainer/services/notifications', () => ({
+vi.mock('@/portainer/services/notifications', () => ({
   notifySuccess: vi.fn(),
 }));
 

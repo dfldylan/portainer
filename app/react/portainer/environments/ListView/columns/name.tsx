@@ -1,6 +1,6 @@
-import { EnvironmentStatus } from '@CE/react/portainer/environments/types';
+import { EnvironmentStatus } from '@/react/portainer/environments/types';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import { columnHelper } from './helper';
 

@@ -1,14 +1,14 @@
 import { FormikErrors } from 'formik';
 import { MultiValue } from 'react-select';
 
-import { Registry } from '@CE/react/portainer/registries/types/registry';
-import { useEnvironmentRegistries } from '@CE/react/portainer/environments/queries/useEnvironmentRegistries';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Registry } from '@/react/portainer/registries/types/registry';
+import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { InlineLoader } from '@@CE/InlineLoader';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { InlineLoader } from '@@/InlineLoader';
+import { FormControl } from '@@/form-components/FormControl';
+import { FormSection } from '@@/form-components/FormSection';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { RegistriesSelector } from './RegistriesSelector';
 

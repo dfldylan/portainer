@@ -4,9 +4,9 @@ import clsx from 'clsx';
 import {
   KubernetesApplicationDeploymentTypes,
   KubernetesApplicationTypes,
-} from '@CE/kubernetes/models/application/models/appConstants';
+} from '@/kubernetes/models/application/models/appConstants';
 
-import { filterHOC } from '@@CE/datatables/Filter';
+import { filterHOC } from '@@/datatables/Filter';
 
 import styles from './columns.status.module.css';
 import { helper } from './columns.helper';

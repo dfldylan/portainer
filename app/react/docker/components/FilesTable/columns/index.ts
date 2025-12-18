@@ -4,7 +4,7 @@ import {
   ColumnDefTemplate,
 } from '@tanstack/react-table';
 
-import { humanize, isoDateFromTimestamp } from '@CE/portainer/filters/filters';
+import { humanize, isoDateFromTimestamp } from '@/portainer/filters/filters';
 
 import { FileData } from '../types';
 

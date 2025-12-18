@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { promiseSequence } from '@CE/portainer/helpers/promise-utils';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { promiseSequence } from '@/portainer/helpers/promise-utils';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
+} from '@/react-tools/react-query';
 
 import { buildUrl } from '../../queries/build-url';
 import { queryKeys } from '../../queries/query-keys';

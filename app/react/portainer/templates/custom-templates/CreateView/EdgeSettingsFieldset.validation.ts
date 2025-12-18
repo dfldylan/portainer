@@ -1,9 +1,9 @@
 import { SchemaOf, boolean, mixed, number, object } from 'yup';
 
-import { staggerConfigValidation } from '@CE/react/edge/edge-stacks/components/StaggerFieldset';
-import { relativePathValidation } from '@CE/react/portainer/gitops/RelativePathFieldset/validation';
-import { EdgeTemplateSettings } from '@CE/react/portainer/templates/custom-templates/types';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { staggerConfigValidation } from '@/react/edge/edge-stacks/components/StaggerFieldset';
+import { relativePathValidation } from '@/react/portainer/gitops/RelativePathFieldset/validation';
+import { EdgeTemplateSettings } from '@/react/portainer/templates/custom-templates/types';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
 export function edgeFieldsetValidation(): SchemaOf<EdgeTemplateSettings> {
   if (!isBE) {

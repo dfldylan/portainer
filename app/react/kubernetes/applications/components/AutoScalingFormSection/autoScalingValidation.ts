@@ -1,6 +1,6 @@
 import { SchemaOf, boolean, number, object } from 'yup';
 
-import { nanNumberSchema } from '@CE/react-tools/yup-schemas';
+import { nanNumberSchema } from '@/react-tools/yup-schemas';
 
 import { AutoScalingFormValues } from './types';
 

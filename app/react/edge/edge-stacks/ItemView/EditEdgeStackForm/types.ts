@@ -1,10 +1,7 @@
-import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
-import {
-  DeploymentType,
-  StaggerConfig,
-} from '@CE/react/edge/edge-stacks/types';
+import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { DeploymentType, StaggerConfig } from '@/react/edge/edge-stacks/types';
 
-import { EnvVar } from '@@CE/form-components/EnvironmentVariablesFieldset/types';
+import { EnvVar } from '@@/form-components/EnvironmentVariablesFieldset/types';
 
 export interface FormValues {
   edgeGroups: EdgeGroup['Id'][];

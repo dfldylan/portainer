@@ -2,12 +2,12 @@ import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { HttpResponse } from 'msw';
 
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { UserViewModel } from '@CE/portainer/models/user';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { http, server } from '@CE/setup-tests/server';
-import { createMockEnvironment } from '@CE/react-tools/test-mocks';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { UserViewModel } from '@/portainer/models/user';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { http, server } from '@/setup-tests/server';
+import { createMockEnvironment } from '@/react-tools/test-mocks';
 
 import { PodKubernetesInstanceLabel, PodManagedByLabel } from '../../constants';
 
@@ -21,11 +21,11 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
   useCurrentStateAndParams: () => mockUseCurrentStateAndParams(),
 }));
 
-vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
+vi.mock('@/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => mockUseEnvironmentId(),
 }));
 
-vi.mock('@CE/react/kubernetes/applications/queries/useApplications', () => ({
+vi.mock('@/react/kubernetes/applications/queries/useApplications', () => ({
   useApplications: () => ({
     data: [
       {
@@ -90,13 +90,13 @@ vi.mock('@CE/react/kubernetes/applications/queries/useApplications', () => ({
   }),
 }));
 
-vi.mock('@@CE/Link', () => ({
+vi.mock('@@/Link', () => ({
   Link: ({ children }: { children: React.ReactNode }) => (
     <span data-testid="mock-link">{children}</span>
   ),
 }));
 
-vi.mock('@CE/react/kubernetes/components/CreateFromManifestButton', () => ({
+vi.mock('@/react/kubernetes/components/CreateFromManifestButton', () => ({
   CreateFromManifestButton: ({
     children,
     ...props

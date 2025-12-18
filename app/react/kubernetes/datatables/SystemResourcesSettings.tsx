@@ -1,7 +1,7 @@
-import { Authorized } from '@CE/react/hooks/useUser';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { ZustandSetFunc } from '@@CE/datatables/types';
-import { Checkbox } from '@@CE/form-components/Checkbox';
+import { ZustandSetFunc } from '@@/datatables/types';
+import { Checkbox } from '@@/form-components/Checkbox';
 
 export function SystemResourcesSettings({
   value,

@@ -1,10 +1,10 @@
 import { ZapIcon } from 'lucide-react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { getDockerEnvironmentType } from '@CE/react/portainer/environments/utils/getDockerEnvironmentType';
-import { useIsPodman } from '@CE/react/portainer/environments/queries/useIsPodman';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { getDockerEnvironmentType } from '@/react/portainer/environments/utils/getDockerEnvironmentType';
+import { useIsPodman } from '@/react/portainer/environments/queries/useIsPodman';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { useInfo } from '../proxy/queries/useInfo';
 

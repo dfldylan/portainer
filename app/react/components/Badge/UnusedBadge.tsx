@@ -1,4 +1,4 @@
-import { Badge } from '@@CE/Badge';
+import { Badge } from '@@/Badge';
 
 export function UnusedBadge() {
   return <Badge type="warn">Unused</Badge>;

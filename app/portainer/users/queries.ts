@@ -1,10 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  TeamRole,
-  TeamMembership,
-} from '@CE/react/portainer/users/teams/types';
-import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { TeamRole, TeamMembership } from '@/react/portainer/users/teams/types';
+import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
 
 import { User, UserId } from './types';
 import { getUserMemberships, getUsers } from './user.service';

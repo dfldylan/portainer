@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import betaIcon from '@CE/assets/ico/beta.svg?c';
+import betaIcon from '@/assets/ico/beta.svg?c';
 
-import { TextTip } from '@@CE/Tip/TextTip';
+import { TextTip } from '@@/Tip/TextTip';
 
 interface Props {
   message: ReactNode;

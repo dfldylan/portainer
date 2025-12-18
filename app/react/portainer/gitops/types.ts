@@ -1,7 +1,7 @@
 import {
   AuthTypeOption,
   GitCredential,
-} from '@CE/react/portainer/account/git-credentials/types';
+} from '@/react/portainer/account/git-credentials/types';
 
 export type AutoUpdateMechanism = 'Webhook' | 'Interval';
 export { type RelativePathModel } from './RelativePathFieldset/types';

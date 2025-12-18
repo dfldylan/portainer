@@ -1,15 +1,15 @@
 import { List } from 'lucide-react';
 
-import { Datatable } from '@@CE/datatables';
-import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
-import { withColumnFilters } from '@@CE/datatables/extend-options/withColumnFilters';
-import { withMeta } from '@@CE/datatables/extend-options/withMeta';
+import { Datatable } from '@@/datatables';
+import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+import { withColumnFilters } from '@@/datatables/extend-options/withColumnFilters';
+import { withMeta } from '@@/datatables/extend-options/withMeta';
 import {
   BasicTableSettings,
   filteredColumnsSettings,
   type FilteredColumnsTableSettings,
-} from '@@CE/datatables/types';
-import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
+} from '@@/datatables/types';
+import { useTableStateWithStorage } from '@@/datatables/useTableState';
 
 import { useColumns } from './columns';
 import { DecoratedTask } from './types';

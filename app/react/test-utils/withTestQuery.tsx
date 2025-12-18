@@ -1,7 +1,7 @@
 import { ComponentType } from 'react';
 import { QueryClient } from '@tanstack/react-query';
 
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
+import { withReactQuery } from '@/react-tools/withReactQuery';
 
 export function withTestQueryProvider<T>(
   WrappedComponent: ComponentType<T & JSX.IntrinsicAttributes>

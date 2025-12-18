@@ -2,8 +2,8 @@ import { Minimize2 } from 'lucide-react';
 import { NodeSelectorRequirement, Pod } from 'kubernetes-types/core/v1';
 import { useMemo } from 'react';
 
-import { Icon } from '@@CE/Icon';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { Icon } from '@@/Icon';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { Application } from '../../types';
 import { applicationIsKind } from '../../utils';

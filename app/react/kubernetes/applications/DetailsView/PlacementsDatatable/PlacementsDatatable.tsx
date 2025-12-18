@@ -3,11 +3,11 @@ import { Minimize2 } from 'lucide-react';
 import {
   BasicTableSettings,
   RefreshableTableSettings,
-} from '@@CE/datatables/types';
-import { ExpandableDatatable } from '@@CE/datatables/ExpandableDatatable';
-import { TableSettingsMenu } from '@@CE/datatables';
-import { TableSettingsMenuAutoRefresh } from '@@CE/datatables/TableSettingsMenuAutoRefresh';
-import { TextTip } from '@@CE/Tip/TextTip';
+} from '@@/datatables/types';
+import { ExpandableDatatable } from '@@/datatables/ExpandableDatatable';
+import { TableSettingsMenu } from '@@/datatables';
+import { TableSettingsMenuAutoRefresh } from '@@/datatables/TableSettingsMenuAutoRefresh';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { NodePlacementRowData } from '../types';
 

@@ -1,7 +1,7 @@
 import { AlertTriangle } from 'lucide-react';
 
-import { Badge } from '@@CE/Badge';
-import { Icon } from '@@CE/Icon';
+import { Badge } from '@@/Badge';
+import { Icon } from '@@/Icon';
 
 type Props = {
   serviceTypeLabel: string;

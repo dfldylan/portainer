@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import angular from 'angular';
 
-import { StateManager } from '@CE/portainer/services/types';
+import { StateManager } from '@/portainer/services/types';
 
-import { PageHeader } from '@@CE/PageHeader';
+import { PageHeader } from '@@/PageHeader';
 
 import { useSettings } from '../queries';
 import { Settings } from '../types';

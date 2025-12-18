@@ -4,13 +4,13 @@ import {
   Edition,
   LicenseInfo,
   LicenseType,
-} from '@CE/react/portainer/licenses/types';
-import { EnvironmentGroup } from '@CE/react/portainer/environments/environment-groups/types';
-import { Tag } from '@CE/portainer/tags/types';
-import { StatusResponse } from '@CE/react/portainer/system/useSystemStatus';
-import { createMockTeams } from '@CE/react-tools/test-mocks';
-import { UserId } from '@CE/portainer/users/types';
-import { VersionResponse } from '@CE/react/portainer/system/useSystemVersion';
+} from '@/react/portainer/licenses/types';
+import { EnvironmentGroup } from '@/react/portainer/environments/environment-groups/types';
+import { Tag } from '@/portainer/tags/types';
+import { StatusResponse } from '@/react/portainer/system/useSystemStatus';
+import { createMockTeams } from '@/react-tools/test-mocks';
+import { UserId } from '@/portainer/users/types';
+import { VersionResponse } from '@/react/portainer/system/useSystemVersion';
 
 import { azureHandlers } from './setup-handlers/azure';
 import { dockerHandlers } from './setup-handlers/docker';

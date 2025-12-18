@@ -1,8 +1,8 @@
-import { useInfo } from '@CE/react/docker/proxy/queries/useInfo';
-import { Environment } from '@CE/react/portainer/environments/types';
-import { isAgentEnvironment } from '@CE/react/portainer/environments/utils';
+import { useInfo } from '@/react/docker/proxy/queries/useInfo';
+import { Environment } from '@/react/portainer/environments/types';
+import { isAgentEnvironment } from '@/react/portainer/environments/utils';
 
-import { PageHeader } from '@@CE/PageHeader';
+import { PageHeader } from '@@/PageHeader';
 
 import { ContainersDatatable } from './ContainersDatatable';
 

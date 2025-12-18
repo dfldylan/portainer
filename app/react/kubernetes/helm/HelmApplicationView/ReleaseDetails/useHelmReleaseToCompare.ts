@@ -1,4 +1,4 @@
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
 import { HelmRelease } from '../../types';
 import { useHelmRelease } from '../../helmReleaseQueries/useHelmRelease';

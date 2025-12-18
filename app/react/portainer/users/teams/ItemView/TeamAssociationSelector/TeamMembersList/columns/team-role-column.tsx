@@ -1,17 +1,17 @@
 import { User as UserIcon, UserPlus, UserX } from 'lucide-react';
 import { CellContext } from '@tanstack/react-table';
 
-import { User } from '@CE/portainer/users/types';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { TeamRole } from '@CE/react/portainer/users/teams/types';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { User } from '@/portainer/users/types';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { TeamRole } from '@/react/portainer/users/teams/types';
+import { notifySuccess } from '@/portainer/services/notifications';
 import {
   useTeamMemberships,
   useUpdateRoleMutation,
-} from '@CE/react/portainer/users/teams/queries';
+} from '@/react/portainer/users/teams/queries';
 
-import { Button } from '@@CE/buttons';
-import { Icon } from '@@CE/Icon';
+import { Button } from '@@/buttons';
+import { Icon } from '@@/Icon';
 
 import { useRowContext } from '../RowContext';
 

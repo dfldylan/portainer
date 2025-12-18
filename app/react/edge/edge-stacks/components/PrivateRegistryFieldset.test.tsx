@@ -2,8 +2,8 @@ import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Registry } from '@CE/react/portainer/registries/types/registry';
-import selectEvent from '@CE/react/test-utils/react-select';
+import { Registry } from '@/react/portainer/registries/types/registry';
+import selectEvent from '@/react/test-utils/react-select';
 
 import {
   REGISTRY_CREDENTIALS_ENABLED,

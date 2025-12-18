@@ -1,9 +1,9 @@
 import { Activity } from 'lucide-react';
 
-import { isoDateFromTimestamp } from '@CE/portainer/filters/filters';
-import { Environment } from '@CE/react/portainer/environments/types';
-import heartbeatup from '@CE/assets/ico/heartbeat-up.svg?c';
-import heartbeatdown from '@CE/assets/ico/heartbeat-down.svg?c';
+import { isoDateFromTimestamp } from '@/portainer/filters/filters';
+import { Environment } from '@/react/portainer/environments/types';
+import heartbeatup from '@/assets/ico/heartbeat-up.svg?c';
+import heartbeatdown from '@/assets/ico/heartbeat-down.svg?c';
 
 import { EnvironmentStatusBadgeItem } from './EnvironmentStatusBadgeItem';
 

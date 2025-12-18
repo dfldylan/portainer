@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-import { TagId } from '@CE/portainer/tags/types';
-import { useCreateTagMutation, useTags } from '@CE/portainer/tags/queries';
+import { TagId } from '@/portainer/tags/types';
+import { useCreateTagMutation, useTags } from '@/portainer/tags/queries';
 
-import { Creatable, Select } from '@@CE/form-components/ReactSelect';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Link } from '@@CE/Link';
-import { ArrayError } from '@@CE/form-components/InputList/InputList';
+import { Creatable, Select } from '@@/form-components/ReactSelect';
+import { FormControl } from '@@/form-components/FormControl';
+import { Link } from '@@/Link';
+import { ArrayError } from '@@/form-components/InputList/InputList';
 
 import { TagButton } from '../TagButton';
 

@@ -1,10 +1,10 @@
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { TeamId } from '@CE/react/portainer/users/teams/types';
-import { UserId } from '@CE/portainer/users/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { TeamId } from '@/react/portainer/users/teams/types';
+import { UserId } from '@/portainer/users/types';
 import {
   RegistryId,
   Registry,
-} from '@CE/react/portainer/registries/types/registry';
+} from '@/react/portainer/registries/types/registry';
 
 import { EnvironmentId } from '../types';
 

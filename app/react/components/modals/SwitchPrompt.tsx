@@ -1,8 +1,8 @@
 import { ReactNode, useState } from 'react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 import { ModalType, type ButtonOptions } from './types';
 import { openModal } from './open-modal';

@@ -1,19 +1,16 @@
 import { Layers } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { pluralize } from '@CE/portainer/helpers/strings';
-import {
-  notifyError,
-  notifySuccess,
-} from '@CE/portainer/services/notifications';
+import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { pluralize } from '@/portainer/helpers/strings';
+import { notifyError, notifySuccess } from '@/portainer/services/notifications';
 
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
-import { refreshableSettings } from '@@CE/datatables/types';
-import { Datatable, TableSettingsMenu } from '@@CE/datatables';
-import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
-import { AddButton } from '@@CE/buttons';
+import { DeleteButton } from '@@/buttons/DeleteButton';
+import { refreshableSettings } from '@@/datatables/types';
+import { Datatable, TableSettingsMenu } from '@@/datatables';
+import { useTableStateWithStorage } from '@@/datatables/useTableState';
+import { AddButton } from '@@/buttons';
 
 import { systemResourcesSettings } from '../../datatables/SystemResourcesSettings';
 import { CreateFromManifestButton } from '../../components/CreateFromManifestButton';

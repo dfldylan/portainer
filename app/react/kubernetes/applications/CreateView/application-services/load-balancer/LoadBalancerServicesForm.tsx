@@ -1,15 +1,15 @@
 import { Plus, RefreshCw } from 'lucide-react';
 import { FormikErrors } from 'formik';
 
-import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
-import { useEnvironment } from '@CE/react/portainer/environments/queries';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useIsEdgeAdmin } from '@/react/hooks/useUser';
+import { useEnvironment } from '@/react/portainer/environments/queries';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { Card } from '@@CE/Card';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Button } from '@@CE/buttons';
-import { FormError } from '@@CE/form-components/FormError';
-import { Link } from '@@CE/Link';
+import { Card } from '@@/Card';
+import { TextTip } from '@@/Tip/TextTip';
+import { Button } from '@@/buttons';
+import { FormError } from '@@/form-components/FormError';
+import { Link } from '@@/Link';
 
 import {
   generateUniqueName,

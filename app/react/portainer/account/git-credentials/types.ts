@@ -1,7 +1,7 @@
 import {
   PaginationTableSettings,
   SortableTableSettings,
-} from '@@CE/datatables/types';
+} from '@@/datatables/types';
 
 export interface GitCredentialTableSettings
   extends SortableTableSettings,

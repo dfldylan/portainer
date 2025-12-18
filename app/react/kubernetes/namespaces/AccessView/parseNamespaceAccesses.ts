@@ -1,7 +1,7 @@
-import { PortainerNamespaceAccessesConfigMap } from '@CE/react/kubernetes/configs/constants';
-import { User } from '@CE/portainer/users/types';
-import { Team } from '@CE/react/portainer/users/teams/types';
-import { Configuration } from '@CE/react/kubernetes/configs/types';
+import { PortainerNamespaceAccessesConfigMap } from '@/react/kubernetes/configs/constants';
+import { User } from '@/portainer/users/types';
+import { Team } from '@/react/portainer/users/teams/types';
+import { Configuration } from '@/react/kubernetes/configs/types';
 
 import { NamespaceAccess, NamespaceAccessesMap } from './types';
 

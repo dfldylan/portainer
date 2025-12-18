@@ -1,10 +1,10 @@
 import { useField } from 'formik';
 
-import { useGroups } from '@CE/react/portainer/environments/environment-groups/queries';
-import { EnvironmentGroupId } from '@CE/react/portainer/environments/types';
+import { useGroups } from '@/react/portainer/environments/environment-groups/queries';
+import { EnvironmentGroupId } from '@/react/portainer/environments/types';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Select } from '@@CE/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { Select } from '@@/form-components/Input';
 
 export function GroupField({ name = 'meta.groupId' }: { name?: string }) {
   const [fieldProps, metaProps, helpers] = useField<EnvironmentGroupId>(name);

@@ -1,13 +1,13 @@
 import uuidv4 from 'uuid/v4';
 import { useState } from 'react';
 
-import { baseStackWebhookUrl } from '@CE/portainer/helpers/webhookHelper';
-import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
-import { WebhookSettings } from '@CE/react/portainer/gitops/AutoUpdateFieldset/WebhookSettings';
+import { baseStackWebhookUrl } from '@/portainer/helpers/webhookHelper';
+import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { WebhookSettings } from '@/react/portainer/gitops/AutoUpdateFieldset/WebhookSettings';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { FormSection } from '@@/form-components/FormSection';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 export function WebhookFieldset({
   value,

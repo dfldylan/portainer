@@ -1,11 +1,11 @@
 import { Cpu, HardDrive } from 'lucide-react';
 
-import { KubernetesSnapshot } from '@CE/react/portainer/environments/types';
-import { humanize } from '@CE/portainer/filters/filters';
-import { addPlural } from '@CE/portainer/helpers/strings';
-import Memory from '@CE/assets/ico/memory.svg?c';
+import { KubernetesSnapshot } from '@/react/portainer/environments/types';
+import { humanize } from '@/portainer/filters/filters';
+import { addPlural } from '@/portainer/helpers/strings';
+import Memory from '@/assets/ico/memory.svg?c';
 
-import { StatsItem } from '@@CE/StatsItem';
+import { StatsItem } from '@@/StatsItem';
 
 interface Props {
   snapshot?: KubernetesSnapshot;

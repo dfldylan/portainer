@@ -1,10 +1,10 @@
 import { RepositoryMechanismTypes } from 'Kubernetes/models/deploy';
-import { parseAutoUpdateResponse } from '@CE/react/portainer/gitops/AutoUpdateFieldset/utils';
-import { baseStackWebhookUrl, createWebhookId } from '@CE/portainer/helpers/webhookHelper';
-import { confirmEnableTLSVerify } from '@CE/react/portainer/gitops/utils';
-import { confirm } from '@@CE/modals/confirm';
-import { buildConfirmButton } from '@@CE/modals/utils';
-import { ModalType } from '@@CE/modals';
+import { confirm } from '@@/modals/confirm';
+import { buildConfirmButton } from '@@/modals/utils';
+import { ModalType } from '@@/modals';
+import { parseAutoUpdateResponse } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { baseStackWebhookUrl, createWebhookId } from '@/portainer/helpers/webhookHelper';
+import { confirmEnableTLSVerify } from '@/react/portainer/gitops/utils';
 
 class KubernetesRedeployAppGitFormController {
   /* @ngInject */

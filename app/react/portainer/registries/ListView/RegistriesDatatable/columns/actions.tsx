@@ -1,12 +1,12 @@
 import { CellContext } from '@tanstack/react-table';
 import { Search } from 'lucide-react';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
 
-import { Link } from '@@CE/Link';
-import { Button } from '@@CE/buttons';
-import { BEFeatureIndicator } from '@@CE/BEFeatureIndicator';
+import { Link } from '@@/Link';
+import { Button } from '@@/buttons';
+import { BEFeatureIndicator } from '@@/BEFeatureIndicator';
 
 import { DecoratedRegistry } from '../types';
 import { RegistryTypes } from '../../../types/registry';

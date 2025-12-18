@@ -1,13 +1,13 @@
 import { Box } from 'lucide-react';
 
-import { ContainerGroup } from '@CE/react/azure/types';
-import { Authorized } from '@CE/react/hooks/useUser';
+import { ContainerGroup } from '@/react/azure/types';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { Datatable } from '@@CE/datatables';
-import { AddButton } from '@@CE/buttons';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Datatable } from '@@/datatables';
+import { AddButton } from '@@/buttons';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { columns } from './columns';
 

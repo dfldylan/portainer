@@ -5,9 +5,9 @@ import { tags as highlightTags } from '@lezer/highlight';
 import type { JSONSchema7 } from 'json-schema';
 import clsx from 'clsx';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { CopyButton } from '@@CE/buttons/CopyButton';
+import { CopyButton } from '@@/buttons/CopyButton';
 
 import { useDebounce } from '../../hooks/useDebounce';
 import { TextTip } from '../Tip/TextTip';

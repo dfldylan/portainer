@@ -1,20 +1,17 @@
 import { useReducer } from 'react';
 import { Edit, Eye } from 'lucide-react';
 
-import { Icon } from '@CE/react/components/Icon';
-import {
-  TeamMembership,
-  TeamRole,
-} from '@CE/react/portainer/users/teams/types';
+import { Icon } from '@/react/components/Icon';
+import { TeamMembership, TeamRole } from '@/react/portainer/users/teams/types';
 import {
   useIsCurrentUserTeamLeader,
   useUserMembership,
-} from '@CE/portainer/users/queries';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+} from '@/portainer/users/queries';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
 
-import { TableContainer, TableTitle } from '@@CE/datatables';
-import { Button } from '@@CE/buttons';
+import { TableContainer, TableTitle } from '@@/datatables';
+import { Button } from '@@/buttons';
 
 import { ResourceControlType, ResourceId } from '../types';
 import { ResourceControlViewModel } from '../models/ResourceControlViewModel';

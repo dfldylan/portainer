@@ -1,6 +1,6 @@
 import { ExternalLink } from 'lucide-react';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 interface Props {
   to: string;

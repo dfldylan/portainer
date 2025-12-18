@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 
-import { Alert } from '@@CE/Alert';
-import { useDocsUrl } from '@@CE/PageHeader/ContextHelp';
+import { Alert } from '@@/Alert';
+import { useDocsUrl } from '@@/PageHeader/ContextHelp';
 
 import { EnvironmentVariablesFieldset } from './EnvironmentVariablesFieldset';
 import { EnvironmentVariablesPanel } from './EnvironmentVariablesPanel';

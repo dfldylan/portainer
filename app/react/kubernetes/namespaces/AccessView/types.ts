@@ -1,7 +1,7 @@
 import {
   TeamAccessPolicies,
   UserAccessPolicies,
-} from '@CE/react/portainer/environments/types';
+} from '@/react/portainer/environments/types';
 
 export type NamespaceAccess = {
   id: number;

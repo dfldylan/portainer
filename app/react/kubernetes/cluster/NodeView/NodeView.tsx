@@ -2,13 +2,13 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { AlertTriangle, Code, History, HardDrive } from 'lucide-react';
 import { useMemo } from 'react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { Widget, WidgetBody, WidgetTabs } from '@@CE/Widget';
-import { Tab, useCurrentTabIndex } from '@@CE/Widget/WidgetTabs';
-import { Badge } from '@@CE/Badge';
-import { Icon } from '@@CE/Icon';
+import { PageHeader } from '@@/PageHeader';
+import { Widget, WidgetBody, WidgetTabs } from '@@/Widget';
+import { Tab, useCurrentTabIndex } from '@@/Widget/WidgetTabs';
+import { Badge } from '@@/Badge';
+import { Icon } from '@@/Icon';
 
 import { useEventWarningsCount } from '../../queries/useEvents';
 import { ResourceEventsDatatable } from '../../components/EventsDatatable/ResourceEventsDatatable';

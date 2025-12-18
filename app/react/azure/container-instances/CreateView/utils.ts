@@ -1,4 +1,4 @@
-import { ProviderViewModel, ResourceGroup } from '@CE/react/azure/types';
+import { ProviderViewModel, ResourceGroup } from '@/react/azure/types';
 
 export function getSubscriptionResourceGroups(
   subscriptionId?: string,

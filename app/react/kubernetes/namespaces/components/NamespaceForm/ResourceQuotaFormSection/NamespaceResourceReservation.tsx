@@ -1,4 +1,4 @@
-import { ResourceReservation } from '@CE/react/kubernetes/components/ResourceReservation';
+import { ResourceReservation } from '@/react/kubernetes/components/ResourceReservation';
 
 import { ResourceQuotaFormValues } from './types';
 import { useNamespaceResourceReservationData } from './useNamespaceResourceReservationData';

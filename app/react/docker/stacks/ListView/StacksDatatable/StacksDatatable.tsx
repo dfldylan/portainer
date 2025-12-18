@@ -1,15 +1,15 @@
 import { Layers } from 'lucide-react';
 import { Row } from '@tanstack/react-table';
 
-import { useAuthorizations, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { useAuthorizations, useIsEdgeAdmin } from '@/react/hooks/useUser';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { Datatable } from '@@CE/datatables';
-import { useRepeater } from '@@CE/datatables/useRepeater';
-import { defaultGlobalFilterFn } from '@@CE/datatables/Datatable';
-import { withGlobalFilter } from '@@CE/datatables/extend-options/withGlobalFilter';
-import { mergeOptions } from '@@CE/datatables/extend-options/mergeOptions';
-import { withColumnFilters } from '@@CE/datatables/extend-options/withColumnFilters';
+import { Datatable } from '@@/datatables';
+import { useRepeater } from '@@/datatables/useRepeater';
+import { defaultGlobalFilterFn } from '@@/datatables/Datatable';
+import { withGlobalFilter } from '@@/datatables/extend-options/withGlobalFilter';
+import { mergeOptions } from '@@/datatables/extend-options/mergeOptions';
+import { withColumnFilters } from '@@/datatables/extend-options/withColumnFilters';
 
 import { isExternalStack, isOrphanedStack } from '../../view-models/utils';
 

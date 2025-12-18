@@ -1,13 +1,13 @@
 import { Field, Form, Formik } from 'formik';
 import { Plug2 } from 'lucide-react';
 
-import { LoadingButton } from '@@CE/buttons/LoadingButton';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
-import { Input } from '@@CE/form-components/Input';
-import { Button } from '@@CE/buttons';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { useDocsUrl } from '@@CE/PageHeader/ContextHelp';
+import { LoadingButton } from '@@/buttons/LoadingButton';
+import { FormControl } from '@@/form-components/FormControl';
+import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
+import { Input } from '@@/form-components/Input';
+import { Button } from '@@/buttons';
+import { TextTip } from '@@/Tip/TextTip';
+import { useDocsUrl } from '@@/PageHeader/ContextHelp';
 
 const initialValues = {
   kubeConfig: '',

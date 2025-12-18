@@ -1,9 +1,9 @@
-import { ping } from '@CE/react/docker/proxy/queries/usePing';
-import { environmentStore } from '@CE/react/hooks/current-environment-store';
+import { ping } from '@/react/docker/proxy/queries/usePing';
+import { environmentStore } from '@/react/hooks/current-environment-store';
 import {
   Environment,
   EnvironmentType,
-} from '@CE/react/portainer/environments/types';
+} from '@/react/portainer/environments/types';
 
 interface State {
   currentEndpoint: Environment | null;

@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { DownloadCloud } from 'lucide-react';
 
-import { useUIState } from '@CE/react/hooks/useUIState';
-import { useSystemVersion } from '@CE/react/portainer/system/useSystemVersion';
+import { useUIState } from '@/react/hooks/useUIState';
+import { useSystemVersion } from '@/react/portainer/system/useSystemVersion';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import styles from './UpdateNotifications.module.css';
 

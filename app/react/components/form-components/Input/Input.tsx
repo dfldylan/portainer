@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef, InputHTMLAttributes, Ref } from 'react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
 export const InputWithRef = forwardRef<
   HTMLInputElement,

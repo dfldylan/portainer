@@ -4,10 +4,10 @@ import { SchemaOf, object } from 'yup';
 import _ from 'lodash';
 import { ComponentType } from 'react';
 
-import { PropNames, r2a } from '@CE/react-tools/react2angular';
+import { PropNames, r2a } from '@/react-tools/react2angular';
 
-import { validateForm } from '@@CE/form-components/validate-form';
-import { ArrayError } from '@@CE/form-components/InputList/InputList';
+import { validateForm } from '@@/form-components/validate-form';
+import { ArrayError } from '@@/form-components/InputList/InputList';
 
 interface FormFieldProps<TValue> {
   onChange(values: TValue): void; // update the values for the entire form object used in yup validation, not just one input.

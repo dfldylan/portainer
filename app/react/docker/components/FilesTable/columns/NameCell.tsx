@@ -2,9 +2,9 @@ import { CellContext } from '@tanstack/react-table';
 import { Check, File as FileIcon, Folder, X } from 'lucide-react';
 import { Form, Formik } from 'formik';
 
-import { Icon } from '@@CE/Icon';
-import { Button } from '@@CE/buttons';
-import { Input } from '@@CE/form-components/Input';
+import { Icon } from '@@/Icon';
+import { Button } from '@@/buttons';
+import { Input } from '@@/form-components/Input';
 
 import { FileData, isFilesTableMeta } from '../types';
 

@@ -3,11 +3,11 @@ import { ComponentProps, PropsWithChildren } from 'react';
 import { Menu, MenuButton, MenuItem, MenuPopover } from '@reach/menu-button';
 import { positionRight } from '@reach/popover';
 
-import { Authorized } from '@CE/react/hooks/useUser';
+import { Authorized } from '@/react/hooks/useUser';
 
-import { Widget } from '@@CE/Widget';
-import { Button, ButtonGroup } from '@@CE/buttons';
-import { ButtonWithRef } from '@@CE/buttons/Button';
+import { Widget } from '@@/Widget';
+import { Button, ButtonGroup } from '@@/buttons';
+import { ButtonWithRef } from '@@/buttons/Button';
 
 /**
  * used for wrapping widget in the service item view

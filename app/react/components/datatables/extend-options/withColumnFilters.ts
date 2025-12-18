@@ -1,6 +1,6 @@
 import { ColumnFiltersState, TableOptions } from '@tanstack/react-table';
 
-import { applySetStateAction } from '@CE/react-tools/apply-set-state-action';
+import { applySetStateAction } from '@/react-tools/apply-set-state-action';
 
 import { DefaultType } from '../types';
 

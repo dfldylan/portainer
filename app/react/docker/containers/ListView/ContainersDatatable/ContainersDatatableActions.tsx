@@ -1,15 +1,15 @@
 import { useRouter } from '@uirouter/react';
 import { Pause, Play, RefreshCw, Slash, Square, Trash2 } from 'lucide-react';
 
-import * as notifications from '@CE/portainer/services/notifications';
-import { useAuthorizations, Authorized } from '@CE/react/hooks/useUser';
-import { confirmContainerDeletion } from '@CE/react/docker/containers/common/confirm-container-delete-modal';
-import { setPortainerAgentTargetHeader } from '@CE/portainer/services/http-request.helper';
+import * as notifications from '@/portainer/services/notifications';
+import { useAuthorizations, Authorized } from '@/react/hooks/useUser';
+import { confirmContainerDeletion } from '@/react/docker/containers/common/confirm-container-delete-modal';
+import { setPortainerAgentTargetHeader } from '@/portainer/services/http-request.helper';
 import {
   ContainerId,
   ContainerStatus,
   ContainerListViewModel,
-} from '@CE/react/docker/containers/types';
+} from '@/react/docker/containers/types';
 import {
   killContainer,
   pauseContainer,
@@ -18,10 +18,10 @@ import {
   resumeContainer,
   startContainer,
   stopContainer,
-} from '@CE/react/docker/containers/containers.service';
-import type { EnvironmentId } from '@CE/react/portainer/environments/types';
+} from '@/react/docker/containers/containers.service';
+import type { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { ButtonGroup, Button, AddButton } from '@@CE/buttons';
+import { ButtonGroup, Button, AddButton } from '@@/buttons';
 
 type ContainerServiceAction = (
   endpointId: EnvironmentId,

@@ -1,6 +1,6 @@
 import { IPAMConfig } from 'docker-types/generated/1.44';
 
-import { NetworkViewModel } from '@CE/docker/models/network';
+import { NetworkViewModel } from '@/docker/models/network';
 
 export type DecoratedNetwork = NetworkViewModel & {
   Subs?: DecoratedNetwork[];

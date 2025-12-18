@@ -1,5 +1,5 @@
-import { KubernetesSecretTypeOptions } from '@CE/kubernetes/models/configuration/models';
-import { KubernetesConfigurationKinds } from '@CE/kubernetes/models/configuration/models';
+import { KubernetesSecretTypeOptions } from '@/kubernetes/models/configuration/models';
+import { KubernetesConfigurationKinds } from '@/kubernetes/models/configuration/models';
 
 export function isConfigurationFormValid(alreadyExist, isDataValid, formValues) {
   const uniqueCheck = !alreadyExist && isDataValid;

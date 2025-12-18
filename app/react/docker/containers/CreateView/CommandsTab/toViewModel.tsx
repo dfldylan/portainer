@@ -1,6 +1,6 @@
 import { HostConfig } from 'docker-types/generated/1.44';
 
-import { commandArrayToString } from '@CE/docker/helpers/containers';
+import { commandArrayToString } from '@/docker/helpers/containers';
 
 import { ContainerDetailsJSON } from '../../queries/useContainer';
 

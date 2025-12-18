@@ -2,8 +2,8 @@ import { Field, FormikErrors } from 'formik';
 import { string } from 'yup';
 import { useMemo } from 'react';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Input } from '@@CE/form-components/Input';
+import { FormControl } from '@@/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
 
 import { useEdgeGroups } from '../../queries/useEdgeGroups';
 import { EdgeGroup } from '../../types';

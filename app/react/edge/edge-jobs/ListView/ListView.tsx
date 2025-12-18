@@ -1,5 +1,5 @@
-import { InformationPanel } from '@@CE/InformationPanel';
-import { PageHeader } from '@@CE/PageHeader';
+import { InformationPanel } from '@@/InformationPanel';
+import { PageHeader } from '@@/PageHeader';
 
 import { EdgeJobsDatatable } from './EdgeJobsDatatable';
 

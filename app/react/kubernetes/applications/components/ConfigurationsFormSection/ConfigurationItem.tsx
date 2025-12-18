@@ -3,13 +3,13 @@ import { List, RotateCw, Trash2 } from 'lucide-react';
 import { ConfigMap, Secret } from 'kubernetes-types/core/v1';
 import { SingleValue } from 'react-select';
 
-import { InputGroup } from '@@CE/form-components/InputGroup';
-import { Select } from '@@CE/form-components/ReactSelect';
-import { FormError } from '@@CE/form-components/FormError';
-import { ItemError } from '@@CE/form-components/InputList/InputList';
-import { isErrorType } from '@@CE/form-components/formikUtils';
-import { Button } from '@@CE/buttons';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { InputGroup } from '@@/form-components/InputGroup';
+import { Select } from '@@/form-components/ReactSelect';
+import { FormError } from '@@/form-components/FormError';
+import { ItemError } from '@@/form-components/InputList/InputList';
+import { isErrorType } from '@@/form-components/formikUtils';
+import { Button } from '@@/buttons';
+import { TextTip } from '@@/Tip/TextTip';
 
 import {
   ConfigurationFormValues,

@@ -1,9 +1,9 @@
 import { useFormikContext } from 'formik';
 
-import { Stack, StackType } from '@CE/react/common/stacks/types';
+import { Stack, StackType } from '@/react/common/stacks/types';
 
-import { SwitchField } from '@@CE/form-components/SwitchField';
-import { FormSection } from '@@CE/form-components/FormSection';
+import { SwitchField } from '@@/form-components/SwitchField';
+import { FormSection } from '@@/form-components/FormSection';
 
 import { FormValues } from './types';
 

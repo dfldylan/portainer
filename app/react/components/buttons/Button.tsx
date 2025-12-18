@@ -8,9 +8,9 @@ import {
 } from 'react';
 import clsx from 'clsx';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 import './Button.css';
 
 type Type = 'submit' | 'button' | 'reset';

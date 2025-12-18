@@ -1,6 +1,6 @@
-import { Badge } from '@@CE/Badge';
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { ExternalLink } from '@@CE/ExternalLink';
+import { Badge } from '@@/Badge';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { ExternalLink } from '@@/ExternalLink';
 
 import { ContainerRowData } from '../types';
 

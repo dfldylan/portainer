@@ -1,4 +1,4 @@
-import { type User } from '@CE/portainer/users/types';
+import { type User } from '@/portainer/users/types';
 
 export type DecoratedUser = User & {
   isTeamLeader?: boolean;

@@ -1,8 +1,8 @@
 import { Field, Form, useFormikContext } from 'formik';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Input } from '@@CE/form-components/Input';
-import { LoadingButton } from '@@CE/buttons';
+import { FormControl } from '@@/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
+import { LoadingButton } from '@@/buttons';
 
 import { ApiKeyFormValues } from './types';
 

@@ -1,6 +1,6 @@
 import { Heart, Power } from 'lucide-react';
 
-import { Icon } from '@CE/react/components/Icon';
+import { Icon } from '@/react/components/Icon';
 
 interface Props {
   stats: {

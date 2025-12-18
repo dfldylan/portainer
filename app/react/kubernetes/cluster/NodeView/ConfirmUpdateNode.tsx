@@ -1,6 +1,6 @@
-import { ModalType } from '@@CE/modals';
-import { confirm } from '@@CE/modals/confirm';
-import { buildConfirmButton } from '@@CE/modals/utils';
+import { ModalType } from '@@/modals';
+import { confirm } from '@@/modals/confirm';
+import { buildConfirmButton } from '@@/modals/utils';
 
 export function confirmUpdateNode(
   taintsWarning: boolean,

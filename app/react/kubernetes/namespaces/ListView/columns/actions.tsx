@@ -1,11 +1,11 @@
 import { CellContext } from '@tanstack/react-table';
 import { Users } from 'lucide-react';
 
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { Environment } from '@CE/react/portainer/environments/types';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { Environment } from '@/react/portainer/environments/types';
 
-import { Link } from '@@CE/Link';
-import { Button } from '@@CE/buttons';
+import { Link } from '@@/Link';
+import { Button } from '@@/buttons';
 
 import { isDefaultNamespace } from '../../isDefaultNamespace';
 import { PortainerNamespace } from '../../types';

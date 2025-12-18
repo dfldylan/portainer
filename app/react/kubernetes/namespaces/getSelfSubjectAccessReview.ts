@@ -1,5 +1,5 @@
-import axios from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import axios from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { parseKubernetesAxiosError } from '../axiosError';
 

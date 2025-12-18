@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import { useIsSwarm } from '@CE/react/docker/proxy/queries/useInfo';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { createOwnershipColumn } from '@CE/react/docker/components/datatable/createOwnershipColumn';
-import { isoDate, truncateLeftRight } from '@CE/portainer/filters/filters';
+import { useIsSwarm } from '@/react/docker/proxy/queries/useInfo';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { createOwnershipColumn } from '@/react/docker/components/datatable/createOwnershipColumn';
+import { isoDate, truncateLeftRight } from '@/portainer/filters/filters';
 
 import { DecoratedVolume } from '../../types';
 

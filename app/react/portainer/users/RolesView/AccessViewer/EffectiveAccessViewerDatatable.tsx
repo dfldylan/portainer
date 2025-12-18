@@ -1,6 +1,6 @@
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Datatable } from '@@CE/datatables';
-import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
+import { TextTip } from '@@/Tip/TextTip';
+import { Datatable } from '@@/datatables';
+import { useTableStateWithStorage } from '@@/datatables/useTableState';
 
 import { AccessViewerPolicyModel } from './model';
 import { columns } from './columns';

@@ -1,10 +1,10 @@
 import { Briefcase } from 'lucide-react';
 
-import { FeatureId } from '@CE/react/portainer/feature-flags/enums';
-import { AutomationTestingProps } from '@CE/types';
+import { FeatureId } from '@/react/portainer/feature-flags/enums';
+import { AutomationTestingProps } from '@/types';
 
-import { Button } from '@@CE/buttons';
-import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
+import { Button } from '@@/buttons';
+import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
 
 interface Props extends AutomationTestingProps {
   featureId: FeatureId;

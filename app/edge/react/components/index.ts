@@ -1,14 +1,14 @@
 import angular from 'angular';
 
-import { r2a } from '@CE/react-tools/react2angular';
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
-import { withUIRouter } from '@CE/react-tools/withUIRouter';
-import { AssociatedEdgeEnvironmentsSelector } from '@CE/react/edge/components/AssociatedEdgeEnvironmentsSelector';
-import { EdgeAsyncIntervalsForm } from '@CE/react/edge/components/EdgeAsyncIntervalsForm';
-import { EdgeCheckinIntervalField } from '@CE/react/edge/components/EdgeCheckInIntervalField';
-import { EdgeScriptForm } from '@CE/react/edge/components/EdgeScriptForm';
-import { EdgeGroupsSelector } from '@CE/react/edge/edge-stacks/components/EdgeGroupsSelector';
-import { AssociatedEdgeGroupEnvironmentsSelector } from '@CE/react/edge/components/AssociatedEdgeGroupEnvironmentsSelector';
+import { r2a } from '@/react-tools/react2angular';
+import { withReactQuery } from '@/react-tools/withReactQuery';
+import { withUIRouter } from '@/react-tools/withUIRouter';
+import { AssociatedEdgeEnvironmentsSelector } from '@/react/edge/components/AssociatedEdgeEnvironmentsSelector';
+import { EdgeAsyncIntervalsForm } from '@/react/edge/components/EdgeAsyncIntervalsForm';
+import { EdgeCheckinIntervalField } from '@/react/edge/components/EdgeCheckInIntervalField';
+import { EdgeScriptForm } from '@/react/edge/components/EdgeScriptForm';
+import { EdgeGroupsSelector } from '@/react/edge/edge-stacks/components/EdgeGroupsSelector';
+import { AssociatedEdgeGroupEnvironmentsSelector } from '@/react/edge/components/AssociatedEdgeGroupEnvironmentsSelector';
 
 const ngModule = angular
   .module('portainer.edge.react.components', [])

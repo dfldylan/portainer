@@ -3,15 +3,15 @@ import clsx from 'clsx';
 import { useMutation } from '@tanstack/react-query';
 import { object } from 'yup';
 
-import { useCurrentUser, useIsEdgeAdmin } from '@CE/react/hooks/useUser';
-import { notifySuccess } from '@CE/portainer/services/notifications';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
+import { notifySuccess } from '@/portainer/services/notifications';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { confirm } from '@@CE/modals/confirm';
-import { Button } from '@@CE/buttons';
-import { LoadingButton } from '@@CE/buttons/LoadingButton';
-import { buildConfirmButton } from '@@CE/modals/utils';
-import { ModalType } from '@@CE/modals';
+import { confirm } from '@@/modals/confirm';
+import { Button } from '@@/buttons';
+import { LoadingButton } from '@@/buttons/LoadingButton';
+import { buildConfirmButton } from '@@/modals/utils';
+import { ModalType } from '@@/modals';
 
 import { EditDetails } from '../EditDetails';
 import { parseAccessControlFormData } from '../utils';

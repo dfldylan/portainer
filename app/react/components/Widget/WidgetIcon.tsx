@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 export function WidgetIcon({ icon }: { icon: ReactNode }) {
   return (

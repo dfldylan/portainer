@@ -1,21 +1,21 @@
 import { FormikErrors, useFormikContext } from 'formik';
 import { SetStateAction, useCallback } from 'react';
 
-import { GitForm } from '@CE/react/portainer/gitops/GitForm';
-import { baseEdgeStackWebhookUrl } from '@CE/portainer/helpers/webhookHelper';
-import { RelativePathFieldset } from '@CE/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
-import { applySetStateAction } from '@CE/react-tools/apply-set-state-action';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { GitForm } from '@/react/portainer/gitops/GitForm';
+import { baseEdgeStackWebhookUrl } from '@/portainer/helpers/webhookHelper';
+import { RelativePathFieldset } from '@/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
+import { applySetStateAction } from '@/react-tools/apply-set-state-action';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { BoxSelector } from '@@CE/BoxSelector';
-import { FormSection } from '@@CE/form-components/FormSection';
+import { BoxSelector } from '@@/BoxSelector';
+import { FormSection } from '@@/form-components/FormSection';
 import {
   editor,
   git,
   edgeStackTemplate,
   upload,
-} from '@@CE/BoxSelector/common-options/build-methods';
-import { FileUploadForm } from '@@CE/form-components/FileUpload';
+} from '@@/BoxSelector/common-options/build-methods';
+import { FileUploadForm } from '@@/form-components/FileUpload';
 
 import { TemplateFieldset } from './TemplateFieldset/TemplateFieldset';
 import { useRenderCustomTemplate } from './useRenderCustomTemplate';

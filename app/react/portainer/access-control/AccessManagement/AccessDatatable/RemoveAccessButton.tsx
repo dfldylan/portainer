@@ -1,4 +1,4 @@
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 import { Access } from './types';
 

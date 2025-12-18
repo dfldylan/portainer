@@ -1,7 +1,7 @@
 import {
   PaginationTableSettings,
   SortableTableSettings,
-} from '@CE/react/components/datatables/types';
+} from '@/react/components/datatables/types';
 
 export interface TableSettings
   extends SortableTableSettings,

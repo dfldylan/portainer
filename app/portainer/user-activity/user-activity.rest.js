@@ -1,4 +1,4 @@
-import { baseHref } from '@CE/portainer/helpers/pathHelper';
+import { baseHref } from '@/portainer/helpers/pathHelper';
 
 /* @ngInject */
 export function UserActivity($resource, $http) {

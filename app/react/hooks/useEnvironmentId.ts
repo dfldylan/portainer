@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 /**
  * useEnvironmentId is a hook that returns the environmentId from the url params.

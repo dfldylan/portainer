@@ -1,7 +1,7 @@
-import { TeamRole, TeamId } from '@CE/react/portainer/users/teams/types';
-import { UserId } from '@CE/portainer/users/types';
+import { TeamRole, TeamId } from '@/react/portainer/users/teams/types';
+import { UserId } from '@/portainer/users/types';
 
-import { createRowContext } from '@@CE/datatables/RowContext';
+import { createRowContext } from '@@/datatables/RowContext';
 
 export interface RowContext {
   getRole(userId: UserId): TeamRole;

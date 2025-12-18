@@ -4,8 +4,8 @@ import { vi, type Mock } from 'vitest';
 import { Terminal } from 'xterm';
 import { fit } from 'xterm/lib/addons/fit/fit';
 
-import { terminalClose } from '@CE/portainer/services/terminal-window';
-import { error as notifyError } from '@CE/portainer/services/notifications';
+import { terminalClose } from '@/portainer/services/terminal-window';
+import { error as notifyError } from '@/portainer/services/notifications';
 
 import { KubectlShellView } from './KubectlShellView';
 
@@ -27,19 +27,19 @@ vi.mock('xterm/lib/addons/fit/fit', () => ({
   fit: vi.fn(),
 }));
 
-vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
+vi.mock('@/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: () => 1,
 }));
 
-vi.mock('@CE/portainer/helpers/pathHelper', () => ({
+vi.mock('@/portainer/helpers/pathHelper', () => ({
   baseHref: vi.fn().mockReturnValue('/portainer/'),
 }));
 
-vi.mock('@CE/portainer/services/terminal-window', () => ({
+vi.mock('@/portainer/services/terminal-window', () => ({
   terminalClose: vi.fn(),
 }));
 
-vi.mock('@CE/portainer/services/notifications', () => ({
+vi.mock('@/portainer/services/notifications', () => ({
   error: vi.fn(),
 }));
 

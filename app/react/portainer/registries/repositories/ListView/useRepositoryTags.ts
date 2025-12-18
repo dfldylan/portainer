@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';
 
-import { Environment } from '@CE/react/portainer/environments/types';
-import axios from '@CE/portainer/services/axios';
+import { Environment } from '@/react/portainer/environments/types';
+import axios from '@/portainer/services/axios';
 
 import { Registry } from '../../types/registry';
 import { buildUrl } from '../../queries/build-url';

@@ -1,11 +1,11 @@
 import { Download, Upload } from 'lucide-react';
 import _ from 'lodash';
 
-import { Authorized } from '@CE/react/hooks/useUser';
-import { notifyWarning } from '@CE/portainer/services/notifications';
+import { Authorized } from '@/react/hooks/useUser';
+import { notifyWarning } from '@/portainer/services/notifications';
 
-import { Button, ButtonGroup, LoadingButton } from '@@CE/buttons';
-import { Link } from '@@CE/Link';
+import { Button, ButtonGroup, LoadingButton } from '@@/buttons';
+import { Link } from '@@/Link';
 
 import { ImagesListResponse } from '../../queries/useImages';
 import { useExportMutation } from '../../queries/useExportImageMutation';

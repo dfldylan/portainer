@@ -1,6 +1,6 @@
 import { ImageSummary } from 'docker-types/generated/1.44';
 
-import { PortainerResponse } from '@CE/react/docker/types';
+import { PortainerResponse } from '@/react/docker/types';
 
 export type ImageId = ImageSummary['Id'];
 export type ImageName = string;

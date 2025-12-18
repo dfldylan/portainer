@@ -1,13 +1,13 @@
 import { Link } from 'lucide-react';
 import { useState } from 'react';
 
-import { Environment } from '@CE/react/portainer/environments/types';
-import { usePublicSettings } from '@CE/react/portainer/settings/queries';
-import { Query } from '@CE/react/portainer/environments/queries/useEnvironmentList';
-import { isEdgeEnvironment } from '@CE/react/portainer/environments/utils';
+import { Environment } from '@/react/portainer/environments/types';
+import { usePublicSettings } from '@/react/portainer/settings/queries';
+import { Query } from '@/react/portainer/environments/queries/useEnvironmentList';
+import { isEdgeEnvironment } from '@/react/portainer/environments/utils';
 
-import { Button } from '@@CE/buttons';
-import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Button } from '@@/buttons';
+import { Tooltip } from '@@/Tip/Tooltip';
 
 import { AssociateAMTDialog } from './AssociateAMTDialog';
 

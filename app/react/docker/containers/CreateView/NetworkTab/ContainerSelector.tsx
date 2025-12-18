@@ -1,6 +1,6 @@
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { Option, PortainerSelect } from '@@CE/form-components/PortainerSelect';
+import { Option, PortainerSelect } from '@@/form-components/PortainerSelect';
 
 import { useContainers } from '../../queries/useContainers';
 import { ContainerStatus } from '../../types';

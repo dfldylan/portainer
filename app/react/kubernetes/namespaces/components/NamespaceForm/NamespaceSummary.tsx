@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash';
 
-import { FormSection } from '@@CE/form-components/FormSection';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { FormSection } from '@@/form-components/FormSection';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { NamespaceFormValues } from '../../types';
 

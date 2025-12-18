@@ -8,9 +8,9 @@ import {
   Server,
 } from 'lucide-react';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { Authorized } from '@CE/react/hooks/useUser';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { Authorized } from '@/react/hooks/useUser';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
 import { DashboardLink } from '../items/DashboardLink';
 import { SidebarItem } from '../SidebarItem';

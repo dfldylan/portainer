@@ -1,14 +1,14 @@
 import { StateRegistry } from '@uirouter/angularjs';
 import angular from 'angular';
 
-import { r2a } from '@CE/react-tools/react2angular';
-import { ListView } from '@CE/react/docker/containers/ListView';
-import { withCurrentUser } from '@CE/react-tools/withCurrentUser';
-import { withReactQuery } from '@CE/react-tools/withReactQuery';
-import { withUIRouter } from '@CE/react-tools/withUIRouter';
-import { LogView } from '@CE/react/docker/containers/LogView';
-import { CreateView } from '@CE/react/docker/containers/CreateView';
-import { InspectView } from '@CE/react/docker/containers/InspectView/InspectView';
+import { r2a } from '@/react-tools/react2angular';
+import { ListView } from '@/react/docker/containers/ListView';
+import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { withReactQuery } from '@/react-tools/withReactQuery';
+import { withUIRouter } from '@/react-tools/withUIRouter';
+import { LogView } from '@/react/docker/containers/LogView';
+import { CreateView } from '@/react/docker/containers/CreateView';
+import { InspectView } from '@/react/docker/containers/InspectView/InspectView';
 
 export const containersModule = angular
   .module('portainer.docker.react.views.containers', [])
@@ -53,7 +53,7 @@ function config($stateRegistryProvider: StateRegistry) {
     url: '/:id?nodeName',
     views: {
       'content@': {
-        templateUrl: '~@CE/docker/views/containers/edit/container.html',
+        templateUrl: '~@/docker/views/containers/edit/container.html',
         controller: 'ContainerController',
       },
     },
@@ -64,7 +64,7 @@ function config($stateRegistryProvider: StateRegistry) {
     url: '/attach',
     views: {
       'content@': {
-        templateUrl: '~@CE/docker/views/containers/console/attach.html',
+        templateUrl: '~@/docker/views/containers/console/attach.html',
         controller: 'ContainerConsoleController',
       },
     },
@@ -75,7 +75,7 @@ function config($stateRegistryProvider: StateRegistry) {
     url: '/exec',
     views: {
       'content@': {
-        templateUrl: '~@CE/docker/views/containers/console/exec.html',
+        templateUrl: '~@/docker/views/containers/console/exec.html',
         controller: 'ContainerConsoleController',
       },
     },
@@ -109,7 +109,7 @@ function config($stateRegistryProvider: StateRegistry) {
     url: '/logs',
     views: {
       'content@': {
-        templateUrl: '~@CE/docker/views/containers/logs/containerlogs.html',
+        templateUrl: '~@/docker/views/containers/logs/containerlogs.html',
         controller: 'ContainerLogsController',
       },
     },
@@ -120,7 +120,7 @@ function config($stateRegistryProvider: StateRegistry) {
     url: '/stats',
     views: {
       'content@': {
-        templateUrl: '~@CE/docker/views/containers/stats/containerstats.html',
+        templateUrl: '~@/docker/views/containers/stats/containerstats.html',
         controller: 'ContainerStatsController',
       },
     },

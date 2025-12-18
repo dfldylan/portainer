@@ -1,7 +1,7 @@
 import { Briefcase } from 'lucide-react';
 
-import { Icon } from '@@CE/Icon';
-import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Icon } from '@@/Icon';
+import { Tooltip } from '@@/Tip/Tooltip';
 
 interface Props {
   url?: string;

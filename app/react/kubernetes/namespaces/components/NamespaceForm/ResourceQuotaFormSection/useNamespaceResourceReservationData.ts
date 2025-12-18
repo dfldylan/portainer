@@ -1,9 +1,9 @@
 import { round } from 'lodash';
 
-import { getSafeValue, parseCPU } from '@CE/react/kubernetes/utils';
-import { PodMetrics } from '@CE/react/kubernetes/metrics/types';
-import { useNamespaceMetricsQuery } from '@CE/react/kubernetes/metrics/queries/useNamespaceMetricsQuery';
-import { megaBytesValue } from '@CE/react/kubernetes/namespaces/resourceQuotaUtils';
+import { getSafeValue, parseCPU } from '@/react/kubernetes/utils';
+import { PodMetrics } from '@/react/kubernetes/metrics/types';
+import { useNamespaceMetricsQuery } from '@/react/kubernetes/metrics/queries/useNamespaceMetricsQuery';
+import { megaBytesValue } from '@/react/kubernetes/namespaces/resourceQuotaUtils';
 
 import { useResourceQuotaUsed } from './useResourceQuotaUsed';
 import { ResourceQuotaFormValues } from './types';

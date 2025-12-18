@@ -2,19 +2,16 @@ import { Formik } from 'formik';
 import { Copy } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import {
-  notifyError,
-  notifySuccess,
-} from '@CE/portainer/services/notifications';
-import { Stack } from '@CE/react/common/stacks/types';
+import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { Stack } from '@/react/common/stacks/types';
 
-import { Widget } from '@@CE/Widget';
-import { WidgetBody } from '@@CE/Widget/WidgetBody';
-import { WidgetTitle } from '@@CE/Widget/WidgetTitle';
-import { validateForm } from '@@CE/form-components/validate-form';
-import { confirm } from '@@CE/modals/confirm';
-import { ModalType } from '@@CE/modals';
-import { buildConfirmButton } from '@@CE/modals/utils';
+import { Widget } from '@@/Widget';
+import { WidgetBody } from '@@/Widget/WidgetBody';
+import { WidgetTitle } from '@@/Widget/WidgetTitle';
+import { validateForm } from '@@/form-components/validate-form';
+import { confirm } from '@@/modals/confirm';
+import { ModalType } from '@@/modals';
+import { buildConfirmButton } from '@@/modals/utils';
 
 import { FormSubmitValues } from './StackDuplicationForm.types';
 import { StackDuplicationFormInner } from './StackDuplicationFormInner';

@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { ImagesListResponse } from '@CE/react/docker/images/queries/useImages';
+import { ImagesListResponse } from '@/react/docker/images/queries/useImages';
 
-import { Badge } from '@@CE/Badge';
+import { Badge } from '@@/Badge';
 
 import { columnHelper } from './helper';
 

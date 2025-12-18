@@ -1,10 +1,10 @@
-import { getPlatformType } from '@CE/react/portainer/environments/utils';
+import { getPlatformType } from '@/react/portainer/environments/utils';
 import {
   ContainerEngine,
   EnvironmentType,
   PlatformType,
-} from '@CE/react/portainer/environments/types';
-import Podman from '@CE/assets/ico/vendor/podman.svg?c';
+} from '@/react/portainer/environments/types';
+import Podman from '@/assets/ico/vendor/podman.svg?c';
 
 import Docker from './docker.svg?c';
 import Azure from './azure.svg?c';

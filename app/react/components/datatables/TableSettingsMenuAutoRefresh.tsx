@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { Check } from 'lucide-react';
 
-import { Checkbox } from '@@CE/form-components/Checkbox';
-import { Icon } from '@@CE/Icon';
+import { Checkbox } from '@@/form-components/Checkbox';
+import { Icon } from '@@/Icon';
 
 import styles from './TableSettingsMenuAutoRefresh.module.css';
 

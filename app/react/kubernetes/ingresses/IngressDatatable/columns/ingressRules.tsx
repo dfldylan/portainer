@@ -1,8 +1,8 @@
 import { CellContext } from '@tanstack/react-table';
 import { AlertTriangle, ArrowRight } from 'lucide-react';
 
-import { Icon } from '@@CE/Icon';
-import { Badge } from '@@CE/Badge';
+import { Icon } from '@@/Icon';
+import { Badge } from '@@/Badge';
 
 import { Ingress, TLS } from '../../types';
 

@@ -11,12 +11,12 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 
-import { useSystemStatus } from '@CE/react/portainer/system/useSystemStatus';
-import { useSystemVersion } from '@CE/react/portainer/system/useSystemVersion';
-import { useIsEdgeAdmin } from '@CE/react/hooks/useUser';
+import { useSystemStatus } from '@/react/portainer/system/useSystemStatus';
+import { useSystemVersion } from '@/react/portainer/system/useSystemVersion';
+import { useIsEdgeAdmin } from '@/react/hooks/useUser';
 
-import { Modal } from '@@CE/modals';
-import { Button } from '@@CE/buttons';
+import { Modal } from '@@/modals';
+import { Button } from '@@/buttons';
 
 import styles from './Footer.module.css';
 

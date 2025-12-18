@@ -5,8 +5,8 @@ import KubernetesVolumeHelper from 'Kubernetes/helpers/volumeHelper';
 import KubernetesEventHelper from 'Kubernetes/helpers/eventHelper';
 import { KubernetesStorageClassAccessPolicies } from 'Kubernetes/models/storage-class/models';
 import KubernetesNamespaceHelper from 'Kubernetes/helpers/namespaceHelper';
-import { confirmRedeploy } from '@CE/react/kubernetes/volumes/ItemView/ConfirmRedeployModal';
-import { isVolumeUsed } from '@CE/react/kubernetes/volumes/utils';
+import { confirmRedeploy } from '@/react/kubernetes/volumes/ItemView/ConfirmRedeployModal';
+import { isVolumeUsed } from '@/react/kubernetes/volumes/utils';
 
 class KubernetesVolumeController {
   /* @ngInject */

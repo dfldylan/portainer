@@ -1,7 +1,7 @@
 import { FormikErrors } from 'formik';
 
-import { Select, Input } from '@@CE/form-components/Input';
-import { FormError } from '@@CE/form-components/FormError';
+import { Select, Input } from '@@/form-components/Input';
+import { FormError } from '@@/form-components/FormError';
 
 import { StaggerConfig, StaggerParallelOption } from './StaggerFieldset.types';
 

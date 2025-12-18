@@ -2,17 +2,17 @@ import { Field, Form, Formik, useFormikContext } from 'formik';
 import { useReducer } from 'react';
 import { Plug2 } from 'lucide-react';
 
-import { useCreateLocalDockerEnvironmentMutation } from '@CE/react/portainer/environments/queries/useCreateEnvironmentMutation';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useCreateLocalDockerEnvironmentMutation } from '@/react/portainer/environments/queries/useCreateEnvironmentMutation';
+import { notifySuccess } from '@/portainer/services/notifications';
 import {
   ContainerEngine,
   Environment,
-} from '@CE/react/portainer/environments/types';
+} from '@/react/portainer/environments/types';
 
-import { LoadingButton } from '@@CE/buttons/LoadingButton';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { Input } from '@@CE/form-components/Input';
-import { SwitchField } from '@@CE/form-components/SwitchField';
+import { LoadingButton } from '@@/buttons/LoadingButton';
+import { FormControl } from '@@/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
+import { SwitchField } from '@@/form-components/SwitchField';
 
 import { NameField } from '../../shared/NameField';
 import { MoreSettingsSection } from '../../shared/MoreSettingsSection';

@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { withGlobalError, withInvalidate } from '@CE/react-tools/react-query';
-import { updateEnvironmentRegistryAccess } from '@CE/react/portainer/environments/environment.service/registries';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { notifyError } from '@CE/portainer/services/notifications';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { withGlobalError, withInvalidate } from '@/react-tools/react-query';
+import { updateEnvironmentRegistryAccess } from '@/react/portainer/environments/environment.service/registries';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { notifyError } from '@/portainer/services/notifications';
 
 import { IngressControllerClassMap } from '../../cluster/ingressClass/types';
 import { updateIngressControllerClassMap } from '../../cluster/ingressClass/useIngressControllerClassMap';

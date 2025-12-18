@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import { useTags } from '@CE/portainer/tags/queries';
+import { useTags } from '@/portainer/tags/queries';
 
-import { DetailsTable } from '@@CE/DetailsTable';
+import { DetailsTable } from '@@/DetailsTable';
 
 export function TagsInfo({ ids }: { ids: number[] }) {
   const tagsQuery = useTags();

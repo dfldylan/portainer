@@ -1,12 +1,12 @@
 import { TagIcon } from 'lucide-react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { Tag } from '@CE/portainer/tags/types';
+import { Tag } from '@/portainer/tags/types';
 
-import { Datatable } from '@@CE/datatables';
-import { createPersistedStore } from '@@CE/datatables/types';
-import { useTableState } from '@@CE/datatables/useTableState';
-import { DeleteButton } from '@@CE/buttons/DeleteButton';
+import { Datatable } from '@@/datatables';
+import { createPersistedStore } from '@@/datatables/types';
+import { useTableState } from '@@/datatables/useTableState';
+import { DeleteButton } from '@@/buttons/DeleteButton';
 
 const columnHelper = createColumnHelper<Tag>();
 

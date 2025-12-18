@@ -1,15 +1,15 @@
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 import {
   ContainerInstanceFormValues,
   ProviderViewModel,
   ResourceGroup,
   Subscription,
-} from '@CE/react/azure/types';
-import { parseAccessControlFormData } from '@CE/react/portainer/access-control/utils';
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import { useProvider } from '@CE/react/azure/queries/useProvider';
-import { useResourceGroups } from '@CE/react/azure/queries/useResourceGroups';
-import { useSubscriptions } from '@CE/react/azure/queries/useSubscriptions';
+} from '@/react/azure/types';
+import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import { useProvider } from '@/react/azure/queries/useProvider';
+import { useResourceGroups } from '@/react/azure/queries/useResourceGroups';
+import { useSubscriptions } from '@/react/azure/queries/useSubscriptions';
 
 import {
   getSubscriptionLocations,

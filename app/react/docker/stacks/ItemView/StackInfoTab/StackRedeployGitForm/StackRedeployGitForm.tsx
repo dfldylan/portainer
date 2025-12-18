@@ -2,23 +2,16 @@ import { Formik, FormikHelpers } from 'formik';
 import { useState } from 'react';
 import { useRouter } from '@uirouter/react';
 
-import {
-  GitStackPayload,
-  Stack,
-  StackType,
-} from '@CE/react/common/stacks/types';
-import { createWebhookId } from '@CE/portainer/helpers/webhookHelper';
-import {
-  notifyError,
-  notifySuccess,
-} from '@CE/portainer/services/notifications';
-import { confirmStackUpdate } from '@CE/react/common/stacks/common/confirm-stack-update';
+import { GitStackPayload, Stack, StackType } from '@/react/common/stacks/types';
+import { createWebhookId } from '@/portainer/helpers/webhookHelper';
+import { notifyError, notifySuccess } from '@/portainer/services/notifications';
+import { confirmStackUpdate } from '@/react/common/stacks/common/confirm-stack-update';
 import {
   parseAutoUpdateResponse,
   transformAutoUpdateViewModel,
-} from '@CE/react/portainer/gitops/AutoUpdateFieldset/utils';
-import { useUpdateGitStack } from '@CE/react/portainer/gitops/queries/useUpdateGitStack';
-import { useUpdateGitStackSettings } from '@CE/react/portainer/gitops/queries/useUpdateGitStackSettings';
+} from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { useUpdateGitStack } from '@/react/portainer/gitops/queries/useUpdateGitStack';
+import { useUpdateGitStackSettings } from '@/react/portainer/gitops/queries/useUpdateGitStackSettings';
 
 import { useValidationSchema } from './useValidationSchema';
 import { FormValues } from './types';

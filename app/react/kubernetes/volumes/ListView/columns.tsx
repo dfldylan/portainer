@@ -1,6 +1,6 @@
-import { isoDate } from '@CE/portainer/filters/filters';
+import { isoDate } from '@/portainer/filters/filters';
 
-import { Link } from '@@CE/Link';
+import { Link } from '@@/Link';
 
 import { name } from './columns.name';
 import { helper } from './columns.helper';

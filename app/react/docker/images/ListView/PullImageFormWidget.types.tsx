@@ -1,4 +1,4 @@
-import { ImageConfigValues } from '@@CE/ImageConfigFieldset';
+import { ImageConfigValues } from '@@/ImageConfigFieldset';
 
 export interface FormValues {
   config: ImageConfigValues;

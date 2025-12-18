@@ -1,9 +1,6 @@
-import {
-  GitAuthModel,
-  AutoUpdateModel,
-} from '@CE/react/portainer/gitops/types';
+import { GitAuthModel, AutoUpdateModel } from '@/react/portainer/gitops/types';
 
-import { EnvVarValues } from '@@CE/form-components/EnvironmentVariablesFieldset';
+import { EnvVarValues } from '@@/form-components/EnvironmentVariablesFieldset';
 
 export interface FormValues {
   refName: string;

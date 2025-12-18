@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { humanize } from '@CE/portainer/filters/filters';
-import { withGlobalError } from '@CE/react-tools/react-query';
-import axios from '@CE/portainer/services/axios';
-import { Volume } from '@CE/kubernetes/models/volume/Volume';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { humanize } from '@/portainer/filters/filters';
+import { withGlobalError } from '@/react-tools/react-query';
+import axios from '@/portainer/services/axios';
+import { Volume } from '@/kubernetes/models/volume/Volume';
 
 import { parseKubernetesAxiosError } from '../../axiosError';
 import { K8sVolumeInfo } from '../types';

@@ -1,7 +1,7 @@
 import { SchemaOf, TestContext, number, object } from 'yup';
 
-import KubernetesResourceReservationHelper from '@CE/kubernetes/helpers/resourceReservationHelper';
-import { nanNumberSchema } from '@CE/react-tools/yup-schemas';
+import KubernetesResourceReservationHelper from '@/kubernetes/helpers/resourceReservationHelper';
+import { nanNumberSchema } from '@/react-tools/yup-schemas';
 
 import { ResourceQuotaFormValues } from './types';
 

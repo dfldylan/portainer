@@ -1,7 +1,7 @@
 import { TrelloIcon } from 'lucide-react';
 
-import { Link } from '@@CE/Link';
-import { Button } from '@@CE/buttons';
+import { Link } from '@@/Link';
+import { Button } from '@@/buttons';
 
 export function ClusterVisualizerLink() {
   return (

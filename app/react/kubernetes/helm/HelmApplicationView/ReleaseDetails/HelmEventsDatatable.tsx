@@ -1,14 +1,14 @@
 import { compact } from 'lodash';
 
-import { Event } from '@CE/react/kubernetes/queries/types';
-import { createStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
-import { EventsDatatable } from '@CE/react/kubernetes/components/EventsDatatable';
-import { useEvents } from '@CE/react/kubernetes/queries/useEvents';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
+import { Event } from '@/react/kubernetes/queries/types';
+import { createStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
+import { EventsDatatable } from '@/react/kubernetes/components/EventsDatatable';
+import { useEvents } from '@/react/kubernetes/queries/useEvents';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 
-import { useTableState } from '@@CE/datatables/useTableState';
-import { Widget } from '@@CE/Widget';
-import { TextTip } from '@@CE/Tip/TextTip';
+import { useTableState } from '@@/datatables/useTableState';
+import { Widget } from '@@/Widget';
+import { TextTip } from '@@/Tip/TextTip';
 
 import { GenericResource } from '../../types';
 

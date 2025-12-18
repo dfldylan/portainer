@@ -1,4 +1,4 @@
-import { Badge } from '@@CE/Badge';
+import { Badge } from '@@/Badge';
 
 import { columnHelper } from './helper';
 

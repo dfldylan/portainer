@@ -1,9 +1,9 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { createStore } from '@CE/react/kubernetes/datatables/default-kube-datatable-store';
+import { createStore } from '@/react/kubernetes/datatables/default-kube-datatable-store';
 
-import { useTableState } from '@@CE/datatables/useTableState';
+import { useTableState } from '@@/datatables/useTableState';
 
 import { useEvents } from '../../queries/useEvents';
 import { useApplication } from '../queries/useApplication';

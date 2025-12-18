@@ -1,10 +1,10 @@
-import { ServiceType } from '@CE/react/kubernetes/applications/CreateView/application-services/types';
+import { ServiceType } from '@/react/kubernetes/applications/CreateView/application-services/types';
 import {
   AppType,
   DeploymentType,
   AppDataAccessPolicy,
   AppKind,
-} from '@CE/react/kubernetes/applications/types';
+} from '@/react/kubernetes/applications/types';
 
 import { ConfigurationVolume } from './ConfigurationVolume';
 import { PersistedFolder } from './PersistedFolder';

@@ -1,6 +1,6 @@
 import { TableMeta as BaseTableMeta } from '@tanstack/react-table';
 
-import { NodeViewModel } from '@CE/docker/models/node';
+import { NodeViewModel } from '@/docker/models/node';
 
 export type TableMeta = BaseTableMeta<NodeViewModel> & {
   table: 'nodes';

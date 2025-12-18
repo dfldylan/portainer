@@ -1,7 +1,7 @@
-import { CopyButton } from '@@CE/buttons';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Code } from '@@CE/Code';
+import { CopyButton } from '@@/buttons';
+import { FormSection } from '@@/form-components/FormSection';
+import { TextTip } from '@@/Tip/TextTip';
+import { Code } from '@@/Code';
 
 export function EdgeKeyDisplay({ edgeKey }: { edgeKey: string }) {
   return (

@@ -1,6 +1,6 @@
 import { uniqBy } from 'lodash';
 
-import { Registry } from '@CE/react/portainer/registries/types/registry';
+import { Registry } from '@/react/portainer/registries/types/registry';
 
 import { UpdateRegistryPayload } from '../types';
 

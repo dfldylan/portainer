@@ -1,13 +1,13 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import _ from 'lodash';
 
-import { isoDateFromTimestamp } from '@CE/portainer/filters/filters';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
-import { GitCommitLink } from '@CE/react/portainer/gitops/GitCommitLink';
+import { isoDateFromTimestamp } from '@/portainer/filters/filters';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+import { GitCommitLink } from '@/react/portainer/gitops/GitCommitLink';
 
-import { buildNameColumnFromObject } from '@@CE/datatables/buildNameColumn';
-import { Link } from '@@CE/Link';
-import { Tooltip } from '@@CE/Tip/Tooltip';
+import { buildNameColumnFromObject } from '@@/datatables/buildNameColumn';
+import { Link } from '@@/Link';
+import { Tooltip } from '@@/Tip/Tooltip';
 
 import { StatusType } from '../../types';
 

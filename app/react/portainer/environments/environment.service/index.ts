@@ -1,4 +1,4 @@
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 import {
   Environment,
   EnvironmentId,
@@ -8,14 +8,14 @@ import {
   EnvironmentGroupId,
   PlatformType,
   EdgeGroupId,
-} from '@CE/react/portainer/environments/types';
-import { type TagId } from '@CE/portainer/tags/types';
-import { UserId } from '@CE/portainer/users/types';
-import { TeamId } from '@CE/react/portainer/users/teams/types';
+} from '@/react/portainer/environments/types';
+import { type TagId } from '@/portainer/tags/types';
+import { UserId } from '@/portainer/users/types';
+import { TeamId } from '@/react/portainer/users/teams/types';
 import {
   EdgeStack,
   StatusType as EdgeStackStatusType,
-} from '@CE/react/edge/edge-stacks/types';
+} from '@/react/edge/edge-stacks/types';
 
 import { getPublicSettings } from '../../settings/settings.service';
 

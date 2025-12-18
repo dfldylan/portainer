@@ -1,8 +1,8 @@
 import { CellContext, createColumnHelper } from '@tanstack/react-table';
 
-import { sortOptionsFromColumns } from '@CE/react/common/api/sort.types';
+import { sortOptionsFromColumns } from '@/react/common/api/sort.types';
 
-import { Button } from '@@CE/buttons';
+import { Button } from '@@/buttons';
 
 import { JobResult, LogsStatus } from '../../types';
 import { useDownloadLogsMutation } from '../../queries/jobResults/useDownloadLogsMutation';

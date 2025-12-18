@@ -1,4 +1,4 @@
-import { truncate } from '@CE/portainer/filters/filters';
+import { truncate } from '@/portainer/filters/filters';
 
 import { helper } from './columns.helper';
 import { name } from './columns.name';

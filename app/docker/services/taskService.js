@@ -1,6 +1,6 @@
-import { getTask } from '@CE/react/docker/tasks/queries/useTask';
-import { getTasks } from '@CE/react/docker/proxy/queries/tasks/useTasks';
-import { getTaskLogs } from '@CE/react/docker/tasks/queries/useTaskLogs';
+import { getTask } from '@/react/docker/tasks/queries/useTask';
+import { getTasks } from '@/react/docker/proxy/queries/tasks/useTasks';
+import { getTaskLogs } from '@/react/docker/tasks/queries/useTaskLogs';
 
 import { TaskViewModel } from '../models/task';
 import { formatLogs } from '../helpers/logHelper';

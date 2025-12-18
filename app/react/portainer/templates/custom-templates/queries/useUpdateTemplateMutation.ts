@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 import {
   mutationOptions,
   withGlobalError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
-import { StackType } from '@CE/react/common/stacks/types';
-import { VariableDefinition } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField/CustomTemplatesVariablesDefinitionField';
-import { AccessControlFormData } from '@CE/react/portainer/access-control/types';
-import { applyResourceControl } from '@CE/react/portainer/access-control/access-control.service';
+} from '@/react-tools/react-query';
+import { StackType } from '@/react/common/stacks/types';
+import { VariableDefinition } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField/CustomTemplatesVariablesDefinitionField';
+import { AccessControlFormData } from '@/react/portainer/access-control/types';
+import { applyResourceControl } from '@/react/portainer/access-control/access-control.service';
 
 import { CustomTemplate, EdgeTemplateSettings } from '../types';
 import { Platform } from '../../types';

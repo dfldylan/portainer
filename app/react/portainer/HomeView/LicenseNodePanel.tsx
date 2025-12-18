@@ -1,5 +1,5 @@
-import { TextTip } from '@@CE/Tip/TextTip';
-import { InformationPanel } from '@@CE/InformationPanel';
+import { TextTip } from '@@/Tip/TextTip';
+import { InformationPanel } from '@@/InformationPanel';
 
 import { useNodesCount } from '../system/useNodesCount';
 import { useLicenseInfo } from '../licenses/use-license.service';

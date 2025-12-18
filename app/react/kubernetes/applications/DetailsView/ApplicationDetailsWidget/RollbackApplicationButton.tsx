@@ -2,20 +2,17 @@ import { Pod } from 'kubernetes-types/core/v1';
 import { RotateCcw } from 'lucide-react';
 import { useRouter } from '@uirouter/react';
 
-import { Authorized } from '@CE/react/hooks/useUser';
-import {
-  notifySuccess,
-  notifyError,
-} from '@CE/portainer/services/notifications';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+import { Authorized } from '@/react/hooks/useUser';
+import { notifySuccess, notifyError } from '@/portainer/services/notifications';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
-import { Button } from '@@CE/buttons';
-import { Icon } from '@@CE/Icon';
-import { confirm } from '@@CE/modals/confirm';
-import { ModalType } from '@@CE/modals';
-import { buildConfirmButton } from '@@CE/modals/utils';
-import { TooltipWithChildren } from '@@CE/Tip/TooltipWithChildren';
-import { Tooltip } from '@@CE/Tip/Tooltip';
+import { Button } from '@@/buttons';
+import { Icon } from '@@/Icon';
+import { confirm } from '@@/modals/confirm';
+import { ModalType } from '@@/modals';
+import { buildConfirmButton } from '@@/modals/utils';
+import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
+import { Tooltip } from '@@/Tip/Tooltip';
 
 import {
   applicationIsKind,

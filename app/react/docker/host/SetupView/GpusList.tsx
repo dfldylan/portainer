@@ -1,11 +1,11 @@
 import { array, object, string } from 'yup';
 
-import { r2a } from '@CE/react-tools/react2angular';
-import { withControlledInput } from '@CE/react-tools/withControlledInput';
+import { r2a } from '@/react-tools/react2angular';
+import { withControlledInput } from '@/react-tools/withControlledInput';
 
-import { InputList } from '@@CE/form-components/InputList';
-import { ItemProps } from '@@CE/form-components/InputList/InputList';
-import { InputGroup } from '@@CE/form-components/InputGroup';
+import { InputList } from '@@/form-components/InputList';
+import { ItemProps } from '@@/form-components/InputList/InputList';
+import { InputGroup } from '@@/form-components/InputGroup';
 
 export interface Gpu {
   value: string;

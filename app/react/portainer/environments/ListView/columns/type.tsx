@@ -3,9 +3,9 @@ import { CellContext } from '@tanstack/react-table';
 import {
   getEnvironmentTypeIcon,
   getPlatformTypeName,
-} from '@CE/react/portainer/environments/utils';
+} from '@/react/portainer/environments/utils';
 
-import { Icon } from '@@CE/Icon';
+import { Icon } from '@@/Icon';
 
 import { EnvironmentListItem } from '../types';
 import { EnvironmentType, ContainerEngine } from '../../types';

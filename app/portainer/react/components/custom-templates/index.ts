@@ -1,9 +1,9 @@
 import angular from 'angular';
 
-import { r2a } from '@CE/react-tools/react2angular';
-import { CustomTemplatesVariablesDefinitionField } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
-import { CustomTemplatesVariablesField } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { withControlledInput } from '@CE/react-tools/withControlledInput';
+import { r2a } from '@/react-tools/react2angular';
+import { CustomTemplatesVariablesDefinitionField } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
+import { CustomTemplatesVariablesField } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { withControlledInput } from '@/react-tools/withControlledInput';
 
 import { VariablesFieldAngular } from './variables-field';
 

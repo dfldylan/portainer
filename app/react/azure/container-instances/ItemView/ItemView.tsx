@@ -1,24 +1,24 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { AccessControlPanel } from '@CE/react/portainer/access-control/AccessControlPanel/AccessControlPanel';
-import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
-import { ResourceControlType } from '@CE/react/portainer/access-control/types';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { AccessControlPanel } from '@/react/portainer/access-control/AccessControlPanel/AccessControlPanel';
+import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { ResourceControlType } from '@/react/portainer/access-control/types';
 import {
   ContainerGroup,
   ResourceGroup,
   Subscription,
-} from '@CE/react/azure/types';
-import { useContainerGroup } from '@CE/react/azure/queries/useContainerGroup';
-import { useResourceGroup } from '@CE/react/azure/queries/useResourceGroup';
-import { useSubscription } from '@CE/react/azure/queries/useSubscription';
+} from '@/react/azure/types';
+import { useContainerGroup } from '@/react/azure/queries/useContainerGroup';
+import { useResourceGroup } from '@/react/azure/queries/useResourceGroup';
+import { useSubscription } from '@/react/azure/queries/useSubscription';
 
-import { Input } from '@@CE/form-components/Input';
-import { Widget, WidgetBody } from '@@CE/Widget';
-import { PageHeader } from '@@CE/PageHeader';
-import { FormSectionTitle } from '@@CE/form-components/FormSectionTitle';
-import { FormControl } from '@@CE/form-components/FormControl';
+import { Input } from '@@/form-components/Input';
+import { Widget, WidgetBody } from '@@/Widget';
+import { PageHeader } from '@@/PageHeader';
+import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
+import { FormControl } from '@@/form-components/FormControl';
 
 import { PortsMappingField } from '../CreateView/PortsMappingField';
 

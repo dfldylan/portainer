@@ -1,15 +1,15 @@
 import { IFormController } from 'angular';
 import { FormikErrors } from 'formik';
 
-import { notifyError } from '@CE/portainer/services/notifications';
-import { IAuthenticationService } from '@CE/portainer/services/types';
-import { GitAuthModel } from '@CE/react/portainer/gitops/types';
-import { gitAuthValidation } from '@CE/react/portainer/gitops/AuthFieldset';
-import { GitCredential } from '@CE/react/portainer/account/git-credentials/types';
-import { getGitCredentials } from '@CE/react/portainer/account/git-credentials/git-credentials.service';
-import { isBE } from '@CE/react/portainer/feature-flags/feature-flags.service';
+import { notifyError } from '@/portainer/services/notifications';
+import { IAuthenticationService } from '@/portainer/services/types';
+import { GitAuthModel } from '@/react/portainer/gitops/types';
+import { gitAuthValidation } from '@/react/portainer/gitops/AuthFieldset';
+import { GitCredential } from '@/react/portainer/account/git-credentials/types';
+import { getGitCredentials } from '@/react/portainer/account/git-credentials/git-credentials.service';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import { validateForm } from '@@CE/form-components/validate-form';
+import { validateForm } from '@@/form-components/validate-form';
 
 export default class GitFormAuthFieldsetController {
   errors?: FormikErrors<GitAuthModel> = {};

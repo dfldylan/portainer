@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { GitStackPayload } from '@CE/react/common/stacks/types';
-import { buildStackUrl } from '@CE/react/common/stacks/queries/buildUrl';
-import { queryKeys } from '@CE/react/common/stacks/queries/query-keys';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { GitStackPayload } from '@/react/common/stacks/types';
+import { buildStackUrl } from '@/react/common/stacks/queries/buildUrl';
+import { queryKeys } from '@/react/common/stacks/queries/query-keys';
 
 async function updateGitStack(
   stackId: number,

@@ -1,4 +1,4 @@
-import { Environment } from '@CE/react/portainer/environments/types';
+import { Environment } from '@/react/portainer/environments/types';
 
 export type WaitingRoomEnvironment = Environment & {
   EdgeGroups: string[];

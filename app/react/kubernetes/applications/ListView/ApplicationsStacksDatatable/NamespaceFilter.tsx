@@ -1,11 +1,11 @@
 import { Filter } from 'lucide-react';
 import { useEffect } from 'react';
 
-import { PortainerNamespace } from '@CE/react/kubernetes/namespaces/types';
+import { PortainerNamespace } from '@/react/kubernetes/namespaces/types';
 
-import { Icon } from '@@CE/Icon';
-import { Select } from '@@CE/form-components/Input';
-import { InputGroup } from '@@CE/form-components/InputGroup';
+import { Icon } from '@@/Icon';
+import { Select } from '@@/form-components/Input';
+import { InputGroup } from '@@/form-components/InputGroup';
 
 function transformNamespaces(
   namespaces: PortainerNamespace[],

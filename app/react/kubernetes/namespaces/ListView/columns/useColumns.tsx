@@ -2,15 +2,15 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 import { AlertTriangle } from 'lucide-react';
 
-import { isoDate } from '@CE/portainer/filters/filters';
-import { useAuthorizations } from '@CE/react/hooks/useUser';
-import { pluralize } from '@CE/portainer/helpers/strings';
+import { isoDate } from '@/portainer/filters/filters';
+import { useAuthorizations } from '@/react/hooks/useUser';
+import { pluralize } from '@/portainer/helpers/strings';
 
-import { Link } from '@@CE/Link';
-import { StatusBadge } from '@@CE/StatusBadge';
-import { Badge } from '@@CE/Badge';
-import { SystemBadge } from '@@CE/Badge/SystemBadge';
-import { Icon } from '@@CE/Icon';
+import { Link } from '@@/Link';
+import { StatusBadge } from '@@/StatusBadge';
+import { Badge } from '@@/Badge';
+import { SystemBadge } from '@@/Badge/SystemBadge';
+import { Icon } from '@@/Icon';
 
 import { helper } from './helper';
 import { actions } from './actions';

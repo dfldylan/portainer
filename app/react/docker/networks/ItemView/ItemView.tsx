@@ -1,15 +1,15 @@
 import { useRouter, useCurrentStateAndParams } from '@uirouter/react';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { AccessControlPanel } from '@CE/react/portainer/access-control/AccessControlPanel/AccessControlPanel';
-import { ResourceControlType } from '@CE/react/portainer/access-control/types';
-import { ContainerListViewModel } from '@CE/react/docker/containers/types';
-import { ResourceControlViewModel } from '@CE/react/portainer/access-control/models/ResourceControlViewModel';
-import { useContainers } from '@CE/react/docker/containers/queries/useContainers';
-import { notifySuccess } from '@CE/portainer/services/notifications';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { AccessControlPanel } from '@/react/portainer/access-control/AccessControlPanel/AccessControlPanel';
+import { ResourceControlType } from '@/react/portainer/access-control/types';
+import { ContainerListViewModel } from '@/react/docker/containers/types';
+import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';
+import { useContainers } from '@/react/docker/containers/queries/useContainers';
+import { notifySuccess } from '@/portainer/services/notifications';
 
-import { PageHeader } from '@@CE/PageHeader';
+import { PageHeader } from '@@/PageHeader';
 
 import { useDeleteNetwork } from '../queries/useDeleteNetworkMutation';
 import { isSystemNetwork } from '../network.helper';

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { StorageClass, StorageClassList } from 'kubernetes-types/storage/v1';
 
-import axios from '@CE/portainer/services/axios';
+import axios from '@/portainer/services/axios';
 import {
   Environment,
   EnvironmentId,
-} from '@CE/react/portainer/environments/types';
-import { withError } from '@CE/react-tools/react-query';
+} from '@/react/portainer/environments/types';
+import { withError } from '@/react-tools/react-query';
 
 import { parseKubernetesAxiosError } from '../../../axiosError';
 

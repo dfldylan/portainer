@@ -1,8 +1,8 @@
-import { parseAccessControlFormData } from '@CE/react/portainer/access-control/utils';
-import { ResourceControlOwnership } from '@CE/react/portainer/access-control/types';
-import { UserId } from '@CE/portainer/users/types';
+import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
+import { ResourceControlOwnership } from '@/react/portainer/access-control/types';
+import { UserId } from '@/portainer/users/types';
 
-import { getDefaultImageConfig } from '@@CE/ImageConfigFieldset/getImageConfig';
+import { getDefaultImageConfig } from '@@/ImageConfigFieldset/getImageConfig';
 
 import { ContainerDetailsResponse } from '../../queries/useContainer';
 

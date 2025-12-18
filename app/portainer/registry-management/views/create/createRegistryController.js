@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { RegistryTypes } from 'Portainer/models/registryTypes';
 import { RegistryCreateFormValues } from 'Portainer/models/registry';
-import { options } from '@CE/react/portainer/registries/CreateView/options';
+import { options } from '@/react/portainer/registries/CreateView/options';
 
 class CreateRegistryController {
   /* @ngInject */
@@ -146,7 +146,7 @@ class CreateRegistryController {
 
   /**
    *
-   * @param {import('@CE/react/portainer/registries/CreateView/RegistryFormDockerhub/RegistryFormDockerhub').RegistryFormDockerhubValues} model
+   * @param {import('@/react/portainer/registries/CreateView/RegistryFormDockerhub/RegistryFormDockerhub').RegistryFormDockerhubValues} model
    */
   onSubmitDocker(model) {
     this.model = model;

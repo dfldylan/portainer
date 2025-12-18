@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { TagId } from '@CE/portainer/tags/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { TagId } from '@/portainer/tags/types';
 import {
   mutationOptions,
   withError,
   withInvalidate,
-} from '@CE/react-tools/react-query';
+} from '@/react-tools/react-query';
 
 import { EnvironmentId } from '../../types';
 import { EnvironmentGroup } from '../types';

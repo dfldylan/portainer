@@ -1,11 +1,11 @@
 import { CellContext } from '@tanstack/react-table';
 
-import { ServiceViewModel } from '@CE/docker/models/service';
-import { ImageStatus } from '@CE/react/docker/components/ImageStatus';
-import { hideShaSum } from '@CE/docker/filters/utils';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { ResourceType } from '@CE/react/docker/components/ImageStatus/types';
-import { ImageUpToDateTooltip } from '@CE/react/docker/components/datatable/TableColumnHeaderImageUpToDate';
+import { ServiceViewModel } from '@/docker/models/service';
+import { ImageStatus } from '@/react/docker/components/ImageStatus';
+import { hideShaSum } from '@/docker/filters/utils';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { ResourceType } from '@/react/docker/components/ImageStatus/types';
+import { ImageUpToDateTooltip } from '@/react/docker/components/datatable/TableColumnHeaderImageUpToDate';
 
 import { columnHelper } from './helper';
 

@@ -4,4 +4,4 @@ export {
   pluralize,
   addPlural,
   grammaticallyJoin,
-} from '@CE/react/common/string-utils';
+} from '@/react/common/string-utils';

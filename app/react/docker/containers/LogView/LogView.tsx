@@ -1,10 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { useContainer } from '@CE/react/docker/containers/queries/useContainer';
+import { useContainer } from '@/react/docker/containers/queries/useContainer';
 
-import { InformationPanel } from '@@CE/InformationPanel';
-import { TextTip } from '@@CE/Tip/TextTip';
-import { Link } from '@@CE/Link';
+import { InformationPanel } from '@@/InformationPanel';
+import { TextTip } from '@@/Tip/TextTip';
+import { Link } from '@@/Link';
 
 export function LogView() {
   const {

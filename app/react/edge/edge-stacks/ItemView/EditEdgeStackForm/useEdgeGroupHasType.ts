@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { useCallback } from 'react';
 
-import { useEdgeGroups } from '@CE/react/edge/edge-groups/queries/useEdgeGroups';
-import { EdgeGroup } from '@CE/react/edge/edge-groups/types';
-import { EnvironmentType } from '@CE/react/portainer/environments/types';
+import { useEdgeGroups } from '@/react/edge/edge-groups/queries/useEdgeGroups';
+import { EdgeGroup } from '@/react/edge/edge-groups/types';
+import { EnvironmentType } from '@/react/portainer/environments/types';
 
 export function useEdgeGroupHasType(groupIds: Array<EdgeGroup['Id']>) {
   const edgeGroupsQuery = useEdgeGroups();

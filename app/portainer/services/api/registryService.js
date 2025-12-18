@@ -85,8 +85,8 @@ angular.module('portainer.app').factory('RegistryService', [
     }
 
     /**
-     * @param {import('@CE/portainer/models/registry').RegistryCreateFormValues} model
-     * @param {Array<import('@CE/react/portainer/registries/types/gitlabProject').RegistryGitlabProject>} projects
+     * @param {import('@/portainer/models/registry').RegistryCreateFormValues} model
+     * @param {Array<import('@/react/portainer/registries/types/gitlabProject').RegistryGitlabProject>} projects
      */
     function createGitlabRegistries(model, projects) {
       const promises = [];

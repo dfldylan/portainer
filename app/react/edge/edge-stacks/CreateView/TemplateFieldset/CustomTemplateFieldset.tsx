@@ -1,9 +1,9 @@
-import { CustomTemplatesVariablesField } from '@CE/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
-import { CustomTemplate } from '@CE/react/portainer/templates/custom-templates/types';
-import { TemplateNote } from '@CE/react/portainer/templates/components/TemplateNote';
-import { useCustomTemplate } from '@CE/react/portainer/templates/custom-templates/queries/useCustomTemplate';
+import { CustomTemplatesVariablesField } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
+import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
+import { TemplateNote } from '@/react/portainer/templates/components/TemplateNote';
+import { useCustomTemplate } from '@/react/portainer/templates/custom-templates/queries/useCustomTemplate';
 
-import { ArrayError } from '@@CE/form-components/InputList/InputList';
+import { ArrayError } from '@@/form-components/InputList/InputList';
 
 import { Values } from './types';
 

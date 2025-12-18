@@ -1,15 +1,15 @@
 import { AlertTriangle } from 'lucide-react';
 
-import { Environment } from '@CE/react/portainer/environments/types';
+import { Environment } from '@/react/portainer/environments/types';
 import {
   isAgentEnvironment,
   isEdgeEnvironment,
-} from '@CE/react/portainer/environments/utils';
-import { isVersionSmaller } from '@CE/react/common/semver-utils';
-import { useSystemStatus } from '@CE/react/portainer/system/useSystemStatus';
+} from '@/react/portainer/environments/utils';
+import { isVersionSmaller } from '@/react/common/semver-utils';
+import { useSystemStatus } from '@/react/portainer/system/useSystemStatus';
 
-import { Tooltip } from '@@CE/Tip/Tooltip';
-import { Icon } from '@@CE/Icon';
+import { Tooltip } from '@@/Tip/Tooltip';
+import { Icon } from '@@/Icon';
 
 export function AgentDetails({ environment }: { environment: Environment }) {
   if (!isAgentEnvironment(environment.Type)) {

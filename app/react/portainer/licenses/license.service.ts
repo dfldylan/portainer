@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { AxiosError } from 'axios';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 
 import { License, LicenseInfo } from './types';
 

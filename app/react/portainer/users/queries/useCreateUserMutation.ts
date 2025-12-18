@@ -1,10 +1,10 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { withGlobalError, withInvalidate } from '@CE/react-tools/react-query';
-import { userQueryKeys } from '@CE/portainer/users/queries/queryKeys';
-import { buildUrl } from '@CE/portainer/users/user.service';
-import { Role, User } from '@CE/portainer/users/types';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { withGlobalError, withInvalidate } from '@/react-tools/react-query';
+import { userQueryKeys } from '@/portainer/users/queries/queryKeys';
+import { buildUrl } from '@/portainer/users/user.service';
+import { Role, User } from '@/portainer/users/types';
 
 import { TeamId, TeamRole } from '../teams/types';
 import { createTeamMembership } from '../teams/queries';

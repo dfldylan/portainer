@@ -1,4 +1,4 @@
-import { WidgetBody, Widget } from '@@CE/Widget';
+import { WidgetBody, Widget } from '@@/Widget';
 
 import { YAMLInspector } from '../../components/YAMLInspector';
 import { useNodeQuery } from '../queries/useNodeQuery';

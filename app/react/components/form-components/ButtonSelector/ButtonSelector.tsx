@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
-import { ButtonGroup, Size } from '@@CE/buttons/ButtonGroup';
-import { Button } from '@@CE/buttons';
+import { ButtonGroup, Size } from '@@/buttons/ButtonGroup';
+import { Button } from '@@/buttons';
 
 import styles from './ButtonSelector.module.css';
 

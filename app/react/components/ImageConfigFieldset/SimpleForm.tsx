@@ -3,26 +3,26 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 
 import { trimSHA, trimVersionTag } from 'Docker/filters/utils';
-import DockerIcon from '@CE/assets/ico/vendor/docker.svg?c';
-import { useImages } from '@CE/react/docker/proxy/queries/images/useImages';
+import DockerIcon from '@/assets/ico/vendor/docker.svg?c';
+import { useImages } from '@/react/docker/proxy/queries/images/useImages';
 import {
   imageContainsURL,
   getUniqueTagListFromImages,
-} from '@CE/react/docker/images/utils';
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useEnvironmentRegistries } from '@CE/react/portainer/environments/queries/useEnvironmentRegistries';
+} from '@/react/docker/images/utils';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
 import {
   Registry,
   RegistryId,
   RegistryTypes,
-} from '@CE/react/portainer/registries/types/registry';
-import { useRegistry } from '@CE/react/portainer/registries/queries/useRegistry';
+} from '@/react/portainer/registries/types/registry';
+import { useRegistry } from '@/react/portainer/registries/queries/useRegistry';
 
-import { Button } from '@@CE/buttons';
-import { FormControl } from '@@CE/form-components/FormControl';
-import { InputGroup } from '@@CE/form-components/InputGroup';
-import { PortainerSelect } from '@@CE/form-components/PortainerSelect';
-import { Input } from '@@CE/form-components/Input';
+import { Button } from '@@/buttons';
+import { FormControl } from '@@/form-components/FormControl';
+import { InputGroup } from '@@/form-components/InputGroup';
+import { PortainerSelect } from '@@/form-components/PortainerSelect';
+import { Input } from '@@/form-components/Input';
 
 import { Values } from './types';
 import { InputSearch } from './InputSearch';

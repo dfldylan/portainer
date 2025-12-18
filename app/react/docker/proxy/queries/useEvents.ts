@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import axios, {
   jsonObjectsToArrayHandler,
   parseAxiosError,
-} from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
+} from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
 
 import { buildDockerProxyUrl } from './buildDockerProxyUrl';
 import { queryKeys } from './query-keys';

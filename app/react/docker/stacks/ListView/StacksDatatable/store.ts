@@ -6,8 +6,8 @@ import {
   hiddenColumnsSettings,
   refreshableSettings,
   filteredColumnsSettings,
-} from '@@CE/datatables/types';
-import { useTableStateWithStorage } from '@@CE/datatables/useTableState';
+} from '@@/datatables/types';
+import { useTableStateWithStorage } from '@@/datatables/useTableState';
 
 export interface TableSettings
   extends BasicTableSettings,

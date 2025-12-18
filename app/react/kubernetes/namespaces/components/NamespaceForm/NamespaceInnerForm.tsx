@@ -1,16 +1,16 @@
 import { Field, Form, FormikProps } from 'formik';
 import { MultiValue } from 'react-select';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { Registry } from '@CE/react/portainer/registries/types/registry';
-import { Authorized, useAuthorizations } from '@CE/react/hooks/useUser';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { Registry } from '@/react/portainer/registries/types/registry';
+import { Authorized, useAuthorizations } from '@/react/hooks/useUser';
 
-import { FormControl } from '@@CE/form-components/FormControl';
-import { FormSection } from '@@CE/form-components/FormSection';
-import { Input } from '@@CE/form-components/Input';
-import { FormActions } from '@@CE/form-components/FormActions';
-import { SystemBadge } from '@@CE/Badge/SystemBadge';
+import { FormControl } from '@@/form-components/FormControl';
+import { FormSection } from '@@/form-components/FormSection';
+import { Input } from '@@/form-components/Input';
+import { FormActions } from '@@/form-components/FormActions';
+import { SystemBadge } from '@@/Badge/SystemBadge';
 
 import { IngressClassDatatable } from '../../../cluster/ingressClass/IngressClassDatatable';
 import { useIngressControllerClassMapQuery } from '../../../cluster/ingressClass/useIngressControllerClassMap';

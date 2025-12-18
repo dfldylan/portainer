@@ -10,14 +10,14 @@ import {
   stopContainer,
   recreateContainer,
   getContainerLogs,
-} from '@CE/react/docker/containers/containers.service';
-import { getContainers } from '@CE/react/docker/containers/queries/useContainers';
-import { getContainer } from '@CE/react/docker/containers/queries/useContainer';
-import { resizeTTY } from '@CE/react/docker/containers/queries/useContainerResizeTTYMutation';
-import { updateContainer } from '@CE/react/docker/containers/queries/useUpdateContainer';
-import { createExec } from '@CE/react/docker/containers/queries/useCreateExecMutation';
-import { containerStats } from '@CE/react/docker/containers/queries/useContainerStats';
-import { getContainerTop } from '@CE/react/docker/containers/queries/useContainerTop';
+} from '@/react/docker/containers/containers.service';
+import { getContainers } from '@/react/docker/containers/queries/useContainers';
+import { getContainer } from '@/react/docker/containers/queries/useContainer';
+import { resizeTTY } from '@/react/docker/containers/queries/useContainerResizeTTYMutation';
+import { updateContainer } from '@/react/docker/containers/queries/useUpdateContainer';
+import { createExec } from '@/react/docker/containers/queries/useCreateExecMutation';
+import { containerStats } from '@/react/docker/containers/queries/useContainerStats';
+import { getContainerTop } from '@/react/docker/containers/queries/useContainerTop';
 
 import { ContainerDetailsViewModel } from '../models/containerDetails';
 import { ContainerStatsViewModel } from '../models/containerStats';

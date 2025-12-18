@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 
-import { UserViewModel } from '@CE/portainer/models/user';
-import { withTestRouter } from '@CE/react/test-utils/withRouter';
-import { withUserProvider } from '@CE/react/test-utils/withUserProvider';
-import { withTestQueryProvider } from '@CE/react/test-utils/withTestQuery';
+import { UserViewModel } from '@/portainer/models/user';
+import { withTestRouter } from '@/react/test-utils/withRouter';
+import { withUserProvider } from '@/react/test-utils/withUserProvider';
+import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 
 import { PageHeader } from './PageHeader';
 

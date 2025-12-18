@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ServiceList } from 'kubernetes-types/core/v1';
 
-import { withGlobalError } from '@CE/react-tools/react-query';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
-import { EnvironmentId } from '@CE/react/portainer/environments/types';
-import { Service } from '@CE/react/kubernetes/services/types';
+import { withGlobalError } from '@/react-tools/react-query';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
+import { EnvironmentId } from '@/react/portainer/environments/types';
+import { Service } from '@/react/kubernetes/services/types';
 
 import { parseKubernetesAxiosError } from '../axiosError';
 

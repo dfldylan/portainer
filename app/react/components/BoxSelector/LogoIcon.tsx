@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { Icon, IconProps } from '@@CE/Icon';
+import { Icon, IconProps } from '@@/Icon';
 
 type Props = IconProps;
 

@@ -1,7 +1,7 @@
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { TemplateType } from '@CE/react/portainer/templates/app-templates/types';
-import { TemplateViewModel } from '@CE/react/portainer/templates/app-templates/view-model';
-import { DeployWidget } from '@CE/react/portainer/templates/components/DeployWidget';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { TemplateType } from '@/react/portainer/templates/app-templates/types';
+import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
+import { DeployWidget } from '@/react/portainer/templates/components/DeployWidget';
 
 import { ContainerDeployForm } from './ContainerDeployForm/ContainerDeployForm';
 import { StackDeployForm } from './StackDeployForm/StackDeployForm';

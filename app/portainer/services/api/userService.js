@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
-import { UserViewModel } from '@CE/portainer/models/user';
-import { getUsers } from '@CE/portainer/users/user.service';
-import { getUser } from '@CE/portainer/users/queries/useUser';
+import { UserViewModel } from '@/portainer/models/user';
+import { getUsers } from '@/portainer/users/user.service';
+import { getUser } from '@/portainer/users/queries/useUser';
 
 import { TeamMembershipModel } from '../../models/teamMembership';
 

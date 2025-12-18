@@ -2,25 +2,25 @@ import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
 import { YAMLInspector } from './YAMLInspector';
 
-vi.mock('@CE/react/hooks/useEnvironmentId', () => ({
+vi.mock('@/react/hooks/useEnvironmentId', () => ({
   useEnvironmentId: vi.fn(() => 1),
 }));
 
-vi.mock('@CE/react/portainer/environments/queries/useEnvironment', () => ({
+vi.mock('@/react/portainer/environments/queries/useEnvironment', () => ({
   useEnvironmentDeploymentOptions: vi.fn(() => ({
     data: { hideWebEditor: false },
   })),
 }));
 
-vi.mock('@CE/react/hooks/useUser', () => ({
+vi.mock('@/react/hooks/useUser', () => ({
   useAuthorizations: vi.fn(() => ({ authorized: true })),
 }));
 
-vi.mock('@@CE/modals/confirm', () => ({
+vi.mock('@@/modals/confirm', () => ({
   confirm: vi.fn(() => Promise.resolve(true)),
   buildConfirmButton: vi.fn((label) => ({ label })),
 }));
@@ -29,15 +29,15 @@ vi.mock('./YAMLReplace/proxy/applyPatch', () => ({
   applyPatch: vi.fn(() => Promise.resolve()),
 }));
 
-vi.mock('@@CE/Widget', () => ({
+vi.mock('@@/Widget', () => ({
   Loading: () => <div data-cy="loading-widget">Loading</div>,
 }));
 
-vi.mock('@@CE/Alert', () => ({
+vi.mock('@@/Alert', () => ({
   Alert: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
-vi.mock('@@CE/WebEditorForm', () => ({
+vi.mock('@@/WebEditorForm', () => ({
   WebEditorForm: ({
     value,
     onChange,

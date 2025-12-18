@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { useCurrentUser } from '@CE/react/hooks/useUser';
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import { useCurrentUser } from '@/react/hooks/useUser';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 
 import { AccessToken } from '../types';
 

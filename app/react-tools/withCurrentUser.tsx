@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 
-import { UserProvider } from '@CE/react/hooks/useUser';
+import { UserProvider } from '@/react/hooks/useUser';
 
 import { withReactQuery } from './withReactQuery';
 

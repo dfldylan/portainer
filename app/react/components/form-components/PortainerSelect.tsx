@@ -8,12 +8,12 @@ import {
 import _ from 'lodash';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
-import { AutomationTestingProps } from '@CE/types';
+import { AutomationTestingProps } from '@/types';
 
 import {
   Creatable,
   Select as ReactSelect,
-} from '@@CE/form-components/ReactSelect';
+} from '@@/form-components/ReactSelect';
 
 export interface Option<TValue> {
   value: TValue;

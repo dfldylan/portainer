@@ -8,14 +8,14 @@ import {
   ShuffleIcon,
 } from 'lucide-react';
 
-import { useEnvironmentId } from '@CE/react/hooks/useEnvironmentId';
-import { isAgentEnvironment } from '@CE/react/portainer/environments/utils';
-import { useCurrentEnvironment } from '@CE/react/hooks/useCurrentEnvironment';
-import { useIsEnvironmentAdmin } from '@CE/react/hooks/useUser';
+import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
+import { isAgentEnvironment } from '@/react/portainer/environments/utils';
+import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
+import { useIsEnvironmentAdmin } from '@/react/hooks/useUser';
 
-import { PageHeader } from '@@CE/PageHeader';
-import { DashboardGrid } from '@@CE/DashboardItem/DashboardGrid';
-import { DashboardItem } from '@@CE/DashboardItem';
+import { PageHeader } from '@@/PageHeader';
+import { DashboardGrid } from '@@/DashboardItem/DashboardGrid';
+import { DashboardItem } from '@@/DashboardItem';
 
 import { useIsSwarm, useIsSwarmManager } from '../proxy/queries/useInfo';
 

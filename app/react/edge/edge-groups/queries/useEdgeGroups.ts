@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import axios, { parseAxiosError } from '@CE/portainer/services/axios';
+import axios, { parseAxiosError } from '@/portainer/services/axios';
 import {
   EnvironmentId,
   EnvironmentType,
-} from '@CE/react/portainer/environments/types';
+} from '@/react/portainer/environments/types';
 
 import { EdgeGroup } from '../types';
 

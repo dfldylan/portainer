@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { localizeDate } from '@CE/react/common/date-utils';
+import { localizeDate } from '@/react/common/date-utils';
 
-import { Badge } from '@@CE/Badge';
+import { Badge } from '@@/Badge';
 
 import { BlocklistItem } from './BlocklistItem';
 
