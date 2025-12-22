@@ -17,7 +17,6 @@ import { Values } from './types';
 import { LogoFieldset } from './LogoFieldset';
 import { ScreenBannerFieldset } from './ScreenBannerFieldset';
 import { TemplatesUrlSection } from './TemplatesUrlSection';
-import { EnableTelemetryField } from './EnableTelemetryField';
 
 export function ApplicationSettingsPanel({
   onSuccess,
@@ -30,7 +29,6 @@ export function ApplicationSettingsPanel({
 
   const initialValues: Values = {
     edgeAgentCheckinInterval: settings.EdgeAgentCheckinInterval,
-    enableTelemetry: settings.EnableTelemetry,
     loginBannerEnabled: !!settings.CustomLoginBanner,
     loginBanner: settings.CustomLoginBanner,
     logoEnabled: !!settings.LogoURL,
@@ -60,7 +58,6 @@ export function ApplicationSettingsPanel({
       {
         SnapshotInterval: values.snapshotInterval,
         LogoURL: values.logo,
-        EnableTelemetry: values.enableTelemetry,
         CustomLoginBanner: values.loginBanner,
         TemplatesURL: values.templatesUrl,
         EdgeAgentCheckinInterval: values.edgeAgentCheckinInterval,
@@ -102,8 +99,6 @@ function InnerForm({ isLoading }: { isLoading: boolean }) {
       />
 
       <LogoFieldset />
-
-      <EnableTelemetryField />
 
       <ScreenBannerFieldset />
 

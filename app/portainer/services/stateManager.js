@@ -87,17 +87,11 @@ function StateManagerFactory($async, $q, SystemService, InfoHelper, LocalStorage
     LocalStorage.storeApplicationState(state.application);
   };
 
-  manager.updateEnableTelemetry = function updateEnableTelemetry(enableTelemetry) {
-    state.application.enableTelemetry = enableTelemetry;
-    LocalStorage.storeApplicationState(state.application);
-  };
-
   function assignStateFromStatusAndSettings(status, settings) {
     state.application.version = status.Version;
     state.application.edition = status.Edition;
     state.application.instanceId = status.InstanceID;
 
-    state.application.enableTelemetry = settings.EnableTelemetry;
     state.application.logo = settings.LogoURL;
     state.application.snapshotInterval = settings.SnapshotInterval;
     state.application.enableEdgeComputeFeatures = settings.EnableEdgeComputeFeatures;

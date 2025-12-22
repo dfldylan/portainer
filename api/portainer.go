@@ -1093,8 +1093,6 @@ type (
 		UserSessionTimeout string `json:"UserSessionTimeout" example:"5m"`
 		// The expiry of a Kubeconfig
 		KubeconfigExpiry string `json:"KubeconfigExpiry" example:"24h"`
-		// Whether telemetry is enabled
-		EnableTelemetry bool `json:"EnableTelemetry" example:"false"`
 		// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
 		HelmRepositoryURL string `json:"HelmRepositoryURL" example:"https://charts.bitnami.com/bitnami"`
 		// KubectlImage, defaults to portainer/kubectl-shell

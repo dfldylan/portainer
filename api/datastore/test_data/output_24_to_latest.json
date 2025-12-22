@@ -604,7 +604,6 @@
     "EdgeAgentCheckinInterval": 5,
     "EdgePortainerUrl": "",
     "EnableEdgeComputeFeatures": false,
-    "EnableTelemetry": true,
     "EnforceEdgeID": false,
     "FeatureFlagSettings": null,
     "GlobalDeploymentOptions": {

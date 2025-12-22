@@ -16,7 +16,6 @@ describe('SettingsView', () => {
         HttpResponse.json({
           LogoURL: '',
           SnapshotInterval: '5m',
-          EnableTelemetry: false,
         })
       )
     );

@@ -1,6 +1,5 @@
 import { getEnvironments } from '@/react/portainer/environments/environment.service';
 import { restoreOptions } from '@/react/portainer/init/InitAdminView/restore-options';
-import { privacyPolicyUrl } from '@/react/portainer/settings/SettingsView/ApplicationSettingsPanel/EnableTelemetryField';
 
 angular.module('portainer.app').controller('InitAdminController', [
   '$scope',
@@ -15,8 +14,6 @@ angular.module('portainer.app').controller('InitAdminController', [
   function ($scope, $state, Notifications, Authentication, StateManager, SettingsService, UserService, BackupService, StatusService) {
     $scope.restoreOptions = restoreOptions;
 
-    $scope.privacyPolicyUrl = privacyPolicyUrl;
-
     $scope.uploadBackup = uploadBackup;
 
     $scope.logo = StateManager.getState().application.logo;
@@ -26,7 +23,6 @@ angular.module('portainer.app').controller('InitAdminController', [
       Username: 'admin',
       Password: '',
       ConfirmPassword: '',
-      enableTelemetry: process.env.NODE_ENV === 'production',
       restoreFormType: $scope.RESTORE_FORM_TYPES.FILE,
     };
 
@@ -58,9 +54,6 @@ angular.module('portainer.app').controller('InitAdminController', [
       UserService.initAdministrator(username, password)
         .then(function success() {
           return Authentication.login(username, password);
-        })
-        .then(function success() {
-          return SettingsService.update({ enableTelemetry: $scope.formValues.enableTelemetry });
         })
         .then(() => {
           return StateManager.initialize();
