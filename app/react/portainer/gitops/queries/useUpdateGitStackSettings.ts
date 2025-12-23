@@ -33,8 +33,11 @@ export function useUpdateGitStackSettings() {
       endpointId: number;
       payload: GitStackPayload;
     }) => updateGitStackSettings(stackId, endpointId, payload),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.base() });
+    onSuccess: (_, { stackId }) => {
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.stack(stackId),
+        exact: true,
+      });
     },
   });
 }

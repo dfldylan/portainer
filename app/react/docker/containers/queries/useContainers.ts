@@ -58,6 +58,10 @@ export async function getContainers(
   { all = true, filters, nodeName }: UseContainers = {}
 ) {
   try {
+    if (!environmentId) {
+      return [];
+    }
+
     const { data } = await axios.get<DockerContainerResponse[]>(
       buildDockerProxyUrl(environmentId, 'containers', 'json'),
       {

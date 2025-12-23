@@ -10,7 +10,7 @@ import { queryKeys } from './query-keys';
 export function useAppStackFile(id?: number, kind?: string) {
   return useQuery(
     queryKeys.appStackFile(id, kind),
-    async () => {
+    async ({ signal }) => {
       if (!id) {
         return undefined;
       }
@@ -21,7 +21,10 @@ export function useAppStackFile(id?: number, kind?: string) {
       }
 
       // Fetch regular stack file
-      const stackFile = await getStackFile(id);
+      const stackFile = await getStackFile({
+        stackId: id,
+        options: { signal },
+      });
       return stackFile?.StackFileContent;
     },
     {

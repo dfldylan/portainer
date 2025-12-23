@@ -1,7 +1,7 @@
 import { AutoUpdateResponse, AutoUpdateModel } from '../types';
 
 export function parseAutoUpdateResponse(
-  response?: AutoUpdateResponse
+  response?: AutoUpdateResponse | null
 ): AutoUpdateModel {
   if (!response || (!response?.Interval && !response?.Webhook)) {
     return {

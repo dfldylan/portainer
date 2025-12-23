@@ -48,7 +48,7 @@ export function InnerForm({
           url={gitConfig.URL}
           type="stack"
           configFilePath={gitConfig.ConfigFilePath}
-          additionalFiles={stack.AdditionalFiles}
+          additionalFiles={stack.AdditionalFiles || []}
         />
 
         <AutoUpdateFieldset

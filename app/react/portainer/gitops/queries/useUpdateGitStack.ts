@@ -30,7 +30,10 @@ export function useUpdateGitStack(stackId: number, endpointId: number) {
     mutationFn: (payload: GitStackPayload) =>
       updateGitStack(stackId, endpointId, payload),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.base() });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.stack(stackId),
+        exact: true,
+      });
     },
   });
 }

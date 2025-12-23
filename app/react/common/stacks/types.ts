@@ -62,8 +62,8 @@ export interface Stack {
   CreatedBy: string;
   UpdateDate: number;
   UpdatedBy: string;
-  AdditionalFiles?: string[];
-  AutoUpdate?: AutoUpdateResponse;
+  AdditionalFiles?: string[] | null;
+  AutoUpdate?: AutoUpdateResponse | null;
   Option?: {
     Prune: boolean;
     Force: boolean;
