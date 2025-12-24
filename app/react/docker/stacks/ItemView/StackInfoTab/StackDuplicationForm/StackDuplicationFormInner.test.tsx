@@ -364,16 +364,8 @@ describe('StackDuplicationFormInner', () => {
           actionType: 'migrate',
         },
         currentEnvironmentId: 1,
+        isLoading: true,
       });
-      const user = userEvent.setup();
-
-      await waitFor(() => {
-        const renameButton = getByRole('button', { name: 'Rename' });
-        expect(renameButton).toBeEnabled();
-      });
-
-      const renameButton = getByRole('button', { name: 'Rename' });
-      await user.click(renameButton);
 
       await waitFor(() => {
         expect(
@@ -392,16 +384,8 @@ describe('StackDuplicationFormInner', () => {
           actionType: 'migrate',
         },
         currentEnvironmentId: 1,
+        isLoading: true,
       });
-      const user = userEvent.setup();
-
-      await waitFor(() => {
-        const migrateButton = getByRole('button', { name: 'Migrate' });
-        expect(migrateButton).toBeEnabled();
-      });
-
-      const migrateButton = getByRole('button', { name: 'Migrate' });
-      await user.click(migrateButton);
 
       await waitFor(() => {
         expect(
@@ -493,6 +477,7 @@ function renderFormInner({
   currentEnvironmentId = 1,
   currentStackName = 'test-stack',
   onSubmit = vi.fn(),
+  isLoading = false,
   initialValues = {
     environmentId: undefined,
     newName: '',
@@ -504,6 +489,7 @@ function renderFormInner({
   currentStackName?: string;
   onSubmit?: (values: FormSubmitValues) => void | Promise<void>;
   initialValues?: FormSubmitValues;
+  isLoading?: boolean;
 } = {}) {
   const mockEnvironments: Environment[] = [
     { Id: 1, Name: 'Current Environment', GroupId: 1 } as Environment,
@@ -525,6 +511,7 @@ function renderFormInner({
         yamlError={yamlError}
         currentEnvironmentId={currentEnvironmentId}
         currentStackName={currentStackName}
+        isLoading={isLoading}
       />
     </Formik>
   ));

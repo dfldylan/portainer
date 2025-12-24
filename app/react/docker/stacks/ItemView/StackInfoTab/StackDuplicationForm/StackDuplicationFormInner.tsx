@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Field, Form, useFormikContext } from 'formik';
 import { Copy, ArrowRight } from 'lucide-react';
 
@@ -17,14 +16,16 @@ interface Props {
   yamlError?: string;
   currentEnvironmentId: EnvironmentId;
   currentStackName: string;
+  isLoading: boolean;
 }
 
 export function StackDuplicationFormInner({
   yamlError,
   currentEnvironmentId,
   currentStackName,
+  isLoading,
 }: Props) {
-  const { values, errors, setFieldValue, submitForm, isSubmitting } =
+  const { values, errors, setFieldValue, submitForm } =
     useFormikContext<FormSubmitValues>();
 
   const validState = useValidation({
@@ -33,23 +34,19 @@ export function StackDuplicationFormInner({
     currentEnvironmentId,
   });
 
-  const [actionType, setActionType] = useState<ActionType | null>(null);
-
   const isEnvSelected = !!values.environmentId;
 
   async function handleAction(type: ActionType) {
-    setActionType(type);
     // Set the actionType in form values before submitting
     await setFieldValue('actionType', type);
     await submitForm();
   }
 
-  const isMigrateInProgress = isSubmitting && actionType === 'migrate';
-  const isDuplicateInProgress = isSubmitting && actionType === 'duplicate';
+  const isMigrateInProgress = isLoading && values.actionType === 'migrate';
+  const isDuplicateInProgress = isLoading && values.actionType === 'duplicate';
 
-  const isMigrateDisabled = isSubmitting || !validState.migrate;
-  const isDuplicateDisabled =
-    isSubmitting || !validState.duplicate || !!yamlError;
+  const isMigrateDisabled = isLoading || !validState.migrate;
+  const isDuplicateDisabled = isLoading || !validState.duplicate || !!yamlError;
 
   return (
     <Form>

@@ -61,6 +61,7 @@ export function StackDuplicationForm({
             yamlError={yamlError}
             currentEnvironmentId={currentEnvironmentId}
             currentStackName={stack.Name}
+            isLoading={migrateMutation.isLoading || duplicateMutation.isLoading}
           />
         </Formik>
       </WidgetBody>
@@ -118,12 +119,18 @@ export function StackDuplicationForm({
     environmentId: number,
     name: string | undefined
   ) {
+    const isRename = environmentId === currentEnvironmentId;
+
     const confirmed = await confirm({
       title: 'Are you sure?',
       modalType: ModalType.Warn,
-      message:
-        'This action will deploy a new instance of this stack on the target environment, please note that this does NOT relocate the content of any persistent volumes that may be attached to this stack.',
-      confirmButton: buildConfirmButton('Migrate', 'danger'),
+      message: isRename
+        ? 'This action will deploy a new instance of this stack with the new name that will replace the current stack. Please note that this does NOT migrate the content of any persistent volumes that may be attached to this stack.'
+        : 'This action will deploy a new instance of this stack on the target environment, please note that this does NOT relocate the content of any persistent volumes that may be attached to this stack.',
+      confirmButton: buildConfirmButton(
+        isRename ? 'Rename' : 'Migrate',
+        'danger'
+      ),
     });
 
     if (!confirmed) {
