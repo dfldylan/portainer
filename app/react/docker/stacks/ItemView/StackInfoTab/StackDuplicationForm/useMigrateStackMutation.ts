@@ -53,7 +53,7 @@ export async function migrateSwarmStack({
   }
 
   const targetSwarm = await getSwarm(targetEnvId);
-  if (fromSwarmId === targetSwarm.ID) {
+  if (fromEnvId !== targetEnvId && fromSwarmId === targetSwarm.ID) {
     throw new Error(
       'Target environment is located in the same Swarm cluster as the current environment'
     );
