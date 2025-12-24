@@ -46,7 +46,13 @@ angular.module('portainer.docker').controller('ContainerController', [
       $scope.state.pullImageValidity = validity;
     }
 
-    $scope.updateRestartPolicy = updateRestartPolicy;
+    $scope.onUpdateRestartPolicySuccess = onUpdateRestartPolicySuccess;
+    function onUpdateRestartPolicySuccess(policy) {
+      $scope.container.HostConfig.RestartPolicy = {
+        Name: policy.name,
+        MaximumRetryCount: policy.maximumRetryCount,
+      };
+    }
 
     $scope.onUpdateResourceControlSuccess = function () {
       $state.reload();
@@ -280,25 +286,6 @@ angular.module('portainer.docker').controller('ContainerController', [
         recreateContainer(result.pullLatest);
       });
     };
-
-    function updateRestartPolicy(restartPolicy, maximumRetryCount) {
-      maximumRetryCount = restartPolicy === 'on-failure' ? maximumRetryCount : undefined;
-
-      return ContainerService.updateRestartPolicy(endpoint.Id, $scope.container.Id, restartPolicy, maximumRetryCount).then(onUpdateSuccess).catch(notifyOnError);
-
-      function onUpdateSuccess() {
-        $scope.container.HostConfig.RestartPolicy = {
-          Name: restartPolicy,
-          MaximumRetryCount: maximumRetryCount,
-        };
-        Notifications.success('Success', 'Restart policy updated');
-      }
-
-      function notifyOnError(err) {
-        Notifications.error('Failure', err, 'Unable to update restart policy');
-        return $q.reject(err);
-      }
-    }
 
     update();
   },

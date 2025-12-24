@@ -300,9 +300,12 @@
               <td>
                 <container-restart-policy
                   ng-if="container"
+                  environment-id="endpoint.Id"
+                  container-id="container.Id"
+                  node-name="nodeName"
                   name="container.HostConfig.RestartPolicy.Name"
                   maximum-retry-count="container.HostConfig.RestartPolicy.MaximumRetryCount"
-                  update-restart-policy="updateRestartPolicy(name, maximumRetryCount)"
+                  on-update-success="(onUpdateRestartPolicySuccess)"
                 >
                 </container-restart-policy>
               </td>
