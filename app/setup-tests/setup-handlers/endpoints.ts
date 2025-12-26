@@ -1,13 +1,13 @@
 import { http, HttpResponse } from 'msw';
 
+import { createMockEnvironment } from '@/react-tools/test-mocks';
+
 export const endpointsHandlers = [
   http.get('/api/endpoints/agent_versions', () => HttpResponse.json([])),
   http.get('/api/endpoints/:endpointId', ({ params }) =>
-    HttpResponse.json({
-      Id: Number(params.endpointId),
-      Name: `test-environment-${params.endpointId}`,
-      Type: 1, // Docker standalone
-    })
+    HttpResponse.json(
+      createMockEnvironment({ Id: parseInt(params.endpointId as string, 10) })
+    )
   ),
   http.get('/api/endpoints/:endpointId/registries', () =>
     HttpResponse.json([])

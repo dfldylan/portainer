@@ -160,7 +160,7 @@ export function CodeEditor({
           }}
           data-cy={dataCy}
           placeholder={placeholder}
-          aria-label={'Code Editor' || ariaLabel}
+          aria-label={ariaLabel || 'Code Editor'}
         />
       </div>
     </>

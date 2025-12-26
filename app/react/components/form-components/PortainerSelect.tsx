@@ -142,7 +142,6 @@ export function SingleSelect<TValue = string>({
       onChange={(option) => onChange(option ? option.value : null)}
       isOptionDisabled={(option) => !!option.disabled}
       data-cy={dataCy}
-      id={dataCy}
       inputId={inputId}
       placeholder={placeholder}
       isDisabled={disabled}

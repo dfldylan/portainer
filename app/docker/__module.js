@@ -442,8 +442,7 @@ angular.module('portainer.docker', ['portainer.app', reactModule]).config([
       url: '/newstack',
       views: {
         'content@': {
-          templateUrl: '~Portainer/views/stacks/create/createstack.html',
-          controller: 'CreateStackController',
+          component: 'createStackView',
         },
       },
     };

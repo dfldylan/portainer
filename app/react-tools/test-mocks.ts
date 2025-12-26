@@ -88,7 +88,9 @@ export function createMockResourceGroups(subscription: string, count: number) {
   return { value: resourceGroups };
 }
 
-export function createMockEnvironment(): Environment {
+export function createMockEnvironment(
+  overrides: Partial<Environment> = {}
+): Environment {
   return {
     TagIds: [],
     GroupId: 1,
@@ -154,6 +156,7 @@ export function createMockEnvironment(): Environment {
       detail: '',
       summary: '',
     },
+    ...overrides,
   };
 }
 

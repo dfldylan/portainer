@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { object, string } from 'yup';
 
 import { accessControlFormValidation } from '@/react/portainer/access-control/AccessControlForm';
-import { useNameValidation } from '@/react/common/stacks/CreateView/NameField';
+import { useNameValidation } from '@/react/docker/stacks/common/NameField';
 import { variablesFieldValidation } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesField';
 import { VariableDefinition } from '@/react/portainer/custom-templates/components/CustomTemplatesVariablesDefinitionField';
 import { EnvironmentId } from '@/react/portainer/environments/types';

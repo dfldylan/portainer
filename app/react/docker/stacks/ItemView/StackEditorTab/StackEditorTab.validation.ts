@@ -2,8 +2,9 @@ import { object, string, boolean, SchemaOf, array, number } from 'yup';
 
 import { envVarValidation } from '@@/form-components/EnvironmentVariablesFieldset';
 
+import { validateYAML } from '../../common/stackYamlValidation';
+
 import { StackEditorFormValues } from './StackEditorTab.types';
-import { validateYAML } from './stackYamlValidation';
 
 export function getValidationSchema(
   containerNames: string[] = [],

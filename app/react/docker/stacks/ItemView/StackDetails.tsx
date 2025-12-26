@@ -10,11 +10,11 @@ import { NavTabs } from '@@/NavTabs';
 import { WidgetBody, Widget } from '@@/Widget';
 
 import { useContainers } from '../../containers/queries/useContainers';
+import { validateYAML } from '../common/stackYamlValidation';
+import { extractContainerNames } from '../common/container-names';
 
 import { StackEditorTab } from './StackEditorTab/StackEditorTab';
 import { StackInfoTab } from './StackInfoTab/StackInfoTab';
-import { extractContainerNames } from './container-names';
-import { validateYAML } from './StackEditorTab/stackYamlValidation';
 
 type Tab = 'info' | 'editor';
 

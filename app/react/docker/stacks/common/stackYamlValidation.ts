@@ -1,7 +1,7 @@
 import YAML from 'yaml';
 import _ from 'lodash';
 
-import { extractContainerNamesFromYaml } from '../container-names';
+import { extractContainerNamesFromYaml } from './container-names';
 
 /**
  * Validates Docker Compose YAML content

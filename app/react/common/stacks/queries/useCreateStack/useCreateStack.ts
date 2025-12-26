@@ -9,7 +9,8 @@ import {
 import { applyResourceControl } from '@/react/portainer/access-control/access-control.service';
 import { AccessControlFormData } from '@/react/portainer/access-control/types';
 import PortainerError from '@/portainer/error';
-import { withError, withInvalidate } from '@/react-tools/react-query';
+import { withGlobalError, withInvalidate } from '@/react-tools/react-query';
+import { transformAutoUpdateViewModel } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
 
 import { queryKeys } from '../query-keys';
 
@@ -26,7 +27,7 @@ import { createKubernetesStackFromFileContent } from './createKubernetesStackFro
 export function useCreateStack() {
   const queryClient = useQueryClient();
   return useMutation(createStack, {
-    ...withError('Failed to create stack'),
+    ...withGlobalError('Failed to create stack'),
     ...withInvalidate(queryClient, [queryKeys.base()]),
   });
 }
@@ -194,7 +195,7 @@ function createSwarmStack({ method, payload }: SwarmCreatePayload) {
         filesystemPath: payload.relativePathSettings?.FilesystemPath,
         supportRelativePath: payload.relativePathSettings?.SupportRelativePath,
         tlsSkipVerify: payload.git.TLSSkipVerify,
-        autoUpdate: payload.git.AutoUpdate,
+        autoUpdate: transformAutoUpdateViewModel(payload.git.AutoUpdate),
         environmentId: payload.environmentId,
         swarmID: payload.swarmId,
         additionalFiles: payload.git.AdditionalFiles,
@@ -239,7 +240,7 @@ function createStandaloneStack({ method, payload }: StandaloneCreatePayload) {
         filesystemPath: payload.relativePathSettings?.FilesystemPath,
         supportRelativePath: payload.relativePathSettings?.SupportRelativePath,
         tlsSkipVerify: payload.git.TLSSkipVerify,
-        autoUpdate: payload.git.AutoUpdate,
+        autoUpdate: transformAutoUpdateViewModel(payload.git.AutoUpdate),
         environmentId: payload.environmentId,
         additionalFiles: payload.git.AdditionalFiles,
         fromAppTemplate: payload.fromAppTemplate,
@@ -282,7 +283,7 @@ function createKubernetesStack({ method, payload }: KubernetesCreatePayload) {
         repositoryGitCredentialId: payload.git.RepositoryGitCredentialID,
 
         tlsSkipVerify: payload.git.TLSSkipVerify,
-        autoUpdate: payload.git.AutoUpdate,
+        autoUpdate: transformAutoUpdateViewModel(payload.git.AutoUpdate),
         environmentId: payload.environmentId,
         additionalFiles: payload.git.AdditionalFiles,
         composeFormat: payload.composeFormat,

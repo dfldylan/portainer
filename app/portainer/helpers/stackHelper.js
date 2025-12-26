@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 import { ExternalStackViewModel } from '@/react/docker/stacks/view-models/external-stack';
-import { validateYAML } from '@/react/docker/stacks/ItemView/StackEditorTab/stackYamlValidation';
+import { validateYAML } from '@/react/docker/stacks/common/stackYamlValidation';
 
 angular.module('portainer.app').factory('StackHelper', [
   function StackHelperFactory() {

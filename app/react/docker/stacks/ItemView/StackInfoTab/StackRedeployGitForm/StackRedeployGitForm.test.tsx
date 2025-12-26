@@ -17,6 +17,7 @@ import { Stack } from '@/react/common/stacks/types';
 import { withUserProvider } from '@/react/test-utils/withUserProvider';
 import { useApiVersion } from '@/react/docker/proxy/queries/useVersion';
 import { http, server } from '@/setup-tests/server';
+import { DeepPartial } from '@/types';
 
 import { StackRedeployGitForm } from './StackRedeployGitForm';
 
@@ -752,10 +753,6 @@ const defaultProps: StackRedeployGitFormProps = {
     },
   } as Stack,
 };
-
-type DeepPartial<T> = T extends object
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : T;
 
 function renderComponent(props: DeepPartial<StackRedeployGitFormProps> = {}) {
   const Component = withTestQueryProvider(

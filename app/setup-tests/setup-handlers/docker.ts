@@ -19,4 +19,7 @@ export const dockerHandlers = [
     '/api/endpoints/:endpointId/docker/version',
     () => HttpResponse.json({ ApiVersion: '1.24' })
   ),
+  http.get('/api/endpoints/:endpointId/docker/containers/json', () =>
+    HttpResponse.json([])
+  ),
 ];

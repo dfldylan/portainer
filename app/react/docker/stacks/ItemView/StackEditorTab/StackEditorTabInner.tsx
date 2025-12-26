@@ -14,8 +14,9 @@ import { FormSection } from '@@/form-components/FormSection';
 import { usePreventExit } from '@@/WebEditorForm';
 import { FormError } from '@@/form-components/FormError';
 
+import { WebhookFieldset } from '../../common/WebhookFieldset';
+
 import { StackEditorFormValues } from './StackEditorTab.types';
-import { WebhookFieldset } from './WebhookFieldset';
 import { useVersionedStackFile } from './useVersionedStackFile';
 
 interface StackEditorTabInnerProps {

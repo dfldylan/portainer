@@ -3,22 +3,18 @@ import {
   GitCredential,
 } from '@/react/portainer/account/git-credentials/types';
 
-export type AutoUpdateMechanism = 'Webhook' | 'Interval';
+import {
+  AutoUpdateModel,
+  getDefaultAutoUpdateValues,
+} from './AutoUpdateFieldset/utils';
+
+export type {
+  AutoUpdateMechanism,
+  AutoUpdateModel,
+  AutoUpdateResponse,
+} from './AutoUpdateFieldset/utils';
+
 export { type RelativePathModel } from './RelativePathFieldset/types';
-
-export interface AutoUpdateResponse {
-  /* Auto update interval */
-  Interval: string;
-
-  /* A UUID generated from client */
-  Webhook: string;
-
-  /* Force update ignores repo changes */
-  ForceUpdate: boolean;
-
-  /* Pull latest image */
-  ForcePullImage: boolean;
-}
 
 export interface GitAuthenticationResponse {
   Username?: string;
@@ -35,14 +31,6 @@ export interface RepoConfigResponse {
   ConfigHash: string;
   TLSSkipVerify: boolean;
 }
-
-export type AutoUpdateModel = {
-  RepositoryAutomaticUpdates: boolean;
-  RepositoryMechanism: AutoUpdateMechanism;
-  RepositoryFetchInterval: string;
-  ForcePullImage: boolean;
-  RepositoryAutomaticUpdatesForce: boolean;
-};
 
 export type GitCredentialsModel = {
   RepositoryAuthentication?: boolean;
@@ -78,18 +66,25 @@ export interface GitFormModel extends GitAuthModel {
   AutoUpdate?: AutoUpdateModel;
 }
 
+export function getDefaultModel(
+  autoUpdate: AutoUpdateModel = getDefaultAutoUpdateValues()
+): GitFormModel {
+  return {
+    RepositoryURL: '',
+    ComposeFilePathInRepository: 'docker-compose.yml',
+    RepositoryReferenceName: 'refs/heads/main',
+    RepositoryAuthentication: false,
+    TLSSkipVerify: false,
+    AutoUpdate: autoUpdate,
+  };
+}
+
 export function toGitFormModel(
   response?: RepoConfigResponse,
   autoUpdate?: AutoUpdateModel
 ): GitFormModel {
   if (!response) {
-    return {
-      RepositoryURL: '',
-      ComposeFilePathInRepository: '',
-      RepositoryAuthentication: false,
-      TLSSkipVerify: false,
-      AutoUpdate: autoUpdate,
-    };
+    return getDefaultModel(autoUpdate);
   }
 
   const { URL, ReferenceName, ConfigFilePath, Authentication, TLSSkipVerify } =

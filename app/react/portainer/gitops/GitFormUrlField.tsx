@@ -84,6 +84,7 @@ export function GitFormUrlField({
               data-cy="component-gitUrlInput"
               required
               onChange={handleChange}
+              id="stack_repository_url"
             />
 
             <Button

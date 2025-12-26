@@ -54,6 +54,7 @@ export const handlers = [
   ...dockerHandlers,
   ...userHandlers,
   ...kubernetesHandlers,
+  http.get('/api/stacks', () => HttpResponse.json([])),
   http.get('/api/licenses/info', () => HttpResponse.json(licenseInfo)),
   http.get('/api/status/nodes', () => HttpResponse.json({ nodes: 3 })),
   http.get('/api/backup/s3/status', () => HttpResponse.json({ Failed: false })),
