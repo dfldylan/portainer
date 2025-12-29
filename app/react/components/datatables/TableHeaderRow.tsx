@@ -1,4 +1,9 @@
-import { Header, flexRender, TableMeta } from '@tanstack/react-table';
+import {
+  Header,
+  flexRender,
+  TableMeta,
+  ColumnMeta,
+} from '@tanstack/react-table';
 
 import { filterHOC } from './Filter';
 import { TableHeaderCell } from './TableHeaderCell';
@@ -19,12 +24,9 @@ export function TableHeaderRow<D extends DefaultType = DefaultType>({
     <tr>
       {headers.map((header) => {
         const sortDirection = header.column.getIsSorted();
-        const {
-          meta: { className, width, filter = filterHOC('Filter') } = {
-            className: '',
-            width: undefined,
-          },
-        } = header.column.columnDef;
+        const { className, filter, width } = parseMeta(
+          header.column.columnDef.meta
+        );
 
         return (
           <TableHeaderCell
@@ -59,4 +61,29 @@ export function TableHeaderRow<D extends DefaultType = DefaultType>({
       })}
     </tr>
   );
+}
+
+function parseMeta<D extends DefaultType = DefaultType>(
+  meta: ColumnMeta<D, unknown> | undefined
+) {
+  if (!meta) {
+    return {
+      className: '',
+      width: undefined,
+      filter: filterHOC('Filter'),
+    };
+  }
+
+  const className =
+    'className' in meta && typeof meta.className === 'string'
+      ? meta.className
+      : undefined;
+  const width =
+    'width' in meta && typeof meta.width === 'string' ? meta.width : undefined;
+  const filter =
+    'filter' in meta && typeof meta.filter === 'function'
+      ? meta.filter
+      : filterHOC('Filter');
+
+  return { className, width, filter };
 }
