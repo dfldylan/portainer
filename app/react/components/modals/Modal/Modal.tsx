@@ -42,7 +42,6 @@ export function Modal({
           'flex items-center justify-center z-50'
         )}
         onDismiss={onDismiss}
-        role="dialog"
       >
         <DialogContent
           aria-label={ariaLabel}

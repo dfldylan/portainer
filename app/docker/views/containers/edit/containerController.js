@@ -1,10 +1,8 @@
 import moment from 'moment';
 import _ from 'lodash-es';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
-import { confirmContainerDeletion } from '@/react/docker/containers/common/confirm-container-delete-modal';
 import { FeatureId } from '@/react/portainer/feature-flags/enums';
 import { ResourceControlType } from '@/react/portainer/access-control/types';
-import { confirmContainerRecreation } from '@/react/docker/containers/ItemView/ConfirmRecreationModal';
 import { commitContainer } from '@/react/docker/proxy/queries/useCommitContainerMutation';
 import { ContainerEngine } from '@/react/portainer/environments/types';
 
@@ -31,13 +29,14 @@ angular.module('portainer.docker').controller('ContainerController', [
     $scope.displayCreateWebhookButton = false;
     $scope.containerWebhookFeature = FeatureId.CONTAINER_WEBHOOK;
 
+    $scope.onSuccessAction = update;
+
     $scope.config = {
       RegistryModel: new PorImageRegistryModel(),
       commitInProgress: false,
     };
 
     $scope.state = {
-      recreateContainerInProgress: false,
       pullImageValidity: false,
     };
 
@@ -75,7 +74,7 @@ angular.module('portainer.docker').controller('ContainerController', [
       return `${gpuStr},${capStr}`;
     };
 
-    var update = function () {
+    function update() {
       var nodeName = $transition$.params().nodeName;
       HttpRequestHelper.setPortainerAgentTargetHeader(nodeName);
       $scope.nodeName = nodeName;
@@ -110,6 +109,7 @@ angular.module('portainer.docker').controller('ContainerController', [
           }
 
           $scope.container.Config.Env = _.sortBy($scope.container.Config.Env, _.toLower);
+
           const inSwarm = $scope.container.Config.Labels['com.docker.swarm.service.id'];
           const autoRemove = $scope.container.HostConfig.AutoRemove;
           const admin = Authentication.isAdmin();
@@ -132,64 +132,16 @@ angular.module('portainer.docker').controller('ContainerController', [
             !allowHostNamespaceForRegularUsers ||
             !allowPrivilegedModeForRegularUsers;
 
-          // displayRecreateButton should false for podman because recreating podman containers give and error: cannot set memory swappiness with cgroupv2
+          // displayCreateWebhookButton should false for podman because recreating podman containers give and error: cannot set memory swappiness with cgroupv2
           // https://github.com/containrrr/watchtower/issues/1060#issuecomment-2319076222
+          // can be the same value as useCanRecreateContainer
           const isPodman = endpoint.ContainerEngine === ContainerEngine.Podman;
-          $scope.displayDuplicateEditButton = !inSwarm && !autoRemove && (admin || !settingRestrictsRegularUsers);
-          $scope.displayRecreateButton = !inSwarm && !autoRemove && (admin || !settingRestrictsRegularUsers) && !isPodman;
-          $scope.displayCreateWebhookButton = $scope.displayRecreateButton;
+          $scope.displayCreateWebhookButton = !inSwarm && !autoRemove && (admin || !settingRestrictsRegularUsers) && !isPodman;
         })
         .catch(function error(err) {
           Notifications.error('Failure', err, 'Unable to retrieve container info');
         });
-    };
-
-    function executeContainerAction(id, action, successMessage, errorMessage) {
-      action(endpoint.Id, id)
-        .then(function success() {
-          Notifications.success(successMessage, id);
-          update();
-        })
-        .catch(function error(err) {
-          Notifications.error('Failure', err, errorMessage);
-        });
     }
-
-    $scope.start = function () {
-      var successMessage = 'Container successfully started';
-      var errorMessage = 'Unable to start container';
-      executeContainerAction($transition$.params().id, ContainerService.startContainer, successMessage, errorMessage);
-    };
-
-    $scope.stop = function () {
-      var successMessage = 'Container successfully stopped';
-      var errorMessage = 'Unable to stop container';
-      executeContainerAction($transition$.params().id, ContainerService.stopContainer, successMessage, errorMessage);
-    };
-
-    $scope.kill = function () {
-      var successMessage = 'Container successfully killed';
-      var errorMessage = 'Unable to kill container';
-      executeContainerAction($transition$.params().id, ContainerService.killContainer, successMessage, errorMessage);
-    };
-
-    $scope.pause = function () {
-      var successMessage = 'Container successfully paused';
-      var errorMessage = 'Unable to pause container';
-      executeContainerAction($transition$.params().id, ContainerService.pauseContainer, successMessage, errorMessage);
-    };
-
-    $scope.unpause = function () {
-      var successMessage = 'Container successfully resumed';
-      var errorMessage = 'Unable to resume container';
-      executeContainerAction($transition$.params().id, ContainerService.resumeContainer, successMessage, errorMessage);
-    };
-
-    $scope.restart = function () {
-      var successMessage = 'Container successfully restarted';
-      var errorMessage = 'Unable to restart container';
-      executeContainerAction($transition$.params().id, ContainerService.restartContainer, successMessage, errorMessage);
-    };
 
     $scope.renameContainer = function () {
       var container = $scope.container;
@@ -228,63 +180,6 @@ angular.module('portainer.docker').controller('ContainerController', [
 
     $scope.commit = function () {
       return $async(commitContainerAsync);
-    };
-
-    $scope.confirmRemove = function () {
-      return $async(async () => {
-        var title = 'You are about to remove a container.';
-        if ($scope.container.State.Running) {
-          title = 'You are about to remove a running container.';
-        }
-
-        const result = await confirmContainerDeletion(title);
-
-        if (!result) {
-          return;
-        }
-        const { removeVolumes } = result;
-
-        removeContainer(removeVolumes);
-      });
-    };
-
-    function removeContainer(cleanAssociatedVolumes) {
-      ContainerService.remove(endpoint.Id, $scope.container.Id, cleanAssociatedVolumes)
-        .then(function success() {
-          Notifications.success('Success', 'Container successfully removed');
-          $state.go('docker.containers', {}, { reload: true });
-        })
-        .catch(function error(err) {
-          Notifications.error('Failure', err, 'Unable to remove container');
-        });
-    }
-
-    function recreateContainer(pullImage) {
-      var container = $scope.container;
-      $scope.state.recreateContainerInProgress = true;
-
-      return ContainerService.recreateContainer(endpoint.Id, container.Id, pullImage).then(notifyAndChangeView).catch(notifyOnError);
-
-      function notifyAndChangeView() {
-        Notifications.success('Success', 'Container successfully re-created');
-        $state.go('docker.containers', {}, { reload: true });
-      }
-
-      function notifyOnError(err) {
-        Notifications.error('Failure', err, 'Unable to re-create container');
-        $scope.state.recreateContainerInProgress = false;
-      }
-    }
-
-    $scope.recreate = function () {
-      const cannotPullImage = !$scope.container.Config.Image || $scope.container.Config.Image.toLowerCase().startsWith('sha256');
-      confirmContainerRecreation(cannotPullImage).then(function (result) {
-        if (!result) {
-          return;
-        }
-
-        recreateContainer(result.pullLatest);
-      });
     };
 
     update();
