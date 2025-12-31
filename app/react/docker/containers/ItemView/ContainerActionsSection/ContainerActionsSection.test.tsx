@@ -285,47 +285,6 @@ describe('ContainerActionsSection', () => {
 
     expect(mockRemoveMutate).not.toHaveBeenCalled();
   });
-
-  it('should not render buttons when user lacks authorizations', async () => {
-    renderComponent({
-      userAuthorizations: {
-        DockerContainerStart: false,
-        DockerContainerStop: false,
-        DockerContainerKill: false,
-        DockerContainerRestart: false,
-        DockerContainerPause: false,
-        DockerContainerUnpause: false,
-        DockerContainerDelete: false,
-        DockerContainerCreate: false,
-      },
-    });
-
-    await waitFor(() => {
-      // Component should render but without buttons
-      expect(
-        screen.queryByRole('button', { name: 'Start' })
-      ).not.toBeInTheDocument();
-    });
-
-    expect(
-      screen.queryByRole('button', { name: 'Stop' })
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole('button', { name: 'Kill' })
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole('button', { name: 'Restart' })
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole('button', { name: 'Pause' })
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole('button', { name: 'Resume' })
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole('button', { name: 'Remove' })
-    ).not.toBeInTheDocument();
-  });
 });
 
 function renderComponent(

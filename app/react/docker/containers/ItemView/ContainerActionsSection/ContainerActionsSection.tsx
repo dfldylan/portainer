@@ -20,7 +20,7 @@ export function ContainerActionsSection({
   container,
   onSuccess,
 }: Props) {
-  const { authorized } = useAuthorizations([
+  const authorizedQuery = useAuthorizations([
     'DockerContainerStart',
     'DockerContainerStop',
     'DockerContainerKill',
@@ -31,14 +31,13 @@ export function ContainerActionsSection({
     'DockerContainerCreate',
   ]);
 
-  if (!authorized || !container.Id) {
+  if (!authorizedQuery.authorized || !container.Id) {
     return null;
   }
 
   const isRunning = container.State?.Running || false;
   const isPaused = container.State?.Paused || false;
   const isPortainer = container.IsPortainer || false;
-
   return (
     <Widget>
       <Widget.Title icon="settings" title="Actions" />

@@ -11,14 +11,14 @@ overrides:
   js-yaml: ^3.14.0
   minimist: ^1.2.6
   http-proxy: ^1.18.1
+  daterangepicker>jquery: ^3.5.1
   '@uirouter/react': ^1.0.7
   '@uirouter/angularjs': 1.0.11
   moment: ^2.21.0
+  markdown-it: ^12.3.2
   msw>wrap-ansi: ^7.0.0
   '@types/react': ^17.0.37
   '@types/react-dom': ^17.0.11
-
-pnpmfileChecksum: sha256-nVOmFZ6JT8FxIhcN+S5sJXuP1DtIhTre5ZGvjJU+4tk=
 
 importers:
 
@@ -93,54 +93,6 @@ importers:
       '@tippyjs/react':
         specifier: ^4.2.6
         version: 4.2.6(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
-      '@types/angular':
-        specifier: ^1.8.3
-        version: 1.8.9
-      '@types/file-saver':
-        specifier: ^2.0.4
-        version: 2.0.7
-      '@types/filesize':
-        specifier: ^5.0.2
-        version: 5.0.2
-      '@types/filesize-parser':
-        specifier: ^1.5.1
-        version: 1.5.3
-      '@types/jquery':
-        specifier: ^3.5.10
-        version: 3.5.33
-      '@types/json-schema':
-        specifier: ^7.0.15
-        version: 7.0.15
-      '@types/lodash':
-        specifier: ^4.17.21
-        version: 4.17.21
-      '@types/mustache':
-        specifier: ^4.1.2
-        version: 4.2.6
-      '@types/qs':
-        specifier: ^6.9.17
-        version: 6.14.0
-      '@types/react':
-        specifier: ^17.0.37
-        version: 17.0.75
-      '@types/react-datetime-picker':
-        specifier: ^3.4.1
-        version: 3.4.1
-      '@types/react-dom':
-        specifier: ^17.0.11
-        version: 17.0.25
-      '@types/react-is':
-        specifier: ^17.0.3
-        version: 17.0.7
-      '@types/sanitize-html':
-        specifier: ^2.8.0
-        version: 2.16.0
-      '@types/toastr':
-        specifier: ^2.1.39
-        version: 2.1.43
-      '@types/uuid':
-        specifier: ^3.3.2
-        version: 3.4.13
       '@uirouter/angularjs':
         specifier: 1.0.11
         version: 1.0.11(angular@1.8.2)
@@ -439,9 +391,57 @@ importers:
       '@testing-library/user-event':
         specifier: ^14.5.2
         version: 14.5.2(@testing-library/dom@9.3.4)
+      '@types/angular':
+        specifier: ^1.8.3
+        version: 1.8.9
+      '@types/file-saver':
+        specifier: ^2.0.4
+        version: 2.0.7
+      '@types/filesize':
+        specifier: ^5.0.2
+        version: 5.0.2
+      '@types/filesize-parser':
+        specifier: ^1.5.1
+        version: 1.5.3
+      '@types/jquery':
+        specifier: ^3.5.10
+        version: 3.5.33
+      '@types/json-schema':
+        specifier: ^7.0.15
+        version: 7.0.15
+      '@types/lodash':
+        specifier: ^4.17.21
+        version: 4.17.21
+      '@types/mustache':
+        specifier: ^4.1.2
+        version: 4.2.6
       '@types/nprogress':
         specifier: ^0.2.0
         version: 0.2.3
+      '@types/qs':
+        specifier: ^6.9.17
+        version: 6.14.0
+      '@types/react':
+        specifier: ^17.0.37
+        version: 17.0.75
+      '@types/react-datetime-picker':
+        specifier: ^3.4.1
+        version: 3.4.1
+      '@types/react-dom':
+        specifier: ^17.0.11
+        version: 17.0.25
+      '@types/react-is':
+        specifier: ^17.0.3
+        version: 17.0.7
+      '@types/sanitize-html':
+        specifier: ^2.8.0
+        version: 2.16.0
+      '@types/toastr':
+        specifier: ^2.1.39
+        version: 2.1.43
+      '@types/uuid':
+        specifier: ^3.3.2
+        version: 3.4.13
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.7.4
         version: 6.7.4(@typescript-eslint/parser@6.7.4(eslint@8.50.0)(typescript@5.5.2))(eslint@8.50.0)(typescript@5.5.2)
@@ -4964,6 +4964,9 @@ packages:
     resolution: {integrity: sha512-LXYT42KJ7lpIKECr2mAXIaMldcNCh/7E0KBKOu4KSfkHmP+mZmSs+8V5gBAqisWBy0OO4W5Oyys0GO1Y8KtdKg==}
     engines: {node: '>=10.13.0'}
 
+  entities@2.1.0:
+    resolution: {integrity: sha512-hCx1oky9PFrJ611mf0ifBLBRW8lUUVRlFolb5gWRfIELabBlbp9xZvrqZLZAs+NxFnbfQoeGd8wDkygjg7U85w==}
+
   entities@2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
 
@@ -6319,8 +6322,8 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  linkify-it@5.0.0:
-    resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
+  linkify-it@3.0.3:
+    resolution: {integrity: sha512-ynTsyrFSdE5oZ/O9GEf00kPngmOfVwazR5GKDq6EYfhlpFug3J2zybX56a2PRRpc9P+FuSoGNAwjlbDs9jJBPQ==}
 
   lint-staged@14.0.1:
     resolution: {integrity: sha512-Mw0cL6HXnHN1ag0mN/Dg4g6sr8uf8sn98w2Oc1ECtFto9tvRF7nkXGJRbx8gPlHyoR0pLyBr2lQHbWwmUHe1Sw==}
@@ -6488,8 +6491,8 @@ packages:
   map-or-similar@1.5.0:
     resolution: {integrity: sha512-0aF7ZmVon1igznGI4VS30yugpduQW3y3GkcgGJOp7d8x8QrizhigUxjI/m2UojsXXto+jLAH3KSz+xOJTiORjg==}
 
-  markdown-it@14.1.0:
-    resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
+  markdown-it@12.3.2:
+    resolution: {integrity: sha512-TchMembfxfNVpHkbtriWltGWc+m3xszaRD0CZup7GFFhzIgQqxIfn3eGj1yZpfuflzPvfkt611B2Q/Bsk1YnGg==}
     hasBin: true
 
   markdown-to-jsx@7.7.4:
@@ -6520,8 +6523,8 @@ packages:
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
 
-  mdurl@2.0.0:
-    resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
+  mdurl@1.0.1:
+    resolution: {integrity: sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==}
 
   media-typer@0.3.0:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
@@ -7500,10 +7503,6 @@ packages:
 
   pumpify@1.5.1:
     resolution: {integrity: sha512-oClZI37HvuUJJxSKKrC17bZ9Cu0ZYhEAGPsPUy9KlMUmv9dKX2o77RUmq7f3XjIxbwyGwYzbzQ1L2Ks8sIradQ==}
-
-  punycode.js@2.3.1:
-    resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
-    engines: {node: '>=6'}
 
   punycode@1.4.1:
     resolution: {integrity: sha512-jmYNElW7yvO7TV33CjSmvSiE2yco3bV2czu/OzDKdMNVZQWfxCblURLhf+47syQRBntjfLdd/H0egrzIG+oaFQ==}
@@ -8737,8 +8736,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  uc.micro@2.1.0:
-    resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
+  uc.micro@1.0.6:
+    resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
 
   uglify-js@3.17.4:
     resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
@@ -11520,7 +11519,7 @@ snapshots:
 
   '@shikijs/markdown-it@1.29.2':
     dependencies:
-      markdown-it: 14.1.0
+      markdown-it: 12.3.2
       shiki: 1.29.2
 
   '@shikijs/themes@1.29.2':
@@ -13924,7 +13923,7 @@ snapshots:
       json-schema: 0.4.0
       json-schema-library: 9.3.5
       loglevel: 1.9.2
-      markdown-it: 14.1.0
+      markdown-it: 12.3.2
       shiki: 1.29.2
       yaml: 2.7.0
     optionalDependencies:
@@ -14528,6 +14527,8 @@ snapshots:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.2.1
+
+  entities@2.1.0: {}
 
   entities@2.2.0: {}
 
@@ -16230,9 +16231,9 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  linkify-it@5.0.0:
+  linkify-it@3.0.3:
     dependencies:
-      uc.micro: 2.1.0
+      uc.micro: 1.0.6
 
   lint-staged@14.0.1:
     dependencies:
@@ -16405,14 +16406,13 @@ snapshots:
 
   map-or-similar@1.5.0: {}
 
-  markdown-it@14.1.0:
+  markdown-it@12.3.2:
     dependencies:
       argparse: 2.0.1
-      entities: 4.5.0
-      linkify-it: 5.0.0
-      mdurl: 2.0.0
-      punycode.js: 2.3.1
-      uc.micro: 2.1.0
+      entities: 2.1.0
+      linkify-it: 3.0.3
+      mdurl: 1.0.1
+      uc.micro: 1.0.6
 
   markdown-to-jsx@7.7.4(react@17.0.2):
     dependencies:
@@ -16448,7 +16448,7 @@ snapshots:
 
   mdn-data@2.0.30: {}
 
-  mdurl@2.0.0: {}
+  mdurl@1.0.1: {}
 
   media-typer@0.3.0: {}
 
@@ -17322,8 +17322,6 @@ snapshots:
       duplexify: 3.7.1
       inherits: 2.0.4
       pump: 2.0.1
-
-  punycode.js@2.3.1: {}
 
   punycode@1.4.1: {}
 
@@ -18774,7 +18772,7 @@ snapshots:
 
   typescript@5.5.2: {}
 
-  uc.micro@2.1.0: {}
+  uc.micro@1.0.6: {}
 
   uglify-js@3.17.4:
     optional: true

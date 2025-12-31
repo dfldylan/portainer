@@ -1,6 +1,6 @@
 {
   "author": "Portainer.io",
-  "name": "portainer",
+  "name": "@portainer/ce",
   "homepage": "http://portainer.io",
   "version": "2.37.0",
   "repository": {
@@ -27,7 +27,6 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build -o ./dist/storybook",
     "analyze-webpack": "webpack --config ./webpack/webpack.analyze.js",
-    "prepare": "cd ../.. && husky install package/server-ce/.husky && husky install .husky",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
@@ -248,9 +247,11 @@
       "js-yaml": "^3.14.0",
       "minimist": "^1.2.6",
       "http-proxy": "^1.18.1",
+      "daterangepicker>jquery": "^3.5.1",
       "@uirouter/react": "^1.0.7",
       "@uirouter/angularjs": "1.0.11",
       "moment": "^2.21.0",
+      "markdown-it": "^12.3.2",
       "msw>wrap-ansi": "^7.0.0",
       "@types/react": "^17.0.37",
       "@types/react-dom": "^17.0.11"
