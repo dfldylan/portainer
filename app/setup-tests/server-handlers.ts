@@ -103,4 +103,5 @@ export const handlers = [
   http.put('/api/resource_controls/:id', () =>
     HttpResponse.json({ success: true })
   ),
+  http.get('/api/webhooks', () => HttpResponse.json([])),
 ];

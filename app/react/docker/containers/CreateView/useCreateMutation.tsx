@@ -10,7 +10,7 @@ import {
   Registry,
   RegistryId,
 } from '@/react/portainer/registries/types/registry';
-import { createWebhook } from '@/react/portainer/webhooks/createWebhook';
+import { createWebhook } from '@/react/portainer/webhooks/useCreateWebhook';
 import { WebhookType } from '@/react/portainer/webhooks/types';
 import {
   AccessControlFormData,
@@ -315,10 +315,10 @@ async function createContainerWebhook(
   }
 
   await createWebhook({
-    ResourceId: containerId,
-    EndpointID: environment.Id,
-    RegistryId: registryId,
-    WebhookType: WebhookType.DockerContainer,
+    resourceId: containerId,
+    environmentId: environment.Id,
+    registryId,
+    webhookType: WebhookType.DockerContainer,
   });
 }
 
