@@ -27,57 +27,8 @@
 
 <docker-health-status ng-if="container.State.Health" health="container.State.Health"></docker-health-status>
 
-<div class="row" authorization="DockerImageCreate">
-  <div class="col-lg-12 col-md-12 col-xs-12">
-    <rd-widget>
-      <rd-widget-header icon="list" title-text="Create image"></rd-widget-header>
-      <rd-widget-body>
-        <form class="form-horizontal">
-          <!-- tag-description -->
-          <div class="form-group">
-            <div class="col-sm-12">
-              <span class="small text-muted">
-                You can create an image from this container, this allows you to backup important data or save helpful configurations. You'll be able to spin up another container
-                based on this image afterward.
-              </span>
-            </div>
-          </div>
-          <!-- !tag-description -->
-          <!-- image-and-registry -->
-          <por-image-registry
-            model="config.RegistryModel"
-            auto-complete="true"
-            label-class="col-sm-1"
-            input-class="col-sm-11"
-            endpoint="endpoint"
-            is-admin="isAdmin"
-            set-validity="setPullImageValidity"
-            check-rate-limits="true"
-          ></por-image-registry>
-          <!-- !image-and-registry -->
-          <!-- tag-note -->
-          <div class="form-group">
-            <div class="col-sm-12">
-              <span class="small text-muted">Note: if you don't specify the tag in the image name, <span class="label label-default">latest</span> will be used.</span>
-            </div>
-          </div>
-          <!-- !tag-note -->
-          <div class="form-group">
-            <div class="col-sm-12">
-              <button
-                type="button"
-                class="btn btn-primary btn-sm !ml-0"
-                ng-disabled="!state.pullImageValidity || !config.RegistryModel.Image || config.commitInProgress"
-                ng-click="commit()"
-              >
-                Create
-              </button>
-            </div>
-          </div>
-        </form>
-      </rd-widget-body>
-    </rd-widget>
-  </div>
+<div class="mx-4 space-y-4 [&>*]:block mb-4">
+  <create-image-section environment-id="endpoint.Id" container-id="container.Id" on-success="(onSuccessAction)"></create-image-section>
 </div>
 
 <div class="row">

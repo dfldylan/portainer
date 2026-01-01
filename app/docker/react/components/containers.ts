@@ -7,6 +7,7 @@ import { ContainerNetworksDatatable } from '@/react/docker/containers/ItemView/C
 import { RestartPolicySection } from '@/react/docker/containers/ItemView/RestartPolicySection/RestartPolicySection';
 import { ContainerActionsSection } from '@/react/docker/containers/ItemView/ContainerActionsSection/ContainerActionsSection';
 import { ContainerStatusSection } from '@/react/docker/containers/ItemView/ContainerStatusSection/ContainerStatusSection';
+import { CreateImageSection } from '@/react/docker/containers/ItemView/CreateImageSection/CreateImageSection';
 
 const ngModule = angular
   .module('portainer.docker.react.components.containers', [])
@@ -46,6 +47,14 @@ const ngModule = angular
       'nodeName',
       'onSuccessUpdate',
       'registryId',
+    ])
+  )
+  .component(
+    'createImageSection',
+    r2a(withUIRouter(withCurrentUser(CreateImageSection)), [
+      'environmentId',
+      'containerId',
+      'onSuccess',
     ])
   );
 

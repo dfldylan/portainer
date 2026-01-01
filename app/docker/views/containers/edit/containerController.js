@@ -1,7 +1,6 @@
 import _ from 'lodash-es';
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
 import { ResourceControlType } from '@/react/portainer/access-control/types';
-import { commitContainer } from '@/react/docker/proxy/queries/useCommitContainerMutation';
 
 angular.module('portainer.docker').controller('ContainerController', ContainerController);
 
@@ -9,7 +8,6 @@ angular.module('portainer.docker').controller('ContainerController', ContainerCo
 function ContainerController($q, $scope, $state, $transition$, $filter, $async, ContainerService, ImageHelper, Notifications, HttpRequestHelper, Authentication, endpoint) {
   $scope.resourceType = ResourceControlType.Container;
   $scope.endpoint = endpoint;
-  $scope.isAdmin = Authentication.isAdmin();
   $scope.activityTime = 0;
   $scope.portBindings = [];
 
@@ -17,7 +15,6 @@ function ContainerController($q, $scope, $state, $transition$, $filter, $async, 
 
   $scope.config = {
     RegistryModel: new PorImageRegistryModel(),
-    commitInProgress: false,
   };
 
   $scope.state = {
@@ -89,24 +86,7 @@ function ContainerController($q, $scope, $state, $transition$, $filter, $async, 
       });
   }
 
-  async function commitContainerAsync() {
-    $scope.config.commitInProgress = true;
-    const registryModel = $scope.config.RegistryModel;
-    const { repo, tag } = ImageHelper.createImageConfigForContainer(registryModel);
-    try {
-      await commitContainer(endpoint.Id, { container: $transition$.params().id, repo, tag });
-      Notifications.success('Image created', $transition$.params().id);
-      $state.reload();
-    } catch (err) {
-      Notifications.error('Failure', err, 'Unable to create image');
-      $scope.config.commitInProgress = false;
-    }
-  }
-
-  $scope.commit = function () {
-    return $async(commitContainerAsync);
-  };
-
+  // TODO - need to fix this
   $scope.getRegistryId = function () {
     return _.get($scope.config.RegistryModel, 'Registry.Id', 0);
   };
