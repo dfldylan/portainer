@@ -14,6 +14,8 @@ func CopyPath(path string, toDir string) error {
 	if err != nil && errors.Is(err, os.ErrNotExist) {
 		// skip copy if file does not exist
 		return nil
+	} else if err != nil {
+		return err
 	}
 
 	if !info.IsDir() {

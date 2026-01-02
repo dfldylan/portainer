@@ -79,3 +79,20 @@ func Test_CopyPath_shouldCopyDir(t *testing.T) {
 	assert.FileExists(t, filepath.Join(destination, "copy_test", "dir", ".dotfile"))
 	assert.FileExists(t, filepath.Join(destination, "copy_test", "dir", "inner"))
 }
+
+func TestCopyPathPanic(t *testing.T) {
+	dir := t.TempDir()
+	p := filepath.Join(dir, "myfile")
+
+	err := os.WriteFile(p, []byte("contents"), 0644)
+	require.NoError(t, err)
+
+	err = os.Chmod(dir, 0)
+	require.NoError(t, err)
+
+	err = CopyPath(p, t.TempDir())
+	require.Error(t, err)
+
+	err = os.Chmod(dir, 0755)
+	require.NoError(t, err)
+}
