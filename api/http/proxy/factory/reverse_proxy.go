@@ -1,9 +1,12 @@
 package factory
 
 import (
+	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"strings"
+
+	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 )
 
 // Note that we discard any non-canonical headers by design
@@ -33,7 +36,13 @@ var allowedHeaders = map[string]struct{}{
 // from golang.org/src/net/http/httputil/reverseproxy.go and merely sets the Host
 // HTTP header, which NewSingleHostReverseProxy deliberately preserves.
 func NewSingleHostReverseProxyWithHostHeader(target *url.URL) *httputil.ReverseProxy {
-	return &httputil.ReverseProxy{Rewrite: createRewriteFn(target)}
+	proxy := &httputil.ReverseProxy{Rewrite: createRewriteFn(target)}
+
+	proxy.ErrorHandler = func(w http.ResponseWriter, r *http.Request, err error) {
+		httperror.WriteError(w, http.StatusBadGateway, "Proxy failure", err)
+	}
+
+	return proxy
 }
 
 func createRewriteFn(target *url.URL) func(*httputil.ProxyRequest) {
