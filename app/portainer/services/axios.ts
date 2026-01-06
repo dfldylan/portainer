@@ -9,6 +9,7 @@ import {
   CacheAxiosResponse,
   InterpreterResult,
   AxiosCacheInstance,
+  StorageValue,
 } from 'axios-cache-interceptor';
 import { loadProgressBar } from 'axios-progress-bar';
 import 'axios-progress-bar/dist/nprogress.css';
@@ -32,7 +33,7 @@ const storage = buildMemoryStorage();
 export const cache = {
   store: {
     clear: () => {
-      storage.data = {};
+      storage.data = new Map<string, StorageValue>();
     },
   },
 };
