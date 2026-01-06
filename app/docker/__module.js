@@ -431,8 +431,7 @@ angular.module('portainer.docker', ['portainer.app', reactModule]).config([
       url: '/:id?nodeName',
       views: {
         'content@': {
-          templateUrl: '~@/docker/views/containers/edit/container.html',
-          controller: 'ContainerController',
+          component: 'containerItemView',
         },
       },
     };

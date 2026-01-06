@@ -224,45 +224,47 @@ export function createMockStack(overrides?: Partial<Stack>): Stack {
 export function createMockContainer(
   overrides?: Partial<ContainerDetailsViewModel>
 ): ContainerDetailsViewModel {
-  return {
-    Id: 'container-id-123',
-    Image: 'sha256:abcd1234',
-    State: {
-      Status: 'running',
-      Running: true,
-      Paused: false,
-      Restarting: false,
-      OOMKilled: false,
-      Dead: false,
-      Pid: 1234,
-      ExitCode: 0,
-      Error: '',
-      StartedAt: '2024-01-01T00:00:00Z',
-      FinishedAt: '0001-01-01T00:00:00Z',
-      Health: undefined,
-    },
-    Created: '2024-01-01T00:00:00Z',
-    Name: '/test-container',
-    NetworkSettings: {
-      Ports: {
-        '80/tcp': [{ HostIp: '0.0.0.0', HostPort: '8080' }],
+  return _.merge(
+    {
+      Id: 'container-id-123',
+      Image: 'sha256:abcd1234',
+      State: {
+        Status: 'running',
+        Running: true,
+        Paused: false,
+        Restarting: false,
+        OOMKilled: false,
+        Dead: false,
+        Pid: 1234,
+        ExitCode: 0,
+        Error: '',
+        StartedAt: '2024-01-01T00:00:00Z',
+        FinishedAt: '0001-01-01T00:00:00Z',
+        Health: undefined,
       },
+      Created: '2024-01-01T00:00:00Z',
+      Name: '/test-container',
+      NetworkSettings: {
+        Ports: {
+          '80/tcp': [{ HostIp: '0.0.0.0', HostPort: '8080' }],
+        },
+      },
+      Args: [],
+      Config: {
+        Image: 'nginx:latest',
+        Cmd: ['nginx', '-g', 'daemon off;'],
+        Entrypoint: [],
+        Env: ['PATH=/usr/local/bin', 'NODE_ENV=production'],
+        Labels: { 'com.example.label': 'value' },
+      },
+      HostConfig: {
+        RestartPolicy: { Name: 'always', MaximumRetryCount: 0 },
+        Sysctls: { 'net.ipv4.ip_forward': '1' },
+        DeviceRequests: [],
+      },
+      Mounts: [],
+      Model: {} as ContainerDetailsViewModel['Model'],
     },
-    Args: [],
-    Config: {
-      Image: 'nginx:latest',
-      Cmd: ['nginx', '-g', 'daemon off;'],
-      Entrypoint: [],
-      Env: ['PATH=/usr/local/bin', 'NODE_ENV=production'],
-      Labels: { 'com.example.label': 'value' },
-    },
-    HostConfig: {
-      RestartPolicy: { Name: 'always', MaximumRetryCount: 0 },
-      Sysctls: { 'net.ipv4.ip_forward': '1' },
-      DeviceRequests: [],
-    },
-    Mounts: [],
-    Model: {} as ContainerDetailsViewModel['Model'],
-    ...overrides,
-  } as ContainerDetailsViewModel;
+    overrides
+  ) as ContainerDetailsViewModel;
 }

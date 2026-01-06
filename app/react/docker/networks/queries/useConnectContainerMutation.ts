@@ -5,11 +5,11 @@ import axios, { parseAxiosError } from '@/portainer/services/axios';
 import { EnvironmentId } from '@/react/portainer/environments/types';
 import {
   mutationOptions,
-  withError,
+  withGlobalError,
   withInvalidate,
 } from '@/react-tools/react-query';
 
-import { queryKeys as dockerQueryKeys } from '../../queries/utils';
+import { queryKeys as containerQueryKeys } from '../../containers/queries/query-keys';
 import { withAgentTargetHeader } from '../../proxy/queries/utils';
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 
@@ -25,8 +25,8 @@ export function useConnectContainerMutation(environmentId: EnvironmentId) {
     (params: Omit<ConnectContainer, 'environmentId'>) =>
       connectContainer({ ...params, environmentId }),
     mutationOptions(
-      withError('Failed connecting container to network'),
-      withInvalidate(queryClient, [dockerQueryKeys.containers(environmentId)])
+      withGlobalError('Failed connecting container to network'),
+      withInvalidate(queryClient, [containerQueryKeys.list(environmentId)])
     )
   );
 }

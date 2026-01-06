@@ -12,7 +12,7 @@ import { PortainerResponse } from '@/react/docker/types';
 import axios, { parseAxiosError } from '@/portainer/services/axios';
 import { ContainerId } from '@/react/docker/containers/types';
 import { EnvironmentId } from '@/react/portainer/environments/types';
-import { queryClient } from '@/react-tools/react-query';
+import { queryClient, withGlobalError } from '@/react-tools/react-query';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
 import { withAgentTargetHeader } from '../../proxy/queries/utils';
@@ -76,26 +76,28 @@ export interface ContainerDetailsJSON {
   NetworkSettings?: NetworkSettings;
 }
 
-export function useContainer(
-  environmentId: EnvironmentId,
-  containerId?: ContainerId,
-  nodeName?: string,
-  { enabled }: { enabled?: boolean } = {}
+export function useContainer<T>(
+  {
+    environmentId,
+    containerId,
+    nodeName,
+  }: {
+    environmentId: EnvironmentId;
+    containerId?: ContainerId;
+    nodeName?: string;
+  },
+  {
+    enabled,
+    select,
+  }: { enabled?: boolean; select?(container: ContainerDetailsResponse): T } = {}
 ) {
-  return useQuery(
-    containerId ? queryKeys.container(environmentId, containerId) : [],
-    () =>
-      containerId
-        ? getContainer(environmentId, containerId, { nodeName })
-        : undefined,
-    {
-      meta: {
-        title: 'Failure',
-        message: 'Unable to retrieve container',
-      },
-      enabled: enabled && !!containerId,
-    }
-  );
+  return useQuery({
+    queryKey: queryKeys.container(environmentId, containerId!),
+    queryFn: () => getContainer(environmentId, containerId!, { nodeName }),
+    enabled: enabled && !!containerId,
+    select,
+    ...withGlobalError('Unable to retrieve container'),
+  });
 }
 
 export function invalidateContainer(

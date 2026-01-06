@@ -4,11 +4,12 @@ import { EnvironmentId } from '@/react/portainer/environments/types';
 import axios, { parseAxiosError } from '@/portainer/services/axios';
 import {
   mutationOptions,
-  withError,
+  withGlobalError,
   withInvalidate,
 } from '@/react-tools/react-query';
 
 import { buildDockerProxyUrl } from '../../proxy/queries/buildDockerProxyUrl';
+import { queryKeys as containerQueryKeys } from '../../containers/queries/query-keys';
 import { withAgentTargetHeader } from '../../proxy/queries/utils';
 import { ContainerId } from '../../containers/types';
 import { NetworkId } from '../types';
@@ -33,8 +34,11 @@ export function useDisconnectContainer({
       nodeName?: string;
     }) => disconnectContainer(environmentId, networkId, containerId, nodeName),
     mutationOptions(
-      withInvalidate(client, [queryKeys.item(environmentId, networkId)]),
-      withError('Unable to disconnect container from network')
+      withInvalidate(client, [
+        queryKeys.item(environmentId, networkId),
+        containerQueryKeys.list(environmentId),
+      ]),
+      withGlobalError('Unable to disconnect container from network')
     )
   );
 }

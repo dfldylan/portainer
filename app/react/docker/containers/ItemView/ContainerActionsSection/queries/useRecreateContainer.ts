@@ -26,7 +26,7 @@ export function useRecreateContainer() {
     }: RecreateContainerParams) =>
       recreateContainer(environmentId, containerId, pullImage, { nodeName }),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
+      queryClient.removeQueries({
         queryKey: containerQueryKeys.container(
           variables.environmentId,
           variables.containerId

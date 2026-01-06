@@ -7,12 +7,6 @@ export type SummaryNetworkSettings = NonNullable<
   ContainerSummary['NetworkSettings']
 >;
 
-export interface Health {
-  Status: 'healthy' | 'unhealthy' | 'starting';
-  FailingStreak: number;
-  Log: Array<{ Output: string }>;
-}
-
 /**
  * Raw container list response item
  */
