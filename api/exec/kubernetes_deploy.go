@@ -111,7 +111,7 @@ func (deployer *KubernetesDeployer) command(operation string, userID portainer.U
 	}
 
 	operations := map[string]func(context.Context, []string) (string, error){
-		"apply":  client.Apply,
+		"apply":  client.ApplyDynamic,
 		"delete": client.Delete,
 	}
 
