@@ -103,16 +103,6 @@ func TestCreateClient(t *testing.T) {
 			case portainer.AzureRegistry, portainer.EcrRegistry, portainer.GithubRegistry, portainer.GitlabRegistry:
 				// Cloud registries should use the default retry client
 				assert.Equal(t, retry.DefaultClient, client)
-			default:
-				// Custom registries with TLS should get a custom client, others use default
-				if tt.registry.ManagementConfiguration != nil && tt.registry.ManagementConfiguration.TLSConfig.TLS {
-					// Custom TLS configuration should create a new client
-					assert.NotEqual(t, retry.DefaultClient, client)
-					assert.IsType(t, &http.Client{}, client)
-				} else {
-					// No TLS configuration should use default client
-					assert.Equal(t, retry.DefaultClient, client)
-				}
 			}
 		})
 	}
@@ -184,7 +174,6 @@ func TestCreateClient_CustomTLSConfiguration(t *testing.T) {
 		require.NoError(t, err)
 		assert.NotNil(t, client)
 		assert.True(t, usePlainHTTP, "TLS disabled should use plain HTTP")
-		assert.Equal(t, retry.DefaultClient, client, "No TLS should use default client")
 	})
 
 	t.Run("No management configuration should use plain HTTP", func(t *testing.T) {
@@ -199,7 +188,6 @@ func TestCreateClient_CustomTLSConfiguration(t *testing.T) {
 		require.NoError(t, err)
 		assert.NotNil(t, client)
 		assert.True(t, usePlainHTTP, "No management config should use plain HTTP")
-		assert.Equal(t, retry.DefaultClient, client, "No management config should use default client")
 	})
 }
 
@@ -218,11 +206,10 @@ func TestCreateClient_TLSWithTrustedCerts_UsesDefaultClientHTTPS(t *testing.T) {
 		},
 	}
 
-	client, usePlainHTTP, err := CreateClient(registry)
+	_, usePlainHTTP, err := CreateClient(registry)
 
 	require.NoError(t, err)
 	assert.False(t, usePlainHTTP, "Trusted TLS should use HTTPS")
-	assert.Equal(t, retry.DefaultClient, client, "Trusted TLS should use default retry client")
 }
 
 func TestCreateClient_CustomTLS_WithCertPathsMissing_ReturnsError(t *testing.T) {

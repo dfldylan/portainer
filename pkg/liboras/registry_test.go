@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/pkg/fips"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -11,6 +12,8 @@ import (
 )
 
 func TestCreateClient_AuthenticationScenarios(t *testing.T) {
+	fips.InitFIPS(false)
+
 	tests := []struct {
 		name                string
 		registry            portainer.Registry

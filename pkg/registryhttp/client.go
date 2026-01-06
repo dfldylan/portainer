@@ -20,24 +20,9 @@ func CreateClient(registry *portainer.Registry) (httpClient *http.Client, usePla
 	default:
 		// For all other registry types, use shared helper to build transport and scheme
 
-		// if no management configuration, treat as plain HTTP for custom registries
-		hasConfiguration := registry.ManagementConfiguration != nil
-		if !hasConfiguration {
-			return retry.DefaultClient, true, nil
-		}
-
-		tlsCfg := registry.ManagementConfiguration.TLSConfig
-
-		// If TLS is disabled, use plain HTTP with default client
-		if !tlsCfg.TLS {
-			return retry.DefaultClient, true, nil
-		}
-
-		// If TLS is enabled and uses trusted system CA (no custom bundle, no skip-verify),
-		// use the default retry client over HTTPS
-		usesTrustedSystemCA := !tlsCfg.TLSSkipVerify && tlsCfg.TLSCACertPath == "" && tlsCfg.TLSCertPath == "" && tlsCfg.TLSKeyPath == ""
-		if usesTrustedSystemCA {
-			return retry.DefaultClient, false, nil
+		tlsCfg := portainer.TLSConfiguration{}
+		if registry.ManagementConfiguration != nil {
+			tlsCfg = registry.ManagementConfiguration.TLSConfig
 		}
 
 		transport, scheme, err := BuildTransportAndSchemeFromTLSConfig(tlsCfg)
@@ -46,16 +31,6 @@ func CreateClient(registry *portainer.Registry) (httpClient *http.Client, usePla
 			return nil, false, err
 		}
 
-		// If scheme is http, we can use the default client and instruct callers to use plainHTTP
-		if scheme == "http" {
-			return retry.DefaultClient, true, nil
-		}
-
-		// For https, wrap our transport with retry
-		retryTransport := retry.NewTransport(transport)
-		httpClient := &http.Client{
-			Transport: retryTransport,
-		}
-		return httpClient, false, nil
+		return &http.Client{Transport: retry.NewTransport(transport)}, scheme == "http", nil
 	}
 }
