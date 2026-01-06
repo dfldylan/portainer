@@ -9,6 +9,7 @@ import { ContainerActionsSection } from '@/react/docker/containers/ItemView/Cont
 import { ContainerStatusSection } from '@/react/docker/containers/ItemView/ContainerStatusSection/ContainerStatusSection';
 import { CreateImageSection } from '@/react/docker/containers/ItemView/CreateImageSection/CreateImageSection';
 import { ContainerDetailsSection } from '@/react/docker/containers/ItemView/ContainerDetailsSection/ContainerDetailsSection';
+import { VolumesSection } from '@/react/docker/containers/ItemView/VolumesSection/VolumesSection';
 
 const ngModule = angular
   .module('portainer.docker.react.components.containers', [])
@@ -66,6 +67,10 @@ const ngModule = angular
       'nodeName',
       'onUpdateSuccess',
     ])
+  )
+  .component(
+    'volumesSection',
+    r2a(withUIRouter(withCurrentUser(VolumesSection)), ['volumes', 'nodeName'])
   );
 
 export const containersModule = ngModule.name;
