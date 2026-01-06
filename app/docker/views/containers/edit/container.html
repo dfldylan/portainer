@@ -29,110 +29,14 @@
 
 <div class="mx-4 space-y-4 [&>*]:block mb-4">
   <create-image-section environment-id="endpoint.Id" container-id="container.Id" on-success="(onSuccessAction)"></create-image-section>
-</div>
 
-<div class="row">
-  <div class="col-lg-12 col-md-12 col-xs-12">
-    <rd-widget>
-      <rd-widget-header icon="list" title-text="Container details"></rd-widget-header>
-      <rd-widget-body classes="no-padding">
-        <table class="container-details-table table">
-          <tbody>
-            <tr>
-              <td>Image</td>
-              <td
-                ><a ui-sref="docker.images.image({ id: container.Image, nodeName: nodeName })">{{ container.Config.Image }}@{{ container.Image }}</a></td
-              >
-            </tr>
-            <tr ng-if="portBindings.length > 0">
-              <td>Port configuration</td>
-              <td>
-                <div ng-repeat="portMapping in portBindings">
-                  {{ portMapping.host }}
-                  <pr-icon icon="'arrow-right'"></pr-icon>
-                  {{ portMapping.container }}
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>CMD</td>
-              <td
-                ><code>{{ container.Config.Cmd | command }}</code></td
-              >
-            </tr>
-            <tr>
-              <td>ENTRYPOINT</td>
-              <td
-                ><code>{{ container.Config.Entrypoint ? (container.Config.Entrypoint | command) : 'null' }}</code></td
-              >
-            </tr>
-            <tr>
-              <td>ENV</td>
-              <td>
-                <table class="table-bordered table-condensed table">
-                  <tr ng-repeat="var in container.Config.Env track by $index">
-                    <td>{{ var|key: '=' }}</td>
-                    <td>{{ var|value: '=' }}</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr ng-if="!(container.Config.Labels | emptyobject)">
-              <td>Labels</td>
-              <td>
-                <table class="table-bordered table-condensed table">
-                  <tr ng-repeat="(k, v) in container.Config.Labels">
-                    <td>{{ k }}</td>
-                    <td>{{ v }}</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td>Restart policies</td>
-              <td>
-                <container-restart-policy
-                  ng-if="container"
-                  environment-id="endpoint.Id"
-                  container-id="container.Id"
-                  node-name="nodeName"
-                  name="container.HostConfig.RestartPolicy.Name"
-                  maximum-retry-count="container.HostConfig.RestartPolicy.MaximumRetryCount"
-                  on-update-success="(onUpdateRestartPolicySuccess)"
-                >
-                </container-restart-policy>
-              </td>
-            </tr>
-            <tr ng-if="!(container.HostConfig.Sysctls | emptyobject)">
-              <td>Sysctls</td>
-              <td>
-                <table class="table-bordered table-condensed table">
-                  <tr ng-repeat="(k, v) in container.HostConfig.Sysctls">
-                    <td>{{ k }}</td>
-                    <td>{{ v }}</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr ng-if="!(container.HostConfig.SecurityOpt | emptyobject)">
-              <td>SecurityOpt</td>
-              <td>
-                <table class="table-bordered table-condensed table">
-                  <tr ng-repeat="opt in container.HostConfig.SecurityOpt">
-                    <td>{{ opt }}</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>                        
-            <tr ng-if="container.HostConfig.DeviceRequests.length">
-              <td>GPUS</td>
-              <td>{{ computeDockerGPUCommand() }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </rd-widget-body>
-    </rd-widget>
-  </div>
+  <container-details-section
+    environment-id="endpoint.Id"
+    container-id="container.Id"
+    container="container"
+    node-name="applicationState.endpoint.mode.provider === 'DOCKER_SWARM_MODE' && container.NodeId ? container.NodeId : undefined"
+  >
+  </container-details-section>
 </div>
 
 <div class="row" ng-if="container.Mounts.length > 0">

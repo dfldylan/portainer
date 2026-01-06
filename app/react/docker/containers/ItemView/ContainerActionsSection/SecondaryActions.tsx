@@ -17,6 +17,7 @@ interface Props {
   containerImage: string;
   containerAutoRemove: boolean | undefined;
   isPortainer: boolean;
+  partOfSwarmService: boolean;
 }
 
 export function SecondaryActions({
@@ -26,15 +27,16 @@ export function SecondaryActions({
   containerImage,
   containerAutoRemove = false,
   isPortainer,
+  partOfSwarmService,
 }: Props) {
   const displayRecreateButton = useCanRecreateContainer({
     autoRemove: containerAutoRemove,
-    environmentId,
+    partOfSwarmService,
   });
 
   const displayDuplicateEditButton = useCanDuplicateEditContainer({
     autoRemove: containerAutoRemove,
-    environmentId,
+    partOfSwarmService,
   });
 
   if (!displayRecreateButton && !displayDuplicateEditButton) {

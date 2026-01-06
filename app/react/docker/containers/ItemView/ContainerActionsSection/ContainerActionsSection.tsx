@@ -1,6 +1,7 @@
 import { EnvironmentId } from '@/react/portainer/environments/types';
 import { useAuthorizations } from '@/react/hooks/useUser';
 import { ContainerDetailsViewModel } from '@/docker/models/containerDetails';
+import { isPartOfSwarmService } from '@/docker/helpers/containers';
 
 import { Widget, WidgetBody } from '@@/Widget';
 
@@ -58,6 +59,7 @@ export function ContainerActionsSection({
             containerImage={container.Config?.Image || ''}
             containerAutoRemove={container.HostConfig?.AutoRemove}
             nodeName={nodeName}
+            partOfSwarmService={isPartOfSwarmService(container)}
             isPortainer={isPortainer}
           />
         </div>

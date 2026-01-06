@@ -8,6 +8,7 @@ import { RestartPolicySection } from '@/react/docker/containers/ItemView/Restart
 import { ContainerActionsSection } from '@/react/docker/containers/ItemView/ContainerActionsSection/ContainerActionsSection';
 import { ContainerStatusSection } from '@/react/docker/containers/ItemView/ContainerStatusSection/ContainerStatusSection';
 import { CreateImageSection } from '@/react/docker/containers/ItemView/CreateImageSection/CreateImageSection';
+import { ContainerDetailsSection } from '@/react/docker/containers/ItemView/ContainerDetailsSection/ContainerDetailsSection';
 
 const ngModule = angular
   .module('portainer.docker.react.components.containers', [])
@@ -55,6 +56,15 @@ const ngModule = angular
       'environmentId',
       'containerId',
       'onSuccess',
+    ])
+  )
+  .component(
+    'containerDetailsSection',
+    r2a(withUIRouter(withCurrentUser(ContainerDetailsSection)), [
+      'environmentId',
+      'container',
+      'nodeName',
+      'onUpdateSuccess',
     ])
   );
 

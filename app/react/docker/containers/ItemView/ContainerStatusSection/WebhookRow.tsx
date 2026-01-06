@@ -22,6 +22,7 @@ interface Props {
   autoRemove: boolean;
   onSuccess?(): void;
   registryId?: RegistryId;
+  partOfSwarmService: boolean;
 }
 
 export function WebhookRow({
@@ -30,10 +31,11 @@ export function WebhookRow({
   autoRemove,
   registryId,
   onSuccess = () => {},
+  partOfSwarmService,
 }: Props) {
   const shouldDisplayWebhook = useCanRecreateContainer({
     autoRemove,
-    environmentId,
+    partOfSwarmService,
   });
   const { authorized: canUpdate } = useAuthorizations([
     'DockerContainerUpdate',

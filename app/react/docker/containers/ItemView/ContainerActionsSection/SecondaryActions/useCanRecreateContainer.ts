@@ -1,7 +1,4 @@
-import {
-  ContainerEngine,
-  EnvironmentId,
-} from '@/react/portainer/environments/types';
+import { ContainerEngine } from '@/react/portainer/environments/types';
 import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
 
 import { useCanDuplicateEditContainer } from './useCanDuplicateEditContainer';
@@ -18,17 +15,10 @@ import { useCanDuplicateEditContainer } from './useCanDuplicateEditContainer';
  * recreating Podman containers gives an error: cannot set memory swappiness with cgroupv2
  * https://github.com/containrrr/watchtower/issues/1060#issuecomment-2319076222
  */
-export function useCanRecreateContainer({
-  autoRemove,
-  environmentId,
-}: {
-  environmentId: EnvironmentId;
-  autoRemove: boolean;
-}) {
-  const canDuplicate = useCanDuplicateEditContainer({
-    autoRemove,
-    environmentId,
-  });
+export function useCanRecreateContainer(
+  ...params: Parameters<typeof useCanDuplicateEditContainer>
+) {
+  const canDuplicate = useCanDuplicateEditContainer(...params);
   const environmentQuery = useCurrentEnvironment();
 
   if (!environmentQuery.data) {

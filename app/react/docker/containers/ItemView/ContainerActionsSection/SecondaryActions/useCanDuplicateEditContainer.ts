@@ -1,7 +1,5 @@
 import { useIsEdgeAdmin } from '@/react/hooks/useUser';
-import { EnvironmentId } from '@/react/portainer/environments/types';
 import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
-import { useIsSwarm } from '@/react/docker/proxy/queries/useInfo';
 
 import { isRegularUserRestricted } from './utils';
 
@@ -10,14 +8,13 @@ import { isRegularUserRestricted } from './utils';
  */
 export function useCanDuplicateEditContainer({
   autoRemove,
-  environmentId,
+  partOfSwarmService,
 }: {
-  environmentId: EnvironmentId;
   autoRemove: boolean;
+  partOfSwarmService: boolean;
 }) {
   const environmentQuery = useCurrentEnvironment();
   const { isAdmin } = useIsEdgeAdmin();
-  const inSwarm = useIsSwarm(environmentId);
 
   if (!environmentQuery.data) {
     return false;
@@ -27,5 +24,7 @@ export function useCanDuplicateEditContainer({
     environmentQuery.data.SecuritySettings
   );
 
-  return !inSwarm && !autoRemove && (isAdmin || !regularUserRestricted);
+  return (
+    !partOfSwarmService && !autoRemove && (isAdmin || !regularUserRestricted)
+  );
 }

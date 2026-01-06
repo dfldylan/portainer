@@ -6,6 +6,7 @@ import { ContainerDetailsViewModel } from '@/docker/models/containerDetails';
 import { useEnvironment } from '@/react/portainer/environments/queries/useEnvironment';
 import { isoDate } from '@/portainer/filters/filters';
 import { RegistryId } from '@/react/portainer/registries/types/registry';
+import { isPartOfSwarmService } from '@/docker/helpers/containers';
 
 import { Widget, WidgetBody } from '@@/Widget';
 import { DetailsTable } from '@@/DetailsTable';
@@ -80,6 +81,7 @@ export function ContainerStatusSection({
               autoRemove={container.HostConfig?.AutoRemove || false}
               onSuccess={onSuccessUpdate}
               registryId={registryId}
+              partOfSwarmService={isPartOfSwarmService(container)}
             />
           )}
           <ActionLinksRow containerId={container.Id || ''} />

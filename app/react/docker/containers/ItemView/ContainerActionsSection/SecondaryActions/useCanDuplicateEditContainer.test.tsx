@@ -13,7 +13,6 @@ import { useCanDuplicateEditContainer } from './useCanDuplicateEditContainer';
 
 let mockEnvironmentData: Environment | undefined;
 let mockIsAdmin = true;
-let mockInSwarm = false;
 
 vi.mock('@/react/hooks/useCurrentEnvironment', () => ({
   useCurrentEnvironment: vi.fn(() => ({
@@ -25,10 +24,6 @@ vi.mock('@/react/hooks/useUser', () => ({
   useIsEdgeAdmin: vi.fn(() => ({
     isAdmin: mockIsAdmin,
   })),
-}));
-
-vi.mock('@/react/docker/proxy/queries/useInfo', () => ({
-  useIsSwarm: vi.fn(() => mockInSwarm),
 }));
 
 describe('useCanDuplicateEditContainer', () => {
@@ -57,13 +52,12 @@ describe('useCanDuplicateEditContainer', () => {
     vi.clearAllMocks();
   });
 
-  function renderCustomHook(environmentId: number, autoRemove: boolean) {
-    return renderHook(
-      () => useCanDuplicateEditContainer({ environmentId, autoRemove }),
-      {
-        wrapper: withTestQueryProvider(({ children }) => <>{children}</>),
-      }
-    );
+  function renderCustomHook(
+    ...params: Parameters<typeof useCanDuplicateEditContainer>
+  ) {
+    return renderHook(() => useCanDuplicateEditContainer(...params), {
+      wrapper: withTestQueryProvider(({ children }) => <>{children}</>),
+    });
   }
 
   it('should return true for Podman container (unlike recreate button)', () => {
@@ -72,9 +66,11 @@ describe('useCanDuplicateEditContainer', () => {
       SecuritySettings: createPermissiveSettings(),
     } as Environment);
     mockIsAdmin = true;
-    mockInSwarm = false;
 
-    const { result } = renderCustomHook(1, false);
+    const { result } = renderCustomHook({
+      autoRemove: false,
+      partOfSwarmService: false,
+    });
 
     expect(result.current).toBe(true);
   });
@@ -85,9 +81,11 @@ describe('useCanDuplicateEditContainer', () => {
       SecuritySettings: createPermissiveSettings(),
     } as Environment);
     mockIsAdmin = true;
-    mockInSwarm = true;
 
-    const { result } = renderCustomHook(1, false);
+    const { result } = renderCustomHook({
+      autoRemove: false,
+      partOfSwarmService: true,
+    });
 
     expect(result.current).toBe(false);
   });
@@ -98,9 +96,11 @@ describe('useCanDuplicateEditContainer', () => {
       SecuritySettings: createPermissiveSettings(),
     } as Environment);
     mockIsAdmin = true;
-    mockInSwarm = false;
 
-    const { result } = renderCustomHook(1, true);
+    const { result } = renderCustomHook({
+      autoRemove: true,
+      partOfSwarmService: false,
+    });
 
     expect(result.current).toBe(false);
   });
@@ -111,9 +111,11 @@ describe('useCanDuplicateEditContainer', () => {
       SecuritySettings: createRestrictiveSettings(),
     } as Environment);
     mockIsAdmin = false;
-    mockInSwarm = false;
 
-    const { result } = renderCustomHook(1, false);
+    const { result } = renderCustomHook({
+      autoRemove: false,
+      partOfSwarmService: false,
+    });
 
     expect(result.current).toBe(false);
   });
@@ -124,9 +126,11 @@ describe('useCanDuplicateEditContainer', () => {
       SecuritySettings: createPermissiveSettings(),
     } as Environment);
     mockIsAdmin = false;
-    mockInSwarm = false;
 
-    const { result } = renderCustomHook(1, false);
+    const { result } = renderCustomHook({
+      autoRemove: false,
+      partOfSwarmService: false,
+    });
 
     expect(result.current).toBe(true);
   });

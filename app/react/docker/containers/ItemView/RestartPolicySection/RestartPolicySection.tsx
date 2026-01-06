@@ -53,7 +53,7 @@ export function RestartPolicySection({
         <Form>
           <DetailsTable
             dataCy="container-restart-policy-table"
-            className="table-bordered table-condensed"
+            className="table-bordered table-condensed !m-0"
           >
             <Authorized authorizations="DockerContainerUpdate">
               <DetailsRow

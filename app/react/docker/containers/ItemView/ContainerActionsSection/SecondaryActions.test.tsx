@@ -198,6 +198,7 @@ function renderComponent(
     containerImage: 'nginx:latest',
     containerAutoRemove: false,
     isPortainer: false,
+    partOfSwarmService: false,
     ...props,
   };
 
