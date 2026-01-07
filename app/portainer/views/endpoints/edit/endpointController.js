@@ -59,6 +59,12 @@ function EndpointController(
     },
   };
 
+  $scope.basicConfigValues = {
+    name: '',
+    url: '',
+    publicUrl: '',
+  };
+
   $scope.selectAll = function () {
     $scope.state.firstClickedItem = null;
     for (var i = 0; i < $scope.state.filteredDataSet.length; i++) {

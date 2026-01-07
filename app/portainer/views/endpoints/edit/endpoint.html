@@ -70,7 +70,19 @@
     <rd-widget>
       <rd-widget-body>
         <form class="form-horizontal" name="$ctrl.endpointForm">
-          <div class="col-sm-12 form-section-title"> Configuration </div>
+          <!-- NEW REACT COMPONENT -->
+          <environment-basic-config-section
+            values="basicConfigValues"
+            set-values="updateBasicConfig"
+            is-edge="state.edgeEndpoint"
+            is-azure="state.azureEndpoint"
+            is-agent="state.agentEndpoint"
+            has-error="endpoint.Status === 4"
+            is-local-environment="endpointType === 'local'"
+          ></environment-basic-config-section>
+
+          <!-- OLD ANGULAR CODE (for comparison during testing) -->
+          <div class="col-sm-12 form-section-title"> Configuration (OLD - Angular) </div>
           <!-- name-input -->
           <div class="form-group">
             <label for="container_name" class="col-sm-3 col-lg-2 control-label text-left">Name</label>
