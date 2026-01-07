@@ -12,6 +12,7 @@ import { FormControl } from '@@/form-components/FormControl';
 import { Input, Select } from '@@/form-components/Input';
 import { FormSectionTitle } from '@@/form-components/FormSectionTitle';
 import { LoadingButton } from '@@/buttons/LoadingButton';
+import { EnvironmentVariablesPanel } from '@@/form-components/EnvironmentVariablesFieldset';
 
 import { validationSchema } from './CreateContainerInstanceForm.validation';
 import { PortsMappingField } from './PortsMappingField';
@@ -22,7 +23,11 @@ import {
 } from './utils';
 import { useCreateInstanceMutation } from './useCreateInstanceMutation';
 
-export function CreateContainerInstanceForm() {
+export function CreateContainerInstanceForm({
+  defaultValues,
+}: {
+  defaultValues?: Partial<ContainerInstanceFormValues>;
+}) {
   const environmentId = useEnvironmentId();
   const { isPureAdmin } = useCurrentUser();
 
@@ -32,7 +37,8 @@ export function CreateContainerInstanceForm() {
   const { initialValues, subscriptionOptions } = useFormState(
     subscriptions,
     resourceGroups,
-    providers
+    providers,
+    defaultValues
   );
 
   const router = useRouter();
@@ -147,6 +153,12 @@ export function CreateContainerInstanceForm() {
             value={values.ports}
             onChange={(value) => setFieldValue('ports', value)}
             errors={errors.ports}
+          />
+
+          <EnvironmentVariablesPanel
+            values={values.env}
+            onChange={(env) => setFieldValue('env', env)}
+            errors={errors.env}
           />
 
           <div className="form-group">
