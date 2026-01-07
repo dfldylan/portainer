@@ -33,6 +33,7 @@ function EndpointController(
   $scope.setFieldValue = setFieldValue;
   $scope.onChangeTags = onChangeTags;
   $scope.onChangeTLSConfigFormValues = onChangeTLSConfigFormValues;
+  $scope.updateAzureCredentials = updateAzureCredentials;
 
   $scope.state = {
     selectAll: false,
@@ -138,6 +139,13 @@ function EndpointController(
 
   function onChangeTags(value) {
     setFieldValue('TagIds', value);
+  }
+
+  function updateAzureCredentials(values) {
+    $scope.endpoint.AzureCredentials.ApplicationID = values.applicationId;
+    $scope.endpoint.AzureCredentials.TenantID = values.tenantId;
+    $scope.endpoint.AzureCredentials.AuthenticationKey = values.authenticationKey;
+    $scope.azureValues = values;
   }
 
   function onChangeTLSConfigFormValues(newValues) {
@@ -331,6 +339,12 @@ function EndpointController(
         $scope.endpoint = endpoint;
         $scope.initialTagIds = endpoint.TagIds.slice();
         $scope.groups = groups;
+
+        $scope.azureValues = {
+          applicationId: endpoint.AzureCredentials.ApplicationID,
+          tenantId: endpoint.AzureCredentials.TenantID,
+          authenticationKey: endpoint.AzureCredentials.AuthenticationKey,
+        };
 
         configureState();
 

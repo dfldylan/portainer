@@ -144,12 +144,7 @@
             validation-data="{optionalCert: true}"
           ></tls-fieldset>
 
-          <azure-endpoint-config
-            ng-if="state.azureEndpoint"
-            application-id="endpoint.AzureCredentials.ApplicationID"
-            tenant-id="endpoint.AzureCredentials.TenantID"
-            authentication-key="endpoint.AzureCredentials.AuthenticationKey"
-          ></azure-endpoint-config>
+          <azure-endpoint-config-section ng-if="state.azureEndpoint" values="azureValues" set-values="updateAzureCredentials($event)"></azure-endpoint-config-section>
           <div class="col-sm-12 form-section-title"> Metadata </div>
           <!-- group -->
           <div class="form-group">
