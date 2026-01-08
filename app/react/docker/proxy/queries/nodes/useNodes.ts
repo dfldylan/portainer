@@ -1,4 +1,4 @@
-import { Node } from 'docker-types/generated/1.44';
+import { Node } from 'docker-types';
 import { useQuery } from '@tanstack/react-query';
 
 import axios, { parseAxiosError } from '@/portainer/services/axios';

@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
-import { Config } from 'docker-types/generated/1.44';
+import { Config } from 'docker-types';
 
 import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 import { withUserProvider } from '@/react/test-utils/withUserProvider';

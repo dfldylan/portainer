@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { RestartPolicy } from 'docker-types/generated/1.44';
+import { RestartPolicy } from 'docker-types';
 
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
 

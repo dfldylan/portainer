@@ -1,4 +1,4 @@
-import { Resources, RestartPolicy } from 'docker-types/generated/1.44';
+import { Resources, RestartPolicy } from 'docker-types';
 
 import axios, { parseAxiosError } from '@/portainer/services/axios';
 import { EnvironmentId } from '@/react/portainer/environments/types';

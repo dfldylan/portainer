@@ -126,7 +126,7 @@ describe('initial loading', () => {
       http.get('/api/endpoints/:id/docker/version', () => {
         versionFetched = true;
         return HttpResponse.json({
-          ApiVersion: '1.44',
+          ApiVersion: '1.47',
         });
       })
     );
@@ -367,7 +367,7 @@ function setupMswHandlers({
   shouldReturnEnv = true,
   shouldReturnSchema = true,
   envType = EnvironmentType.Docker,
-  apiVersion = 1.44,
+  apiVersion = 1.47,
   schema = { type: 'object', properties: {} },
   stackUpdateResponse,
 }: {

@@ -1,4 +1,4 @@
-import { Network } from 'docker-types/generated/1.44';
+import { Network } from 'docker-types';
 
 import axios, { parseAxiosError } from '@/portainer/services/axios';
 import { EnvironmentId } from '@/react/portainer/environments/types';

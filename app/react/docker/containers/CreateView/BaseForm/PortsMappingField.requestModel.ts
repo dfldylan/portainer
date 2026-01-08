@@ -1,4 +1,4 @@
-import { PortMap } from 'docker-types/generated/1.44';
+import { PortMap } from 'docker-types';
 import _ from 'lodash';
 
 import { PortMapping, Protocol, Values } from './PortsMappingField';

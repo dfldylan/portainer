@@ -1,4 +1,4 @@
-import { ServiceSpec, TaskSpec } from 'docker-types/generated/1.44';
+import { ServiceSpec, TaskSpec } from 'docker-types';
 
 export type ServiceId = string;
 

@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import {
   ContainerConfig,
   ContainerState,
-  GraphDriverData,
+  DriverData,
   HostConfig,
   MountPoint,
   NetworkSettings,
-} from 'docker-types/generated/1.44';
+} from 'docker-types';
 
 import { PortainerResponse } from '@/react/docker/types';
 import axios, { parseAxiosError } from '@/portainer/services/axios';
@@ -60,7 +60,7 @@ export interface ContainerDetailsJSON {
    */
   ExecIDs?: Array<string> | null;
   HostConfig?: HostConfig;
-  GraphDriver?: GraphDriverData;
+  GraphDriver?: DriverData;
   /**
    * The size of files that have been created or changed by this
    * container.

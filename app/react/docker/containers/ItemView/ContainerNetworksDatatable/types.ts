@@ -1,5 +1,5 @@
 import { TableMeta } from '@tanstack/react-table';
-import { EndpointSettings } from 'docker-types/generated/1.44';
+import { EndpointSettings } from 'docker-types';
 
 export type TableNetwork = EndpointSettings & { id: string; name: string };
 

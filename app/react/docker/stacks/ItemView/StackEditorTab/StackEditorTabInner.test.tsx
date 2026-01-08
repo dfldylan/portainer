@@ -38,7 +38,7 @@ vi.mock('@uirouter/react', async (importOriginal: () => Promise<object>) => ({
 const defaultProps = {
   stackType: StackType.DockerCompose,
   composeSyntaxMaxVersion: 3,
-  apiVersion: 1.44,
+  apiVersion: 1.47,
   envType: EnvironmentType.Docker,
   schema: { type: 'object' } as JSONSchema7,
   isOrphaned: false,
@@ -154,7 +154,7 @@ describe('conditional rendering - Prune services field', () => {
   it('should show Prune field for DockerCompose with API >= 1.27', async () => {
     renderComponent({
       stackType: StackType.DockerCompose,
-      apiVersion: 1.44,
+      apiVersion: 1.47,
     });
 
     await waitFor(() => {
@@ -183,7 +183,7 @@ describe('conditional rendering - Prune services field', () => {
   it('should hide Prune field for Kubernetes stack', () => {
     renderComponent({
       stackType: StackType.Kubernetes,
-      apiVersion: 1.44,
+      apiVersion: 1.47,
     });
 
     expect(screen.queryByTestId('stack-prune-switch')).not.toBeInTheDocument();
@@ -273,7 +273,7 @@ describe('form field updates', () => {
     renderComponent(
       {
         stackType: StackType.DockerSwarm,
-        apiVersion: 1.44,
+        apiVersion: 1.47,
       },
       { onSubmit }
     );
@@ -421,7 +421,7 @@ describe('authorization', () => {
     renderComponent(
       {
         stackType: StackType.DockerSwarm,
-        apiVersion: 1.44,
+        apiVersion: 1.47,
       },
       { user: unauthorizedUser }
     );

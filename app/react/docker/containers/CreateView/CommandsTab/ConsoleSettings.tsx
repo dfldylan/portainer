@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { mixed } from 'yup';
-import { ContainerConfig } from 'docker-types/generated/1.44';
+import { ContainerConfig } from 'docker-types';
 
 import { AutomationTestingProps } from '@/types';
 

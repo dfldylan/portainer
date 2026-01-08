@@ -1,4 +1,4 @@
-import { Config } from 'docker-types/generated/1.44';
+import { Config } from 'docker-types';
 
 import { PortainerResponse } from '@/react/docker/types';
 import { ResourceControlViewModel } from '@/react/portainer/access-control/models/ResourceControlViewModel';

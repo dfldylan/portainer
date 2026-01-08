@@ -1,4 +1,4 @@
-import { EventMessage } from 'docker-types/generated/1.44';
+import { EventMessage } from 'docker-types';
 
 type EventType = NonNullable<EventMessage['Type']>;
 type Action = string;
