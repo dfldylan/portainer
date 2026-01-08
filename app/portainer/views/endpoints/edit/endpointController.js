@@ -5,10 +5,9 @@ import { PortainerEndpointTypes } from '@/portainer/models/endpoint/models';
 import EndpointHelper from '@/portainer/helpers/endpointHelper';
 import { getAMTInfo } from 'Portainer/hostmanagement/open-amt/open-amt.service';
 import { confirmDestructive } from '@@/modals/confirm';
-import { isEdgeEnvironment, isDockerAPIEnvironment } from '@/react/portainer/environments/utils';
+import { getPlatformTypeName, isEdgeEnvironment, isDockerAPIEnvironment } from '@/react/portainer/environments/utils';
 
 import { commandsTabs } from '@/react/edge/components/EdgeScriptForm/scripts';
-import { confirmDisassociate } from '@/react/portainer/environments/ItemView/ConfirmDisassociateModel';
 import { buildConfirmButton } from '@@/modals/utils';
 import { getInfo } from '@/react/docker/proxy/queries/useInfo';
 
@@ -34,8 +33,10 @@ function EndpointController(
   $scope.onChangeTags = onChangeTags;
   $scope.onChangeTLSConfigFormValues = onChangeTLSConfigFormValues;
   $scope.updateAzureCredentials = updateAzureCredentials;
+  $scope.onDisassociateSuccess = onDisassociateSuccess;
 
   $scope.state = {
+    platformName: '',
     selectAll: false,
     // displayTextFilter: false,
     get selectedItemCount() {
@@ -116,27 +117,8 @@ function EndpointController(
     },
   };
 
-  $scope.onDisassociateEndpoint = async function () {
-    confirmDisassociate().then((confirmed) => {
-      if (confirmed) {
-        disassociateEndpoint();
-      }
-    });
-  };
-
-  async function disassociateEndpoint() {
-    var endpoint = $scope.endpoint;
-
-    try {
-      $scope.state.actionInProgress = true;
-      await EndpointService.disassociateEndpoint(endpoint.Id);
-      Notifications.success('Environment disassociated', $scope.endpoint.Name);
-      $state.reload();
-    } catch (err) {
-      Notifications.error('Failure', err, 'Unable to disassociate environment');
-    } finally {
-      $scope.state.actionInProgress = false;
-    }
+  function onDisassociateSuccess() {
+    $state.reload();
   }
 
   function onChangeCheckInInterval(value) {
@@ -274,6 +256,8 @@ function EndpointController(
   }
 
   function configureState() {
+    $scope.state.platformName = getPlatformTypeName($scope.endpoint.Type);
+
     if (
       $scope.endpoint.Type === PortainerEndpointTypes.KubernetesLocalEnvironment ||
       $scope.endpoint.Type === PortainerEndpointTypes.AgentOnKubernetesEnvironment ||

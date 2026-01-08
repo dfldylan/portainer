@@ -6,6 +6,9 @@ import { KVMControl } from '@/react/portainer/environments/KvmView/KVMControl';
 import { TagsDatatable } from '@/react/portainer/environments/TagsView/TagsDatatable';
 import { AzureEndpointConfigSection } from '@/react/portainer/environments/ItemView/AzureEndpointConfigSection/AzureEndpointConfigSection';
 import { EnvironmentBasicConfigSection } from '@/react/portainer/environments/ItemView/EnvironmentBasicConfigSection/EnvironmentBasicConfigSection';
+import { EdgeInformationPanel } from '@/react/portainer/environments/ItemView/EdgeInformationPanel/EdgeInformationPanel';
+import { withUIRouter } from '@/react-tools/withUIRouter';
+import { withReactQuery } from '@/react-tools/withReactQuery';
 
 export const environmentsModule = angular
   .module('portainer.app.react.components.environments', [])
@@ -26,5 +29,15 @@ export const environmentsModule = angular
       'isAgent',
       'hasError',
       'isLocalEnvironment',
+    ])
+  )
+  .component(
+    'edgeInformationPanel',
+    r2a(withUIRouter(withReactQuery(EdgeInformationPanel)), [
+      'environmentId',
+      'edgeKey',
+      'edgeId',
+      'platformName',
+      'onSuccess',
     ])
   ).name;

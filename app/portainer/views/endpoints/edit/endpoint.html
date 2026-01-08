@@ -1,36 +1,19 @@
 <page-header ng-if="endpoint" title="'Environment details'" breadcrumbs="[{label:'Environments', link:'portainer.endpoints'}, endpoint.Name]" reload="true"> </page-header>
 
-<div class="row">
-  <div ng-if="state.edgeEndpoint">
-    <information-panel ng-if="state.edgeAssociated" title-text="Edge information">
-      <span class="small text-muted">
-        <p class="vertical-center">
-          <pr-icon icon="'alert-circle'" mode="'primary'"></pr-icon>
-          This Edge environment is associated to an Edge environment {{ state.kubernetesEndpoint ? '(Kubernetes)' : '(Docker)' }}.
-        </p>
-        <p>
-          Edge key: <code>{{ endpoint.EdgeKey }}</code>
-        </p>
-        <p>
-          Edge identifier: <code>{{ endpoint.EdgeID }}</code>
-        </p>
-        <p>
-          <button
-            type="button"
-            class="btn btn-primary btn-sm"
-            ng-disabled="state.actionInProgress"
-            ng-click="onDisassociateEndpoint()"
-            button-spinner="state.actionInProgress"
-            analytics-on
-            analytics-event="edge-endpoint-disassociate"
-            analytics-category="edge"
-          >
-            <span ng-hide="state.actionInProgress">Disassociate</span>
-          </button>
-        </p>
-      </span>
-    </information-panel>
+<div>
+  <div class="mx-4 space-y-4 [&>*]:block mb-4">
+    <edge-information-panel
+      ng-if="state.edgeAssociated"
+      environment-id="endpoint.Id"
+      edge-key="endpoint.EdgeKey"
+      edge-id="endpoint.EdgeID"
+      platform-name="state.platformName"
+      on-success="(onDisassociateSuccess)"
+    >
+    </edge-information-panel>
+  </div>
 
+  <div class="row">
     <div class="col-sm-12" ng-if="!state.edgeAssociated">
       <rd-widget>
         <rd-widget-body>
