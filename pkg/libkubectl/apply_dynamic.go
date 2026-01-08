@@ -70,9 +70,9 @@ func (c *Client) ApplyDynamic(ctx context.Context, manifests []string) (string, 
 		}
 
 		// Split by document separator if multiple resources in one manifest
-		resources := strings.Split(content, "\n---\n")
+		resources := strings.SplitSeq(content, "\n---\n")
 
-		for _, resource := range resources {
+		for resource := range resources {
 			resource = strings.TrimSpace(resource)
 			if resource == "" {
 				continue

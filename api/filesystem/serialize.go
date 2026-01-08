@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"golang.org/x/mod/semver"
@@ -27,11 +28,8 @@ func FilterDirForEntryFile(dirEntries []DirEntry, entryFile string) []DirEntry {
 	for _, dirEntry := range dirEntries {
 		match := false
 		if dirEntry.IsFile {
-			for _, filter := range filters {
-				if filter == dirEntry.Name {
-					match = true
-					break
-				}
+			if slices.Contains(filters, dirEntry.Name) {
+				match = true
 			}
 		} else {
 			for _, filter := range filters {

@@ -365,12 +365,12 @@ const (
 )
 
 func formatReferenceName(name string) string {
-	if strings.HasPrefix(name, branchPrefix) {
-		return strings.TrimPrefix(name, branchPrefix)
+	if after, ok := strings.CutPrefix(name, branchPrefix); ok {
+		return after
 	}
 
-	if strings.HasPrefix(name, tagPrefix) {
-		return strings.TrimPrefix(name, tagPrefix)
+	if after, ok := strings.CutPrefix(name, tagPrefix); ok {
+		return after
 	}
 
 	return name

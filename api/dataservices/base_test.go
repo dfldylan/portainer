@@ -21,7 +21,7 @@ type mockConnection struct {
 	portainer.Connection
 }
 
-func (m mockConnection) UpdateObject(bucket string, key []byte, value interface{}) error {
+func (m mockConnection) UpdateObject(bucket string, key []byte, value any) error {
 	obj := value.(*testObject)
 
 	m.store[obj.ID] = *obj

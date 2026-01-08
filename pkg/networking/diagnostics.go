@@ -17,7 +17,7 @@ import (
 // ignores errors for the dns lookup since we want to know if the host is reachable
 func ProbeDNSConnection(url string) string {
 	_, host, _ := parseURL(url)
-	result := map[string]interface{}{
+	result := map[string]any{
 		"operation":      "dns lookup",
 		"remote_address": host,
 		"connected_at":   time.Now().Format(time.RFC3339),

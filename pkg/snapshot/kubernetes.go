@@ -219,7 +219,7 @@ func calculateNodeMetrics(nodeStats statsapi.NodeStats, node corev1.Node) *porta
 
 func filterLogsByPattern(logBytes []byte, patterns []string) []map[string]string {
 	logs := []map[string]string{}
-	for _, line := range strings.Split(strings.TrimSpace(string(logBytes)), "\n") {
+	for line := range strings.SplitSeq(strings.TrimSpace(string(logBytes)), "\n") {
 		if line == "" {
 			continue
 		}

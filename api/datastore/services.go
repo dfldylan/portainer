@@ -391,16 +391,16 @@ type storeExport struct {
 	ResourceControl    []portainer.ResourceControl    `json:"resource_control,omitempty"`
 	Role               []portainer.Role               `json:"roles,omitempty"`
 	Schedules          []portainer.Schedule           `json:"schedules,omitempty"`
-	Settings           portainer.Settings             `json:"settings,omitempty"`
+	Settings           portainer.Settings             `json:"settings,omitzero"`
 	Snapshot           []portainer.Snapshot           `json:"snapshots,omitempty"`
-	SSLSettings        portainer.SSLSettings          `json:"ssl,omitempty"`
+	SSLSettings        portainer.SSLSettings          `json:"ssl,omitzero"`
 	Stack              []portainer.Stack              `json:"stacks,omitempty"`
 	Tag                []portainer.Tag                `json:"tags,omitempty"`
 	TeamMembership     []portainer.TeamMembership     `json:"team_membership,omitempty"`
 	Team               []portainer.Team               `json:"teams,omitempty"`
-	TunnelServer       portainer.TunnelServerInfo     `json:"tunnel_server,omitempty"`
+	TunnelServer       portainer.TunnelServerInfo     `json:"tunnel_server,omitzero"`
 	User               []portainer.User               `json:"users,omitempty"`
-	Version            models.Version                 `json:"version,omitempty"`
+	Version            models.Version                 `json:"version,omitzero"`
 	Webhook            []portainer.Webhook            `json:"webhooks,omitempty"`
 	Metadata           map[string]any                 `json:"metadata,omitempty"`
 }

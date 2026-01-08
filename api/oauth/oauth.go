@@ -97,9 +97,7 @@ func GetIdToken(token *oauth2.Token) (map[string]any, error) {
 	}
 
 	if claims, ok := t.Claims.(jwt.MapClaims); ok {
-		for k, v := range claims {
-			tokenData[k] = v
-		}
+		maps.Copy(tokenData, claims)
 	}
 
 	return tokenData, nil

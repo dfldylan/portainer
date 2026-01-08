@@ -436,7 +436,7 @@ type (
 		PublicURL        string           `json:"PublicURL" example:"docker.mydomain.tld:2375"`
 		Gpus             []Pair           `json:"Gpus"`
 		TLSConfig        TLSConfiguration `json:"TLSConfig"`
-		AzureCredentials AzureCredentials `json:"AzureCredentials,omitempty"`
+		AzureCredentials AzureCredentials `json:"AzureCredentials,omitzero"`
 		// List of tag identifiers to which this environment(endpoint) is associated
 		TagIDs []TagID `json:"TagIds"`
 		// The status of the environment(endpoint) (1 - up, 2 - down)
@@ -661,7 +661,7 @@ type (
 		PriceDescription string                      `json:"PriceDescription,omitempty"`
 		Deal             bool                        `json:"Deal,omitempty"`
 		Available        bool                        `json:"Available,omitempty"`
-		License          ExtensionLicenseInformation `json:"License,omitempty"`
+		License          ExtensionLicenseInformation `json:"License,omitzero"`
 		Version          string                      `json:"Version"`
 		UpdateAvailable  bool                        `json:"UpdateAvailable"`
 		ShopURL          string                      `json:"ShopURL,omitempty"`

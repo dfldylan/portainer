@@ -52,9 +52,9 @@ func extractResourceIdentifiers(manifests []string) []string {
 		}
 
 		// Split by document separator if multiple resources in one manifest
-		resources := strings.Split(manifest, "\n---\n")
+		resources := strings.SplitSeq(manifest, "\n---\n")
 
-		for _, resource := range resources {
+		for resource := range resources {
 			resource = strings.TrimSpace(resource)
 			if resource == "" {
 				continue
@@ -62,11 +62,11 @@ func extractResourceIdentifiers(manifests []string) []string {
 
 			// Extract kind and name using simple string parsing
 			var kind, name string
-			lines := strings.Split(resource, "\n")
-			for _, line := range lines {
+			lines := strings.SplitSeq(resource, "\n")
+			for line := range lines {
 				line = strings.TrimSpace(line)
-				if strings.HasPrefix(line, "kind:") {
-					kind = strings.TrimSpace(strings.TrimPrefix(line, "kind:"))
+				if after, ok := strings.CutPrefix(line, "kind:"); ok {
+					kind = strings.TrimSpace(after)
 				} else if strings.HasPrefix(line, "name:") && name == "" {
 					// Get the first name (resource name, not nested names)
 					name = strings.TrimSpace(strings.TrimPrefix(line, "name:"))
