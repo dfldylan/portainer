@@ -7,8 +7,8 @@ import { getAMTInfo } from 'Portainer/hostmanagement/open-amt/open-amt.service';
 import { confirmDestructive } from '@@/modals/confirm';
 import { getPlatformTypeName, isEdgeEnvironment, isDockerAPIEnvironment } from '@/react/portainer/environments/utils';
 
-import { commandsTabs } from '@/react/edge/components/EdgeScriptForm/scripts';
 import { buildConfirmButton } from '@@/modals/utils';
+
 import { getInfo } from '@/react/docker/proxy/queries/useInfo';
 
 angular.module('portainer.app').controller('EndpointController', EndpointController);
@@ -54,10 +54,6 @@ function EndpointController(
     allowSelfSignedCerts: true,
     showAMTInfo: false,
     showTLSConfig: false,
-    edgeScriptCommands: {
-      linux: _.compact([commandsTabs.k8sLinux, commandsTabs.swarmLinux, commandsTabs.standaloneLinux, commandsTabs.podmanLinux]),
-      win: [commandsTabs.swarmWindows, commandsTabs.standaloneWindow],
-    },
   };
 
   $scope.basicConfigValues = {
@@ -241,20 +237,6 @@ function EndpointController(
     );
   };
 
-  function decodeEdgeKey(key) {
-    let keyInformation = {};
-
-    if (key === '') {
-      return keyInformation;
-    }
-
-    let decodedKey = _.split(atob(key), '|');
-    keyInformation.instanceURL = decodedKey[0];
-    keyInformation.tunnelServerAddr = decodedKey[1];
-
-    return keyInformation;
-  }
-
   function configureState() {
     $scope.state.platformName = getPlatformTypeName($scope.endpoint.Type);
 
@@ -320,8 +302,6 @@ function EndpointController(
         endpoint.URL = $filter('stripprotocol')(endpoint.URL);
 
         if (endpoint.Type === PortainerEndpointTypes.EdgeAgentOnDockerEnvironment || endpoint.Type === PortainerEndpointTypes.EdgeAgentOnKubernetesEnvironment) {
-          $scope.edgeKeyDetails = decodeEdgeKey(endpoint.EdgeKey);
-
           $scope.state.edgeAssociated = !!endpoint.EdgeID;
           endpoint.EdgeID = endpoint.EdgeID || uuidv4();
         }
