@@ -8,9 +8,10 @@ import { TagsDatatable } from '@/react/portainer/environments/TagsView/TagsDatat
 import { AzureEndpointConfigSection } from '@/react/portainer/environments/ItemView/AzureEndpointConfigSection/AzureEndpointConfigSection';
 import { EnvironmentBasicConfigSection } from '@/react/portainer/environments/ItemView/EnvironmentBasicConfigSection/EnvironmentBasicConfigSection';
 import { EdgeInformationPanel } from '@/react/portainer/environments/ItemView/EdgeInformationPanel/EdgeInformationPanel';
-import { withUIRouter } from '@/react-tools/withUIRouter';
+import { KubeConfigInfo } from '@/react/portainer/environments/ItemView/KubeConfigInfo/KubeConfigInfo';
 import { withReactQuery } from '@/react-tools/withReactQuery';
 import { withCurrentUser } from '@/react-tools/withCurrentUser';
+import { withUIRouter } from '@/react-tools/withUIRouter';
 
 export const environmentsModule = angular
   .module('portainer.app.react.components.environments', [])
@@ -21,6 +22,15 @@ export const environmentsModule = angular
       'edgeKey',
       'edgeId',
       'asyncMode',
+    ])
+  )
+  .component(
+    'kubeConfigInfo',
+    r2a(withUIRouter(withReactQuery(KubeConfigInfo)), [
+      'environmentId',
+      'environmentType',
+      'edgeId',
+      'status',
     ])
   )
   .component('kvmControl', r2a(KVMControl, ['deviceId', 'server', 'token']))

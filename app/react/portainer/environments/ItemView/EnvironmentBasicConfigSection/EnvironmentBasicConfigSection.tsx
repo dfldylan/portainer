@@ -1,7 +1,7 @@
 import { FormControl } from '@@/form-components/FormControl';
 import { FormSection } from '@@/form-components/FormSection';
 import { Input } from '@@/form-components/Input';
-import { Icon } from '@@/Icon';
+import { TextTip } from '@@/Tip/TextTip';
 
 interface Values {
   name: string;
@@ -99,15 +99,10 @@ export function EnvironmentBasicConfigSection({
               </FormControl>
 
               {isEdge && (
-                <div className="col-sm-12 small text-muted vertical-center mt-2">
-                  <Icon
-                    icon="alert-circle"
-                    mode="primary"
-                    className="space-right"
-                  />
+                <TextTip color="blue">
                   Use https connection on Edge agent to use private registries
                   with credentials.
-                </div>
+                </TextTip>
               )}
             </>
           )}

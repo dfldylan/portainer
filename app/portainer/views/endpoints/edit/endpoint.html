@@ -19,15 +19,9 @@
     </div>
   </div>
 
-  <information-panel ng-if="state.kubernetesEndpoint && (!state.edgeEndpoint || state.edgeAssociated)" title-text="Kubernetes features configuration">
-    <span class="small text-muted vertical-center">
-      <pr-icon icon="'wrench'" mode="'primary'"></pr-icon>
-      <div>
-        You should configure the features available in this Kubernetes environment in the
-        <a ui-sref="kubernetes.cluster.setup({endpointId: endpoint.Id})">Kubernetes configuration</a> view.
-      </div>
-    </span>
-  </information-panel>
+  <div class="mx-4 space-y-4 [&>*]:block mb-4">
+    <kube-config-info environment-id="endpoint.Id" environment-type="endpoint.Type" edge-id="endpoint.EdgeID" status="endpoint.Status"></kube-config-info>
+  </div>
 </div>
 
 <div class="row mt-4">
