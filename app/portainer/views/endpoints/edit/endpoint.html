@@ -1,7 +1,7 @@
 <page-header ng-if="endpoint" title="'Environment details'" breadcrumbs="[{label:'Environments', link:'portainer.endpoints'}, endpoint.Name]" reload="true"> </page-header>
 
 <div>
-  <div class="mx-4 space-y-4 [&>*]:block mb-4">
+  <div class="mx-4 space-y-4 [&>*]:block mb-4" ng-if="state.edgeEndpoint">
     <edge-information-panel
       ng-if="state.edgeAssociated"
       environment-id="endpoint.Id"
@@ -11,10 +11,8 @@
       on-success="(onDisassociateSuccess)"
     >
     </edge-information-panel>
-  </div>
 
-  <div class="row">
-    <div class="col-sm-12" ng-if="!state.edgeAssociated">
+    <div ng-if="!state.edgeAssociated">
       <edge-agent-deployment-widget edge-key="endpoint.EdgeKey" edge-id="endpoint.EdgeID" async-mode="endpoint.Edge.AsyncMode"></edge-agent-deployment-widget>
     </div>
   </div>
@@ -53,7 +51,7 @@
             validation-data="{optionalCert: true}"
           ></tls-fieldset>
 
-          <azure-endpoint-config-section ng-if="state.azureEndpoint" values="azureValues" set-values="updateAzureCredentials($event)"></azure-endpoint-config-section>
+          <azure-endpoint-config-section ng-if="state.azureEndpoint" values="azureValues" set-values="updateAzureCredentials"></azure-endpoint-config-section>
           <div class="col-sm-12 form-section-title"> Metadata </div>
           <!-- group -->
           <div class="form-group">
