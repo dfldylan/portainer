@@ -31,7 +31,6 @@ export function AzureEndpointConfigSection({ values, setValues }: Props) {
             })
           }
           placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-          required
           data-cy="azure-credential-appid-input"
         />
       </FormControl>
@@ -47,7 +46,6 @@ export function AzureEndpointConfigSection({ values, setValues }: Props) {
             })
           }
           placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-          required
           data-cy="azure-credential-tenantid-input"
         />
       </FormControl>
@@ -67,7 +65,6 @@ export function AzureEndpointConfigSection({ values, setValues }: Props) {
             })
           }
           placeholder="cOrXoK/1D35w8YQ8nH1/8ZGwzz45JIYD5jxHKXEQknk="
-          required
           data-cy="azure-credential-authkey-input"
         />
       </FormControl>

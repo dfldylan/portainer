@@ -46,7 +46,7 @@ export function NameField({
   );
 }
 
-export async function isNameUnique(name = '') {
+export async function isNameUnique(name = '', envId?: number) {
   if (!name) {
     return true;
   }
@@ -57,7 +57,8 @@ export async function isNameUnique(name = '') {
       query: { name, excludeSnapshots: true },
     });
     return (
-      result.totalCount === 0 || result.value.every((e) => e.Name !== name)
+      result.totalCount === 0 ||
+      result.value.every((e) => e.Name !== name || e.Id === envId)
     );
   } catch (e) {
     // if backend fails to respond, assume name is unique, name validation happens also in the backend
@@ -65,8 +66,10 @@ export async function isNameUnique(name = '') {
   }
 }
 
-export function useNameValidation() {
-  const uniquenessTest = useCachedValidation(isNameUnique);
+export function useNameValidation(envId?: number) {
+  const uniquenessTest = useCachedValidation((name: string | undefined) =>
+    isNameUnique(name || '', envId)
+  );
 
   return string()
     .required('Name is required')
