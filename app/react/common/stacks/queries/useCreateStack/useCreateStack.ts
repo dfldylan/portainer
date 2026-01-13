@@ -11,6 +11,7 @@ import { AccessControlFormData } from '@/react/portainer/access-control/types';
 import PortainerError from '@/portainer/error';
 import { withGlobalError, withInvalidate } from '@/react-tools/react-query';
 import { transformAutoUpdateViewModel } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { RegistryId } from '@/react/portainer/registries/types/registry';
 
 import { queryKeys } from '../query-keys';
 
@@ -35,6 +36,7 @@ export function useCreateStack() {
 type BasePayload = {
   name: string;
   environmentId: EnvironmentId;
+  registries?: Array<RegistryId>;
 };
 
 type DockerBasePayload = BasePayload & {
@@ -180,6 +182,7 @@ function createSwarmStack({ method, payload }: SwarmCreatePayload) {
         SwarmID: payload.swarmId,
         Env: payload.env,
         Webhook: payload.webhook,
+        Registries: payload.registries,
       });
     case 'git':
       return createSwarmStackFromGit({
@@ -200,6 +203,7 @@ function createSwarmStack({ method, payload }: SwarmCreatePayload) {
         swarmID: payload.swarmId,
         additionalFiles: payload.git.AdditionalFiles,
         fromAppTemplate: payload.fromAppTemplate,
+        registries: payload.registries,
       });
     case 'string':
       return createSwarmStackFromFileContent({
@@ -210,6 +214,7 @@ function createSwarmStack({ method, payload }: SwarmCreatePayload) {
         webhook: payload.webhook,
         swarmID: payload.swarmId,
         fromAppTemplate: payload.fromAppTemplate,
+        registries: payload.registries,
       });
     default:
       throw new Error('Invalid method');
@@ -225,6 +230,7 @@ function createStandaloneStack({ method, payload }: StandaloneCreatePayload) {
         Name: payload.name,
         Env: payload.env,
         Webhook: payload.webhook,
+        Registries: payload.registries,
       });
     case 'git':
       return createStandaloneStackFromGit({
@@ -244,6 +250,7 @@ function createStandaloneStack({ method, payload }: StandaloneCreatePayload) {
         environmentId: payload.environmentId,
         additionalFiles: payload.git.AdditionalFiles,
         fromAppTemplate: payload.fromAppTemplate,
+        registries: payload.registries,
       });
     case 'string':
       return createStandaloneStackFromFileContent({
@@ -253,6 +260,7 @@ function createStandaloneStack({ method, payload }: StandaloneCreatePayload) {
         stackFileContent: payload.fileContent,
         webhook: payload.webhook,
         fromAppTemplate: payload.fromAppTemplate,
+        registries: payload.registries,
       });
     default:
       throw new Error('Invalid method');

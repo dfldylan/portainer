@@ -102,6 +102,7 @@ function buildCreateStackPayload(
     environmentId,
     env: values.env,
     accessControl: values.accessControl,
+    registries: values.registries,
   };
 
   switch (values.method) {
