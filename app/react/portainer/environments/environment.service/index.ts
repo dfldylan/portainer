@@ -42,7 +42,6 @@ export interface BaseEnvironmentsQueryParams {
   edgeAsync?: boolean;
   edgeDeviceUntrusted?: boolean;
   excludeSnapshots?: boolean;
-  excludeSnapshotRaw?: boolean;
   provisioned?: boolean;
   name?: string;
   agentVersions?: string[];
@@ -121,14 +120,10 @@ export async function getAgentVersions() {
   }
 }
 
-export async function getEndpoint(
-  id: EnvironmentId,
-  excludeSnapshot = true,
-  excludeSnapshotRaw = true
-) {
+export async function getEndpoint(id: EnvironmentId, excludeSnapshot = true) {
   try {
     const { data: endpoint } = await axios.get<Environment>(buildUrl(id), {
-      params: { excludeSnapshot, excludeSnapshotRaw },
+      params: { excludeSnapshot },
     });
     return endpoint;
   } catch (e) {

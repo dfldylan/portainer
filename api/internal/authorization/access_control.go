@@ -72,6 +72,10 @@ func NewPublicResourceControl(resourceIdentifier string, resourceType portainer.
 	}
 }
 
+func NewEmptyRestrictedResourceControl(resourceIdentifier string, resourceType portainer.ResourceControlType) *portainer.ResourceControl {
+	return NewRestrictedResourceControl(resourceIdentifier, resourceType, []portainer.UserID{}, []portainer.TeamID{})
+}
+
 // NewRestrictedResourceControl will create a new resource control with user and team accesses restrictions.
 func NewRestrictedResourceControl(resourceIdentifier string, resourceType portainer.ResourceControlType, userIDs []portainer.UserID, teamIDs []portainer.TeamID) *portainer.ResourceControl {
 	userAccesses := make([]portainer.UserResourceAccess, 0)

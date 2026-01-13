@@ -588,7 +588,7 @@ func (transport *Transport) restrictedResourceOperation(request *http.Request, r
 
 	// the resourceID may be the resource name (as it's a valid proxy call to use the name and not the UUID)
 	// so get the real resource ID and retry with it
-	resourceID, err = getRealResourceID(client, resourceType, resourceID)
+	resourceID, err = getDockerResourceUUID(client, resourceType, resourceID)
 	if err != nil {
 		return nil, err
 	}
@@ -619,7 +619,7 @@ func (transport *Transport) restrictedResourceOperation(request *http.Request, r
 	return transport.executeDockerRequest(request)
 }
 
-func getRealResourceID(client *dockerclient.Client, resourceType portainer.ResourceControlType, resourceId string) (string, error) {
+func getDockerResourceUUID(client *dockerclient.Client, resourceType portainer.ResourceControlType, resourceId string) (string, error) {
 	switch resourceType {
 	case portainer.NetworkResourceControl:
 		network, err := client.NetworkInspect(context.Background(), resourceId, network.InspectOptions{})
