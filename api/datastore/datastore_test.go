@@ -90,19 +90,7 @@ func newEndpoint(endpointType portainer.EndpointType, id portainer.EndpointID, n
 }
 
 func setEndpointAuthorizations(endpoint *portainer.Endpoint) {
-	endpoint.SecuritySettings = portainer.EndpointSecuritySettings{
-		AllowVolumeBrowserForRegularUsers: false,
-		EnableHostManagementFeatures:      false,
-
-		AllowSysctlSettingForRegularUsers:         true,
-		AllowSecurityOptForRegularUsers:           true,
-		AllowBindMountsForRegularUsers:            true,
-		AllowPrivilegedModeForRegularUsers:        true,
-		AllowHostNamespaceForRegularUsers:         true,
-		AllowContainerCapabilitiesForRegularUsers: true,
-		AllowDeviceMappingForRegularUsers:         true,
-		AllowStackManagementForRegularUsers:       true,
-	}
+	endpoint.SecuritySettings = portainer.DefaultEndpointSecuritySettings()
 }
 
 func (store *Store) CreateEndpoint(t *testing.T, name string, endpointType portainer.EndpointType, URL string, tls bool) portainer.EndpointID {
