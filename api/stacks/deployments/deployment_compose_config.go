@@ -79,15 +79,7 @@ func (config *ComposeStackDeploymentConfig) Deploy() error {
 
 	securitySettings := &config.endpoint.SecuritySettings
 
-	if (!securitySettings.AllowBindMountsForRegularUsers ||
-		!securitySettings.AllowPrivilegedModeForRegularUsers ||
-		!securitySettings.AllowHostNamespaceForRegularUsers ||
-		!securitySettings.AllowDeviceMappingForRegularUsers ||
-		!securitySettings.AllowSysctlSettingForRegularUsers ||
-		!securitySettings.AllowSecurityOptForRegularUsers ||
-		!securitySettings.AllowContainerCapabilitiesForRegularUsers) &&
-		!isAdminOrEndpointAdmin {
-
+	if !isAdminOrEndpointAdmin {
 		if err := stackutils.ValidateStackFiles(config.stack, securitySettings, config.FileService); err != nil {
 			return err
 		}
