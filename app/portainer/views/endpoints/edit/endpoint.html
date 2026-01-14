@@ -22,7 +22,11 @@
   </div>
 </div>
 
-<div class="row mt-4">
+<div ng-if="state.azureEndpoint" class="col-sm-12">
+  <azure-environment-form environment="endpoint" on-cancel="(cancelUpdateEndpoint)" on-success="(onUpdateSuccess)"></azure-environment-form>
+</div>
+
+<div class="row mt-4" ng-if="!state.azureEndpoint">
   <div class="col-lg-12 col-md-12 col-xs-12">
     <rd-widget>
       <rd-widget-body>
@@ -51,7 +55,6 @@
             validation-data="{optionalCert: true}"
           ></tls-fieldset>
 
-          <azure-endpoint-config-section ng-if="state.azureEndpoint" values="azureValues" set-values="updateAzureCredentials"></azure-endpoint-config-section>
           <div class="col-sm-12 form-section-title"> Metadata </div>
           <!-- group -->
           <div class="form-group">

@@ -5,13 +5,13 @@ import { EdgeKeyDisplay } from '@/react/portainer/environments/ItemView/EdgeKeyD
 import { EdgeAgentDeploymentWidget } from '@/react/portainer/environments/ItemView/EdgeAgentDeploymentWidget/EdgeAgentDeploymentWidget';
 import { KVMControl } from '@/react/portainer/environments/KvmView/KVMControl';
 import { TagsDatatable } from '@/react/portainer/environments/TagsView/TagsDatatable';
-import { AzureEndpointConfigSection } from '@/react/portainer/environments/ItemView/AzureEndpointConfigSection/AzureEndpointConfigSection';
 import { EnvironmentBasicConfigSection } from '@/react/portainer/environments/ItemView/EnvironmentBasicConfigSection/EnvironmentBasicConfigSection';
 import { EdgeInformationPanel } from '@/react/portainer/environments/ItemView/EdgeInformationPanel/EdgeInformationPanel';
 import { KubeConfigInfo } from '@/react/portainer/environments/ItemView/KubeConfigInfo/KubeConfigInfo';
 import { withReactQuery } from '@/react-tools/withReactQuery';
 import { withCurrentUser } from '@/react-tools/withCurrentUser';
 import { withUIRouter } from '@/react-tools/withUIRouter';
+import { AzureEnvironmentForm } from '@/react/portainer/environments/ItemView/AzureEnvironmentForm/AzureEnvironmentForm';
 
 export const environmentsModule = angular
   .module('portainer.app.react.components.environments', [])
@@ -36,10 +36,6 @@ export const environmentsModule = angular
   .component('kvmControl', r2a(KVMControl, ['deviceId', 'server', 'token']))
   .component('tagsDatatable', r2a(TagsDatatable, ['dataset', 'onRemove']))
   .component(
-    'azureEndpointConfigSection',
-    r2a(AzureEndpointConfigSection, ['values', 'setValues'])
-  )
-  .component(
     'environmentBasicConfigSection',
     r2a(EnvironmentBasicConfigSection, [
       'values',
@@ -58,6 +54,13 @@ export const environmentsModule = angular
       'edgeKey',
       'edgeId',
       'platformName',
+      'onSuccess',
+    ])
+  )
+  .component(
+    'azureEnvironmentForm',
+    r2a(withUIRouter(withReactQuery(withCurrentUser(AzureEnvironmentForm))), [
+      'environment',
       'onSuccess',
     ])
   ).name;

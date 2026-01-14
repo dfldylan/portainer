@@ -32,7 +32,6 @@ function EndpointController(
   $scope.setFieldValue = setFieldValue;
   $scope.onChangeTags = onChangeTags;
   $scope.onChangeTLSConfigFormValues = onChangeTLSConfigFormValues;
-  $scope.updateAzureCredentials = updateAzureCredentials;
   $scope.onDisassociateSuccess = onDisassociateSuccess;
 
   $scope.state = {
@@ -125,13 +124,6 @@ function EndpointController(
     setFieldValue('TagIds', value);
   }
 
-  function updateAzureCredentials(values) {
-    $scope.endpoint.AzureCredentials.ApplicationID = values.applicationId;
-    $scope.endpoint.AzureCredentials.TenantID = values.tenantId;
-    $scope.endpoint.AzureCredentials.AuthenticationKey = values.authenticationKey;
-    $scope.azureValues = values;
-  }
-
   function onChangeTLSConfigFormValues(newValues) {
     return this.$async(async () => {
       $scope.formValues.tlsConfig = {
@@ -184,9 +176,6 @@ function EndpointController(
       Gpus: endpoint.Gpus,
       GroupID: endpoint.GroupId,
       TagIds: endpoint.TagIds,
-      AzureApplicationID: endpoint.AzureCredentials.ApplicationID,
-      AzureTenantID: endpoint.AzureCredentials.TenantID,
-      AzureAuthenticationKey: endpoint.AzureCredentials.AuthenticationKey,
       EdgeCheckinInterval: endpoint.EdgeCheckinInterval,
     };
 
@@ -222,8 +211,7 @@ function EndpointController(
     $scope.state.actionInProgress = true;
     EndpointService.updateEndpoint(endpoint.Id, payload).then(
       function success() {
-        Notifications.success('Environment updated', $scope.endpoint.Name);
-        $state.go($state.params.redirectTo || 'portainer.endpoints', {}, { reload: true });
+        onUpdateSuccess();
       },
       function error(err) {
         Notifications.error('Failure', err, 'Unable to update environment');
@@ -236,6 +224,11 @@ function EndpointController(
       }
     );
   };
+
+  function onUpdateSuccess() {
+    Notifications.success('Environment updated', $scope.endpoint.Name);
+    $state.go($state.params.redirectTo || 'portainer.endpoints', {}, { reload: true });
+  }
 
   function configureState() {
     $scope.state.platformName = getPlatformTypeName($scope.endpoint.Type);
@@ -309,12 +302,6 @@ function EndpointController(
         $scope.endpoint = endpoint;
         $scope.initialTagIds = endpoint.TagIds.slice();
         $scope.groups = groups;
-
-        $scope.azureValues = {
-          applicationId: endpoint.AzureCredentials.ApplicationID,
-          tenantId: endpoint.AzureCredentials.TenantID,
-          authenticationKey: endpoint.AzureCredentials.AuthenticationKey,
-        };
 
         configureState();
 
