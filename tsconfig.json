@@ -6,7 +6,7 @@
     // "module": "commonjs",
     // "module": "esnext",
     "incremental": true,
-    "target": "ES2018",
+    "target": "esnext",
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
