@@ -50,10 +50,6 @@ func (m mockConnection) ViewTx(fn func(portainer.Transaction) error) error {
 func (m mockConnection) ConvertToKey(v int) []byte {
 	return []byte(strconv.Itoa(v))
 }
-func (c mockConnection) ConvertStringToKey(v string) []byte {
-	return []byte(v)
-}
-
 func TestReadAll(t *testing.T) {
 	service := BaseDataService[testObject, int]{
 		Bucket:     "testBucket",
