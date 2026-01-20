@@ -8,6 +8,7 @@ import { withTestRouter } from '@/react/test-utils/withRouter';
 import { server } from '@/setup-tests/server';
 import { Role, User } from '@/portainer/users/types';
 import { createMockUsers } from '@/react-tools/test-mocks';
+import { isoDate } from '@/portainer/filters/filters';
 
 import { ConfigsDatatable } from './ConfigsDatatable';
 
@@ -81,10 +82,11 @@ it('should render datatable with configs', async () => {
 });
 
 it('should display config creation date formatted', async () => {
+  const createdAt = '2024-06-15T14:30:00.000000000Z';
   const mockConfigs = [
     createMockConfig({
       ID: 'config-1',
-      CreatedAt: '2024-06-15T14:30:00.000000000Z',
+      CreatedAt: createdAt,
     }),
   ];
 
@@ -100,7 +102,7 @@ it('should display config creation date formatted', async () => {
     expect(screen.getByRole('region', { name: 'Configs' })).toBeVisible();
   });
 
-  expect(screen.getByText(/2024-06-15/)).toBeVisible();
+  expect(screen.getByText(isoDate(createdAt))).toBeInTheDocument();
 });
 
 it('should show Add config button for admin user', async () => {

@@ -211,6 +211,7 @@ export const ngModule = angular
       'size',
       'loadingMessage',
       'getOptionValue',
+      'onBlur',
     ])
   )
   .component(
