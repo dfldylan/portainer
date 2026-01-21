@@ -377,7 +377,9 @@ describe('ImportExportButtons', () => {
       mockConfirmImageExport.mockResolvedValue(false);
       await user.click(exportButton);
 
-      expect(mockConfirmImageExport).toHaveBeenCalled();
+      await waitFor(() => {
+        expect(mockConfirmImageExport).toHaveBeenCalled();
+      });
       expect(apiCalled).toBe(false);
       expect(mockSaveAs).not.toHaveBeenCalled();
     });

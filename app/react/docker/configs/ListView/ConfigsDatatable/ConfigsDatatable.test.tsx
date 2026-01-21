@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 import { Config } from 'docker-types';
 
+import { isoDate } from '@/portainer/filters/filters';
 import { withTestQueryProvider } from '@/react/test-utils/withTestQuery';
 import { withUserProvider } from '@/react/test-utils/withUserProvider';
 import { withTestRouter } from '@/react/test-utils/withRouter';
@@ -102,7 +103,8 @@ it('should display config creation date formatted', async () => {
     expect(screen.getByRole('region', { name: 'Configs' })).toBeVisible();
   });
 
-  expect(screen.getByText(isoDate(createdAt))).toBeInTheDocument();
+  const expectedDate = isoDate(mockConfigs[0].CreatedAt);
+  expect(screen.getByText(new RegExp(expectedDate))).toBeVisible();
 });
 
 it('should show Add config button for admin user', async () => {
