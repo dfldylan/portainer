@@ -26,7 +26,7 @@ export function DeleteButton({
   size,
   children,
   isLoading,
-  loadingText = 'Removing',
+  loadingText = 'Removing...',
   'data-cy': dataCy,
   ...props
 }: PropsWithChildren<
