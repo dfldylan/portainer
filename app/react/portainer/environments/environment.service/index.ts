@@ -44,6 +44,8 @@ export interface BaseEnvironmentsQueryParams {
   excludeSnapshots?: boolean;
   provisioned?: boolean;
   name?: string;
+  /** Filter environments by partial name match (case-insensitive, searches name only) */
+  nameFilter?: string;
   agentVersions?: string[];
   updateInformation?: boolean;
   edgeCheckInPassedSeconds?: number;
