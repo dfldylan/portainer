@@ -9,7 +9,6 @@ import { withTestRouter } from '@/react/test-utils/withRouter';
 import { server } from '@/setup-tests/server';
 import { Role, User } from '@/portainer/users/types';
 import { createMockUsers } from '@/react-tools/test-mocks';
-import { isoDate } from '@/portainer/filters/filters';
 
 import { ConfigsDatatable } from './ConfigsDatatable';
 
