@@ -1,9 +1,11 @@
 package datastore
 
 import (
+	"os"
 	"testing"
 
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/api/database/boltdb"
 	"github.com/portainer/portainer/api/database/models"
 	"github.com/stretchr/testify/require"
 
@@ -74,5 +76,52 @@ func TestRestore(t *testing.T) {
 
 		// check if the restore is successful and the version is correct
 		testVersion(store, "2.4", t)
+	})
+}
+
+func TestBackupDBFile(t *testing.T) {
+	_, store := MustNewTestStore(t, true, false)
+
+	t.Run("creates backup file without managing connection state", func(t *testing.T) {
+		// Verify connection is usable before
+		_, err := store.VersionService.Version()
+		require.NoError(t, err, "connection should be usable before backupDBFile")
+
+		// backupDBFile should work without closing the connection
+		backupFilename, err := store.backupDBFile("")
+		require.NoError(t, err)
+		require.FileExists(t, backupFilename)
+
+		// Verify connection is still usable after (not closed/reopened)
+		_, err = store.VersionService.Version()
+		require.NoError(t, err, "connection should still be usable after backupDBFile")
+
+		require.NoError(t, os.Remove(backupFilename))
+	})
+
+	t.Run("uses custom path when provided", func(t *testing.T) {
+		customPath := t.TempDir() + "/custom-backup.db"
+		backupFilename, err := store.backupDBFile(customPath)
+		require.NoError(t, err)
+		require.Equal(t, customPath, backupFilename)
+		require.FileExists(t, backupFilename)
+	})
+}
+
+func TestBackupDBFileUsesCorrectPath(t *testing.T) {
+	_, store := MustNewTestStore(t, true, false)
+
+	t.Run("backs up unencrypted db when encrypted flag is false", func(t *testing.T) {
+		store.connection.SetEncrypted(false)
+
+		backupFilename, err := store.backupDBFile("")
+		require.NoError(t, err)
+		require.FileExists(t, backupFilename)
+
+		// Verify it backed up the unencrypted file (portainer.db)
+		require.Contains(t, backupFilename, boltdb.DatabaseFileName)
+		require.NotContains(t, backupFilename, boltdb.EncryptedDatabaseFileName)
+
+		require.NoError(t, os.Remove(backupFilename))
 	})
 }

@@ -32,13 +32,19 @@ func (store *Store) Open() (newStore bool, err error) {
 	}
 
 	if encryptionReq {
-		backupFilename, err := store.Backup("")
+		// NeedsEncryptionMigration() sets encrypted=true as a side effect when a key exists.
+		// We need to set it back to false so GetDatabaseFilePath() returns the path to the
+		// actual unencrypted file (portainer.db) that we want to back up.
+		store.connection.SetEncrypted(false)
+
+		// Use backupDBFile directly since connection isn't open yet
+		// and we don't want to trigger the close/open cycle of Backup()
+		backupFilename, err := store.backupDBFile("")
 		if err != nil {
 			return false, fmt.Errorf("failed to backup database prior to encrypting: %w", err)
 		}
 
-		err = store.encryptDB()
-		if err != nil {
+		if err := store.encryptDB(); err != nil {
 			store.RestoreFromFile(backupFilename) // restore from backup if encryption fails
 			return false, err
 		}
@@ -166,8 +172,9 @@ func (store *Store) encryptDB() error {
 		return err
 	}
 
-	err = store.Import(exportFilename)
-	if err != nil {
+	if err := store.Import(exportFilename); err != nil {
+		log.Error().Err(err).Msg("failed to import database backup")
+
 		// Remove the new encrypted file that we failed to import
 		os.Remove(store.connection.GetDatabaseFilePath())
 
