@@ -51,13 +51,13 @@ func TestStoreFull(t *testing.T) {
 
 func (store *Store) testEnvironments(t *testing.T) {
 	id := store.CreateEndpoint(t, "local", portainer.KubernetesLocalEnvironment, "", true)
-	store.CreateEndpointRelation(id)
+	store.CreateEndpointRelation(t, id)
 
 	id = store.CreateEndpoint(t, "agent", portainer.AgentOnDockerEnvironment, agentOnDockerEnvironmentUrl, true)
-	store.CreateEndpointRelation(id)
+	store.CreateEndpointRelation(t, id)
 
 	id = store.CreateEndpoint(t, "edge", portainer.EdgeAgentOnKubernetesEnvironment, edgeAgentOnKubernetesEnvironmentUrl, true)
-	store.CreateEndpointRelation(id)
+	store.CreateEndpointRelation(t, id)
 }
 
 func newEndpoint(endpointType portainer.EndpointType, id portainer.EndpointID, name, URL string, TLS bool) *portainer.Endpoint {
@@ -131,7 +131,9 @@ func (store *Store) CreateEndpoint(t *testing.T, name string, endpointType porta
 	}
 
 	setEndpointAuthorizations(expectedEndpoint)
-	store.Endpoint().Create(expectedEndpoint)
+
+	err := store.Endpoint().Create(expectedEndpoint)
+	require.NoError(t, err)
 
 	endpoint, err := store.Endpoint().Endpoint(id)
 	require.NoError(t, err, "Endpoint() should not return an error")
@@ -140,13 +142,14 @@ func (store *Store) CreateEndpoint(t *testing.T, name string, endpointType porta
 	return endpoint.ID
 }
 
-func (store *Store) CreateEndpointRelation(id portainer.EndpointID) {
+func (store *Store) CreateEndpointRelation(t *testing.T, id portainer.EndpointID) {
 	relation := &portainer.EndpointRelation{
 		EndpointID: id,
 		EdgeStacks: map[portainer.EdgeStackID]bool{},
 	}
 
-	store.EndpointRelation().Create(relation)
+	err := store.EndpointRelation().Create(relation)
+	require.NoError(t, err)
 }
 
 func (store *Store) testSSLSettings(t *testing.T) {
@@ -158,7 +161,8 @@ func (store *Store) testSSLSettings(t *testing.T) {
 		SelfSigned:  true,
 	}
 
-	store.SSLSettings().UpdateSettings(ssl)
+	err := store.SSLSettings().UpdateSettings(ssl)
+	require.NoError(t, err)
 
 	settings, err := store.SSLSettings().Settings()
 	require.NoError(t, err, "Get sslsettings should succeed")
@@ -271,7 +275,8 @@ func (store *Store) testCustomTemplates(t *testing.T) {
 		CreatedByUserID: 10,
 	}
 
-	customTemplate.Create(expectedTemplate)
+	err := customTemplate.Create(expectedTemplate)
+	require.NoError(t, err)
 
 	actualTemplate, err := customTemplate.Read(expectedTemplate.ID)
 	require.NoError(t, err, "CustomTemplate should not return an error")

@@ -134,15 +134,16 @@ func initDataStore(flags *portainer.CLIFlags, secretKey []byte, fileService port
 			InstanceID:    instanceId.String(),
 			MigratorCount: migratorCount,
 		}
-		store.VersionService.UpdateVersion(&v)
+
+		if err := store.VersionService.UpdateVersion(&v); err != nil {
+			log.Fatal().Err(err).Msg("failed to update version")
+		}
 
 		if err := updateSettingsFromFlags(store, flags); err != nil {
 			log.Fatal().Err(err).Msg("failed updating settings from flags")
 		}
-	} else {
-		if err := store.MigrateData(); err != nil {
-			log.Fatal().Err(err).Msg("failed migration")
-		}
+	} else if err := store.MigrateData(); err != nil {
+		log.Fatal().Err(err).Msg("failed migration")
 	}
 
 	if err := updateSettingsFromFlags(store, flags); err != nil {
@@ -153,7 +154,7 @@ func initDataStore(flags *portainer.CLIFlags, secretKey []byte, fileService port
 	go func() {
 		<-shutdownCtx.Done()
 
-		defer connection.Close()
+		defer logs.CloseAndLogErr(connection)
 	}()
 
 	return store
@@ -529,7 +530,9 @@ func buildServer(flags *portainer.CLIFlags) portainer.Server {
 
 	scheduler := scheduler.NewScheduler(shutdownCtx)
 	stackDeployer := deployments.NewStackDeployer(swarmStackManager, composeStackManager, kubernetesDeployer, dockerClientFactory, dataStore)
-	deployments.StartStackSchedules(scheduler, stackDeployer, dataStore, gitService)
+	if err := deployments.StartStackSchedules(scheduler, stackDeployer, dataStore, gitService); err != nil {
+		log.Fatal().Err(err).Msg("failed to start stack scheduler")
+	}
 
 	sslDBSettings, err := dataStore.SSLSettings().Settings()
 	if err != nil {

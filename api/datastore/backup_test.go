@@ -38,8 +38,12 @@ func TestBackup(t *testing.T) {
 			Edition:       int(portainer.PortainerCE),
 			SchemaVersion: portainer.APIVersion,
 		}
-		store.VersionService.UpdateVersion(&v)
-		store.Backup("")
+
+		err := store.VersionService.UpdateVersion(&v)
+		require.NoError(t, err)
+
+		_, err = store.Backup("")
+		require.NoError(t, err)
 
 		if !isFileExist(backupFileName) {
 			t.Errorf("Expect backup file to be created %s", backupFileName)
@@ -55,10 +59,14 @@ func TestRestore(t *testing.T) {
 		updateEdition(store, portainer.PortainerCE)
 		updateVersion(store, "2.4")
 
-		store.Backup("")
+		_, err := store.Backup("")
+		require.NoError(t, err)
+
 		updateVersion(store, "2.16")
 		testVersion(store, "2.16", t)
-		store.Restore()
+
+		err = store.Restore()
+		require.NoError(t, err)
 
 		// check if the restore is successful and the version is correct
 		testVersion(store, "2.4", t)
@@ -68,11 +76,16 @@ func TestRestore(t *testing.T) {
 		// override and set initial db version and edition
 		updateEdition(store, portainer.PortainerCE)
 		updateVersion(store, "2.4")
-		store.Backup("")
+
+		_, err := store.Backup("")
+		require.NoError(t, err)
+
 		updateVersion(store, "2.14")
 		updateVersion(store, "2.16")
 		testVersion(store, "2.16", t)
-		store.Restore()
+
+		err = store.Restore()
+		require.NoError(t, err)
 
 		// check if the restore is successful and the version is correct
 		testVersion(store, "2.4", t)

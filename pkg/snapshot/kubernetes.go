@@ -15,6 +15,7 @@ import (
 
 	"github.com/aws/smithy-go/ptr"
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/api/logs"
 	edgeutils "github.com/portainer/portainer/pkg/edge"
 	networkingutils "github.com/portainer/portainer/pkg/networking"
 	"github.com/rs/zerolog/log"
@@ -147,7 +148,7 @@ func kubernetesSnapshotPodErrorLogs(snapshot *portainer.KubernetesSnapshot, cli 
 	if err != nil {
 		return fmt.Errorf("failed to stream logs: %w", err)
 	}
-	defer logsStream.Close()
+	defer logs.CloseAndLogErr(logsStream)
 
 	logBytes, err := io.ReadAll(logsStream)
 	if err != nil {

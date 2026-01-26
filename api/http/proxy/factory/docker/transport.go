@@ -21,6 +21,7 @@ import (
 	"github.com/portainer/portainer/api/http/proxy/factory/utils"
 	"github.com/portainer/portainer/api/http/security"
 	"github.com/portainer/portainer/api/internal/authorization"
+	"github.com/portainer/portainer/api/logs"
 
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/api/types/swarm"
@@ -480,7 +481,9 @@ func (transport *Transport) proxyImageRequest(request *http.Request, unversioned
 }
 
 func (transport *Transport) replaceRegistryAuthenticationHeader(request *http.Request) (*http.Response, error) {
-	transport.decorateRegistryAuthenticationHeader(request)
+	if err := transport.decorateRegistryAuthenticationHeader(request); err != nil {
+		return nil, err
+	}
 
 	return transport.decorateGenericResourceCreationOperation(request, serviceObjectIdentifier, portainer.ServiceResourceControl)
 }
@@ -584,7 +587,7 @@ func (transport *Transport) restrictedResourceOperation(request *http.Request, r
 	if err != nil {
 		return nil, err
 	}
-	defer client.Close()
+	defer logs.CloseAndLogErr(client)
 
 	// the resourceID may be the resource name (as it's a valid proxy call to use the name and not the UUID)
 	// so get the real resource ID and retry with it

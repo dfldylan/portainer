@@ -57,15 +57,17 @@ func (store *Store) Restore() error {
 }
 
 func (store *Store) RestoreFromFile(backupFilename string) error {
-	store.Close()
+	if err := store.Close(); err != nil {
+		return err
+	}
+
 	if err := store.fileService.Copy(backupFilename, store.connection.GetDatabaseFilePath(), true); err != nil {
 		return fmt.Errorf("unable to restore backup file %q. err: %w", backupFilename, err)
 	}
 
 	log.Info().Str("from", backupFilename).Str("to", store.connection.GetDatabaseFilePath()).Msgf("database restored")
 
-	_, err := store.Open()
-	if err != nil {
+	if _, err := store.Open(); err != nil {
 		return fmt.Errorf("unable to determine version of restored portainer backup file: %w", err)
 	}
 
@@ -87,6 +89,7 @@ func (store *Store) createBackupPath() error {
 			return fmt.Errorf("unable to create backup folder: %w", err)
 		}
 	}
+
 	return nil
 }
 

@@ -625,85 +625,129 @@ func (store *Store) Import(filename string) (err error) {
 		return err
 	}
 
-	store.Version().UpdateVersion(&backup.Version)
+	err = store.Version().UpdateVersion(&backup.Version)
+	if err != nil {
+		return err
+	}
 
 	for _, v := range backup.CustomTemplate {
-		store.CustomTemplate().Update(v.ID, &v)
+		if err := store.CustomTemplate().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the custom template in the database")
+		}
 	}
 
 	for _, v := range backup.EdgeGroup {
-		store.EdgeGroup().Update(v.ID, &v)
+		if err := store.EdgeGroup().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the edge group in the database")
+		}
 	}
 
 	for _, v := range backup.EdgeJob {
-		store.EdgeJob().Update(v.ID, &v)
+		if err := store.EdgeJob().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the edge job in the database")
+		}
 	}
 
 	for _, v := range backup.EdgeStack {
-		store.EdgeStack().UpdateEdgeStack(v.ID, &v)
+		if err := store.EdgeStack().UpdateEdgeStack(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the edge stack in the database")
+		}
 	}
 
 	for _, v := range backup.Endpoint {
-		store.Endpoint().UpdateEndpoint(v.ID, &v)
+		if err := store.Endpoint().UpdateEndpoint(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the endpoint in the database")
+		}
 	}
 
 	for _, v := range backup.EndpointGroup {
-		store.EndpointGroup().Update(v.ID, &v)
+		if err := store.EndpointGroup().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the endpoint group in the database")
+		}
 	}
 
 	for _, v := range backup.EndpointRelation {
-		store.EndpointRelation().UpdateEndpointRelation(v.EndpointID, &v)
+		if err := store.EndpointRelation().UpdateEndpointRelation(v.EndpointID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the endpoint relation in the database")
+		}
 	}
 
 	for _, v := range backup.HelmUserRepository {
-		store.HelmUserRepository().Update(v.ID, &v)
+		if err := store.HelmUserRepository().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the helm user repository in the database")
+		}
 	}
 
 	for _, v := range backup.Registry {
-		store.Registry().Update(v.ID, &v)
+		if err := store.Registry().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the registry in the database")
+		}
 	}
 
 	for _, v := range backup.ResourceControl {
-		store.ResourceControl().Update(v.ID, &v)
+		if err := store.ResourceControl().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the resource control in the database")
+		}
 	}
 
 	for _, v := range backup.Role {
-		store.Role().Update(v.ID, &v)
+		if err := store.Role().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the role in the database")
+		}
 	}
 
-	store.Settings().UpdateSettings(&backup.Settings)
-	store.SSLSettings().UpdateSettings(&backup.SSLSettings)
+	if err := store.Settings().UpdateSettings(&backup.Settings); err != nil {
+		log.Warn().Err(err).Msg("failed to update the settings in the database")
+	}
+
+	if err := store.SSLSettings().UpdateSettings(&backup.SSLSettings); err != nil {
+		log.Warn().Err(err).Msg("failed to update the SSL settings in the database")
+	}
 
 	for _, v := range backup.Snapshot {
-		store.Snapshot().Update(v.EndpointID, &v)
+		if err := store.Snapshot().Update(v.EndpointID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the snapshot in the database")
+		}
 	}
 
 	for _, v := range backup.Stack {
-		store.Stack().Update(v.ID, &v)
+		if err := store.Stack().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the stack in the database")
+		}
 	}
 
 	for _, v := range backup.Tag {
-		store.Tag().Update(v.ID, &v)
+		if err := store.Tag().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the tag in the database")
+		}
 	}
 
 	for _, v := range backup.TeamMembership {
-		store.TeamMembership().Update(v.ID, &v)
+		if err := store.TeamMembership().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the team membership in the database")
+		}
 	}
 
 	for _, v := range backup.Team {
-		store.Team().Update(v.ID, &v)
+		if err := store.Team().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the team in the database")
+		}
 	}
 
-	store.TunnelServer().UpdateInfo(&backup.TunnelServer)
+	if err := store.TunnelServer().UpdateInfo(&backup.TunnelServer); err != nil {
+		log.Warn().Err(err).Msg("failed to update the tunnel server info in the database")
+	}
 
 	for _, user := range backup.User {
 		if err := store.User().Update(user.ID, &user); err != nil {
-			log.Debug().Str("user", fmt.Sprintf("%+v", user)).Err(err).Msg("failed to update the user in the database")
+			log.Warn().Str("user", fmt.Sprintf("%+v", user)).Err(err).Msg("failed to update the user in the database")
 		}
 	}
 
 	for _, v := range backup.Webhook {
-		store.Webhook().Update(v.ID, &v)
+		if err := store.Webhook().Update(v.ID, &v); err != nil {
+			log.Warn().Err(err).Msg("failed to update the webhook in the database")
+		}
 	}
 
 	return store.connection.RestoreMetadata(backup.Metadata)

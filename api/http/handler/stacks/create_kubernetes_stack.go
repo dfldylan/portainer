@@ -165,7 +165,9 @@ func (handler *Handler) createKubernetesStackFromFileContent(w http.ResponseWrit
 	// otherwise return nil
 	cli, err := handler.KubernetesClientFactory.GetPrivilegedKubeClient(endpoint)
 	if err == nil {
-		registryutils.RefreshEcrSecret(cli, endpoint, handler.DataStore, payload.Namespace)
+		if err := registryutils.RefreshEcrSecret(cli, endpoint, handler.DataStore, payload.Namespace); err != nil {
+			return httperror.InternalServerError("Unable to refresh ECR registry secret", err)
+		}
 	}
 
 	stackBuilderDirector := stackbuilders.NewStackBuilderDirector(k8sStackBuilder)

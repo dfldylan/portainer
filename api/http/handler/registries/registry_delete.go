@@ -86,9 +86,11 @@ func (handler *Handler) deleteKubernetesSecrets(registry *portainer.Registry) {
 			}
 
 			if len(failedNamespaces) > 0 {
-				handler.PendingActionsService.Create(
+				if err := handler.PendingActionsService.Create(
 					handlers.NewDeleteK8sRegistrySecrets(endpointId, registry.ID, failedNamespaces),
-				)
+				); err != nil {
+					log.Warn().Err(err).Msg("unable to schedule pending action to delete kubernetes registry secrets")
+				}
 			}
 		}
 	}

@@ -9,6 +9,8 @@ import (
 	"time"
 
 	"github.com/portainer/portainer/api/crypto"
+	"github.com/portainer/portainer/api/logs"
+	"github.com/rs/zerolog/log"
 
 	"github.com/segmentio/encoding/json"
 )
@@ -58,7 +60,7 @@ func ProbeTelnetConnection(url string) string {
 	if err != nil {
 		result["status"] = fmt.Sprintf("failed to connect to %s: %s", address, err)
 	} else {
-		defer connection.Close()
+		defer logs.CloseAndLogErr(connection)
 		result["local_address"] = connection.LocalAddr().String()
 		result["remote_address"] = connection.RemoteAddr().String()
 	}
@@ -90,7 +92,11 @@ func DetectProxy(url string) string {
 	if err != nil {
 		result["status"] = fmt.Sprintf("failed to make request: %s", err)
 	} else {
-		defer resp.Body.Close()
+		defer func() {
+			if err := resp.Body.Close(); err != nil {
+				log.Warn().Err(err).Msg("failed to close response body")
+			}
+		}()
 
 		if resp.Request != nil {
 			result["local_address"] = resp.Request.Host

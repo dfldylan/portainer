@@ -391,7 +391,8 @@ func TestTransport_proxyNetworkRequest(t *testing.T) {
 		require.Error(t, err)
 		require.Nil(t, r)
 		if r != nil {
-			r.Body.Close()
+			err = r.Body.Close()
+			require.NoError(t, err)
 		}
 	}
 
@@ -400,7 +401,8 @@ func TestTransport_proxyNetworkRequest(t *testing.T) {
 		require.Error(t, err)
 		require.Nil(t, r)
 		if r != nil {
-			r.Body.Close()
+			err = r.Body.Close()
+			require.NoError(t, err)
 		}
 	}
 }

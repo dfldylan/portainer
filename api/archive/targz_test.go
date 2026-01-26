@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -14,7 +15,7 @@ import (
 func listFiles(dir string) []string {
 	items := make([]string, 0)
 
-	filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+	if err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 		if path == dir {
 			return nil
 		}
@@ -22,7 +23,9 @@ func listFiles(dir string) []string {
 		items = append(items, path)
 
 		return nil
-	})
+	}); err != nil {
+		log.Warn().Err(err).Msg("failed to list files in directory")
+	}
 
 	return items
 }
@@ -34,7 +37,7 @@ func Test_shouldCreateArchive(t *testing.T) {
 	err := os.WriteFile(path.Join(tmpdir, "outer"), content, 0600)
 	require.NoError(t, err)
 
-	os.MkdirAll(path.Join(tmpdir, "dir"), 0700)
+	err = os.MkdirAll(path.Join(tmpdir, "dir"), 0700)
 	require.NoError(t, err)
 
 	err = os.WriteFile(path.Join(tmpdir, "dir", ".dotfile"), content, 0600)

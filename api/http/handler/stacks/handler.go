@@ -15,6 +15,7 @@ import (
 	"github.com/portainer/portainer/api/internal/authorization"
 	"github.com/portainer/portainer/api/internal/endpointutils"
 	"github.com/portainer/portainer/api/kubernetes/cli"
+	"github.com/portainer/portainer/api/logs"
 	"github.com/portainer/portainer/api/scheduler"
 	"github.com/portainer/portainer/api/stacks/deployments"
 	"github.com/portainer/portainer/api/stacks/stackutils"
@@ -174,7 +175,7 @@ func (handler *Handler) checkUniqueStackNameInDocker(endpoint *portainer.Endpoin
 	if err != nil {
 		return false, err
 	}
-	defer dockerClient.Close()
+	defer logs.CloseAndLogErr(dockerClient)
 	if swarmMode {
 		services, err := dockerClient.ServiceList(context.Background(), types.ServiceListOptions{})
 		if err != nil {

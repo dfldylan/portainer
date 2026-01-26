@@ -8,6 +8,7 @@ import (
 	"github.com/portainer/portainer/api/dataservices"
 	dockerclient "github.com/portainer/portainer/api/docker/client"
 	k "github.com/portainer/portainer/api/kubernetes"
+	"github.com/rs/zerolog/log"
 
 	"github.com/pkg/errors"
 )
@@ -48,8 +49,14 @@ func (d *stackDeployer) DeploySwarmStack(stack *portainer.Stack, endpoint *porta
 	d.lock.Lock()
 	defer d.lock.Unlock()
 
-	d.swarmStackManager.Login(registries, endpoint)
-	defer d.swarmStackManager.Logout(endpoint)
+	if err := d.swarmStackManager.Login(registries, endpoint); err != nil {
+		log.Warn().Err(err).Msg("unable to login to registries for swarm stack deployment")
+	}
+	defer func() {
+		if err := d.swarmStackManager.Logout(endpoint); err != nil {
+			log.Warn().Err(err).Msg("unable to logout from registries after swarm stack deployment")
+		}
+	}()
 
 	return d.swarmStackManager.Deploy(stack, prune, pullImage, endpoint)
 }
@@ -71,7 +78,9 @@ func (d *stackDeployer) DeployComposeStack(stack *portainer.Stack, endpoint *por
 		ComposeOptions: options,
 		ForceRecreate:  forceRecreate,
 	}); err != nil {
-		d.composeStackManager.Down(context.TODO(), stack, endpoint)
+		if err := d.composeStackManager.Down(context.TODO(), stack, endpoint); err != nil {
+			log.Warn().Err(err).Msg("failed to cleanup compose stack after failed deployment")
+		}
 
 		return err
 	}
