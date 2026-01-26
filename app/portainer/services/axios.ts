@@ -171,6 +171,10 @@ export function parseAxiosError(
   msg = '',
   parseError = defaultErrorParser
 ) {
+  if (err instanceof PortainerError) {
+    return err;
+  }
+
   let resultErr = err;
   let resultMsg = msg;
 
