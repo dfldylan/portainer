@@ -26,7 +26,13 @@
   <azure-environment-form environment="endpoint" on-cancel="(cancelUpdateEndpoint)" on-success="(onUpdateSuccess)"></azure-environment-form>
 </div>
 
-<div class="row mt-4" ng-if="!state.azureEndpoint">
+<div class="row mt-4" ng-if="!state.azureEndpoint && !state.edgeEndpoint">
+  <div class="col-lg-12 col-md-12 col-xs-12" ng-if="endpoint">
+    <general-environment-form environment="endpoint" on-cancel="(cancelUpdateEndpoint)" on-success="(onUpdateSuccess)"></general-environment-form>
+  </div>
+</div>
+
+<div class="row mt-4" ng-if="state.edgeEndpoint">
   <div class="col-lg-12 col-md-12 col-xs-12">
     <rd-widget>
       <rd-widget-body>

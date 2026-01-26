@@ -12,6 +12,7 @@ import { withReactQuery } from '@/react-tools/withReactQuery';
 import { withCurrentUser } from '@/react-tools/withCurrentUser';
 import { withUIRouter } from '@/react-tools/withUIRouter';
 import { AzureEnvironmentForm } from '@/react/portainer/environments/ItemView/AzureEnvironmentForm/AzureEnvironmentForm';
+import { GeneralEnvironmentForm } from '@/react/portainer/environments/ItemView/GeneralEnvironmentForm/GeneralEnvironmentForm';
 
 export const environmentsModule = angular
   .module('portainer.app.react.components.environments', [])
@@ -60,6 +61,13 @@ export const environmentsModule = angular
   .component(
     'azureEnvironmentForm',
     r2a(withUIRouter(withReactQuery(withCurrentUser(AzureEnvironmentForm))), [
+      'environment',
+      'onSuccess',
+    ])
+  )
+  .component(
+    'generalEnvironmentForm',
+    r2a(withUIRouter(withReactQuery(withCurrentUser(GeneralEnvironmentForm))), [
       'environment',
       'onSuccess',
     ])

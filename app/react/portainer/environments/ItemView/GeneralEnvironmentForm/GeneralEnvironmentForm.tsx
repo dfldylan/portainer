@@ -1,0 +1,99 @@
+import { Formik, Form } from 'formik';
+
+import { useUpdateEnvironmentMutation } from '@/react/portainer/environments/queries/useUpdateEnvironmentMutation';
+import { NameField } from '@/react/portainer/environments/common/NameField/NameField';
+import { EnvironmentUrlField } from '@/react/portainer/environments/common/EnvironmentUrlField/EnvironmentUrlField';
+import { PublicUrlField } from '@/react/portainer/environments/common/PublicUrlField/PublicUrlField';
+import { TLSFieldset } from '@/react/components/TLSFieldset';
+import { MetadataFieldset } from '@/react/portainer/environments/common/MetadataFieldset';
+import {
+  isAgentEnvironment,
+  isDockerAPIEnvironment,
+  isLocalEnvironment,
+} from '@/react/portainer/environments/utils';
+import {
+  Environment,
+  EnvironmentStatus,
+} from '@/react/portainer/environments/types';
+
+import { FormSection } from '@@/form-components/FormSection';
+import { Widget } from '@@/Widget/Widget';
+import { WidgetBody } from '@@/Widget';
+
+import { EnvironmentFormActions } from '../EnvironmentFormActions/EnvironmentFormActions';
+
+import { useGeneralValidation } from './validation';
+import { buildInitialValues, buildUpdatePayload } from './helpers';
+
+interface Props {
+  environment: Environment;
+  onSuccess: () => void;
+}
+
+export function GeneralEnvironmentForm({ environment, onSuccess }: Props) {
+  const updateMutation = useUpdateEnvironmentMutation();
+
+  const isDockerAPI = isDockerAPIEnvironment(environment);
+  const isAgent = isAgentEnvironment(environment.Type);
+  const isLocal = isLocalEnvironment(environment);
+  const hasError = environment.Status === EnvironmentStatus.Error;
+  const validationSchema = useGeneralValidation({
+    status: environment.Status,
+    environmentId: environment.Id,
+  });
+
+  return (
+    <Widget>
+      <WidgetBody>
+        <Formik
+          initialValues={buildInitialValues(environment)}
+          validationSchema={validationSchema}
+          onSubmit={(values) => {
+            const payload = buildUpdatePayload(values, environment.Type);
+            updateMutation.mutate(
+              { id: environment.Id, payload },
+              { onSuccess }
+            );
+          }}
+          validateOnMount
+        >
+          {(formik) => (
+            <Form className="form-horizontal">
+              <FormSection title="Configuration">
+                <NameField />
+
+                {!hasError && (
+                  <>
+                    <EnvironmentUrlField isAgent={isAgent} disabled={isLocal} />
+                    <PublicUrlField />
+                  </>
+                )}
+
+                {!hasError && isDockerAPI && (
+                  <TLSFieldset
+                    values={formik.values.tls}
+                    onChange={(partialValues) => {
+                      formik.setFieldValue('tls', {
+                        ...formik.values.tls,
+                        ...partialValues,
+                      });
+                    }}
+                    errors={formik.errors.tls}
+                  />
+                )}
+              </FormSection>
+
+              <MetadataFieldset />
+
+              <EnvironmentFormActions
+                isLoading={updateMutation.isLoading}
+                isValid={formik.isValid}
+                isDirty={formik.dirty}
+              />
+            </Form>
+          )}
+        </Formik>
+      </WidgetBody>
+    </Widget>
+  );
+}
