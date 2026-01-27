@@ -27,7 +27,7 @@ import { FormValues } from './types';
 
 const buildMethods = [editor, upload, git, customTemplate];
 
-export function InnerForm({
+export function CreateStackInnerForm({
   isSwarm = false,
   isDeploying,
   isSaved,

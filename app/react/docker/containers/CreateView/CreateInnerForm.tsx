@@ -23,7 +23,7 @@ import { Values } from './useInitialValues';
 import { EnvVarsTab } from './EnvVarsTab';
 import { EditResourcesForm } from './ResourcesTab/EditResourceForm';
 
-export function InnerForm({
+export function CreateInnerForm({
   hideCapabilities = false,
   isLoading,
   isDuplicate,

@@ -13,7 +13,7 @@ import { getDefaultModel } from '@/react/portainer/gitops/types';
 
 import { FormValues } from './types';
 import { useValidationSchema } from './useValidationSchema';
-import { InnerForm } from './InnerForm';
+import { CreateStackInnerForm } from './CreateStackInnerForm';
 
 interface Props {
   environmentId: EnvironmentId;
@@ -64,7 +64,7 @@ export function CreateStackForm({ environmentId, isSwarm, swarmId }: Props) {
       validationSchema={validationSchema}
       validateOnMount
     >
-      <InnerForm
+      <CreateStackInnerForm
         isDeploying={createStackMutation.isLoading}
         isSwarm={isSwarm}
         isSaved={createStackMutation.isSuccess}

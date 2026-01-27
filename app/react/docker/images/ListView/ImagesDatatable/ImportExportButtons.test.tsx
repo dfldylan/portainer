@@ -60,6 +60,7 @@ vi.mock('@/portainer/services/notifications', () => ({
 describe('ImportExportButtons', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    server.resetHandlers();
     mockConfirmImageExport.mockResolvedValue(false);
   });
 
@@ -379,9 +380,9 @@ describe('ImportExportButtons', () => {
 
       await waitFor(() => {
         expect(mockConfirmImageExport).toHaveBeenCalled();
+        expect(apiCalled).toBe(false);
+        expect(mockSaveAs).not.toHaveBeenCalled();
       });
-      expect(apiCalled).toBe(false);
-      expect(mockSaveAs).not.toHaveBeenCalled();
     });
   });
 
