@@ -265,7 +265,7 @@ func (handler *Handler) endpointUpdate(w http.ResponseWriter, r *http.Request) *
 		if err := handler.AuthorizationService.CleanNAPWithOverridePolicies(handler.DataStore, endpoint, nil); err != nil {
 			log.Warn().Err(err).Msgf("Unable to clean NAP with override policies for endpoint (%d). Will try to update when endpoint is online.", endpoint.ID)
 
-			if err := handler.PendingActionsService.Create(handlers.NewCleanNAPWithOverridePolicies(endpoint.ID, nil)); err != nil {
+			if err := handler.PendingActionsService.Create(handler.DataStore, handlers.NewCleanNAPWithOverridePolicies(endpoint.ID, nil)); err != nil {
 				log.Warn().Err(err).Msg("unable to schedule pending action to clean NAP with override policies")
 			}
 		}

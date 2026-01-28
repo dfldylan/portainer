@@ -147,11 +147,9 @@ func (handler *Handler) updateEndpointGroup(tx dataservices.DataStoreTx, endpoin
 			if endpoint.GroupID == endpointGroup.ID && endpointutils.IsKubernetesEndpoint(&endpoint) {
 				if err := handler.AuthorizationService.CleanNAPWithOverridePolicies(tx, &endpoint, endpointGroup); err != nil {
 					// Update flag with endpoint and continue
-					go func(endpointID portainer.EndpointID, endpointGroupID portainer.EndpointGroupID) {
-						if err := handler.PendingActionsService.Create(handlers.NewCleanNAPWithOverridePolicies(endpointID, &endpointGroupID)); err != nil {
-							log.Error().Err(err).Msgf("Unable to create pending action to clean NAP with override policies for endpoint (%d) and endpoint group (%d).", endpointID, endpointGroupID)
-						}
-					}(endpoint.ID, endpointGroup.ID)
+					if err := handler.PendingActionsService.Create(tx, handlers.NewCleanNAPWithOverridePolicies(endpoint.ID, &endpointGroup.ID)); err != nil {
+						log.Error().Err(err).Msgf("Unable to create pending action to clean NAP with override policies for endpoint (%d) and endpoint group (%d).", endpoint.ID, endpointGroup.ID)
+					}
 				}
 			}
 		}

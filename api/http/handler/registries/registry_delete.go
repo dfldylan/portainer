@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/api/dataservices"
 	httperrors "github.com/portainer/portainer/api/http/errors"
 	"github.com/portainer/portainer/api/http/security"
 	"github.com/portainer/portainer/api/internal/registryutils"
@@ -51,16 +52,16 @@ func (handler *Handler) registryDelete(w http.ResponseWriter, r *http.Request) *
 		return httperror.InternalServerError("Unable to remove the registry from the database", err)
 	}
 
-	handler.deleteKubernetesSecrets(registry)
+	handler.deleteKubernetesSecrets(handler.DataStore, registry)
 
 	return response.Empty(w)
 }
 
-func (handler *Handler) deleteKubernetesSecrets(registry *portainer.Registry) {
+func (handler *Handler) deleteKubernetesSecrets(tx dataservices.DataStoreTx, registry *portainer.Registry) {
 	for endpointId, access := range registry.RegistryAccesses {
 		if access.Namespaces != nil {
 			// Obtain a kubeclient for the endpoint
-			endpoint, err := handler.DataStore.Endpoint().Endpoint(endpointId)
+			endpoint, err := tx.Endpoint().Endpoint(endpointId)
 			if err != nil {
 				// Skip environments that can't be loaded from the DB
 				log.Warn().Err(err).Msgf("Unable to load the environment with id %d from the database", endpointId)
@@ -87,6 +88,7 @@ func (handler *Handler) deleteKubernetesSecrets(registry *portainer.Registry) {
 
 			if len(failedNamespaces) > 0 {
 				if err := handler.PendingActionsService.Create(
+					tx,
 					handlers.NewDeleteK8sRegistrySecrets(endpointId, registry.ID, failedNamespaces),
 				); err != nil {
 					log.Warn().Err(err).Msg("unable to schedule pending action to delete kubernetes registry secrets")

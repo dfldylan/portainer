@@ -35,9 +35,9 @@ func (service *PendingActionsService) RegisterHandler(name string, handler porta
 	handlers[name] = handler
 }
 
-func (service *PendingActionsService) Create(action portainer.PendingAction) error {
+func (service *PendingActionsService) Create(tx dataservices.DataStoreTx, action portainer.PendingAction) error {
 	// Check if this pendingAction already exists
-	pendingActions, err := service.dataStore.PendingActions().ReadAll()
+	pendingActions, err := tx.PendingActions().ReadAll()
 	if err != nil {
 		return fmt.Errorf("failed to retrieve pending actions: %w", err)
 	}
@@ -51,7 +51,7 @@ func (service *PendingActionsService) Create(action portainer.PendingAction) err
 		}
 	}
 
-	return service.dataStore.PendingActions().Create(&action)
+	return tx.PendingActions().Create(&action)
 }
 
 func (service *PendingActionsService) Execute(id portainer.EndpointID) {
