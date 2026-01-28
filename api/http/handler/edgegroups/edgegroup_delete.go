@@ -7,6 +7,7 @@ import (
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
+	dserrors "github.com/portainer/portainer/api/dataservices/errors"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
 	"github.com/portainer/portainer/pkg/libhttp/response"
@@ -38,9 +39,9 @@ func (handler *Handler) edgeGroupDelete(w http.ResponseWriter, r *http.Request) 
 }
 
 func deleteEdgeGroup(tx dataservices.DataStoreTx, ID portainer.EdgeGroupID) error {
-	_, err := tx.EdgeGroup().Read(ID)
-	if tx.IsErrObjectNotFound(err) {
-		return httperror.NotFound("Unable to find an Edge group with the specified identifier inside the database", err)
+	ok, err := tx.EdgeGroup().Exists(ID)
+	if !ok {
+		return httperror.NotFound("Unable to find an Edge group with the specified identifier inside the database", dserrors.ErrObjectNotFound)
 	} else if err != nil {
 		return httperror.InternalServerError("Unable to find an Edge group with the specified identifier inside the database", err)
 	}
