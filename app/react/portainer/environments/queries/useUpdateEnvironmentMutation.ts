@@ -19,7 +19,8 @@ import { environmentQueryKeys } from './query-keys';
 
 export function useUpdateEnvironmentMutation() {
   const queryClient = useQueryClient();
-  return useMutation(updateEnvironment, {
+  return useMutation({
+    mutationFn: updateEnvironment,
     ...withInvalidate(queryClient, [environmentQueryKeys.base()]),
     ...withGlobalError('Unable to update environment'),
   });

@@ -2,12 +2,8 @@ import _ from 'lodash-es';
 import uuidv4 from 'uuid/v4';
 
 import { PortainerEndpointTypes } from '@/portainer/models/endpoint/models';
-import EndpointHelper from '@/portainer/helpers/endpointHelper';
 import { getAMTInfo } from 'Portainer/hostmanagement/open-amt/open-amt.service';
-import { confirmDestructive } from '@@/modals/confirm';
-import { getPlatformTypeName, isEdgeEnvironment, isDockerAPIEnvironment } from '@/react/portainer/environments/utils';
-
-import { buildConfirmButton } from '@@/modals/utils';
+import { getPlatformTypeName, isDockerAPIEnvironment } from '@/react/portainer/environments/utils';
 
 import { getInfo } from '@/react/docker/proxy/queries/useInfo';
 
@@ -25,14 +21,13 @@ function EndpointController(
   GroupService,
 
   Notifications,
-  Authentication,
-  SettingsService
+  Authentication
 ) {
-  $scope.onChangeCheckInInterval = onChangeCheckInInterval;
   $scope.setFieldValue = setFieldValue;
   $scope.onChangeTags = onChangeTags;
   $scope.onChangeTLSConfigFormValues = onChangeTLSConfigFormValues;
   $scope.onDisassociateSuccess = onDisassociateSuccess;
+  $scope.onUpdateSuccess = onUpdateSuccess;
 
   $scope.state = {
     platformName: '',
@@ -116,10 +111,6 @@ function EndpointController(
     $state.reload();
   }
 
-  function onChangeCheckInInterval(value) {
-    setFieldValue('EdgeCheckinInterval', value);
-  }
-
   function onChangeTags(value) {
     setFieldValue('TagIds', value);
   }
@@ -158,25 +149,12 @@ function EndpointController(
   $scope.updateEndpoint = async function () {
     var endpoint = $scope.endpoint;
 
-    if (isEdgeEnvironment(endpoint.Type) && _.difference($scope.initialTagIds, endpoint.TagIds).length > 0) {
-      let confirmed = await confirmDestructive({
-        title: 'Confirm action',
-        message: 'Removing tags from this environment will remove the corresponding edge stacks when dynamic grouping is being used',
-        confirmButton: buildConfirmButton(),
-      });
-
-      if (!confirmed) {
-        return;
-      }
-    }
-
     var payload = {
       Name: endpoint.Name,
       PublicURL: endpoint.PublicURL,
       Gpus: endpoint.Gpus,
       GroupID: endpoint.GroupId,
       TagIds: endpoint.TagIds,
-      EdgeCheckinInterval: endpoint.EdgeCheckinInterval,
     };
 
     if (
@@ -269,7 +247,7 @@ function EndpointController(
   async function initView() {
     return $async(async () => {
       try {
-        const [endpoint, groups, settings] = await Promise.all([EndpointService.endpoint($transition$.params().id), GroupService.groups(), SettingsService.settings()]);
+        const [endpoint, groups] = await Promise.all([EndpointService.endpoint($transition$.params().id), GroupService.groups()]);
         if (isDockerAPIEnvironment(endpoint)) {
           $scope.state.showTLSConfig = true;
         }
@@ -306,10 +284,6 @@ function EndpointController(
         configureState();
 
         configureTLS(endpoint);
-
-        if (EndpointHelper.isDockerEndpoint(endpoint) && $scope.state.edgeAssociated) {
-          $scope.state.showAMTInfo = settings && settings.openAMTConfiguration && settings.openAMTConfiguration.enabled;
-        }
       } catch (err) {
         Notifications.error('Failure', err, 'Unable to retrieve environment details');
       }
