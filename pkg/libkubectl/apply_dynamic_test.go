@@ -21,9 +21,8 @@ import (
 //   - With cluster: go test -v ./pkg/libkubectl -run TestApplyDynamic
 //   - Without cluster: Tests will skip automatically
 //
-// Cleanup: Tests automatically clean up resources by extracting resource identifiers
-// from manifests and using client.Delete(). Resources are deleted after each test
-// completes, keeping the cluster clean.
+// Cleanup: Tests automatically clean up resources using client.DeleteDynamic().
+// Resources are deleted after each test completes, keeping the cluster clean.
 
 // skipIfNoKubeconfig skips the test if no kubeconfig is available
 func skipIfNoKubeconfig(tb testing.TB) string {
@@ -46,54 +45,6 @@ func skipIfNoKubeconfig(tb testing.TB) string {
 	}
 
 	return kubeconfig
-}
-
-// extractResourceIdentifiers extracts resource identifiers (kind/name) from YAML manifests
-// Returns a slice of resource identifiers in the format "kind/name" that can be used with Delete()
-func extractResourceIdentifiers(manifests []string) []string {
-	var identifiers []string
-
-	for _, manifest := range manifests {
-		manifest = strings.TrimSpace(manifest)
-		if manifest == "" {
-			continue
-		}
-
-		// Split by document separator if multiple resources in one manifest
-		resources := strings.SplitSeq(manifest, "\n---\n")
-
-		for resource := range resources {
-			resource = strings.TrimSpace(resource)
-			if resource == "" {
-				continue
-			}
-
-			// Extract kind and name using simple string parsing
-			var kind, name string
-			lines := strings.SplitSeq(resource, "\n")
-			for line := range lines {
-				line = strings.TrimSpace(line)
-				if after, ok := strings.CutPrefix(line, "kind:"); ok {
-					kind = strings.TrimSpace(after)
-				} else if strings.HasPrefix(line, "name:") && name == "" {
-					// Get the first name (resource name, not nested names)
-					name = strings.TrimSpace(strings.TrimPrefix(line, "name:"))
-				}
-				// Stop after metadata section
-				if kind != "" && name != "" {
-					break
-				}
-			}
-
-			if kind != "" && name != "" {
-				// Convert kind to lowercase for kubectl format
-				identifier := strings.ToLower(kind) + "/" + name
-				identifiers = append(identifiers, identifier)
-			}
-		}
-	}
-
-	return identifiers
 }
 
 func TestApplyDynamic(t *testing.T) {
@@ -595,14 +546,9 @@ data:
 			// This runs even if the test fails, ensuring cluster stays clean
 			if !tt.wantErr && len(tt.manifests) > 0 {
 				t.Cleanup(func() {
-					// Extract resource identifiers (kind/name) from manifests
-					resourceIDs := extractResourceIdentifiers(tt.manifests)
-					if len(resourceIDs) > 0 {
-						// Delete resources using client.Delete with resource identifiers
-						_, err := client.Delete(context.Background(), resourceIDs)
-						if err != nil {
-							t.Logf("Warning: failed to cleanup resources: %v", err)
-						}
+					_, err := client.DeleteDynamic(context.Background(), tt.manifests)
+					if err != nil {
+						t.Logf("Warning: failed to cleanup resources: %v", err)
 					}
 				})
 			}
