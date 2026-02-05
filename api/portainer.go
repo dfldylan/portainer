@@ -355,6 +355,18 @@ type (
 		CreatedBy string `example:"admin"`
 	}
 
+	// HelmConfig represents the Helm configuration for an edge stack
+	HelmConfig struct {
+		// Path to a Helm chart folder for Helm git deployments
+		ChartPath string `json:"HelmChartPath,omitempty" example:"charts/my-app"`
+		// Array of paths to Helm values YAML files for Helm git deployments
+		ValuesFiles []string `json:"HelmValuesFiles,omitempty" example:"['values/prod.yaml', 'values/secrets.yaml']"`
+		// Helm chart version from Chart.yaml (read-only, extracted during Git sync)
+		Version string `json:"HelmVersion,omitempty" example:"1.2.3"`
+		// Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
+		Atomic bool `json:"HelmAtomic" example:"true"`
+	}
+
 	EdgeStackStatusForEnv struct {
 		EndpointID EndpointID
 		Status     []EdgeStackDeploymentStatus
