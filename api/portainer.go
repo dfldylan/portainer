@@ -364,7 +364,7 @@ type (
 		// Helm chart version from Chart.yaml (read-only, extracted during Git sync)
 		Version string `json:"HelmVersion,omitempty" example:"1.2.3"`
 		// Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
-		Atomic bool `json:"HelmAtomic" example:"true"`
+		Atomic bool `json:"HelmAtomic,omitempty" example:"true"`
 	}
 
 	EdgeStackStatusForEnv struct {
