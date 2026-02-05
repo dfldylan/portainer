@@ -28,6 +28,7 @@ export const settingsHandlers = [
           requireNoteOnApplications: false,
           minApplicationNoteLength: 0,
         },
+        Features: {},
       } satisfies Partial<PublicSettingsResponse>)
   ),
 ];
