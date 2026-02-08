@@ -2,8 +2,7 @@ import { Pencil } from 'lucide-react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { Pod } from 'kubernetes-types/core/v1';
 
-import { Authorized } from '@/react/hooks/useUser';
-import { useStackFile } from '@/react/common/stacks/stack.service';
+import { Authorized, useIsEdgeAdmin } from '@/react/hooks/useUser';
 import { useNamespaceQuery } from '@/react/kubernetes/namespaces/queries/useNamespaceQuery';
 
 import { Widget, WidgetBody } from '@@/Widget';
@@ -12,9 +11,11 @@ import { Link } from '@@/Link';
 import { Icon } from '@@/Icon';
 
 import { applicationIsKind, isExternalApplication } from '../../utils';
-import { appStackIdLabel } from '../../constants';
+import { appStackIdLabel, appStackKindLabel } from '../../constants';
 import { useApplication } from '../../queries/useApplication';
 import { useApplicationServices } from '../../queries/useApplicationServices';
+import { useAppStackFile } from '../../queries/useAppStackFile';
+import { Application } from '../../types';
 
 import { RestartApplicationButton } from './RestartApplicationButton';
 import { RedeployApplicationButton } from './RedeployApplicationButton';
@@ -41,6 +42,9 @@ export function ApplicationDetailsWidget() {
   const namespaceData = useNamespaceQuery(environmentId, namespace);
   const isSystemNamespace = namespaceData.data?.IsSystem;
 
+  // check if user is edge admin
+  const edgeAdminQuery = useIsEdgeAdmin();
+
   // get app info
   const { data: app } = useApplication(
     environmentId,
@@ -48,9 +52,20 @@ export function ApplicationDetailsWidget() {
     name,
     resourceType
   );
+
+  const { stackId: appStackId, stackKind: appStackKind } =
+    getStackDetailsFromLabels(app);
+
   const externalApp = app && isExternalApplication(app);
-  const appStackId = Number(app?.metadata?.labels?.[appStackIdLabel]);
-  const appStackFileQuery = useStackFile(appStackId);
+
+  // Use a single query hook that resolves to the stack file content (string)
+  // Only fetch stack file for directly managed apps
+  const appStackFileQuery = useAppStackFile(
+    !externalApp && appStackKind !== 'edge' ? appStackId : undefined,
+    appStackKind
+  );
+  const appStackFileContent = appStackFileQuery.data;
+
   const { data: appServices } = useApplicationServices(
     environmentId,
     namespace,
@@ -67,7 +82,16 @@ export function ApplicationDetailsWidget() {
               <div className="mb-4 flex flex-wrap gap-2">
                 <Authorized authorizations="K8sApplicationDetailsW">
                   <Link
-                    to="kubernetes.applications.application.edit"
+                    to={
+                      appStackKind === 'edge'
+                        ? 'edge.stacks.edit'
+                        : 'kubernetes.applications.application.edit'
+                    }
+                    params={
+                      appStackKind === 'edge'
+                        ? { stackId: appStackId }
+                        : undefined
+                    }
                     data-cy="k8sAppDetail-editAppLink"
                   >
                     <Button
@@ -76,6 +100,9 @@ export function ApplicationDetailsWidget() {
                       size="small"
                       className="hover:decoration-none !ml-0"
                       data-cy="k8sAppDetail-editAppButton"
+                      disabled={
+                        edgeAdminQuery.isLoading || !edgeAdminQuery.isAdmin
+                      }
                     >
                       <Icon icon={Pencil} className="mr-1" />
                       {externalApp
@@ -103,12 +130,12 @@ export function ApplicationDetailsWidget() {
                     app={app}
                   />
                 )}
-                {appStackFileQuery.data && (
+                {appStackFileContent && (
                   <AddButton
                     to="kubernetes.templates.custom.new"
                     data-cy="k8sAppDetail-createCustomTemplateButton"
                     params={{
-                      fileContent: appStackFileQuery.data.StackFileContent,
+                      fileContent: appStackFileContent,
                     }}
                   >
                     Create template from application
@@ -145,4 +172,16 @@ export function ApplicationDetailsWidget() {
       </div>
     </div>
   );
+}
+
+function getStackDetailsFromLabels(app?: Application): {
+  stackId?: number;
+  stackKind?: string;
+} {
+  // make undefined when missing so hooks don't run with invalid id
+  const appStackId = app?.metadata?.labels?.[appStackIdLabel]
+    ? Number(app.metadata.labels[appStackIdLabel])
+    : undefined;
+  const appStackKind = app?.metadata?.labels?.[appStackKindLabel];
+  return { stackId: appStackId, stackKind: appStackKind };
 }

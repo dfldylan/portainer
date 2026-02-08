@@ -2,12 +2,12 @@ package system
 
 import (
 	"net/http"
-	"os"
 
 	portainer "github.com/portainer/portainer/api"
-	"github.com/portainer/portainer/api/build"
 	"github.com/portainer/portainer/api/http/client"
 	"github.com/portainer/portainer/api/http/security"
+	"github.com/portainer/portainer/pkg/build"
+	libclient "github.com/portainer/portainer/pkg/libhttp/client"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/response"
 
@@ -23,20 +23,12 @@ type versionResponse struct {
 	LatestVersion string `json:"LatestVersion" example:"2.0.0"`
 
 	ServerVersion   string
+	VersionSupport  string `json:"VersionSupport" example:"STS/LTS"`
 	ServerEdition   string `json:"ServerEdition" example:"CE/EE"`
 	DatabaseVersion string
-	Build           BuildInfo
-}
-
-type BuildInfo struct {
-	BuildNumber    string
-	ImageTag       string
-	NodejsVersion  string
-	YarnVersion    string
-	WebpackVersion string
-	GoVersion      string
-	GitCommit      string
-	Env            []string `json:",omitempty"`
+	Build           build.BuildInfo
+	Dependencies    build.DependenciesInfo
+	Runtime         build.RuntimeInfo
 }
 
 // @id systemVersion
@@ -57,21 +49,15 @@ func (handler *Handler) version(w http.ResponseWriter, r *http.Request) *httperr
 
 	result := &versionResponse{
 		ServerVersion:   portainer.APIVersion,
+		VersionSupport:  portainer.APIVersionSupport,
 		DatabaseVersion: portainer.APIVersion,
 		ServerEdition:   portainer.Edition.GetEditionLabel(),
-		Build: BuildInfo{
-			BuildNumber:    build.BuildNumber,
-			ImageTag:       build.ImageTag,
-			NodejsVersion:  build.NodejsVersion,
-			YarnVersion:    build.YarnVersion,
-			WebpackVersion: build.WebpackVersion,
-			GoVersion:      build.GoVersion,
-			GitCommit:      build.GitCommit,
-		},
+		Build:           build.GetBuildInfo(),
+		Dependencies:    build.GetDependenciesInfo(),
 	}
 
 	if isAdmin {
-		result.Build.Env = os.Environ()
+		result.Runtime = build.GetRuntimeInfo()
 	}
 
 	latestVersion := GetLatestVersion()
@@ -84,10 +70,14 @@ func (handler *Handler) version(w http.ResponseWriter, r *http.Request) *httperr
 }
 
 func GetLatestVersion() string {
+	if err := libclient.ExternalRequestDisabled(portainer.VersionCheckURL); err != nil {
+		log.Debug().Err(err).Msg("External request disabled: Version check")
+		return ""
+	}
+
 	motd, err := client.Get(portainer.VersionCheckURL, 5)
 	if err != nil {
 		log.Debug().Err(err).Msg("couldn't fetch latest Portainer release version")
-
 		return ""
 	}
 
@@ -120,22 +110,4 @@ func HasNewerVersion(currentVersion, latestVersion string) bool {
 	}
 
 	return currentVersionSemver.LessThan(*latestVersionSemver)
-}
-
-// @id Version
-// @summary Check for portainer updates
-// @deprecated
-// @description Deprecated: use the `/system/version` endpoint instead.
-// @description Check if portainer has an update available
-// @description **Access policy**: authenticated
-// @security ApiKeyAuth
-// @security jwt
-// @tags status
-// @produce json
-// @success 200 {object} versionResponse "Success"
-// @router /status/version [get]
-func (handler *Handler) versionDeprecated(w http.ResponseWriter, r *http.Request) {
-	log.Warn().Msg("The /status/version endpoint is deprecated, please use the /system/version endpoint instead")
-
-	handler.version(w, r)
 }

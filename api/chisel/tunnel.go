@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"math/rand"
 	"net"
 	"strings"
 	"time"
@@ -14,6 +13,7 @@ import (
 	"github.com/portainer/portainer/api/internal/edge/cache"
 	"github.com/portainer/portainer/api/internal/endpointutils"
 	"github.com/portainer/portainer/pkg/libcrypto"
+	"github.com/portainer/portainer/pkg/librand"
 
 	"github.com/dchest/uniuri"
 	"github.com/rs/zerolog/log"
@@ -142,7 +142,9 @@ func (s *Service) TunnelAddr(endpoint *portainer.Endpoint) (string, error) {
 			continue
 		}
 
-		conn.Close()
+		if err := conn.Close(); err != nil {
+			log.Warn().Err(err).Msg("failed to close tcp connection")
+		}
 
 		break
 	}
@@ -200,7 +202,9 @@ func (service *Service) getUnusedPort() int {
 
 	conn, err := net.DialTCP("tcp", nil, &net.TCPAddr{IP: net.IPv4(127, 0, 0, 1), Port: port})
 	if err == nil {
-		conn.Close()
+		if err := conn.Close(); err != nil {
+			log.Warn().Msg("failed to close tcp connection that checks if port is free")
+		}
 
 		log.Debug().
 			Int("port", port).
@@ -213,7 +217,7 @@ func (service *Service) getUnusedPort() int {
 }
 
 func randomInt(min, max int) int {
-	return min + rand.Intn(max-min)
+	return min + librand.Intn(max-min)
 }
 
 func generateRandomCredentials() (string, string) {

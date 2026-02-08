@@ -21,6 +21,9 @@ import (
 const (
 	DatabaseFileName          = "portainer.db"
 	EncryptedDatabaseFileName = "portainer.edb"
+
+	txMaxSize       = 65536
+	compactedSuffix = ".compacted"
 )
 
 var (
@@ -35,6 +38,7 @@ type DbConnection struct {
 	InitialMmapSize int
 	EncryptionKey   []byte
 	isEncrypted     bool
+	Compact         bool
 
 	*bolt.DB
 }
@@ -60,6 +64,15 @@ func (connection *DbConnection) GetDatabaseFilePath() string {
 // GetStorePath get the filename and path for the database file
 func (connection *DbConnection) GetStorePath() string {
 	return connection.Path
+}
+
+func (connection *DbConnection) GetDatabaseFileSize() (int64, error) {
+	file, err := os.Stat(connection.GetDatabaseFilePath())
+	if err != nil {
+		return 0, fmt.Errorf("Failed to stat database file path: %s err: %w", connection.GetDatabaseFilePath(), err)
+	}
+
+	return file.Size(), nil
 }
 
 func (connection *DbConnection) SetEncrypted(flag bool) {
@@ -123,13 +136,8 @@ func (connection *DbConnection) NeedsEncryptionMigration() (bool, error) {
 func (connection *DbConnection) Open() error {
 	log.Info().Str("filename", connection.GetDatabaseFileName()).Msg("loading PortainerDB")
 
-	// Now we open the db
 	databasePath := connection.GetDatabaseFilePath()
-
-	db, err := bolt.Open(databasePath, 0600, &bolt.Options{
-		Timeout:         1 * time.Second,
-		InitialMmapSize: connection.InitialMmapSize,
-	})
+	db, err := bolt.Open(databasePath, 0600, connection.boltOptions(connection.Compact))
 	if err != nil {
 		return err
 	}
@@ -137,6 +145,24 @@ func (connection *DbConnection) Open() error {
 	db.MaxBatchSize = connection.MaxBatchSize
 	db.MaxBatchDelay = connection.MaxBatchDelay
 	connection.DB = db
+
+	if connection.Compact {
+		log.Info().Msg("compacting database")
+		if err := connection.compact(); err != nil {
+			log.Error().Err(err).Msg("failed to compact database")
+
+			// Close the read-only database and re-open in read-write mode
+			if err := connection.Close(); err != nil {
+				log.Warn().Err(err).Msg("failure to close the database after failed compaction")
+			}
+
+			connection.Compact = false
+
+			return connection.Open()
+		} else {
+			log.Info().Msg("database compaction completed")
+		}
+	}
 
 	return nil
 }
@@ -233,6 +259,32 @@ func (connection *DbConnection) GetObject(bucketName string, key []byte, object 
 	return connection.ViewTx(func(tx portainer.Transaction) error {
 		return tx.GetObject(bucketName, key, object)
 	})
+}
+
+func (connection *DbConnection) GetRawBytes(bucketName string, key []byte) ([]byte, error) {
+	var value []byte
+
+	err := connection.ViewTx(func(tx portainer.Transaction) error {
+		var err error
+		value, err = tx.GetRawBytes(bucketName, key)
+
+		return err
+	})
+
+	return value, err
+}
+
+func (connection *DbConnection) KeyExists(bucketName string, key []byte) (bool, error) {
+	var exists bool
+
+	err := connection.ViewTx(func(tx portainer.Transaction) error {
+		var err error
+		exists, err = tx.KeyExists(bucketName, key)
+
+		return err
+	})
+
+	return exists, err
 }
 
 func (connection *DbConnection) getEncryptionKey() []byte {
@@ -376,4 +428,49 @@ func (connection *DbConnection) RestoreMetadata(s map[string]any) error {
 	}
 
 	return err
+}
+
+// compact attempts to compact the database and replace it iff it succeeds
+func (connection *DbConnection) compact() (err error) {
+	compactedPath := connection.GetDatabaseFilePath() + compactedSuffix
+
+	if err := os.Remove(compactedPath); err != nil && !errors.Is(err, os.ErrNotExist) {
+		return fmt.Errorf("failure to remove an existing compacted database: %w", err)
+	}
+
+	compactedDB, err := bolt.Open(compactedPath, 0o600, connection.boltOptions(false))
+	if err != nil {
+		return fmt.Errorf("failure to create the compacted database: %w", err)
+	}
+
+	compactedDB.MaxBatchSize = connection.MaxBatchSize
+	compactedDB.MaxBatchDelay = connection.MaxBatchDelay
+
+	if err := bolt.Compact(compactedDB, connection.DB, txMaxSize); err != nil {
+		return fmt.Errorf("failure to compact the database: %w",
+			errors.Join(err, compactedDB.Close(), os.Remove(compactedPath)))
+	}
+
+	if err := os.Rename(compactedPath, connection.GetDatabaseFilePath()); err != nil {
+		return fmt.Errorf("failure to move the compacted database: %w",
+			errors.Join(err, compactedDB.Close(), os.Remove(compactedPath)))
+	}
+
+	if err := connection.Close(); err != nil {
+		log.Warn().Err(err).Msg("failure to close the database after compaction")
+	}
+
+	connection.DB = compactedDB
+
+	return nil
+}
+
+func (connection *DbConnection) boltOptions(readOnly bool) *bolt.Options {
+	return &bolt.Options{
+		Timeout:         1 * time.Second,
+		InitialMmapSize: connection.InitialMmapSize,
+		FreelistType:    bolt.FreelistMapType,
+		NoFreelistSync:  true,
+		ReadOnly:        readOnly,
+	}
 }

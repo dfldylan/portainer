@@ -15,9 +15,10 @@ import (
 // GetServices gets all the services for either at the cluster level or a given namespace in a k8s endpoint.
 // It returns a list of K8sServiceInfo objects.
 func (kcl *KubeClient) GetServices(namespace string) ([]models.K8sServiceInfo, error) {
-	if kcl.IsKubeAdmin {
+	if kcl.GetIsKubeAdmin() {
 		return kcl.fetchServices(namespace)
 	}
+
 	return kcl.fetchServicesForNonAdmin(namespace)
 }
 
@@ -25,9 +26,13 @@ func (kcl *KubeClient) GetServices(namespace string) ([]models.K8sServiceInfo, e
 // the namespace will be coming from NonAdminNamespaces as non-admin users are restricted to certain namespaces.
 // it returns a list of K8sServiceInfo objects.
 func (kcl *KubeClient) fetchServicesForNonAdmin(namespace string) ([]models.K8sServiceInfo, error) {
-	log.Debug().Msgf("Fetching services for non-admin user: %v", kcl.NonAdminNamespaces)
+	nonAdminNamespaces := kcl.GetClientNonAdminNamespaces()
 
-	if len(kcl.NonAdminNamespaces) == 0 {
+	log.Debug().
+		Strs("non_admin_namespaces", nonAdminNamespaces).
+		Msg("fetching services for non-admin user")
+
+	if len(nonAdminNamespaces) == 0 {
 		return nil, nil
 	}
 
@@ -81,8 +86,8 @@ func parseService(service corev1.Service) models.K8sServiceInfo {
 	ingressStatus := make([]models.K8sServiceIngress, 0)
 	for _, status := range service.Status.LoadBalancer.Ingress {
 		ingressStatus = append(ingressStatus, models.K8sServiceIngress{
-			IP:   status.IP,
-			Host: status.Hostname,
+			IP:       status.IP,
+			Hostname: status.Hostname,
 		})
 	}
 
@@ -130,7 +135,7 @@ func (kcl *KubeClient) convertToK8sService(info models.K8sServiceInfo) corev1.Se
 	for _, i := range info.IngressStatus {
 		service.Status.LoadBalancer.Ingress = append(
 			service.Status.LoadBalancer.Ingress,
-			corev1.LoadBalancerIngress{IP: i.IP, Hostname: i.Host},
+			corev1.LoadBalancerIngress{IP: i.IP, Hostname: i.Hostname},
 		)
 	}
 
@@ -174,7 +179,7 @@ func (kcl *KubeClient) UpdateService(namespace string, info models.K8sServiceInf
 func (kcl *KubeClient) CombineServicesWithApplications(services []models.K8sServiceInfo) ([]models.K8sServiceInfo, error) {
 	if containsServiceWithSelector(services) {
 		updatedServices := make([]models.K8sServiceInfo, len(services))
-		pods, replicaSets, _, _, _, _, _, err := kcl.fetchAllPodsAndReplicaSets("", metav1.ListOptions{})
+		portainerApplicationResources, err := kcl.fetchAllApplicationsListResources("", metav1.ListOptions{})
 		if err != nil {
 			return nil, fmt.Errorf("an error occurred during the CombineServicesWithApplications operation, unable to fetch pods and replica sets. Error: %w", err)
 		}
@@ -182,7 +187,7 @@ func (kcl *KubeClient) CombineServicesWithApplications(services []models.K8sServ
 		for index, service := range services {
 			updatedService := service
 
-			application, err := kcl.GetApplicationFromServiceSelector(pods, service, replicaSets)
+			application, err := kcl.GetApplicationFromServiceSelector(portainerApplicationResources.Pods, service, portainerApplicationResources.ReplicaSets)
 			if err != nil {
 				return services, fmt.Errorf("an error occurred during the CombineServicesWithApplications operation, unable to get application from service. Error: %w", err)
 			}

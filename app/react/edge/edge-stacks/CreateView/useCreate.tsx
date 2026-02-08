@@ -1,20 +1,19 @@
 import { useRouter } from '@uirouter/react';
 
 import { useCurrentUser } from '@/react/hooks/useUser';
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 import { TemplateViewModel } from '@/react/portainer/templates/app-templates/view-model';
 import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
 import { notifySuccess } from '@/portainer/services/notifications';
 import { transformAutoUpdateViewModel } from '@/react/portainer/gitops/AutoUpdateFieldset/utils';
+import { mutationOptions, withError } from '@/react-tools/react-query';
 
 import {
   BasePayload,
   CreateEdgeStackPayload,
   useCreateEdgeStack,
 } from '../queries/useCreateEdgeStack/useCreateEdgeStack';
-import { DeploymentType } from '../types';
 
-import { FormValues, Method } from './types';
+import { FormValues } from './types';
 
 export function useCreate({
   webhookId,
@@ -28,7 +27,6 @@ export function useCreate({
   const router = useRouter();
   const mutation = useCreateEdgeStack();
   const { user } = useCurrentUser();
-  const { trackEvent } = useAnalytics();
 
   return {
     isLoading: mutation.isLoading,
@@ -40,21 +38,19 @@ export function useCreate({
       values.method,
       getIsGitTemplate(template, templateType)
     );
-    trackEvent('edge-stack-creation', {
-      category: 'edge',
-      metadata: buildAnalyticsMetadata(
-        values.method,
-        values.deploymentType,
-        template?.Title
-      ),
-    });
 
-    mutation.mutate(getPayload(method, values), {
-      onSuccess: () => {
-        notifySuccess('Success', 'Edge stack created');
-        router.stateService.go('^');
-      },
-    });
+    mutation.mutate(
+      getPayload(method, values),
+      mutationOptions(
+        {
+          onSuccess: () => {
+            notifySuccess('Success', 'Edge stack created');
+            router.stateService.go('^');
+          },
+        },
+        withError('unable to create edge stack')
+      )
+    );
 
     function getPayload(
       method: 'string' | 'file' | 'git',
@@ -120,32 +116,6 @@ export function useCreate({
         staggerConfig: values.staggerConfig,
         useManifestNamespaces: values.useManifestNamespaces,
       };
-    }
-  }
-
-  function buildAnalyticsMetadata(
-    method: Method,
-    type: DeploymentType,
-    templateTitle: string | undefined
-  ) {
-    return {
-      type: methodLabel(method),
-      format: type === DeploymentType.Compose ? 'compose' : 'kubernetes',
-      templateName: templateTitle,
-    };
-
-    function methodLabel(method: Method) {
-      switch (method) {
-        case 'repository':
-          return 'git';
-        case 'upload':
-          return 'file-upload';
-        case 'template':
-          return 'template';
-        case 'editor':
-        default:
-          return 'web-editor';
-      }
     }
   }
 }

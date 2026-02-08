@@ -50,7 +50,7 @@ func (factory *ProxyFactory) newDockerHTTPProxy(endpoint *portainer.Endpoint) (h
 	httpTransport := &http.Transport{}
 
 	if endpoint.TLSConfig.TLS || endpoint.TLSConfig.TLSSkipVerify {
-		config, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig.TLSCACertPath, endpoint.TLSConfig.TLSCertPath, endpoint.TLSConfig.TLSKeyPath, endpoint.TLSConfig.TLSSkipVerify)
+		config, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig)
 		if err != nil {
 			return nil, err
 		}
@@ -72,7 +72,7 @@ func (factory *ProxyFactory) newDockerHTTPProxy(endpoint *portainer.Endpoint) (h
 		return nil, err
 	}
 
-	proxy := newSingleHostReverseProxyWithHostHeader(endpointURL)
+	proxy := NewSingleHostReverseProxyWithHostHeader(endpointURL)
 	proxy.Transport = dockerTransport
 	return proxy, nil
 }
@@ -99,7 +99,11 @@ func (proxy *dockerLocalProxy) ServeHTTP(w http.ResponseWriter, r *http.Request)
 		httperror.WriteError(w, code, "Unable to proxy the request via the Docker socket", err)
 		return
 	}
-	defer res.Body.Close()
+	defer func() {
+		if err := res.Body.Close(); err != nil {
+			log.Warn().Err(err).Msg("proxy error: failed to close response body")
+		}
+	}()
 
 	for k, vv := range res.Header {
 		for _, v := range vv {

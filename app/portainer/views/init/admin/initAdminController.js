@@ -23,7 +23,6 @@ angular.module('portainer.app').controller('InitAdminController', [
       Username: 'admin',
       Password: '',
       ConfirmPassword: '',
-      enableTelemetry: process.env.NODE_ENV === 'production',
       restoreFormType: $scope.RESTORE_FORM_TYPES.FILE,
     };
 
@@ -55,9 +54,6 @@ angular.module('portainer.app').controller('InitAdminController', [
       UserService.initAdministrator(username, password)
         .then(function success() {
           return Authentication.login(username, password);
-        })
-        .then(function success() {
-          return SettingsService.update({ enableTelemetry: $scope.formValues.enableTelemetry });
         })
         .then(() => {
           return StateManager.initialize();

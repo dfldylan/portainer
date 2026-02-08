@@ -8,6 +8,8 @@ import (
 	"github.com/portainer/portainer/api/dataservices"
 	"github.com/portainer/portainer/api/filesystem"
 	httperrors "github.com/portainer/portainer/api/http/errors"
+	"github.com/portainer/portainer/api/stacks/stackutils"
+	"github.com/portainer/portainer/pkg/edge"
 	"github.com/portainer/portainer/pkg/libhttp/request"
 
 	"github.com/pkg/errors"
@@ -15,7 +17,11 @@ import (
 
 type edgeStackFromStringPayload struct {
 	// Name of the stack
-	Name string `example:"myStack" validate:"required"`
+	// Max length: 255
+	// Name must only contains lowercase characters, numbers, hyphens, or underscores
+	// Name must start with a lowercase character or number
+	// Example: stack-name or stack_123 or stackName
+	Name string `example:"stack-name" validate:"required"`
 	// Content of the Stack file
 	StackFileContent string `example:"version: 3\n services:\n web:\n image:nginx" validate:"required"`
 	// List of identifiers of EdgeGroups
@@ -34,6 +40,10 @@ type edgeStackFromStringPayload struct {
 func (payload *edgeStackFromStringPayload) Validate(r *http.Request) error {
 	if len(payload.Name) == 0 {
 		return httperrors.NewInvalidPayloadError("Invalid stack name")
+	}
+
+	if !edge.IsValidEdgeStackName(payload.Name) {
+		return httperrors.NewInvalidPayloadError("Invalid stack name. Stack name must only consist of lowercase alpha characters, numbers, hyphens, or underscores as well as start with a lowercase character or number")
 	}
 
 	if len(payload.StackFileContent) == 0 {
@@ -65,10 +75,9 @@ func (payload *edgeStackFromStringPayload) Validate(r *http.Request) error {
 // @failure 500 "Internal server error"
 // @failure 503 "Edge compute features are disabled"
 // @router /edge_stacks/create/string [post]
-func (handler *Handler) createEdgeStackFromFileContent(r *http.Request, tx dataservices.DataStoreTx, dryrun bool) (*portainer.EdgeStack, error) {
+func (handler *Handler) createEdgeStackFromFileContent(r *http.Request, tx dataservices.DataStoreTx, tokenData *portainer.TokenData, dryrun bool) (*portainer.EdgeStack, error) {
 	var payload edgeStackFromStringPayload
-	err := request.DecodeAndValidateJSONPayload(r, &payload)
-	if err != nil {
+	if err := request.DecodeAndValidateJSONPayload(r, &payload); err != nil {
 		return nil, err
 	}
 
@@ -76,6 +85,9 @@ func (handler *Handler) createEdgeStackFromFileContent(r *http.Request, tx datas
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to create Edge stack object")
 	}
+
+	stack.CreatedByUserId = fmt.Sprintf("%d", tokenData.ID)
+	stack.CreatedBy = stackutils.SanitizeLabel(tokenData.Username)
 
 	if dryrun {
 		return stack, nil
@@ -87,11 +99,9 @@ func (handler *Handler) createEdgeStackFromFileContent(r *http.Request, tx datas
 }
 
 func (handler *Handler) storeFileContent(tx dataservices.DataStoreTx, stackFolder string, deploymentType portainer.EdgeStackDeploymentType, relatedEndpointIds []portainer.EndpointID, fileContent []byte) (composePath, manifestPath, projectPath string, err error) {
-	hasWrongType, err := hasWrongEnvironmentType(tx.Endpoint(), relatedEndpointIds, deploymentType)
-	if err != nil {
+	if hasWrongType, err := hasWrongEnvironmentType(tx.Endpoint(), relatedEndpointIds, deploymentType); err != nil {
 		return "", "", "", fmt.Errorf("unable to check for existence of non fitting environments: %w", err)
-	}
-	if hasWrongType {
+	} else if hasWrongType {
 		return "", "", "", errors.New("edge stack with config do not match the environment type")
 	}
 
@@ -115,7 +125,6 @@ func (handler *Handler) storeFileContent(tx dataservices.DataStoreTx, stackFolde
 		}
 
 		return "", manifestPath, projectPath, nil
-
 	}
 
 	errMessage := fmt.Sprintf("invalid deployment type: %d", deploymentType)

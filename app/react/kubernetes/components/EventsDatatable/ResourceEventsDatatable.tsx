@@ -10,6 +10,8 @@ type Props = {
   resourceId?: string;
   /** if undefined, events are fetched for the cluster */
   namespace?: string;
+  noWidget?: boolean;
+  isLoading?: boolean;
 };
 
 /** ResourceEventsDatatable returns the EventsDatatable for all events that relate to a specific resource id */
@@ -17,6 +19,8 @@ export function ResourceEventsDatatable({
   storageKey,
   resourceId,
   namespace,
+  noWidget = true,
+  isLoading = false,
 }: Props) {
   const tableState = useKubeStore(storageKey, {
     id: 'Date',
@@ -27,9 +31,7 @@ export function ResourceEventsDatatable({
     params: { endpointId },
   } = useCurrentStateAndParams();
 
-  const params = resourceId
-    ? { fieldSelector: `involvedObject.uid=${resourceId}` }
-    : {};
+  const params = resourceId ? { resourceId: `${resourceId}` } : {};
   const resourceEventsQuery = useEvents(endpointId, {
     namespace,
     params,
@@ -45,9 +47,9 @@ export function ResourceEventsDatatable({
     <EventsDatatable
       dataset={nodeEvents}
       tableState={tableState}
-      isLoading={resourceEventsQuery.isLoading}
+      isLoading={resourceEventsQuery.isLoading || isLoading}
       data-cy="k8sNodeDetail-eventsTable"
-      noWidget
+      noWidget={noWidget}
     />
   );
 }

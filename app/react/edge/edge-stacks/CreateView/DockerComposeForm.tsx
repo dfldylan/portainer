@@ -1,9 +1,11 @@
-import { useFormikContext } from 'formik';
+import { FormikErrors, useFormikContext } from 'formik';
+import { SetStateAction, useCallback } from 'react';
 
 import { GitForm } from '@/react/portainer/gitops/GitForm';
 import { baseEdgeStackWebhookUrl } from '@/portainer/helpers/webhookHelper';
 import { RelativePathFieldset } from '@/react/portainer/gitops/RelativePathFieldset/RelativePathFieldset';
 import { applySetStateAction } from '@/react-tools/apply-set-state-action';
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
 
 import { BoxSelector } from '@@/BoxSelector';
 import { FormSection } from '@@/form-components/FormSection';
@@ -23,30 +25,34 @@ import { useRenderAppTemplate } from './useRenderAppTemplate';
 
 const buildMethods = [editor, upload, git, edgeStackTemplate] as const;
 
-export function DockerComposeForm({
-  webhookId,
-  onChangeTemplate,
-}: {
+interface Props {
   webhookId: string;
-  onChangeTemplate: ({
-    type,
-    id,
-  }: {
-    type: 'app' | 'custom' | undefined;
-    id: number | undefined;
+  onChangeTemplate: (change: {
+    templateType: 'app' | 'custom' | undefined;
+    templateId: number | undefined;
   }) => void;
-}) {
+}
+
+export function DockerComposeForm({ webhookId, onChangeTemplate }: Props) {
   const { errors, values, setValues } = useFormikContext<DockerFormValues>();
   const { method } = values;
 
-  const { customTemplate, isInitialLoading: isCustomTemplateLoading } =
-    useRenderCustomTemplate(values.templateValues, setValues);
-  const { appTemplate, isInitialLoading: isAppTemplateLoading } =
-    useRenderAppTemplate(values.templateValues, setValues);
+  const handleChange = useCallback(
+    (newValues: Partial<DockerFormValues>) => {
+      setValues((values) => ({
+        ...values,
+        ...newValues,
+      }));
+    },
+    [setValues]
+  );
 
-  const isTemplate =
-    method === edgeStackTemplate.value && (customTemplate || appTemplate);
-  const isTemplateLoading = isCustomTemplateLoading || isAppTemplateLoading;
+  const saveFileContent = useCallback(
+    (value: string) => {
+      handleChange({ fileContent: value });
+    },
+    [handleChange]
+  );
 
   return (
     <>
@@ -61,37 +67,48 @@ export function DockerComposeForm({
       </FormSection>
 
       {method === edgeStackTemplate.value && (
-        <TemplateFieldset
-          values={values.templateValues}
-          setValues={(templateAction) =>
-            setValues((values) => {
+        <>
+          <TemplateFieldset
+            values={values.templateValues}
+            setValues={(templateAction) => {
               const templateValues = applySetStateAction(
                 templateAction,
                 values.templateValues
               );
               onChangeTemplate({
-                id: templateValues.templateId,
-                type: templateValues.type,
+                templateId: templateValues.templateId,
+                templateType: templateValues.type,
               });
-
-              return {
+              setValues((values) => ({
                 ...values,
                 templateValues,
-              };
-            })
-          }
-          errors={errors?.templateValues}
-          isLoadingValues={isTemplateLoading}
-        />
+              }));
+            }}
+            errors={errors?.templateValues}
+          />
+          {values.templateValues.type === 'app' && (
+            <AppTemplateContentField
+              values={values}
+              handleChange={handleChange}
+              errors={errors}
+              setValues={setValues}
+            />
+          )}
+          {values.templateValues.type === 'custom' && (
+            <CustomTemplateContentField
+              values={values}
+              handleChange={handleChange}
+              errors={errors}
+              setValues={setValues}
+            />
+          )}
+        </>
       )}
 
-      {(method === editor.value || isTemplate) && !isTemplateLoading && (
+      {method === editor.value && (
         <DockerContentField
           value={values.fileContent}
-          onChange={(value) => handleChange({ fileContent: value })}
-          readonly={
-            method === edgeStackTemplate.value && !!customTemplate?.GitConfig
-          }
+          onChange={saveFileContent}
           error={errors?.fileContent}
         />
       )}
@@ -122,32 +139,77 @@ export function DockerComposeForm({
             }
             baseWebhookUrl={baseEdgeStackWebhookUrl()}
             webhookId={webhookId}
+            isAutoUpdateVisible={isBE}
           />
 
-          <FormSection title="Advanced configurations">
-            <RelativePathFieldset
-              values={values.relativePath}
-              gitModel={values.git}
-              onChange={(relativePath) =>
-                setValues((values) => ({
-                  ...values,
-                  relativePath: {
-                    ...values.relativePath,
-                    ...relativePath,
-                  },
-                }))
-              }
-            />
-          </FormSection>
+          {isBE && (
+            <FormSection title="Advanced configurations">
+              <RelativePathFieldset
+                values={values.relativePath}
+                errors={errors.relativePath}
+                gitModel={values.git}
+                onChange={(relativePath) =>
+                  setValues((values) => ({
+                    ...values,
+                    relativePath: {
+                      ...values.relativePath,
+                      ...relativePath,
+                    },
+                  }))
+                }
+              />
+            </FormSection>
+          )}
         </>
       )}
     </>
   );
+}
 
-  function handleChange(newValues: Partial<DockerFormValues>) {
-    setValues((values) => ({
-      ...values,
-      ...newValues,
-    }));
-  }
+type TemplateContentFieldProps = {
+  values: DockerFormValues;
+  handleChange: (newValues: Partial<DockerFormValues>) => void;
+  errors?: FormikErrors<DockerFormValues>;
+  setValues: (values: SetStateAction<DockerFormValues>) => void;
+};
+
+function AppTemplateContentField({
+  values,
+  handleChange,
+  errors,
+  setValues,
+}: TemplateContentFieldProps) {
+  const { isInitialLoading } = useRenderAppTemplate(
+    values.templateValues,
+    setValues
+  );
+  return (
+    <DockerContentField
+      value={values.fileContent}
+      onChange={(value) => handleChange({ fileContent: value })}
+      error={errors?.fileContent}
+      isLoading={isInitialLoading}
+    />
+  );
+}
+
+function CustomTemplateContentField({
+  values,
+  handleChange,
+  errors,
+  setValues,
+}: TemplateContentFieldProps) {
+  const { customTemplate, isInitialLoading } = useRenderCustomTemplate(
+    values.templateValues,
+    setValues
+  );
+  return (
+    <DockerContentField
+      value={values.fileContent}
+      onChange={(value) => handleChange({ fileContent: value })}
+      error={errors?.fileContent}
+      readonly={!!customTemplate?.GitConfig}
+      isLoading={isInitialLoading}
+    />
+  );
 }

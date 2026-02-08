@@ -13,15 +13,24 @@ export interface VersionResponse {
   // The latest version available
   LatestVersion: string;
   ServerVersion: string;
+  VersionSupport: 'STS' | 'LTS';
   DatabaseVersion: string;
   Build: {
     BuildNumber: string;
     ImageTag: string;
     NodejsVersion: string;
-    YarnVersion: string;
+    PnpmVersion: string;
     WebpackVersion: string;
     GoVersion: string;
     GitCommit: string;
+  };
+  Dependencies: {
+    DockerVersion: string;
+    HelmVersion: string;
+    KubectlVersion: string;
+    ComposeVersion: string;
+  };
+  Runtime: {
     Env?: string[];
   };
 }

@@ -19,6 +19,7 @@ import (
 // @security jwt
 // @produce json
 // @param id path int true "Environment(Endpoint) identifier"
+// @param excludeSnapshot query bool false "if true, the snapshot data won't be retrieved"
 // @success 200 {object} portainer.Endpoint "Success"
 // @failure 400 "Invalid request"
 // @failure 404 "Environment(Endpoint) not found"
@@ -37,8 +38,7 @@ func (handler *Handler) endpointInspect(w http.ResponseWriter, r *http.Request) 
 		return httperror.InternalServerError("Unable to find an environment with the specified identifier inside the database", err)
 	}
 
-	err = handler.requestBouncer.AuthorizedEndpointOperation(r, endpoint)
-	if err != nil {
+	if err := handler.requestBouncer.AuthorizedEndpointOperation(r, endpoint); err != nil {
 		return httperror.Forbidden("Permission denied to access environment", err)
 	}
 
@@ -51,9 +51,10 @@ func (handler *Handler) endpointInspect(w http.ResponseWriter, r *http.Request) 
 	endpointutils.UpdateEdgeEndpointHeartbeat(endpoint, settings)
 	endpoint.ComposeSyntaxMaxVersion = handler.ComposeStackManager.ComposeSyntaxMaxVersion()
 
-	if !excludeSnapshot(r) {
-		err = handler.SnapshotService.FillSnapshotData(endpoint)
-		if err != nil {
+	excludeSnapshot, _ := request.RetrieveBooleanQueryParameter(r, "excludeSnapshot", true)
+
+	if !excludeSnapshot {
+		if err := handler.SnapshotService.FillSnapshotData(endpoint, false); err != nil {
 			return httperror.InternalServerError("Unable to add snapshot data", err)
 		}
 	}
@@ -82,10 +83,4 @@ func (handler *Handler) endpointInspect(w http.ResponseWriter, r *http.Request) 
 	handler.PendingActionsService.Execute(endpoint.ID)
 
 	return response.JSON(w, endpoint)
-}
-
-func excludeSnapshot(r *http.Request) bool {
-	excludeSnapshot, _ := request.RetrieveBooleanQueryParameter(r, "excludeSnapshot", true)
-
-	return excludeSnapshot
 }

@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	portainer "github.com/portainer/portainer/api"
-	"github.com/portainer/portainer/api/http/models/kubernetes"
 	models "github.com/portainer/portainer/api/http/models/kubernetes"
 	"github.com/portainer/portainer/api/internal/errorlist"
 	corev1 "k8s.io/api/core/v1"
@@ -17,7 +16,7 @@ import (
 // GetServiceAccounts gets all the service accounts for either at the cluster level or a given namespace in a k8s endpoint.
 // It returns a list of K8sServiceAccount objects.
 func (kcl *KubeClient) GetServiceAccounts(namespace string) ([]models.K8sServiceAccount, error) {
-	if kcl.IsKubeAdmin {
+	if kcl.GetIsKubeAdmin() {
 		return kcl.fetchServiceAccounts(namespace)
 	}
 
@@ -92,7 +91,7 @@ func (kcl *KubeClient) isSystemServiceAccount(namespace string) bool {
 
 // DeleteServices processes a K8sServiceDeleteRequest by deleting each service
 // in its given namespace.
-func (kcl *KubeClient) DeleteServiceAccounts(reqs kubernetes.K8sServiceAccountDeleteRequests) error {
+func (kcl *KubeClient) DeleteServiceAccounts(reqs models.K8sServiceAccountDeleteRequests) error {
 	var errors []error
 	for namespace := range reqs {
 		for _, serviceName := range reqs[namespace] {

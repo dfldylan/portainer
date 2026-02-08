@@ -1,14 +1,13 @@
 import { ComponentProps } from 'react';
 import { HeartPulse, Server } from 'lucide-react';
+import { Health } from 'docker-types/generated/1.44';
 
 import { TableContainer, TableTitle } from '@@/datatables';
 import { DetailsTable } from '@@/DetailsTable';
 import { Icon } from '@@/Icon';
 
-import { Health } from '../types/response';
-
 const StatusMode: Record<
-  Health['Status'],
+  Exclude<Health['Status'], undefined | 'none'>,
   ComponentProps<typeof Icon>['mode']
 > = {
   healthy: 'success',
@@ -27,23 +26,29 @@ export function HealthStatus({ health }: Props) {
 
       <DetailsTable dataCy="health-status-table">
         <DetailsTable.Row label="Status">
-          <div className="vertical-center">
-            <Icon
-              icon={HeartPulse}
-              mode={StatusMode[health.Status]}
-              className="space-right"
-            />
-            {health.Status}
-          </div>
+          {health.Status && health.Status !== 'none' ? (
+            <div className="vertical-center">
+              <Icon
+                icon={HeartPulse}
+                mode={StatusMode[health.Status]}
+                className="space-right"
+              />
+              {health.Status}
+            </div>
+          ) : (
+            <div>No health status</div>
+          )}
         </DetailsTable.Row>
 
         <DetailsTable.Row label="Failure count">
           <div className="vertical-center">{health.FailingStreak}</div>
         </DetailsTable.Row>
 
-        <DetailsTable.Row label="Last output">
-          {health.Log[health.Log.length - 1].Output}
-        </DetailsTable.Row>
+        {!!health.Log && (
+          <DetailsTable.Row label="Last output">
+            {health.Log[health.Log.length - 1].Output}
+          </DetailsTable.Row>
+        )}
       </DetailsTable>
     </TableContainer>
   );

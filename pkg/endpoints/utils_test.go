@@ -7,6 +7,50 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestIsRegularAgentEndpoint(t *testing.T) {
+	tests := []struct {
+		name     string
+		endpoint *portainer.Endpoint
+		expected bool
+	}{
+		{
+			name: "AgentOnDockerEnvironment",
+			endpoint: &portainer.Endpoint{
+				Type: portainer.AgentOnDockerEnvironment,
+			},
+			expected: true,
+		},
+		{
+			name: "AgentOnKubernetesEnvironment",
+			endpoint: &portainer.Endpoint{
+				Type: portainer.AgentOnKubernetesEnvironment,
+			},
+			expected: true,
+		},
+		{
+			name: "EdgeAgentOnDockerEnvironment",
+			endpoint: &portainer.Endpoint{
+				Type: portainer.EdgeAgentOnDockerEnvironment,
+			},
+			expected: false,
+		},
+		{
+			name: "EdgeAgentOnKubernetesEnvironment",
+			endpoint: &portainer.Endpoint{
+				Type: portainer.EdgeAgentOnKubernetesEnvironment,
+			},
+			expected: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := IsRegularAgentEndpoint(tt.endpoint)
+			assert.Equal(t, tt.expected, result)
+		})
+	}
+}
+
 func TestIsEdgeEndpoint(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -154,6 +198,69 @@ func TestHasDirectConnectivity(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			result := HasDirectConnectivity(tt.endpoint)
+			assert.Equal(t, tt.expected, result)
+		})
+	}
+}
+
+func TestIsStandardEdgeEndpoint(t *testing.T) {
+	tests := []struct {
+		name     string
+		endpoint *portainer.Endpoint
+		expected bool
+	}{
+		{
+			name: "StandardEdgeEndpoint",
+			endpoint: &portainer.Endpoint{
+				Type: portainer.EdgeAgentOnDockerEnvironment,
+				Edge: portainer.EnvironmentEdgeSettings{AsyncMode: false},
+			},
+			expected: true,
+		},
+		{
+			name: "AsyncEdgeEndpoint",
+			endpoint: &portainer.Endpoint{
+				Type: portainer.EdgeAgentOnDockerEnvironment,
+				Edge: portainer.EnvironmentEdgeSettings{AsyncMode: true},
+			},
+			expected: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := IsStandardEdgeEndpoint(tt.endpoint)
+			assert.Equal(t, tt.expected, result)
+		})
+	}
+}
+
+func TestIsNewerThan225(t *testing.T) {
+	tests := []struct {
+		name     string
+		version  string
+		expected bool
+	}{
+		{
+			name:     "NewerThan225",
+			version:  "2.25.1",
+			expected: true,
+		},
+		{
+			name:     "OlderThan225",
+			version:  "2.24.0",
+			expected: false,
+		},
+		{
+			name:     "Not a version",
+			version:  "NotAVersion",
+			expected: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := IsNewerThan225(tt.version)
 			assert.Equal(t, tt.expected, result)
 		})
 	}

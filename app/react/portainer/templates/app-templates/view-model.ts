@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { RestartPolicy } from 'docker-types/generated/1.41';
+import { RestartPolicy } from 'docker-types';
 
 import { PorImageRegistryModel } from 'Docker/models/porImageRegistry';
 
@@ -88,10 +88,8 @@ function setTemplatesV3(this: TemplateViewModel, template: AppTemplate) {
   this.Id = template.id;
 }
 
-let templateV2ID = 0;
-
 function setTemplatesV2(this: TemplateViewModel, template: AppTemplate) {
-  this.Id = templateV2ID++;
+  this.Id = template.id;
   this.Title = template.title;
   this.Type = template.type;
   this.Description = template.description;

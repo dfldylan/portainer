@@ -175,6 +175,32 @@ export function ItemView() {
                   data-cy="aci-container-memory-input"
                 />
               </FormControl>
+              {container.environmentVariables &&
+                container.environmentVariables.length > 0 && (
+                  <>
+                    <FormSectionTitle>Environment Variables</FormSectionTitle>
+                    <FormControl
+                      label="Environment variables"
+                      inputId="env-vars-input"
+                    >
+                      <div data-cy="aci-container-env-vars-input">
+                        {container.environmentVariables.map((env) => (
+                          <>
+                            {/* show redacted values for secure values and values */}
+                            {/* when I add secure values in azure, the 'secureValue' and 'value' fields are ommitted (tested on current and latest, 2025-09-01 api versions) */}
+                            {env.secureValue || env.value === undefined ? (
+                              <div key={env.name}>{env.name} = ********</div>
+                            ) : (
+                              <div key={env.name}>
+                                {env.name} = {env.value}
+                              </div>
+                            )}
+                          </>
+                        ))}
+                      </div>
+                    </FormControl>
+                  </>
+                )}
             </WidgetBody>
           </Widget>
         </div>
@@ -267,11 +293,14 @@ function aggregateContainerData(
       }
     );
 
+    const { environmentVariables } = containerInstanceProperties;
+
     return {
       imageName,
       ports,
       cpu: containerInstanceProperties.resources.cpu,
       memory: containerInstanceProperties.resources.memoryInGB,
+      environmentVariables,
     };
   }
 }

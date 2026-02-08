@@ -4,6 +4,7 @@ import { TextTip } from '@@/Tip/TextTip';
 import { FormControl } from '@@/form-components/FormControl';
 import { FormSection } from '@@/form-components/FormSection';
 import { Input } from '@@/form-components/Input';
+import { ExternalLink } from '@@/ExternalLink';
 
 export function HelmSection() {
   const [{ name }, { error }] = useField<string>('helmRepositoryUrl');
@@ -12,15 +13,14 @@ export function HelmSection() {
     <FormSection title="Helm repository">
       <div className="mb-2">
         <TextTip color="blue">
-          You can specify the URL to your own Helm repository here. See the{' '}
-          <a
-            href="https://helm.sh/docs/topics/chart_repository/"
-            target="_blank"
-            rel="noreferrer"
+          You can specify the URL to your own{' '}
+          <ExternalLink
+            to="https://helm.sh/docs/topics/chart_repository/"
+            data-cy="helm-repository-link"
           >
-            official documentation
-          </a>{' '}
-          for more details.
+            Helm repository
+          </ExternalLink>{' '}
+          here.
         </TextTip>
       </div>
 
@@ -30,7 +30,7 @@ export function HelmSection() {
           id="helm-repo-url"
           data-cy="helm-repo-url-input"
           name={name}
-          placeholder="https://charts.bitnami.com/bitnami"
+          placeholder="https://kubernetes.github.io/ingress-nginx"
         />
       </FormControl>
     </FormSection>

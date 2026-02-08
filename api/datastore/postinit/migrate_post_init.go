@@ -2,6 +2,7 @@ package postinit
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
@@ -10,6 +11,7 @@ import (
 	dockerClient "github.com/portainer/portainer/api/docker/client"
 	"github.com/portainer/portainer/api/internal/endpointutils"
 	"github.com/portainer/portainer/api/kubernetes/cli"
+	"github.com/portainer/portainer/api/logs"
 	"github.com/portainer/portainer/api/pendingactions/actions"
 	"github.com/portainer/portainer/pkg/endpoints"
 
@@ -83,17 +85,28 @@ func (postInitMigrator *PostInitMigrator) PostInitMigrate() error {
 
 // try to create a post init migration pending action. If it already exists, do nothing
 // this function exists for readability, not reusability
-// TODO: This should be moved into pending actions as part of the pending action migration
 func (postInitMigrator *PostInitMigrator) createPostInitMigrationPendingAction(environmentID portainer.EndpointID) error {
-	// If there are no pending actions for the given endpoint, create one
-	err := postInitMigrator.dataStore.PendingActions().Create(&portainer.PendingAction{
+	action := portainer.PendingAction{
 		EndpointID: environmentID,
 		Action:     actions.PostInitMigrateEnvironment,
-	})
-	if err != nil {
-		log.Error().Err(err).Msgf("Error creating pending action for environment %d", environmentID)
 	}
-	return nil
+
+	pendingActions, err := postInitMigrator.dataStore.PendingActions().ReadAll()
+	if err != nil {
+		return fmt.Errorf("failed to retrieve pending actions: %w", err)
+	}
+
+	for _, dba := range pendingActions {
+		if dba.EndpointID == action.EndpointID && dba.Action == action.Action {
+			log.Debug().
+				Str("action", action.Action).
+				Int("endpoint_id", int(action.EndpointID)).
+				Msg("pending action already exists for environment, skipping...")
+			return nil
+		}
+	}
+
+	return postInitMigrator.dataStore.PendingActions().Create(&action)
 }
 
 // MigrateEnvironment runs migrations on a single environment
@@ -108,11 +121,12 @@ func (migrator *PostInitMigrator) MigrateEnvironment(environment *portainer.Endp
 			log.Error().Err(err).Msgf("Error creating kubeclient for environment: %d", environment.ID)
 			return err
 		}
+
 		// if one environment fails, it is logged and the next migration runs. The error is returned at the end and handled by pending actions
-		err = migrator.MigrateIngresses(*environment, kubeclient)
-		if err != nil {
+		if err := migrator.MigrateIngresses(*environment, kubeclient); err != nil {
 			return err
 		}
+
 		return nil
 	case endpointutils.IsDockerEndpoint(environment):
 		// get the docker client for the environment, and skip all docker migrations if there's an error
@@ -121,8 +135,11 @@ func (migrator *PostInitMigrator) MigrateEnvironment(environment *portainer.Endp
 			log.Error().Err(err).Msgf("Error creating docker client for environment: %d", environment.ID)
 			return err
 		}
-		defer dockerClient.Close()
-		migrator.MigrateGPUs(*environment, dockerClient)
+		defer logs.CloseAndLogErr(dockerClient)
+
+		if err := migrator.MigrateGPUs(*environment, dockerClient); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -149,7 +166,7 @@ func (migrator *PostInitMigrator) MigrateGPUs(e portainer.Endpoint, dockerClient
 	return migrator.dataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
 		environment, err := tx.Endpoint().Endpoint(e.ID)
 		if err != nil {
-			log.Error().Err(err).Msgf("Error getting environment %d", environment.ID)
+			log.Error().Err(err).Msgf("Error getting environment %d", e.ID)
 			return err
 		}
 		// Early exit if we do not need to migrate!
@@ -175,10 +192,11 @@ func (migrator *PostInitMigrator) MigrateGPUs(e portainer.Endpoint, dockerClient
 				continue
 			}
 
-			deviceRequests := containerDetails.HostConfig.Resources.DeviceRequests
+			deviceRequests := containerDetails.HostConfig.DeviceRequests
 			for _, deviceRequest := range deviceRequests {
 				if deviceRequest.Driver == "nvidia" {
 					environment.EnableGPUManagement = true
+
 					break containersLoop
 				}
 			}
@@ -186,8 +204,7 @@ func (migrator *PostInitMigrator) MigrateGPUs(e portainer.Endpoint, dockerClient
 
 		// set the MigrateGPUs flag to false so we don't run this again
 		environment.PostInitMigrations.MigrateGPUs = false
-		err = tx.Endpoint().UpdateEndpoint(environment.ID, environment)
-		if err != nil {
+		if err := tx.Endpoint().UpdateEndpoint(environment.ID, environment); err != nil {
 			log.Error().Err(err).Msgf("Error updating EnableGPUManagement flag for environment %d", environment.ID)
 			return err
 		}

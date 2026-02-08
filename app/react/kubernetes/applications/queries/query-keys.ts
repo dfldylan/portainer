@@ -3,7 +3,6 @@ import { EnvironmentId } from '@/react/portainer/environments/types';
 export type GetAppsParams = {
   namespace?: string;
   nodeName?: string;
-  withDependencies?: boolean;
 };
 
 export const queryKeys = {
@@ -102,4 +101,6 @@ export const queryKeys = {
       name,
       'pods',
     ] as const,
+  appStackFile: (id?: number, kind?: string) =>
+    ['app-stack-file', id, kind] as const,
 };

@@ -32,6 +32,9 @@ func (handler *Handler) updateEndpointRelations(tx dataservices.DataStoreTx, end
 
 	edgeStacks, err := tx.EdgeStack().EdgeStacks()
 	if err != nil {
+		if tx.IsErrObjectNotFound(err) {
+			return nil
+		}
 		return err
 	}
 

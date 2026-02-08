@@ -1,6 +1,6 @@
 import { useFormikContext, Field } from 'formik';
 
-import { GroupField } from '@/react/portainer/environments/wizard/EnvironmentsCreationView/shared/MetadataFieldset/GroupsField';
+import { GroupField } from '@/react/portainer/environments/common/MetadataFieldset/GroupsField';
 
 import { FormControl } from '@@/form-components/FormControl';
 import { Input } from '@@/form-components/Input';
@@ -86,6 +86,11 @@ export function EdgeScriptSettingsFieldset({
           id="env-variables-input"
         />
       </FormControl>
+
+      <TextTip color="orange" className="mb-2 icon-orange">
+        For security purposes, only environment variables prefixed with
+        &apos;PORTAINER_&apos; will be accessible.
+      </TextTip>
 
       <div className="form-group">
         <div className="col-sm-12">

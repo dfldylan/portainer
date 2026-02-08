@@ -16,8 +16,8 @@ import (
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
 	"github.com/portainer/portainer/pkg/libhttp/response"
+	"github.com/portainer/portainer/pkg/validate"
 
-	"github.com/asaskevich/govalidator"
 	"github.com/rs/zerolog/log"
 	"github.com/segmentio/encoding/json"
 )
@@ -228,7 +228,7 @@ func (payload *customTemplateFromGitRepositoryPayload) Validate(r *http.Request)
 	if len(payload.Description) == 0 {
 		return errors.New("Invalid custom template description")
 	}
-	if len(payload.RepositoryURL) == 0 || !govalidator.IsURL(payload.RepositoryURL) {
+	if len(payload.RepositoryURL) == 0 || !validate.IsURL(payload.RepositoryURL) {
 		return errors.New("Invalid repository URL. Must correspond to a valid URL format")
 	}
 	if payload.RepositoryAuthentication && (len(payload.RepositoryUsername) == 0 || len(payload.RepositoryPassword) == 0) {
@@ -481,29 +481,4 @@ func (handler *Handler) createCustomTemplateFromFileUpload(r *http.Request) (*po
 	customTemplate.ProjectPath = projectPath
 
 	return customTemplate, nil
-}
-
-// @id CustomTemplateCreate
-// @summary Create a custom template
-// @description Create a custom template.
-// @description **Access policy**: authenticated
-// @tags custom_templates
-// @security ApiKeyAuth
-// @security jwt
-// @accept json,multipart/form-data
-// @produce json
-// @param method query string true "method for creating template" Enums(string, file, repository)
-// @param body body object true "for body documentation see the relevant /custom_templates/{method} endpoint"
-// @success 200 {object} portainer.CustomTemplate
-// @failure 400 "Invalid request"
-// @failure 500 "Server error"
-// @deprecated
-// @router /custom_templates [post]
-func deprecatedCustomTemplateCreateUrlParser(w http.ResponseWriter, r *http.Request) (string, *httperror.HandlerError) {
-	method, err := request.RetrieveQueryParameter(r, "method", false)
-	if err != nil {
-		return "", httperror.BadRequest("Invalid query parameter: method", err)
-	}
-
-	return "/custom_templates/create/" + method, nil
 }

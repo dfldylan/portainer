@@ -1,7 +1,11 @@
 import { TagId } from '@/portainer/tags/types';
 import { DockerSnapshot } from '@/react/docker/snapshots/types';
 
+import { TLSConfiguration } from '../settings/types';
+
 export type EnvironmentGroupId = number;
+
+export type EdgeGroupId = number;
 
 type RoleId = number;
 interface AccessPolicy {
@@ -56,6 +60,8 @@ export interface KubernetesSnapshot {
 export type IngressClass = {
   Name: string;
   Type: string;
+  Blocked?: boolean;
+  BlockedNamespaces?: string[] | null;
 };
 
 export interface StorageClass {
@@ -82,6 +88,11 @@ export interface KubernetesConfiguration {
 export interface KubernetesSettings {
   Snapshots?: KubernetesSnapshot[] | null;
   Configuration: KubernetesConfiguration;
+  Flags: {
+    IsServerMetricsDetected: boolean;
+    IsServerIngressClassDetected: boolean;
+    IsServerStorageDetected: boolean;
+  };
 }
 
 export type EnvironmentEdge = {
@@ -146,7 +157,6 @@ export type Environment = {
   EdgeID?: string;
   EdgeKey: string;
   EdgeCheckinInterval?: number;
-  QueryDate?: number;
   Heartbeat?: boolean;
   LastCheckInDate?: number;
   Name: string;
@@ -155,11 +165,18 @@ export type Environment = {
   Snapshots: DockerSnapshot[];
   Kubernetes: KubernetesSettings;
   PublicURL?: string;
-  UserTrusted: boolean;
+  UserTrusted?: boolean;
   AMTDeviceGUID?: string;
   Edge: EnvironmentEdge;
   SecuritySettings: EnvironmentSecuritySettings;
   Gpus?: { name: string; value: string }[];
+  TLSConfig?: TLSConfiguration;
+  AzureCredentials?: {
+    ApplicationID: string;
+    TenantID: string;
+    AuthenticationKey: string;
+  };
+  ComposeSyntaxMaxVersion: string;
   EnableImageNotification: boolean;
   LocalTimeZone?: string;
 
@@ -188,6 +205,8 @@ export enum EnvironmentCreationTypes {
 export enum ContainerEngine {
   Docker = 'docker',
   Podman = 'podman',
+  // an empty container engine means that the endpoint is a Kubernetes endpoint
+  Kubernetes = '',
 }
 
 export enum PlatformType {

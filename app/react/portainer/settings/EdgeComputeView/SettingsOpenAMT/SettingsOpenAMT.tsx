@@ -11,6 +11,7 @@ import { LoadingButton } from '@@/buttons/LoadingButton';
 import { TextTip } from '@@/Tip/TextTip';
 import { Input } from '@@/form-components/Input';
 import { FileUploadField } from '@@/form-components/FileUpload';
+import { Alert } from '@@/Alert';
 
 import { validationSchema } from './SettingsOpenAMT.validation';
 
@@ -96,6 +97,14 @@ export function SettingsOpenAMT({ settings, onSubmit }: Props) {
       <Widget>
         <WidgetTitle icon={Laptop} title="Intel OpenAMT" />
         <WidgetBody>
+          <div className="mb-2">
+            <Alert color="warn">
+              OpenAMT support is deprecated and will be removed in a future
+              version of Portainer. <br />
+              Please plan to migrate to alternative device management solutions.
+            </Alert>
+          </div>
+
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}

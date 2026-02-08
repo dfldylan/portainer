@@ -8,7 +8,6 @@ import { useCurrentEnvironment } from '@/react/hooks/useCurrentEnvironment';
 import { useEnvironmentRegistries } from '@/react/portainer/environments/queries/useEnvironmentRegistries';
 import { Registry } from '@/react/portainer/registries/types/registry';
 import { notifySuccess } from '@/portainer/services/notifications';
-import { useAnalytics } from '@/react/hooks/useAnalytics';
 import { useDebouncedValue } from '@/react/hooks/useDebouncedValue';
 
 import { PageHeader } from '@@/PageHeader';
@@ -25,7 +24,7 @@ import { useSystemLimits, useIsWindows } from '../../proxy/queries/useInfo';
 import { useCreateOrReplaceMutation } from './useCreateMutation';
 import { useValidation } from './validation';
 import { useInitialValues, Values } from './useInitialValues';
-import { InnerForm } from './InnerForm';
+import { CreateInnerForm } from './CreateInnerForm';
 import { toRequest } from './toRequest';
 
 export function CreateView() {
@@ -49,11 +48,8 @@ function CreateForm() {
   const environmentId = useEnvironmentId();
   const router = useRouter();
   const isWindows = useIsWindows(environmentId);
-  const { trackEvent } = useAnalytics();
   const isAdminQuery = useIsEdgeAdmin();
-  const { authorized: isEnvironmentAdmin } = useIsEnvironmentAdmin({
-    adminOnlyCE: true,
-  });
+  const { authorized: isEnvironmentAdmin } = useIsEnvironmentAdmin();
   const [isDockerhubRateLimited, setIsDockerhubRateLimited] = useState(false);
 
   const mutation = useCreateOrReplaceMutation();
@@ -86,7 +82,6 @@ function CreateForm() {
 
   const environment = envQuery.data;
 
-  // if windows, hide capabilities. this is because capadd and capdel are not supported on windows
   const hideCapabilities =
     (!environment.SecuritySettings.allowContainerCapabilitiesForRegularUsers &&
       !isEnvironmentAdmin) ||
@@ -124,7 +119,7 @@ function CreateForm() {
         validateOnMount
         validationSchema={validationSchema}
       >
-        <InnerForm
+        <CreateInnerForm
           hideCapabilities={hideCapabilities}
           onChangeName={syncName}
           isDuplicate={isDuplicating}
@@ -170,24 +165,11 @@ function CreateForm() {
       },
       {
         onSuccess() {
-          sendAnalytics(values, registry);
           notifySuccess('Success', 'Container successfully created');
           router.stateService.go('docker.containers');
         },
       }
     );
-  }
-
-  function sendAnalytics(values: Values, registry?: Registry) {
-    const containerImage = registry?.URL
-      ? `${registry?.URL}/${values.image}`
-      : values.image;
-    if (values.resources.gpu.enabled) {
-      trackEvent('gpuContainerCreated', {
-        category: 'docker',
-        metadata: { gpu: values.resources.gpu, containerImage },
-      });
-    }
   }
 }
 

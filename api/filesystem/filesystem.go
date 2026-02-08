@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/api/logs"
 
 	"github.com/gofrs/uuid"
 	"github.com/rs/zerolog/log"
@@ -194,7 +195,7 @@ func (service *Service) Copy(fromFilePath string, toFilePath string, deleteIfExi
 		return err
 	}
 
-	defer finput.Close()
+	defer logs.CloseAndLogErr(finput)
 
 	exists, err = service.FileExists(toFilePath)
 	if err != nil {
@@ -217,7 +218,7 @@ func (service *Service) Copy(fromFilePath string, toFilePath string, deleteIfExi
 		return err
 	}
 
-	defer foutput.Close()
+	defer logs.CloseAndLogErr(foutput)
 
 	buf := make([]byte, 1024)
 	for {
@@ -702,7 +703,7 @@ func (service *Service) createPEMFileInStore(content []byte, fileType, filePath 
 	if err != nil {
 		return err
 	}
-	defer out.Close()
+	defer logs.CloseAndLogErr(out)
 
 	return pem.Encode(out, block)
 }
@@ -841,14 +842,14 @@ func (service *Service) GetDefaultSSLCertsPath() (string, string) {
 }
 
 func defaultMTLSCertPathUnderFileStore() (string, string, string) {
-	certPath := JoinPaths(SSLCertPath, MTLSCertFilename)
 	caCertPath := JoinPaths(SSLCertPath, MTLSCACertFilename)
+	certPath := JoinPaths(SSLCertPath, MTLSCertFilename)
 	keyPath := JoinPaths(SSLCertPath, MTLSKeyFilename)
 
-	return certPath, caCertPath, keyPath
+	return caCertPath, certPath, keyPath
 }
 
-// GetDefaultChiselPrivateKeyPath returns the chisle private key path
+// GetDefaultChiselPrivateKeyPath returns the chisel private key path
 func (service *Service) GetDefaultChiselPrivateKeyPath() string {
 	privateKeyPath := defaultChiselPrivateKeyPathUnderFileStore()
 	return service.wrapFileStore(privateKeyPath)
@@ -1008,32 +1009,51 @@ func CreateFile(path string, r io.Reader) error {
 		return err
 	}
 
-	defer out.Close()
+	defer logs.CloseAndLogErr(out)
 
 	_, err = io.Copy(out, r)
 	return err
 }
 
-func (service *Service) StoreMTLSCertificates(cert, caCert, key []byte) (string, string, string, error) {
-	certPath, caCertPath, keyPath := defaultMTLSCertPathUnderFileStore()
+func (service *Service) StoreMTLSCertificates(caCert, cert, key []byte) (string, string, string, error) {
+	caCertPath, certPath, keyPath := defaultMTLSCertPathUnderFileStore()
 
-	r := bytes.NewReader(cert)
-	err := service.createFileInStore(certPath, r)
-	if err != nil {
+	r := bytes.NewReader(caCert)
+	if err := service.createFileInStore(caCertPath, r); err != nil {
 		return "", "", "", err
 	}
 
-	r = bytes.NewReader(caCert)
-	err = service.createFileInStore(caCertPath, r)
-	if err != nil {
+	r = bytes.NewReader(cert)
+	if err := service.createFileInStore(certPath, r); err != nil {
 		return "", "", "", err
 	}
 
 	r = bytes.NewReader(key)
-	err = service.createFileInStore(keyPath, r)
-	if err != nil {
+	if err := service.createFileInStore(keyPath, r); err != nil {
 		return "", "", "", err
 	}
 
-	return service.wrapFileStore(certPath), service.wrapFileStore(caCertPath), service.wrapFileStore(keyPath), nil
+	return service.wrapFileStore(caCertPath), service.wrapFileStore(certPath), service.wrapFileStore(keyPath), nil
+}
+
+func (service *Service) GetMTLSCertificates() (string, string, string, error) {
+	caCertPath, certPath, keyPath := defaultMTLSCertPathUnderFileStore()
+
+	caCertPath = service.wrapFileStore(caCertPath)
+	certPath = service.wrapFileStore(certPath)
+	keyPath = service.wrapFileStore(keyPath)
+
+	paths := [...]string{caCertPath, certPath, keyPath}
+	for _, path := range paths {
+		exists, err := service.FileExists(path)
+		if err != nil {
+			return "", "", "", err
+		}
+
+		if !exists {
+			return "", "", "", fmt.Errorf("file %s does not exist", path)
+		}
+	}
+
+	return caCertPath, certPath, keyPath, nil
 }

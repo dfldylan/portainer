@@ -1,19 +1,30 @@
+import { useState } from 'react';
+import type { AriaAttributes } from 'react';
 import {
   GroupBase,
   OptionsOrGroups,
   SelectComponentsConfig,
 } from 'react-select';
 import _ from 'lodash';
-import { AriaAttributes } from 'react';
+import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import { AutomationTestingProps } from '@/types';
 
-import { Select as ReactSelect } from '@@/form-components/ReactSelect';
+import {
+  Creatable,
+  Select as ReactSelect,
+} from '@@/form-components/ReactSelect';
 
 export interface Option<TValue> {
   value: TValue;
   label: string;
   disabled?: boolean;
+  [key: string]: unknown;
+}
+
+export interface GroupOption<TValue> {
+  label: string;
+  options: Option<TValue>[];
 }
 
 type Options<TValue> = OptionsOrGroups<
@@ -21,20 +32,28 @@ type Options<TValue> = OptionsOrGroups<
   GroupBase<Option<TValue>>
 >;
 
-interface SharedProps
+interface SharedProps<TValue>
   extends AutomationTestingProps,
     Pick<AriaAttributes, 'aria-label'> {
   name?: string;
   inputId?: string;
+  size?: 'sm' | 'md';
   placeholder?: string;
   disabled?: boolean;
   isClearable?: boolean;
   bindToBody?: boolean;
   isLoading?: boolean;
   noOptionsMessage?: () => string;
+  loadingMessage?: () => string;
+  filterOption?: (
+    option: FilterOptionOption<Option<TValue>>,
+    rawInput: string
+  ) => boolean;
+  getOptionValue?: (option: TValue) => string;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-interface MultiProps<TValue> extends SharedProps {
+interface MultiProps<TValue> extends SharedProps<TValue> {
   value: readonly TValue[];
   onChange(value: TValue[]): void;
   options: Options<TValue>;
@@ -44,9 +63,12 @@ interface MultiProps<TValue> extends SharedProps {
     true,
     GroupBase<Option<TValue>>
   >;
+  formatCreateLabel?: (input: string) => string;
+  onCreateOption?: (input: string) => void;
+  isCreatable?: boolean;
 }
 
-interface SingleProps<TValue> extends SharedProps {
+interface SingleProps<TValue> extends SharedProps<TValue> {
   value: TValue;
   onChange(value: TValue | null): void;
   options: Options<TValue>;
@@ -58,9 +80,13 @@ interface SingleProps<TValue> extends SharedProps {
   >;
 }
 
-type Props<TValue> = MultiProps<TValue> | SingleProps<TValue>;
+export type PortainerSelectProps<TValue> =
+  | MultiProps<TValue>
+  | SingleProps<TValue>;
 
-export function PortainerSelect<TValue = string>(props: Props<TValue>) {
+export function PortainerSelect<TValue = string>(
+  props: PortainerSelectProps<TValue>
+) {
   return isMultiProps(props) ? (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <MultiSelect {...props} />
@@ -71,7 +97,7 @@ export function PortainerSelect<TValue = string>(props: Props<TValue>) {
 }
 
 function isMultiProps<TValue>(
-  props: Props<TValue>
+  props: PortainerSelectProps<TValue>
 ): props is MultiProps<TValue> {
   return 'isMulti' in props && !!props.isMulti;
 }
@@ -87,17 +113,22 @@ export function SingleSelect<TValue = string>({
   placeholder,
   isClearable,
   bindToBody,
+  filterOption,
   components,
   isLoading,
   noOptionsMessage,
+  loadingMessage,
   isMulti,
+  size,
+  getOptionValue,
+  onBlur,
   ...aria
 }: SingleProps<TValue>) {
   const selectedValue =
     value ||
     (typeof value === 'number' && value === 0) ||
     (typeof value === 'string' && value === '')
-      ? _.first(findSelectedOptions<TValue>(options, value))
+      ? _.first(findSelectedOptions<TValue>(options, value, getOptionValue))
       : null;
 
   return (
@@ -105,7 +136,9 @@ export function SingleSelect<TValue = string>({
       name={name}
       isClearable={isClearable}
       getOptionLabel={(option) => option.label}
-      getOptionValue={(option) => String(option.value)}
+      getOptionValue={(option) =>
+        getOptionValue ? getOptionValue(option.value) : String(option.value)
+      }
       options={options}
       value={selectedValue}
       onChange={(option) => onChange(option ? option.value : null)}
@@ -115,28 +148,43 @@ export function SingleSelect<TValue = string>({
       placeholder={placeholder}
       isDisabled={disabled}
       menuPortalTarget={bindToBody ? document.body : undefined}
+      filterOption={filterOption}
       components={components}
       isLoading={isLoading}
       noOptionsMessage={noOptionsMessage}
+      size={size}
+      loadingMessage={loadingMessage}
+      onBlur={onBlur}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...aria}
     />
   );
 }
 
+function isSingleValue<TValue>(
+  value: TValue | readonly TValue[]
+): value is TValue {
+  return !Array.isArray(value);
+}
+
 function findSelectedOptions<TValue>(
   options: Options<TValue>,
-  value: TValue | readonly TValue[]
+  value: TValue | readonly TValue[],
+  getOptionValue: (option: TValue) => string | TValue = (v: TValue) => v
 ) {
-  const valueArr = Array.isArray(value) ? value : [value];
+  const valueArr = isSingleValue(value)
+    ? [getOptionValue(value)]
+    : value.map((v) => getOptionValue(v));
 
   const values = _.compact(
     options.flatMap((option) => {
       if (isGroup(option)) {
-        return option.options.find((option) => valueArr.includes(option.value));
+        return option.options.find((opt) =>
+          valueArr.includes(getOptionValue(opt.value))
+        );
       }
 
-      if (valueArr.includes(option.value)) {
+      if (valueArr.includes(getOptionValue(option.value))) {
         return option;
       }
 
@@ -158,36 +206,76 @@ export function MultiSelect<TValue = string>({
   disabled,
   isClearable,
   bindToBody,
+  filterOption,
   components,
   isLoading,
   noOptionsMessage,
+  loadingMessage,
+  formatCreateLabel,
+  onCreateOption,
+  isCreatable,
+  size,
+  getOptionValue,
+  onBlur,
   ...aria
 }: Omit<MultiProps<TValue>, 'isMulti'>) {
-  const selectedOptions = findSelectedOptions(options, value);
+  const [inputValue, setInputValue] = useState('');
+  const selectedOptions = findSelectedOptions(options, value, getOptionValue);
+  const SelectComponent = isCreatable ? Creatable : ReactSelect;
+
   return (
-    <ReactSelect
+    <SelectComponent
       name={name}
       isMulti
       isClearable={isClearable}
       getOptionLabel={(option) => option.label}
-      getOptionValue={(option) => String(option.value)}
+      getOptionValue={(option) =>
+        getOptionValue ? getOptionValue(option.value) : String(option.value)
+      }
       isOptionDisabled={(option) => !!option.disabled}
       options={options}
       value={selectedOptions}
       closeMenuOnSelect={false}
-      onChange={(newValue) => onChange(newValue.map((option) => option.value))}
+      onChange={(newValue) => {
+        onChange(newValue.map((option) => option.value));
+        setInputValue('');
+      }}
       data-cy={dataCy}
+      id={dataCy}
       inputId={inputId}
       placeholder={placeholder}
       isDisabled={disabled}
       menuPortalTarget={bindToBody ? document.body : undefined}
+      filterOption={filterOption}
       components={components}
       isLoading={isLoading}
       noOptionsMessage={noOptionsMessage}
+      loadingMessage={loadingMessage}
+      formatCreateLabel={formatCreateLabel}
+      onCreateOption={onCreateOption}
+      inputValue={inputValue}
+      onInputChange={(textInput) => setInputValue(textInput)}
+      onBlur={handleBlur}
+      size={size}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...aria}
     />
   );
+
+  function handleBlur(e: React.FocusEvent<HTMLInputElement>) {
+    onBlur?.(e);
+    const trimmed = inputValue.trim();
+    if (!trimmed || value.includes(trimmed as TValue)) {
+      setInputValue('');
+      return;
+    }
+    if (onCreateOption && isCreatable) {
+      onCreateOption(trimmed);
+    } else {
+      onChange([...value, trimmed as TValue]);
+    }
+    setInputValue('');
+  }
 }
 
 function isGroup<TValue>(

@@ -3,10 +3,10 @@ import { Download } from 'lucide-react';
 
 import { Environment } from '@/react/portainer/environments/types';
 import { isKubernetesEnvironment } from '@/react/portainer/environments/utils';
-import { trackEvent } from '@/angulartics.matomo/analytics-services';
 import { Query } from '@/react/portainer/environments/queries/useEnvironmentList';
 
 import { Button } from '@@/buttons';
+import { TooltipWithChildren } from '@@/Tip/TooltipWithChildren';
 
 import { KubeconfigPrompt } from './KubeconfigPrompt';
 
@@ -23,23 +23,41 @@ export function KubeconfigButton({ environments, envQueryParams }: Props) {
     isKubernetesEnvironment(env.Type)
   );
 
-  if (!isKubeconfigButtonVisible()) {
-    return null;
+  const isHttp = window.location.protocol === 'http:';
+  const noKubeEnvs = kubeEnvs.length === 0;
+  const isDisabled = noKubeEnvs || isHttp;
+
+  let tooltipMessage = '';
+  if (isHttp) {
+    tooltipMessage =
+      'Kubeconfig download is not available when Portainer is accessed via HTTP. Please use HTTPS';
+  } else if (noKubeEnvs) {
+    tooltipMessage = 'No Kubernetes environments detected';
   }
+
+  const button = (
+    <Button
+      onClick={handleClick}
+      data-cy="download-kubeconfig-button"
+      size="medium"
+      className="!m-0"
+      icon={Download}
+      disabled={isDisabled}
+      color="light"
+    >
+      Kubeconfig
+    </Button>
+  );
 
   return (
     <>
-      <Button
-        onClick={handleClick}
-        data-cy="download-kubeconfig-button"
-        size="medium"
-        className="!m-0"
-        icon={Download}
-        disabled={kubeEnvs.length === 0}
-        color="light"
-      >
-        Kubeconfig
-      </Button>
+      {isDisabled ? (
+        <TooltipWithChildren message={tooltipMessage}>
+          <span className="!m-0">{button}</span>
+        </TooltipWithChildren>
+      ) : (
+        button
+      )}
       {prompt()}
     </>
   );
@@ -49,19 +67,11 @@ export function KubeconfigButton({ environments, envQueryParams }: Props) {
       return;
     }
 
-    trackEvent('kubernetes-kubectl-kubeconfig-multi', {
-      category: 'kubernetes',
-    });
-
     setIsOpen(true);
   }
 
   function handleClose() {
     setIsOpen(false);
-  }
-
-  function isKubeconfigButtonVisible() {
-    return window.location.protocol === 'https:';
   }
 
   function prompt() {

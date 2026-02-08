@@ -14,6 +14,7 @@ import (
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
 	"github.com/portainer/portainer/pkg/libhttp/response"
+	"github.com/rs/zerolog/log"
 
 	"github.com/segmentio/encoding/json"
 )
@@ -80,6 +81,13 @@ func (handler *Handler) endpointDockerhubStatus(w http.ResponseWriter, r *http.R
 		}
 	}
 
+	if handler.PullLimitCheckDisabled {
+		return response.JSON(w, &dockerhubStatusResponse{
+			Limit:     10,
+			Remaining: 10,
+		})
+	}
+
 	httpClient := client.NewHTTPClient()
 	token, err := getDockerHubToken(httpClient, registry)
 	if err != nil {
@@ -114,15 +122,18 @@ func getDockerHubToken(httpClient *client.HTTPClient, registry *portainer.Regist
 	if err != nil {
 		return "", err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			log.Warn().Err(err).Msg("failed to close response body")
+		}
+	}()
 
 	if resp.StatusCode != http.StatusOK {
 		return "", errors.New("failed fetching dockerhub token")
 	}
 
 	var data dockerhubTokenResponse
-	err = json.NewDecoder(resp.Body).Decode(&data)
-	if err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
 		return "", err
 	}
 
@@ -144,8 +155,11 @@ func getDockerHubLimits(httpClient *client.HTTPClient, token string) (*dockerhub
 		return nil, err
 	}
 
-	io.Copy(io.Discard, resp.Body)
-	resp.Body.Close()
+	_, _ = io.Copy(io.Discard, resp.Body)
+
+	if err := resp.Body.Close(); err != nil {
+		log.Warn().Err(err).Msg("failed to close response body")
+	}
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, errors.New("failed fetching dockerhub limits")

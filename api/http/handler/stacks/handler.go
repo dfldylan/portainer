@@ -11,11 +11,11 @@ import (
 	"github.com/portainer/portainer/api/dataservices"
 	dockerclient "github.com/portainer/portainer/api/docker/client"
 	"github.com/portainer/portainer/api/docker/consts"
-	"github.com/portainer/portainer/api/http/middlewares"
 	"github.com/portainer/portainer/api/http/security"
 	"github.com/portainer/portainer/api/internal/authorization"
 	"github.com/portainer/portainer/api/internal/endpointutils"
 	"github.com/portainer/portainer/api/kubernetes/cli"
+	"github.com/portainer/portainer/api/logs"
 	"github.com/portainer/portainer/api/scheduler"
 	"github.com/portainer/portainer/api/stacks/deployments"
 	"github.com/portainer/portainer/api/stacks/stackutils"
@@ -62,8 +62,6 @@ func NewHandler(bouncer security.BouncerService) *Handler {
 
 	h.Handle("/stacks/create/{type}/{method}",
 		bouncer.AuthenticatedAccess(httperror.LoggerHandler(h.stackCreate))).Methods(http.MethodPost)
-	h.Handle("/stacks",
-		bouncer.AuthenticatedAccess(middlewares.Deprecated(h, deprecatedStackCreateUrlParser))).Methods(http.MethodPost) // Deprecated
 	h.Handle("/stacks",
 		bouncer.AuthenticatedAccess(httperror.LoggerHandler(h.stackList))).Methods(http.MethodGet)
 	h.Handle("/stacks/{id}",
@@ -177,7 +175,7 @@ func (handler *Handler) checkUniqueStackNameInDocker(endpoint *portainer.Endpoin
 	if err != nil {
 		return false, err
 	}
-	defer dockerClient.Close()
+	defer logs.CloseAndLogErr(dockerClient)
 	if swarmMode {
 		services, err := dockerClient.ServiceList(context.Background(), types.ServiceListOptions{})
 		if err != nil {

@@ -3,14 +3,15 @@ package client
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"io"
-	"maps"
 	"net/http"
 	"strings"
 	"time"
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/crypto"
+	"github.com/rs/zerolog/log"
 
 	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
@@ -23,6 +24,8 @@ const (
 	defaultDockerRequestTimeout = 60 * time.Second
 	dockerClientVersion         = "1.37"
 )
+
+type NodeNamesCtxKey struct{}
 
 // ClientFactory is used to create Docker clients
 type ClientFactory struct {
@@ -69,19 +72,6 @@ func (factory *ClientFactory) CreateClient(endpoint *portainer.Endpoint, nodeNam
 func createLocalClient(endpoint *portainer.Endpoint) (*client.Client, error) {
 	return client.NewClientWithOpts(
 		client.WithHost(endpoint.URL),
-		client.WithAPIVersionNegotiation(),
-	)
-}
-
-func CreateClientFromEnv() (*client.Client, error) {
-	return client.NewClientWithOpts(
-		client.FromEnv,
-		client.WithAPIVersionNegotiation(),
-	)
-}
-
-func CreateSimpleClient() (*client.Client, error) {
-	return client.NewClientWithOpts(
 		client.WithAPIVersionNegotiation(),
 	)
 }
@@ -141,7 +131,6 @@ func createAgentClient(endpoint *portainer.Endpoint, endpointURL string, signatu
 
 type NodeNameTransport struct {
 	*http.Transport
-	nodeNames map[string]string
 }
 
 func (t *NodeNameTransport) RoundTrip(req *http.Request) (*http.Response, error) {
@@ -155,11 +144,16 @@ func (t *NodeNameTransport) RoundTrip(req *http.Request) (*http.Response, error)
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		resp.Body.Close()
+		if err := resp.Body.Close(); err != nil {
+			log.Warn().Err(err).Msg("failed to close response body")
+		}
+
 		return resp, err
 	}
 
-	resp.Body.Close()
+	if err := resp.Body.Close(); err != nil {
+		log.Warn().Err(err).Msg("failed to close response body")
+	}
 
 	resp.Body = io.NopCloser(bytes.NewReader(body))
 
@@ -176,16 +170,17 @@ func (t *NodeNameTransport) RoundTrip(req *http.Request) (*http.Response, error)
 		return resp, nil
 	}
 
-	t.nodeNames = make(map[string]string)
-	for _, r := range rs {
-		t.nodeNames[r.ID] = r.Portainer.Agent.NodeName
+	nodeNames, ok := req.Context().Value(NodeNamesCtxKey{}).(map[string]string)
+	if ok {
+		for idx, r := range rs {
+			// as there is no way to differentiate the same image available in multiple nodes only by their ID
+			// we append the index of the image in the payload response to match the node name later
+			// from the image.Summary[] list returned by docker's client.ImageList()
+			nodeNames[fmt.Sprintf("%s-%d", r.ID, idx)] = r.Portainer.Agent.NodeName
+		}
 	}
 
 	return resp, err
-}
-
-func (t *NodeNameTransport) NodeNames() map[string]string {
-	return maps.Clone(t.nodeNames)
 }
 
 func httpClient(endpoint *portainer.Endpoint, timeout *time.Duration) (*http.Client, error) {
@@ -194,10 +189,11 @@ func httpClient(endpoint *portainer.Endpoint, timeout *time.Duration) (*http.Cli
 	}
 
 	if endpoint.TLSConfig.TLS {
-		tlsConfig, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig.TLSCACertPath, endpoint.TLSConfig.TLSCertPath, endpoint.TLSConfig.TLSKeyPath, endpoint.TLSConfig.TLSSkipVerify)
+		tlsConfig, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig)
 		if err != nil {
 			return nil, err
 		}
+
 		transport.TLSClientConfig = tlsConfig
 	}
 

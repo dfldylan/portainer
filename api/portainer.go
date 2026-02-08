@@ -4,16 +4,21 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"net/http"
 	"time"
+
+	gittypes "github.com/portainer/portainer/api/git/types"
+	models "github.com/portainer/portainer/api/http/models/kubernetes"
+	"github.com/portainer/portainer/api/roar"
+	"github.com/portainer/portainer/pkg/featureflags"
+	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/image"
+	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/api/types/system"
 	"github.com/docker/docker/api/types/volume"
-	gittypes "github.com/portainer/portainer/api/git/types"
-	models "github.com/portainer/portainer/api/http/models/kubernetes"
-	"github.com/portainer/portainer/pkg/featureflags"
-
+	"github.com/segmentio/encoding/json"
 	"golang.org/x/oauth2"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/version"
@@ -24,6 +29,8 @@ type (
 	AccessPolicy struct {
 		// Role identifier. Reference the role that will be associated to this access policy
 		RoleID RoleID `json:"RoleId" example:"1"`
+		// Namespaces is a list of namespaces that this access policy applies to. Only used for namespaced level roles
+		Namespaces []string `json:"Namespaces,omitempty"`
 	}
 
 	// AgentPlatform represents a platform type for an Agent
@@ -106,6 +113,8 @@ type (
 		AdminPassword             *string
 		AdminPasswordFile         *string
 		Assets                    *string
+		CSP                       *bool
+		CompactDB                 *bool
 		Data                      *string
 		FeatureFlags              *[]string
 		EnableEdgeComputeFeatures *bool
@@ -116,14 +125,12 @@ type (
 		Templates                 *string
 		TLS                       *bool
 		TLSSkipVerify             *bool
+		HasTLSCacert              *bool
 		TLSCacert                 *string
 		TLSCert                   *string
 		TLSKey                    *string
 		HTTPDisabled              *bool
 		HTTPEnabled               *bool
-		SSL                       *bool
-		SSLCert                   *string
-		SSLKey                    *string
 		Rollback                  *bool
 		SnapshotInterval          *string
 		BaseURL                   *string
@@ -134,6 +141,8 @@ type (
 		LogLevel                  *string
 		LogMode                   *string
 		KubectlShellImage         *string
+		PullLimitCheckDisabled    *bool
+		TrustedOrigins            *string
 	}
 
 	// CustomTemplateVariableDefinition
@@ -185,6 +194,16 @@ type (
 	// CustomTemplatePlatform represents a custom template platform
 	CustomTemplatePlatform int
 
+	// DiagnosticsData represents the diagnostics data for an environment
+	// this contains the logs, telnet, traceroute, dns and proxy information
+	// which will be part of the DockerSnapshot and KubernetesSnapshot structs
+	DiagnosticsData struct {
+		Log    string            `json:"Log,omitempty"`
+		Telnet map[string]string `json:"Telnet,omitempty"`
+		DNS    map[string]string `json:"DNS,omitempty"`
+		Proxy  map[string]string `json:"Proxy,omitempty"`
+	}
+
 	// DockerHub represents all the required information to connect and use the
 	// Docker Hub
 	DockerHub struct {
@@ -198,25 +217,34 @@ type (
 
 	// DockerSnapshot represents a snapshot of a specific Docker environment(endpoint) at a specific time
 	DockerSnapshot struct {
-		Time                    int64             `json:"Time"`
-		DockerVersion           string            `json:"DockerVersion"`
-		Swarm                   bool              `json:"Swarm"`
-		TotalCPU                int               `json:"TotalCPU"`
-		TotalMemory             int64             `json:"TotalMemory"`
-		ContainerCount          int               `json:"ContainerCount"`
-		RunningContainerCount   int               `json:"RunningContainerCount"`
-		StoppedContainerCount   int               `json:"StoppedContainerCount"`
-		HealthyContainerCount   int               `json:"HealthyContainerCount"`
-		UnhealthyContainerCount int               `json:"UnhealthyContainerCount"`
-		VolumeCount             int               `json:"VolumeCount"`
-		ImageCount              int               `json:"ImageCount"`
-		ServiceCount            int               `json:"ServiceCount"`
-		StackCount              int               `json:"StackCount"`
-		SnapshotRaw             DockerSnapshotRaw `json:"DockerSnapshotRaw"`
-		NodeCount               int               `json:"NodeCount"`
-		GpuUseAll               bool              `json:"GpuUseAll"`
-		GpuUseList              []string          `json:"GpuUseList"`
-		IsPodman                bool              `json:"IsPodman"`
+		Time                    int64               `json:"Time"`
+		DockerVersion           string              `json:"DockerVersion"`
+		Swarm                   bool                `json:"Swarm"`
+		TotalCPU                int                 `json:"TotalCPU"`
+		TotalMemory             int64               `json:"TotalMemory"`
+		ContainerCount          int                 `json:"ContainerCount"`
+		RunningContainerCount   int                 `json:"RunningContainerCount"`
+		StoppedContainerCount   int                 `json:"StoppedContainerCount"`
+		HealthyContainerCount   int                 `json:"HealthyContainerCount"`
+		UnhealthyContainerCount int                 `json:"UnhealthyContainerCount"`
+		VolumeCount             int                 `json:"VolumeCount"`
+		ImageCount              int                 `json:"ImageCount"`
+		ServiceCount            int                 `json:"ServiceCount"`
+		StackCount              int                 `json:"StackCount"`
+		SnapshotRaw             DockerSnapshotRaw   `json:"DockerSnapshotRaw"`
+		NodeCount               int                 `json:"NodeCount"`
+		GpuUseAll               bool                `json:"GpuUseAll"`
+		GpuUseList              []string            `json:"GpuUseList"`
+		IsPodman                bool                `json:"IsPodman"`
+		DiagnosticsData         *DiagnosticsData    `json:"DiagnosticsData"`
+		PerformanceMetrics      *PerformanceMetrics `json:"PerformanceMetrics"`
+	}
+
+	// PerformanceMetrics represents the performance metrics of a Docker, Swarm, Podman, and Kubernetes environments
+	PerformanceMetrics struct {
+		CPUUsage     float64 `json:"CPUUsage,omitempty"`
+		MemoryUsage  float64 `json:"MemoryUsage,omitempty"`
+		NetworkUsage float64 `json:"NetworkUsage,omitempty"`
 	}
 
 	// DockerContainerSnapshot is an extent of Docker's Container struct
@@ -230,7 +258,7 @@ type (
 	DockerSnapshotRaw struct {
 		Containers []DockerContainerSnapshot `json:"Containers" swaggerignore:"true"`
 		Volumes    volume.ListResponse       `json:"Volumes" swaggerignore:"true"`
-		Networks   []types.NetworkResource   `json:"Networks" swaggerignore:"true"`
+		Networks   []network.Summary         `json:"Networks" swaggerignore:"true"`
 		Images     []image.Summary           `json:"Images" swaggerignore:"true"`
 		Info       system.Info               `json:"Info" swaggerignore:"true"`
 		Version    types.Version             `json:"Version" swaggerignore:"true"`
@@ -239,12 +267,15 @@ type (
 	// EdgeGroup represents an Edge group
 	EdgeGroup struct {
 		// EdgeGroup Identifier
-		ID           EdgeGroupID  `json:"Id" example:"1"`
-		Name         string       `json:"Name"`
-		Dynamic      bool         `json:"Dynamic"`
-		TagIDs       []TagID      `json:"TagIds"`
-		Endpoints    []EndpointID `json:"Endpoints"`
-		PartialMatch bool         `json:"PartialMatch"`
+		ID           EdgeGroupID           `json:"Id" example:"1"`
+		Name         string                `json:"Name"`
+		Dynamic      bool                  `json:"Dynamic"`
+		TagIDs       []TagID               `json:"TagIds"`
+		EndpointIDs  roar.Roar[EndpointID] `json:"EndpointIds"`
+		PartialMatch bool                  `json:"PartialMatch"`
+
+		// Deprecated: only used for API responses
+		Endpoints []EndpointID `json:"Endpoints"`
 	}
 
 	// EdgeGroupID represents an Edge group identifier
@@ -298,7 +329,7 @@ type (
 		// FileVersion is the version of the stack file, used to detect changes
 		FileVersion int `json:"FileVersion"`
 		// ConfigHash is the commit hash of the git repository used for deploying the stack
-		ConfigHash string `json:"ConfigHash"`
+		ConfigHash string `json:"ConfigHash,omitempty"`
 	}
 
 	// EdgeStack represents an edge stack
@@ -318,9 +349,39 @@ type (
 		DeploymentType EdgeStackDeploymentType `json:"DeploymentType"`
 		// Uses the manifest's namespaces instead of the default one
 		UseManifestNamespaces bool
+		// The username id which created this stack
+		CreatedByUserId string `example:"1"`
+		// The username which created this stack
+		CreatedBy string `example:"admin"`
+	}
 
-		// Deprecated
-		Prune bool `json:"Prune,omitempty"`
+	// HelmConfig represents the Helm configuration for an edge stack
+	HelmConfig struct {
+		// Path to a Helm chart folder for Helm git deployments
+		ChartPath string `json:"HelmChartPath,omitempty" example:"charts/my-app"`
+		// Array of paths to Helm values YAML files for Helm git deployments
+		ValuesFiles []string `json:"HelmValuesFiles,omitempty" example:"['values/prod.yaml', 'values/secrets.yaml']"`
+		// Helm chart version from Chart.yaml (read-only, extracted during Git sync)
+		Version string `json:"HelmVersion,omitempty" example:"1.2.3"`
+		// Enable automatic rollback on deployment failure (equivalent to helm --atomic flag)
+		Atomic bool `json:"HelmAtomic,omitempty" example:"true"`
+	}
+
+	EdgeStackStatusForEnv struct {
+		EndpointID EndpointID
+		Status     []EdgeStackDeploymentStatus
+		// EE only feature
+		DeploymentInfo StackDeploymentInfo
+		// RePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+		RePullImage bool `json:"RePullImage,omitempty"`
+		// ForceRedeploy is a flag to indicate whether the force redeployment is set for the current
+		// deployment of the edge stack. The redeployment could be triggered by GitOps Update or manually by user.
+		ForceRedeploy bool `json:"ForceRedeploy,omitempty"`
+
+		// Deprecated(2.36): use ForceRedeploy and RePullImage instead for cleaner
+		// responsibility, but keep it for backward compatibility. To remove in future versions (2.44+)
+		// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+		ReadyRePullImage bool `json:"ReadyRePullImage,omitempty"`
 	}
 
 	EdgeStackDeploymentType int
@@ -345,23 +406,24 @@ type (
 		// EE only feature
 		DeploymentInfo StackDeploymentInfo
 		// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
-		ReadyRePullImage bool
+		ReadyRePullImage bool `json:"ReadyRePullImage,omitempty"`
 
 		// Deprecated
-		Details EdgeStackStatusDetails
+		Details *EdgeStackStatusDetails `json:"Details,omitempty"`
 		// Deprecated
-		Error string
+		Error string `json:"Error,omitempty"`
 		// Deprecated
-		Type EdgeStackStatusType `json:"Type"`
+		Type EdgeStackStatusType `json:"Type,omitempty"`
 	}
 
 	// EdgeStackDeploymentStatus represents an edge stack deployment status
 	EdgeStackDeploymentStatus struct {
 		Time  int64
 		Type  EdgeStackStatusType
-		Error string
+		Error string `json:"Error,omitempty"`
 		// EE only feature
-		RollbackTo *int
+		RollbackTo *int `json:"RollbackTo,omitempty"`
+		Version    int  `json:"Version,omitempty"`
 	}
 
 	// EdgeStackStatusType represents an edge stack status type
@@ -386,7 +448,7 @@ type (
 		PublicURL        string           `json:"PublicURL" example:"docker.mydomain.tld:2375"`
 		Gpus             []Pair           `json:"Gpus"`
 		TLSConfig        TLSConfiguration `json:"TLSConfig"`
-		AzureCredentials AzureCredentials `json:"AzureCredentials,omitempty"`
+		AzureCredentials AzureCredentials `json:"AzureCredentials,omitzero"`
 		// List of tag identifiers to which this environment(endpoint) is associated
 		TagIDs []TagID `json:"TagIds"`
 		// The status of the environment(endpoint) (1 - up, 2 - down)
@@ -413,8 +475,6 @@ type (
 		AMTDeviceGUID string `json:"AMTDeviceGUID,omitempty" example:"4c4c4544-004b-3910-8037-b6c04f504633"`
 		// LastCheckInDate mark last check-in date on checkin
 		LastCheckInDate int64
-		// QueryDate of each query with the endpoints list
-		QueryDate int64
 		// Heartbeat indicates the heartbeat status of an edge environment
 		Heartbeat bool `json:"Heartbeat" example:"true"`
 
@@ -490,6 +550,67 @@ type (
 		Tags []string `json:"Tags,omitempty"`
 	}
 
+	PolicyChartSummary struct {
+		ChartName   string `json:"ChartName"`
+		Fingerprint string `json:"Fingerprint"`
+	}
+
+	PolicyChartStatus struct {
+		ChartName   string            `json:"chartName"`
+		Fingerprint string            `json:"fingerprint"`
+		Status      HelmInstallStatus `json:"status"`
+		Message     string            `json:"message"`
+		Namespace   string            `json:"namespace"`
+		// Unix timestamp
+		LastAttemptTime int64 `json:"lastAttemptTime"`
+	}
+
+	ImageBundle struct {
+		FileName     string `json:"FileName"`
+		EncodedTarGz string `json:"EncodedTarGz"`
+	}
+
+	PolicyChartBundle struct {
+		PolicyChartSummary
+		EncodedTgz          string             `json:"EncodedTgz"`
+		Namespace           string             `json:"Namespace"`
+		PreReleaseManifest  string             `json:"PreReleaseManifest,omitempty"`
+		EncodedValues       string             `json:"EncodedValues"`
+		PreInstallDeletions []ResourceDeletion `json:"PreInstallDeletions,omitempty"`
+		PreInstallAdoptions []ResourceAdoption `json:"PreInstallAdoptions,omitempty"`
+	}
+
+	// ResourceDeletion identifies an existing Kubernetes resource to delete before policy install
+	ResourceDeletion struct {
+		APIVersion string `json:"apiVersion" example:"v1" yaml:"apiVersion"`
+		Kind       string `json:"kind" example:"Secret" yaml:"kind"`
+		Name       string `json:"name" example:"registry-1" yaml:"name"`
+		Namespace  string `json:"namespace,omitempty" example:"default" yaml:"namespace,omitempty"`
+	}
+
+	// ResourceAdoption identifies an existing Kubernetes resource to adopt into a Helm release
+	ResourceAdoption struct {
+		APIVersion string `json:"apiVersion" example:"v1" yaml:"apiVersion"`
+		Kind       string `json:"kind" example:"Secret" yaml:"kind"`
+		Name       string `json:"name" example:"registry-1" yaml:"name"`
+		Namespace  string `json:"namespace,omitempty" example:"default" yaml:"namespace,omitempty"`
+	}
+
+	// RestoreSettings contains instructions for restoring environment-level settings
+	RestoreSettings struct {
+		Manifest string `json:"manifest"` // Base64-encoded Kubernetes YAML manifest
+	}
+
+	// RestoreSettingsBundle maps restore type to restoration instructions
+	RestoreSettingsBundle map[PolicyType]RestoreSettings
+
+	PolicyID int
+
+	// PolicyType represents the type of policy
+	PolicyType string
+)
+
+type (
 	// EndpointGroupID represents an environment(endpoint) group identifier
 	EndpointGroupID int
 
@@ -554,7 +675,7 @@ type (
 		PriceDescription string                      `json:"PriceDescription,omitempty"`
 		Deal             bool                        `json:"Deal,omitempty"`
 		Available        bool                        `json:"Available,omitempty"`
-		License          ExtensionLicenseInformation `json:"License,omitempty"`
+		License          ExtensionLicenseInformation `json:"License,omitzero"`
 		Version          string                      `json:"Version"`
 		UpdateAvailable  bool                        `json:"UpdateAvailable"`
 		ShopURL          string                      `json:"ShopURL,omitempty"`
@@ -570,6 +691,12 @@ type (
 		ProjectID   int    `json:"ProjectId"`
 		InstanceURL string `json:"InstanceURL"`
 		ProjectPath string `json:"ProjectPath"`
+	}
+
+	// GithubRegistryData represents data required for Github registry to work
+	GithubRegistryData struct {
+		UseOrganisation  bool   `json:"UseOrganisation"`
+		OrganisationName string `json:"OrganisationName"`
 	}
 
 	HelmUserRepositoryID int
@@ -599,14 +726,16 @@ type (
 	JobType int
 
 	K8sNamespaceInfo struct {
-		Id             string                 `json:"Id"`
-		Name           string                 `json:"Name"`
-		Status         corev1.NamespaceStatus `json:"Status"`
-		CreationDate   string                 `json:"CreationDate"`
-		NamespaceOwner string                 `json:"NamespaceOwner"`
-		IsSystem       bool                   `json:"IsSystem"`
-		IsDefault      bool                   `json:"IsDefault"`
-		ResourceQuota  *corev1.ResourceQuota  `json:"ResourceQuota"`
+		Id                  string                 `json:"Id"`
+		Name                string                 `json:"Name"`
+		Status              corev1.NamespaceStatus `json:"Status"`
+		Annotations         map[string]string      `json:"Annotations"`
+		CreationDate        string                 `json:"CreationDate"`
+		UnhealthyEventCount int                    `json:"UnhealthyEventCount"`
+		NamespaceOwner      string                 `json:"NamespaceOwner"`
+		IsSystem            bool                   `json:"IsSystem"`
+		IsDefault           bool                   `json:"IsDefault"`
+		ResourceQuota       *corev1.ResourceQuota  `json:"ResourceQuota"`
 	}
 
 	K8sNodeLimits struct {
@@ -638,11 +767,13 @@ type (
 
 	// KubernetesSnapshot represents a snapshot of a specific Kubernetes environment(endpoint) at a specific time
 	KubernetesSnapshot struct {
-		Time              int64  `json:"Time"`
-		KubernetesVersion string `json:"KubernetesVersion"`
-		NodeCount         int    `json:"NodeCount"`
-		TotalCPU          int64  `json:"TotalCPU"`
-		TotalMemory       int64  `json:"TotalMemory"`
+		Time               int64               `json:"Time"`
+		KubernetesVersion  string              `json:"KubernetesVersion"`
+		NodeCount          int                 `json:"NodeCount"`
+		TotalCPU           int64               `json:"TotalCPU"`
+		TotalMemory        int64               `json:"TotalMemory"`
+		DiagnosticsData    *DiagnosticsData    `json:"DiagnosticsData"`
+		PerformanceMetrics *PerformanceMetrics `json:"PerformanceMetrics"`
 	}
 
 	// KubernetesConfiguration represents the configuration of a Kubernetes environment(endpoint)
@@ -788,6 +919,7 @@ type (
 		Password                string                           `json:"Password,omitempty" example:"registry_password"`
 		ManagementConfiguration *RegistryManagementConfiguration `json:"ManagementConfiguration"`
 		Gitlab                  GitlabRegistryData               `json:"Gitlab"`
+		Github                  GithubRegistryData               `json:"Github"`
 		Quay                    QuayRegistryData                 `json:"Quay"`
 		Ecr                     EcrData                          `json:"Ecr"`
 		RegistryAccesses        RegistryAccesses                 `json:"RegistryAccesses"`
@@ -811,9 +943,11 @@ type (
 	RegistryAccesses map[EndpointID]RegistryAccessPolicies
 
 	RegistryAccessPolicies struct {
+		// Docker specific fields (with docker, users/teams have access to a registry)
 		UserAccessPolicies UserAccessPolicies `json:"UserAccessPolicies"`
 		TeamAccessPolicies TeamAccessPolicies `json:"TeamAccessPolicies"`
-		Namespaces         []string           `json:"Namespaces"`
+		// Kubernetes specific fields (with kubernetes, namespaces have access to a registry, if users/teams have access to the same namespace, they have access to the registry)
+		Namespaces []string `json:"Namespaces"`
 	}
 
 	// RegistryID represents a registry identifier
@@ -973,8 +1107,6 @@ type (
 		UserSessionTimeout string `json:"UserSessionTimeout" example:"5m"`
 		// The expiry of a Kubeconfig
 		KubeconfigExpiry string `json:"KubeconfigExpiry" example:"24h"`
-		// Whether telemetry is enabled
-		EnableTelemetry bool `json:"EnableTelemetry" example:"false"`
 		// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
 		HelmRepositoryURL string `json:"HelmRepositoryURL" example:"https://charts.bitnami.com/bitnami"`
 		// KubectlImage, defaults to portainer/kubectl-shell
@@ -1069,6 +1201,8 @@ type (
 	StackOption struct {
 		// Prune services that are no longer referenced
 		Prune bool `example:"false"`
+		// Enable atomic rollback on failure (Helm --atomic flag for Kubernetes Helm stacks)
+		HelmAtomic bool `example:"false"`
 	}
 
 	// StackID represents a stack identifier (it must be composed of Name + "_" + SwarmID to create a unique identifier)
@@ -1364,6 +1498,12 @@ type (
 		Kubernetes *KubernetesSnapshot `json:"Kubernetes"`
 	}
 
+	SnapshotRawMessage struct {
+		EndpointID EndpointID      `json:"EndpointId"`
+		Docker     json.RawMessage `json:"Docker"`
+		Kubernetes json.RawMessage `json:"Kubernetes"`
+	}
+
 	// CLIService represents a service for managing CLI
 	CLIService interface {
 		ParseFlags(version string) (*CLIFlags, error)
@@ -1385,6 +1525,13 @@ type (
 		// When this is set, docker compose will output its logs to stdout
 		AbortOnContainerExit bool
 		Prune                bool
+	}
+
+	ComposeDownOptions struct {
+		// RemoveVolumes will remove the named volumes declared in the compose file
+		// and anonymous volumes attached to the stack's containers
+		// Drives `docker compose down --volumes`
+		RemoveVolumes bool
 	}
 
 	ComposeRunOptions struct {
@@ -1475,17 +1622,50 @@ type (
 		StoreSSLCertPair(cert, key []byte) (string, string, error)
 		CopySSLCertPair(certPath, keyPath string) (string, string, error)
 		CopySSLCACert(caCertPath string) (string, error)
-		StoreMTLSCertificates(cert, caCert, key []byte) (string, string, string, error)
+		StoreMTLSCertificates(caCert, cert, key []byte) (string, string, string, error)
+		GetMTLSCertificates() (string, string, string, error)
 		GetDefaultChiselPrivateKeyPath() string
 		StoreChiselPrivateKey(privateKey []byte) error
 	}
 
 	// GitService represents a service for managing Git
 	GitService interface {
-		CloneRepository(destination string, repositoryURL, referenceName, username, password string, tlsSkipVerify bool) error
-		LatestCommitID(repositoryURL, referenceName, username, password string, tlsSkipVerify bool) (string, error)
-		ListRefs(repositoryURL, username, password string, hardRefresh bool, tlsSkipVerify bool) ([]string, error)
-		ListFiles(repositoryURL, referenceName, username, password string, dirOnly, hardRefresh bool, includeExts []string, tlsSkipVerify bool) ([]string, error)
+		CloneRepository(
+			destination string,
+			repositoryURL,
+			referenceName,
+			username,
+			password string,
+			authType gittypes.GitCredentialAuthType,
+			tlsSkipVerify bool,
+		) error
+		LatestCommitID(
+			repositoryURL,
+			referenceName,
+			username,
+			password string,
+			authType gittypes.GitCredentialAuthType,
+			tlsSkipVerify bool,
+		) (string, error)
+		ListRefs(
+			repositoryURL,
+			username,
+			password string,
+			authType gittypes.GitCredentialAuthType,
+			hardRefresh bool,
+			tlsSkipVerify bool,
+		) ([]string, error)
+		ListFiles(
+			repositoryURL,
+			referenceName,
+			username,
+			password string,
+			authType gittypes.GitCredentialAuthType,
+			dirOnly,
+			hardRefresh bool,
+			includeExts []string,
+			tlsSkipVerify bool,
+		) ([]string, error)
 	}
 
 	// OpenAMTService represents a service for managing OpenAMT
@@ -1506,56 +1686,127 @@ type (
 
 	// KubeClient represents a service used to query a Kubernetes environment(endpoint)
 	KubeClient interface {
-		ServerVersion() (*version.Info, error)
+		// Access
+		GetIsKubeAdmin() bool
+		SetIsKubeAdmin(isKubeAdmin bool)
+		GetClientNonAdminNamespaces() []string
+		SetClientNonAdminNamespaces([]string)
+		NamespaceAccessPoliciesDeleteNamespace(ns string) error
+		UpdateNamespaceAccessPolicies(accessPolicies map[string]K8sNamespaceAccessPolicy) error
+		GetNamespaceAccessPolicies() (map[string]K8sNamespaceAccessPolicy, error)
+		GetNonAdminNamespaces(userID int, teamIDs []int, isRestrictDefaultNamespace bool) ([]string, error)
 
-		SetupUserServiceAccount(userID int, teamIDs []int, restrictDefaultNamespace bool) error
-		IsRBACEnabled() (bool, error)
-		GetPortainerUserServiceAccount(tokendata *TokenData) (*corev1.ServiceAccount, error)
-		GetServiceAccounts(namespace string) ([]models.K8sServiceAccount, error)
-		DeleteServiceAccounts(reqs models.K8sServiceAccountDeleteRequests) error
-		GetServiceAccountBearerToken(userID int) (string, error)
-		CreateUserShellPod(ctx context.Context, serviceAccountName, shellPodImage string) (*KubernetesShellPod, error)
+		// Applications
+		GetApplications(namespace, nodeName string) ([]models.K8sApplication, error)
+		GetApplicationsResource(namespace, node string) (models.K8sApplicationResource, error)
+
+		// ClusterRole
+		GetClusterRoles() ([]models.K8sClusterRole, error)
+		DeleteClusterRoles(req models.K8sClusterRoleDeleteRequests) error
+
+		// ConfigMap
+		GetConfigMap(namespace, configMapName string) (models.K8sConfigMap, error)
+		CombineConfigMapWithApplications(configMap models.K8sConfigMap) (models.K8sConfigMap, error)
+
+		// CronJob
+		GetCronJobs(namespace string) ([]models.K8sCronJob, error)
+		DeleteCronJobs(payload models.K8sCronJobDeleteRequests) error
+
+		// Event
+		GetEvents(namespace string, resourceId string) ([]models.K8sEvent, error)
+
+		// Exec
 		StartExecProcess(token string, useAdminToken bool, namespace, podName, containerName string, command []string, stdin io.Reader, stdout io.Writer, errChan chan error)
 
+		// ClusterRoleBinding
+		GetClusterRoleBindings() ([]models.K8sClusterRoleBinding, error)
+		DeleteClusterRoleBindings(reqs models.K8sClusterRoleBindingDeleteRequests) error
+
+		// Dashboard
+		GetDashboard() (models.K8sDashboard, error)
+
+		// Deployment
 		HasStackName(namespace string, stackName string) (bool, error)
-		NamespaceAccessPoliciesDeleteNamespace(namespace string) error
-		CreateNamespace(info models.K8sNamespaceDetails) (*corev1.Namespace, error)
-		UpdateNamespace(info models.K8sNamespaceDetails) (*corev1.Namespace, error)
-		GetNamespaces() (map[string]K8sNamespaceInfo, error)
-		GetNamespace(string) (K8sNamespaceInfo, error)
-		DeleteNamespace(namespace string) (*corev1.Namespace, error)
-		GetConfigMaps(namespace string) ([]models.K8sConfigMap, error)
-		GetSecrets(namespace string) ([]models.K8sSecret, error)
+
+		// Ingress
 		GetIngressControllers() (models.K8sIngressControllers, error)
-		GetApplications(namespace, nodename string, withDependencies bool) ([]models.K8sApplication, error)
-		GetMetrics() (models.K8sMetrics, error)
-		GetStorage() ([]KubernetesStorageClassConfig, error)
-		CreateIngress(namespace string, info models.K8sIngressInfo, owner string) error
-		UpdateIngress(namespace string, info models.K8sIngressInfo) error
+		GetIngress(namespace, ingressName string) (models.K8sIngressInfo, error)
 		GetIngresses(namespace string) ([]models.K8sIngressInfo, error)
+		CreateIngress(namespace string, info models.K8sIngressInfo, owner string) error
 		DeleteIngresses(reqs models.K8sIngressDeleteRequests) error
-		CreateService(namespace string, service models.K8sServiceInfo) error
-		UpdateService(namespace string, service models.K8sServiceInfo) error
-		GetServices(namespace string) ([]models.K8sServiceInfo, error)
-		DeleteServices(reqs models.K8sServiceDeleteRequests) error
+		UpdateIngress(namespace string, info models.K8sIngressInfo) error
+		CombineIngressWithService(ingress models.K8sIngressInfo) (models.K8sIngressInfo, error)
+		CombineIngressesWithServices(ingresses []models.K8sIngressInfo) ([]models.K8sIngressInfo, error)
+
+		// Job
+		GetJobs(namespace string, includeCronJobChildren bool) ([]models.K8sJob, error)
+		DeleteJobs(payload models.K8sJobDeleteRequests) error
+
+		// Metrics
+		GetMetrics() (models.K8sMetrics, error)
+
+		// Namespace
+		ToggleSystemState(namespaceName string, isSystem bool) error
+		UpdateNamespace(info models.K8sNamespaceDetails) (*corev1.Namespace, error)
+		GetNamespace(name string) (K8sNamespaceInfo, error)
+		CreateNamespace(info models.K8sNamespaceDetails) (*corev1.Namespace, error)
+		GetNamespaces() (map[string]K8sNamespaceInfo, error)
+		CombineNamespaceWithResourceQuota(namespace K8sNamespaceInfo, w http.ResponseWriter) *httperror.HandlerError
+		DeleteNamespace(namespaceName string) (*corev1.Namespace, error)
+		CombineNamespacesWithResourceQuotas(namespaces map[string]K8sNamespaceInfo, w http.ResponseWriter) *httperror.HandlerError
+		ConvertNamespaceMapToSlice(namespaces map[string]K8sNamespaceInfo) []K8sNamespaceInfo
+
+		// NodeLimits
 		GetNodesLimits() (K8sNodesLimits, error)
-		GetMaxResourceLimits(name string, overCommitEnabled bool, resourceOverCommitPercent int) (K8sNodeLimits, error)
-		GetNamespaceAccessPolicies() (map[string]K8sNamespaceAccessPolicy, error)
-		UpdateNamespaceAccessPolicies(accessPolicies map[string]K8sNamespaceAccessPolicy) error
+		GetMaxResourceLimits(skipNamespace string, overCommitEnabled bool, resourceOverCommitPercent int) (K8sNodeLimits, error)
+
+		// Pod
+		CreateUserShellPod(ctx context.Context, serviceAccountName, shellPodImage string) (*KubernetesShellPod, error)
+
+		// RBAC
+		IsRBACEnabled() (bool, error)
+
+		// Registries
 		DeleteRegistrySecret(registry RegistryID, namespace string) error
 		CreateRegistrySecret(registry *Registry, namespace string) error
 		IsRegistrySecret(namespace, secretName string) (bool, error)
-		ToggleSystemState(namespace string, isSystem bool) error
 
-		GetClusterRoles() ([]models.K8sClusterRole, error)
-		DeleteClusterRoles(models.K8sClusterRoleDeleteRequests) error
-		GetClusterRoleBindings() ([]models.K8sClusterRoleBinding, error)
-		DeleteClusterRoleBindings(models.K8sClusterRoleBindingDeleteRequests) error
-
-		GetRoles(namespace string) ([]models.K8sRole, error)
-		DeleteRoles(models.K8sRoleDeleteRequests) error
+		// RoleBinding
 		GetRoleBindings(namespace string) ([]models.K8sRoleBinding, error)
-		DeleteRoleBindings(models.K8sRoleBindingDeleteRequests) error
+		DeleteRoleBindings(reqs models.K8sRoleBindingDeleteRequests) error
+
+		// Role
+		DeleteRoles(reqs models.K8sRoleDeleteRequests) error
+
+		// Secret
+		GetSecrets(namespace string) ([]models.K8sSecret, error)
+		GetSecret(namespace string, secretName string) (models.K8sSecret, error)
+		CombineSecretWithApplications(secret models.K8sSecret) (models.K8sSecret, error)
+
+		// ServiceAccount
+		GetServiceAccounts(namespace string) ([]models.K8sServiceAccount, error)
+		DeleteServiceAccounts(reqs models.K8sServiceAccountDeleteRequests) error
+		SetupUserServiceAccount(int, []int, bool) error
+		GetPortainerUserServiceAccount(tokendata *TokenData) (*corev1.ServiceAccount, error)
+		GetServiceAccountBearerToken(userID int) (string, error)
+
+		// Service
+		GetServices(namespace string) ([]models.K8sServiceInfo, error)
+		CombineServicesWithApplications(services []models.K8sServiceInfo) ([]models.K8sServiceInfo, error)
+		CreateService(namespace string, info models.K8sServiceInfo) error
+		DeleteServices(reqs models.K8sServiceDeleteRequests) error
+		UpdateService(namespace string, info models.K8sServiceInfo) error
+
+		// ServerVersion
+		ServerVersion() (*version.Info, error)
+
+		// Storage
+		GetStorage() ([]KubernetesStorageClassConfig, error)
+
+		// Volumes
+		GetVolumes(namespace string) ([]models.K8sVolumeInfo, error)
+		GetVolume(namespace, volumeName string) (*models.K8sVolumeInfo, error)
+		CombineVolumesWithApplications(volumes *[]models.K8sVolumeInfo) (*[]models.K8sVolumeInfo, error)
 	}
 
 	// KubernetesDeployer represents a service to deploy a manifest inside a Kubernetes environment(endpoint)
@@ -1580,7 +1831,7 @@ type (
 
 	// OAuthService represents a service used to authenticate users using OAuth
 	OAuthService interface {
-		Authenticate(code string, configuration *OAuthSettings) (string, error)
+		Authenticate(ctx context.Context, code string, configuration *OAuthSettings) (string, error)
 	}
 
 	// ReverseTunnelService represents a service used to manage reverse tunnel connections.
@@ -1605,7 +1856,7 @@ type (
 		Start()
 		SetSnapshotInterval(snapshotInterval string) error
 		SnapshotEndpoint(endpoint *Endpoint) error
-		FillSnapshotData(endpoint *Endpoint) error
+		FillSnapshotData(endpoint *Endpoint, includeRaw bool) error
 	}
 
 	// SwarmStackManager represents a service to manage Swarm stacks
@@ -1620,7 +1871,9 @@ type (
 
 const (
 	// APIVersion is the version number of the Portainer API
-	APIVersion = "2.24.0"
+	APIVersion = "2.38.0"
+	// Support annotation for the API version ("STS" for Short-Term Support or "LTS" for Long-Term Support)
+	APIVersionSupport = "STS"
 	// Edition is what this edition of Portainer is called
 	Edition = PortainerCE
 	// ComposeSyntaxMaxVersion is a maximum supported version of the docker compose syntax
@@ -1629,8 +1882,10 @@ const (
 	AssetsServerURL = "https://portainer-io-assets.sfo2.digitaloceanspaces.com"
 	// MessageOfTheDayURL represents the URL where Portainer MOTD message can be retrieved
 	MessageOfTheDayURL = AssetsServerURL + "/motd.json"
+	// ReleasesURL represents the URL used to retrieve all releases of Portainer
+	ReleasesURL = "https://api.github.com/repos/portainer/portainer/releases"
 	// VersionCheckURL represents the URL used to retrieve the latest version of Portainer
-	VersionCheckURL = "https://api.github.com/repos/portainer/portainer/releases/latest"
+	VersionCheckURL = ReleasesURL + "/latest"
 	// PortainerAgentHeader represents the name of the header available in any agent response
 	PortainerAgentHeader = "Portainer-Agent"
 	// PortainerAgentEdgeIDHeader represent the name of the header containing the Edge ID associated to an agent/agent cluster
@@ -1670,6 +1925,19 @@ const (
 	PortainerCacheHeader = "X-Portainer-Cache"
 	// KubectlShellImageEnvVar is the environment variable used to override the default kubectl shell image
 	KubectlShellImageEnvVar = "KUBECTL_SHELL_IMAGE"
+	// PullLimitCheckDisabledEnvVar is the environment variable used to disable the pull limit check
+	PullLimitCheckDisabledEnvVar = "PULL_LIMIT_CHECK_DISABLED"
+	// LicenseServerBaseURL represents the base URL of the API used to validate
+	// an extension license.
+	LicenseServerBaseURL = "https://api.portainer.io"
+	// URL to validate licenses along with system metadata.
+	LicenseCheckInURL = LicenseServerBaseURL + "/licenses/checkin"
+	// TrustedOriginsEnvVar is the environment variable used to set the trusted origins for CSRF protection
+	TrustedOriginsEnvVar = "TRUSTED_ORIGINS"
+	// CSPEnvVar is the environment variable used to enable/disable the Content Security Policy
+	CSPEnvVar = "CSP"
+	// CompactDBEnvVar is the environment variable used to enable/disable the startup compaction of the database
+	CompactDBEnvVar = "COMPACT_DB"
 )
 
 // List of supported features
@@ -1839,6 +2107,8 @@ const (
 	DockerHubRegistry
 	// EcrRegistry represents an ECR registry
 	EcrRegistry
+	// Github container registry
+	GithubRegistry
 )
 
 const (
@@ -2174,3 +2444,40 @@ const (
 	ContainerEngineDocker = "docker"
 	ContainerEnginePodman = "podman"
 )
+
+const (
+	// PolicyType constants
+	RbacK8s        PolicyType = "rbac-k8s"
+	SecurityK8s    PolicyType = "security-k8s"
+	SetupK8s       PolicyType = "setup-k8s"
+	RegistryK8s    PolicyType = "registry-k8s"
+	RbacDocker     PolicyType = "rbac-docker"
+	SecurityDocker PolicyType = "security-docker"
+	SetupDocker    PolicyType = "setup-docker"
+	RegistryDocker PolicyType = "registry-docker"
+)
+
+type HelmInstallStatus string
+
+const (
+	HelmInstallStatusInstalling   HelmInstallStatus = "installing"
+	HelmInstallStatusInstalled    HelmInstallStatus = "installed"
+	HelmInstallStatusFailed       HelmInstallStatus = "failed"
+	HelmInstallStatusUninstalling HelmInstallStatus = "uninstalling"
+)
+
+func DefaultEndpointSecuritySettings() EndpointSecuritySettings {
+	return EndpointSecuritySettings{
+		AllowBindMountsForRegularUsers:            false,
+		AllowContainerCapabilitiesForRegularUsers: false,
+		AllowDeviceMappingForRegularUsers:         false,
+		AllowHostNamespaceForRegularUsers:         false,
+		AllowPrivilegedModeForRegularUsers:        false,
+		AllowSysctlSettingForRegularUsers:         false,
+		AllowSecurityOptForRegularUsers:           false,
+		AllowVolumeBrowserForRegularUsers:         false,
+		EnableHostManagementFeatures:              false,
+
+		AllowStackManagementForRegularUsers: true,
+	}
+}

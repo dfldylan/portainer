@@ -1,20 +1,20 @@
 import { FormikErrors } from 'formik';
-import { boolean, number, object, SchemaOf, string } from 'yup';
+import { boolean, mixed, number, object, SchemaOf, string } from 'yup';
 import { useState } from 'react';
 
 import { GitAuthModel } from '@/react/portainer/gitops/types';
-import { useDebounce } from '@/react/hooks/useDebounce';
-import { GitCredential } from '@/react/portainer/account/git-credentials/types';
+import {
+  AuthTypeOption,
+  GitCredential,
+} from '@/react/portainer/account/git-credentials/types';
 
 import { SwitchField } from '@@/form-components/SwitchField';
-import { Input } from '@@/form-components/Input';
-import { FormControl } from '@@/form-components/FormControl';
 import { TextTip } from '@@/Tip/TextTip';
 
 import { isBE } from '../../feature-flags/feature-flags.service';
 
 import { CredentialSelector } from './CredentialSelector';
-import { NewCredentialForm } from './NewCredentialForm';
+import { CredentialsSection } from './CredentialsSection';
 
 interface Props {
   value: GitAuthModel;
@@ -30,14 +30,6 @@ export function AuthFieldset({
   errors,
 }: Props) {
   const [value, setValue] = useState(initialValue); // TODO: remove this state when form is not inside angularjs
-  const [username, setUsername] = useDebounce(
-    value.RepositoryUsername || '',
-    (username) => handleChange({ RepositoryUsername: username })
-  );
-  const [password, setPassword] = useDebounce(
-    value.RepositoryPassword || '',
-    (password) => handleChange({ RepositoryPassword: password })
-  );
 
   return (
     <>
@@ -72,50 +64,13 @@ export function AuthFieldset({
             />
           )}
 
-          <div className="form-group">
-            <div className="col-sm-12">
-              <FormControl label="Username" errors={errors?.RepositoryUsername}>
-                <Input
-                  value={username}
-                  name="repository_username"
-                  placeholder={
-                    value.RepositoryGitCredentialID ? '' : 'git username'
-                  }
-                  onChange={(e) => setUsername(e.target.value)}
-                  data-cy="component-gitUsernameInput"
-                  readOnly={!!value.RepositoryGitCredentialID}
-                />
-              </FormControl>
-            </div>
-          </div>
-          <div className="form-group !mb-0">
-            <div className="col-sm-12">
-              <FormControl
-                label="Personal Access Token"
-                tooltip="Provide a personal access token or password"
-                errors={errors?.RepositoryPassword}
-              >
-                <Input
-                  type="password"
-                  value={password}
-                  name="repository_password"
-                  placeholder="*******"
-                  onChange={(e) => setPassword(e.target.value)}
-                  data-cy="component-gitPasswordInput"
-                  readOnly={!!value.RepositoryGitCredentialID}
-                />
-              </FormControl>
-            </div>
-          </div>
-          {!value.RepositoryGitCredentialID &&
-            value.RepositoryPassword &&
-            isBE && (
-              <NewCredentialForm
-                value={value}
-                onChange={handleChange}
-                errors={errors}
-              />
-            )}
+          {!value.RepositoryGitCredentialID && (
+            <CredentialsSection
+              value={value}
+              onChange={handleChange}
+              errors={errors}
+            />
+          )}
         </>
       )}
     </>
@@ -163,9 +118,17 @@ export function gitAuthValidation(
       .when(['RepositoryAuthentication', 'RepositoryGitCredentialID'], {
         is: (auth: boolean, id: number) =>
           auth && !id && !isAuthEdit && !isCreatedFromCustomTemplate,
-        then: string().required('Password is required'),
+        then: string().required('Personal Access Token is required'),
       })
       .default(''),
+    RepositoryAuthorizationType: mixed()
+      .oneOf(Object.values(AuthTypeOption))
+      .when(['RepositoryAuthentication', 'RepositoryGitCredentialID'], {
+        is: (auth: boolean, id: number) =>
+          isBE && auth && !id && !isAuthEdit && !isCreatedFromCustomTemplate,
+        then: mixed().required('Authorization type is required'),
+      })
+      .default(AuthTypeOption.Basic),
     SaveCredential: boolean().default(false),
     NewCredentialName: string()
       .default('')

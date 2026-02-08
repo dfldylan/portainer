@@ -10,7 +10,7 @@ import { useEnvironmentId } from '@/react/hooks/useEnvironmentId';
 import { useCurrentUser, useIsEdgeAdmin } from '@/react/hooks/useUser';
 import { AccessControlForm } from '@/react/portainer/access-control';
 import { parseAccessControlFormData } from '@/react/portainer/access-control/utils';
-import { NameField } from '@/react/common/stacks/CreateView/NameField';
+import { NameField } from '@/react/docker/stacks/common/NameField';
 import { CustomTemplate } from '@/react/portainer/templates/custom-templates/types';
 import {
   isTemplateVariablesEnabled,
@@ -121,7 +121,7 @@ export function DeployForm({
               }}
               type="yaml"
               error={errors.fileContent}
-              placeholder="Define or paste the content of your docker compose file here"
+              textTip="Define or paste the content of your docker compose file here"
               readonly={isGit}
               data-cy="custom-template-creation-editor"
             >

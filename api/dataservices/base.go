@@ -9,7 +9,8 @@ import (
 type BaseCRUD[T any, I constraints.Integer] interface {
 	Create(element *T) error
 	Read(ID I) (*T, error)
-	ReadAll() ([]T, error)
+	Exists(ID I) (bool, error)
+	ReadAll(predicates ...func(T) bool) ([]T, error)
 	Update(ID I, element *T) error
 	Delete(ID I) error
 }
@@ -42,12 +43,26 @@ func (service BaseDataService[T, I]) Read(ID I) (*T, error) {
 	})
 }
 
-func (service BaseDataService[T, I]) ReadAll() ([]T, error) {
+func (service BaseDataService[T, I]) Exists(ID I) (bool, error) {
+	var exists bool
+
+	err := service.Connection.ViewTx(func(tx portainer.Transaction) error {
+		var err error
+		exists, err = service.Tx(tx).Exists(ID)
+
+		return err
+	})
+
+	return exists, err
+}
+
+// ReadAll retrieves all the elements that satisfy all the provided predicates.
+func (service BaseDataService[T, I]) ReadAll(predicates ...func(T) bool) ([]T, error) {
 	var collection = make([]T, 0)
 
 	return collection, service.Connection.ViewTx(func(tx portainer.Transaction) error {
 		var err error
-		collection, err = service.Tx(tx).ReadAll()
+		collection, err = service.Tx(tx).ReadAll(predicates...)
 
 		return err
 	})

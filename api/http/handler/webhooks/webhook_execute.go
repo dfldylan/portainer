@@ -8,11 +8,14 @@ import (
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/internal/registryutils"
+	"github.com/portainer/portainer/api/logs"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
 	"github.com/portainer/portainer/pkg/libhttp/response"
+	"github.com/rs/zerolog/log"
 
 	dockertypes "github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/image"
 )
 
 // @summary Execute a webhook
@@ -70,7 +73,7 @@ func (handler *Handler) executeServiceWebhook(
 	if err != nil {
 		return httperror.InternalServerError("Error creating docker client", err)
 	}
-	defer dockerClient.Close()
+	defer logs.CloseAndLogErr(dockerClient)
 
 	service, _, err := dockerClient.ServiceInspectWithRaw(context.Background(), resourceID, dockertypes.ServiceInspectOptions{InsertDefaults: true})
 	if err != nil {
@@ -79,16 +82,16 @@ func (handler *Handler) executeServiceWebhook(
 
 	service.Spec.TaskTemplate.ForceUpdate++
 
-	var imageName = strings.Split(service.Spec.TaskTemplate.ContainerSpec.Image, "@sha")[0]
+	imageName := strings.Split(service.Spec.TaskTemplate.ContainerSpec.Image, "@sha")[0]
+	service.Spec.TaskTemplate.ContainerSpec.Image = imageName
 
 	if imageTag != "" {
-		var tagIndex = strings.LastIndex(imageName, ":")
+		tagIndex := strings.LastIndex(imageName, ":")
 		if tagIndex == -1 {
 			tagIndex = len(imageName)
 		}
+
 		service.Spec.TaskTemplate.ContainerSpec.Image = imageName[:tagIndex] + ":" + imageTag
-	} else {
-		service.Spec.TaskTemplate.ContainerSpec.Image = imageName
 	}
 
 	serviceUpdateOptions := dockertypes.ServiceUpdateOptions{
@@ -102,19 +105,23 @@ func (handler *Handler) executeServiceWebhook(
 		}
 
 		if registry.Authentication {
-			registryutils.EnsureRegTokenValid(handler.DataStore, registry)
+			if err := registryutils.EnsureRegTokenValid(handler.DataStore, registry); err != nil {
+				log.Warn().Err(err).Msgf("registry auth token renewal failed for registry %d", registry.ID)
+			}
+
 			serviceUpdateOptions.EncodedRegistryAuth, err = registryutils.GetRegistryAuthHeader(registry)
 			if err != nil {
 				return httperror.InternalServerError("Error getting registry auth header", err)
 			}
 		}
 	}
+
 	if imageTag != "" {
-		rc, err := dockerClient.ImagePull(context.Background(), service.Spec.TaskTemplate.ContainerSpec.Image, dockertypes.ImagePullOptions{RegistryAuth: serviceUpdateOptions.EncodedRegistryAuth})
+		rc, err := dockerClient.ImagePull(context.Background(), service.Spec.TaskTemplate.ContainerSpec.Image, image.PullOptions{RegistryAuth: serviceUpdateOptions.EncodedRegistryAuth})
 		if err != nil {
 			return httperror.NotFound("Error pulling image with the specified tag", err)
 		}
-		defer rc.Close()
+		defer logs.CloseAndLogErr(rc)
 	}
 
 	if _, err := dockerClient.ServiceUpdate(context.Background(), resourceID, service.Version, service.Spec, serviceUpdateOptions); err != nil {

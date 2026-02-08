@@ -35,7 +35,18 @@ export function ComposePathField({
       <span className="col-sm-12">
         <TextTip color="blue" className="mb-2">
           <span>
-            Indicate the path to the {isCompose ? 'Compose' : 'Manifest'} file
+            Indicate the path to the{' '}
+            {isCompose ? (
+              'Compose'
+            ) : (
+              <a
+                href="https://kubernetes.io/docs/concepts/overview/working-with-objects/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Kubernetes manifest file
+              </a>
+            )}{' '}
             from the root of your repository (requires a yaml, yml, json, or hcl
             file extension).
           </span>

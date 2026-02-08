@@ -187,10 +187,10 @@ func InitialStorageDetection(endpoint *portainer.Endpoint, endpointService datas
 	}
 	defer func() {
 		endpoint.Kubernetes.Flags.IsServerStorageDetected = true
-		endpointService.UpdateEndpoint(
-			endpoint.ID,
-			endpoint,
-		)
+
+		if err := endpointService.UpdateEndpoint(endpoint.ID, endpoint); err != nil {
+			log.Warn().Err(err).Msg("unable to store found StorageClasses inside the database")
+		}
 	}()
 
 	log.Info().Msg("attempting to detect storage classes in the cluster")
@@ -215,9 +215,8 @@ func UpdateEdgeEndpointHeartbeat(endpoint *portainer.Endpoint, settings *portain
 		return
 	}
 
-	endpoint.QueryDate = time.Now().Unix()
 	checkInInterval := getEndpointCheckinInterval(endpoint, settings)
-	endpoint.Heartbeat = endpoint.QueryDate-endpoint.LastCheckInDate <= int64(checkInInterval*2+20)
+	endpoint.Heartbeat = time.Now().Unix()-endpoint.LastCheckInDate <= int64(checkInInterval*2+20)
 }
 
 func getEndpointCheckinInterval(endpoint *portainer.Endpoint, settings *portainer.Settings) int {
@@ -248,4 +247,20 @@ func getEndpointCheckinInterval(endpoint *portainer.Endpoint, settings *portaine
 	}
 
 	return defaultInterval
+}
+
+func InitializeEdgeEndpointRelation(endpoint *portainer.Endpoint, tx dataservices.DataStoreTx) error {
+	if !IsEdgeEndpoint(endpoint) {
+		return nil
+	}
+
+	relation := &portainer.EndpointRelation{
+		EndpointID: endpoint.ID,
+		EdgeStacks: make(map[portainer.EdgeStackID]bool),
+	}
+
+	if err := tx.EndpointRelation().Create(relation); err != nil {
+		return err
+	}
+	return nil
 }

@@ -5,16 +5,18 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"math/rand"
 	"os"
 	"strings"
 	"time"
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/filesystem"
+	"github.com/portainer/portainer/api/logs"
+	"github.com/portainer/portainer/pkg/librand"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/api/types/swarm"
 	"github.com/docker/docker/api/types/system"
 	dockerclient "github.com/docker/docker/client"
@@ -54,12 +56,11 @@ func (d *stackDeployer) DeployRemoteComposeStack(
 	d.lock.Lock()
 	defer d.lock.Unlock()
 
-	d.swarmStackManager.Login(registries, endpoint)
-	defer d.swarmStackManager.Logout(endpoint)
+	options := portainer.ComposeOptions{Registries: registries}
 
 	// --force-recreate doesn't pull updated images
 	if forcePullImage {
-		if err := d.composeStackManager.Pull(context.TODO(), stack, endpoint, portainer.ComposeOptions{}); err != nil {
+		if err := d.composeStackManager.Pull(context.TODO(), stack, endpoint, options); err != nil {
 			return err
 		}
 	}
@@ -115,8 +116,14 @@ func (d *stackDeployer) DeployRemoteSwarmStack(
 	d.lock.Lock()
 	defer d.lock.Unlock()
 
-	d.swarmStackManager.Login(registries, endpoint)
-	defer d.swarmStackManager.Logout(endpoint)
+	if err := d.swarmStackManager.Login(registries, endpoint); err != nil {
+		log.Warn().Err(err).Msg("unable to login to registries for swarm stack deployment")
+	}
+	defer func() {
+		if err := d.swarmStackManager.Logout(endpoint); err != nil {
+			log.Warn().Err(err).Msg("unable to logout from registries after swarm stack deployment")
+		}
+	}()
 
 	return d.remoteStack(stack, endpoint, OperationSwarmDeploy, unpackerCmdBuilderOptions{
 		pullImage:     pullImage,
@@ -144,9 +151,7 @@ func (d *stackDeployer) StartRemoteSwarmStack(
 		stack,
 		endpoint,
 		OperationSwarmStart,
-		unpackerCmdBuilderOptions{
-			registries: registries,
-		},
+		unpackerCmdBuilderOptions{registries: registries},
 	)
 }
 
@@ -168,16 +173,16 @@ func (d *stackDeployer) remoteStack(stack *portainer.Stack, endpoint *portainer.
 	if err != nil {
 		return errors.WithMessage(err, "unable to create docker client")
 	}
-	defer cli.Close()
+	defer logs.CloseAndLogErr(cli)
 
-	image := getUnpackerImage()
+	unpackerImg := getUnpackerImage()
 
-	reader, err := cli.ImagePull(ctx, image, types.ImagePullOptions{})
+	reader, err := cli.ImagePull(ctx, unpackerImg, image.PullOptions{})
 	if err != nil {
 		return errors.Wrap(err, "unable to pull unpacker image")
 	}
-	defer reader.Close()
-	io.Copy(io.Discard, reader)
+	defer logs.CloseAndLogErr(reader)
+	_, _ = io.Copy(io.Discard, reader)
 
 	info, err := cli.Info(ctx)
 	if err != nil {
@@ -197,24 +202,28 @@ func (d *stackDeployer) remoteStack(stack *portainer.Stack, endpoint *portainer.
 	}
 
 	log.Debug().
-		Str("image", image).
+		Str("image", unpackerImg).
 		Str("cmd", strings.Join(cmd, " ")).
 		Msg("running unpacker")
 
 	unpackerContainer, err := cli.ContainerCreate(ctx, &container.Config{
-		Image: image,
+		Image: unpackerImg,
 		Cmd:   cmd,
 	}, &container.HostConfig{
 		Binds: []string{
 			fmt.Sprintf("%s:%s", composeDestination, composeDestination),
 			fmt.Sprintf("%s:%s", targetSocketBindHost, targetSocketBindContainer),
 		},
-	}, nil, nil, fmt.Sprintf("portainer-unpacker-%d-%s-%d", stack.ID, stack.Name, rand.Intn(100)))
+	}, nil, nil, fmt.Sprintf("portainer-unpacker-%d-%s-%d", stack.ID, stack.Name, librand.Intn(100)))
 
 	if err != nil {
 		return errors.Wrap(err, "unable to create unpacker container")
 	}
-	defer cli.ContainerRemove(ctx, unpackerContainer.ID, container.RemoveOptions{})
+	defer func() {
+		if err := cli.ContainerRemove(ctx, unpackerContainer.ID, container.RemoveOptions{}); err != nil {
+			log.Warn().Err(err).Msg("unable to remove unpacker container")
+		}
+	}()
 
 	if err := cli.ContainerStart(ctx, unpackerContainer.ID, container.StartOptions{}); err != nil {
 		return errors.Wrap(err, "start unpacker container error")
@@ -235,8 +244,7 @@ func (d *stackDeployer) remoteStack(stack *portainer.Stack, endpoint *portainer.
 	if err != nil {
 		log.Error().Err(err).Msg("unable to get logs from unpacker container")
 	} else {
-		_, err = stdcopy.StdCopy(io.Discard, stdErr, out)
-		if err != nil {
+		if _, err := stdcopy.StdCopy(io.Discard, stdErr, out); err != nil {
 			log.Warn().Err(err).Msg("unable to parse logs from unpacker container")
 		} else {
 			log.Info().
@@ -250,31 +258,31 @@ func (d *stackDeployer) remoteStack(stack *portainer.Stack, endpoint *portainer.
 		return errors.Wrap(err, "fetch container information error")
 	}
 
-	if status.State.ExitCode != 0 {
-		dec := json.NewDecoder(stdErr)
-		for {
-			errorStruct := struct {
-				Level string
-				Error string
-			}{}
-
-			if err := dec.Decode(&errorStruct); errors.Is(err, io.EOF) {
-				break
-			} else if err != nil {
-				log.Warn().Err(err).Msg("unable to parse logs from unpacker container")
-
-				continue
-			}
-
-			if errorStruct.Level == "error" {
-				return fmt.Errorf("an error occurred while running unpacker container with exit code %d: %s", status.State.ExitCode, errorStruct.Error)
-			}
-		}
-
-		return fmt.Errorf("an error occurred while running unpacker container with exit code %d", status.State.ExitCode)
+	if status.State.ExitCode == 0 {
+		return nil
 	}
 
-	return nil
+	dec := json.NewDecoder(stdErr)
+	for {
+		errorStruct := struct {
+			Level string
+			Error string
+		}{}
+
+		if err := dec.Decode(&errorStruct); errors.Is(err, io.EOF) {
+			break
+		} else if err != nil {
+			log.Warn().Err(err).Msg("unable to parse logs from unpacker container")
+
+			continue
+		}
+
+		if errorStruct.Level == "error" {
+			return fmt.Errorf("an error occurred while running unpacker container with exit code %d: %s", status.State.ExitCode, errorStruct.Error)
+		}
+	}
+
+	return fmt.Errorf("an error occurred while running unpacker container with exit code %d", status.State.ExitCode)
 }
 
 // Creates a docker client with 1 hour timeout
@@ -293,7 +301,7 @@ func (d *stackDeployer) createDockerClient(ctx context.Context, endpoint *portai
 	if isNotInASwarm(&info) {
 		return cli, nil
 	}
-	defer cli.Close()
+	defer logs.CloseAndLogErr(cli)
 
 	nodes, err := cli.NodeList(ctx, types.NodeListOptions{})
 	if err != nil {
@@ -337,6 +345,7 @@ func getTargetSocketBindHost(osType string, containerEngine string) string {
 			targetSocketBind = "/var/run/docker.sock"
 		}
 	}
+
 	return targetSocketBind
 }
 
@@ -345,6 +354,7 @@ func getTargetSocketBindContainer(osType string) string {
 	if strings.EqualFold(osType, "linux") {
 		targetSocketBind = "/var/run/docker.sock"
 	}
+
 	return targetSocketBind
 }
 

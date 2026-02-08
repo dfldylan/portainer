@@ -36,6 +36,7 @@ export function AccessTable({
       dataset={dataset}
       columns={columns}
       settingsManager={tableState}
+      getRowId={(row) => row.value}
       renderTableActions={(selectedItems) => (
         <DeleteButton
           disabled={selectedItems.length === 0}

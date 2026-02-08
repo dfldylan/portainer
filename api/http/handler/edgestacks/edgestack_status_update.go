@@ -4,6 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"slices"
+	"strconv"
 	"time"
 
 	portainer "github.com/portainer/portainer/api"
@@ -11,8 +13,6 @@ import (
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
 	"github.com/portainer/portainer/pkg/libhttp/response"
-
-	"github.com/rs/zerolog/log"
 )
 
 type updateStatusPayload struct {
@@ -20,6 +20,7 @@ type updateStatusPayload struct {
 	Status     *portainer.EdgeStackStatusType
 	EndpointID portainer.EndpointID
 	Time       int64
+	Version    int
 }
 
 func (payload *updateStatusPayload) Validate(r *http.Request) error {
@@ -67,53 +68,54 @@ func (handler *Handler) edgeStackStatusUpdate(w http.ResponseWriter, r *http.Req
 		return httperror.BadRequest("Invalid request payload", fmt.Errorf("edge polling error: %w. Environment ID: %d", err, payload.EndpointID))
 	}
 
+	endpoint, err := handler.DataStore.Endpoint().Endpoint(payload.EndpointID)
+	if err != nil {
+		return handlerDBErr(fmt.Errorf("unable to find the environment from the database: %w. Environment ID: %d", err, payload.EndpointID), "unable to find the environment")
+	}
+
+	if err := handler.requestBouncer.AuthorizedEdgeEndpointOperation(r, endpoint); err != nil {
+		return httperror.Forbidden("Permission denied to access environment", fmt.Errorf("unauthorized edge endpoint operation: %w. Environment ID: %d", err, payload.EndpointID))
+	}
+
 	var stack *portainer.EdgeStack
+
 	if err := handler.DataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
-		stack, err = handler.updateEdgeStackStatus(tx, r, portainer.EdgeStackID(stackID), payload)
-		return err
-	}); err != nil {
-		var httpErr *httperror.HandlerError
-		if errors.As(err, &httpErr) {
-			return httpErr
+		var err error
+		stack, err = tx.EdgeStack().EdgeStack(portainer.EdgeStackID(stackID))
+		if err != nil {
+			if dataservices.IsErrObjectNotFound(err) {
+				return nil
+			}
+
+			return httperror.InternalServerError("Unable to retrieve Edge stack from the database", err)
 		}
 
-		return httperror.InternalServerError("Unexpected error", err)
+		if err := handler.updateEdgeStackStatus(tx, stack, stack.ID, payload); err != nil {
+			return httperror.InternalServerError("Unable to update Edge stack status", err)
+		}
+
+		return nil
+	}); err != nil {
+		return response.TxErrorResponse(err)
+	}
+
+	if ok, _ := strconv.ParseBool(r.Header.Get("X-Portainer-No-Body")); ok {
+		return nil
+	}
+
+	if err := fillEdgeStackStatus(handler.DataStore, stack); err != nil {
+		return handlerDBErr(err, "Unable to retrieve edge stack status from the database")
 	}
 
 	return response.JSON(w, stack)
 }
 
-func (handler *Handler) updateEdgeStackStatus(tx dataservices.DataStoreTx, r *http.Request, stackID portainer.EdgeStackID, payload updateStatusPayload) (*portainer.EdgeStack, error) {
-	stack, err := tx.EdgeStack().EdgeStack(stackID)
-	if err != nil {
-		if dataservices.IsErrObjectNotFound(err) {
-			// skip error because agent tries to report on deleted stack
-			log.Debug().
-				Err(err).
-				Int("stackID", int(stackID)).
-				Int("status", int(*payload.Status)).
-				Msg("Unable to find a stack inside the database, skipping error")
-			return nil, nil
-		}
-
-		return nil, fmt.Errorf("unable to retrieve Edge stack from the database: %w. Environment ID: %d", err, payload.EndpointID)
-	}
-
-	endpoint, err := tx.Endpoint().Endpoint(payload.EndpointID)
-	if err != nil {
-		return nil, handler.handlerDBErr(fmt.Errorf("unable to find the environment from the database: %w. Environment ID: %d", err, payload.EndpointID), "unable to find the environment")
-	}
-
-	if err := handler.requestBouncer.AuthorizedEdgeEndpointOperation(r, endpoint); err != nil {
-		return nil, httperror.Forbidden("Permission denied to access environment", fmt.Errorf("unauthorized edge endpoint operation: %w. Environment name: %s", err, endpoint.Name))
+func (handler *Handler) updateEdgeStackStatus(tx dataservices.DataStoreTx, stack *portainer.EdgeStack, stackID portainer.EdgeStackID, payload updateStatusPayload) error {
+	if payload.Version > 0 && payload.Version < stack.Version {
+		return nil
 	}
 
 	status := *payload.Status
-
-	log.Debug().
-		Int("stackID", int(stackID)).
-		Int("status", int(status)).
-		Msg("Updating stack status")
 
 	deploymentStatus := portainer.EdgeStackDeploymentStatus{
 		Type:  status,
@@ -121,31 +123,25 @@ func (handler *Handler) updateEdgeStackStatus(tx dataservices.DataStoreTx, r *ht
 		Time:  payload.Time,
 	}
 
-	updateEnvStatus(payload.EndpointID, stack, deploymentStatus)
-
-	if err := tx.EdgeStack().UpdateEdgeStack(stackID, stack); err != nil {
-		return nil, handler.handlerDBErr(fmt.Errorf("unable to update Edge stack to the database: %w. Environment name: %s", err, endpoint.Name), "unable to update Edge stack")
-	}
-
-	return stack, nil
-}
-
-func updateEnvStatus(environmentId portainer.EndpointID, stack *portainer.EdgeStack, deploymentStatus portainer.EdgeStackDeploymentStatus) {
 	if deploymentStatus.Type == portainer.EdgeStackStatusRemoved {
-		delete(stack.Status, environmentId)
-
-		return
+		return tx.EdgeStackStatus().Delete(stackID, payload.EndpointID)
 	}
 
-	environmentStatus, ok := stack.Status[environmentId]
-	if !ok {
-		environmentStatus = portainer.EdgeStackStatus{
-			EndpointID: environmentId,
+	environmentStatus, err := tx.EdgeStackStatus().Read(stackID, payload.EndpointID)
+	if err != nil && !tx.IsErrObjectNotFound(err) {
+		return err
+	} else if tx.IsErrObjectNotFound(err) {
+		environmentStatus = &portainer.EdgeStackStatusForEnv{
+			EndpointID: payload.EndpointID,
 			Status:     []portainer.EdgeStackDeploymentStatus{},
 		}
 	}
 
-	environmentStatus.Status = append(environmentStatus.Status, deploymentStatus)
+	if containsStatus := slices.ContainsFunc(environmentStatus.Status, func(e portainer.EdgeStackDeploymentStatus) bool {
+		return e.Type == deploymentStatus.Type
+	}); !containsStatus {
+		environmentStatus.Status = append(environmentStatus.Status, deploymentStatus)
+	}
 
-	stack.Status[environmentId] = environmentStatus
+	return tx.EdgeStackStatus().Update(stackID, payload.EndpointID, environmentStatus)
 }

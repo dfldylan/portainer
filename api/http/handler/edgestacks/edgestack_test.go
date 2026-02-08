@@ -1,7 +1,6 @@
 package edgestacks
 
 import (
-	"os"
 	"strconv"
 	"testing"
 	"time"
@@ -15,8 +14,10 @@ import (
 	"github.com/portainer/portainer/api/internal/edge/edgestacks"
 	"github.com/portainer/portainer/api/internal/testhelpers"
 	"github.com/portainer/portainer/api/jwt"
+	"github.com/portainer/portainer/api/roar"
 
 	"github.com/pkg/errors"
+	"github.com/stretchr/testify/require"
 )
 
 // Helpers
@@ -41,12 +42,7 @@ func setupHandler(t *testing.T) (*Handler, string) {
 		t.Fatal(err)
 	}
 
-	tmpDir, err := os.MkdirTemp(t.TempDir(), "portainer-test")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	fs, err := filesystem.NewService(tmpDir, "")
+	fs, err := filesystem.NewService(t.TempDir(), "")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -60,14 +56,12 @@ func setupHandler(t *testing.T) (*Handler, string) {
 	handler.FileService = fs
 
 	settings, err := handler.DataStore.Settings().Settings()
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
+
 	settings.EnableEdgeComputeFeatures = true
 
-	if err := handler.DataStore.Settings().UpdateSettings(settings); err != nil {
-		t.Fatal(err)
-	}
+	err = handler.DataStore.Settings().UpdateSettings(settings)
+	require.NoError(t, err)
 
 	handler.GitService = testhelpers.NewGitService(errors.New("Clone error"), "git-service-id")
 
@@ -86,9 +80,8 @@ func createEndpointWithId(t *testing.T, store dataservices.DataStore, endpointID
 		LastCheckInDate: time.Now().Unix(),
 	}
 
-	if err := store.Endpoint().Create(&endpoint); err != nil {
-		t.Fatal(err)
-	}
+	err := store.Endpoint().Create(&endpoint)
+	require.NoError(t, err)
 
 	return endpoint
 }
@@ -105,19 +98,17 @@ func createEdgeStack(t *testing.T, store dataservices.DataStore, endpointID port
 		Name:         "EdgeGroup 1",
 		Dynamic:      false,
 		TagIDs:       nil,
-		Endpoints:    []portainer.EndpointID{endpointID},
+		EndpointIDs:  roar.FromSlice([]portainer.EndpointID{endpointID}),
 		PartialMatch: false,
 	}
 
-	if err := store.EdgeGroup().Create(&edgeGroup); err != nil {
-		t.Fatal(err)
-	}
+	err := store.EdgeGroup().Create(&edgeGroup)
+	require.NoError(t, err)
 
 	edgeStackID := portainer.EdgeStackID(14)
 	edgeStack := portainer.EdgeStack{
 		ID:             edgeStackID,
 		Name:           "test-edge-stack-" + strconv.Itoa(int(edgeStackID)),
-		Status:         map[portainer.EndpointID]portainer.EdgeStackStatus{},
 		CreationDate:   time.Now().Unix(),
 		EdgeGroups:     []portainer.EdgeGroupID{edgeGroup.ID},
 		ProjectPath:    "/project/path",
@@ -134,13 +125,23 @@ func createEdgeStack(t *testing.T, store dataservices.DataStore, endpointID port
 		},
 	}
 
-	if err := store.EdgeStack().Create(edgeStack.ID, &edgeStack); err != nil {
-		t.Fatal(err)
-	}
+	err = store.EdgeStack().Create(edgeStack.ID, &edgeStack)
+	require.NoError(t, err)
 
-	if err := store.EndpointRelation().Create(&endpointRelation); err != nil {
-		t.Fatal(err)
-	}
+	err = store.EndpointRelation().Create(&endpointRelation)
+	require.NoError(t, err)
 
 	return edgeStack
+}
+
+func createEdgeGroup(t *testing.T, store dataservices.DataStore) portainer.EdgeGroup {
+	edgeGroup := portainer.EdgeGroup{
+		ID:   1,
+		Name: "EdgeGroup 1",
+	}
+
+	err := store.EdgeGroup().Create(&edgeGroup)
+	require.NoError(t, err)
+
+	return edgeGroup
 }

@@ -1,4 +1,4 @@
-import { SchemaOf, bool, boolean, number, object, string } from 'yup';
+import { SchemaOf, boolean, number, object, string } from 'yup';
 
 import { isValidUrl } from '@@/form-components/validate-url';
 
@@ -7,7 +7,6 @@ import { Values } from './types';
 export function validation(): SchemaOf<Values> {
   return object({
     edgeAgentCheckinInterval: number().required(),
-    enableTelemetry: bool().default(false),
     loginBannerEnabled: boolean().default(false),
     loginBanner: string()
       .default('')

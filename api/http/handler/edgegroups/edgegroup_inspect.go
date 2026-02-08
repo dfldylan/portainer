@@ -5,8 +5,10 @@ import (
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
+	"github.com/portainer/portainer/api/roar"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
+	"github.com/portainer/portainer/pkg/libhttp/response"
 )
 
 // @id EdgeGroupInspect
@@ -27,13 +29,21 @@ func (handler *Handler) edgeGroupInspect(w http.ResponseWriter, r *http.Request)
 		return httperror.BadRequest("Invalid Edge group identifier route variable", err)
 	}
 
-	var edgeGroup *portainer.EdgeGroup
+	var shadowEdgeGroup shadowedEdgeGroup
 	err = handler.DataStore.ViewTx(func(tx dataservices.DataStoreTx) error {
-		edgeGroup, err = getEdgeGroup(tx, portainer.EdgeGroupID(edgeGroupID))
-		return err
+		edgeGroup, err := getEdgeGroup(tx, portainer.EdgeGroupID(edgeGroupID))
+		if err != nil {
+			return err
+		}
+
+		edgeGroup.Endpoints = edgeGroup.EndpointIDs.ToSlice()
+
+		shadowEdgeGroup = shadowedEdgeGroup{EdgeGroup: *edgeGroup}
+
+		return nil
 	})
 
-	return txResponse(w, edgeGroup, err)
+	return response.TxResponse(w, shadowEdgeGroup, err)
 }
 
 func getEdgeGroup(tx dataservices.DataStoreTx, ID portainer.EdgeGroupID) (*portainer.EdgeGroup, error) {
@@ -50,7 +60,7 @@ func getEdgeGroup(tx dataservices.DataStoreTx, ID portainer.EdgeGroupID) (*porta
 			return nil, httperror.InternalServerError("Unable to retrieve environments and environment groups for Edge group", err)
 		}
 
-		edgeGroup.Endpoints = endpoints
+		edgeGroup.EndpointIDs = roar.FromSlice(endpoints)
 	}
 
 	return edgeGroup, err

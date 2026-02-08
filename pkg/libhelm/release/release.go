@@ -1,6 +1,9 @@
 package release
 
-import "github.com/portainer/portainer/pkg/libhelm/time"
+import (
+	"github.com/portainer/portainer/pkg/libhelm/time"
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
+)
 
 // Release is the struct that holds the information for a helm release.
 // The struct definitions have been copied from the official Helm Golang client/library.
@@ -14,7 +17,7 @@ type ReleaseElement struct {
 	Updated    string `json:"updated"`
 	Status     string `json:"status"`
 	Chart      string `json:"chart"`
-	AppVersion string `json:"app_version"`
+	AppVersion string `json:"appVersion"`
 }
 
 // Release describes a deployment of a chart, together with the chart
@@ -23,9 +26,9 @@ type Release struct {
 	// Name is the name of the release
 	Name string `json:"name,omitempty"`
 	// Info provides information about a release
-	// Info *Info `json:"info,omitempty"`
+	Info *Info `json:"info,omitempty"`
 	// Chart is the chart that was released.
-	Chart Chart `json:"chart,omitempty"`
+	Chart Chart `json:"chart,omitzero"`
 	// Config is the set of extra Values added to the chart.
 	// These values override the default values inside of the chart.
 	Config map[string]any `json:"config,omitempty"`
@@ -33,6 +36,8 @@ type Release struct {
 	Manifest string `json:"manifest,omitempty"`
 	// Hooks are all of the hooks declared for this release.
 	Hooks []*Hook `json:"hooks,omitempty"`
+	// AppVersion is the app version of the release.
+	AppVersion string `json:"appVersion,omitempty"`
 	// Version is an int which represents the revision of the release.
 	Version int `json:"version,omitempty"`
 	// Namespace is the kubernetes namespace of the release.
@@ -40,6 +45,33 @@ type Release struct {
 	// Labels of the release.
 	// Disabled encoding into Json cause labels are stored in storage driver metadata field.
 	Labels map[string]string `json:"-"`
+	// ChartReference are the labels that are used to identify the chart source.
+	ChartReference ChartReference `json:"chartReference,omitzero"`
+	// StackID is the ID of the Portainer stack associated with this release (if using GitOps)
+	StackID int `json:"stackID,omitempty"`
+	// Values are the values used to deploy the chart.
+	Values Values `json:"values,omitzero"`
+}
+
+type Values struct {
+	UserSuppliedValues string `json:"userSuppliedValues,omitempty"`
+	ComputedValues     string `json:"computedValues,omitempty"`
+}
+
+type ChartReference struct {
+	ChartPath  string `json:"chartPath,omitempty"`
+	RepoURL    string `json:"repoURL,omitempty"`
+	RegistryID int64  `json:"registryID,omitempty"`
+}
+
+type GitReference struct {
+	Repo               string `json:"repo,omitempty"`
+	Reference          string `json:"reference,omitempty"`
+	CommitID           string `json:"commitID,omitempty"`
+	StackID            string `json:"stackID,omitempty"`
+	AutoUpdate         bool   `json:"autoUpdate,omitempty"`
+	AutoUpdateInterval string `json:"autoUpdateInterval,omitempty"`
+	TLSSkipVerify      bool   `json:"tlsSkipVerify,omitempty"`
 }
 
 // Chart is a helm package that contains metadata, a default config, zero or more
@@ -172,9 +204,9 @@ type Lock struct {
 // Info describes release information.
 type Info struct {
 	// FirstDeployed is when the release was first deployed.
-	FirstDeployed time.Time `json:"first_deployed,omitempty"`
+	FirstDeployed time.Time `json:"first_deployed,omitzero"`
 	// LastDeployed is when the release was last deployed.
-	LastDeployed time.Time `json:"last_deployed,omitempty"`
+	LastDeployed time.Time `json:"last_deployed,omitzero"`
 	// Deleted tracks when this object was deleted.
 	Deleted time.Time `json:"deleted"`
 	// Description is human-friendly "log entry" about this release.
@@ -183,6 +215,8 @@ type Info struct {
 	Status Status `json:"status,omitempty"`
 	// Contains the rendered templates/NOTES.txt if available
 	Notes string `json:"notes,omitempty"`
+	// Resources is the list of resources that are part of the release
+	Resources []*unstructured.Unstructured `json:"resources,omitempty"`
 }
 
 // Status is the status of a release
@@ -200,7 +234,7 @@ type Hook struct {
 	// Events are the events that this hook fires on.
 	Events []HookEvent `json:"events,omitempty"`
 	// LastRun indicates the date/time this was last run.
-	LastRun HookExecution `json:"last_run,omitempty"`
+	LastRun HookExecution `json:"last_run,omitzero"`
 	// Weight indicates the sort order for execution among similar Hook type
 	Weight int `json:"weight,omitempty"`
 	// DeletePolicies are the policies that indicate when to delete the hook
@@ -213,9 +247,9 @@ type HookEvent string
 // A HookExecution records the result for the last execution of a hook for a given release.
 type HookExecution struct {
 	// StartedAt indicates the date/time this hook was started
-	StartedAt time.Time `json:"started_at,omitempty"`
+	StartedAt time.Time `json:"started_at,omitzero"`
 	// CompletedAt indicates the date/time this hook was completed.
-	CompletedAt time.Time `json:"completed_at,omitempty"`
+	CompletedAt time.Time `json:"completed_at,omitzero"`
 	// Phase indicates whether the hook completed successfully
 	Phase HookPhase `json:"phase"`
 }

@@ -3,6 +3,7 @@ package cli
 import (
 	"context"
 	"errors"
+	"slices"
 	"strings"
 
 	models "github.com/portainer/portainer/api/http/models/kubernetes"
@@ -16,7 +17,7 @@ import (
 // GetClusterRoles gets all the clusterRoles for at the cluster level in a k8s endpoint.
 // It returns a list of K8sClusterRole objects.
 func (kcl *KubeClient) GetClusterRoles() ([]models.K8sClusterRole, error) {
-	if kcl.IsKubeAdmin {
+	if kcl.GetIsKubeAdmin() {
 		return kcl.fetchClusterRoles()
 	}
 
@@ -93,11 +94,5 @@ func isSystemClusterRole(role *rbacv1.ClusterRole) bool {
 	}
 
 	roles := getPortainerDefaultK8sRoleNames()
-	for i := range roles {
-		if role.Name == roles[i] {
-			return true
-		}
-	}
-
-	return false
+	return slices.Contains(roles, role.Name)
 }

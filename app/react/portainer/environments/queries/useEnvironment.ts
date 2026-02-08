@@ -10,11 +10,14 @@ import { environmentQueryKeys } from './query-keys';
 export function useEnvironment<T = Environment>(
   environmentId?: EnvironmentId,
   select?: (environment: Environment) => T,
-  options?: { autoRefreshRate?: number }
+  options?: {
+    autoRefreshRate?: number;
+    excludeSnapshot?: boolean;
+  }
 ) {
   return useQuery(
     environmentQueryKeys.item(environmentId!),
-    () => getEndpoint(environmentId!),
+    () => getEndpoint(environmentId!, options?.excludeSnapshot ?? undefined),
     {
       select,
       ...withError('Failed loading environment'),

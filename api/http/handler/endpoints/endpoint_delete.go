@@ -3,7 +3,6 @@ package endpoints
 import (
 	"errors"
 	"net/http"
-	"slices"
 	"strconv"
 
 	portainer "github.com/portainer/portainer/api"
@@ -63,18 +62,11 @@ func (handler *Handler) endpointDelete(w http.ResponseWriter, r *http.Request) *
 		return httperror.BadRequest("Invalid boolean query parameter", err)
 	}
 
-	if err := handler.DataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
+	err = handler.DataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
 		return handler.deleteEndpoint(tx, portainer.EndpointID(endpointID), deleteCluster)
-	}); err != nil {
-		var handlerError *httperror.HandlerError
-		if errors.As(err, &handlerError) {
-			return handlerError
-		}
+	})
 
-		return httperror.InternalServerError("Unexpected error", err)
-	}
-
-	return response.Empty(w)
+	return response.TxEmptyResponse(w, err)
 }
 
 // @id EndpointDeleteBatch
@@ -91,7 +83,7 @@ func (handler *Handler) endpointDelete(w http.ResponseWriter, r *http.Request) *
 // @failure 400 "Invalid request payload, such as missing required fields or fields not meeting validation criteria."
 // @failure 403 "Unauthorized access or operation not allowed."
 // @failure 500 "Server error occurred while attempting to delete the specified environments."
-// @router /endpoints [delete]
+// @router /endpoints/delete [post]
 func (handler *Handler) endpointDeleteBatch(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	var p endpointDeleteBatchPayload
 	if err := request.DecodeAndValidateJSONPayload(r, &p); err != nil {
@@ -125,6 +117,27 @@ func (handler *Handler) endpointDeleteBatch(w http.ResponseWriter, r *http.Reque
 	}
 
 	return response.Empty(w)
+}
+
+// @id EndpointDeleteBatchDeprecated
+// @summary Remove multiple environments
+// @deprecated
+// @description Deprecated: use the `POST` endpoint instead.
+// @description Remove multiple environments and optionally clean-up associated resources.
+// @description **Access policy**: Administrator only.
+// @tags endpoints
+// @security ApiKeyAuth || jwt
+// @accept json
+// @produce json
+// @param body body endpointDeleteBatchPayload true "List of environments to delete, with optional deleteCluster flag to clean-up associated resources (cloud environments only)"
+// @success 204 "Environment(s) successfully deleted."
+// @failure 207 {object} endpointDeleteBatchPartialResponse "Partial success. Some environments were deleted successfully, while others failed."
+// @failure 400 "Invalid request payload, such as missing required fields or fields not meeting validation criteria."
+// @failure 403 "Unauthorized access or operation not allowed."
+// @failure 500 "Server error occurred while attempting to delete the specified environments."
+// @router /endpoints [delete]
+func (handler *Handler) endpointDeleteBatchDeprecated(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
+	return handler.endpointDeleteBatch(w, r)
 }
 
 func (handler *Handler) deleteEndpoint(tx dataservices.DataStoreTx, endpointID portainer.EndpointID, deleteCluster bool) error {
@@ -179,9 +192,7 @@ func (handler *Handler) deleteEndpoint(tx dataservices.DataStoreTx, endpointID p
 	}
 
 	for _, edgeGroup := range edgeGroups {
-		edgeGroup.Endpoints = slices.DeleteFunc(edgeGroup.Endpoints, func(e portainer.EndpointID) bool {
-			return e == endpoint.ID
-		})
+		edgeGroup.EndpointIDs.Remove(endpoint.ID)
 
 		if err := tx.EdgeGroup().Update(edgeGroup.ID, &edgeGroup); err != nil {
 			log.Warn().Err(err).Msg("Unable to update edge group")
@@ -193,14 +204,9 @@ func (handler *Handler) deleteEndpoint(tx dataservices.DataStoreTx, endpointID p
 		log.Warn().Err(err).Msg("Unable to retrieve edge stacks from the database")
 	}
 
-	for idx := range edgeStacks {
-		edgeStack := &edgeStacks[idx]
-		if _, ok := edgeStack.Status[endpoint.ID]; ok {
-			delete(edgeStack.Status, endpoint.ID)
-
-			if err := tx.EdgeStack().UpdateEdgeStack(edgeStack.ID, edgeStack); err != nil {
-				log.Warn().Err(err).Msg("Unable to update edge stack")
-			}
+	for _, edgeStack := range edgeStacks {
+		if err := tx.EdgeStackStatus().Delete(edgeStack.ID, endpoint.ID); err != nil {
+			log.Warn().Err(err).Msg("Unable to delete edge stack status")
 		}
 	}
 

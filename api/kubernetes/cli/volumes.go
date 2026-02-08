@@ -7,7 +7,6 @@ import (
 	models "github.com/portainer/portainer/api/http/models/kubernetes"
 	"github.com/rs/zerolog/log"
 	appsv1 "k8s.io/api/apps/v1"
-	autoscalingv2 "k8s.io/api/autoscaling/v2"
 	corev1 "k8s.io/api/core/v1"
 	storagev1 "k8s.io/api/storage/v1"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
@@ -19,9 +18,10 @@ import (
 // If the user is not an admin, it fetches the volumes in the namespaces the user has access to.
 // It returns a list of K8sVolumeInfo.
 func (kcl *KubeClient) GetVolumes(namespace string) ([]models.K8sVolumeInfo, error) {
-	if kcl.IsKubeAdmin {
+	if kcl.GetIsKubeAdmin() {
 		return kcl.fetchVolumes(namespace)
 	}
+
 	return kcl.fetchVolumesForNonAdmin(namespace)
 }
 
@@ -49,9 +49,13 @@ func (kcl *KubeClient) GetVolume(namespace, volumeName string) (*models.K8sVolum
 // This function is called when the user is not an admin.
 // It fetches all the persistent volume claims, persistent volumes and storage classes in the namespaces the user has access to.
 func (kcl *KubeClient) fetchVolumesForNonAdmin(namespace string) ([]models.K8sVolumeInfo, error) {
-	log.Debug().Msgf("Fetching volumes for non-admin user: %v", kcl.NonAdminNamespaces)
+	nonAdminNamespaces := kcl.GetClientNonAdminNamespaces()
 
-	if len(kcl.NonAdminNamespaces) == 0 {
+	log.Debug().
+		Strs("non_admin_namespaces", nonAdminNamespaces).
+		Msg("fetching volumes for non-admin user")
+
+	if len(nonAdminNamespaces) == 0 {
 		return nil, nil
 	}
 
@@ -264,8 +268,13 @@ func (kcl *KubeClient) updateVolumesWithOwningApplications(volumes *[]models.K8s
 		for _, pod := range pods.Items {
 			if pod.Spec.Volumes != nil {
 				for _, podVolume := range pod.Spec.Volumes {
-					if podVolume.VolumeSource.PersistentVolumeClaim != nil && podVolume.VolumeSource.PersistentVolumeClaim.ClaimName == volume.PersistentVolumeClaim.Name && pod.Namespace == volume.PersistentVolumeClaim.Namespace {
-						application, err := kcl.ConvertPodToApplication(pod, replicaSetItems, deploymentItems, statefulSetItems, daemonSetItems, []corev1.Service{}, []autoscalingv2.HorizontalPodAutoscaler{}, false)
+					if podVolume.PersistentVolumeClaim != nil && podVolume.PersistentVolumeClaim.ClaimName == volume.PersistentVolumeClaim.Name && pod.Namespace == volume.PersistentVolumeClaim.Namespace {
+						application, err := kcl.ConvertPodToApplication(pod, PortainerApplicationResources{
+							ReplicaSets:  replicaSetItems,
+							Deployments:  deploymentItems,
+							StatefulSets: statefulSetItems,
+							DaemonSets:   daemonSetItems,
+						}, false)
 						if err != nil {
 							log.Error().Err(err).Msg("Failed to convert pod to application")
 							return nil, fmt.Errorf("an error occurred during the CombineServicesWithApplications operation, unable to convert pod to application. Error: %w", err)

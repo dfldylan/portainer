@@ -24,7 +24,6 @@ import (
 	"github.com/portainer/portainer/api/http/handler/edgegroups"
 	"github.com/portainer/portainer/api/http/handler/edgejobs"
 	"github.com/portainer/portainer/api/http/handler/edgestacks"
-	"github.com/portainer/portainer/api/http/handler/edgetemplates"
 	"github.com/portainer/portainer/api/http/handler/endpointedge"
 	"github.com/portainer/portainer/api/http/handler/endpointgroups"
 	"github.com/portainer/portainer/api/http/handler/endpointproxy"
@@ -68,7 +67,7 @@ import (
 	"github.com/portainer/portainer/api/platform"
 	"github.com/portainer/portainer/api/scheduler"
 	"github.com/portainer/portainer/api/stacks/deployments"
-	"github.com/portainer/portainer/pkg/libhelm"
+	libhelmtypes "github.com/portainer/portainer/pkg/libhelm/types"
 
 	"github.com/rs/zerolog/log"
 )
@@ -78,6 +77,7 @@ type Server struct {
 	AuthorizationService        *authorization.Service
 	BindAddress                 string
 	BindAddressHTTPS            string
+	CSP                         bool
 	HTTPEnabled                 bool
 	AssetsPath                  string
 	Status                      *portainer.Status
@@ -104,7 +104,7 @@ type Server struct {
 	DockerClientFactory         *dockerclient.ClientFactory
 	KubernetesClientFactory     *cli.ClientFactory
 	KubernetesDeployer          portainer.KubernetesDeployer
-	HelmPackageManager          libhelm.HelmPackageManager
+	HelmPackageManager          libhelmtypes.HelmPackageManager
 	Scheduler                   *scheduler.Scheduler
 	ShutdownCtx                 context.Context
 	ShutdownTrigger             context.CancelFunc
@@ -113,6 +113,8 @@ type Server struct {
 	AdminCreationDone           chan struct{}
 	PendingActionsService       *pendingactions.PendingActionsService
 	PlatformService             platform.Service
+	PullLimitCheckDisabled      bool
+	TrustedOrigins              []string
 }
 
 // Start starts the HTTP server
@@ -120,13 +122,16 @@ func (server *Server) Start() error {
 	kubernetesTokenCacheManager := server.KubernetesTokenCacheManager
 
 	requestBouncer := security.NewRequestBouncer(server.DataStore, server.JWTService, server.APIKeyService)
+	if !server.CSP {
+		requestBouncer.DisableCSP()
+	}
 
 	rateLimiter := security.NewRateLimiter(10, 1*time.Second, 1*time.Hour)
 	offlineGate := offlinegate.NewOfflineGate()
 
 	passwordStrengthChecker := security.NewPasswordStrengthChecker(server.DataStore.Settings())
 
-	var authHandler = auth.NewHandler(requestBouncer, rateLimiter, passwordStrengthChecker)
+	var authHandler = auth.NewHandler(requestBouncer, rateLimiter, passwordStrengthChecker, server.KubernetesClientFactory)
 	authHandler.DataStore = server.DataStore
 	authHandler.CryptoService = server.CryptoService
 	authHandler.JWTService = server.JWTService
@@ -166,9 +171,6 @@ func (server *Server) Start() error {
 	edgeStacksHandler.GitService = server.GitService
 	edgeStacksHandler.KubernetesDeployer = server.KubernetesDeployer
 
-	var edgeTemplatesHandler = edgetemplates.NewHandler(requestBouncer)
-	edgeTemplatesHandler.DataStore = server.DataStore
-
 	var endpointHandler = endpoints.NewHandler(requestBouncer)
 	endpointHandler.DataStore = server.DataStore
 	endpointHandler.FileService = server.FileService
@@ -182,6 +184,7 @@ func (server *Server) Start() error {
 	endpointHandler.BindAddress = server.BindAddress
 	endpointHandler.BindAddressHTTPS = server.BindAddressHTTPS
 	endpointHandler.PendingActionsService = server.PendingActionsService
+	endpointHandler.PullLimitCheckDisabled = server.PullLimitCheckDisabled
 
 	var endpointEdgeHandler = endpointedge.NewHandler(requestBouncer, server.DataStore, server.FileService, server.ReverseTunnelService)
 
@@ -201,7 +204,7 @@ func (server *Server) Start() error {
 
 	var dockerHandler = dockerhandler.NewHandler(requestBouncer, server.AuthorizationService, server.DataStore, server.DockerClientFactory, containerService)
 
-	var fileHandler = file.NewHandler(filepath.Join(server.AssetsPath, "public"), adminMonitor.WasInstanceDisabled)
+	var fileHandler = file.NewHandler(filepath.Join(server.AssetsPath, "public"), server.CSP, adminMonitor.WasInstanceDisabled)
 
 	var endpointHelmHandler = helm.NewHandler(requestBouncer, server.DataStore, server.JWTService, server.KubernetesDeployer, server.HelmPackageManager, server.KubeClusterAccessService)
 
@@ -303,7 +306,6 @@ func (server *Server) Start() error {
 		EdgeGroupsHandler:      edgeGroupsHandler,
 		EdgeJobsHandler:        edgeJobsHandler,
 		EdgeStacksHandler:      edgeStacksHandler,
-		EdgeTemplatesHandler:   edgeTemplatesHandler,
 		EndpointGroupHandler:   endpointGroupHandler,
 		EndpointHandler:        endpointHandler,
 		EndpointHelmHandler:    endpointHelmHandler,
@@ -337,9 +339,9 @@ func (server *Server) Start() error {
 
 	handler := adminMonitor.WithRedirect(offlineGate.WaitingMiddleware(time.Minute, server.Handler))
 
-	handler = middlewares.WithSlowRequestsLogger(handler)
+	handler = middlewares.WithPanicLogger(middlewares.WithSlowRequestsLogger(handler))
 
-	handler, err := csrf.WithProtect(handler)
+	handler, err := csrf.WithProtect(handler, server.TrustedOrigins)
 	if err != nil {
 		return errors.Wrap(err, "failed to create CSRF middleware")
 	}
@@ -349,7 +351,7 @@ func (server *Server) Start() error {
 			log.Info().Str("bind_address", server.BindAddress).Msg("starting HTTP server")
 			httpServer := &http.Server{
 				Addr:     server.BindAddress,
-				Handler:  handler,
+				Handler:  middlewares.PlaintextHTTPRequest(handler),
 				ErrorLog: errorLogger,
 			}
 
@@ -370,7 +372,7 @@ func (server *Server) Start() error {
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler)), // Disable HTTP/2
 	}
 
-	httpsServer.TLSConfig = crypto.CreateTLSConfiguration()
+	httpsServer.TLSConfig = crypto.CreateTLSConfiguration(false)
 	httpsServer.TLSConfig.GetCertificate = func(*tls.ClientHelloInfo) (*tls.Certificate, error) {
 		return server.SSLService.GetRawCertificate(), nil
 	}

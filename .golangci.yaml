@@ -1,42 +1,88 @@
-linters:
-  # Disable all linters, the defaults don't pass on our code yet
-  disable-all: true
+version: "2"
 
-  # Enable these for now
+run:
+  allow-parallel-runners: true
+linters:
+  default: none
   enable:
-    - unused
-    - depguard
-    - gosimple
-    - govet
-    - errorlint
+    - bodyclose
     - copyloopvar
+    - depguard
+    - errcheck
+    - errorlint
+    - forbidigo
+    - govet
+    - ineffassign
     - intrange
     - perfsprint
-
-linters-settings:
-  depguard:
-    rules:
-      main:
-        deny:
-          - pkg: 'encoding/json'
-            desc: 'use github.com/segmentio/encoding/json'
-          - pkg: 'github.com/sirupsen/logrus'
-            desc: 'logging is allowed only by github.com/rs/zerolog'
-          - pkg: 'golang.org/x/exp'
-            desc: 'exp is not allowed'
-          - pkg: 'github.com/portainer/libcrypto'
-            desc: 'use github.com/portainer/portainer/pkg/libcrypto'
-          - pkg: 'github.com/portainer/libhttp'
-            desc: 'use github.com/portainer/portainer/pkg/libhttp'
-        files:
-          - '!**/*_test.go'
-          - '!**/base.go'
-          - '!**/base_tx.go'
-
-# errorlint is causing a typecheck error for some reason. The go compiler will report these
-# anyway, so ignore them from the linter
-issues:
-  exclude-rules:
-    - path: ./
-      linters:
-        - typecheck
+    - staticcheck
+    - unused
+    - mirror
+    - durationcheck
+    - errorlint
+    - govet
+    - usetesting
+    - zerologlint
+    - testifylint
+    - modernize
+    - unconvert
+    - unused
+    - zerologlint
+    - exptostd
+  settings:
+    staticcheck:
+      checks: ["all", "-ST1003", "-ST1005", "-ST1016", "-SA1019", "-QF1003"]
+    depguard:
+      rules:
+        main:
+          files:
+            - '!**/*_test.go'
+            - '!**/base.go'
+            - '!**/base_tx.go'
+          deny:
+            - pkg: encoding/json
+              desc: use github.com/segmentio/encoding/json
+            - pkg: golang.org/x/exp
+              desc: exp is not allowed
+            - pkg: github.com/portainer/libcrypto
+              desc: use github.com/portainer/portainer/pkg/libcrypto
+            - pkg: github.com/portainer/libhttp
+              desc: use github.com/portainer/portainer/pkg/libhttp
+            - pkg: golang.org/x/crypto
+              desc: golang.org/x/crypto is not allowed because of FIPS mode
+            - pkg: github.com/ProtonMail/go-crypto/openpgp
+              desc: github.com/ProtonMail/go-crypto/openpgp is not allowed because of FIPS mode
+            - pkg: github.com/cosi-project/runtime
+              desc: github.com/cosi-project/runtime is not allowed because of FIPS mode
+            - pkg: gopkg.in/yaml.v3
+              desc: use go.yaml.in/yaml/v3 instead
+    forbidigo:
+      forbid:
+        - pattern: ^tls\.Config$
+          msg: Use crypto.CreateTLSConfiguration() instead
+        - pattern: ^tls\.Config\.(InsecureSkipVerify|MinVersion|MaxVersion|CipherSuites|CurvePreferences)$
+          msg: Do not set this field directly, use crypto.CreateTLSConfiguration() instead
+        - pattern: ^object\.(Commit|Tag)\.Verify$
+          msg: "Not allowed because of FIPS mode"
+        - pattern: ^(types\.SystemContext\.)?(DockerDaemonInsecureSkipTLSVerify|DockerInsecureSkipTLSVerify|OCIInsecureSkipTLSVerify)$
+          msg: "Not allowed because of FIPS mode"
+      analyze-types: true
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofmt
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

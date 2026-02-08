@@ -89,6 +89,10 @@ export function isDockerAPIEnvironment(environment: Environment) {
   );
 }
 
+export function isAzureEnvironment(envType: EnvironmentType) {
+  return envType === EnvironmentType.Azure;
+}
+
 export function getDashboardRoute(environment: Environment) {
   if (isEdgeEnvironment(environment.Type)) {
     if (!environment.EdgeID) {

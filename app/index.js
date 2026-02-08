@@ -5,12 +5,9 @@ import './i18n';
 import angular from 'angular';
 import { UI_ROUTER_REACT_HYBRID } from '@uirouter/react-hybrid';
 
-import './matomo-setup';
-
 import { Edition } from '@/react/portainer/feature-flags/enums';
 import { init as initFeatureService } from '@/react/portainer/feature-flags/feature-flags.service';
 
-import analyticsModule from './angulartics.matomo';
 import './agent';
 import { azureModule } from './azure';
 import './docker/__module';
@@ -58,8 +55,6 @@ angular
     'portainer.edge',
     'rzModule',
     'moment-picker',
-    'angulartics',
-    analyticsModule,
     constantsModule,
   ])
   .run(onStartupAngular)

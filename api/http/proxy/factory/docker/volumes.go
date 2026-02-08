@@ -12,9 +12,9 @@ import (
 	"github.com/portainer/portainer/api/http/security"
 	"github.com/portainer/portainer/api/internal/authorization"
 	"github.com/portainer/portainer/api/internal/snapshot"
+	"github.com/portainer/portainer/api/logs"
 
 	"github.com/docker/docker/client"
-	"github.com/rs/zerolog/log"
 )
 
 const volumeObjectIdentifier = "ResourceID"
@@ -49,15 +49,6 @@ func (transport *Transport) volumeListOperation(response *http.Response, executo
 	}
 
 	volumeData := responseObject["Volumes"].([]any)
-
-	if transport.snapshotService != nil {
-		// Filling snapshot data can improve the performance of getVolumeResourceID
-		if err = transport.snapshotService.FillSnapshotData(transport.endpoint); err != nil {
-			log.Info().Err(err).
-				Int("endpoint id", int(transport.endpoint.ID)).
-				Msg("snapshot is not filled into the endpoint.")
-		}
-	}
 
 	for _, volumeObject := range volumeData {
 		volume := volumeObject.(map[string]any)
@@ -145,9 +136,9 @@ func (transport *Transport) decorateVolumeResourceCreationOperation(request *htt
 		if err != nil {
 			return nil, err
 		}
-		defer cli.Close()
+		defer logs.CloseAndLogErr(cli)
 
-		if _, err = cli.VolumeInspect(context.Background(), volumeID); err == nil {
+		if _, err := cli.VolumeInspect(context.Background(), volumeID); err == nil {
 			return &http.Response{
 				StatusCode: http.StatusConflict,
 			}, errors.New("a volume with the same name already exists")
@@ -222,19 +213,32 @@ func (transport *Transport) getVolumeResourceID(volumeName string) (string, erro
 }
 
 func (transport *Transport) getDockerID() (string, error) {
-	if len(transport.endpoint.Snapshots) > 0 {
-		dockerID, err := snapshot.FetchDockerID(transport.endpoint.Snapshots[0])
-		// ignore err - in case of error, just generate not from snapshot
-		if err == nil {
-			return dockerID, nil
+	transport.mu.Lock()
+	defer transport.mu.Unlock()
+
+	// Local cache
+	if transport.dockerID != "" {
+		return transport.dockerID, nil
+	}
+
+	// Snapshot cache
+	if transport.snapshotService != nil {
+		endpoint := portainer.Endpoint{ID: transport.endpoint.ID}
+
+		if err := transport.snapshotService.FillSnapshotData(&endpoint, true); err == nil && len(endpoint.Snapshots) > 0 {
+			if dockerID, err := snapshot.FetchDockerID(endpoint.Snapshots[0]); err == nil {
+				transport.dockerID = dockerID
+				return dockerID, nil
+			}
 		}
 	}
 
+	// Remote value
 	client, err := transport.dockerClientFactory.CreateClient(transport.endpoint, "", nil)
 	if err != nil {
 		return "", err
 	}
-	defer client.Close()
+	defer logs.CloseAndLogErr(client)
 
 	info, err := client.Info(context.Background())
 	if err != nil {
@@ -242,8 +246,11 @@ func (transport *Transport) getDockerID() (string, error) {
 	}
 
 	if info.Swarm.Cluster != nil {
-		return info.Swarm.Cluster.ID, nil
+		transport.dockerID = info.Swarm.Cluster.ID
+		return transport.dockerID, nil
 	}
 
-	return info.ID, nil
+	transport.dockerID = info.ID
+
+	return transport.dockerID, nil
 }

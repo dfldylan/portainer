@@ -1,7 +1,6 @@
 package client
 
 import (
-	"crypto/tls"
 	"errors"
 	"fmt"
 	"io"
@@ -11,6 +10,7 @@ import (
 	"time"
 
 	portainer "github.com/portainer/portainer/api"
+	"github.com/portainer/portainer/api/crypto"
 
 	"github.com/rs/zerolog/log"
 	"github.com/segmentio/encoding/json"
@@ -55,7 +55,11 @@ func (client *HTTPClient) ExecuteAzureAuthenticationRequest(credentials *portain
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			log.Warn().Err(err).Msg("failed to close response body")
+		}
+	}()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, errors.New("invalid Azure credentials")
@@ -86,7 +90,11 @@ func Get(url string, timeout int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer response.Body.Close()
+	defer func() {
+		if err := response.Body.Close(); err != nil {
+			log.Warn().Err(err).Msg("failed to close response body")
+		}
+	}()
 
 	if response.StatusCode != http.StatusOK {
 		log.Error().Int("status_code", response.StatusCode).Msg("unexpected status code")
@@ -105,21 +113,28 @@ func Get(url string, timeout int) ([]byte, error) {
 // ExecutePingOperation will send a SystemPing operation HTTP request to a Docker environment(endpoint)
 // using the specified host and optional TLS configuration.
 // It uses a new Http.Client for each operation.
-func ExecutePingOperation(host string, tlsConfig *tls.Config) (bool, error) {
+func ExecutePingOperation(host string, tlsConfiguration portainer.TLSConfiguration) (bool, error) {
 	transport := &http.Transport{}
 
 	scheme := "http"
-	if tlsConfig != nil {
+
+	if tlsConfiguration.TLS {
+		tlsConfig, err := crypto.CreateTLSConfigurationFromDisk(tlsConfiguration)
+		if err != nil {
+			return false, err
+		}
+
 		transport.TLSClientConfig = tlsConfig
 		scheme = "https"
 	}
 
 	client := &http.Client{
-		Timeout:   time.Second * 3,
+		Timeout:   3 * time.Second,
 		Transport: transport,
 	}
 
 	target := strings.Replace(host, "tcp://", scheme+"://", 1)
+
 	return pingOperation(client, target)
 }
 
@@ -131,13 +146,13 @@ func pingOperation(client *http.Client, target string) (bool, error) {
 		return false, err
 	}
 
-	io.Copy(io.Discard, resp.Body)
-	resp.Body.Close()
+	_, _ = io.Copy(io.Discard, resp.Body)
 
-	agentOnDockerEnvironment := false
-	if resp.Header.Get(portainer.PortainerAgentHeader) != "" {
-		agentOnDockerEnvironment = true
+	if err := resp.Body.Close(); err != nil {
+		log.Warn().Err(err).Msg("failed to close response body")
 	}
+
+	agentOnDockerEnvironment := resp.Header.Get(portainer.PortainerAgentHeader) != ""
 
 	return agentOnDockerEnvironment, nil
 }

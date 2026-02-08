@@ -52,10 +52,12 @@ export function intervalValidation() {
       //   /[-+]?([0-9]*(\.[0-9]*)?[a-z]+)+/g,
       //   'Please enter a valid time interval.'
       // )
-      .test(
-        'minimumInterval',
-        'Minimum interval is 1m',
-        (value) => !!value && parse(value, 'minute') >= 1
-      )
+      .test('minimumInterval', 'Minimum interval is 1m', (value) => {
+        if (!value) {
+          return false;
+        }
+        const minutes = parse(value, 'minute');
+        return minutes !== null && minutes >= 1;
+      })
   );
 }

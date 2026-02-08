@@ -4,7 +4,6 @@ import { r2a } from '@/react-tools/react2angular';
 import { IngressClassDatatableAngular } from '@/react/kubernetes/cluster/ingressClass/IngressClassDatatable/IngressClassDatatableAngular';
 import { NamespacesSelector } from '@/react/kubernetes/cluster/RegistryAccessView/NamespacesSelector';
 import { NamespaceAccessUsersSelector } from '@/react/kubernetes/namespaces/AccessView/NamespaceAccessUsersSelector';
-import { RegistriesSelector } from '@/react/kubernetes/namespaces/components/RegistriesFormSection/RegistriesSelector';
 import { KubeServicesForm } from '@/react/kubernetes/applications/CreateView/application-services/KubeServicesForm';
 import { kubeServicesValidation } from '@/react/kubernetes/applications/CreateView/application-services/kubeServicesValidation';
 import { withReactQuery } from '@/react-tools/withReactQuery';
@@ -59,6 +58,7 @@ import { AppDeploymentTypeFormSection } from '@/react/kubernetes/applications/co
 import { EnvironmentVariablesFormSection } from '@/react/kubernetes/applications/components/EnvironmentVariablesFormSection/EnvironmentVariablesFormSection';
 import { kubeEnvVarValidationSchema } from '@/react/kubernetes/applications/components/EnvironmentVariablesFormSection/kubeEnvVarValidationSchema';
 import { IntegratedAppsDatatable } from '@/react/kubernetes/components/IntegratedAppsDatatable/IntegratedAppsDatatable';
+import { HelmTemplates } from '@/react/kubernetes/helm/HelmTemplates/HelmTemplates';
 
 import { namespacesModule } from './namespaces';
 import { clusterManagementModule } from './clusterManagement';
@@ -92,6 +92,7 @@ export const ngModule = angular
       'onChange',
       'placeholder',
       'value',
+      'allowSelectAll',
     ])
   )
   .component(
@@ -104,15 +105,6 @@ export const ngModule = angular
       'dataCy',
       'placeholder',
       'name',
-    ])
-  )
-  .component(
-    'createNamespaceRegistriesSelector',
-    r2a(withUIRouter(withReactQuery(withCurrentUser(RegistriesSelector))), [
-      'inputId',
-      'onChange',
-      'options',
-      'value',
     ])
   )
   .component(
@@ -135,6 +127,8 @@ export const ngModule = angular
       'data',
       'hideMessage',
       'data-cy',
+      'isLoading',
+      'isError',
     ])
   )
   .component(
@@ -214,6 +208,14 @@ export const ngModule = angular
       'tableKey',
       'tableTitle',
       'dataCy',
+    ])
+  )
+  .component(
+    'helmTemplatesView',
+    r2a(withUIRouter(withCurrentUser(HelmTemplates)), [
+      'onSelectHelmChart',
+      'namespace',
+      'name',
     ])
   );
 

@@ -2,7 +2,6 @@ package deployments
 
 import (
 	"cmp"
-	"crypto/tls"
 	"fmt"
 	"strconv"
 	"time"
@@ -122,7 +121,7 @@ func redeployWhenChangedSecondStage(
 	var gitCommitChangedOrForceUpdate bool
 
 	if !stack.FromAppTemplate {
-		updated, newHash, err := update.UpdateGitObject(gitService, fmt.Sprintf("stack:%d", stack.ID), stack.GitConfig, false, false, stack.ProjectPath)
+		updated, newHash, err := update.UpdateGitObject(gitService, fmt.Sprintf("stack:%d", stack.ID), stack.GitConfig, false, stack.ProjectPath)
 		if err != nil {
 			return err
 		}
@@ -131,6 +130,10 @@ func redeployWhenChangedSecondStage(
 			stack.GitConfig.ConfigHash = newHash
 			stack.UpdateDate = time.Now().Unix()
 			gitCommitChangedOrForceUpdate = updated
+		}
+
+		if stack.AutoUpdate != nil && stack.AutoUpdate.ForceUpdate {
+			gitCommitChangedOrForceUpdate = true
 		}
 	}
 
@@ -215,13 +218,9 @@ func isEnvironmentOnline(endpoint *portainer.Endpoint) bool {
 		return true
 	}
 
-	var err error
-	var tlsConfig *tls.Config
-	if endpoint.TLSConfig.TLS {
-		tlsConfig, err = crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig.TLSCACertPath, endpoint.TLSConfig.TLSCertPath, endpoint.TLSConfig.TLSKeyPath, endpoint.TLSConfig.TLSSkipVerify)
-		if err != nil {
-			return false
-		}
+	tlsConfig, err := crypto.CreateTLSConfigurationFromDisk(endpoint.TLSConfig)
+	if err != nil {
+		return false
 	}
 
 	_, _, err = agent.GetAgentVersionAndPlatform(endpoint.URL, tlsConfig)

@@ -7,8 +7,10 @@ import (
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
 	"github.com/portainer/portainer/api/internal/endpointutils"
+	"github.com/portainer/portainer/api/roar"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
+	"github.com/portainer/portainer/pkg/libhttp/response"
 )
 
 type edgeGroupCreatePayload struct {
@@ -52,6 +54,7 @@ func calculateEndpointsOrTags(tx dataservices.DataStoreTx, edgeGroup *portainer.
 	}
 
 	edgeGroup.Endpoints = endpointIDs
+	edgeGroup.EndpointIDs = roar.FromSlice(endpointIDs)
 
 	return nil
 }
@@ -75,8 +78,7 @@ func (handler *Handler) edgeGroupCreate(w http.ResponseWriter, r *http.Request) 
 		return httperror.BadRequest("Invalid request payload", err)
 	}
 
-	var edgeGroup *portainer.EdgeGroup
-
+	var shadowEdgeGroup shadowedEdgeGroup
 	err := handler.DataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
 		edgeGroups, err := tx.EdgeGroup().ReadAll()
 		if err != nil {
@@ -89,11 +91,12 @@ func (handler *Handler) edgeGroupCreate(w http.ResponseWriter, r *http.Request) 
 			}
 		}
 
-		edgeGroup = &portainer.EdgeGroup{
+		edgeGroup := &portainer.EdgeGroup{
 			Name:         payload.Name,
 			Dynamic:      payload.Dynamic,
 			TagIDs:       []portainer.TagID{},
 			Endpoints:    []portainer.EndpointID{},
+			EndpointIDs:  roar.Roar[portainer.EndpointID]{},
 			PartialMatch: payload.PartialMatch,
 		}
 
@@ -105,8 +108,10 @@ func (handler *Handler) edgeGroupCreate(w http.ResponseWriter, r *http.Request) 
 			return httperror.InternalServerError("Unable to persist the Edge group inside the database", err)
 		}
 
+		shadowEdgeGroup = shadowedEdgeGroup{EdgeGroup: *edgeGroup}
+
 		return nil
 	})
 
-	return txResponse(w, edgeGroup, err)
+	return response.TxResponse(w, shadowEdgeGroup, err)
 }

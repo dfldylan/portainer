@@ -84,8 +84,8 @@ export function ApplicationEnvVarsTable({ namespace, app }: Props) {
                     ))}
                 </td>
                 <td data-cy="k8sAppDetail-configName">
-                  {!envVar.resourseName && <span>-</span>}
-                  {envVar.resourseName && (
+                  {!envVar.resourceName && <span>-</span>}
+                  {envVar.resourceName && (
                     <span>
                       <Link
                         to={
@@ -94,17 +94,17 @@ export function ApplicationEnvVarsTable({ namespace, app }: Props) {
                             : 'kubernetes.secrets.secret'
                         }
                         params={{
-                          name: envVar.resourseName,
+                          name: envVar.resourceName,
                           namespace,
                         }}
                         className="flex items-center"
-                        data-cy={`configmap-link-${envVar.resourseName}`}
+                        data-cy={`configmap-link-${envVar.resourceName}`}
                       >
                         <Icon
                           icon={envVar.type === 'configMap' ? FileCode : Lock}
                           className="!mr-1"
                         />
-                        {envVar.resourseName}
+                        {envVar.resourceName}
                       </Link>
                     </span>
                   )}
@@ -126,7 +126,7 @@ interface ContainerEnvVar {
   containerName: string;
   isInitContainer: boolean;
   type: EnvVarType;
-  resourseName: string;
+  resourceName: string;
 }
 
 function getApplicationEnvironmentVariables(
@@ -159,7 +159,7 @@ function getApplicationEnvironmentVariables(
             containerName: container.name,
             isInitContainer: false,
             type: envtype,
-            resourseName:
+            resourceName:
               envVar?.valueFrom?.configMapKeyRef?.name ||
               envVar?.valueFrom?.secretKeyRef?.name ||
               '',
@@ -170,7 +170,7 @@ function getApplicationEnvironmentVariables(
       const containerEnvFroms: ContainerEnvVar[] =
         container?.envFrom?.map((envFrom) => ({
           name: '',
-          resourseName:
+          resourceName:
             envFrom?.configMapRef?.name || envFrom?.secretRef?.name || '',
           containerName: container.name,
           isInitContainer: false,
@@ -196,7 +196,7 @@ function getApplicationEnvironmentVariables(
             containerName: container.name,
             isInitContainer: true,
             type: envtype,
-            resourseName:
+            resourceName:
               envVar?.valueFrom?.configMapKeyRef?.name ||
               envVar?.valueFrom?.secretKeyRef?.name ||
               '',
@@ -207,7 +207,7 @@ function getApplicationEnvironmentVariables(
       const containerEnvFroms: ContainerEnvVar[] =
         container?.envFrom?.map((envFrom) => ({
           name: '',
-          resourseName:
+          resourceName:
             envFrom?.configMapRef?.name || envFrom?.secretRef?.name || '',
           containerName: container.name,
           isInitContainer: true,

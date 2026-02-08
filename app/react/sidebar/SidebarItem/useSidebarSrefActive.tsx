@@ -5,7 +5,9 @@ import {
 } from '@uirouter/react';
 
 export type PathOptions = {
+  /** ignorePaths ignores highlighting the sidebar parent when the URL of a sidebar child matches the current URL */
   ignorePaths?: string[];
+  /** includePaths help to highlight the sidebar parent when the URL of a sidebar child matches the current URL */
   includePaths?: string[];
 };
 
@@ -20,7 +22,7 @@ export type PathOptions = {
 export function useSidebarSrefActive(
   to: string,
   // default values are the classes used in the sidebar for an active item
-  activeClassName: string = 'bg-blue-5/25 be:bg-gray-5/25 th-dark:bg-gray-true-5/25',
+  activeClassName: string = 'bg-graphite-500',
   params: Partial<Record<string, string>> = {},
   options: TransitionOptions = {},
   pathOptions: PathOptions = {

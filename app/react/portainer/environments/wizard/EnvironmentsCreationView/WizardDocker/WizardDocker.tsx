@@ -31,6 +31,20 @@ const options: BoxSelectorOption<
   'agent' | 'api' | 'socket' | 'edgeAgentStandard' | 'edgeAgentAsync'
 >[] = _.compact([
   {
+    id: 'edgeAgentStandard',
+    icon: <BadgeIcon icon={EdgeAgentStandardIcon} size="3xl" />,
+    label: 'Edge Agent Standard',
+    description: '',
+    value: 'edgeAgentStandard',
+  },
+  isBE && {
+    id: 'edgeAgentAsync',
+    icon: <BadgeIcon icon={EdgeAgentAsyncIcon} size="3xl" />,
+    label: 'Edge Agent Async',
+    description: '',
+    value: 'edgeAgentAsync',
+  },
+  {
     id: 'agent',
     icon: <BadgeIcon icon={Zap} size="3xl" />,
     label: 'Agent',
@@ -50,20 +64,6 @@ const options: BoxSelectorOption<
     label: 'Socket',
     description: '',
     value: 'socket',
-  },
-  {
-    id: 'edgeAgentStandard',
-    icon: <BadgeIcon icon={EdgeAgentStandardIcon} size="3xl" />,
-    label: 'Edge Agent Standard',
-    description: '',
-    value: 'edgeAgentStandard',
-  },
-  isBE && {
-    id: 'edgeAgentAsync',
-    icon: <BadgeIcon icon={EdgeAgentAsyncIcon} size="3xl" />,
-    label: 'Edge Agent Async',
-    description: '',
-    value: 'edgeAgentAsync',
   },
 ]);
 

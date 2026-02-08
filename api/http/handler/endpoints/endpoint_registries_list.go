@@ -2,6 +2,7 @@ package endpoints
 
 import (
 	"net/http"
+	"slices"
 
 	"github.com/pkg/errors"
 
@@ -35,19 +36,12 @@ func (handler *Handler) endpointRegistriesList(w http.ResponseWriter, r *http.Re
 	}
 
 	var registries []portainer.Registry
-	if err := handler.DataStore.ViewTx(func(tx dataservices.DataStoreTx) error {
+	err = handler.DataStore.ViewTx(func(tx dataservices.DataStoreTx) error {
 		registries, err = handler.listRegistries(tx, r, portainer.EndpointID(endpointID))
 		return err
-	}); err != nil {
-		var httpErr *httperror.HandlerError
-		if errors.As(err, &httpErr) {
-			return httpErr
-		}
+	})
 
-		return httperror.InternalServerError("Unexpected error", err)
-	}
-
-	return response.JSON(w, registries)
+	return response.TxResponse(w, registries, err)
 }
 
 func (handler *Handler) listRegistries(tx dataservices.DataStoreTx, r *http.Request, endpointID portainer.EndpointID) ([]portainer.Registry, error) {
@@ -75,7 +69,7 @@ func (handler *Handler) listRegistries(tx dataservices.DataStoreTx, r *http.Requ
 		return nil, httperror.InternalServerError("Unable to retrieve registries from the database", err)
 	}
 
-	registries, handleError := handler.filterRegistriesByAccess(r, registries, endpoint, user, securityContext.UserMemberships)
+	registries, handleError := handler.filterRegistriesByAccess(tx, r, registries, endpoint, user, securityContext.UserMemberships)
 	if handleError != nil {
 		return nil, handleError
 	}
@@ -87,15 +81,15 @@ func (handler *Handler) listRegistries(tx dataservices.DataStoreTx, r *http.Requ
 	return registries, err
 }
 
-func (handler *Handler) filterRegistriesByAccess(r *http.Request, registries []portainer.Registry, endpoint *portainer.Endpoint, user *portainer.User, memberships []portainer.TeamMembership) ([]portainer.Registry, *httperror.HandlerError) {
+func (handler *Handler) filterRegistriesByAccess(tx dataservices.DataStoreTx, r *http.Request, registries []portainer.Registry, endpoint *portainer.Endpoint, user *portainer.User, memberships []portainer.TeamMembership) ([]portainer.Registry, *httperror.HandlerError) {
 	if !endpointutils.IsKubernetesEndpoint(endpoint) {
 		return security.FilterRegistries(registries, user, memberships, endpoint.ID), nil
 	}
 
-	return handler.filterKubernetesEndpointRegistries(r, registries, endpoint, user, memberships)
+	return handler.filterKubernetesEndpointRegistries(tx, r, registries, endpoint, user, memberships)
 }
 
-func (handler *Handler) filterKubernetesEndpointRegistries(r *http.Request, registries []portainer.Registry, endpoint *portainer.Endpoint, user *portainer.User, memberships []portainer.TeamMembership) ([]portainer.Registry, *httperror.HandlerError) {
+func (handler *Handler) filterKubernetesEndpointRegistries(tx dataservices.DataStoreTx, r *http.Request, registries []portainer.Registry, endpoint *portainer.Endpoint, user *portainer.User, memberships []portainer.TeamMembership) ([]portainer.Registry, *httperror.HandlerError) {
 	namespaceParam, _ := request.RetrieveQueryParameter(r, "namespace", true)
 	isAdmin, err := security.IsAdmin(r)
 	if err != nil {
@@ -116,7 +110,7 @@ func (handler *Handler) filterKubernetesEndpointRegistries(r *http.Request, regi
 		return registries, nil
 	}
 
-	return handler.filterKubernetesRegistriesByUserRole(r, registries, endpoint, user)
+	return handler.filterKubernetesRegistriesByUserRole(tx, r, registries, endpoint, user)
 }
 
 func (handler *Handler) isNamespaceAuthorized(endpoint *portainer.Endpoint, namespace string, userId portainer.UserID, memberships []portainer.TeamMembership, isAdmin bool) (bool, error) {
@@ -160,16 +154,14 @@ func filterRegistriesByNamespaces(registries []portainer.Registry, endpointId po
 
 func registryAccessPoliciesContainsNamespace(registryAccess portainer.RegistryAccessPolicies, namespaces []string) bool {
 	for _, authorizedNamespace := range registryAccess.Namespaces {
-		for _, namespace := range namespaces {
-			if namespace == authorizedNamespace {
-				return true
-			}
+		if slices.Contains(namespaces, authorizedNamespace) {
+			return true
 		}
 	}
 	return false
 }
 
-func (handler *Handler) filterKubernetesRegistriesByUserRole(r *http.Request, registries []portainer.Registry, endpoint *portainer.Endpoint, user *portainer.User) ([]portainer.Registry, *httperror.HandlerError) {
+func (handler *Handler) filterKubernetesRegistriesByUserRole(tx dataservices.DataStoreTx, r *http.Request, registries []portainer.Registry, endpoint *portainer.Endpoint, user *portainer.User) ([]portainer.Registry, *httperror.HandlerError) {
 	err := handler.requestBouncer.AuthorizedEndpointOperation(r, endpoint)
 	if errors.Is(err, security.ErrAuthorizationRequired) {
 		return nil, httperror.Forbidden("User is not authorized", err)
@@ -178,7 +170,7 @@ func (handler *Handler) filterKubernetesRegistriesByUserRole(r *http.Request, re
 		return nil, httperror.InternalServerError("Unable to retrieve info from request context", err)
 	}
 
-	userNamespaces, err := handler.userNamespaces(endpoint, user)
+	userNamespaces, err := handler.userNamespaces(tx, endpoint, user)
 	if err != nil {
 		return nil, httperror.InternalServerError("unable to retrieve user namespaces", err)
 	}
@@ -186,7 +178,7 @@ func (handler *Handler) filterKubernetesRegistriesByUserRole(r *http.Request, re
 	return filterRegistriesByNamespaces(registries, endpoint.ID, userNamespaces), nil
 }
 
-func (handler *Handler) userNamespaces(endpoint *portainer.Endpoint, user *portainer.User) ([]string, error) {
+func (handler *Handler) userNamespaces(tx dataservices.DataStoreTx, endpoint *portainer.Endpoint, user *portainer.User) ([]string, error) {
 	kcl, err := handler.K8sClientFactory.GetPrivilegedKubeClient(endpoint)
 	if err != nil {
 		return nil, err
@@ -197,7 +189,7 @@ func (handler *Handler) userNamespaces(endpoint *portainer.Endpoint, user *porta
 		return nil, err
 	}
 
-	userMemberships, err := handler.DataStore.TeamMembership().TeamMembershipsByUserID(user.ID)
+	userMemberships, err := tx.TeamMembership().TeamMembershipsByUserID(user.ID)
 	if err != nil {
 		return nil, err
 	}

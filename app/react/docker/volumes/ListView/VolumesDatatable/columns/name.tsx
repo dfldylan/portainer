@@ -81,10 +81,11 @@ function Cell({
       <Link
         to=".volume"
         params={{
-          id: item.Id,
+          id: item.Name,
           nodeName: item.NodeName,
         }}
         data-cy={`volume-link-${name}`}
+        title={name}
       >
         {truncate(name, 40)}
       </Link>
@@ -99,7 +100,7 @@ function Cell({
             props={{
               to: 'docker.volumes.volume.browse',
               params: {
-                id: item.Id,
+                id: item.Name,
                 nodeName: item.NodeName,
               },
             }}

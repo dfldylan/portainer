@@ -27,12 +27,13 @@ type kubernetesFileStackUpdatePayload struct {
 }
 
 type kubernetesGitStackUpdatePayload struct {
-	RepositoryReferenceName  string
-	RepositoryAuthentication bool
-	RepositoryUsername       string
-	RepositoryPassword       string
-	AutoUpdate               *portainer.AutoUpdateSettings
-	TLSSkipVerify            bool
+	RepositoryReferenceName     string
+	RepositoryAuthentication    bool
+	RepositoryUsername          string
+	RepositoryPassword          string
+	RepositoryAuthorizationType gittypes.GitCredentialAuthType
+	AutoUpdate                  *portainer.AutoUpdateSettings
+	TLSSkipVerify               bool
 }
 
 func (payload *kubernetesFileStackUpdatePayload) Validate(r *http.Request) error {
@@ -76,11 +77,19 @@ func (handler *Handler) updateKubernetesStack(r *http.Request, stack *portainer.
 			}
 
 			stack.GitConfig.Authentication = &gittypes.GitAuthentication{
-				Username: payload.RepositoryUsername,
-				Password: password,
+				Username:          payload.RepositoryUsername,
+				Password:          password,
+				AuthorizationType: payload.RepositoryAuthorizationType,
 			}
 
-			if _, err := handler.GitService.LatestCommitID(stack.GitConfig.URL, stack.GitConfig.ReferenceName, stack.GitConfig.Authentication.Username, stack.GitConfig.Authentication.Password, stack.GitConfig.TLSSkipVerify); err != nil {
+			if _, err := handler.GitService.LatestCommitID(
+				stack.GitConfig.URL,
+				stack.GitConfig.ReferenceName,
+				stack.GitConfig.Authentication.Username,
+				stack.GitConfig.Authentication.Password,
+				stack.GitConfig.Authentication.AuthorizationType,
+				stack.GitConfig.TLSSkipVerify,
+			); err != nil {
 				return httperror.InternalServerError("Unable to fetch git repository", err)
 			}
 		}
@@ -108,7 +117,11 @@ func (handler *Handler) updateKubernetesStack(r *http.Request, stack *portainer.
 	}
 
 	tempFileDir, _ := os.MkdirTemp("", "kub_file_content")
-	defer os.RemoveAll(tempFileDir)
+	defer func() {
+		if err := os.RemoveAll(tempFileDir); err != nil {
+			log.Warn().Err(err).Msg("failed to remove temporary stack deployment directory")
+		}
+	}()
 
 	if err := filesystem.WriteToFile(filesystem.JoinPaths(tempFileDir, stack.EntryPoint), []byte(payload.StackFileContent)); err != nil {
 		return httperror.InternalServerError("Failed to persist deployment file in a temp directory", err)
@@ -126,7 +139,9 @@ func (handler *Handler) updateKubernetesStack(r *http.Request, stack *portainer.
 	// otherwise return nil
 	cli, err := handler.KubernetesClientFactory.GetPrivilegedKubeClient(endpoint)
 	if err == nil {
-		registryutils.RefreshEcrSecret(cli, endpoint, handler.DataStore, stack.Namespace)
+		if err := registryutils.RefreshEcrSecret(cli, endpoint, handler.DataStore, stack.Namespace); err != nil {
+			log.Warn().Err(err).Msg("failed to refresh ECR registry secret")
+		}
 	}
 
 	// Use temp dir as the stack project path for deployment
@@ -153,7 +168,9 @@ func (handler *Handler) updateKubernetesStack(r *http.Request, stack *portainer.
 	}
 	stack.ProjectPath = projectPath
 
-	handler.FileService.RemoveStackFileBackup(stackFolder, stack.EntryPoint)
+	if err := handler.FileService.RemoveStackFileBackup(stackFolder, stack.EntryPoint); err != nil {
+		log.Warn().Err(err).Msg("remove stack file backup error")
+	}
 
 	return nil
 }

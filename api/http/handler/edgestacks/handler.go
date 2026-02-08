@@ -36,8 +36,6 @@ func NewHandler(bouncer security.BouncerService, dataStore dataservices.DataStor
 	h.Handle("/edge_stacks/create/{method}",
 		bouncer.AdminAccess(bouncer.EdgeComputeOperation(httperror.LoggerHandler(h.edgeStackCreate)))).Methods(http.MethodPost)
 	h.Handle("/edge_stacks",
-		bouncer.AdminAccess(bouncer.EdgeComputeOperation(middlewares.Deprecated(h, deprecatedEdgeStackCreateUrlParser)))).Methods(http.MethodPost) // Deprecated
-	h.Handle("/edge_stacks",
 		bouncer.AdminAccess(bouncer.EdgeComputeOperation(httperror.LoggerHandler(h.edgeStackList)))).Methods(http.MethodGet)
 	h.Handle("/edge_stacks/{id}",
 		bouncer.AdminAccess(bouncer.EdgeComputeOperation(httperror.LoggerHandler(h.edgeStackInspect)))).Methods(http.MethodGet)
@@ -53,15 +51,13 @@ func NewHandler(bouncer security.BouncerService, dataStore dataservices.DataStor
 	edgeStackStatusRouter := h.NewRoute().Subrouter()
 	edgeStackStatusRouter.Use(middlewares.WithEndpoint(h.DataStore.Endpoint(), "endpoint_id"))
 
-	edgeStackStatusRouter.PathPrefix("/edge_stacks/{id}/status/{endpoint_id}").Handler(bouncer.PublicAccess(httperror.LoggerHandler(h.edgeStackStatusDelete))).Methods(http.MethodDelete)
-
 	return h
 }
 
-func (handler *Handler) handlerDBErr(err error, msg string) *httperror.HandlerError {
+func handlerDBErr(err error, msg string) *httperror.HandlerError {
 	httpErr := httperror.InternalServerError(msg, err)
 
-	if handler.DataStore.IsErrObjectNotFound(err) {
+	if dataservices.IsErrObjectNotFound(err) {
 		httpErr.StatusCode = http.StatusNotFound
 	}
 

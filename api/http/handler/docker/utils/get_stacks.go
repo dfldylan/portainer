@@ -6,14 +6,14 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/swarm"
 	portainer "github.com/portainer/portainer/api"
-	portaineree "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
 	dockerconsts "github.com/portainer/portainer/api/docker/consts"
 	"github.com/portainer/portainer/api/http/security"
+	"github.com/portainer/portainer/api/uac"
 )
 
 type StackViewModel struct {
-	InternalStack *portaineree.Stack
+	InternalStack *portainer.Stack
 
 	ID         portainer.StackID
 	Name       string
@@ -23,10 +23,14 @@ type StackViewModel struct {
 
 // GetDockerStacks retrieves all the stacks associated to a specific environment filtered by the user's access.
 func GetDockerStacks(tx dataservices.DataStoreTx, securityContext *security.RestrictedRequestContext, environmentID portainer.EndpointID, containers []types.Container, services []swarm.Service) ([]StackViewModel, error) {
-
 	stacks, err := tx.Stack().ReadAll()
 	if err != nil {
 		return nil, fmt.Errorf("Unable to retrieve stacks: %w", err)
+	}
+
+	user, err := tx.User().Read(securityContext.UserID)
+	if err != nil {
+		return nil, fmt.Errorf("Unable to retrieve user: %w", err)
 	}
 
 	stacksNameSet := map[string]*StackViewModel{}
@@ -73,9 +77,11 @@ func GetDockerStacks(tx dataservices.DataStoreTx, securityContext *security.Rest
 		stacksList = append(stacksList, *stack)
 	}
 
-	return FilterByResourceControl(tx, stacksList, portainer.StackResourceControl, securityContext, func(c StackViewModel) string {
-		return c.Name
-	})
+	return uac.FilterByResourceControl(stacksList, user, securityContext.UserMemberships,
+		func(item StackViewModel) (*portainer.ResourceControl, error) {
+			return uac.StackResourceControlGetter(tx, environmentID)(*item.InternalStack)
+		},
+	)
 }
 
 func isHiddenStack(labels map[string]string) bool {

@@ -42,8 +42,8 @@ export function FileUploadField({
         required={required}
         className={styles.fileInput}
         onChange={changeHandler}
-        aria-label="file-input"
         name={name}
+        data-cy={`${dataCy}-input`}
       />
       <Button
         size="small"

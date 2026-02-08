@@ -27,7 +27,7 @@ func (handler *Handler) edgeStackCreate(w http.ResponseWriter, r *http.Request) 
 
 	var edgeStack *portainer.EdgeStack
 	if err := handler.DataStore.UpdateTx(func(tx dataservices.DataStoreTx) error {
-		edgeStack, err = handler.createSwarmStack(tx, method, dryrun, tokenData.ID, r)
+		edgeStack, err = handler.createSwarmStack(tx, method, dryrun, tokenData, r)
 		return err
 	}); err != nil {
 		switch {
@@ -43,38 +43,15 @@ func (handler *Handler) edgeStackCreate(w http.ResponseWriter, r *http.Request) 
 	return response.JSON(w, edgeStack)
 }
 
-func (handler *Handler) createSwarmStack(tx dataservices.DataStoreTx, method string, dryrun bool, userID portainer.UserID, r *http.Request) (*portainer.EdgeStack, error) {
+func (handler *Handler) createSwarmStack(tx dataservices.DataStoreTx, method string, dryrun bool, tokenData *portainer.TokenData, r *http.Request) (*portainer.EdgeStack, error) {
 	switch method {
 	case "string":
-		return handler.createEdgeStackFromFileContent(r, tx, dryrun)
+		return handler.createEdgeStackFromFileContent(r, tx, tokenData, dryrun)
 	case "repository":
-		return handler.createEdgeStackFromGitRepository(r, tx, dryrun, userID)
+		return handler.createEdgeStackFromGitRepository(r, tx, tokenData, dryrun)
 	case "file":
-		return handler.createEdgeStackFromFileUpload(r, tx, dryrun)
+		return handler.createEdgeStackFromFileUpload(r, tx, tokenData, dryrun)
 	}
 
 	return nil, httperrors.NewInvalidPayloadError("Invalid value for query parameter: method. Value must be one of: string, repository or file")
-}
-
-// @id EdgeStackCreate
-// @summary Create an EdgeStack
-// @description **Access policy**: administrator
-// @tags edge_stacks
-// @security ApiKeyAuth
-// @security jwt
-// @produce json
-// @param method query string true "Creation Method" Enums(file,string,repository)
-// @param body body object true "for body documentation see the relevant /edge_stacks/create/{method} endpoint"
-// @success 200 {object} portainer.EdgeStack
-// @failure 500
-// @failure 503 "Edge compute features are disabled"
-// @deprecated
-// @router /edge_stacks [post]
-func deprecatedEdgeStackCreateUrlParser(w http.ResponseWriter, r *http.Request) (string, *httperror.HandlerError) {
-	method, err := request.RetrieveQueryParameter(r, "method", false)
-	if err != nil {
-		return "", httperror.BadRequest("Invalid query parameter: method. Valid values are: file or string", err)
-	}
-
-	return "/edge_stacks/create/" + method, nil
 }

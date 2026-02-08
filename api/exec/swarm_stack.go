@@ -127,7 +127,7 @@ func (manager *SwarmStackManager) Remove(stack *portainer.Stack, endpoint *porta
 		return err
 	}
 
-	args = append(args, "stack", "rm", stack.Name)
+	args = append(args, "stack", "rm", "--detach=false", stack.Name)
 
 	return runCommandAndCaptureStdErr(command, args, nil, "")
 }
@@ -183,7 +183,7 @@ func (manager *SwarmStackManager) prepareDockerCommandAndArgs(binaryPath, config
 		if !endpoint.TLSConfig.TLSSkipVerify {
 			args = append(args, "--tlsverify", "--tlscacert", endpoint.TLSConfig.TLSCACertPath)
 		} else {
-			args = append(args, "--tlscacert", "''")
+			args = append(args, "--tlscacert", "")
 		}
 
 		if endpoint.TLSConfig.TLSCertPath != "" && endpoint.TLSConfig.TLSKeyPath != "" {

@@ -99,9 +99,7 @@ export interface DefaultRegistry {
   Hide: boolean;
 }
 
-export interface ExperimentalFeatures {
-  OpenAIIntegration: boolean;
-}
+export interface ExperimentalFeatures {}
 
 export interface Settings {
   LogoURL: string;
@@ -118,7 +116,6 @@ export interface Settings {
   EnableEdgeComputeFeatures: boolean;
   UserSessionTimeout: string;
   KubeconfigExpiry: string;
-  EnableTelemetry: boolean;
   HelmRepositoryURL: string;
   KubectlShellImage: string;
   TrustOnFirstConnect: boolean;
@@ -187,8 +184,6 @@ export interface PublicSettingsResponse {
   OAuthLogoutURI: string;
   /** Whether portainer internal auth view will be hidden (only on BE) */
   OAuthHideInternalAuth: boolean;
-  /** Whether telemetry is enabled */
-  EnableTelemetry: boolean;
   /** The expiry of a Kubeconfig */
   KubeconfigExpiry: string;
   /** Whether team sync is enabled */

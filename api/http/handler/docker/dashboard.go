@@ -1,20 +1,22 @@
 package docker
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/image"
+	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/api/types/swarm"
 	"github.com/docker/docker/api/types/volume"
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
-	"github.com/portainer/portainer/api/docker"
-	"github.com/portainer/portainer/api/http/errors"
+	"github.com/portainer/portainer/api/docker/stats"
 	"github.com/portainer/portainer/api/http/handler/docker/utils"
 	"github.com/portainer/portainer/api/http/middlewares"
 	"github.com/portainer/portainer/api/http/security"
+	"github.com/portainer/portainer/api/uac"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/response"
 )
@@ -25,12 +27,12 @@ type imagesCounters struct {
 }
 
 type dashboardResponse struct {
-	Containers docker.ContainerStats `json:"containers"`
-	Services   int                   `json:"services"`
-	Images     imagesCounters        `json:"images"`
-	Volumes    int                   `json:"volumes"`
-	Networks   int                   `json:"networks"`
-	Stacks     int                   `json:"stacks"`
+	Containers stats.ContainerStats `json:"containers"`
+	Services   int                  `json:"services"`
+	Images     imagesCounters       `json:"images"`
+	Volumes    int                  `json:"volumes"`
+	Networks   int                  `json:"networks"`
+	Stacks     int                  `json:"stacks"`
 }
 
 // @id dockerDashboard
@@ -44,7 +46,7 @@ type dashboardResponse struct {
 // @success 200 {object} dashboardResponse "Success"
 // @failure 400 "Bad request"
 // @failure 500 "Internal server error"
-// @router /docker/{environmentId}/dashboard [post]
+// @router /docker/{environmentId}/dashboard [get]
 func (h *Handler) dashboard(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	var resp dashboardResponse
 	err := h.dataStore.ViewTx(func(tx dataservices.DataStoreTx) error {
@@ -57,16 +59,22 @@ func (h *Handler) dashboard(w http.ResponseWriter, r *http.Request) *httperror.H
 		if err != nil {
 			return httperror.InternalServerError("Unable to retrieve user details from request context", err)
 		}
+		user, err := tx.User().Read(context.UserID)
+		if err != nil {
+			return httperror.InternalServerError("Unable to retrieve user", err)
+		}
+
+		endpoint, err := middlewares.FetchEndpoint(r)
+		if err != nil {
+			return err
+		}
 
 		containers, err := cli.ContainerList(r.Context(), container.ListOptions{All: true})
 		if err != nil {
 			return httperror.InternalServerError("Unable to retrieve Docker containers", err)
 		}
 
-		containers, err = utils.FilterByResourceControl(tx, containers, portainer.ContainerResourceControl, context, func(c types.Container) string {
-			return c.ID
-		})
-		if err != nil {
+		if containers, err = uac.FilterByResourceControl(containers, user, context.UserMemberships, uac.ContainerResourceControlGetter(tx, endpoint.ID)); err != nil {
 			return err
 		}
 
@@ -94,14 +102,9 @@ func (h *Handler) dashboard(w http.ResponseWriter, r *http.Request) *httperror.H
 				return httperror.InternalServerError("Unable to retrieve Docker services", err)
 			}
 
-			filteredServices, err := utils.FilterByResourceControl(tx, servicesRes, portainer.ServiceResourceControl, context, func(c swarm.Service) string {
-				return c.ID
-			})
-			if err != nil {
+			if services, err = uac.FilterByResourceControl(servicesRes, user, context.UserMemberships, uac.ServiceResourceControlGetter(tx, endpoint.ID)); err != nil {
 				return err
 			}
-
-			services = filteredServices
 		}
 
 		volumesRes, err := cli.VolumeList(r.Context(), volume.ListOptions{})
@@ -109,22 +112,22 @@ func (h *Handler) dashboard(w http.ResponseWriter, r *http.Request) *httperror.H
 			return httperror.InternalServerError("Unable to retrieve Docker volumes", err)
 		}
 
-		volumes, err := utils.FilterByResourceControl(tx, volumesRes.Volumes, portainer.NetworkResourceControl, context, func(c *volume.Volume) string {
-			return c.Name
-		})
-		if err != nil {
+		var volumes []*volume.Volume
+		if volumes, err = uac.FilterByResourceControl(volumesRes.Volumes, user, context.UserMemberships, func(item *volume.Volume) (*portainer.ResourceControl, error) {
+			if item == nil {
+				return nil, errors.New("Found nil volume in volumes list")
+			}
+			return uac.VolumeResourceControlGetter(tx, endpoint.ID)(*item)
+		}); err != nil {
 			return err
 		}
 
-		networks, err := cli.NetworkList(r.Context(), types.NetworkListOptions{})
+		networks, err := cli.NetworkList(r.Context(), network.ListOptions{})
 		if err != nil {
 			return httperror.InternalServerError("Unable to retrieve Docker networks", err)
 		}
 
-		networks, err = utils.FilterByResourceControl(tx, networks, portainer.NetworkResourceControl, context, func(c types.NetworkResource) string {
-			return c.Name
-		})
-		if err != nil {
+		if networks, err = uac.FilterByResourceControl(networks, user, context.UserMemberships, uac.NetworkResourceControlGetter(tx, endpoint.ID)); err != nil {
 			return err
 		}
 
@@ -143,13 +146,18 @@ func (h *Handler) dashboard(w http.ResponseWriter, r *http.Request) *httperror.H
 			stackCount = len(stacks)
 		}
 
+		containersStats, err := stats.CalculateContainerStats(r.Context(), cli, info.Swarm.ControlAvailable, containers)
+		if err != nil {
+			return httperror.InternalServerError("Unable to retrieve Docker containers stats", err)
+		}
+
 		resp = dashboardResponse{
 			Images: imagesCounters{
 				Total: len(images),
 				Size:  totalSize,
 			},
 			Services:   len(services),
-			Containers: docker.CalculateContainerStats(containers),
+			Containers: containersStats,
 			Networks:   len(networks),
 			Volumes:    len(volumes),
 			Stacks:     stackCount,
@@ -158,7 +166,5 @@ func (h *Handler) dashboard(w http.ResponseWriter, r *http.Request) *httperror.H
 		return nil
 	})
 
-	return errors.TxResponse(err, func() *httperror.HandlerError {
-		return response.JSON(w, resp)
-	})
+	return response.TxResponse(w, resp, err)
 }

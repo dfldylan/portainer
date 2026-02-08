@@ -16,10 +16,12 @@ export interface Application {
   CreationDate: string;
   ApplicationOwner?: string;
   StackName?: string;
+  StackKind?: string;
   ResourcePool: string;
   ApplicationType: AppType;
   Metadata?: {
     labels: Record<string, string>;
+    annotations: Record<string, string>;
   };
   Status: 'Ready' | string;
   TotalPodsCount: number;

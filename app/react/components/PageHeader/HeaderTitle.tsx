@@ -1,10 +1,13 @@
 import { PropsWithChildren } from 'react';
 
+import { isBE } from '@/react/portainer/feature-flags/feature-flags.service';
+
 import { ContextHelp } from '@@/PageHeader/ContextHelp';
 
 import { useHeaderContext } from './HeaderContainer';
 import { NotificationsMenu } from './NotificationsMenu';
 import { UserMenu } from './UserMenu';
+import { AskAILink } from './AskAILink';
 
 interface Props {
   title: string;
@@ -25,6 +28,7 @@ export function HeaderTitle({ title, children }: PropsWithChildren<Props>) {
         {children && <>{children}</>}
       </div>
       <div className="flex items-end">
+        {isBE && <AskAILink />}
         <NotificationsMenu />
         <ContextHelp />
         {!window.ddExtension && <UserMenu />}

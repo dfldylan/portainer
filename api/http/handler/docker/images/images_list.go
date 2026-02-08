@@ -1,6 +1,8 @@
 package images
 
 import (
+	"context"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -11,8 +13,8 @@ import (
 	"github.com/portainer/portainer/pkg/libhttp/request"
 	"github.com/portainer/portainer/pkg/libhttp/response"
 
-	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/api/types/image"
 )
 
 type ImageResponse struct {
@@ -46,15 +48,14 @@ func (handler *Handler) imagesList(w http.ResponseWriter, r *http.Request) *http
 		return httpErr
 	}
 
-	images, err := cli.ImageList(r.Context(), types.ImageListOptions{})
+	nodeNames := make(map[string]string)
+
+	// Pass the node names map to the context so the custom NodeNameTransport can use it
+	ctx := context.WithValue(r.Context(), client.NodeNamesCtxKey{}, nodeNames)
+
+	images, err := cli.ImageList(ctx, image.ListOptions{})
 	if err != nil {
 		return httperror.InternalServerError("Unable to retrieve Docker images", err)
-	}
-
-	// Extract the node name from the custom transport
-	nodeNames := make(map[string]string)
-	if t, ok := cli.HTTPClient().Transport.(*client.NodeNameTransport); ok {
-		nodeNames = t.NodeNames()
 	}
 
 	withUsage, err := request.RetrieveBooleanQueryParameter(r, "withUsage", true)
@@ -85,8 +86,12 @@ func (handler *Handler) imagesList(w http.ResponseWriter, r *http.Request) *http
 		}
 
 		imagesList[i] = ImageResponse{
-			Created:  image.Created,
-			NodeName: nodeNames[image.ID],
+			Created: image.Created,
+			// Only works if the order of `images` is not changed between unmarshaling the agent's response
+			// in NodeNameTransport.RoundTrip()  (api/docker/client/client.go)
+			// and docker's cli.ImageList()
+			// As both functions unmarshal the same response body, the resulting array will be ordered the same way.
+			NodeName: nodeNames[fmt.Sprintf("%s-%d", image.ID, i)],
 			ID:       image.ID,
 			Size:     image.Size,
 			Tags:     image.RepoTags,

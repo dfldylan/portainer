@@ -5,11 +5,17 @@ import (
 	"fmt"
 	"slices"
 	"strings"
+	"sync"
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/dataservices"
 	"github.com/portainer/portainer/api/internal/endpointutils"
+
 	"github.com/rs/zerolog/log"
+)
+
+var (
+	ErrNoLocalEnvironment = errors.New("No local environment was detected")
 )
 
 type Service interface {
@@ -21,38 +27,46 @@ type service struct {
 	dataStore   dataservices.DataStore
 	environment *portainer.Endpoint
 	platform    ContainerPlatform
+	mu          sync.Mutex
 }
 
-func NewService(dataStore dataservices.DataStore) (Service, error) {
+func NewService(dataStore dataservices.DataStore) (*service, error) {
+	return &service{dataStore: dataStore}, nil
+}
 
-	return &service{
-		dataStore: dataStore,
-	}, nil
+func (service *service) loadEnvAndPlatform() error {
+	if service.environment != nil {
+		return nil
+	}
+
+	environment, platform, err := detectLocalEnvironment(service.dataStore)
+	if err != nil {
+		return err
+	}
+
+	service.environment = environment
+	service.platform = platform
+
+	return nil
 }
 
 func (service *service) GetLocalEnvironment() (*portainer.Endpoint, error) {
-	if service.environment == nil {
-		environment, platform, err := guessLocalEnvironment(service.dataStore)
-		if err != nil {
-			return nil, err
-		}
+	service.mu.Lock()
+	defer service.mu.Unlock()
 
-		service.environment = environment
-		service.platform = platform
+	if err := service.loadEnvAndPlatform(); err != nil {
+		return nil, err
 	}
 
 	return service.environment, nil
 }
 
 func (service *service) GetPlatform() (ContainerPlatform, error) {
-	if service.environment == nil {
-		environment, platform, err := guessLocalEnvironment(service.dataStore)
-		if err != nil {
-			return "", err
-		}
+	service.mu.Lock()
+	defer service.mu.Unlock()
 
-		service.environment = environment
-		service.platform = platform
+	if err := service.loadEnvAndPlatform(); err != nil {
+		return "", err
 	}
 
 	return service.platform, nil
@@ -63,7 +77,7 @@ var platformToEndpointType = map[ContainerPlatform][]portainer.EndpointType{
 	PlatformKubernetes: {portainer.KubernetesLocalEnvironment},
 }
 
-func guessLocalEnvironment(dataStore dataservices.DataStore) (*portainer.Endpoint, ContainerPlatform, error) {
+func detectLocalEnvironment(dataStore dataservices.DataStore) (*portainer.Endpoint, ContainerPlatform, error) {
 	platform := DetermineContainerPlatform()
 
 	if !slices.Contains([]ContainerPlatform{PlatformDocker, PlatformKubernetes}, platform) {
@@ -90,19 +104,20 @@ func guessLocalEnvironment(dataStore dataservices.DataStore) (*portainer.Endpoin
 	}
 
 	for _, endpoint := range endpoints {
-		if slices.Contains(endpointTypes, endpoint.Type) {
-			if platform != PlatformDocker {
-				return &endpoint, platform, nil
-			}
+		if !slices.Contains(endpointTypes, endpoint.Type) {
+			continue
+		}
 
-			dockerPlatform := checkDockerEnvTypeForUpgrade(&endpoint)
-			if dockerPlatform != "" {
-				return &endpoint, dockerPlatform, nil
-			}
+		if platform != PlatformDocker {
+			return &endpoint, platform, nil
+		}
+
+		if dockerPlatform := checkDockerEnvTypeForUpgrade(&endpoint); dockerPlatform != "" {
+			return &endpoint, dockerPlatform, nil
 		}
 	}
 
-	return nil, "", errors.New("failed to find local environment")
+	return nil, "", ErrNoLocalEnvironment
 }
 
 func checkDockerEnvTypeForUpgrade(environment *portainer.Endpoint) ContainerPlatform {

@@ -26,19 +26,20 @@ func hideFields(endpoint *portainer.Endpoint) {
 // Handler is the HTTP handler used to handle environment(endpoint) operations.
 type Handler struct {
 	*mux.Router
-	requestBouncer        security.BouncerService
-	DataStore             dataservices.DataStore
-	FileService           portainer.FileService
-	ProxyManager          *proxy.Manager
-	ReverseTunnelService  portainer.ReverseTunnelService
-	SnapshotService       portainer.SnapshotService
-	K8sClientFactory      *cli.ClientFactory
-	ComposeStackManager   portainer.ComposeStackManager
-	AuthorizationService  *authorization.Service
-	DockerClientFactory   *dockerclient.ClientFactory
-	BindAddress           string
-	BindAddressHTTPS      string
-	PendingActionsService *pendingactions.PendingActionsService
+	requestBouncer         security.BouncerService
+	DataStore              dataservices.DataStore
+	FileService            portainer.FileService
+	ProxyManager           *proxy.Manager
+	ReverseTunnelService   portainer.ReverseTunnelService
+	SnapshotService        portainer.SnapshotService
+	K8sClientFactory       *cli.ClientFactory
+	ComposeStackManager    portainer.ComposeStackManager
+	AuthorizationService   *authorization.Service
+	DockerClientFactory    *dockerclient.ClientFactory
+	BindAddress            string
+	BindAddressHTTPS       string
+	PendingActionsService  *pendingactions.PendingActionsService
+	PullLimitCheckDisabled bool
 }
 
 // NewHandler creates a handler to manage environment(endpoint) operations.
@@ -68,8 +69,8 @@ func NewHandler(bouncer security.BouncerService) *Handler {
 		bouncer.AdminAccess(httperror.LoggerHandler(h.endpointUpdate))).Methods(http.MethodPut)
 	h.Handle("/endpoints/{id}",
 		bouncer.AdminAccess(httperror.LoggerHandler(h.endpointDelete))).Methods(http.MethodDelete)
-	h.Handle("/endpoints",
-		bouncer.AdminAccess(httperror.LoggerHandler(h.endpointDeleteBatch))).Methods(http.MethodDelete)
+	h.Handle("/endpoints/delete",
+		bouncer.AdminAccess(httperror.LoggerHandler(h.endpointDeleteBatch))).Methods(http.MethodPost)
 	h.Handle("/endpoints/{id}/dockerhub/{registryId}",
 		bouncer.AuthenticatedAccess(httperror.LoggerHandler(h.endpointDockerhubStatus))).Methods(http.MethodGet)
 	h.Handle("/endpoints/{id}/snapshot",
@@ -85,6 +86,7 @@ func NewHandler(bouncer security.BouncerService) *Handler {
 
 	// DEPRECATED
 	h.Handle("/endpoints/{id}/status", bouncer.PublicAccess(httperror.LoggerHandler(h.endpointStatusInspect))).Methods(http.MethodGet)
+	h.Handle("/endpoints", bouncer.AdminAccess(httperror.LoggerHandler(h.endpointDeleteBatchDeprecated))).Methods(http.MethodDelete)
 
 	return h
 }

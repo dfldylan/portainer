@@ -10,11 +10,13 @@ import (
 	"github.com/portainer/portainer/api/http/security"
 	"github.com/portainer/portainer/api/kubernetes"
 	"github.com/portainer/portainer/api/kubernetes/validation"
+	"github.com/portainer/portainer/api/logs"
 	"github.com/portainer/portainer/pkg/libhelm/options"
 	"github.com/portainer/portainer/pkg/libhelm/release"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
 	"github.com/portainer/portainer/pkg/libhttp/response"
+	"github.com/rs/zerolog/log"
 
 	"github.com/pkg/errors"
 	"golang.org/x/sync/errgroup"
@@ -26,6 +28,8 @@ type installChartPayload struct {
 	Chart     string `json:"chart"`
 	Repo      string `json:"repo"`
 	Values    string `json:"values"`
+	Version   string `json:"version"`
+	Atomic    bool   `json:"atomic"`
 }
 
 var errChartNameInvalid = errors.New("invalid chart name. " +
@@ -44,18 +48,24 @@ var errChartNameInvalid = errors.New("invalid chart name. " +
 // @produce json
 // @param id path int true "Environment(Endpoint) identifier"
 // @param payload body installChartPayload true "Chart details"
+// @param dryRun query bool false "Dry run"
 // @success 201 {object} release.Release "Created"
 // @failure 401 "Unauthorized"
 // @failure 404 "Environment(Endpoint) or ServiceAccount not found"
 // @failure 500 "Server error"
 // @router /endpoints/{id}/kubernetes/helm [post]
 func (handler *Handler) helmInstall(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
+	dryRun, err := request.RetrieveBooleanQueryParameter(r, "dryRun", true)
+	if err != nil {
+		return httperror.BadRequest("Invalid dryRun query parameter", err)
+	}
+
 	var payload installChartPayload
 	if err := request.DecodeAndValidateJSONPayload(r, &payload); err != nil {
 		return httperror.BadRequest("Invalid Helm install payload", err)
 	}
 
-	release, err := handler.installChart(r, payload)
+	release, err := handler.installChart(r, payload, dryRun)
 	if err != nil {
 		return httperror.InternalServerError("Unable to install a chart", err)
 	}
@@ -92,22 +102,21 @@ func (p *installChartPayload) Validate(_ *http.Request) error {
 	return nil
 }
 
-func (handler *Handler) installChart(r *http.Request, p installChartPayload) (*release.Release, error) {
+func (handler *Handler) installChart(r *http.Request, p installChartPayload, dryRun bool) (*release.Release, error) {
 	clusterAccess, httperr := handler.getHelmClusterAccess(r)
 	if httperr != nil {
 		return nil, httperr.Err
 	}
 
 	installOpts := options.InstallOptions{
-		Name:      p.Name,
-		Chart:     p.Chart,
-		Namespace: p.Namespace,
-		Repo:      p.Repo,
-		KubernetesClusterAccess: &options.KubernetesClusterAccess{
-			ClusterServerURL:         clusterAccess.ClusterServerURL,
-			CertificateAuthorityFile: clusterAccess.CertificateAuthorityFile,
-			AuthToken:                clusterAccess.AuthToken,
-		},
+		Name:                    p.Name,
+		Chart:                   p.Chart,
+		Version:                 p.Version,
+		Namespace:               p.Namespace,
+		Repo:                    p.Repo,
+		Atomic:                  p.Atomic,
+		DryRun:                  dryRun,
+		KubernetesClusterAccess: clusterAccess,
 	}
 
 	if p.Values != "" {
@@ -115,10 +124,14 @@ func (handler *Handler) installChart(r *http.Request, p installChartPayload) (*r
 		if err != nil {
 			return nil, err
 		}
-		defer os.Remove(file.Name())
+		defer func() {
+			if err := os.Remove(file.Name()); err != nil {
+				log.Warn().Err(err).Msg("failed to remove temporary helm values file")
+			}
+		}()
 
 		if _, err := file.WriteString(p.Values); err != nil {
-			file.Close()
+			logs.CloseAndLogErr(file)
 			return nil, err
 		}
 
@@ -129,18 +142,19 @@ func (handler *Handler) installChart(r *http.Request, p installChartPayload) (*r
 		installOpts.ValuesFile = file.Name()
 	}
 
-	release, err := handler.helmPackageManager.Install(installOpts)
+	release, err := handler.helmPackageManager.Upgrade(installOpts)
 	if err != nil {
 		return nil, err
 	}
 
-	manifest, err := handler.applyPortainerLabelsToHelmAppManifest(r, installOpts, release.Manifest)
-	if err != nil {
-		return nil, err
-	}
-
-	if err := handler.updateHelmAppManifest(r, manifest, installOpts.Namespace); err != nil {
-		return nil, err
+	if !installOpts.DryRun {
+		manifest, err := handler.applyPortainerLabelsToHelmAppManifest(r, installOpts, release.Manifest)
+		if err != nil {
+			return nil, err
+		}
+		if err := handler.updateHelmAppManifest(r, manifest, installOpts.Namespace); err != nil {
+			return nil, err
+		}
 	}
 
 	return release, nil
@@ -196,13 +210,18 @@ func (handler *Handler) updateHelmAppManifest(r *http.Request, manifest []byte, 
 	g := new(errgroup.Group)
 	for _, resource := range yamlResources {
 		g.Go(func() error {
-			tmpfile, err := os.CreateTemp("", "helm-manifest-*")
+			tmpfile, err := os.CreateTemp("", "helm-manifest-*.yaml")
 			if err != nil {
 				return errors.Wrap(err, "failed to create a tmp helm manifest file")
 			}
 			defer func() {
-				tmpfile.Close()
-				os.Remove(tmpfile.Name())
+				if err := tmpfile.Close(); err != nil {
+					log.Warn().Err(err).Msg("failed to close tmp helm manifest file")
+				}
+
+				if err := os.Remove(tmpfile.Name()); err != nil {
+					log.Warn().Err(err).Msg("failed to remove tmp helm manifest file")
+				}
 			}()
 
 			if _, err := tmpfile.Write(resource); err != nil {

@@ -3,6 +3,8 @@ package libstack
 import (
 	"context"
 
+	portainer "github.com/portainer/portainer/api"
+
 	configtypes "github.com/docker/cli/cli/config/types"
 )
 
@@ -16,8 +18,9 @@ type Deployer interface {
 	Pull(ctx context.Context, filePaths []string, options Options) error
 	Run(ctx context.Context, filePaths []string, serviceName string, options RunOptions) error
 	Validate(ctx context.Context, filePaths []string, options Options) error
-	WaitForStatus(ctx context.Context, name string, status Status) <-chan WaitResult
+	WaitForStatus(ctx context.Context, name string, status Status) WaitResult
 	Config(ctx context.Context, filePaths []string, options Options) ([]byte, error)
+	GetExistingEdgeStacks(ctx context.Context) ([]EdgeStack, error)
 }
 
 type Status string
@@ -65,6 +68,7 @@ type DeployOptions struct {
 	// When this is set, docker compose will output its logs to stdout
 	AbortOnContainerExit bool
 	RemoveOrphans        bool
+	EdgeStackID          portainer.EdgeStackID
 }
 
 type RunOptions struct {
@@ -81,4 +85,10 @@ type RemoveOptions struct {
 	Options
 
 	Volumes bool
+}
+
+type EdgeStack struct {
+	ID       int
+	Name     string
+	ExitCode int
 }

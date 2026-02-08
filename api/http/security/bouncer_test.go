@@ -1,7 +1,6 @@
 package security
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -19,16 +18,17 @@ import (
 )
 
 // testHandler200 is a simple handler which returns HTTP status 200 OK
-var testHandler200 = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-})
+var testHandler200 = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})
 
 func tokenLookupSucceed(dataStore dataservices.DataStore, jwtService portainer.JWTService) tokenLookup {
 	return func(r *http.Request) (*portainer.TokenData, error) {
 		uid := portainer.UserID(1)
-		dataStore.User().Create(&portainer.User{ID: uid})
-		jwtService.GenerateToken(&portainer.TokenData{ID: uid})
-		return &portainer.TokenData{ID: 1}, nil
+		if err := dataStore.User().Create(&portainer.User{ID: uid}); err != nil {
+			return nil, err
+		}
+
+		_, _, err := jwtService.GenerateToken(&portainer.TokenData{ID: uid})
+		return &portainer.TokenData{ID: 1}, err
 	}
 }
 
@@ -44,7 +44,7 @@ func Test_mwAuthenticateFirst(t *testing.T) {
 	_, store := datastore.MustNewTestStore(t, true, true)
 
 	jwtService, err := jwt.NewService("1h", store)
-	assert.NoError(t, err, "failed to create a copy of service")
+	require.NoError(t, err, "failed to create a copy of service")
 
 	apiKeyService := apikey.NewAPIKeyService(nil, nil)
 
@@ -111,7 +111,7 @@ func Test_mwAuthenticateFirst(t *testing.T) {
 			h := bouncer.mwAuthenticateFirst(tt.verificationMiddlwares, testHandler200)
 			h.ServeHTTP(rr, req)
 
-			is.Equal(tt.wantStatusCode, rr.Code, fmt.Sprintf("Status should be %d", tt.wantStatusCode))
+			is.Equal(tt.wantStatusCode, rr.Code, "Status should be %d", tt.wantStatusCode)
 		})
 	}
 }
@@ -146,10 +146,10 @@ func Test_extractKeyFromCookie(t *testing.T) {
 		apiKey, err := extractKeyFromCookie(req)
 		is.Equal(test.token, apiKey)
 		if !test.succeeds {
-			is.Error(err, "Should return error")
+			require.Error(t, err, "Should return error")
 			is.ErrorIs(err, http.ErrNoCookie)
 		} else {
-			is.NoError(err)
+			require.NoError(t, err)
 		}
 	}
 }
@@ -313,18 +313,19 @@ func Test_apiKeyLookup(t *testing.T) {
 	// create standard user
 	user := &portainer.User{ID: 2, Username: "standard", Role: portainer.StandardUserRole}
 	err := store.User().Create(user)
-	is.NoError(err, "error creating user")
+	require.NoError(t, err, "error creating user")
 
 	// setup services
 	jwtService, err := jwt.NewService("1h", store)
-	is.NoError(err, "Error initiating jwt service")
+	require.NoError(t, err, "Error initiating jwt service")
 	apiKeyService := apikey.NewAPIKeyService(store.APIKeyRepository(), store.User())
 	bouncer := NewRequestBouncer(store, jwtService, apiKeyService)
 
 	t.Run("missing x-api-key header fails api-key lookup", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
 		// testhelpers.AddTestSecurityCookie(req, jwt)
-		token, _ := bouncer.apiKeyLookup(req)
+		token, err := bouncer.apiKeyLookup(req)
+		require.NoError(t, err)
 		is.Nil(token)
 	})
 
@@ -333,17 +334,18 @@ func Test_apiKeyLookup(t *testing.T) {
 		req.Header.Add("x-api-key", "random-failing-api-key")
 		token, err := bouncer.apiKeyLookup(req)
 		is.Nil(token)
-		is.Error(err)
+		require.Error(t, err)
 	})
 
 	t.Run("valid x-api-key header succeeds api-key lookup", func(t *testing.T) {
 		rawAPIKey, _, err := apiKeyService.GenerateApiKey(*user, "test")
-		is.NoError(err)
+		require.NoError(t, err)
 
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
 		req.Header.Add("x-api-key", rawAPIKey)
 
 		token, err := bouncer.apiKeyLookup(req)
+		require.NoError(t, err)
 
 		expectedToken := &portainer.TokenData{ID: user.ID, Username: user.Username, Role: portainer.StandardUserRole}
 		is.Equal(expectedToken, token)
@@ -351,13 +353,17 @@ func Test_apiKeyLookup(t *testing.T) {
 
 	t.Run("valid x-api-key header succeeds api-key lookup", func(t *testing.T) {
 		rawAPIKey, apiKey, err := apiKeyService.GenerateApiKey(*user, "test")
-		is.NoError(err)
-		defer apiKeyService.DeleteAPIKey(apiKey.ID)
+		require.NoError(t, err)
+		defer func() {
+			err := apiKeyService.DeleteAPIKey(apiKey.ID)
+			require.NoError(t, err)
+		}()
 
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
 		req.Header.Add("x-api-key", rawAPIKey)
 
 		token, err := bouncer.apiKeyLookup(req)
+		require.NoError(t, err)
 
 		expectedToken := &portainer.TokenData{ID: user.ID, Username: user.Username, Role: portainer.StandardUserRole}
 		is.Equal(expectedToken, token)
@@ -365,21 +371,25 @@ func Test_apiKeyLookup(t *testing.T) {
 
 	t.Run("successful api-key lookup updates token last used time", func(t *testing.T) {
 		rawAPIKey, apiKey, err := apiKeyService.GenerateApiKey(*user, "test")
-		is.NoError(err)
-		defer apiKeyService.DeleteAPIKey(apiKey.ID)
+		require.NoError(t, err)
+		defer func() {
+			err := apiKeyService.DeleteAPIKey(apiKey.ID)
+			require.NoError(t, err)
+		}()
 
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
 		req.Header.Add("x-api-key", rawAPIKey)
 
 		token, err := bouncer.apiKeyLookup(req)
+		require.NoError(t, err)
 
 		expectedToken := &portainer.TokenData{ID: user.ID, Username: user.Username, Role: portainer.StandardUserRole}
 		is.Equal(expectedToken, token)
 
 		_, apiKeyUpdated, err := apiKeyService.GetDigestUserAndKey(apiKey.Digest)
-		is.NoError(err)
+		require.NoError(t, err)
 
-		is.True(apiKeyUpdated.LastUsed > apiKey.LastUsed)
+		is.Greater(apiKeyUpdated.LastUsed, apiKey.LastUsed)
 	})
 }
 
@@ -451,9 +461,9 @@ func Test_ShouldSkipCSRFCheck(t *testing.T) {
 			result, err := ShouldSkipCSRFCheck(req, test.isDockerDesktopExtension)
 			is.Equal(test.expectedResult, result)
 			if test.expectedError {
-				is.Error(err)
+				require.Error(t, err)
 			} else {
-				is.NoError(err)
+				require.NoError(t, err)
 			}
 		})
 	}
@@ -526,4 +536,41 @@ func TestJWTRevocation(t *testing.T) {
 	bouncer.cleanUpExpiredJWTPass()
 
 	require.Equal(t, 1, revokeLen())
+}
+
+func TestCSPHeaderDefault(t *testing.T) {
+	b := NewRequestBouncer(nil, nil, nil)
+
+	srv := httptest.NewServer(
+		b.PublicAccess(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})),
+	)
+	defer srv.Close()
+
+	resp, err := http.Get(srv.URL + "/")
+	require.NoError(t, err)
+	defer func() {
+		err := resp.Body.Close()
+		require.NoError(t, err)
+	}()
+
+	require.Contains(t, resp.Header, "Content-Security-Policy")
+}
+
+func TestCSPHeaderDisabled(t *testing.T) {
+	b := NewRequestBouncer(nil, nil, nil)
+	b.DisableCSP()
+
+	srv := httptest.NewServer(
+		b.PublicAccess(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})),
+	)
+	defer srv.Close()
+
+	resp, err := http.Get(srv.URL + "/")
+	require.NoError(t, err)
+	defer func() {
+		err := resp.Body.Close()
+		require.NoError(t, err)
+	}()
+
+	require.NotContains(t, resp.Header, "Content-Security-Policy")
 }

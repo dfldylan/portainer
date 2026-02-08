@@ -6,12 +6,12 @@ import (
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestLimitAccess(t *testing.T) {
-	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
+	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {})
 
 	t.Run("Request below the limit", func(t *testing.T) {
 		req := httptest.NewRequest("GET", "/", nil)
@@ -33,13 +33,21 @@ func TestLimitAccess(t *testing.T) {
 
 		ts := httptest.NewServer(handler)
 		defer ts.Close()
-		http.Get(ts.URL)
+
 		resp, err := http.Get(ts.URL)
+		if err == nil {
+			err = resp.Body.Close()
+			require.NoError(t, err)
+		}
+
+		resp, err = http.Get(ts.URL)
 		if err != nil {
 			t.Fatal(err)
 		}
-		io.Copy(io.Discard, resp.Body)
-		resp.Body.Close()
+
+		_, _ = io.Copy(io.Discard, resp.Body)
+		err = resp.Body.Close()
+		require.NoError(t, err)
 
 		if status := resp.StatusCode; status != http.StatusForbidden {
 			t.Errorf("handler returned wrong status code: got %v want %v",

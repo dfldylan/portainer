@@ -49,15 +49,57 @@ type (
 
 		// Is relative path supported
 		SupportRelativePath bool
+		// AlwaysCloneGitRepoForRelativePath is a flag indicating if the agent must always clone the git repository for relative path.
+		// This field is only valid when SupportRelativePath is true.
+		// Used only for EE
+		AlwaysCloneGitRepoForRelativePath bool
+
 		// Mount point for relative path
 		FilesystemPath string
 		// Used only for EE
 		// EnvVars is a list of environment variables to inject into the stack
 		EnvVars []portainer.Pair
 
+		// ForceUpdate is a flag indicating if the agent must force the update of the stack.
+		// Used only for EE
+		ForceUpdate bool
+
+		DeployerOptionsPayload DeployerOptionsPayload
+
 		// Used only for EE async edge agent
 		// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+		// Deprecated(2.36): use DeployerOptionsPayload.ForceRecreate instead
 		ReadyRePullImage bool
+
+		// CreatedBy is the username that created this stack
+		// Used for adding labels to Kubernetes manifests
+		CreatedBy string
+		// CreatedByUserId is the user ID that created this stack
+		// Used for adding labels to Kubernetes manifests
+		CreatedByUserId string
+
+		// HelmConfig represents the Helm configuration for an edge stack
+		HelmConfig portainer.HelmConfig
+	}
+
+	DeployerOptionsPayload struct {
+		// Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
+		// This flag drives `docker compose up --remove-orphans` and `docker stack up --prune` options
+		// Used only for EE
+		Prune bool
+		// RemoveVolumes is a flag indicating if the agent must remove the named volumes declared
+		// in the compose file and anonymouse volumes attached to containers
+		// This flag drives `docker compose down --volumes` option
+		// Used only for EE
+		RemoveVolumes bool
+
+		// ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
+		// This field is only used when the Force Redeployment is triggered.
+		// Once the stack is redeployed, this field will be reset to false.
+		// For standard edge agent, this field is used in agent side
+		// For async edge agent, this field is used in both agent side and server side.
+		// This flag drives `docker compose up --force-recreate` option
+		ForceRecreate bool
 	}
 
 	// RegistryCredentials holds the credentials for a Docker registry.

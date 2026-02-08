@@ -9,13 +9,14 @@ import (
 
 	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/hostmanagement/openamt"
+	"github.com/portainer/portainer/api/logs"
 	httperror "github.com/portainer/portainer/pkg/libhttp/error"
 	"github.com/portainer/portainer/pkg/libhttp/request"
 	"github.com/portainer/portainer/pkg/libhttp/response"
 
-	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/filters"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
 	"github.com/rs/zerolog/log"
@@ -48,6 +49,7 @@ const (
 // @security jwt
 // @produce json
 // @param id path int true "Environment identifier"
+// @deprecated
 // @success 200 "Success"
 // @failure 400 "Invalid request"
 // @failure 403 "Permission denied to access settings"
@@ -110,7 +112,11 @@ func (handler *Handler) PullAndRunContainer(ctx context.Context, endpoint *porta
 	if err != nil {
 		return "Unable to create Docker Client connection", err
 	}
-	defer docker.Close()
+	defer func() {
+		if err := docker.Close(); err != nil {
+			log.Warn().Err(err).Msg("failed to close docker client")
+		}
+	}()
 
 	if err := pullImage(ctx, docker, imageName); err != nil {
 		return "Could not pull image from registry", err
@@ -131,14 +137,14 @@ func (handler *Handler) PullAndRunContainer(ctx context.Context, endpoint *porta
 // TODO: add k8s implementation
 // TODO: work out registry auth
 func pullImage(ctx context.Context, docker *client.Client, imageName string) error {
-	out, err := docker.ImagePull(ctx, imageName, types.ImagePullOptions{})
+	out, err := docker.ImagePull(ctx, imageName, image.PullOptions{})
 	if err != nil {
 		log.Error().Str("image_name", imageName).Err(err).Msg("could not pull image from registry")
 
 		return err
 	}
 
-	defer out.Close()
+	defer logs.CloseAndLogErr(out)
 	outputBytes, err := io.ReadAll(out)
 	if err != nil {
 		log.Error().Str("image_name", imageName).Err(err).Msg("could not read image pull output")

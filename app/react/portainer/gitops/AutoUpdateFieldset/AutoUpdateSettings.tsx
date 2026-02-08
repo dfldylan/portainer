@@ -107,7 +107,14 @@ export function AutoUpdateSettings({
                 the cluster being overwritten.
               </p>
             </>
-          ) : undefined
+          ) : (
+            <p>
+              If enabled, then when redeploy is triggered via the webhook or
+              polling, the stack will be always redeployed, even if Portainer
+              detects no difference between the git repo and what was stored
+              locally on last git pull.
+            </p>
+          )
         }
       />
     </>
