@@ -15,7 +15,7 @@ import { PortConfigurationRow } from './PortConfigurationRow';
 import { EnvironmentVariablesRow } from './EnvironmentVariablesRow';
 import { LabelsRow } from './LabelsRow';
 import { SysctlsRow } from './SysctlsRow';
-import { SecurityOptRow } from './SecurityOptRow'
+import { SecurityOptRow } from './SecurityOptRow';
 import { GpuRow } from './GpuRow';
 
 interface Props {
@@ -82,7 +82,7 @@ export function ContainerDetailsSection({
 
           <SysctlsRow sysctls={hostConfig.Sysctls} />
 
-          <SecurityOptRow securityOpts={hostConfig.SecurityOpt}/>
+          <SecurityOptRow securityOpts={hostConfig.SecurityOpt} />
 
           <GpuRow deviceRequests={hostConfig.DeviceRequests} />
         </DetailsTable>

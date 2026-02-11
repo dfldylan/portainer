@@ -13,8 +13,8 @@ export function SecurityOptRow({ securityOpts }: SecurityOptRowProps) {
     <DetailsTable.Row label="SecurityOpt">
       <table className="table table-bordered table-condensed !m-0">
         <tbody>
-          {Object.entries(securityOpts).map(([key, value]) => (
-            <tr key={key}>
+          {securityOpts.map((value,index) => (
+            <tr key={index}>
               <td>{value}</td>
             </tr>
           ))}
