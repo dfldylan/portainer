@@ -14,7 +14,7 @@ export function SecurityOptField({
 }: {
   values: Values;
   onChange: (value: Values) => void;
-  errors?: FormikErrors<string>[];
+  errors?: FormikErrors<string>[] | string[] | string;
 }) {
   return (
     <InputList
@@ -25,7 +25,7 @@ export function SecurityOptField({
       label="SecurityOpt"
       errors={errors}
       itemBuilder={() => ''}
-      data-cy='docker-container-securityopts'
+      data-cy="docker-container-securityopts"
     />
   );
 }
